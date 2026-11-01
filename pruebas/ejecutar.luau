@@ -16,6 +16,8 @@ local Marco = require("./infraestructura/Marco")
 -- Archivos de pruebas/casos/ (sin extensión), en el orden en que se ejecutan.
 local CASOS = {
 	require("./casos/Estructura"),
+	require("./casos/Utilidades"),
+	require("./casos/Red"),
 }
 
 Marco.verificarAlTerminar(Entorno.verificarSinErrores)
