@@ -23,6 +23,7 @@ local CASOS = {
 	require("./casos/BloqueoSesion"),
 	require("./casos/AlmacenMemoria"),
 	require("./casos/ServicioDatos"),
+	require("./casos/Integracion"),
 }
 
 Marco.verificarAlTerminar(Entorno.verificarSinErrores)

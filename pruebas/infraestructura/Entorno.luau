@@ -163,9 +163,19 @@ local function nuevoLado(mundo)
 		if guardado then
 			return guardado.Valor
 		end
-		assert(not cargando[modulo], `dependencia circular al cargar {modulo:GetFullName()}`)
 
-		cargando[modulo] = true
+		-- Si otro hilo está cargando ya este módulo (porque cedió el hilo a media carga), se espera a que
+		-- termine, como hace Roblox. Si el hilo que lo carga es el actual, es una dependencia circular.
+		local hiloCargador = cargando[modulo]
+		if hiloCargador ~= nil then
+			assert(hiloCargador ~= coroutine.running(), `dependencia circular al cargar {modulo:GetFullName()}`)
+			while cargando[modulo] ~= nil do
+				task.wait()
+			end
+			return cache[modulo].Valor
+		end
+
+		cargando[modulo] = coroutine.running()
 		local resultado = table.pack(ejecutar(modulo))
 		cargando[modulo] = nil
 		assert(
