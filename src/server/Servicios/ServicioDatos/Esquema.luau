@@ -46,6 +46,7 @@ local PLANTILLA: Datos = {
 		Motor = 0,
 		Armas = 0,
 		Escaner = 0,
+		Carga = 0,
 	},
 }
 

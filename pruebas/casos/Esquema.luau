@@ -26,7 +26,7 @@ return function(Marco)
 			Marco.igual(datos.XP, 0)
 			Marco.igual(datos.Monedas, 0)
 			Marco.igualProfundo(datos.Inventario, {})
-			for _, mejora in { "Casco", "Escudo", "Motor", "Armas", "Escaner" } do
+			for _, mejora in { "Casco", "Escudo", "Motor", "Armas", "Escaner", "Carga" } do
 				Marco.igual(datos.MejorasNave[mejora], 0, `la mejora {mejora} debe empezar en 0`)
 			end
 		end)
@@ -71,6 +71,7 @@ return function(Marco)
 			local datos = Esquema.Conciliar({ MejorasNave = { Casco = 4 } })
 			Marco.igual(datos.MejorasNave.Casco, 4)
 			Marco.igual(datos.MejorasNave.Motor, 0)
+			Marco.igual(datos.MejorasNave.Carga, 0)
 		end)
 
 		Marco.prueba("conserva datos válidos y los campos que no conoce", function()
@@ -81,7 +82,7 @@ return function(Marco)
 				XP = 340,
 				Monedas = 1500,
 				Inventario = { hierro = 30, cristal = 2 },
-				MejorasNave = { Casco = 2, Escudo = 1, Motor = 0, Armas = 5, Escaner = 3 },
+				MejorasNave = { Casco = 2, Escudo = 1, Motor = 0, Armas = 5, Escaner = 3, Carga = 4 },
 				CampoFuturo = "no lo borres",
 			}
 			local datos, reparaciones = Esquema.Conciliar(Esquema.Migrar(entrada, 1))
@@ -90,6 +91,7 @@ return function(Marco)
 			Marco.igual(datos.Bando, "Villanos")
 			Marco.igual(datos.Inventario.hierro, 30)
 			Marco.igual(datos.MejorasNave.Armas, 5)
+			Marco.igual(datos.MejorasNave.Carga, 4)
 			Marco.igual((datos :: any).CampoFuturo, "no lo borres")
 		end)
 

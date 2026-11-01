@@ -129,6 +129,7 @@ return function(Marco)
 			Marco.igual(datos.Monedas, 500)
 			Marco.igual(datos.Inventario.hierro, 9)
 			Marco.igual(datos.MejorasNave.Motor, 0, "las mejoras que no tenía se rellenan")
+			Marco.igual(datos.MejorasNave.Carga, 0, "incluida la mejora Carga, añadida después")
 		end)
 
 		Marco.prueba("los datos no están disponibles hasta que terminan de cargarse", function()
