@@ -1,8 +1,8 @@
 --[[
 	Ejecuta las pruebas del proyecto con Lune, desde la carpeta raíz del repositorio:
 
-		lune run pruebas/ejecutar                 -- todas las pruebas
-		lune run pruebas/ejecutar -- ServicioRed  -- solo las que contengan ese texto en el nombre
+		lune run pruebas/ejecutar                -- todas las pruebas
+		lune run pruebas/ejecutar ServicioRed    -- solo las que contengan ese texto en el nombre
 
 	Las pruebas cargan los módulos reales de `src/` sobre una simulación mínima de la API de Roblox
 	(ver pruebas/infraestructura). Cada archivo de pruebas/casos/ registra los casos de un módulo.
