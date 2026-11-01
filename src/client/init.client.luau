@@ -9,4 +9,16 @@
 	Aquí solo se arrancan los servicios; la lógica vive en los módulos de `Servicios/`.
 ]]
 
+local ServicioDatos = require(script.Servicios.ServicioDatos)
+local ServicioRed = require(script.Servicios.ServicioRed)
+
+-- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa.
+ServicioRed.Iniciar()
+ServicioDatos.Iniciar()
+
+-- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
+ServicioDatos.Actualizados:Conectar(function(datos)
+	print(`[Cliente] Datos recibidos: bando {datos.Bando}, nivel {datos.Nivel}, {datos.Monedas} monedas`)
+end)
+
 print("[Cliente] Juego espacial iniciado")
