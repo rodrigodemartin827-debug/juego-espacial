@@ -51,6 +51,14 @@ local definiciones: { [string]: Definicion } = {
 	DatosJugador = {
 		Direccion = "ServidorACliente",
 	},
+
+	-- El cliente pide una copia de sus datos. Lo hace al arrancar, por si el servidor ya los había
+	-- enviado antes de que el cliente estuviera escuchando (los remotos no guardan mensajes).
+	PedirDatos = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 2,
+		Argumentos = {},
+	},
 }
 
 -- Se congela la lista (dos niveles) para que ningún script la modifique por accidente.
