@@ -18,6 +18,7 @@ local CASOS = {
 	require("./casos/Estructura"),
 	require("./casos/Utilidades"),
 	require("./casos/Red"),
+	require("./casos/ServicioRed"),
 }
 
 Marco.verificarAlTerminar(Entorno.verificarSinErrores)
