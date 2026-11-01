@@ -208,6 +208,153 @@ return function(Marco)
 		end)
 	end)
 
+	Marco.grupo("Combate: árbitro (petición de habilidad)", function()
+		local Arbitro = cargar("Combate.Arbitro")
+
+		-- Luchador nuevo en el instante 100.
+		local function nuevo()
+			return Arbitro.NuevoLuchador(100)
+		end
+
+		Marco.prueba(
+			"una petición correcta se acepta y se cobra la energía, el cooldown y el tiempo ocupado",
+			function()
+				local l = nuevo()
+				local r = Arbitro.Evaluar(l, "Rayo_Basico", 100, 40)
+				Marco.verdadero(r.Ok)
+				Marco.igual(r.Habilidad.Id, "Rayo_Basico")
+				Marco.igual(r.Distancia, 40)
+
+				local duracion = Arbitro.Aplicar(l, "Rayo_Basico", r, 100)
+				local hab = Poderes.Habilidades.Rayo_Basico
+				Marco.igual(l.Energia, Config.EnergiaMaxima - hab.Energia)
+				Marco.igual(l.Cooldowns.Rayo_Basico, 100 + hab.Cooldown)
+				Marco.igual(l.Estado.OcupadoHasta, 100 + duracion)
+			end
+		)
+
+		Marco.prueba("no se puede repetir la habilidad mientras dura el cooldown", function()
+			local l = nuevo()
+			local r = Arbitro.Evaluar(l, "Rayo_Fuerte", 100, 30)
+			Arbitro.Aplicar(l, "Rayo_Fuerte", r, 100)
+			l.Estado.OcupadoHasta = 0 -- ya no está ocupado, pero el cooldown sigue
+
+			r = Arbitro.Evaluar(l, "Rayo_Fuerte", 101, 30)
+			Marco.falso(r.Ok)
+			Marco.igual(r.Motivo, "cooldown")
+
+			r = Arbitro.Evaluar(l, "Rayo_Fuerte", 100 + Poderes.Habilidades.Rayo_Fuerte.Cooldown, 30)
+			Marco.verdadero(r.Ok, "al terminar el cooldown vuelve a poder")
+		end)
+
+		Marco.prueba("los cooldowns de habilidades distintas son independientes", function()
+			local l = nuevo()
+			Arbitro.Aplicar(l, "Rayo_Basico", Arbitro.Evaluar(l, "Rayo_Basico", 100, 30), 100)
+			l.Estado.OcupadoHasta = 0
+			Marco.verdadero(Arbitro.Evaluar(l, "Gravedad_Basico", 100, 30).Ok)
+		end)
+
+		Marco.prueba("sin energía suficiente se rechaza, y la energía se regenera con el tiempo", function()
+			local l = nuevo()
+			l.Energia = 5
+			local r = Arbitro.Evaluar(l, "Rayo_Basico", 100, 30)
+			Marco.falso(r.Ok)
+			Marco.igual(r.Motivo, "energia")
+
+			-- Coste 8: faltan 3 puntos; con 7 por segundo tarda menos de un segundo.
+			r = Arbitro.Evaluar(l, "Rayo_Basico", 101, 30)
+			Marco.verdadero(r.Ok)
+		end)
+
+		Marco.prueba("una distancia fuera de alcance se rechaza; ligeramente excedida se recorta", function()
+			local l = nuevo()
+			local rango = Poderes.Habilidades.Rayo_Fuerte.Rango
+			local r = Arbitro.Evaluar(l, "Rayo_Fuerte", 100, rango * 3)
+			Marco.falso(r.Ok)
+			Marco.igual(r.Motivo, "distancia")
+
+			r = Arbitro.Evaluar(l, "Rayo_Fuerte", 100, rango * 1.1)
+			Marco.verdadero(r.Ok)
+			Marco.igual(r.Distancia, rango)
+		end)
+
+		Marco.prueba("muerto, aturdido u ocupado no puede lanzar nada", function()
+			local l = nuevo()
+			l.Estado.Vivo = false
+			Marco.igual(Arbitro.Evaluar(l, "Rayo_Basico", 100, 30).Motivo, "muerto")
+			l.Estado.Vivo = true
+			l.Estado.AturdidoHasta = 105
+			Marco.igual(Arbitro.Evaluar(l, "Rayo_Basico", 100, 30).Motivo, "aturdido")
+			l.Estado.AturdidoHasta = 0
+			l.Estado.OcupadoHasta = 105
+			Marco.igual(Arbitro.Evaluar(l, "Rayo_Basico", 100, 30).Motivo, "ocupado")
+		end)
+
+		Marco.prueba("una habilidad inexistente se rechaza", function()
+			Marco.igual(Arbitro.Evaluar(nuevo(), "Inventada", 100, 5).Motivo, "desconocida")
+			Marco.igual(Arbitro.Evaluar(nuevo(), "Combo2", 100, 5).Habilidad, nil, "Combo2 no es un id pedible")
+		end)
+
+		Marco.prueba("evaluar no modifica el estado", function()
+			local l = nuevo()
+			Arbitro.Evaluar(l, "Rayo_Basico", 100, 30)
+			Marco.igual(l.Energia, Config.EnergiaMaxima)
+			Marco.igual(next(l.Cooldowns), nil)
+			Marco.igual(l.Estado.OcupadoHasta, 0)
+		end)
+
+		Marco.prueba("la definitiva hace invulnerable al lanzador mientras dura", function()
+			local l = nuevo()
+			local r = Arbitro.Evaluar(l, "Rayo_Definitiva", 100, 50)
+			Marco.verdadero(r.Ok)
+			local duracion = Arbitro.Aplicar(l, "Rayo_Definitiva", r, 100)
+			Marco.igual(l.InvulnerableHasta, 100 + duracion)
+			Marco.falso(Arbitro.PuedeSerGolpeado("Villanos", "Heroes", l, 101))
+			Marco.verdadero(Arbitro.PuedeSerGolpeado("Villanos", "Heroes", l, 100 + duracion))
+		end)
+
+		Marco.prueba("el combo avanza golpe a golpe, se reinicia tarde y tras el cuarto", function()
+			local l = nuevo()
+			local ahora = 100
+			local vistos = {}
+			for _ = 1, 4 do
+				local r = Arbitro.Evaluar(l, "Combo", ahora, 0)
+				Marco.verdadero(r.Ok, "el golpe se acepta")
+				table.insert(vistos, r.Habilidad.Id)
+				Arbitro.Aplicar(l, "Combo", r, ahora)
+				ahora = l.Cooldowns.Combo + 0.1 -- se encadena justo después del cooldown
+				l.Estado.OcupadoHasta = 0
+			end
+			Marco.igualProfundo(vistos, { "Combo1", "Combo2", "Combo3", "Combo4" })
+
+			-- Tras el cuarto golpe, el siguiente vuelve a ser el primero.
+			local r = Arbitro.Evaluar(l, "Combo", ahora, 0)
+			Marco.igual(r.Habilidad.Id, "Combo1")
+			Arbitro.Aplicar(l, "Combo", r, ahora)
+
+			-- Si se deja pasar la ventana, vuelve a empezar.
+			l.Estado.OcupadoHasta = 0
+			r = Arbitro.Evaluar(l, "Combo", l.Cooldowns.Combo + 5, 0)
+			Marco.igual(r.Habilidad.Id, "Combo1")
+		end)
+
+		Marco.prueba("el combo respeta el cooldown entre golpes", function()
+			local l = nuevo()
+			Arbitro.Aplicar(l, "Combo", Arbitro.Evaluar(l, "Combo", 100, 0), 100)
+			l.Estado.OcupadoHasta = 0
+			Marco.igual(Arbitro.Evaluar(l, "Combo", 100.05, 0).Motivo, "cooldown")
+		end)
+
+		Marco.prueba("fuego amistoso: el mismo bando no se golpea; sin bando y bandos distintos, sí", function()
+			local objetivo = nuevo()
+			Marco.falso(Arbitro.PuedeSerGolpeado("Heroes", "Heroes", objetivo, 100))
+			Marco.verdadero(Arbitro.PuedeSerGolpeado("Heroes", "Villanos", objetivo, 100))
+			Marco.verdadero(Arbitro.PuedeSerGolpeado("Ninguno", "Heroes", objetivo, 100))
+			objetivo.Estado.Vivo = false
+			Marco.falso(Arbitro.PuedeSerGolpeado("Heroes", "Villanos", objetivo, 100), "un muerto no se golpea")
+		end)
+	end)
+
 	Marco.grupo("Combate: datos de las habilidades", function()
 		Marco.prueba("las habilidades pedibles existen y 'Combo' se resuelve a sus 4 golpes", function()
 			for _, id in Poderes.Solicitables do
