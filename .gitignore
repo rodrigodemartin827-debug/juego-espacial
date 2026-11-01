@@ -1,0 +1,17 @@
+# Archivos de Roblox generados al compilar con Rojo (`rojo build`)
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+*.rbxl.lock
+
+# Mapa de fuentes generado por `rojo sourcemap` (lo usan luau-lsp y otras herramientas)
+sourcemap.json
+
+# Biblioteca estándar de Roblox que Selene genera en local
+roblox.yml
+
+# Archivos del sistema operativo y del editor
+.DS_Store
+Thumbs.db
+.idea/
