@@ -21,6 +21,7 @@ local CASOS = {
 	require("./casos/ServicioRed"),
 	require("./casos/Esquema"),
 	require("./casos/BloqueoSesion"),
+	require("./casos/AlmacenMemoria"),
 }
 
 Marco.verificarAlTerminar(Entorno.verificarSinErrores)
