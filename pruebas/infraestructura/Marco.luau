@@ -175,6 +175,11 @@ function Marco.esperarHasta(condicion: () -> any, detalle: string?, maximo: numb
 	end
 end
 
+-- Cede el hilo durante `segundos` de tiempo real.
+function Marco.esperar(segundos: number)
+	task.wait(segundos)
+end
+
 -- Cede el hilo unos ciclos para que se completen las tareas diferidas (remotos, señales...).
 function Marco.dejarCorrer(ciclos: number?)
 	for _ = 1, ciclos or 3 do

@@ -18,6 +18,9 @@
 	  - FallosTrasAplicar: peticiones que SÍ se aplican pero cuya respuesta se pierde (el servidor cree que
 	    ha fallado aunque el dato se haya guardado).
 	  - FallarSi: función opcional (clave, operacion) -> boolean que limita los fallos a ciertas claves.
+
+	Y lleva cuentas para comprobar el comportamiento: Peticiones, MaxEnVuelo (peticiones UpdateAsync
+	simultáneas) y Escrituras (historial de lo escrito, con los UserIds asociados).
 ]]
 
 local task = require("@lune/task")
@@ -112,7 +115,9 @@ function NubeDatos.nueva(): Nube
 		FallarSi = nil,
 		ErrorAlObtenerAlmacen = nil,
 		Peticiones = 0,
-		Escrituras = {}, -- historial de lo que se ha escrito, en orden
+		EnVuelo = 0, -- UpdateAsync en marcha ahora mismo
+		MaxEnVuelo = 0, -- el máximo de UpdateAsync que han coincidido a la vez
+		Escrituras = {}, -- historial de lo que se ha escrito, en orden: { Clave, Valor, UserIds }
 	}
 
 	local function debeFallar(clave: string, operacion: string): boolean
@@ -159,7 +164,7 @@ function NubeDatos.nueva(): Nube
 			return copiar(datos[clave])
 		end
 
-		function almacen.UpdateAsync(_, clave: string, transformacion: (any, any) -> (any, any, any)): any
+		local function actualizar(clave: string, transformacion: (any, any) -> (any, any, any)): (any, any)
 			iniciarPeticion(clave, "UpdateAsync")
 
 			local actual = copiar(datos[clave])
@@ -182,13 +187,28 @@ function NubeDatos.nueva(): Nube
 			assert(idsUsuario == nil or type(idsUsuario) == "table", "UpdateAsync: los UserIds deben ser una lista")
 
 			datos[clave] = serializar(nuevo, clave)
-			table.insert(nube.Escrituras, { Clave = clave, Valor = copiar(datos[clave]) })
+			table.insert(nube.Escrituras, {
+				Clave = clave,
+				Valor = copiar(datos[clave]),
+				UserIds = copiar(idsUsuario),
+			})
 
 			if nube.FallosTrasAplicar > 0 and debeFallar(clave, "UpdateAsync") then
 				nube.FallosTrasAplicar -= 1
 				error("504: se perdió la respuesta de la petición (simulado)", 0)
 			end
 			return copiar(datos[clave]), info
+		end
+
+		function almacen.UpdateAsync(_, clave: string, transformacion: (any, any) -> (any, any, any)): any
+			nube.EnVuelo += 1
+			nube.MaxEnVuelo = math.max(nube.MaxEnVuelo, nube.EnVuelo)
+			local ok, resultado, info = pcall(actualizar, clave, transformacion)
+			nube.EnVuelo -= 1
+			if not ok then
+				error(resultado, 0)
+			end
+			return resultado, info
 		end
 
 		return almacen

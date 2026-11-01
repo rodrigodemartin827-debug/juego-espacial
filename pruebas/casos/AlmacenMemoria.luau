@@ -6,8 +6,8 @@
 local Entorno = require("../infraestructura/Entorno")
 
 local function crearAlmacen()
-	local AlmacenMemoria =
-		Entorno.nuevo().servidor.requerir("ServerScriptService.Server.Servicios.ServicioDatos.AlmacenMemoria")
+	local AlmacenMemoria = Entorno.nuevo().servidor
+		.requerir("ServerScriptService.Server.Servicios.ServicioDatos.AlmacenMemoria")
 	return AlmacenMemoria.nuevo()
 end
 
