@@ -1,7 +1,3 @@
 # Análisis estático (https://github.com/Kampfkarren/selene). Se ejecuta con:  selene src pruebas
 # La primera vez hay que generar la biblioteca estándar de Roblox:  selene generate-roblox-std
 std = "roblox"
-
-[rules]
-# Los módulos usan el mismo nombre para el valor y para el tipo (patrón habitual en Luau).
-shadowing = "allow"
