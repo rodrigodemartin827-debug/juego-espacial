@@ -166,7 +166,11 @@ local function actualizarRegistro(
 					return nil
 				end
 				-- Asociar el registro al UserId permite borrarlo si el jugador pide eliminar sus datos (RGPD).
-				return nuevo, { sesion.UserId }
+				-- Los jugadores de prueba de Studio tienen UserId negativo o cero: no son usuarios reales.
+				if sesion.UserId > 0 then
+					return nuevo, { sesion.UserId }
+				end
+				return nuevo
 			end)
 		end)
 

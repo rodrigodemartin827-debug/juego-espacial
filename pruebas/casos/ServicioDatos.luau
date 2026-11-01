@@ -168,6 +168,22 @@ return function(Marco)
 			Marco.igualProfundo(nube.Escrituras[1].UserIds, { 4242 })
 		end)
 
+		Marco.prueba("los jugadores de prueba de Studio (UserId negativo) se guardan sin UserIds asociados", function()
+			local nube = NubeDatos.nueva()
+			local servidor = crearServidor(nube)
+
+			local jugador = entrar(servidor, -1, "Prueba")
+			servidor.Servicio.ObtenerDatos(jugador).Monedas = 3
+			servidor.Mundo.salirJugador(jugador)
+			esperarLiberacion(nube, -1)
+
+			Marco.verdadero(#nube.Escrituras >= 2, "debe haber cargado y guardado")
+			for _, escritura in nube.Escrituras do
+				Marco.esNil(escritura.UserIds, "no debe asociar UserIds que no son de usuarios reales")
+			end
+			Marco.igual(leerRegistro(nube, -1).Datos.Monedas, 3)
+		end)
+
 		Marco.prueba("Iniciar solo puede llamarse una vez", function()
 			local servidor = crearServidor(NubeDatos.nueva())
 			Marco.lanzaError(servidor.Servicio.Iniciar, "solo debe llamarse una vez")
