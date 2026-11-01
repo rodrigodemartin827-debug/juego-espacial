@@ -69,9 +69,7 @@ export type OpcionesCadena = {
 -- Cadena de texto. Las longitudes se miden en bytes, que es lo que cuesta enviar y guardar.
 function Validador.Cadena(opciones: OpcionesCadena?): Validador
 	local minLongitud = if opciones and opciones.MinLongitud then opciones.MinLongitud else 0
-	local maxLongitud = if opciones and opciones.MaxLongitud
-		then opciones.MaxLongitud
-		else LONGITUD_MAXIMA_POR_DEFECTO
+	local maxLongitud = if opciones and opciones.MaxLongitud then opciones.MaxLongitud else LONGITUD_MAXIMA_POR_DEFECTO
 	local patron = if opciones then opciones.Patron else nil
 
 	return function(valor: any)

@@ -38,7 +38,10 @@ return function(Marco)
 
 			Marco.igual(buscar("ReplicatedStorage.Shared.Red.Validador").ClassName, "ModuleScript")
 			Marco.igual(buscar("ServerScriptService.Server.Servicios.ServicioRed").ClassName, "ModuleScript")
-			Marco.igual(buscar("StarterPlayer.StarterPlayerScripts.Client.Servicios.ServicioRed").ClassName, "ModuleScript")
+			Marco.igual(
+				buscar("StarterPlayer.StarterPlayerScripts.Client.Servicios.ServicioRed").ClassName,
+				"ModuleScript"
+			)
 		end)
 
 		Marco.prueba("todos los archivos .luau compilan con el compilador de Luau", function()

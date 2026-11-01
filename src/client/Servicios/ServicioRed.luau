@@ -66,10 +66,8 @@ function ServicioRed.Iniciar()
 		eventos[nombre] = carpeta:WaitForChild(nombre) :: RemoteEvent
 
 		if definicion.Direccion == "ClienteAServidor" then
-			limitadores[nombre] = LimitadorDeTasa.nuevo(
-				definicion.LimitePorSegundo or Remotos.LIMITE_POR_DEFECTO,
-				definicion.Rafaga
-			)
+			limitadores[nombre] =
+				LimitadorDeTasa.nuevo(definicion.LimitePorSegundo or Remotos.LIMITE_POR_DEFECTO, definicion.Rafaga)
 		end
 	end
 end

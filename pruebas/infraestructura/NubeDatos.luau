@@ -179,10 +179,7 @@ function NubeDatos.nueva(): Nube
 			if nuevo == nil then
 				return nil -- escritura cancelada
 			end
-			assert(
-				idsUsuario == nil or type(idsUsuario) == "table",
-				"UpdateAsync: los UserIds deben ser una lista"
-			)
+			assert(idsUsuario == nil or type(idsUsuario) == "table", "UpdateAsync: los UserIds deben ser una lista")
 
 			datos[clave] = serializar(nuevo, clave)
 			table.insert(nube.Escrituras, { Clave = clave, Valor = copiar(datos[clave]) })

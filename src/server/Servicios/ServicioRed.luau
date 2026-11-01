@@ -152,10 +152,8 @@ function ServicioRed.Iniciar()
 				`El remoto '{nombre}' debe declarar Argumentos (usa una lista vacía si no lleva ninguno)`
 			)
 
-			limitadores[nombre] = LimitadorDeTasa.nuevo(
-				definicion.LimitePorSegundo or Remotos.LIMITE_POR_DEFECTO,
-				definicion.Rafaga
-			)
+			limitadores[nombre] =
+				LimitadorDeTasa.nuevo(definicion.LimitePorSegundo or Remotos.LIMITE_POR_DEFECTO, definicion.Rafaga)
 			evento.OnServerEvent:Connect(function(jugador: Player, ...: any)
 				procesarPeticion(nombre, jugador, ...)
 			end)

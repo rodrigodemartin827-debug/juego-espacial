@@ -50,11 +50,7 @@ export type LimitadorDeTasa = typeof(setmetatable(
 	- reloj: función que devuelve el tiempo en segundos. Por defecto `os.clock`; solo se cambia
 	  en las pruebas para controlar el tiempo.
 ]]
-function LimitadorDeTasa.nuevo(
-	limitePorSegundo: number,
-	rafaga: number?,
-	reloj: (() -> number)?
-): LimitadorDeTasa
+function LimitadorDeTasa.nuevo(limitePorSegundo: number, rafaga: number?, reloj: (() -> number)?): LimitadorDeTasa
 	assert(
 		type(limitePorSegundo) == "number" and limitePorSegundo > 0,
 		"limitePorSegundo debe ser un número mayor que 0"

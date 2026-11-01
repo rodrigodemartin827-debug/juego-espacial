@@ -91,23 +91,27 @@ end
 
 return function(Marco)
 	Marco.grupo("ServicioRed (servidor): creación de remotos", function()
-		Marco.prueba("Iniciar crea un RemoteEvent por cada remoto definido, dentro de ReplicatedStorage.Remotos", function()
-			local servidor = crearServidor()
-			Marco.esNil(servidor.Entorno.game.ReplicatedStorage:FindFirstChild("Remotos"), "aún no se ha iniciado")
+		Marco.prueba(
+			"Iniciar crea un RemoteEvent por cada remoto definido, dentro de ReplicatedStorage.Remotos",
+			function()
+				local servidor = crearServidor()
+				Marco.esNil(servidor.Entorno.game.ReplicatedStorage:FindFirstChild("Remotos"), "aún no se ha iniciado")
 
-			servidor.Red.Iniciar()
+				servidor.Red.Iniciar()
 
-			local definiciones = servidor.Entorno.servidor.requerir("ReplicatedStorage.Shared.Red.Remotos").Definiciones
-			local carpeta = servidor.Entorno.game.ReplicatedStorage.Remotos
-			local cantidad = 0
-			for nombre in definiciones do
-				cantidad += 1
-				local evento = carpeta:FindFirstChild(nombre)
-				Marco.distinto(evento, nil, `falta el RemoteEvent '{nombre}'`)
-				Marco.igual(evento.ClassName, "RemoteEvent")
+				local definiciones =
+					servidor.Entorno.servidor.requerir("ReplicatedStorage.Shared.Red.Remotos").Definiciones
+				local carpeta = servidor.Entorno.game.ReplicatedStorage.Remotos
+				local cantidad = 0
+				for nombre in definiciones do
+					cantidad += 1
+					local evento = carpeta:FindFirstChild(nombre)
+					Marco.distinto(evento, nil, `falta el RemoteEvent '{nombre}'`)
+					Marco.igual(evento.ClassName, "RemoteEvent")
+				end
+				Marco.igual(#carpeta:GetChildren(), cantidad)
 			end
-			Marco.igual(#carpeta:GetChildren(), cantidad)
-		end)
+		)
 
 		Marco.prueba("la carpeta se publica con todos los eventos ya dentro", function()
 			local servidor = crearServidor()
