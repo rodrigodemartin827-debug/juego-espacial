@@ -1,0 +1,46 @@
+--!strict
+--[[
+	ServicioBandos: atiende la elección de bando del jugador (Héroes o Villanos).
+
+	Es el primer consumidor real de los sistemas de red y de datos, y sirve de ejemplo de cómo escribir
+	un servicio:
+	  - Recibe la petición por ServicioRed.Conectar. Cuando el manejador se ejecuta, el remoto ya ha pasado
+	    el límite por segundo y la validación (el bando es "Heroes" o "Villanos"), pero la lógica de la
+	    partida sigue siendo cosa del manejador: ¿tiene ya bando? ¿han cargado sus datos?
+	  - Modifica directamente los datos que devuelve ServicioDatos.ObtenerDatos.
+	  - Avisa al cliente con ServicioReplicacion y guarda de inmediato, porque elegir bando es una decisión
+	    que no debe perderse si el servidor falla.
+
+	Regla actual: el bando se elige una sola vez y no se puede cambiar. Para permitir cambios (con un
+	coste, un enfriamiento...) bastaría con modificar la comprobación del manejador.
+]]
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Bandos = require(ReplicatedStorage.Shared.Juego.Bandos)
+local ServicioDatos = require(script.Parent.ServicioDatos)
+local ServicioRed = require(script.Parent.ServicioRed)
+local ServicioReplicacion = require(script.Parent.ServicioReplicacion)
+
+local ServicioBandos = {}
+
+local function elegirBando(jugador: Player, bando: Bandos.IdBando)
+	local datos = ServicioDatos.ObtenerDatos(jugador)
+	if datos == nil then
+		return -- sus datos todavía no han cargado: no hay dónde guardar la elección
+	end
+	if datos.Bando ~= Bandos.Ninguno then
+		return -- ya eligió bando
+	end
+
+	datos.Bando = bando
+	ServicioReplicacion.EnviarDatos(jugador)
+	ServicioDatos.GuardarAhora(jugador)
+end
+
+-- Empieza a atender el remoto ElegirBando. Debe llamarse una sola vez, después de ServicioRed.Iniciar().
+function ServicioBandos.Iniciar()
+	ServicioRed.Conectar("ElegirBando", elegirBando :: any)
+end
+
+return ServicioBandos
