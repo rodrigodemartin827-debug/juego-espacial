@@ -20,6 +20,7 @@
 ]]
 
 local Bandos = require(script.Parent.Parent.Juego.Bandos)
+local Poderes = require(script.Parent.Parent.Combate.Datos.Poderes)
 local Validador = require(script.Parent.Validador)
 
 export type Direccion = "ClienteAServidor" | "ServidorACliente"
@@ -55,6 +56,44 @@ local definiciones: { [string]: Definicion } = {
 	-- El cliente pide una copia de sus datos. Lo hace al arrancar, por si el servidor ya los había
 	-- enviado antes de que el cliente estuviera escuchando (los remotos no guardan mensajes).
 	PedirDatos = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 2,
+		Argumentos = {},
+	},
+
+	-- ===== Combate =====
+
+	-- El cliente pide usar una habilidad. Solo dice CUÁL, hacia dónde apunta y a qué distancia: el
+	-- servidor decide si puede (cooldown, energía, estado, alcance) y qué golpea. Los argumentos son:
+	-- id de la habilidad, dirección (vector unitario) y distancia al punto señalado.
+	UsarHabilidad = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 6,
+		Rafaga = 4,
+		Argumentos = {
+			Validador.Enumeracion(Poderes.Solicitables),
+			Validador.Vector3(1.5),
+			Validador.Numero(0, 400),
+		},
+	},
+
+	-- El servidor avisa a todos de que una habilidad ha empezado (para animación y efectos de carga).
+	HabilidadIniciada = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- El servidor avisa a todos del impacto: dónde cae y a quién ha golpeado (efectos de impacto).
+	HabilidadImpacto = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Estado propio de combate: energía, cooldowns. Solo se envía al jugador afectado.
+	EstadoCombate = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- El cliente pide su estado de combate (al arrancar, por si el servidor ya lo había enviado).
+	PedirEstadoCombate = {
 		Direccion = "ClienteAServidor",
 		LimitePorSegundo = 2,
 		Argumentos = {},
