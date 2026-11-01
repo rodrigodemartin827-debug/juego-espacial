@@ -29,7 +29,7 @@ Bandos.Info = {
 } :: { [string]: InfoBando }
 
 -- Los bandos que un jugador puede elegir ("Ninguno" no es una opción).
-Bandos.Elegibles = { "Heroes", "Villanos" } :: { IdBando }
+Bandos.Elegibles = { "Heroes", "Villanos" } :: { string }
 
 -- Indica si `valor` es el identificador de un bando conocido (incluido "Ninguno").
 function Bandos.EsValido(valor: any): boolean

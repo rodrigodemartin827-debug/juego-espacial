@@ -41,7 +41,7 @@ function Validador.Numero(minimo: number?, maximo: number?): Validador
 		if maximo ~= nil and valor > maximo then
 			return false, `debe ser <= {maximo}`
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -56,7 +56,7 @@ function Validador.Entero(minimo: number?, maximo: number?): Validador
 		if valor % 1 ~= 0 then
 			return false, "se esperaba un número entero"
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -85,7 +85,7 @@ function Validador.Cadena(opciones: OpcionesCadena?): Validador
 		if patron ~= nil and string.match(valor, patron) == nil then
 			return false, "el formato no es válido"
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -95,7 +95,7 @@ function Validador.Booleano(): Validador
 		if type(valor) ~= "boolean" then
 			return false, "se esperaba true o false"
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -111,7 +111,7 @@ function Validador.Enumeracion(valores: { string }): Validador
 		if type(valor) ~= "string" or not permitidos[valor] then
 			return false, `valor no permitido (los válidos son: {lista})`
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -129,7 +129,7 @@ function Validador.Vector3(maxMagnitud: number?): Validador
 		if maxMagnitud ~= nil and magnitud > maxMagnitud then
 			return false, `la magnitud debe ser <= {maxMagnitud}`
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -142,7 +142,7 @@ function Validador.Instancia(clase: string?): Validador
 		if clase ~= nil and not (valor :: Instance):IsA(clase) then
 			return false, `la Instancia debe ser de la clase {clase}`
 		end
-		return true
+		return true, nil
 	end
 end
 
@@ -150,7 +150,7 @@ end
 function Validador.Opcional(validador: Validador): Validador
 	return function(valor: any)
 		if valor == nil then
-			return true
+			return true, nil
 		end
 		return validador(valor)
 	end
@@ -178,7 +178,7 @@ function Validador.ValidarArgumentos(esquema: { Validador }, ...: any): (boolean
 			return false, `argumento {posicion}: {motivo or "no es válido"}`
 		end
 	end
-	return true
+	return true, nil
 end
 
 return Validador

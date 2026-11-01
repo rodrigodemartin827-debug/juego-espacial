@@ -17,7 +17,7 @@ local Tablas = {}
 ]]
 function Tablas.CopiaProfunda<T>(valor: T): T
 	if type(valor) ~= "table" then
-		return valor
+		return valor :: any
 	end
 
 	local copia = {}
