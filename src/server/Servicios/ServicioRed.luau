@@ -58,6 +58,11 @@ local limitadores: { [string]: LimitadorDeTasa.LimitadorDeTasa } = {}
 local manejadores: { [string]: Manejador } = {}
 local infracciones: { [number]: Infracciones } = {} -- por UserId
 
+-- Añade la traza de pila al mensaje de un error, para que el aviso diga dónde ocurrió.
+local function conTraza(motivo: any): string
+	return debug.traceback(tostring(motivo), 2)
+end
+
 -- Anota una petición descartada y expulsa al jugador si se pasa de la raya.
 local function registrarInfraccion(jugador: Player, nombre: string, motivo: string)
 	local ahora = os.clock()
@@ -108,7 +113,12 @@ local function procesarPeticion(nombre: string, jugador: Player, ...: any)
 		return
 	end
 
-	local ejecutado, errorManejador = xpcall(manejador, debug.traceback, jugador, ...)
+	-- El envoltorio devuelve nil para que xpcall dé siempre dos resultados (éxito y error), incluso
+	-- cuando el manejador no devuelve nada.
+	local ejecutado, errorManejador = xpcall(function(...: any): any
+		manejador(jugador, ...)
+		return nil
+	end, conTraza, ...)
 	if not ejecutado then
 		warn(`[Red] Error en el manejador de '{nombre}' (jugador {jugador.Name}):\n{errorManejador}`)
 	end

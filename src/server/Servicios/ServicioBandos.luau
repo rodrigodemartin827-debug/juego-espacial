@@ -40,7 +40,7 @@ end
 
 -- Empieza a atender el remoto ElegirBando. Debe llamarse una sola vez, después de ServicioRed.Iniciar().
 function ServicioBandos.Iniciar()
-	ServicioRed.Conectar("ElegirBando", elegirBando :: any)
+	ServicioRed.Conectar("ElegirBando", elegirBando)
 end
 
 return ServicioBandos
