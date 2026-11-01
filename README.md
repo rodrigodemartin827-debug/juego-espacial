@@ -134,7 +134,7 @@ ServicioRed.Conectar("DatosJugador", function(datos) end)
 
 `ServicioDatos` guarda en un DataStore, para cada jugador (clave `Jugador_<UserId>`): **bando, nivel, XP, monedas,
 inventario y mejoras de la nave**. Los valores iniciales están en la plantilla de `Servicios/ServicioDatos/Esquema`
-(las mejoras de la nave son `Casco`, `Escudo`, `Motor`, `Armas` y `Escaner`, y se pueden cambiar ahí).
+(las mejoras de la nave son `Casco`, `Escudo`, `Motor`, `Armas`, `Escaner` y `Carga`, y se pueden cambiar ahí).
 
 ### Bloqueo de sesión
 
