@@ -92,6 +92,8 @@ src/
 │   ├── Combate/             Datos y reglas del combate (ver más abajo)
 │   ├── Naves/               Datos y reglas puras de las naves (ver Naves)
 │   ├── Exploracion/         Escáner, minerales, inventario y crafteo: datos y reglas puras (ver Exploración)
+│   ├── Animacion/           Cinemática R6, horneado de curvas y catálogo de animaciones por código
+│   ├── Personajes/          Andar de los monstruos: datos (Datos/AnimacionesMonstruo) y decisiones (Locomocion)
 │   ├── Red/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
@@ -108,7 +110,7 @@ src/
 │       │   └── AlmacenMemoria   DataStore falso para Studio
 │       ├── ServicioReplicacion  Envía al cliente una copia de sus datos
 │       ├── ServicioPersonaje    Garantiza que todos los personajes son R6
-│       ├── ServicioBandos       Ejemplo: elegir bando
+│       ├── ServicioBandos       Elegir bando y publicarlo en el atributo "Bando" del Player
 │       ├── ServicioCombate      Combate: cooldown, energía, alcance, daño (autoritativo)
 │       ├── ServicioNaves/       Naves: despegue, vida y escudo, armas, choques, vigilancia
 │       ├── ServicioAsteroides   Campos de asteroides generados por código (con vetas de mineral)
@@ -126,10 +128,11 @@ src/
     ├── Combate/             Entrada, interfaz (vida, energía, cooldowns), números de daño
     ├── Naves/               Vuelo, cámara, panel de mandos, controles y efectos de las naves
     ├── Exploracion/         Escáner (Q), pico (R), ficha, bodega (I), mesa de crafteo y efectos de escaneo
+    ├── Personajes/          AndarMonstruo: pone el andar de monstruo a todos los Monstruos que se ven
     └── VFX/                 Motor de efectos visuales (lo usan el combate y las naves)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
-animaciones/                 Animaciones de combate (.fbx para R6) y los scripts de Blender que las generan
+animaciones/                 Animaciones R6 (.fbx), hojas de contactos y los scripts de Blender que las generan
 ```
 
 Convenciones: todo el código de `src/` va en módulos con `--!strict` y comentarios en español; los nombres de módulos,

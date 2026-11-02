@@ -1,4 +1,4 @@
-# Animaciones de combate
+# Animaciones
 
 Animaciones para el rig **R6** de Roblox, creadas con Blender en modo sin pantalla (`bpy`) y exportadas a `.fbx`.
 El juego entero es R6 (ver el README principal): no hay animaciones para R15.
@@ -144,6 +144,109 @@ python3 -m venv .venv && .venv/bin/pip install -r animaciones/herramientas/requi
 | `exportar_fbx.py` | Exportación FBX con los ajustes para Roblox |
 | `verificar_fbx.py` | Reimporta el FBX y comprueba huesos, jerarquía, duración y posiciones |
 | `generar.py` | Lo ejecuta todo |
+
+## Andar de los monstruos
+
+Los jugadores del bando **Monstruos** se mueven con animaciones propias: reposo, andar, correr, saltar y caer.
+Estilo creepypasta original: encorvado, la cabeza ladeada y **clavada al frente** mientras el cuerpo se sacude, con
+tirones secos; los brazos cuelgan como peso muerto, cada uno a su ritmo; al andar cojea arrastrando la pierna
+izquierda con la punta rozando el suelo, y corre a zancadas desiguales, muy agachado, con espasmos.
+
+| Archivo | Qué es |
+| --- | --- |
+| `andar_monstruo/hoja_<estado>.png` | Hoja de contactos: momentos clave desde frente, lateral y 3/4. El personaje avanza a la velocidad de referencia sobre un suelo de casillas de 1 stud: un pie bien plantado se queda en su casilla |
+| `andar_monstruo/bucle_<estado>.gif` | La animación en bucle (vista 3/4), para ver el ritmo y los tirones sin Studio |
+| `andar_monstruo/monstruo_<estado>_solo_huesos.fbx` | Para importar en el Animation Editor si se quiere subir como asset (opcional, ver abajo) |
+
+**La fuente de verdad es el código**, no Blender: las curvas están en
+`src/shared/Personajes/Datos/AnimacionesMonstruo.luau` y el juego las convierte en `KeyframeSequence` al arrancar
+(`Animacion/Horneado` → `VFX/Animador`). Las hojas, los GIF y los FBX se generan **a partir de esos mismos datos**, así
+que enseñan exactamente lo que se verá en el juego. Al tocar las curvas, regenera las hojas para revisarlas.
+
+### Cómo se mide que los pies no patinen
+
+R6 no tiene rodillas: las piernas son bloques rígidos que cuelgan del `Torso`. Por eso:
+
+- La **altura del cuerpo se calcula en cada cuadro** (`AlturaAutomatica`) para que el pie más bajo toque el suelo: ni
+  flota ni se hunde.
+- Las piernas, los brazos y la cabeza se escriben **respecto al mundo** (`Mundo = true`): una pierna a 0° está
+  vertical aunque el torso vaya inclinado 40°.
+- El pie que pisa se mueve con tramos **lineales**, así va hacia atrás a velocidad constante.
+- El ladeo del torso sube una cadera y baja la otra (2·sen(ladeo) studs): se usa para que la pierna que avanza no roce.
+- `pruebas/infraestructura/Pisada.luau` mide la velocidad natural de los pies con la cinemática R6 y la prueba
+  `AndarMonstruo` exige que `VelocidadReferencia` esté a menos de un 10 % de ella. El cliente reproduce la animación a
+  `velocidad real / VelocidadReferencia` para que no patinen a ninguna velocidad (dentro de `RitmoMinimo..RitmoMaximo`).
+
+| Animación | Ciclo | Velocidad de referencia | Patinaje medio | En el aire |
+| --- | --- | --- | --- | --- |
+| Andar | 0,9 s | 4,2 studs/s (pies: 4,26) | 19 % | 0 % |
+| Correr | 0,56 s | 13 studs/s (pies: 13,4) | 12 % | 22 % |
+
+A la velocidad normal de un jugador (16 studs/s) el monstruo **corre** (a 1,23×). Anda por debajo de 8 studs/s (joystick
+a medias en móvil). En reposo los pies quedan a ≤ 0,1 studs del suelo en todo el ciclo.
+
+### Regenerar
+
+```bash
+lune run animaciones/herramientas/exportar_monstruo.luau /tmp/monstruo.json
+.venv/bin/python animaciones/herramientas/andar_monstruo.py --json /tmp/monstruo.json \
+  --hojas animaciones/andar_monstruo/hoja --gifs animaciones/andar_monstruo/bucle --fbx-dir animaciones/andar_monstruo
+.venv/bin/python animaciones/herramientas/verificar_fbx_monstruo.py --json /tmp/monstruo.json --fbx-dir animaciones/andar_monstruo
+```
+
+Con `--solo Andar` se genera solo una. Tarda unos 3 minutos en total (Cycles en CPU).
+
+### Subirlas como asset (opcional)
+
+No hace falta: funcionan registradas por código. Pero si se suben, se ahorra el registro y la animación viaja por la
+red como cualquier otra. Para cada `monstruo_<estado>_solo_huesos.fbx`: Rig Builder → R6 → Animation Editor →
+Import From FBX → **Looping activado** (todas menos Saltar) → prioridad **Movement** → Publish. Pega el ID en
+`src/shared/Combate/Datos/Recursos.luau`, en `Monstruo_Reposo`, `Monstruo_Andar`, `Monstruo_Correr`,
+`Monstruo_Saltar` o `Monstruo_Caer`.
+
+### Lista de comprobación en Studio
+
+**Poner a un jugador como Monstruo.** Play. En la zona de pruebas, usa el pedestal rojo "Unirse a Monstruos" (solo
+funciona si el jugador aún no tiene bando). Para un jugador que ya es Humano, desde la barra de comandos del servidor:
+
+```lua
+local S = game.ServerScriptService.Server.Servicios
+local j = game.Players:GetPlayers()[1]
+require(S.ServicioDatos).ObtenerDatos(j).Bando = "Monstruos"
+require(S.ServicioBandos).Publicar(j)
+```
+
+Comprueba `j:GetAttribute("Bando") == "Monstruos"` en el servidor y en el cliente. El **Muñeco Monstruo** de la zona de
+pruebas también lleva el reposo de monstruo (sirve de referencia quieta).
+
+1. **Quieto**: encorvado y con la cabeza ladeada; a los ~1,6 s la cabeza da un latigazo al otro lado y los hombros se
+   encogen; a los ~3,6 s, tres tics de cabeza y una sacudida del brazo izquierdo. Los pies no flotan ni se hunden.
+2. **Andar** (joystick a medias, o `Humanoid.WalkSpeed = 6` desde la consola): cojera, la pierna izquierda se
+   arrastra rozando el suelo, el cuerpo se desploma hacia ella y la cabeza da un tirón por ciclo. Mira los pies contra
+   el suelo: no deben deslizarse de forma llamativa.
+3. **Correr** (velocidad normal, 16): muy agachado, zancadas desiguales, espasmo hacia el lado izquierdo, brazo izquierdo
+   arrastrado atrás. Ritmo frenético pero los pies sin patinar mucho.
+4. **Saltar y caer**: se encoge y se estira con los brazos abiertos atrás; al caer, brazos arriba como una marioneta.
+   Al aterrizar vuelve enseguida a andar o correr.
+5. **Combate encima**: con el monstruo, lanza el combo (y algún poder) quieto y corriendo: el golpe debe verse entero,
+   y al terminar vuelve el andar de monstruo.
+6. **Otros casos**: siéntate en un asiento (debe verse la animación normal de sentarse), muere y reaparece (el andar de
+   monstruo vuelve solo), cambia el bando a Humanos con el comando de arriba (vuelve el andar normal sin reaparecer).
+7. **Dos jugadores** (Test → Clients and Servers → 2 jugadores): uno Monstruo y otro Humano. Desde el cliente del
+   Humano, el Monstruo debe verse quieto, andando, corriendo y saltando con sus animaciones, **sin temblores ni mezclas
+   con el andar normal**. Y el Humano debe verse normal desde los dos clientes.
+8. Consola sin avisos de `[Animador]`. Para depurar, en la consola del cliente:
+   `require(game.Players.LocalPlayer.PlayerScripts.Client.Personajes.AndarMonstruo).Seguidos()` lista los personajes
+   con el andar de monstruo.
+
+**Qué mirar especialmente** (no se ha podido comprobar sin Studio):
+
+- Que el andar normal no se mezcle con el del monstruo (si se viera "a medias", el Animate usa una prioridad igual o
+  mayor que Movement: súbela en `AnimacionesMonstruo`, campo `Prioridad`).
+- En dos jugadores, que no haya parpadeos: cada cliente para la copia replicada que le llega del dueño del personaje y
+  reproduce la suya. Si se viera doble o con saltos, avísame con una captura.
+- Que la dirección del personaje cuadre: en Studio la cabeza va adelantada y las piernas pisan delante del cuerpo
+  (como en la vista lateral de las hojas).
 
 ## Por qué no se usó un modelo de IA
 
