@@ -444,17 +444,30 @@ end
 	Las estadísticas de la nave salen de las mejoras guardadas en sus datos.
 ]]
 function ServicioNaves.Despegar(jugador: Player, plataforma: Plataforma): boolean
-	if naves[jugador] ~= nil or plataforma.Ocupada then
+	-- Si no puede, se le dice por qué (el panel de la nave aún no existe: va como un mensaje suelto).
+	local function rechazar(motivo: string): boolean
+		ServicioRed.EnviarACliente(jugador, "EstadoNave", { Activa = false, Aviso = motivo })
 		return false
 	end
-	local ahora = os.clock()
-	if ahora < (proximoDespegue[jugador] or 0) then
+
+	if naves[jugador] ~= nil then
 		return false
+	end
+	if plataforma.Ocupada then
+		return rechazar("La plataforma está ocupada")
+	end
+	local ahora = os.clock()
+	local espera = (proximoDespegue[jugador] or 0) - ahora
+	if espera > 0 then
+		return rechazar(`Tu nave se está reparando ({math.ceil(espera)} s)`)
 	end
 	local datos = ServicioDatos.ObtenerDatos(jugador)
 	local personaje = jugador.Character
 	local humanoid = if personaje then personaje:FindFirstChildOfClass("Humanoid") else nil
-	if datos == nil or personaje == nil or humanoid == nil or humanoid.Health <= 0 then
+	if datos == nil then
+		return rechazar("Tus datos todavía se están cargando")
+	end
+	if personaje == nil or humanoid == nil or humanoid.Health <= 0 then
 		return false
 	end
 
@@ -521,8 +534,14 @@ function ServicioNaves.Despegar(jugador: Player, plataforma: Plataforma): boolea
 		end)
 	)
 
-	-- Los motores rugen unos instantes antes de soltar la nave.
+	-- Los motores rugen unos instantes antes de soltar la nave. El estado se repite enseguida: el modelo puede no
+	-- haberse replicado todavía al cliente del piloto la primera vez.
 	enviarEstado(nave)
+	task.delay(0.35, function()
+		if nave.Activa and not nave.Lista then
+			enviarEstado(nave)
+		end
+	end)
 	ServicioRed.EnviarATodos("NaveDespegue", modelo, plataforma.Marco.Position, plataforma.Marco.LookVector)
 	task.delay(Config.SegundosArranque, function()
 		if not nave.Activa then

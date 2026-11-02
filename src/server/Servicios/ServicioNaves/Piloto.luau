@@ -20,6 +20,7 @@ export type Guardado = {
 	Humanoid: Humanoid,
 	Raiz: BasePart,
 	Transparencias: { [Instance]: number }, -- lo que valía Transparency antes de ocultarlo
+	ConsultasPrevias: { [BasePart]: boolean }, -- lo que valía CanQuery antes de quitarlo
 	Soldadura: WeldConstraint,
 	Escudo: ForceField,
 	DistanciaNombre: Enum.HumanoidDisplayDistanceType,
@@ -43,12 +44,16 @@ function Piloto.Subir(personaje: Model, nave: Model): Guardado?
 		return nil
 	end
 
-	-- Invisible: se guarda la transparencia de cada parte para devolverla luego.
+	-- Invisible e intangible para los disparos (si no, el cuerpo del piloto, dentro de la nave, pararía los láseres
+	-- enemigos como si fuera escenario). Se guarda lo que valía cada cosa para devolverla luego.
 	local transparencias: { [Instance]: number } = {}
+	local consultas: { [BasePart]: boolean } = {}
 	for _, parte in personaje:GetDescendants() do
 		if parte:IsA("BasePart") then
 			transparencias[parte] = parte.Transparency
+			consultas[parte] = parte.CanQuery
 			parte.Transparency = 1
+			parte.CanQuery = false
 		elseif parte:IsA("Decal") then
 			transparencias[parte] = parte.Transparency
 			parte.Transparency = 1
@@ -80,6 +85,7 @@ function Piloto.Subir(personaje: Model, nave: Model): Guardado?
 		Humanoid = humanoid,
 		Raiz = raiz,
 		Transparencias = transparencias,
+		ConsultasPrevias = consultas,
 		Soldadura = soldadura,
 		Escudo = escudo,
 		DistanciaNombre = distanciaNombre,
@@ -101,6 +107,11 @@ function Piloto.Bajar(guardado: Guardado, destino: CFrame?)
 	for parte, transparencia in guardado.Transparencias do
 		if parte.Parent ~= nil then
 			(parte :: any).Transparency = transparencia
+		end
+	end
+	for parte, consulta in guardado.ConsultasPrevias do
+		if parte.Parent ~= nil then
+			parte.CanQuery = consulta
 		end
 	end
 	GruposColision.Aplicar(personaje, "Default")

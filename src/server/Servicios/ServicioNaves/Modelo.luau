@@ -49,7 +49,7 @@ local COLORES: { [string]: { Casco: Color3, Oscuro: Color3, Neon: Color3 } } = {
 }
 
 -- Altura de la nave sobre el suelo cuando está posada (para colocarla en la plataforma).
-Modelo.ALTURA_POSADA = 2.6
+Modelo.ALTURA_POSADA = 2.4
 
 -- Crea una parte soldada a la principal. `relativo` es su posición y giro respecto a ella.
 local function crearParte(
@@ -103,6 +103,7 @@ end
 	El que la use la mueve con `PivotTo` y la suelta con `Modelo.Soltar`.
 ]]
 function Modelo.Crear(bando: string, nombrePiloto: string, ocultarA: Player?): Model
+	GruposColision.Preparar() -- sin los grupos registrados, asignar un CollisionGroup daría error
 	local colores = COLORES[bando] or COLORES.Ninguno
 	local modelo = Instance.new("Model")
 	modelo.Name = `Nave de {nombrePiloto}`

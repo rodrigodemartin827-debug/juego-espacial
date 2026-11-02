@@ -13,9 +13,6 @@
 	no lance un combo del personaje.
 ]]
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local Config = require(ReplicatedStorage:WaitForChild("Shared").Naves.Config)
 local ServicioCombate = require(script.Parent.Parent.Combate.ServicioCombate)
 local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 local Camara = require(script.Parent.Camara)
@@ -27,6 +24,7 @@ local ServicioNaves = {}
 
 local enNave = false -- hay una nave del jugador (aunque aún esté arrancando)
 local volando = false -- los mandos ya están activos
+local preparando = false -- se están activando los mandos (puede tardar: espera a que el modelo termine de replicarse)
 local iniciado = false
 
 local ROJO = Color3.fromRGB(255, 120, 130)
@@ -37,6 +35,7 @@ end
 
 -- Vuelve a la vista de a pie.
 local function salir(destruida: boolean)
+	preparando = false
 	if volando then
 		Vuelo.Detener()
 		volando = false
@@ -59,6 +58,10 @@ local function alRecibirEstado(datos: any)
 	end
 	if datos.Activa ~= true then
 		salir(datos.Destruida == true)
+		-- Un mensaje del servidor sin nave: por qué no ha podido despegar, por ejemplo.
+		if type(datos.Aviso) == "string" then
+			Panel.AvisoFinal(datos.Aviso, Color3.fromRGB(255, 210, 120))
+		end
 		return
 	end
 
@@ -88,8 +91,10 @@ local function alRecibirEstado(datos: any)
 	if datos.Lista == true then
 		if volando then
 			Vuelo.Actualizar(datos)
-		else
-			volando = Vuelo.Iniciar(datos, pedirAterrizar)
+		elseif not preparando then
+			preparando = true
+			volando = Vuelo.Iniciar(datos, pedirAterrizar) and enNave
+			preparando = false
 		end
 	end
 end
@@ -100,7 +105,6 @@ function ServicioNaves.Iniciar()
 		return
 	end
 	iniciado = true
-	assert(Config.EtiquetaNave ~= "")
 
 	Efectos.Iniciar(Vuelo.Chocar)
 	ServicioRed.Conectar("EstadoNave", alRecibirEstado)
