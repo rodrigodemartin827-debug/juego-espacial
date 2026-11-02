@@ -8,8 +8,10 @@
 	  1. lee la intención del piloto (Entrada),
 	  2. gira la orientación (guiñada y cabeceo) y calcula la velocidad que piden los mandos (Naves/Fisica),
 	  3. acerca la velocidad real a esa con la aceleración de SU motor (inercia),
-	  4. predice choques con los asteroides y rebota al momento, sin esperar el aviso del servidor,
-	  5. y lo escribe en las dos fuerzas del modelo: LinearVelocity (velocidad) y AlignOrientation (orientación).
+	  4. suma el arrastre del agujero negro (Planetas/Gravedad: una corriente hacia su centro que crece al
+	     acercarse; si el motor no da más que ella, no se escapa) y no deja meterse dentro de un planeta o del sol,
+	  5. predice choques con los asteroides y rebota al momento, sin esperar el aviso del servidor,
+	  6. y lo escribe en las dos fuerzas del modelo: LinearVelocity (velocidad) y AlignOrientation (orientación).
 
 	Todos los límites (velocidad máxima, aceleración, turbo, cadencia...) vienen de las estadísticas que el
 	servidor calculó a partir de las mejoras guardadas del jugador. Si un tramposo se los salta, el servidor lo
@@ -23,6 +25,9 @@ local RunService = game:GetService("RunService")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Config = require(Shared.Naves.Config)
 local Fisica = require(Shared.Naves.Fisica)
+local DatosPlanetas = require(Shared.Planetas.Datos)
+local Espacio = require(Shared.Planetas.Espacio)
+local Gravedad = require(Shared.Planetas.Gravedad)
 local Camara = require(script.Parent.Camara)
 local Entrada = require(script.Parent.Entrada)
 local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
@@ -55,6 +60,10 @@ local NOMBRE_PASO = "NaveVuelo"
 local DT_MAXIMO = 0.1 -- un tirón de fotogramas no debe disparar la nave hacia delante
 
 local sesion: Sesion? = nil
+
+-- Cuerpos sólidos (planetas y sol) y agujero negro: no cambian, se leen una vez.
+local SOLIDOS = Espacio.CuerposSolidos()
+local AGUJERO = DatosPlanetas.AgujeroNegro
 
 -- ===== Controles de Roblox =====
 
@@ -181,11 +190,32 @@ local function paso(dt: number)
 	}, datos.VelocidadMax, datos.TurboMult)
 	local objetivo = sinAlabeo:VectorToWorldSpace(Vector3.new(lx, ly, lz))
 
+	-- Atracción del agujero negro: una corriente que se suma a lo que piden los mandos (el servidor la cuenta).
+	local posicion = s.Raiz.Position
+	local ax, ay, az = Gravedad.VectorArrastre(posicion :: any, AGUJERO.Centro, AGUJERO.Atraccion)
+	if ax ~= 0 or ay ~= 0 or az ~= 0 then
+		objetivo += Vector3.new(ax, ay, az)
+	end
+
 	-- Inercia: la velocidad real se acerca a la pedida con la aceleración del motor (el doble con turbo).
 	local hayOrden = lectura.Adelante ~= 0 or lectura.Lateral ~= 0 or lectura.Vertical ~= 0 or s.TurboActivo
 	s.Acelerando = hayOrden
 	local aceleracion = Fisica.Aceleracion(datos.Aceleracion * (if s.TurboActivo then 2 else 1), hayOrden)
 	s.Vx, s.Vy, s.Vz = Fisica.AcercarVelocidad(s.Vx, s.Vy, s.Vz, objetivo.X, objetivo.Y, objetivo.Z, aceleracion * dt)
+
+	-- Planetas y sol son sólidos: la nave resbala por fuera en lugar de atravesarlos.
+	for _, cuerpo in SOLIDOS do
+		s.Vx, s.Vy, s.Vz = Gravedad.ContenerFuera(
+			posicion.X,
+			posicion.Y,
+			posicion.Z,
+			s.Vx,
+			s.Vy,
+			s.Vz,
+			cuerpo.Centro,
+			cuerpo.Radio + Config.RadioNave
+		)
+	end
 
 	-- Choque previsto con un asteroide en este fotograma: rebota ya (el servidor aplica el daño).
 	local avance = Vector3.new(s.Vx, s.Vy, s.Vz) * dt

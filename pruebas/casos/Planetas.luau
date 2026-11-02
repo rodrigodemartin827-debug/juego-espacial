@@ -4,7 +4,24 @@
 	los planetas.
 ]]
 
+local fs = require("@lune/fs")
+local serde = require("@lune/serde")
+
 local Entorno = require("../infraestructura/Entorno")
+
+-- Junta el texto de todos los .luau de un directorio (y subdirectorios).
+local function leerDirectorio(directorio: string): string
+	local textos = {}
+	for _, nombre in fs.readDir(directorio) do
+		local ruta = `{directorio}/{nombre}`
+		if fs.isDir(ruta) then
+			table.insert(textos, leerDirectorio(ruta))
+		elseif string.sub(nombre, -5) == ".luau" then
+			table.insert(textos, fs.readFile(ruta))
+		end
+	end
+	return table.concat(textos, "\n")
+end
 
 local function cargar(ruta: string)
 	local entorno = Entorno.nuevo()
@@ -847,6 +864,126 @@ return function(Marco)
 				Marco.verdadero(partes <= 140, `{id} usa {partes} partes`)
 				Marco.verdadero(partes >= 20, `{id} usa muy pocas partes ({partes}): se verá pobre`)
 			end
+		end)
+	end)
+
+	-- ===== Recetas, red y proyecto =====
+
+	Marco.grupo("Planetas: recetas de VFX, red y proyecto", function()
+		local Recetas = cargar("Planetas.Datos.Efectos")
+		local Paleta = cargar("Combate.Datos.Paleta")
+		local Combate = cargar("Combate.Datos.EfectosVFX")
+		local DeNaves = cargar("Naves.Datos.EfectosNave")
+		local TIPOS = {
+			Particulas = true,
+			Onda = true,
+			Esfera = true,
+			Luz = true,
+			Tinte = true,
+			Desenfoque = true,
+			Zoom = true,
+			Sacudida = true,
+		}
+		local ANCLAS = { Lanzador = true, Objetivo = true, Origen = true }
+
+		Marco.prueba("las recetas del entorno existen, usan paletas y capas conocidas y no pisan otras", function()
+			for _, nombre in
+				{ "Planeta_Entrada", "Planeta_Salida", "Espacio_Calor", "Espacio_Atraccion", "Espacio_Absorcion" }
+			do
+				Marco.distinto(Recetas[nombre], nil, `falta la receta {nombre}`)
+			end
+			for nombre, receta in Recetas do
+				Marco.esNil(Combate[nombre], `{nombre} pisa una receta del combate`)
+				Marco.esNil(DeNaves[nombre], `{nombre} pisa una receta de las naves`)
+				local paleta = Paleta[receta.Paleta]
+				Marco.distinto(paleta, nil, `{nombre}: paleta {receta.Paleta}`)
+				for fase, capas in receta.Fases do
+					Marco.verdadero(#capas > 0, `{nombre}/{fase} vacía`)
+					for indice, capa in capas do
+						local donde = `{nombre}/{fase}[{indice}]`
+						Marco.verdadero(TIPOS[capa.Tipo], `{donde}: tipo {capa.Tipo}`)
+						if capa.Anclaje then
+							Marco.verdadero(ANCLAS[capa.Anclaje], `{donde}: ancla {capa.Anclaje}`)
+						end
+						local colores = if type(capa.Color) == "table" then capa.Color else { capa.Color }
+						for _, c in colores do
+							if c ~= nil then
+								Marco.distinto(paleta[c], nil, `{donde}: color {c}`)
+							end
+						end
+					end
+				end
+			end
+		end)
+
+		Marco.prueba(
+			"TransicionPlaneta va del servidor al cliente, el servidor la envía y el cliente la escucha",
+			function()
+				local Remotos = cargar("Red.Remotos")
+				local definicion = Remotos.Definiciones.TransicionPlaneta
+				Marco.distinto(definicion, nil)
+				Marco.igual(definicion.Direccion, "ServidorACliente")
+				local servidor = leerDirectorio("src/server/Servicios/ServicioPlanetas")
+				local cliente = leerDirectorio("src/client/Planetas")
+				Marco.verdadero(string.find(servidor, 'EnviarACliente%(%s*[%w_]+%s*,%s*"TransicionPlaneta"') ~= nil)
+				Marco.verdadero(string.find(cliente, 'ServicioRed%.Conectar%(%s*"TransicionPlaneta"') ~= nil)
+			end
+		)
+
+		Marco.prueba("el lugar usa StreamingEnabled (mapa enorme)", function()
+			local proyecto = serde.decode("json", fs.readFile("default.project.json"))
+			local propiedades = proyecto.tree.Workspace["$properties"]
+			Marco.igual(propiedades.StreamingEnabled, true)
+			Marco.verdadero(propiedades.StreamingTargetRadius >= propiedades.StreamingMinRadius)
+		end)
+
+		Marco.prueba(
+			"en el espacio la luz es la luna (cielo con estrellas) y en la superficie humana, el sol",
+			function()
+				for _, nombre in { "EspacioProfundo", "EspacioHumanos", "EspacioMonstruos" } do
+					Marco.igual(Iluminacion.Presets[nombre].Fuente, "Luna")
+					Marco.igual(
+						Iluminacion.Presets[nombre].Atmosfera.Densidad,
+						0,
+						`{nombre}: el espacio no tiene atmósfera`
+					)
+				end
+				Marco.igual(Iluminacion.Presets.SuperficieHumanos.Fuente, "Sol")
+				Marco.verdadero(
+					Iluminacion.Presets.SuperficieMonstruos.Atmosfera.Densidad > 0.3,
+					"los monstruos tienen niebla"
+				)
+				Marco.verdadero(
+					Iluminacion.Presets.SuperficieHumanos.Brillo > Iluminacion.Presets.SuperficieMonstruos.Brillo,
+					"la superficie humana debe ser más luminosa"
+				)
+			end
+		)
+
+		Marco.prueba("el puerto cabe en su llano y en su zona segura, y la nave llega dentro de ella", function()
+			for _, id in Datos.OrdenPlanetas do
+				local puerto = Datos.Planetas[id].Puerto
+				local terreno = Datos.Planetas[id].Superficie.Terreno
+				local ancho = (puerto.Plataformas - 1) / 2 * puerto.Separacion + 23 -- medio hangar
+				Marco.verdadero(ancho < terreno.PuertoRadioPlano * 0.72, `{id}: los hangares se salen del llano`)
+				Marco.verdadero(ancho < puerto.RadioZonaSegura, `{id}: los hangares se salen de la zona segura`)
+				local llegada = Espacio.PuntoLlegada(id)
+				Marco.igual(Espacio.EnZonaSeguraSuperficie(llegada), id, `{id}: la nave llega fuera de la zona segura`)
+			end
+			-- El hangar de la estación de pruebas (en el origen) está en el espacio.
+			Marco.igual(Espacio.ZonaDe({ X = 75, Y = 1, Z = 62 }).Tipo, "Espacio")
+		end)
+
+		Marco.prueba("los discos del agujero negro y los halos caben en una Part (2048 studs)", function()
+			local agujero = Datos.AgujeroNegro
+			for _, radio in agujero.Apariencia.RadiosDisco do
+				Marco.verdadero(radio * agujero.RadioHorizonte * 2 <= 2048, `disco de radio {radio}`)
+			end
+			Marco.igual(#agujero.Apariencia.RadiosDisco, #agujero.Apariencia.Disco, "un color por disco")
+			Marco.verdadero(
+				agujero.Apariencia.RadioParticulas
+					< agujero.Apariencia.RadiosDisco[#agujero.Apariencia.RadiosDisco] * 1.8
+			)
 		end)
 	end)
 end

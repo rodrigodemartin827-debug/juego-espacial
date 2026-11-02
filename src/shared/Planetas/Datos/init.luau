@@ -111,6 +111,14 @@ Datos.Espacio = {
 	-- en su dirección real (ver Espacio.DireccionEnCielo), y nunca por debajo de esta elevación (grados).
 	DistanciaCielo = 1400,
 	ElevacionMinimaCielo = 12,
+	-- Qué se ve en el cielo de cada superficie. En la humana el sol ya lo dibuja el cielo de Roblox (su disco
+	-- sale justo en la dirección de la luz); en la de los monstruos, el agujero negro es un objeto.
+	Cielo = {
+		Humanos = { "Monstruos" },
+		Monstruos = { "AgujeroNegro", "Humanos" },
+	} :: { [string]: { string } },
+	-- A menos de esta distancia (studs) se animan los detalles finos: llamaradas y partículas absorbidas.
+	DistanciaDetalle = 7000,
 }
 
 -- ===========================================================================================================
@@ -122,7 +130,7 @@ Datos.Transicion = {
 	NegroMinimo = 0.6, -- segundos en negro como mínimo (mientras el servidor coloca la nave y carga el terreno)
 	FundidoEntrada = 1.1, -- segundos de negro a imagen
 	AlturaLlegada = 160, -- la nave aparece a esta altura sobre el puerto de la superficie
-	DistanciaLlegada = 260, -- ... y a esta distancia horizontal del puerto, mirando hacia él
+	DistanciaLlegada = 150, -- ... y a esta distancia horizontal del puerto, mirando hacia él (dentro de su zona segura)
 	MargenOrbita = 500, -- al despegar, la nave aparece a esta distancia por fuera de la atmósfera
 	SegundosEntreAvisos = 2.5, -- "no puedes aterrizar en pleno combate" no se repite más a menudo
 }
@@ -405,7 +413,7 @@ Datos.AgujeroNegro = {
 	},
 	Apariencia = {
 		Disco = { "#FFF2D6", "#FFB25A", "#FF5A2A", "#7A1FD6" }, -- de dentro a fuera
-		RadiosDisco = { 1.7, 2.6, 3.8, 5.6 }, -- respecto al horizonte
+		RadiosDisco = { 1.7, 2.5, 3.4, 4.4 }, -- respecto al horizonte (el disco mayor no debe pasar de 2048 studs)
 		InclinacionDisco = 14, -- grados
 		Grumos = 26, -- trozos de materia que orbitan en el disco (se ve que gira)
 		AnilloFotones = "#FFE9C2",

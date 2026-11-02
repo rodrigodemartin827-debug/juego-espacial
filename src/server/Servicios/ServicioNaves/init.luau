@@ -505,7 +505,7 @@ local function empezarTransicion(nave: Nave, funcion: (Player, string) -> (), pl
 	nave.EnTransicion = true
 	enviarEstado(nave)
 	task.spawn(function()
-		local ok, err = pcall(funcion, nave.Jugador, planeta)
+		local ok, err = pcall(funcion :: any, nave.Jugador, planeta)
 		if not ok then
 			warn(`[ServicioNaves] Falló la transición a {planeta}: {err}`)
 		end
@@ -654,6 +654,8 @@ function ServicioNaves.Despegar(jugador: Player, plataforma: Plataforma): boolea
 	modelo:PivotTo(plataforma.Marco * CFrame.new(0, Modelo.ALTURA_POSADA, 0))
 	modelo:SetAttribute(Config.AtributoPiloto, jugador.UserId)
 	modelo:SetAttribute("Turbo", false)
+	-- Con StreamingEnabled, la nave llega entera a cada cliente o no llega (nunca a medias).
+	modelo.ModelStreamingMode = Enum.ModelStreamingMode.Atomic
 	modelo.Parent = workspace
 	CollectionService:AddTag(modelo, Config.EtiquetaNave)
 

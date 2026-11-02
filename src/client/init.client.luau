@@ -13,6 +13,7 @@ local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
 local ServicioNaves = require(script.Naves.ServicioNaves)
+local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
 
 -- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa.
@@ -21,6 +22,7 @@ ServicioDatos.Iniciar()
 ServicioCombate.Iniciar()
 ServicioNaves.Iniciar()
 ServicioExploracion.Iniciar()
+ServicioPlanetas.Iniciar()
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
 ServicioDatos.Actualizados:Conectar(function(datos)

@@ -95,7 +95,7 @@ local function transicion(jugador: Player, planeta: string, tipo: string, destin
 	end
 	cargarZona(jugador, destino)
 	if jugador.Parent ~= nil then
-		local ok, err = pcall(mover)
+		local ok, err = pcall(mover :: any)
 		if not ok then
 			warn(`[ServicioPlanetas] No se pudo colocar a {jugador.Name}: {err}`)
 		end

@@ -89,7 +89,7 @@ function Terreno.Generar(id: string, alPuertoListo: (() -> ())?): number
 	local lista = generador:Trozos()
 	for indice, t in lista do
 		local trozo = generador:Trozo(t.I, t.J)
-		local ok, err = pcall(escribir, trozo, centro, parametros.Resolucion)
+		local ok, err = pcall(escribir :: any, trozo, centro, parametros.Resolucion)
 		if not ok then
 			warn(`[Terreno] No se pudo escribir el trozo {t.I},{t.J} de {id}: {err}`)
 		end
