@@ -18,6 +18,7 @@ local ServicioInventario = require(script.Servicios.ServicioInventario)
 local ServicioMinado = require(script.Servicios.ServicioMinado)
 local ServicioNaves = require(script.Servicios.ServicioNaves)
 local ServicioPersonaje = require(script.Servicios.ServicioPersonaje)
+local ServicioPlanetas = require(script.Servicios.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
 local ServicioReplicacion = require(script.Servicios.ServicioReplicacion)
 local ZonaPruebas = require(script.Servicios.ZonaPruebas)
@@ -29,6 +30,8 @@ local ZonaPruebas = require(script.Servicios.ZonaPruebas)
 	     El del personaje va antes que el combate para que sustituya cualquier R15 antes de que se registre.
 	     Los asteroides van antes que las naves, porque preparan los grupos de colisión que ellas usan.
 	     Exploración (inventario, minería, escáner y crafteo) va después de las naves, que le piden golpear minerales.
+	     Los planetas van después de las naves (conectan con ellas el aterrizaje y el despegue) y antes de la zona de
+	     pruebas (que pone plataformas para viajar a ellos).
 	  3. Los datos, los últimos: empiezan a cargar jugadores y a disparar DatosCargados, y para entonces
 	     todos los demás servicios ya deben estar escuchando.
 ]]
@@ -43,6 +46,7 @@ ServicioInventario.Iniciar()
 ServicioMinado.Iniciar()
 ServicioEscaner.Iniciar()
 ServicioCrafteo.Iniciar()
+ServicioPlanetas.Iniciar()
 ZonaPruebas.Iniciar()
 ServicioDatos.Iniciar()
 

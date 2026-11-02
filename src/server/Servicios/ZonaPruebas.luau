@@ -15,6 +15,8 @@
 	    escanear (Q), y una mesa de crafteo (E) donde fabricar componentes y mejoras de la nave. Los asteroides del campo
 	    llevan además vetas de mineral que los láseres de la nave pueden picar.
 	  - un ambiente nocturno con resplandor (bloom) para que se vean bien los efectos luminosos.
+	  - dos plataformas de VIAJE A LOS PLANETAS (ProximityPrompt) que llevan a pie al puerto de Nueva Tierra o de Umbra,
+	    para probar las superficies sin volar diez minutos.
 
 	Se desactiva quitando la llamada a ZonaPruebas.Iniciar() en init.server. Todo se crea por código, no hay
 	nada que montar a mano en Studio.
@@ -35,6 +37,8 @@ local ServicioCombate = require(script.Parent.ServicioCombate)
 local ServicioCrafteo = require(script.Parent.ServicioCrafteo)
 local ServicioEscaner = require(script.Parent.ServicioEscaner)
 local ServicioMinado = require(script.Parent.ServicioMinado)
+local ServicioPlanetas = require(script.Parent.ServicioPlanetas)
+local DatosPlanetas = require(Shared.Planetas.Datos)
 
 local ZonaPruebas = {}
 
@@ -51,6 +55,8 @@ local RADIO_CAMPO = 140
 local POSICION_MINAS = Vector3.new(-72, 0, 38)
 local POSICION_CRIATURA = Vector3.new(-50, 0, -44)
 local POSICION_MESA = Vector3.new(-38, 0, 68)
+-- Plataformas de viaje a los planetas (relativas al centro de la plataforma).
+local POSICION_VIAJES = Vector3.new(40, 0, 90)
 
 -- true = ambiente nocturno con bloom, que hace destacar láseres, explosiones y propulsores.
 local AMBIENTE_ESPACIAL = true
@@ -378,6 +384,26 @@ local function crearPlanta(
 	ServicioEscaner.Marcar(planta, especie)
 end
 
+-- Plataformas para viajar a pie al puerto de cada planeta de bando (atajo de pruebas: el viaje en nave dura ~10 min).
+local function crearViajes(zona: Folder)
+	local colores = { Humanos = Color3.fromRGB(80, 200, 120), Monstruos = Color3.fromRGB(150, 70, 220) }
+	for indice, id in DatosPlanetas.OrdenPlanetas do
+		local posicion = CENTRO + POSICION_VIAJES + Vector3.new((indice - 1.5) * 18, 0.5, 0)
+		local base = crearParte(`Viaje{id}`, Vector3.new(8, 1, 8), posicion, colores[id], Enum.Material.Neon)
+		base.Parent = zona
+		local prompt = Instance.new("ProximityPrompt")
+		prompt.ActionText = `Viajar a {DatosPlanetas.Planetas[id].Nombre}`
+		prompt.ObjectText = "Pruebas"
+		prompt.HoldDuration = 0.4
+		prompt.MaxActivationDistance = 12
+		prompt.Parent = base
+		prompt.Triggered:Connect(function(jugador)
+			ServicioPlanetas.LlevarAPie(jugador, id)
+		end)
+		crearCartel(zona, `Viajar a {DatosPlanetas.Planetas[id].Nombre}`, posicion + Vector3.new(0, 6, 0), 220, 40)
+	end
+end
+
 -- La mesa de crafteo y su cartel.
 local function crearMesa(zona: Folder)
 	ServicioCrafteo.CrearMesa(zona, POSICION_MESA)
@@ -462,6 +488,7 @@ function ZonaPruebas.Iniciar()
 	Hangar.Crear(zona, CENTRO + POSICION_HANGAR)
 	crearCampoDePruebas(zona)
 	crearZonaExploracion(zona)
+	crearViajes(zona)
 	if AMBIENTE_ESPACIAL then
 		ambientarEspacio()
 	end

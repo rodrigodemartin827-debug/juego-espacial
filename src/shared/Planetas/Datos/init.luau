@@ -199,7 +199,7 @@ Datos.Planetas = {
 				Estilo = "Humanos",
 				Semilla = 4242,
 				Resolucion = 4, -- studs por celda (Terrain usa 4)
-				Trozo = 64, -- celdas por lado de cada trozo que se genera de una vez
+				Trozo = 32, -- celdas por lado de cada trozo que se genera de una vez (unos 10 ms de trabajo)
 				Grosor = 3, -- celdas de suelo por debajo de la superficie (lo de más abajo nunca se ve)
 				-- Relieve: suma de capas de ruido (escala en studs y amplitud en studs).
 				Capas = {
@@ -240,8 +240,8 @@ Datos.Planetas = {
 			Separacion = 60,
 			RadioZonaSegura = 230,
 			AltoZonaSegura = 400,
-			Aparicion = { X = 0, Y = 2, Z = 70 },
-			Llegada = { X = 0, Y = 3.5, Z = 52 },
+			Aparicion = { X = 0, Y = 2, Z = -75 },
+			Llegada = { X = 0, Y = 3.5, Z = -55 },
 			ColorNeon = "#4DF0FF",
 		},
 	},
@@ -311,7 +311,7 @@ Datos.Planetas = {
 				Estilo = "Monstruos",
 				Semilla = 6666,
 				Resolucion = 4,
-				Trozo = 64,
+				Trozo = 32,
 				Grosor = 3,
 				Capas = {
 					{ Escala = 900, Amplitud = 70 },
@@ -346,8 +346,8 @@ Datos.Planetas = {
 			Separacion = 60,
 			RadioZonaSegura = 230,
 			AltoZonaSegura = 400,
-			Aparicion = { X = 0, Y = 2, Z = 70 },
-			Llegada = { X = 0, Y = 3.5, Z = 52 },
+			Aparicion = { X = 0, Y = 2, Z = -75 },
+			Llegada = { X = 0, Y = 3.5, Z = -55 },
 			ColorNeon = "#C04BFF",
 		},
 	},

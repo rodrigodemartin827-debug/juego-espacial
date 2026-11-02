@@ -25,7 +25,7 @@
 local Datos = require(script.Parent.Datos)
 local V = require(script.Parent.Vectores)
 
-type Vec = V.Vec
+export type Vec = V.Vec
 
 export type Zona = {
 	Tipo: string, -- "Espacio" | "Superficie" | "Fuera"
