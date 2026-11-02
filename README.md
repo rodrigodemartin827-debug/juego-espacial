@@ -82,6 +82,7 @@ src/
     └── VFX/                 Motor de efectos visuales (ver Combate)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
+animaciones/                 Animaciones de combate (.fbx para R15) y los scripts de Blender que las generan
 ```
 
 Convenciones: todo el código de `src/` va en módulos con `--!strict` y comentarios en español; los nombres de módulos,

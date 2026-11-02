@@ -249,15 +249,15 @@ Animaciones.Definiciones = {
 			},
 		},
 	},
-	Combo4 = { -- remate: salto con puñetazo doble
-		Duracion = 0.55,
+	Combo4 = { -- remate: salto con puñetazo doble (el impacto cae en T = 0.53, igual que la animación del FBX)
+		Duracion = 0.9,
 		Cuadros = {
 			{
 				T = 0,
 				Poses = { RightUpperArm = { 160, 0, 10 }, LeftUpperArm = { 160, 0, -10 }, UpperTorso = { -14, 0, 0 } },
 			},
 			{
-				T = 0.2,
+				T = 0.53,
 				Easing = "Cubic",
 				Poses = {
 					RightUpperArm = { 80, 0, 6 },
@@ -270,7 +270,7 @@ Animaciones.Definiciones = {
 				},
 			},
 			{
-				T = 0.55,
+				T = 0.9,
 				Easing = "Quad",
 				Poses = { RightUpperArm = { 60, 0, 6 }, LeftUpperArm = { 60, 0, -6 }, UpperTorso = { 20, 0, 0 } },
 			},
