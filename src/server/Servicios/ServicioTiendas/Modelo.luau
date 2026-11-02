@@ -200,7 +200,8 @@ local function construirPersiana(modelo: Model, origen: CFrame)
 	pintura.CanTouch = false
 	local textoPintado = rotulo(pintura, DatosPersiana.Textos.RotuloPersiana, hex(colores.Cerrado), nil, "Pintura")
 	textoPintado.Font = Enum.Font.Arcade
-	;(textoPintado.Parent :: SurfaceGui).Enabled = false
+	local guiPintura = textoPintado.Parent :: SurfaceGui
+	guiPintura.Enabled = false -- lo muestra el cliente cuando la persiana baja
 
 	-- Baliza de aviso sobre el cajón (apagada: la enciende el cliente).
 	local baliza = parte(
@@ -364,18 +365,12 @@ function Modelo.Construir(idTienda: string, origen: CFrame): Model
 	local anchoFranja = (mitad * 2) / franjas
 	for indice = 1, franjas do
 		local x = -mitad + anchoFranja * (indice - 0.5)
-		local franja = parte(
-			modelo,
-			origen,
-			"Toldo",
-			Vector3.new(anchoFranja, 0.2, 4),
-			Vector3.new(x, altoLocal - 0.2, -2.1),
-			{
+		local franja =
+			parte(modelo, origen, "Toldo", Vector3.new(anchoFranja, 0.2, 4), Vector3.new(x, altoLocal - 0.2, -2.1), {
 				Color = if indice % 2 == 0 then Color3.fromRGB(245, 245, 250) else COLOR_ACENTO,
 				Material = Enum.Material.Fabric,
 				Colision = false,
-			}
-		)
+			})
 		franja.CFrame = franja.CFrame * CFrame.Angles(math.rad(-16), 0, 0)
 	end
 

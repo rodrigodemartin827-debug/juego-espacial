@@ -135,7 +135,7 @@ end
 
 -- Petición del cliente.
 local function comprar(jugador: Player, tienda: Instance, idArticulo: string, cantidad: number?)
-	local registro = if tienda:IsA("Model") then tiendas[tienda] else nil
+	local registro = if tienda:IsA("Model") then tiendas[tienda :: Model] else nil
 	if registro == nil or not tienda:IsDescendantOf(workspace) then
 		return -- no es una tienda: un cliente normal nunca lo manda
 	end

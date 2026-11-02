@@ -62,7 +62,10 @@ return function(Marco)
 				end
 				for nivel = 0, Mejoras.NivelMaximo - 1 do
 					local precio = Compras.Precio(articulo.Precio, nivel)
-					Marco.verdadero(precio >= 1 and precio == math.floor(precio), `{id}: precio {precio} en nivel {nivel}`)
+					Marco.verdadero(
+						precio >= 1 and precio == math.floor(precio),
+						`{id}: precio {precio} en nivel {nivel}`
+					)
 				end
 			end
 		end)
@@ -105,26 +108,29 @@ return function(Marco)
 			Marco.falso(Catalogo.Vende("NoExiste", "Hierro"))
 		end)
 
-		Marco.prueba("comprar una mejora cuesta más monedas que fabricarla en la mesa (no hace inútil explorar)", function()
-			for _, idReceta in Recetas.Orden do
-				local receta = Recetas.Lista[idReceta]
-				local idMejora = receta.Resultado.Mejora
-				if idMejora then
-					for _, idArticulo in Catalogo.Orden do
-						local articulo = Catalogo.Articulos[idArticulo]
-						if articulo.Resultado.Mejora == idMejora then
-							for nivel = 0, Mejoras.NivelMaximo - 1 do
-								local mesa = if receta.Monedas then Crafteo.Cantidad(receta.Monedas, nivel) else 0
-								Marco.verdadero(
-									Compras.Precio(articulo.Precio, nivel) > mesa * 2,
-									`{idArticulo} nivel {nivel}: demasiado barata frente a la mesa`
-								)
+		Marco.prueba(
+			"comprar una mejora cuesta más monedas que fabricarla en la mesa (no hace inútil explorar)",
+			function()
+				for _, idReceta in Recetas.Orden do
+					local receta = Recetas.Lista[idReceta]
+					local idMejora = receta.Resultado.Mejora
+					if idMejora then
+						for _, idArticulo in Catalogo.Orden do
+							local articulo = Catalogo.Articulos[idArticulo]
+							if articulo.Resultado.Mejora == idMejora then
+								for nivel = 0, Mejoras.NivelMaximo - 1 do
+									local mesa = if receta.Monedas then Crafteo.Cantidad(receta.Monedas, nivel) else 0
+									Marco.verdadero(
+										Compras.Precio(articulo.Precio, nivel) > mesa * 2,
+										`{idArticulo} nivel {nivel}: demasiado barata frente a la mesa`
+									)
+								end
 							end
 						end
 					end
 				end
 			end
-		end)
+		)
 
 		Marco.prueba("los Monstruos son el bando vetado y los Humanos no", function()
 			Marco.verdadero(Compras.EsVetado(Bandos.Monstruos))
@@ -135,8 +141,14 @@ return function(Marco)
 		end)
 
 		Marco.prueba("la configuración es coherente", function()
-			Marco.verdadero(Config.RadioApertura > Config.RadioCierre, "la histéresis necesita RadioApertura > RadioCierre")
-			Marco.verdadero(Config.RadioCierre > Config.AlcanceTienda, "la persiana baja antes de que el monstruo llegue")
+			Marco.verdadero(
+				Config.RadioApertura > Config.RadioCierre,
+				"la histéresis necesita RadioApertura > RadioCierre"
+			)
+			Marco.verdadero(
+				Config.RadioCierre > Config.AlcanceTienda,
+				"la persiana baja antes de que el monstruo llegue"
+			)
 			Marco.verdadero(Config.SegundosParaReabrir > 0)
 			Marco.verdadero(Config.IntervaloVigilancia > 0 and Config.IntervaloVigilancia <= 0.5)
 			Marco.verdadero(Config.CantidadMaximaPorPeticion >= 1)
