@@ -501,8 +501,12 @@ return function(Marco)
 		Marco.prueba("dos servidores cargando a la vez: solo uno obtiene los datos", function()
 			local nube = NubeDatos.nueva()
 			nube.Latencia = 0.01
-			local servidorA = crearServidor(nube)
-			local servidorB = crearServidor(nube)
+			-- El que espera no debe rendirse antes de que el otro suelte los datos. Con pocos intentos, la
+			-- prueba dependía de la precisión del reloj: en Windows cada espera dura ~15 ms como mínimo y el
+			-- servidor agotaba los intentos y expulsaba al jugador antes de tiempo.
+			local sinRendirse = { Config = { MaxIntentosBloqueo = 1000 } }
+			local servidorA = crearServidor(nube, sinRendirse)
+			local servidorB = crearServidor(nube, sinRendirse)
 
 			local enA = servidorA.Mundo.unirJugador(1, "Ana")
 			local enB = servidorB.Mundo.unirJugador(1, "Ana")
@@ -528,6 +532,7 @@ return function(Marco)
 				servidorB.Mundo.salirJugador(enB)
 				esperarCarga(servidorA, enA)
 			end
+			Marco.igual(#servidorA.Mundo.Expulsiones + #servidorB.Mundo.Expulsiones, 0, "nadie debe ser expulsado")
 		end)
 
 		Marco.prueba("saltando entre servidores no se pierde ningún cambio (con latencia y fallos al azar)", function()

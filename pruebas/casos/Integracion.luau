@@ -216,14 +216,17 @@ return function(Marco)
 
 		Marco.prueba("elegir bando antes de que carguen los datos no hace nada", function()
 			local nube = NubeDatos.nueva()
-			nube.Latencia = 0.05
 			local entorno, ServicioDatos = arrancarServidor(nube)
+			-- La carga se queda a medias hasta que la prueba la suelte. Antes se usaba una latencia de
+			-- 0,05 s, pero en Windows dejarCorrer(5) ya dura más que eso y los datos llegaban a cargarse.
+			nube.Pausada = true
 			local jugador = entorno.mundo.unirJugador(1, "Ana")
 			local _, RedCliente = arrancarCliente(entorno, jugador)
 
 			RedCliente.Enviar("ElegirBando", "Villanos") -- llega mientras la carga sigue en curso
 			Marco.dejarCorrer(5)
 			Marco.esNil(ServicioDatos.ObtenerDatos(jugador), "los datos aún no han cargado")
+			nube.Pausada = false
 
 			Marco.esperarHasta(function()
 				return ServicioDatos.ObtenerDatos(jugador) ~= nil
