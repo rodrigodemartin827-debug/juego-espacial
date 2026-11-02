@@ -137,7 +137,7 @@ def metabolas_torso():
 def metabolas_cabeza():
     nz = ARTICULACIONES["Neck"][2]
     return [
-        ("CAPSULE", (0, -0.62, nz + 0.05), (0.19, 0.25), (0, 90, 60), 2.0),  # cuello
+        ("CAPSULE", (0, -0.66, nz + 0.12), (0.15, 0.16), (0, 90, 60), 2.0),  # cuello (corto: sigue en el torso)
         ("ELLIPSOID", (0, -0.62, nz + 1.35), (0.36, 0.4, 0.62), (-12, 0, 0), 2.0),  # cráneo alargado
         ("ELLIPSOID", (0, -0.8, nz + 0.75), (0.3, 0.27, 0.48), (8, 0, 0), 2.0),  # cara
         ("ELLIPSOID", (0, -0.86, nz + 0.28), (0.18, 0.2, 0.2), (0, 0, 0), 2.0),  # barbilla
@@ -337,10 +337,10 @@ def detalle_piel(obj, rnd, fuerza=0.025, costillas=False, extremos=None):
             # Costillas: bandas horizontales en el pecho y los costados (no en la espalda).
             # Bajan en diagonal desde la espalda hacia el esternón y se cortan antes del centro del pecho.
             zr = p.z - (H + 0.65) - 0.3 * max(0.0, 0.6 - p.y)
-            lateral = min(1.0, abs(p.x) / 0.25)  # nada en el esternón
+            lateral = max(0.0, min(1.0, (abs(p.x) - 0.3) / 0.25))  # solo en los costados, no en el pecho
             if 0 < zr < 1.0 and v.normal.y < 0.5:
                 banda = max(0.0, math.sin(zr * math.pi * 5.0)) ** 4
-                des += 0.045 * banda * lateral
+                des += 0.035 * banda * lateral
                 des -= 0.02 * (1 - banda) * lateral
             # Esternón hundido y vientre chupado.
             if v.normal.y < -0.5 and H + 0.35 < p.z < H + 0.85:
@@ -471,9 +471,9 @@ def dientes(rnd):
             z = nz + 0.18 + t * 1.15
             ancho = ancho_boca(t)
             ys = superficie_y(lado * ancho * 1.05, z)
-            raiz = Vector((lado * ancho * 1.05, ys + 0.06, z))
+            raiz = Vector((lado * ancho * 0.95, ys + 0.07, z))
             punta = Vector((-lado * ancho * 0.55, ys + 0.02, z + rnd.uniform(-0.04, 0.04)))
-            largo = (punta - raiz).length * rnd.uniform(0.8, 1.15)
+            largo = (punta - raiz).length * rnd.uniform(0.7, 0.95)
             eje = (punta - raiz).normalized()
             q = eje.to_track_quat("Z", "Y")
             r = 0.028 + 0.012 * math.sin(t * math.pi)
@@ -629,6 +629,24 @@ def a_roblox(p):
     return [round(-x, 4), round(z, 4), round(y, 4)]
 
 
+def escribir_montar_r6(ruta, centros):
+    """Rellena la plantilla del script de Studio con las articulaciones y los centros de este modelo."""
+    def v3(p):
+        return f"Vector3.new({p[0]}, {p[1]}, {p[2]})"
+
+    def tabla(d):
+        return "\n\t".join(f'["{k}"] = {v3(v)},' for k, v in d.items())
+
+    plantilla = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "plantilla_montar_r6.luau"),
+                     encoding="utf-8").read()
+    texto = (plantilla.replace("--ARTICULACIONES--", tabla({k: a_roblox(v) for k, v in ARTICULACIONES.items()}))
+             .replace("--CENTROS--", tabla(centros))
+             .replace("--ALTURA--", str(ALTO_CADERA))
+             .replace("--COLOR_OJOS--", COLOR_OJOS))
+    with open(ruta, "w", encoding="utf-8") as f:
+        f.write(texto)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--salida", required=True)
@@ -659,7 +677,9 @@ def main():
             "AlturaCadera": ALTO_CADERA,
         }, f, indent=2, ensure_ascii=False)
 
-    c.preparar_estudio(z_suelo=0.0, luz_clave=500)
+    escribir_montar_r6(os.path.join(salida, "montar_r6.luau"), centros)
+
+    c.preparar_estudio(z_suelo=0.0, luz_clave=700)
     vistas = [("Frente", 0, 4), ("3/4", -35, 10), ("Lateral", -90, 2), ("Detrás", 180, 8),
               ("Cara", 0, 6), ("Contrapicado", -25, -14), ("3/4 trasera", 140, 18)]
     tmp = os.path.join(salida, "_render_tmp")

@@ -410,7 +410,13 @@ def main():
     # Centro del modelo en el origen (Ejes).
     c.exportar_fbx(os.path.join(salida, "Nave_Humana.fbx"), piezas)
     with open(os.path.join(salida, "anclajes.json"), "w", encoding="utf-8") as f:
-        json.dump({k: a_roblox(v) for k, v in anclajes().items()}, f, indent=2, ensure_ascii=False)
+        # Relativos al centro de la pieza Nave_Casco (Roblox pone el CFrame de cada MeshPart en el centro de su
+        # caja), que es donde se crean los Attachments.
+        cmn, cmx = c.caja_limite([casco])
+        centro = tuple(((cmn + cmx) / 2) / E)
+        rel = {k: a_roblox(tuple(Vector(v) - Vector(centro))) for k, v in anclajes().items()}
+        json.dump({"nota": "studs, ejes de Roblox, relativos al centro de la MeshPart Nave_Casco",
+                   "Anclajes": rel}, f, indent=2, ensure_ascii=False)
 
     c.preparar_estudio(z_suelo=mn.z - 0.25 * E)
     vistas = [("Frente", 0, 6), ("3/4 delantera", -38, 20), ("Lateral", -90, 4), ("3/4 trasera", -145, 18),
