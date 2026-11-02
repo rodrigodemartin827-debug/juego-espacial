@@ -346,7 +346,7 @@ return function(Marco)
 			end
 		end)
 
-		Marco.prueba("los cuadros están ordenados en el tiempo y solo nombran partes del rig R15", function()
+		Marco.prueba("los cuadros están ordenados en el tiempo y solo nombran partes del rig R6", function()
 			local partes = {}
 			local function recorrer(nodo)
 				partes[nodo.Nombre] = true
@@ -355,7 +355,9 @@ return function(Marco)
 				end
 			end
 			recorrer(Animaciones.Rig)
-			Marco.verdadero(partes.RightUpperArm and partes.LeftFoot and partes.Head, "el rig está incompleto")
+			for _, parte in { "HumanoidRootPart", "Torso", "Head", "Right Arm", "Left Arm", "Right Leg", "Left Leg" } do
+				Marco.verdadero(partes[parte], `al rig le falta '{parte}'`)
+			end
 
 			for nombre, anim in Animaciones.Definiciones do
 				Marco.verdadero(#anim.Cuadros >= 2, `{nombre}: necesita al menos dos cuadros`)
@@ -368,7 +370,10 @@ return function(Marco)
 					anterior = cuadro.T
 					for parte, rotacion in cuadro.Poses do
 						Marco.verdadero(partes[parte], `{nombre}: la parte '{parte}' no existe en el rig`)
-						Marco.verdadero(#rotacion == 3, `{nombre}.{parte}: la rotación necesita 3 ángulos`)
+						Marco.verdadero(
+							#rotacion == 3 or #rotacion == 6,
+							`{nombre}.{parte}: necesita 3 ángulos (y opcionalmente 3 de traslación)`
+						)
 					end
 				end
 				Marco.igual(anim.Cuadros[1].T, 0, `{nombre}: debe empezar en T = 0`)
@@ -376,6 +381,92 @@ return function(Marco)
 					anim.Cuadros[#anim.Cuadros].T <= anim.Duracion + 1e-6,
 					`{nombre}: el último cuadro pasa de la duración`
 				)
+			end
+		end)
+
+		Marco.prueba("la conversión a Motor6D mueve cada pieza R6 hacia donde dice el ángulo", function()
+			local function nodo(nombre)
+				local encontrado
+				local function buscar(n)
+					if n.Nombre == nombre then
+						encontrado = n
+					end
+					for _, hijo in n.Hijos do
+						buscar(hijo)
+					end
+				end
+				buscar(Animaciones.Rig)
+				return encontrado
+			end
+			-- Dónde acaba, en el sistema del personaje (x derecha, y arriba, z ATRÁS), un punto de la pieza
+			-- tras la pose: deshace el cambio de eje de la articulación (R = C · T · Cᵀ).
+			local function mover(nombre, pose, punto)
+				local n = nodo(nombre)
+				local m, t = Animaciones.Articulacion(n, pose)
+				local c = {
+					{ n.Eje.X[1], n.Eje.Y[1], n.Eje.Z[1] },
+					{ n.Eje.X[2], n.Eje.Y[2], n.Eje.Z[2] },
+					{ n.Eje.X[3], n.Eje.Y[3], n.Eje.Z[3] },
+				}
+				local T = { { m[1], m[2], m[3] }, { m[4], m[5], m[6] }, { m[7], m[8], m[9] } }
+				local function mul(a, b)
+					local r = {}
+					for i = 1, 3 do
+						r[i] = {}
+						for j = 1, 3 do
+							r[i][j] = a[i][1] * b[1][j] + a[i][2] * b[2][j] + a[i][3] * b[3][j]
+						end
+					end
+					return r
+				end
+				local ct =
+					{ { c[1][1], c[2][1], c[3][1] }, { c[1][2], c[2][2], c[3][2] }, { c[1][3], c[2][3], c[3][3] } }
+				local r = mul(c, mul(T, ct))
+				local v = {}
+				for i = 1, 3 do
+					v[i] = r[i][1] * punto[1] + r[i][2] * punto[2] + r[i][3] * punto[3]
+				end
+				-- La traslación del joint también vuelve al sistema del personaje: c · t.
+				local tp = {}
+				for i = 1, 3 do
+					tp[i] = c[i][1] * t[1] + c[i][2] * t[2] + c[i][3] * t[3]
+				end
+				return v, tp
+			end
+			local function cerca(real, esperado, detalle)
+				for i = 1, 3 do
+					Marco.verdadero(
+						math.abs(real[i] - esperado[i]) < 1e-6,
+						`{detalle}: {real[1]}, {real[2]}, {real[3]}`
+					)
+				end
+			end
+
+			local abajo = { 0, -1, 0 }
+			local arriba = { 0, 1, 0 }
+			-- Sin pose, nada se mueve.
+			cerca(mover("Right Arm", { 0, 0, 0 }, abajo), abajo, "reposo")
+			-- Cabeceo 90 en cualquier brazo o pierna: horizontal hacia DELANTE (z negativa).
+			for _, parte in { "Right Arm", "Left Arm", "Right Leg", "Left Leg" } do
+				cerca(mover(parte, { 90, 0, 0 }, abajo), { 0, 0, -1 }, `{parte} cabeceo 90`)
+				cerca(mover(parte, { 180, 0, 0 }, abajo), { 0, 1, 0 }, `{parte} cabeceo 180`)
+				cerca(mover(parte, { -90, 0, 0 }, abajo), { 0, 0, 1 }, `{parte} cabeceo -90 (hacia atrás)`)
+			end
+			-- Ladeo: hacia la derecha del personaje (+x) en las piezas que cuelgan, en las dos manos.
+			cerca(mover("Right Arm", { 0, 0, 90 }, abajo), { 1, 0, 0 }, "brazo derecho abierto")
+			cerca(mover("Left Arm", { 0, 0, -90 }, abajo), { -1, 0, 0 }, "brazo izquierdo abierto")
+			cerca(mover("Left Arm", { 0, 0, 90 }, abajo), { 1, 0, 0 }, "brazo izquierdo cruzado")
+			-- Torso y cabeza (apuntan hacia arriba): cabeceo positivo = inclinarse hacia delante.
+			for _, parte in { "Torso", "Head" } do
+				cerca(mover(parte, { 90, 0, 0 }, arriba), { 0, 0, -1 }, `{parte} inclinado hacia delante`)
+				cerca(mover(parte, { 0, 0, 90 }, arriba), { 1, 0, 0 }, `{parte} ladeado a la derecha`)
+				-- Giro positivo = a la izquierda: el hombro derecho (+x) pasa a z negativa (delante).
+				cerca(mover(parte, { 0, 90, 0 }, { 1, 0, 0 }), { 0, 0, -1 }, `{parte} gira a la izquierda`)
+			end
+			-- La traslación (derecha, arriba, adelante) llega al personaje tal cual: adelante = z negativa.
+			for _, parte in { "Torso", "Right Arm", "Left Leg", "Head" } do
+				local _, t = mover(parte, { 0, 0, 0, 0.5, 0.25, 2 }, abajo)
+				cerca(t, { 0.5, 0.25, -2 }, `{parte} traslación`)
 			end
 		end)
 

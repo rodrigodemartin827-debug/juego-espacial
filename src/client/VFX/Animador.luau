@@ -1,6 +1,6 @@
 --!strict
 --[[
-	Animador: reproduce las animaciones del combate en cualquier personaje (R15).
+	Animador: reproduce las animaciones del combate en cualquier personaje R6.
 
 	Para cada nombre de animación decide qué usar:
 	  1. Si Datos/Recursos.Animaciones[nombre] tiene un ID, usa ese asset (animación hecha en el editor).
@@ -29,6 +29,12 @@ local ESTILOS: { [string]: Enum.PoseEasingStyle } = {
 	Elastic = Enum.PoseEasingStyle.Elastic,
 	Cubic = Enum.PoseEasingStyle.Cubic,
 	Bounce = Enum.PoseEasingStyle.Bounce,
+}
+
+local DIRECCIONES: { [string]: Enum.PoseEasingDirection } = {
+	In = Enum.PoseEasingDirection.In,
+	Out = Enum.PoseEasingDirection.Out,
+	InOut = Enum.PoseEasingDirection.InOut,
 }
 
 local PRIORIDADES: { [string]: Enum.AnimationPriority } = {
@@ -64,19 +70,22 @@ local function construir(nombre: string, definicion: any): KeyframeSequence
 			actual[parte] = rotacion
 		end
 		local estilo = ESTILOS[cuadro.Easing or "Linear"] or Enum.PoseEasingStyle.Linear
+		local direccion = DIRECCIONES[cuadro.Direccion or "Out"] or Enum.PoseEasingDirection.Out
 
 		local function crearPose(nodo: any): Pose
 			local pose = Instance.new("Pose")
 			pose.Name = nodo.Nombre
 			local rotacion = actual[nodo.Nombre]
-			if rotacion then
-				pose.CFrame = CFrame.Angles(math.rad(rotacion[1]), math.rad(rotacion[2]), math.rad(rotacion[3]))
+			if rotacion and nodo.Eje then
+				-- Del sistema del personaje (cabeceo, giro, ladeo) al Transform del Motor6D de esa parte.
+				local m, t = Animaciones.Articulacion(nodo, rotacion)
+				pose.CFrame = CFrame.new(t[1], t[2], t[3], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9])
 				pose.Weight = 1
 			else
 				pose.Weight = 0
 			end
 			pose.EasingStyle = estilo
-			pose.EasingDirection = Enum.PoseEasingDirection.Out
+			pose.EasingDirection = direccion
 			for _, hijo in nodo.Hijos do
 				crearPose(hijo).Parent = pose
 			end
@@ -123,8 +132,8 @@ local function animadorDe(modelo: Model): Animator?
 	if humanoid == nil then
 		return nil
 	end
-	if humanoid.RigType ~= Enum.HumanoidRigType.R15 then
-		avisarUnaVez("R6", "Las animaciones del combate están hechas para R15: este personaje las ignora")
+	if humanoid.RigType ~= Enum.HumanoidRigType.R6 then
+		avisarUnaVez("RigNoR6", "Las animaciones del combate están hechas para R6: este personaje las ignora")
 		return nil
 	end
 	local animador = humanoid:FindFirstChildOfClass("Animator")
