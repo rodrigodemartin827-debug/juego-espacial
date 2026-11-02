@@ -154,7 +154,8 @@ def hornear(baja, alta=None, tam=1024, ruta_color=None, ruta_normal=None, con_oc
     fuente = alta or baja
 
     def imagen(nombre, color=True):
-        img = bpy.data.images.new(nombre, tam, tam, alpha=False, float_buffer=not color)
+        # 8 bits también para las normales: Roblox no usa más y el PNG pesa la cuarta parte.
+        img = bpy.data.images.new(nombre, tam, tam, alpha=False, float_buffer=False)
         img.colorspace_settings.name = "sRGB" if color else "Non-Color"
         return img
 

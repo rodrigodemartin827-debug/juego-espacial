@@ -695,7 +695,8 @@ def main():
                          ", ".join(f"{k} {v}" for k, v in tris.items())])
 
     arm = esqueleto_r6(piezas)
-    c.exportar_fbx(os.path.join(salida, "Monstruo_R6_esqueleto.fbx"), lista, armature=arm)
+    # Sin texturas incrustadas: es para animar en Blender y las texturas ya están en texturas/.
+    c.exportar_fbx(os.path.join(salida, "Monstruo_R6_esqueleto.fbx"), lista, armature=arm, incrustar_texturas=False)
 
 
 if __name__ == "__main__":
