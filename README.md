@@ -9,7 +9,8 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
 - un **sistema de red** con RemoteEvents validados en el servidor y límite de peticiones por segundo,
 - un **sistema de datos** con DataStore y **bloqueo de sesión** que guarda bando, nivel, XP, monedas, inventario y
   mejoras de la nave,
-- un primer servicio de ejemplo (elegir bando) que usa los dos sistemas,
+- un primer servicio de ejemplo (elegir bando) que usa los dos sistemas, con la **pantalla de elección de bando** de la
+  primera entrada (planetas, grieta y confirmación con VFX; ver [Elección de bando](#elección-de-bando)),
 - el **sistema de combate** (servidor autoritativo, poderes Rayo y Gravedad, combo, VFX por fases, interfaz y una zona de
   pruebas; ver [Combate](#combate)),
 - el **sistema de naves** (vuelo en el espacio para PC, móvil y mando, vida y escudo, armas validadas en el servidor,
@@ -89,6 +90,7 @@ src/
 ├── shared/                  → ReplicatedStorage.Shared (servidor y cliente)
 │   ├── Datos/Tipos          Tipos de los datos del jugador
 │   ├── Juego/Bandos         Humanos, Monstruos y "Ninguno"
+│   ├── Eleccion/            Pantalla de elección de bando: datos (escena, textos, efectos) y reglas puras
 │   ├── Combate/             Datos y reglas del combate (ver más abajo)
 │   ├── Naves/               Datos y reglas puras de las naves (ver Naves)
 │   ├── Exploracion/         Escáner, minerales, inventario y crafteo: datos y reglas puras (ver Exploración)
@@ -108,7 +110,7 @@ src/
 │       │   └── AlmacenMemoria   DataStore falso para Studio
 │       ├── ServicioReplicacion  Envía al cliente una copia de sus datos
 │       ├── ServicioPersonaje    Garantiza que todos los personajes son R6
-│       ├── ServicioBandos       Ejemplo: elegir bando
+│       ├── ServicioBandos       Elegir bando (una sola vez) y proteger al jugador mientras elige
 │       ├── ServicioCombate      Combate: cooldown, energía, alcance, daño (autoritativo)
 │       ├── ServicioNaves/       Naves: despegue, vida y escudo, armas, choques, vigilancia
 │       ├── ServicioAsteroides   Campos de asteroides generados por código (con vetas de mineral)
@@ -126,6 +128,7 @@ src/
     ├── Combate/             Entrada, interfaz (vida, energía, cooldowns), números de daño
     ├── Naves/               Vuelo, cámara, panel de mandos, controles y efectos de las naves
     ├── Exploracion/         Escáner (Q), pico (R), ficha, bodega (I), mesa de crafteo y efectos de escaneo
+    ├── Eleccion/            Pantalla de elección de bando: escena 3D, interfaz, bloqueo de controles
     └── VFX/                 Motor de efectos visuales (lo usan el combate y las naves)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
@@ -532,6 +535,40 @@ falta recolectar y refinar materiales; las monedas se ganan escaneando.
 - El pico no tiene animación propia ni herramienta en la mano; los golpes se ven por los efectos del mineral.
 - El XP se acumula pero todavía no hay sistema de niveles del jugador (el pico mejora con `datos.Nivel` cuando exista).
 
+## Elección de bando
+
+La **primera vez** que un jugador entra (su bando guardado es `Ninguno`), en lugar del juego ve la pantalla de elección:
+cámara fija, sin poder moverse ni girar la cámara y sin la interfaz del juego. A la izquierda, el planeta de los
+**Humanos** (océanos, continentes, nubes y su sol) con un explorador; en medio, la **grieta** (una rasgadura animada con
+bordes de energía, vacío negro, ramas, motas y chispazos); a la derecha, el planeta de los **Monstruos** (roca negra, venas de
+lava, niebla púrpura y un agujero negro por sol) con una silueta de brazos larguísimos que da tirones con la cabeza.
+
+- **Ratón**: al pasar por una mitad, ese lado se resalta (el planeta crece y se ilumina, la cámara gira un poco hacia él,
+  la grieta le lanza un rayo y se despliega su panel con sus ventajas). Un clic lo elige.
+- **Táctil**: los dos paneles se ven siempre; tocar una mitad la resalta y soltar el dedo sobre ella la elige.
+- **Teclado / mando**: ◀ ▶ (o A / D) para resaltar, Intro / Ⓐ para elegir.
+
+Al elegir, el planeta "toma aire" mientras responde el servidor (anticipación); cuando confirma, la escena se congela un
+instante y estalla la confirmación (`Eleccion_Confirmar_<Bando>`: destellos, ondas, rayos desde la grieta, destello de
+pantalla, temblor y zoom), el otro lado se apaga, la cámara se acerca al planeta elegido y todo se funde a negro para volver
+al juego. Quien ya tiene bando no ve nada de esto (solo un fundido de entrada).
+
+**Qué hace el servidor** (`ServicioBandos`): solo acepta `Humanos` o `Monstruos`, solo si el bando guardado es `Ninguno`, y
+guarda en el acto. Mientras el jugador elige, su personaje queda **anclado** y con un `ForceField` invisible, y el `Player`
+lleva el atributo `EligiendoBando`: el combate no le deja usar habilidades ni le toma como objetivo. Al elegir se quita todo
+y se dispara `ServicioBandos.BandoElegido` (jugador, bando); en el cliente, `ServicioEleccion.Terminada` (bando) cuando ya ha
+vuelto al juego. Ahí se enganchará el tutorial.
+
+**Cambiar cosas sin tocar código**: `shared/Eleccion/Config` (posiciones y tamaños de los planetas, continentes, nubes, sol,
+agujero negro, grieta y figuras R6, cámara y encuadre, tiempos de cada fase), `shared/Eleccion/Datos/Textos` (todo lo que se
+lee) y `shared/Eleccion/Datos/EfectosEleccion` (recetas de VFX; colores en `Combate/Datos/Paleta`, sonidos en
+`Combate/Datos/Recursos`, de momento vacíos). La escena se monta solo en el cliente que elige, lejos del mapa
+(`Config.Camara.Origen`), y el campo de visión se ajusta a la proporción de la pantalla para que los dos planetas quepan
+siempre a lo ancho (`Eleccion/Encuadre`).
+
+**Probarla en Studio**: con el almacén en memoria (lugar sin publicar), cada partida empieza sin bando, así que la pantalla
+sale siempre. Con DataStore real, hay que borrar el registro `Jugador_<UserId>` del almacén `DatosJugador_Studio`.
+
 ## Pruebas
 
 Las pruebas ejecutan los módulos reales de `src/` fuera de Studio con [Lune](https://lune-org.github.io/docs), sobre una
@@ -556,7 +593,10 @@ cliente de las naves usan la API 3D de Roblox, que la simulación no tiene, así
 sustituyen por módulos vacíos (como ya se hace con `ZonaPruebas`). Para la exploración comprueban los catálogos y las recetas
 (todo ingrediente se puede conseguir, hay una receta por mejora), el inventario con límite, la elección del objetivo del
 escáner, la recompensa, el crafteo (materiales, monedas, nivel máximo, bodega llena, plan que ya no vale), los datos de los
-efectos (calidad máxima del escaneo) y el cableado de red y las reglas de seguridad de los servicios.
+efectos (calidad máxima del escaneo) y el cableado de red y las reglas de seguridad de los servicios. Para la elección de
+bando comprueban cuándo se muestra la pantalla, que solo se pide una vez y que manda el servidor (flujo), que los dos planetas
+quepan en cualquier pantalla (encuadre), la forma de la grieta, los textos y las recetas de efectos, y en el servidor la
+validación, la protección del personaje mientras elige y que no se pueda elegir dos veces.
 
 La simulación es una aproximación: sirve para comprobar la lógica, no sustituye a probar en Studio y en un servidor real.
 
