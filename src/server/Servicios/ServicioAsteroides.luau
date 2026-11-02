@@ -81,7 +81,7 @@ end
 
 -- Pega a la roca una veta de mineral que sobresale: es lo que se puede picar con los láseres de la nave o a pie.
 local function anadirVeta(modelo: Model, descripcion: Generador.Asteroide, indice: number, tipo: string)
-	local rng = Random.new(descripcion.Tamano * 1000 + indice)
+	local rng = Random.new(math.floor(descripcion.Tamano * 1000) + indice)
 	local direccion = Vector3.new(rng:NextNumber(-1, 1), rng:NextNumber(-0.4, 1), rng:NextNumber(-1, 1))
 	direccion = if direccion.Magnitude > 0.1 then direccion.Unit else Vector3.yAxis
 	local tamanoVeta = math.max(4, descripcion.Tamano * 0.4)
