@@ -399,6 +399,17 @@ def renderizar_vistas(objetos, carpeta, vistas=None, tam=460, muestras=48, con_m
     radio = (mx - mn).length / 2
     _mira().location = c
 
+    # Las luces del estudio están pensadas para un modelo de ~3 m: con uno más grande se alejan y ganan potencia
+    # en proporción, para que un edificio se ilumine igual que una nave.
+    k = max(1.0, radio / 1.6)
+    for o in scn.objects:
+        if o.get("luz_estudio"):
+            if "pos_base" not in o:
+                o["pos_base"] = list(o.location)
+                o["energia_base"] = o.data.energy
+            o.location = c + Vector(o["pos_base"]) * k
+            o.data.energy = o["energia_base"] * k * k
+
     cam_d = bpy.data.cameras.new("cam_hoja")
     cam_d.lens = lente
     cam_d.clip_end = 10000
