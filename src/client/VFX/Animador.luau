@@ -1,25 +1,29 @@
 --!strict
 --[[
-	Animador: reproduce las animaciones del combate en cualquier personaje R6.
+	Animador: reproduce las animaciones del juego (combate y andar de monstruo) en cualquier personaje R6.
 
 	Para cada nombre de animación decide qué usar:
-	  1. Si Datos/Recursos.Animaciones[nombre] tiene un ID, usa ese asset (animación hecha en el editor).
-	  2. Si está vacío, construye una KeyframeSequence a partir de Datos/Animaciones (provisional, por código),
-	     la registra con KeyframeSequenceProvider y la usa como si fuera un asset.
+	  1. Si Combate/Datos/Recursos.Animaciones[nombre] tiene un ID, usa ese asset (animación hecha en el editor).
+	  2. Si está vacío, construye una KeyframeSequence a partir de la definición por código (Animacion/Catalogo:
+	     las de Combate/Datos/Animaciones y las de Personajes/Datos/AnimacionesMonstruo), la registra con
+	     KeyframeSequenceProvider y la usa como si fuera un asset.
 
 	Así se puede sustituir cualquier animación cambiando SOLO el ID en el módulo de datos.
 
 	Nota: las animaciones registradas por código solo existen en el cliente que las registró, por eso cada
-	cliente reproduce las de TODOS los luchadores por su cuenta (al recibir el aviso del servidor), en vez de
-	fiarse de que se repliquen. Con un ID de asset real también funciona, y verlas dos veces es inofensivo.
+	cliente reproduce las de TODOS los personajes por su cuenta (los golpes al recibir el aviso del servidor, el
+	andar de monstruo en Personajes/AndarMonstruo), en vez de fiarse de que se repliquen. Precargar() registra
+	todas al arrancar y siempre en el mismo orden, para que un mismo ID temporal signifique la misma animación en
+	todos los clientes.
 ]]
 
 local KeyframeSequenceProvider = game:GetService("KeyframeSequenceProvider")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Datos = ReplicatedStorage:WaitForChild("Shared").Combate.Datos
-local Animaciones = require(Datos.Animaciones)
-local Recursos = require(Datos.Recursos)
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local Animaciones = require(Shared.Combate.Datos.Animaciones)
+local Catalogo = require(Shared.Animacion.Catalogo)
+local Recursos = require(Shared.Combate.Datos.Recursos)
 
 local Animador = {}
 
@@ -111,9 +115,9 @@ local function resolverId(nombre: string): string?
 	if guardado then
 		return guardado
 	end
-	local definicion = Animaciones.Definiciones[nombre]
+	local definicion = Catalogo.Definicion(nombre)
 	if definicion == nil then
-		avisarUnaVez(nombre, `La animación '{nombre}' no existe en Datos/Animaciones ni tiene ID en Datos/Recursos`)
+		avisarUnaVez(nombre, `La animación '{nombre}' no existe en Animacion/Catalogo ni tiene ID en Datos/Recursos`)
 		return nil
 	end
 	local ok, resultado = pcall(function()
@@ -145,11 +149,34 @@ local function animadorDe(modelo: Model): Animator?
 	return animador
 end
 
+-- Prioridad con la que se carga la animación `nombre` (la de su definición; Action si no dice nada).
+local function prioridadDe(nombre: string): Enum.AnimationPriority
+	local definicion = Catalogo.Definicion(nombre)
+	local prioridad = definicion and definicion.Prioridad
+	return PRIORIDADES[prioridad or "Action"] or Enum.AnimationPriority.Action
+end
+
+-- ID de contenido que se usa para la animación `nombre` (el de Recursos o el registrado), o nil si no existe.
+function Animador.Id(nombre: string): string?
+	return resolverId(nombre)
+end
+
 --[[
-	Reproduce la animación `nombre` en el personaje. Devuelve la pista (para poder pararla) o nil si no se
-	pudo. `velocidad` multiplica la rapidez (1 = normal).
+	Registra ya todas las animaciones hechas por código, en orden alfabético. Se llama una vez al arrancar el
+	cliente: evita el tirón de construirlas en mitad de una pelea y hace que los IDs temporales coincidan entre
+	clientes (todos registran lo mismo en el mismo orden).
 ]]
-function Animador.Reproducir(modelo: Model, nombre: string, velocidad: number?): AnimationTrack?
+function Animador.Precargar()
+	for _, nombre in Catalogo.Nombres() do
+		resolverId(nombre)
+	end
+end
+
+--[[
+	Pista de la animación `nombre` en el personaje, cargada una sola vez por Animator (no la reproduce). Lleva la
+	prioridad de su definición. Devuelve nil si el personaje no es R6 o la animación no se puede cargar.
+]]
+function Animador.Cargar(modelo: Model, nombre: string): AnimationTrack?
 	local animador = animadorDe(modelo)
 	if animador == nil then
 		return nil
@@ -162,12 +189,13 @@ function Animador.Reproducir(modelo: Model, nombre: string, velocidad: number?):
 	end
 
 	local pista = delPersonaje[nombre]
-	if pista == nil then
+	if not pista then
 		local id = resolverId(nombre)
 		if id == nil then
 			return nil
 		end
 		local animacion = Instance.new("Animation")
+		animacion.Name = nombre
 		animacion.AnimationId = id
 		local ok, cargada = pcall(function()
 			return animador:LoadAnimation(animacion)
@@ -176,11 +204,39 @@ function Animador.Reproducir(modelo: Model, nombre: string, velocidad: number?):
 			avisarUnaVez(nombre, `No se pudo cargar la animación '{nombre}': {cargada}`)
 			return nil
 		end
-		pista = cargada
-		pista.Priority = Enum.AnimationPriority.Action
-		delPersonaje[nombre] = pista
+		local nueva: AnimationTrack = cargada
+		nueva.Priority = prioridadDe(nombre)
+		delPersonaje[nombre] = nueva
+		return nueva
 	end
+	return pista
+end
 
+-- ¿Es `pista` una de las que ha cargado este cliente con Animador en ese personaje?
+function Animador.EsPropia(modelo: Model, pista: AnimationTrack): boolean
+	local humanoid = modelo:FindFirstChildOfClass("Humanoid")
+	local animador = humanoid and humanoid:FindFirstChildOfClass("Animator")
+	local delPersonaje = animador and pistas[animador]
+	if delPersonaje == nil then
+		return false
+	end
+	for _, propia in delPersonaje do
+		if rawequal(propia, pista) then
+			return true
+		end
+	end
+	return false
+end
+
+--[[
+	Reproduce la animación `nombre` en el personaje. Devuelve la pista (para poder pararla) o nil si no se
+	pudo. `velocidad` multiplica la rapidez (1 = normal).
+]]
+function Animador.Reproducir(modelo: Model, nombre: string, velocidad: number?): AnimationTrack?
+	local pista = Animador.Cargar(modelo, nombre)
+	if pista == nil then
+		return nil
+	end
 	pista:Play(0.05, 1, velocidad or 1)
 	return pista
 end

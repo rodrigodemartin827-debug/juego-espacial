@@ -9,6 +9,7 @@
 	Aquí solo se arrancan los servicios; la lógica vive en los módulos de `Servicios/`.
 ]]
 
+local AndarMonstruo = require(script.Personajes.AndarMonstruo)
 local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
@@ -19,6 +20,7 @@ local ServicioRed = require(script.Servicios.ServicioRed)
 ServicioRed.Iniciar()
 ServicioDatos.Iniciar()
 ServicioCombate.Iniciar()
+AndarMonstruo.Iniciar()
 ServicioNaves.Iniciar()
 ServicioExploracion.Iniciar()
 

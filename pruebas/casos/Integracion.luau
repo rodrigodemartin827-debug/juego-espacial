@@ -56,6 +56,8 @@ local function arrancarCliente(entorno, jugador)
 	entorno.mundo.establecerJugadorLocal(jugador)
 	-- El combate del cliente usa cámara, interfaz y efectos que la simulación no tiene: se sustituye por un módulo vacío.
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Combate.ServicioCombate`).Source = "return { Iniciar = function() end }"
+	-- El andar de monstruo anima personajes (Animator, KeyframeSequence...): tiene sus propias pruebas (AndarMonstruo).
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Personajes.AndarMonstruo`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Naves.ServicioNaves`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Exploracion.ServicioExploracion`).Source =
 		"return { Iniciar = function() end }"
