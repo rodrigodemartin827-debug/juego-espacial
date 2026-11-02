@@ -1437,20 +1437,13 @@ Recetas.Gravedad_Definitiva = {
 				"Secundario",
 				{ Desplazamiento = { 0, 10, 0 }, Grosor = 0.3, Giro = 160, Transparencia = { 0.25, 1 } }
 			),
-			onda(
-				"Objetivo",
-				6,
-				34,
-				0.9,
-				"Principal",
-				{
-					Desplazamiento = { 0, 10, 0 },
-					Grosor = 0.3,
-					Giro = -160,
-					Transparencia = { 0.25, 1 },
-					Retraso = 0.45,
-				}
-			),
+			onda("Objetivo", 6, 34, 0.9, "Principal", {
+				Desplazamiento = { 0, 10, 0 },
+				Grosor = 0.3,
+				Giro = -160,
+				Transparencia = { 0.25, 1 },
+				Retraso = 0.45,
+			}),
 			onda(
 				"Objetivo",
 				6,

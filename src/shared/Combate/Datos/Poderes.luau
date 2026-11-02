@@ -35,7 +35,7 @@
 	  Invulnerable El lanzador no recibe daño durante ese mismo tiempo.
 	  Animaciones { Carga, Lanzamiento }  nombres de Datos/Animaciones (y de Recursos.Animaciones).
 	  Efecto      Nombre de la receta de Datos/EfectosVFX.
-	  Cinematica  (opcional) nombre de la cinemática de cámara de Datos/EfectosVFX.Cinematicas.
+	  Cinematica  (opcional) nombre de la cinemática de cámara de Datos/Cinematicas.
 ]]
 
 export type Empuje = { Horizontal: number, Vertical: number, Atrae: boolean? }

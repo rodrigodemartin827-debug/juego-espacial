@@ -40,6 +40,8 @@ end
 ]]
 local function arrancarCliente(entorno, jugador)
 	entorno.mundo.establecerJugadorLocal(jugador)
+	-- El combate del cliente usa cámara, interfaz y efectos que la simulación no tiene: se sustituye por un módulo vacío.
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Combate.ServicioCombate`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
 		entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioRed`)
