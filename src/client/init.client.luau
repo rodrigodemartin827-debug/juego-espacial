@@ -18,6 +18,7 @@ local ServicioRed = require(script.Servicios.ServicioRed)
 
 -- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa. La pantalla de elección
 -- de bando va la última: pausa y oculta lo de los demás mientras el jugador elige (solo la primera vez).
+ServicioEleccion.Preparar() -- cortina negra hasta saber si hay que elegir bando
 ServicioRed.Iniciar()
 ServicioDatos.Iniciar()
 ServicioCombate.Iniciar()

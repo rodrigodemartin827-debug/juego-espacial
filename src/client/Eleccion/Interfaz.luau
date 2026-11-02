@@ -462,9 +462,11 @@ function Interfaz.Confirmar(bando: string)
 	end
 	for _, hijo in contenido:GetChildren() do
 		if hijo:IsA("Frame") then
-			for _, texto in hijo:GetDescendants() do
-				if texto:IsA("TextLabel") then
-					Utiles.Tween(texto, 0.3, { TextTransparency = 1 }, "Quad")
+			for _, objeto in hijo:GetDescendants() do
+				if objeto:IsA("TextLabel") then
+					Utiles.Tween(objeto, 0.3, { TextTransparency = 1 }, "Quad")
+				elseif objeto:IsA("UIStroke") then
+					Utiles.Tween(objeto, 0.3, { Transparency = 1 }, "Quad")
 				end
 			end
 		end

@@ -218,6 +218,12 @@ function ServicioEleccion.Activa(): boolean
 	return flujo.Mostrada and flujo.Estado ~= "Terminado"
 end
 
+-- Pone la cortina negra. Se llama lo primero al arrancar el cliente, antes que nada del juego, para que su interfaz
+-- no se vea ni un instante si luego resulta que hay que mostrar la pantalla de elección.
+function ServicioEleccion.Preparar()
+	Interfaz.CrearCortina()
+end
+
 --[[
 	Arranca la pantalla de elección. Debe llamarse una vez, después de ServicioDatos.Iniciar() y de los servicios
 	del juego (combate, naves, exploración), para poder pausarlos y ocultar su interfaz.
@@ -228,7 +234,7 @@ function ServicioEleccion.Iniciar()
 	end
 	iniciado = true
 
-	Interfaz.CrearCortina()
+	Interfaz.CrearCortina() -- por si no se llamó a Preparar
 	ServicioDatos.Actualizados:Conectar(alRecibirDatos)
 	-- Puede que los datos ya hubieran llegado antes de que este servicio escuchara.
 	local datos = ServicioDatos.Obtener()

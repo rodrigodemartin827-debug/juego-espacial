@@ -60,7 +60,8 @@ local function arrancarCliente(entorno, jugador)
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Exploracion.ServicioExploracion`).Source =
 		"return { Iniciar = function() end }"
 	-- La pantalla de elección de bando monta una escena 3D e interfaz: tiene sus propias pruebas (EleccionBando).
-	entorno.cliente.buscar(`{RUTA_CLIENTE}.Eleccion.ServicioEleccion`).Source = "return { Iniciar = function() end }"
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Eleccion.ServicioEleccion`).Source =
+		"return { Preparar = function() end, Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
 		entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioRed`)
