@@ -83,4 +83,28 @@ function Minerales.De(origen: string): { string }
 	return lista
 end
 
+--[[
+	Elige un tipo de mineral para `origen` ("Planeta" o "Asteroide") según el Peso de cada uno. `azar` es un número entre
+	0 (incluido) y 1 (excluido): el llamador pone el generador de números, así el resultado se puede repetir con una
+	semilla. Devuelve nil si en ese origen no aparece ningún mineral.
+]]
+function Minerales.Elegir(origen: string, azar: number): string?
+	local candidatos = Minerales.De(origen)
+	local total = 0
+	for _, id in candidatos do
+		total += Minerales.Lista[id].Peso
+	end
+	if total <= 0 then
+		return nil
+	end
+	local objetivo = math.clamp(azar, 0, 0.999999) * total
+	for _, id in candidatos do
+		objetivo -= Minerales.Lista[id].Peso
+		if objetivo < 0 then
+			return id
+		end
+	end
+	return candidatos[#candidatos]
+end
+
 return Minerales

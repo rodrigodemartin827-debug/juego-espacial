@@ -80,6 +80,27 @@ return function(Marco)
 			Marco.verdadero(#Minerales.De("Asteroide") >= 3, "debe haber varios minerales en los asteroides")
 		end)
 
+		Marco.prueba("el reparto de minerales por azar respeta el origen y los pesos", function()
+			-- Titanio solo sale en asteroides; nunca en planetas.
+			for paso = 0, 99 do
+				Marco.distinto(Minerales.Elegir("Planeta", paso / 100), "Titanio", "el titanio no sale en los planetas")
+			end
+			local cuentas = {}
+			for paso = 0, 999 do
+				local tipo = Minerales.Elegir("Asteroide", paso / 1000)
+				Marco.distinto(tipo, nil)
+				cuentas[tipo] = (cuentas[tipo] or 0) + 1
+			end
+			Marco.verdadero(
+				cuentas.Hierro > cuentas.Cristal,
+				"el hierro (peso 5) es más común que el cristal (peso 2)"
+			)
+			Marco.verdadero(cuentas.Titanio > 0, "el titanio sale en los asteroides")
+			Marco.esNil(Minerales.Elegir("Luna", 0.5), "un origen sin minerales no devuelve nada")
+			Marco.distinto(Minerales.Elegir("Planeta", 5), nil, "un azar fuera de rango se acota")
+			Marco.distinto(Minerales.Elegir("Planeta", -5), nil)
+		end)
+
 		Marco.prueba("las especies tienen ficha completa y hay una por cada mineral", function()
 			local categorias = { Criatura = 0, Planta = 0, Mineral = 0 }
 			for id, especie in Especies.Lista do

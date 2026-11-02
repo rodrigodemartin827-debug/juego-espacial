@@ -11,6 +11,8 @@
 	                calculado "perezosamente" (sin bucles ni temporizadores por nave).
 	  ARMAS         el cliente solo pide disparar y dice hacia dónde apunta; la cadencia, el cono de puntería, el
 	                cañón, la trayectoria y el daño los decide el servidor (ServicioNaves/Armas).
+	  MINERÍA       un láser que da en una veta de mineral de un asteroide la pica (ServicioMinado): el botín va al
+	                inventario del piloto, limitado por la mejora Carga.
 	  CHOQUES       cada fotograma se comprueba si la nave toca un asteroide (ServicioNaves/Choques): el daño
 	                depende de la velocidad que lleva MEDIDA por el servidor y del tamaño de la roca.
 	  VIGILANCIA    cada 0,2 s se comprueba que la nave no va más deprisa de lo que permite su motor, ni se sale
@@ -35,6 +37,7 @@ local Estadisticas = require(Shared.Naves.Estadisticas)
 local Reglas = require(Shared.Naves.Reglas)
 local ServicioAsteroides = require(script.Parent.ServicioAsteroides)
 local ServicioDatos = require(script.Parent.ServicioDatos)
+local ServicioMinado = require(script.Parent.ServicioMinado)
 local ServicioRed = require(script.Parent.ServicioRed)
 local Armas = require(script.Armas)
 local Choques = require(script.Choques)
@@ -219,6 +222,12 @@ local function aplicarImpacto(nave: Nave, punto: Vector3, direccion: Vector3, go
 	if golpe.Parent == nil then
 		return -- lo que se golpeó ya no está
 	end
+	-- Una veta de mineral: el láser la pica y el botín va a la bodega del piloto (si no cabe nada, el disparo sigue su curso).
+	if ServicioMinado.PicarDesdeNave(nave.Jugador, golpe, nave.Stats.Dano) then
+		ServicioRed.EnviarATodos("NaveImpacto", nave.Modelo, punto, direccion, "Asteroide")
+		return
+	end
+
 	local asteroide = Choques.AsteroideDe(golpe)
 
 	-- Un asteroide.
