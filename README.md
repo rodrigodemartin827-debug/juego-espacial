@@ -59,6 +59,8 @@ src/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
 │   │   └── LimitadorDeTasa  Cubo de fichas (peticiones por segundo)
+│   ├── Recursos/
+│   │   └── Animaciones      IDs de las animaciones subidas a Roblox (ver `animaciones/README.md`)
 │   └── Utilidades/          Senal (eventos) y Tablas (copia profunda)
 ├── server/                  → ServerScriptService.Server (un Script con sus módulos)
 │   ├── init.server.luau     Arranque: inicia los servicios en orden
@@ -82,6 +84,7 @@ src/
     └── VFX/                 Motor de efectos visuales (ver Combate)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
+animaciones/                 Animaciones de combate (.fbx para R15) y los scripts de Blender que las generan
 ```
 
 Convenciones: todo el código de `src/` va en módulos con `--!strict` y comentarios en español; los nombres de módulos,
