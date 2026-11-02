@@ -56,14 +56,14 @@ type DatosCrafteo = {
 local Crafteo = {}
 
 -- Textos para mostrar al jugador, uno por motivo.
-Crafteo.Mensajes = table.freeze({
+Crafteo.Mensajes = table.freeze(({
 	RecetaDesconocida = "Esa receta no existe",
 	CantidadInvalida = "Cantidad no válida",
 	NivelMaximo = "Esa mejora ya está al máximo",
 	FaltanMateriales = "Te faltan materiales",
 	FaltanMonedas = "Te faltan monedas",
 	BodegaLlena = "No te cabe en la bodega: mejora la Carga o libera espacio",
-})
+} :: any) :: { [string]: string })
 
 -- Cantidad que pide una receta para ese nivel: fija, o `Base + PorNivel * nivel` redondeado hacia arriba.
 function Crafteo.Cantidad(valor: Recetas.Cantidad, nivel: number): number

@@ -366,20 +366,13 @@ for _, id in Minerales.Orden do
 				esfera("Objetivo", 2, 16, 0.55, "Principal", { Transparencia = { 0.4, 1 }, Easing = "Quart" }),
 				esfera("Objetivo", 3, 22, 0.8, "Secundario", { Transparencia = { 0.7, 1 }, Minimo = "Medio" }),
 				onda("Objetivo", 1.5, 18, 0.5, "Principal", { Orientacion = "Frente", Grosor = 0.2 }),
-				onda(
-					"Objetivo",
-					1.5,
-					22,
-					0.6,
-					"Nucleo",
-					{
-						Orientacion = "Suelo",
-						Grosor = 0.18,
-						Transparencia = { 0.3, 1 },
-						Retraso = 0.05,
-						Minimo = "Medio",
-					}
-				),
+				onda("Objetivo", 1.5, 22, 0.6, "Nucleo", {
+					Orientacion = "Suelo",
+					Grosor = 0.18,
+					Transparencia = { 0.3, 1 },
+					Retraso = 0.05,
+					Minimo = "Medio",
+				}),
 				luz("Objetivo", { 6, 0 }, { 10, 30 }, 0.55, "Principal"),
 				chispas("Objetivo", 60, { 14, 60 }, { 0.3, 0.9 }, { "Nucleo", "Principal", "Secundario" }, {
 					Aceleracion = { 0, -35, 0 },

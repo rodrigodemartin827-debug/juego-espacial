@@ -27,6 +27,7 @@ local CASOS = {
 	require("./casos/Integracion"),
 	require("./casos/Exploracion"),
 	require("./casos/ExploracionVFX"),
+	require("./casos/ExploracionRed"),
 	require("./casos/ServicioPersonaje"),
 	require("./casos/Combate"),
 	require("./casos/CombateVFX"),

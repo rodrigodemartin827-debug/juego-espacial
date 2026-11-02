@@ -32,12 +32,12 @@ export type Especie = {
 local Especies = {}
 
 -- Color de la ficha según la rareza.
-Especies.ColoresRareza = table.freeze({
+Especies.ColoresRareza = table.freeze(({
 	["Comun"] = "#B8C4D6",
 	["Poco comun"] = "#5CE08A",
 	["Rara"] = "#5CB8FF",
 	["Epica"] = "#C58CFF",
-})
+} :: any) :: { [string]: string })
 
 local lista: { [string]: Especie } = {
 	-- ===== Criaturas =====
