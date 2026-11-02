@@ -11,6 +11,13 @@ local RUTA_SERVIDOR = "ServerScriptService.Server"
 local RUTA_CLIENTE = "StarterPlayer.StarterPlayerScripts.Client"
 local ALMACEN = "DatosJugador"
 
+-- Ejecuta init.server.luau. La zona de pruebas construye un escenario con Part, Color3, etc. que la simulación
+-- no tiene, así que se sustituye por un módulo vacío (el combate tiene sus propias pruebas).
+local function arrancarScriptServidor(entorno)
+	entorno.servidor.buscar(`{RUTA_SERVIDOR}.Servicios.ZonaPruebas`).Source = "return { Iniciar = function() end }"
+	entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
+end
+
 --[[
 	Arranca el servidor completo (init.server.luau) sobre `nube`. Devuelve el entorno y el ServicioDatos del
 	servidor. Los tiempos del servicio se acortan para que las pruebas vayan rápido.
@@ -23,7 +30,7 @@ local function arrancarServidor(nube)
 	ServicioDatos.Configuracion.EsperaBloqueo = 0.02
 	ServicioDatos.Configuracion.EsperaReintentoInicial = 0.005
 
-	entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
+	arrancarScriptServidor(entorno)
 	return entorno, ServicioDatos
 end
 
@@ -33,6 +40,8 @@ end
 ]]
 local function arrancarCliente(entorno, jugador)
 	entorno.mundo.establecerJugadorLocal(jugador)
+	-- El combate del cliente usa cámara, interfaz y efectos que la simulación no tiene: se sustituye por un módulo vacío.
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Combate.ServicioCombate`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
 		entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioRed`)
@@ -63,7 +72,7 @@ return function(Marco)
 			local entorno = Entorno.nuevo({ Nube = nube })
 			local jugador = entorno.mundo.unirJugador(1, "Ana")
 
-			entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
+			arrancarScriptServidor(entorno)
 
 			local ServicioDatos = entorno.servidor.requerir(`{RUTA_SERVIDOR}.Servicios.ServicioDatos`)
 			Marco.esperarHasta(function()
@@ -116,7 +125,7 @@ return function(Marco)
 			Marco.dejarCorrer(5)
 			Marco.esNil(DatosCliente.Obtener())
 
-			entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
+			arrancarScriptServidor(entorno)
 
 			Marco.esperarHasta(function()
 				return DatosCliente.Obtener() ~= nil

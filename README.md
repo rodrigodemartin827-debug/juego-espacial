@@ -9,10 +9,12 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
 - un **sistema de red** con RemoteEvents validados en el servidor y límite de peticiones por segundo,
 - un **sistema de datos** con DataStore y **bloqueo de sesión** que guarda bando, nivel, XP, monedas, inventario y
   mejoras de la nave,
-- un primer servicio de ejemplo (elegir bando) que usa los dos sistemas, y
+- un primer servicio de ejemplo (elegir bando) que usa los dos sistemas,
+- el **sistema de combate** (servidor autoritativo, poderes Rayo y Gravedad, combo, VFX por fases, interfaz y una zona de
+  pruebas; ver [Combate](#combate)), y
 - pruebas automáticas que se ejecutan fuera de Studio.
 
-Los poderes, las naves, el escáner y el crafteo todavía no existen: se añadirán como servicios nuevos encima de esta base.
+Las naves, el escáner y el crafteo todavía no existen: se añadirán como servicios nuevos encima de esta base.
 
 ## Puesta en marcha
 
@@ -52,6 +54,7 @@ src/
 ├── shared/                  → ReplicatedStorage.Shared (servidor y cliente)
 │   ├── Datos/Tipos          Tipos de los datos del jugador
 │   ├── Juego/Bandos         Héroes, Villanos y "Ninguno"
+│   ├── Combate/             Datos y reglas del combate (ver más abajo)
 │   ├── Red/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
@@ -67,12 +70,16 @@ src/
 │       │   ├── Esquema          Plantilla, reparación de datos, migraciones
 │       │   └── AlmacenMemoria   DataStore falso para Studio
 │       ├── ServicioReplicacion  Envía al cliente una copia de sus datos
-│       └── ServicioBandos       Ejemplo: elegir bando
+│       ├── ServicioBandos       Ejemplo: elegir bando
+│       ├── ServicioCombate      Combate: cooldown, energía, alcance, daño (autoritativo)
+│       └── ZonaPruebas          Plataforma con muñecos de entrenamiento
 └── client/                  → StarterPlayer.StarterPlayerScripts.Client (un LocalScript)
     ├── init.client.luau     Arranque del cliente
-    └── Servicios/
-        ├── ServicioRed      Envía peticiones y escucha avisos
-        └── ServicioDatos    Copia local (solo lectura) de los datos
+    ├── Servicios/
+    │   ├── ServicioRed      Envía peticiones y escucha avisos
+    │   └── ServicioDatos    Copia local (solo lectura) de los datos
+    ├── Combate/             Entrada, interfaz (vida, energía, cooldowns), números de daño
+    └── VFX/                 Motor de efectos visuales (ver Combate)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
 ```
@@ -183,6 +190,88 @@ Modifica los datos solo desde el servidor. El cliente recibe una copia (`Servici
 Los identificadores que se guardan (`"Heroes"`, `"Villanos"`, los ids de objetos y mejoras) no deben cambiarse una vez
 publicado el juego.
 
+## Combate
+
+El cliente **pide** usar una habilidad; el **servidor decide**. Los del mismo bando no se hacen daño (un jugador sin bando
+puede dañar y ser dañado por cualquiera).
+
+### Cómo se decide (servidor)
+
+`UsarHabilidad(id, dirección, distancia)` pasa por `Combate/Arbitro`, que comprueba en orden:
+
+1. **Estado**: vivo, sin aturdimiento y sin otra habilidad en marcha.
+2. **Cooldown** de esa habilidad.
+3. **Energía** (se regenera sola con el tiempo, sin bucles).
+4. **Distancia**: el punto señalado debe estar dentro del alcance (se recorta al rango real).
+
+Si todo es válido, cobra la energía, arranca el cooldown y avisa a todos (`HabilidadIniciada`). Pasado el tiempo de carga y
+de viaje, el servidor calcula **él mismo** a quién alcanza (forma del golpe, alcance medido otra vez desde donde está ahora el
+lanzador, bando, invulnerabilidad), aplica el daño y avisa del impacto (`HabilidadImpacto`). El cliente no dice a quién
+golpea ni cuánto daño hace. Quien recibe un golpe queda aturdido (esto interrumpe lo que estuviera lanzando: el servidor cancela su golpe y avisa
+con `HabilidadInterrumpida` para que los clientes paren su animación y sus efectos de carga) y su propio
+cliente aplica el empuje.
+
+Las reglas son funciones puras (`Combate/Reglas`, `Combate/Arbitro`) y tienen pruebas propias.
+
+### Qué se puede jugar
+
+| Poder | Básico | Fuerte | Definitiva (con cinemática) |
+| --- | --- | --- | --- |
+| **Rayo** (`Z` `X` `C`) | Chispa Voltaica: rayo veloz en línea | Trueno Divino: rayo del cielo sobre una zona | Tormenta Celestial |
+| **Gravedad** (`V` `B` `N`) | Pulso Gravitatorio: esfera que aplasta | Aplastamiento: zona hundida contra el suelo | Singularidad: agujero negro que arrastra y colapsa |
+| **Cuerpo a cuerpo** (clic) | Combo de 4 golpes: gancho, revés, patada giratoria y remate | | |
+
+En móvil, los mismos botones aparecen en la esquina inferior derecha y se apunta hacia el enemigo más cercano delante de la
+cámara. Hay barra de vida y de energía, y cada botón muestra su cooldown y se apaga si falta energía.
+
+### Zona de pruebas
+
+Al arrancar el servidor se crea (`ZonaPruebas`) una plataforma con tres muñecos de entrenamiento: uno de los **Héroes**,
+uno de los **Villanos** y uno **sin bando**; renacen solos. Dos pedestales (`ProximityPrompt`) permiten elegir bando sin
+interfaz: si eliges Héroes, el muñeco Héroe ya no recibe tu daño. El bando se elige una sola vez (regla de `ServicioBandos`).
+
+### Efectos visuales (VFX)
+
+Cada habilidad tiene una receta en `Combate/Datos/EfectosVFX` con cinco **fases**, y cada fase combina varias **capas**:
+
+| Fase | Cuándo | Ejemplos de capas |
+| --- | --- | --- |
+| Anticipación | al aceptar la habilidad | aura, esferas que crecen, partículas que convergen, luz, aviso en el suelo |
+| Lanzamiento | acaba la carga | proyectil con estela, rayos, onda de salida |
+| Impacto | lo confirma el servidor | explosión, ondas, escombros, cráter temporal, cámara (sacudida, FOV, desenfoque, destello) |
+| Residuo | tras el impacto | brasas, humo, arcos eléctricos, luz que se apaga |
+| Golpeado | por cada enemigo alcanzado | destello, chispas, pantalla del golpeado, reacción |
+
+Tipos de capa: `Particulas`, `Onda`, `Esfera`, `Luz`, `Proyectil`, `Corte`, `Haz` (rayos con zigzag y ramas),
+`Escombros`, `Crater`, `Tinte`, `Desenfoque`, `Zoom`, `Sacudida`, `Hitstop` y `Sonido`. Cada módulo de `client/VFX/Capas`
+documenta sus campos.
+
+**Móvil y rendimiento**: los objetos se reutilizan (`VFX/Pool`, con precalentado), un único bucle mueve todo lo animado
+(`VFX/Actores`) y `VFX/Calidad` mide los fotogramas por segundo para bajar (o subir) entre Bajo, Medio y Alto, escalando
+partículas, escombros, luces y segmentos de rayo. En móvil se empieza en Medio. Las capas con `Minimo = "Alto"` se omiten
+en dispositivos lentos y los efectos lejanos no se dibujan.
+
+### Cambiar cosas sin tocar código
+
+Todo está en `src/shared/Combate/Datos/`:
+
+| Quiero cambiar... | Archivo |
+| --- | --- |
+| **IDs de texturas, mallas, animaciones y sonidos** | `Recursos` (cadena vacía = valor por defecto) |
+| Colores de un poder | `Paleta` |
+| Daño, cooldown, energía, alcance, tiempos, teclas | `Poderes` |
+| Tamaños, cantidades y tiempos de los efectos | `EfectosVFX` |
+| Movimientos de cámara de las definitivas | `Cinematicas` |
+| Las animaciones provisionales | `Animaciones` |
+
+**Sustituir una animación**: las animaciones provisionales están hechas por código (`Animaciones`) y se convierten en una
+`KeyframeSequence` al jugarse. Para usar una hecha en el editor de Roblox, pega su ID en `Recursos.Animaciones`
+(por ejemplo `Combo1 = "rbxassetid://123456"`); desde ese momento se usa esa, sin más cambios. Las animaciones están hechas para
+rigs **R15**. Con `Recursos.Mallas` ocurre lo mismo (el mesh debe medir 1 stud) y con las texturas de `Recursos.Texturas`.
+
+Limitaciones conocidas: no he podido probarlo dentro de Roblox Studio (las pruebas automáticas cubren reglas y datos, no el
+aspecto), así que los números de los efectos (tamaños, tiempos) son un primer ajuste.
+
 ## Pruebas
 
 Las pruebas ejecutan los módulos reales de `src/` fuera de Studio con [Lune](https://lune-org.github.io/docs), sobre una
@@ -196,7 +285,9 @@ lune run pruebas/ejecutar BloqueoSesion     # solo las que contengan ese texto e
 Cubren la red (validación, límites, expulsión, envío en ambos sentidos), el esquema, el bloqueo de sesión y el servicio de
 datos con **varios servidores simulados compitiendo por el mismo DataStore** (traspaso sin perder progreso, servidor caído,
 bloqueo perdido, fallos y respuestas perdidas del DataStore, reconexiones rápidas, cierre del servidor...) y la integración
-de punta a punta con los scripts de arranque reales.
+de punta a punta con los scripts de arranque reales. Para el combate comprueban el árbitro (cooldown, energía, alcance,
+estado, combo, fuego amistoso), la geometría de los golpes y que los datos visuales sean coherentes (colores, texturas y
+animaciones que existen, límites de partículas para móvil, cinemáticas que cubren el impacto).
 
 La simulación es una aproximación: sirve para comprobar la lógica, no sustituye a probar en Studio y en un servidor real.
 

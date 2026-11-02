@@ -24,7 +24,8 @@ local ServicioReplicacion = require(script.Parent.ServicioReplicacion)
 
 local ServicioBandos = {}
 
-local function elegirBando(jugador: Player, bando: Bandos.IdBando)
+-- Asigna el bando al jugador si todavía no tiene (la regla de arriba). Lo usa el remoto y la zona de pruebas.
+function ServicioBandos.Elegir(jugador: Player, bando: Bandos.IdBando)
 	local datos = ServicioDatos.ObtenerDatos(jugador)
 	if datos == nil then
 		return -- sus datos todavía no han cargado: no hay dónde guardar la elección
@@ -40,7 +41,7 @@ end
 
 -- Empieza a atender el remoto ElegirBando. Debe llamarse una sola vez, después de ServicioRed.Iniciar().
 function ServicioBandos.Iniciar()
-	ServicioRed.Conectar("ElegirBando", elegirBando)
+	ServicioRed.Conectar("ElegirBando", ServicioBandos.Elegir)
 end
 
 return ServicioBandos

@@ -32,6 +32,7 @@ local SERVICIOS = {
 	DataStoreService = true,
 	HttpService = true,
 	RunService = true,
+	CollectionService = true,
 }
 
 -- Clases que cuentan como "padres" de otras para Instance:IsA.
@@ -324,6 +325,7 @@ function Roblox.nuevoMundo(opciones)
 	PorClase.Player = {
 		iniciar = function(self)
 			rawset(self, "UserId", 0)
+			rawset(self, "CharacterAdded", nuevaSenal(mundo.task))
 		end,
 		metodos = {
 			-- Expulsa al jugador: se anota el mensaje y se le saca de forma asíncrona.
