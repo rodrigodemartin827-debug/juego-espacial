@@ -9,8 +9,10 @@ Juego de Roblox de exploración espacial con PvP, de **calidad alta**. Nada de o
 Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (poderes, progresión larga, PvP con recompensa).
 
 ### Bandos
-- Dos bandos: **Héroes** y **Villanos**. Se elige una sola vez.
+- Dos bandos: **Héroes** y **Villanos**. Se elige al empezar y es permanente, pero se puede cambiar pagando muchas monedas del juego, como máximo una vez cada 7 días.
 - Cada bando tiene su **planeta grande**, que hace de base y de tutorial.
+- Alrededor de cada planeta de bando hay una **zona segura** sin PvP de naves.
+- En la v1 no se puede aterrizar en el planeta del bando contrario: está protegido.
 - Los del mismo bando no se hacen daño.
 
 ### Bucle principal
@@ -19,16 +21,19 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 3. Despegas y viajas por el espacio esquivando **campos de asteroides** que dañan la nave.
 4. Hay **10 planetas pequeños** a distintas distancias, cada uno con recursos, criaturas y peligros.
 5. El primer viaje dura 2-3 minutos con eventos. Los lejanos, 8-10 minutos. Más tarde se desbloquea un motor de salto.
-6. **PvP en naves** (armas de nave) y **PvP en planetas** (poderes y armas).
+6. **PvP en naves** (armas de nave) en todo el espacio salvo las zonas seguras, y **PvP en planetas** (poderes y armas).
 7. **Niveles, escáner y crafteo**: escaneas criaturas, plantas y minerales, recoges recursos y fabricas mejoras.
 
 ### Lista de la v1 (lo que entra en el lanzamiento)
 - Los 2 planetas de bando y 4 planetas pequeños.
-- 1 nave con mejoras: Casco, Escudo, Motor, Armas, Escaner, Carga.
-- 1 campo de asteroides.
+- 1 nave con mejoras: Casco, Escudo, Motor, Armas, Escaner, Carga. ("Escaner" va sin tilde a propósito: es la clave del código).
+- 1 campo de asteroides y los eventos del primer viaje.
+- Niveles.
 - 8-10 poderes, 3-4 armas, escáner, crafteo básico.
-- PvP en naves y en un planeta disputado.
-Lo que no esté en esta lista no se hace hasta después del lanzamiento.
+- PvP en naves y en un planeta disputado, que es uno de los 4 planetas pequeños.
+- Cambio de bando de pago (monedas del juego, una vez cada 7 días).
+
+Lo que no esté en esta lista no se hace hasta después del lanzamiento. Por ejemplo, el motor de salto queda para después.
 
 ### Monetización (sin pay-to-win)
 Gamepasses (x2 monedas, VIP, almacén extra), skins de nave y de poderes, pase de temporada. Nada que haga ganar peleas comprando.
@@ -52,5 +57,7 @@ Gamepasses (x2 monedas, VIP, almacén extra), skins de nave y de poderes, pase d
 - **Director (Claude Code en local)**: tiene Roblox Studio conectado por MCP. Prueba todo de verdad: `start_stop_play`, `screen_capture`, `user_keyboard_input`, `user_mouse_input`, `get_console_output`, `execute_luau`. Rojo sincroniza esta carpeta con Studio.
 - **Nada está terminado hasta verlo funcionar en Studio con capturas.** Que las pruebas automáticas pasen no basta.
 - El director puede repartir trabajo a sesiones en la nube (`claude --cloud "encargo"`), una por área: programación, VFX, animación, Blender. Esas sesiones no tienen Studio, así que el director revisa y prueba todo lo que entregan antes de darlo por bueno.
+  - La sesión en la nube clona el repositorio de GitHub en la rama actual, no la copia local: **sube antes la rama** con lo que necesite.
+  - Para seguir una sesión desde aquí: `claude --teleport <id>`. Para mandarle otro mensaje: `claude -p "mensaje" --cloud <id>`.
 - Cada trabajo en su propia rama, con commits pequeños en español, y pull request a `main`.
 - **Rodrigo da el visto bueno final.** Enséñale capturas del antes y el después.
