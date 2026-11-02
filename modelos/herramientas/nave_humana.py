@@ -355,7 +355,7 @@ def construir_neon():
     for s in (-1, 1):
         caja(bm, Vector((s * 1.34, -2.2, 0.2)), (0.05, 3.6, 0.1))
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
-    m = c.material("Neon", col("Neon"), rugosidad=0.3, emision=col("Neon"), fuerza_emision=8.0)
+    m = c.material("Neon", col("Neon"), rugosidad=0.3, emision=col("Neon"), fuerza_emision=3.5)
     return c.objeto_desde_bmesh("Nave_Neon", bm, [m])
 
 
@@ -363,7 +363,6 @@ def construir_neon():
 def anclajes():
     g, cn = GONDOLA, CANON
     return {
-        "Ejes": (0, 0, 0),
         "Piloto": (0, -2.4, 0.9),
         "CanonDer": (-cn["x"], cn["y0"] - 0.95, cn["z"]),
         "CanonIzq": (cn["x"], cn["y0"] - 0.95, cn["z"]),
@@ -415,6 +414,7 @@ def main():
         cmn, cmx = c.caja_limite([casco])
         centro = tuple(((cmn + cmx) / 2) / E)
         rel = {k: a_roblox(tuple(Vector(v) - Vector(centro))) for k, v in anclajes().items()}
+        rel["Ejes"] = (0.0, 0.0, 0.0)  # las fuerzas del vuelo, en el centro de la pieza principal (como en el código)
         json.dump({"nota": "studs, ejes de Roblox, relativos al centro de la MeshPart Nave_Casco",
                    "Anclajes": rel}, f, indent=2, ensure_ascii=False)
 
