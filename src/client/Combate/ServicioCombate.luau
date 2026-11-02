@@ -32,6 +32,9 @@ local Utiles = require(script.Parent.Parent.VFX.Utiles)
 
 local ServicioCombate = {}
 
+-- Mientras está pausado (el jugador pilota una nave) no se pide ninguna habilidad y la interfaz se oculta.
+local pausado = false
+
 -- Velocidad máxima de empuje que se acepta del servidor (ante un dato absurdo, no se sale volando).
 local EMPUJE_MAXIMO = 160
 
@@ -101,7 +104,7 @@ end
 
 local function solicitar(id: string)
 	local hab = Poderes.Presentacion(id)
-	if hab == nil or raizLocal() == nil then
+	if pausado or hab == nil or raizLocal() == nil then
 		return
 	end
 	if Interfaz.EnCooldown(id) then
@@ -189,6 +192,12 @@ local function alInterrumpirHabilidad(lanzador: any)
 	if esModelo(lanzador) then
 		Gestor.Interrumpir(lanzador :: Model)
 	end
+end
+
+-- Pausa o reanuda el combate a pie (lo usan las naves: dentro de una, el clic y las teclas son suyos).
+function ServicioCombate.Pausar(valor: boolean)
+	pausado = valor
+	Interfaz.Mostrar(not valor)
 end
 
 -- ===== Arranque =====
