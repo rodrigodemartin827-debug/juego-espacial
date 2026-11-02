@@ -11,10 +11,13 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
   mejoras de la nave,
 - un primer servicio de ejemplo (elegir bando) que usa los dos sistemas,
 - el **sistema de combate** (servidor autoritativo, poderes Rayo y Gravedad, combo, VFX por fases, interfaz y una zona de
-  pruebas; ver [Combate](#combate)), y
+  pruebas; ver [Combate](#combate)),
+- el **sistema de naves** (vuelo en el espacio para PC, móvil y mando, vida y escudo, armas validadas en el servidor,
+  campos de asteroides generados por código y mejoras leídas de los datos del jugador; ver [Naves](#naves)), y
 - pruebas automáticas que se ejecutan fuera de Studio.
 
-Las naves, el escáner y el crafteo todavía no existen: se añadirán como servicios nuevos encima de esta base.
+El escáner de recursos y el crafteo todavía no existen: se añadirán como servicios nuevos encima de esta base. (Las mejoras
+de nave `Escaner` y `Carga` ya se leen y se usan: el radar del panel y el tamaño de la bodega.)
 
 ## Puesta en marcha
 
@@ -88,11 +91,12 @@ src/
 │   ├── Datos/Tipos          Tipos de los datos del jugador
 │   ├── Juego/Bandos         Héroes, Villanos y "Ninguno"
 │   ├── Combate/             Datos y reglas del combate (ver más abajo)
+│   ├── Naves/               Datos y reglas puras de las naves (ver Naves)
 │   ├── Red/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
 │   │   └── LimitadorDeTasa  Cubo de fichas (peticiones por segundo)
-│   └── Utilidades/          Senal (eventos) y Tablas (copia profunda)
+│   └── Utilidades/          Senal (eventos), Tablas (copia profunda) y Azar (aleatorio con semilla)
 ├── server/                  → ServerScriptService.Server (un Script con sus módulos)
 │   ├── init.server.luau     Arranque: inicia los servicios en orden
 │   └── Servicios/
@@ -106,14 +110,18 @@ src/
 │       ├── ServicioPersonaje    Garantiza que todos los personajes son R6
 │       ├── ServicioBandos       Ejemplo: elegir bando
 │       ├── ServicioCombate      Combate: cooldown, energía, alcance, daño (autoritativo)
-│       └── ZonaPruebas          Plataforma con muñecos de entrenamiento
+│       ├── ServicioNaves/       Naves: despegue, vida y escudo, armas, choques, vigilancia
+│       ├── ServicioAsteroides   Campos de asteroides generados por código
+│       ├── Hangar               Hangar con plataforma de despegue
+│       └── ZonaPruebas          Plataforma con muñecos, hangar y campo de asteroides
 └── client/                  → StarterPlayer.StarterPlayerScripts.Client (un LocalScript)
     ├── init.client.luau     Arranque del cliente
     ├── Servicios/
     │   ├── ServicioRed      Envía peticiones y escucha avisos
     │   └── ServicioDatos    Copia local (solo lectura) de los datos
     ├── Combate/             Entrada, interfaz (vida, energía, cooldowns), números de daño
-    └── VFX/                 Motor de efectos visuales (ver Combate)
+    ├── Naves/               Vuelo, cámara, panel de mandos, controles y efectos de las naves
+    └── VFX/                 Motor de efectos visuales (lo usan el combate y las naves)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
 animaciones/                 Animaciones de combate (.fbx para R6) y los scripts de Blender que las generan
@@ -264,6 +272,8 @@ cámara. Hay barra de vida y de energía, y cada botón muestra su cooldown y se
 Al arrancar el servidor se crea (`ZonaPruebas`) una plataforma con tres muñecos de entrenamiento: uno de los **Héroes**,
 uno de los **Villanos** y uno **sin bando**; renacen solos. Dos pedestales (`ProximityPrompt`) permiten elegir bando sin
 interfaz: si eliges Héroes, el muñeco Héroe ya no recibe tu daño. El bando se elige una sola vez (regla de `ServicioBandos`).
+La zona también tiene el hangar y el campo de asteroides de las [Naves](#naves) y un ambiente nocturno con resplandor
+(`AMBIENTE_ESPACIAL` en `ZonaPruebas`).
 
 ### Efectos visuales (VFX)
 
@@ -309,6 +319,111 @@ el rig **R6** (ver *Avatar R6*). Con `Recursos.Mallas` ocurre lo mismo (el mesh 
 Limitaciones conocidas: no he podido probarlo dentro de Roblox Studio (las pruebas automáticas cubren reglas y datos, no el
 aspecto), así que los números de los efectos (tamaños, tiempos) son un primer ajuste.
 
+## Naves
+
+Una nave se pilota con el cliente del jugador (control inmediato) pero **el servidor es la autoridad** de todo lo que
+importa: qué estadísticas tiene, cuándo y hacia dónde puede disparar, a qué daña, cuándo choca y si se mueve de forma
+creíble.
+
+### Jugar
+
+En la zona de pruebas hay un **hangar** (a la derecha de los pedestales de bando, en `x = +75, z = +62`) con una nave
+posada. Acércate a la consola y usa **Despegar**. El campo de asteroides está al norte (−Z), a unos 300 studs, con una baliza
+luminosa en un claro central.
+
+| | Ordenador | Mando | Móvil |
+| --- | --- | --- | --- |
+| Acelerar / frenar | `W` / `S` | palanca izquierda | joystick (abajo-izquierda) |
+| Desplazarse de lado | `A` / `D` | palanca izquierda | joystick |
+| Subir / bajar | `Espacio` / `Ctrl` o `C` | `A` / `B` | botones ▲ ▼ |
+| Orientar | ratón (se bloquea al centro) | palanca derecha | arrastrar por la mitad derecha |
+| Disparar | clic | `R2` | botón DISPARAR |
+| Turbo | `Shift` | `L2` | botón TURBO |
+| Aterrizar | `F` | `Y` | botón ATERRIZAR |
+
+El panel muestra casco, escudo y turbo, la velocidad, la mira, la bodega, los niveles de mejora y un **radar** (alcance según
+el nivel de Escáner; las naves enemigas salen en rojo y las aliadas en verde). Mientras pilotas, el combate a pie queda
+pausado: ni el clic ni las teclas lanzan habilidades y el personaje, invisible dentro de la cabina, no puede ser alcanzado
+por ellas.
+
+### Las mejoras salen de los datos del jugador
+
+`datos.MejorasNave` (`Casco`, `Escudo`, `Motor`, `Armas`, `Escaner`, `Carga`) se lee **en el servidor al despegar**
+(`Naves/Estadisticas.Calcular`, función pura que sanea niveles raros: ausentes, negativos, decimales, `NaN`, por encima del
+máximo...). Qué hace cada una, nivel a nivel, está en `Naves/Datos/Mejoras` (`Base + PorNivel × nivel`, nivel máximo 10):
+
+| Mejora | Efecto |
+| --- | --- |
+| Casco | vida máxima |
+| Escudo | capacidad, velocidad de recarga y espera antes de recargar |
+| Motor | velocidad máxima, aceleración, potencia y depósito del turbo |
+| Armas | daño, cadencia y alcance de los láseres |
+| Escáner | alcance del radar |
+| Carga | capacidad de la bodega (se muestra; aún no hay nada que cargar) |
+
+`ServicioNaves.ActualizarMejoras(jugador)` recalcula las estadísticas de una nave en vuelo cuando cambien las mejoras
+(conserva la proporción de vida y escudo).
+
+### Qué decide el servidor
+
+- **Vida y escudo** (`Naves/Reglas`): el escudo absorbe primero y el sobrante pasa al casco; se recarga solo tras unos
+  segundos sin daño, calculado "perezosamente" (sin bucles por nave, igual que la energía del combate). Al despegar hay unos
+  segundos de inmunidad.
+- **Armas** (`ServicioNaves/Armas`): el cliente solo manda la dirección. El servidor comprueba la **cadencia** (la del nivel de
+  Armas), **limita la dirección a un cono** alrededor de la proa que él mide (no se dispara hacia atrás), elige el **cañón**
+  (alternan) y hace el raycast. El daño llega cuando termina el vuelo del proyectil. Las naves del mismo bando no se hacen daño.
+- **Choques con asteroides** (`ServicioNaves/Choques`): cada fotograma, un barrido esférico más una consulta de solape. El
+  daño depende de la **velocidad medida por el servidor** y del tamaño de la roca (`Reglas.DanoChoque`). El piloto rebota al
+  momento con una predicción local; si no, el servidor se lo ordena.
+- **Vigilancia**: cada 0,2 s se comprueba que la nave no vaya más deprisa de lo que permite su motor (con o sin turbo, que
+  también gestiona el servidor) ni salga del mundo. Si falla varias veces seguidas se la devuelve a su última posición buena.
+  Un tirón de lag legítimo se acepta (el margen crece con el tiempo), un teletransporte no.
+- **Remotos** (`Red/Remotos`): `DispararNave`, `TurboNave`, `AterrizarNave` y `PedirEstadoNave`, todos con validación y límite por
+  segundo. Las reglas, la física y el generador son funciones puras con pruebas.
+
+### Campos de asteroides
+
+`ServicioAsteroides.CrearCampo({ Semilla, Cantidad, Centro, Radio, Aplanado, TamanoMin, TamanoMax, Separacion, Exclusiones })`
+construye un campo por código. El reparto (`Naves/GeneradorAsteroides`) es **determinista por semilla**, con muchos pequeños y
+pocos grandes, sin solapes y respetando zonas de exclusión. Cada asteroide es una esfera con fragmentos de roca; tiene vida,
+estalla cuando se le dispara y renace pasado un tiempo (si no hay una nave encima).
+
+### Efectos visuales: el mismo motor que el combate
+
+Las naves **no tienen un sistema de efectos propio**: usan el de `client/VFX` con sus mismas capas y fases, a través de
+`Gestor.Reproducir(receta, fases, opciones)`. Las recetas están en `Naves/Datos/EfectosNave` (con colores en
+`Combate/Datos/Paleta` y sonidos en `Combate/Datos/Recursos`) y se construyen con los mismos atajos (`Combate/Datos/Atajos`):
+
+| Receta | Cuándo |
+| --- | --- |
+| `Nave_Laser_<Bando>` | cada disparo: fogonazo, proyectil con estela y haz; azul, rojo o verde según el bando |
+| `Nave_Impacto_Escudo` / `_Casco` / `_Asteroide` | el láser golpea cada cosa |
+| `Nave_Choque_Escudo` / `_Casco` | choque con un asteroide (sacude, tiñe y desenfoca la pantalla del piloto) |
+| `Nave_Explosion` | nave destruida: destello, bola de fuego en capas, ondas, chispas, humo, restos, arcos eléctricos y explosiones secundarias escalonadas |
+| `Nave_Asteroide_<Tamaño>` | un asteroide estalla, con más fuerza cuanto más grande |
+| `Nave_Propulsor` / `_Turbo` / `Nave_Turbo_Arranque` | estela de los propulsores (se repite mientras se acelera) y destello al encender el turbo |
+| `Nave_Despegue` | arranque de los motores en el hangar |
+
+Para que el motor sirviera en el espacio se le añadió: dirección 3D en las anclas (`Espacial`), anclas por nombre (los
+Attachments `CanonIzq`, `MotorDer`... del modelo), partículas hacia atrás (`Direccion = "Atras"`) y escombros sin suelo
+(`Libre = true`). La calidad adaptativa de `VFX/Calidad` se aplica igual: las capas pesadas llevan `Minimo = "Alto"`.
+
+### Modelo 3D
+
+La nave se construye por código (`ServicioNaves/Modelo`): fuselaje, cabina de cristal, alas en flecha con un cañón en cada
+punta, dos propulsores y neón del color del bando. No hay assets que subir. Las naves **no colisionan físicamente** con nada
+(grupo de colisión propio): los choques los decide el servidor.
+
+### Limitaciones conocidas
+
+- **No he podido probarlo dentro de Roblox Studio** (este entorno no tiene Studio). La lógica pura (estadísticas, reglas,
+  física, generador, datos de efectos y cableado de red) está cubierta por pruebas; la parte que usa el motor de Roblox (física
+  de la nave, propiedad de red, cámara, interfaz, aspecto de los efectos) se ha revisado con el analizador de tipos de
+  `luau-lsp` pero **hay que ajustarla probándola**: sensibilidad, distancias de cámara, tamaños de efectos y la sensación del vuelo.
+- La nave de un piloto la simula su cliente: es la forma estándar de que el control sea inmediato, pero implica que el servidor
+  no puede impedir cada movimiento, solo detectar y deshacer los imposibles.
+- Los sonidos están vacíos (`Recursos.Sonidos`); pega un ID y suenan sin tocar código.
+
 ## Pruebas
 
 Las pruebas ejecutan los módulos reales de `src/` fuera de Studio con [Lune](https://lune-org.github.io/docs), sobre una
@@ -325,7 +440,12 @@ bloqueo perdido, fallos y respuestas perdidas del DataStore, reconexiones rápid
 de punta a punta con los scripts de arranque reales. Para el combate comprueban el árbitro (cooldown, energía, alcance,
 estado, combo, fuego amistoso), la geometría de los golpes, la conversión de las poses a los ejes de los `Motor6D` de R6, el
 servicio que fuerza el personaje R6 y que los datos visuales sean coherentes (colores, texturas y
-animaciones que existen, límites de partículas para móvil, cinemáticas que cubren el impacto).
+animaciones que existen, límites de partículas para móvil, cinemáticas que cubren el impacto). Para las naves comprueban
+las estadísticas por mejora (incluidos datos corruptos), el escudo y el daño, la cadencia y el cono de disparo, el turbo, la
+vigilancia del movimiento, la física del vuelo, el generador de asteroides (determinismo, sin solapes, exclusiones), los datos
+de los efectos y que cada remoto de naves esté declarado, bien dirigido, usado por los dos lados y validado. El servidor y el
+cliente de las naves usan la API 3D de Roblox, que la simulación no tiene, así que en las pruebas de integración se
+sustituyen por módulos vacíos (como ya se hace con `ZonaPruebas`).
 
 La simulación es una aproximación: sirve para comprobar la lógica, no sustituye a probar en Studio y en un servidor real.
 

@@ -193,6 +193,27 @@ local function planoDe(direccion: Vector3): Vector3
 	return plano.Unit
 end
 
+-- Dirección unitaria completa (con cabeceo). Si no hay una usable, mira hacia delante (-Z).
+local function direccionEspacial(direccion: Vector3): Vector3
+	if direccion.Magnitude < 0.01 then
+		return Vector3.new(0, 0, -1)
+	end
+	return direccion.Unit
+end
+
+-- Posición de un Attachment o una parte llamados `nombre` dentro de `modelo` (nil si no existe).
+function Utiles.PosicionNombrada(modelo: Instance?, nombre: string): Vector3?
+	local hallado = if modelo then modelo:FindFirstChild(nombre, true) else nil
+	if hallado == nil then
+		return nil
+	elseif hallado:IsA("Attachment") then
+		return hallado.WorldPosition
+	elseif hallado:IsA("BasePart") then
+		return hallado.Position
+	end
+	return nil
+end
+
 --[[
 	Marco de referencia (posición + orientación mirando en la dirección del golpe) de un "ancla".
 	  "Lanzador"  el cuerpo del que lanza (posición actual)
@@ -202,7 +223,12 @@ end
 	  "Suelo"     el punto de impacto, a la altura del suelo
 	  "Cielo"     muy por encima del punto de impacto
 	  "Victima"   el cuerpo del golpeado al que se aplica la fase "Golpeado"
+	  cualquier otro nombre ("CanonIzq", "MotorDer"...): un Attachment o una parte con ese nombre dentro del
+	              modelo del lanzador (así las naves colocan los efectos en sus cañones y propulsores)
 	`desplazamiento` = { x, y, z } en el sistema local del ancla (z negativa = hacia delante).
+
+	Si el contexto es `Espacial` (naves), el ancla mira en la dirección 3D completa, con cabeceo; si no, solo en
+	horizontal, como se necesita para golpes sobre el suelo.
 ]]
 function Utiles.Ancla(ctx: any, nombre: string?, desplazamiento: { number }?): CFrame
 	local posicion: Vector3
@@ -230,11 +256,13 @@ function Utiles.Ancla(ctx: any, nombre: string?, desplazamiento: { number }?): C
 	elseif clave == "Victima" then
 		local raiz = ctx.Victima and ctx.Victima:FindFirstChild("HumanoidRootPart")
 		posicion = if raiz then (raiz :: BasePart).Position else ctx.Punto
-	else -- "Objetivo"
+	elseif clave == "Objetivo" then
 		posicion = ctx.Punto
+	else
+		posicion = Utiles.PosicionNombrada(ctx.Lanzador, clave) or ctx.Punto
 	end
 
-	local mira = planoDe(ctx.Direccion)
+	local mira = if ctx.Espacial then direccionEspacial(ctx.Direccion) else planoDe(ctx.Direccion)
 	local marco = CFrame.lookAt(posicion, posicion + mira)
 	if desplazamiento then
 		marco = marco * CFrame.new(Utiles.V3(desplazamiento))

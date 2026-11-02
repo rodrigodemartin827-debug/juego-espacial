@@ -55,6 +55,7 @@ local textoVida: TextLabel = nil :: any
 local barraEnergia: Frame = nil :: any
 local textoEnergia: TextLabel = nil :: any
 local humanoidActual: Humanoid? = nil
+local pantalla: ScreenGui? = nil
 local iniciada = false
 
 -- ===== Construcción =====
@@ -267,6 +268,13 @@ function Interfaz.PonerEstado(estado: any)
 	end
 end
 
+-- Muestra u oculta toda la interfaz de combate (mientras se pilota una nave no hace falta).
+function Interfaz.Mostrar(visible: boolean)
+	if pantalla then
+		pantalla.Enabled = visible
+	end
+end
+
 -- ¿Está la habilidad en cooldown según lo último que dijo el servidor? (para no pedir en vano)
 function Interfaz.EnCooldown(id: string): boolean
 	local fin = finCooldown[id]
@@ -343,6 +351,7 @@ function Interfaz.Iniciar(alPulsar: (id: string) -> ())
 	end
 
 	gui.Parent = jugador:WaitForChild("PlayerGui")
+	pantalla = gui
 
 	-- Vida: sigue al personaje actual y a los siguientes.
 	if jugador.Character then

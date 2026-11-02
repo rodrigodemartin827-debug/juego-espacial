@@ -13,6 +13,8 @@
 	  Vida            segundos antes de encogerse y desaparecer
 	  Color, Material ("Roca"), Neon (true = brillan), Giro (velocidad de giro, rad/s)
 	  Emerge          si es true nacen medio enterrados, como arrancados del suelo
+	  Libre           si es true no hay suelo (espacio): nacen alrededor del ancla y salen disparados en todas
+	                  direcciones con velocidad `Dispersion`, sin `Impulso` ni rebote
 
 	"Crater"  Cráter temporal: disco oscuro, resplandor, grietas luminosas y rocas levantadas en el borde.
 	  Radio, Duracion (segundos visible), Desvanecer (segundos de fundido final)
@@ -89,6 +91,14 @@ function Terreno.Escombros(capa: any, ctx: any)
 		)
 		local fuera = Vector3.new(math.cos(angulo), 0, math.sin(angulo))
 		local velocidad = fuera * Utiles.Elegir(capa.Dispersion, 4) + Vector3.yAxis * Utiles.Elegir(capa.Impulso, 30)
+		if capa.Libre then
+			-- En el espacio: una dirección al azar en 3D (esfera) desde el ancla.
+			local cenit = Utiles.Azar:NextNumber(-1, 1)
+			local radioHorizontal = math.sqrt(1 - cenit * cenit)
+			local salida = Vector3.new(math.cos(angulo) * radioHorizontal, cenit, math.sin(angulo) * radioHorizontal)
+			posicion = centro + salida * distancia
+			velocidad = salida * Utiles.Elegir(capa.Dispersion, 20)
+		end
 
 		local parte = Pool.Parte("Bloque")
 		local medidas =

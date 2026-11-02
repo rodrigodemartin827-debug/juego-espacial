@@ -46,6 +46,9 @@ local DISTANCIA_MAXIMA = 280
 
 local activas: { [Model]: any } = setmetatable({}, { __mode = "k" }) :: any
 
+-- Recetas de otros sistemas que usan este mismo motor (las naves): se registran con Gestor.RegistrarRecetas.
+local recetasExtra: { [string]: any } = {}
+
 -- ===== Capas de pantalla y sonido =====
 
 -- ¿Le toca a ESTE jugador ver el efecto de pantalla de la capa?
@@ -340,6 +343,76 @@ function Gestor.Impacto(idHab: string, lanzador: Model, punto: Vector3, direccio
 		Animador.Reproducir(victima, "Impacto")
 		destello(victima, Utiles.Color("Principal", ctx.Paleta))
 	end
+end
+
+-- ===== Recetas sin habilidad (otros sistemas) =====
+
+--[[
+	Añade recetas de efectos de otro sistema (con el mismo formato que Datos/EfectosVFX). Así el motor no depende
+	de quien lo usa: cada sistema registra las suyas al arrancar.
+]]
+function Gestor.RegistrarRecetas(recetas: { [string]: any })
+	for nombre, receta in recetas do
+		recetasExtra[nombre] = receta
+	end
+end
+
+--[[
+	Reproduce una receta que no pertenece a una habilidad: disparos, explosiones y propulsores de las naves.
+
+	  receta     nombre de una receta de EfectosVFX o registrada con RegistrarRecetas
+	  fases      nombre de una fase ("Impacto") o lista de fases, que se disparan en ese orden
+	  opciones   Origen (de dónde sale), Punto (dónde ocurre; por defecto, el origen), Direccion (hacia dónde mira,
+	             en 3D), Lanzador (Model con los Attachments que usan las anclas por nombre), Raiz (la parte que
+	             sigue el ancla "Lanzador"), Viaje (segundos de vuelo de los proyectiles), Victima, EsLocal,
+	             LocalGolpeado y DistanciaMaxima (más lejos que esto, solo se ven los efectos de pantalla)
+
+	Devuelve el contexto: poner `Cancelado = true` en él corta los efectos de carga y de salida que sigan en marcha.
+]]
+function Gestor.Reproducir(receta: string, fases: string | { string }, opciones: any): any
+	local datos = EfectosVFX[receta] or recetasExtra[receta]
+	if datos == nil then
+		warn(`[VFX] Receta desconocida: '{receta}'`)
+		return nil
+	end
+
+	local origen: Vector3 = opciones.Origen or opciones.Punto or Vector3.zero
+	local punto: Vector3 = opciones.Punto or origen
+	local direccion: Vector3 = opciones.Direccion or Vector3.new(0, 0, -1)
+	local camara = workspace.CurrentCamera
+	local esLocal = opciones.EsLocal == true
+	local lejos = camara ~= nil
+		and (camara.CFrame.Position - punto).Magnitude > (opciones.DistanciaMaxima or DISTANCIA_MAXIMA)
+	local viaje: number = opciones.Viaje or 0.2
+
+	local ctx: any = {
+		Hab = { Efecto = receta, Tiempos = { Carga = 0, Viaje = viaje }, Animaciones = {} },
+		Receta = datos,
+		Paleta = Paleta[datos.Paleta],
+		Lanzador = opciones.Lanzador,
+		Raiz = opciones.Raiz,
+		Origen = origen,
+		Destino = punto,
+		Punto = punto,
+		Direccion = direccion,
+		SueloY = punto.Y, -- en el espacio no hay suelo: las capas de terreno usan la altura del propio punto
+		AlturaCielo = datos.AlturaCielo or 140,
+		Carga = 0,
+		Viaje = viaje,
+		Victimas = opciones.Victimas or {},
+		Victima = opciones.Victima,
+		EsLocal = esLocal,
+		LocalGolpeado = opciones.LocalGolpeado == true,
+		Lejos = lejos and not esLocal,
+		Cancelado = false,
+		Espacial = true, -- las anclas miran en 3D (con cabeceo) en lugar de solo en horizontal
+	}
+
+	local lista: { string } = if type(fases) == "string" then { fases } else fases
+	for _, fase in lista do
+		Gestor.ReproducirFase(ctx, fase)
+	end
+	return ctx
 end
 
 return Gestor

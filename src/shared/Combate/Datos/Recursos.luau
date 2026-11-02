@@ -62,6 +62,15 @@ Recursos.Sonidos = {
 	AgujeroNegro = "",
 	GolpeLigero = "",
 	GolpePesado = "",
+	-- Naves.
+	NaveLaser = "",
+	NaveImpacto = "",
+	NaveEscudo = "",
+	NaveChoque = "",
+	NaveExplosion = "",
+	NaveDespegue = "",
+	NaveTurbo = "",
+	AsteroideRoto = "",
 }
 
 return Recursos

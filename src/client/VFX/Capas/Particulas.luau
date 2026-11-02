@@ -10,7 +10,8 @@
 	  Vida          segundos, número o { mín, máx }
 	  Velocidad     studs/s, número o { mín, máx }
 	  Dispersion    ángulo de apertura en grados (0 = recto, 180 = en todas direcciones)
-	  Direccion     "Arriba" | "Abajo" | "Frente" | "Esfera"                                   ("Arriba")
+	  Direccion     "Arriba" | "Abajo" | "Frente" | "Atras" | "Esfera"                          ("Arriba")
+	                ("Atras" sale hacia atrás del ancla: la estela de un propulsor)
 	  Aceleracion   { x, y, z }
 	  Arrastre, Brillo, Rotacion, VelRotacion, Estirar, Orientacion ("Velocidad" para estelas)
 	  Area, Forma   tamaño { x, y, z } y forma ("Box", "Sphere", "Disc", "Cylinder") del volumen de nacimiento
@@ -47,6 +48,8 @@ local function orientar(marco: CFrame, direccion: string): CFrame
 	local posicion = marco.Position
 	if direccion == "Frente" then
 		return marco * CFrame.Angles(-math.pi / 2, 0, 0)
+	elseif direccion == "Atras" then
+		return marco * CFrame.Angles(math.pi / 2, 0, 0)
 	elseif direccion == "Abajo" then
 		return CFrame.new(posicion) * CFrame.Angles(math.pi, 0, 0)
 	end

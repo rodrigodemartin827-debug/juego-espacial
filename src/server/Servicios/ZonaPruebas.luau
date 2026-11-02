@@ -9,17 +9,23 @@
 	    Sirven para comprobar que los del mismo bando no se hacen daño, y renacen solos al "morir".
 	  - dos pedestales "Unirse a Héroes / Villanos" (ProximityPrompt) para elegir bando sin interfaz.
 	  - un cartel con los controles.
+	  - un HANGAR con una nave para despegar (consola "Despegar") y, a unos cientos de studs, un pequeño CAMPO DE
+	    ASTEROIDES generado por código para probar el vuelo, las armas y los choques.
+	  - un ambiente nocturno con resplandor (bloom) para que se vean bien los efectos luminosos.
 
 	Se desactiva quitando la llamada a ZonaPruebas.Iniciar() en init.server. Todo se crea por código, no hay
 	nada que montar a mano en Studio.
 ]]
 
+local Lighting = game:GetService("Lighting")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Shared = ReplicatedStorage.Shared
 local Bandos = require(Shared.Juego.Bandos)
 local Config = require(Shared.Combate.Config)
+local Hangar = require(script.Parent.Hangar)
+local ServicioAsteroides = require(script.Parent.ServicioAsteroides)
 local ServicioBandos = require(script.Parent.ServicioBandos)
 local ServicioCombate = require(script.Parent.ServicioCombate)
 
@@ -28,6 +34,14 @@ local ZonaPruebas = {}
 -- Centro de la plataforma y su tamaño.
 local CENTRO = Vector3.new(0, 0, 0)
 local TAMANO = Vector3.new(220, 2, 220)
+
+-- Dónde está el hangar y el campo de asteroides de pruebas (relativos al centro de la plataforma).
+local POSICION_HANGAR = Vector3.new(75, 0, 62)
+local CENTRO_CAMPO = Vector3.new(0, 130, -270)
+local RADIO_CAMPO = 140
+
+-- true = ambiente nocturno con bloom, que hace destacar láseres, explosiones y propulsores.
+local AMBIENTE_ESPACIAL = true
 
 local carpeta: Folder? = nil
 
@@ -154,6 +168,60 @@ local function crearPedestal(padre: Instance, bando: Bandos.IdBando, posicion: V
 	crearCartel(padre, Bandos.Info[bando].Nombre, posicion + Vector3.new(0, 6, 0), 160, 40)
 end
 
+-- Noche cerrada con un poco de luz ambiente, resplandor en lo que brilla y algo de contraste.
+local function ambientarEspacio()
+	Lighting.ClockTime = 0
+	Lighting.Ambient = Color3.fromRGB(38, 42, 68)
+	Lighting.OutdoorAmbient = Color3.fromRGB(46, 52, 86)
+	Lighting.ExposureCompensation = 0.25
+	Lighting.EnvironmentDiffuseScale = 0.6
+	Lighting.EnvironmentSpecularScale = 0.8
+
+	local resplandor = Instance.new("BloomEffect")
+	resplandor.Name = "ResplandorEspacial"
+	resplandor.Intensity = 0.75
+	resplandor.Size = 30
+	resplandor.Threshold = 0.85
+	resplandor.Parent = Lighting
+
+	local color = Instance.new("ColorCorrectionEffect")
+	color.Name = "ColorEspacial"
+	color.Contrast = 0.12
+	color.Saturation = 0.18
+	color.Parent = Lighting
+end
+
+-- Campo de asteroides de pruebas, con una baliza luminosa en un claro y un cartel que indica el camino.
+local function crearCampoDePruebas(zona: Folder)
+	ServicioAsteroides.CrearCampo({
+		Nombre = "CampoDePruebas",
+		Semilla = 20241102,
+		Cantidad = 70,
+		Centro = CENTRO_CAMPO,
+		Radio = RADIO_CAMPO,
+		Aplanado = 0.8,
+		TamanoMin = 6,
+		TamanoMax = 30,
+		Separacion = 14,
+		-- Un claro en el centro, donde está la baliza.
+		Exclusiones = { { Centro = CENTRO_CAMPO, Radio = 34 } },
+	})
+
+	local baliza = crearParte("Baliza", Vector3.one * 6, CENTRO_CAMPO, Color3.fromRGB(77, 240, 255), Enum.Material.Neon)
+	baliza.Shape = Enum.PartType.Ball
+	baliza.CanCollide = false
+	baliza.Parent = zona
+	local luz = Instance.new("PointLight")
+	luz.Color = baliza.Color
+	luz.Range = 60
+	luz.Brightness = 3
+	luz.Parent = baliza
+	crearCartel(zona, "CAMPO DE ASTEROIDES", CENTRO_CAMPO + Vector3.new(0, 12, 0), 360, 44)
+
+	-- Una señal a la salida del hangar, para saber hacia dónde volar.
+	crearCartel(zona, "↑ Campo de asteroides al norte (−Z)", CENTRO + Vector3.new(60, 30, -40), 440, 40)
+end
+
 -- Crea la zona de pruebas. Debe llamarse una sola vez, después de ServicioCombate.Iniciar().
 function ZonaPruebas.Iniciar()
 	assert(carpeta == nil, "ZonaPruebas.Iniciar() solo debe llamarse una vez")
@@ -204,6 +272,13 @@ function ZonaPruebas.Iniciar()
 		460,
 		44
 	)
+
+	-- Naves: el hangar y el campo de asteroides.
+	Hangar.Crear(zona, CENTRO + POSICION_HANGAR)
+	crearCampoDePruebas(zona)
+	if AMBIENTE_ESPACIAL then
+		ambientarEspacio()
+	end
 
 	zona.Parent = workspace
 

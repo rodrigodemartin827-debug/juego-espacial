@@ -104,6 +104,75 @@ local definiciones: { [string]: Definicion } = {
 		LimitePorSegundo = 2,
 		Argumentos = {},
 	},
+
+	-- ===== Naves =====
+	-- Despegar no necesita remoto: lo pide el ProximityPrompt de la plataforma del hangar, que vive en el servidor.
+
+	-- El piloto quiere aterrizar (volver al hangar). El servidor decide si puede y lo devuelve a la plataforma.
+	AterrizarNave = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 1,
+		Argumentos = {},
+	},
+
+	-- El piloto dispara. Solo manda hacia dónde apunta: el servidor decide si puede (cadencia), desde qué cañón
+	-- sale, a qué puede apuntar (cono delante de la proa), qué golpea y cuánto daño hace.
+	DispararNave = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 12,
+		Rafaga = 6,
+		Argumentos = { Validador.Vector3(1.5) },
+	},
+
+	-- El piloto enciende o apaga el turbo. El servidor lleva el depósito de energía y fija el límite de velocidad.
+	TurboNave = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 4,
+		Rafaga = 3,
+		Argumentos = { Validador.Booleano() },
+	},
+
+	-- El cliente pide el estado de su nave (al arrancar o al entrar a un servidor con la nave ya en vuelo).
+	PedirEstadoNave = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 2,
+		Argumentos = {},
+	},
+
+	-- Estado de la nave propia: vida, escudo, turbo y estadísticas. Solo se envía al piloto.
+	EstadoNave = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Una nave acaba de despegar: todos ven el arranque de los motores.
+	NaveDespegue = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Una nave ha disparado: modelo, desde dónde, hasta dónde llega, hacia dónde mira y cuánto tarda en llegar.
+	NaveDisparo = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Un disparo ha llegado a su destino: dónde y contra qué ("Escudo", "Casco", "Asteroide").
+	NaveImpacto = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Una nave ha chocado con un asteroide: dónde, normal de la superficie, si el escudo aguantó y la intensidad.
+	NaveChoque = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Una nave ha sido destruida: modelo y posición.
+	NaveDestruida = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Un asteroide ha estallado: dónde y su tamaño.
+	AsteroideDestruido = {
+		Direccion = "ServidorACliente",
+	},
 }
 
 -- Se congela la lista (dos niveles) para que ningún script la modifique por accidente.
