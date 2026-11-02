@@ -31,6 +31,7 @@ local CASOS = {
 	require("./casos/ServicioPersonaje"),
 	require("./casos/Combate"),
 	require("./casos/CombateVFX"),
+	require("./casos/AndarMonstruo"),
 	require("./casos/Naves"),
 	require("./casos/NavesVFX"),
 	require("./casos/NavesRed"),

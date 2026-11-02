@@ -336,10 +336,11 @@ return function(Marco)
 					`Recursos.Animaciones no tiene entrada para '{nombre}'`
 				)
 			end
-			-- Y al revés: ninguna entrada de Recursos sobra.
+			-- Y al revés: ninguna entrada de Recursos sobra (las del andar de monstruo están en Animacion/Catalogo).
+			local Catalogo = Entorno.nuevo().servidor.requerir("ReplicatedStorage.Shared.Animacion.Catalogo")
 			for nombre in Recursos.Animaciones do
 				Marco.distinto(
-					Animaciones.Definiciones[nombre],
+					Catalogo.Definicion(nombre),
 					nil,
 					`Recursos.Animaciones.{nombre} no corresponde a ninguna animación`
 				)

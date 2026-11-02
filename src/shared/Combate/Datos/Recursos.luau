@@ -1,6 +1,6 @@
 --!strict
 --[[
-	Recursos: TODOS los identificadores de contenido del combate en un solo sitio.
+	Recursos: TODOS los identificadores de contenido del combate (y de las demás animaciones) en un solo sitio.
 
 	Para cambiar el aspecto o el movimiento de un poder no hace falta tocar código: pega aquí el ID del
 	asset que quieras ("rbxassetid://123456") y listo.
@@ -50,6 +50,13 @@ Recursos.Animaciones = {
 	Combo4 = "", -- Remate: aquí va el ID del "puñetazo fuerte" (ver animaciones/README.md)
 	-- Reacción del que recibe un golpe.
 	Impacto = "",
+	-- Andar de los jugadores del bando Monstruos (Personajes/Datos/AnimacionesMonstruo). Si se sube una animación
+	-- propia, debe ser R6, con Looping activado (salvo Saltar) y prioridad Movement; ver animaciones/README.md.
+	Monstruo_Reposo = "",
+	Monstruo_Andar = "",
+	Monstruo_Correr = "",
+	Monstruo_Saltar = "",
+	Monstruo_Caer = "",
 }
 
 Recursos.Sonidos = {
