@@ -185,6 +185,12 @@ local function alImpactarHabilidad(id: any, lanzador: any, punto: any, direccion
 	Gestor.Impacto(id, lanzador :: Model, punto, direccion, modelos)
 end
 
+local function alInterrumpirHabilidad(lanzador: any)
+	if esModelo(lanzador) then
+		Gestor.Interrumpir(lanzador :: Model)
+	end
+end
+
 -- ===== Arranque =====
 
 --[[
@@ -205,6 +211,7 @@ function ServicioCombate.Iniciar()
 
 	ServicioRed.Conectar("HabilidadIniciada", alIniciarHabilidad)
 	ServicioRed.Conectar("HabilidadImpacto", alImpactarHabilidad)
+	ServicioRed.Conectar("HabilidadInterrumpida", alInterrumpirHabilidad)
 	ServicioRed.Conectar("EstadoCombate", Interfaz.PonerEstado)
 	ServicioRed.Enviar("PedirEstadoCombate")
 end

@@ -103,7 +103,7 @@ function Particulas.Reproducir(capa: any, ctx: any)
 			if capa.Sigue and parte.Parent then
 				parte.CFrame = orientar(Utiles.Ancla(ctx, capa.Anclaje, capa.Desplazamiento), direccion)
 			end
-			if transcurrido >= duracion then
+			if transcurrido >= duracion or ctx.Cancelado then
 				emisor.Enabled = false
 				return true
 			end

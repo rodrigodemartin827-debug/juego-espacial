@@ -141,6 +141,10 @@ end
 
 -- Cancela lo que el luchador tenía en marcha (lo hace el aturdimiento) y lo libera del bloqueo de movimiento.
 local function interrumpir(luchador: Luchador)
+	-- Si estaba lanzando algo, se avisa a los clientes para que dejen de mostrar la carga.
+	if os.clock() < luchador.Estado.OcupadoHasta then
+		ServicioRed.EnviarATodos("HabilidadInterrumpida", luchador.Modelo)
+	end
 	luchador.Generacion += 1
 	luchador.Estado.OcupadoHasta = 0
 	luchador.Inmovilizaciones = 0

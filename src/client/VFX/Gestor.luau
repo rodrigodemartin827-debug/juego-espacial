@@ -138,8 +138,9 @@ local TIPOS: { [string]: (capa: any, ctx: any) -> () } = {
 -- Los tipos que afectan a la pantalla del jugador: no se omiten aunque el efecto quede lejos.
 local DE_PANTALLA = { Tinte = true, Desenfoque = true, Zoom = true, Sacudida = true, Hitstop = true }
 
-local function ejecutarCapa(capa: any, ctx: any)
-	if ctx.Cancelado and capa.Tipo ~= "Sonido" and ctx.FaseActual == "Lanzamiento" then
+local function ejecutarCapa(capa: any, ctx: any, fase: string)
+	-- Si la habilidad fue interrumpida, las capas de carga y de salida que aún no habían empezado no se reproducen.
+	if ctx.Cancelado and (fase == "Anticipacion" or fase == "Lanzamiento") then
 		return
 	end
 	if not Calidad.Permite(capa.Minimo) then
@@ -169,13 +170,12 @@ function Gestor.ReproducirFase(ctx: any, fase: string)
 	if capas == nil then
 		return
 	end
-	ctx.FaseActual = fase
 	for _, capa in capas do
 		local retraso: number = capa.Retraso or 0
 		if retraso <= 0 then
-			ejecutarCapa(capa, ctx)
+			ejecutarCapa(capa, ctx, fase)
 		else
-			task.delay(retraso, ejecutarCapa, capa, ctx)
+			task.delay(retraso, ejecutarCapa, capa, ctx, fase)
 		end
 	end
 end
@@ -263,6 +263,23 @@ function Gestor.Iniciar(idHab: string, lanzador: Model, origen: Vector3, destino
 		end
 		Gestor.ReproducirFase(ctx, "Lanzamiento")
 	end)
+end
+
+--[[
+	El servidor ha interrumpido al lanzador (aturdido o muerto): se paran sus animaciones de la habilidad y se
+	cancelan los efectos de carga y de salida que seguían en marcha (los que siguen a su ancla, los chorros de
+	partículas, el proyectil y la cinemática de cámara) o que estaban por empezar.
+]]
+function Gestor.Interrumpir(lanzador: Model)
+	local ctx = activas[lanzador]
+	if ctx == nil or ctx.Cancelado then
+		return
+	end
+	ctx.Cancelado = true
+	local animaciones = ctx.Hab.Animaciones
+	for _, nombre in { animaciones.Carga, animaciones.Lanzamiento } do
+		Animador.Detener(lanzador, nombre)
+	end
 end
 
 -- Destello de color sobre un personaje golpeado (Highlight).

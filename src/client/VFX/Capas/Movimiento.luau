@@ -149,8 +149,8 @@ function Movimiento.Proyectil(capa: any, ctx: any)
 			luzParte.CFrame = marco
 		end
 
-		if alfa >= 1 then
-			-- Llega al destino: se apaga lo que se ve y se deja que la estela termine de desvanecerse.
+		if alfa >= 1 or ctx.Cancelado then
+			-- Llega al destino (o lo interrumpen): se apaga lo que se ve y se deja que la estela termine de desvanecerse.
 			if emisor then
 				emisor.Enabled = false
 			end

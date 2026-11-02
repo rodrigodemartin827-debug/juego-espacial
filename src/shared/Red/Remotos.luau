@@ -87,6 +87,12 @@ local definiciones: { [string]: Definicion } = {
 		Direccion = "ServidorACliente",
 	},
 
+	-- El servidor avisa a todos de que un luchador ha sido interrumpido (aturdido o muerto) mientras lanzaba una
+	-- habilidad: los clientes cancelan su animación y los efectos de carga que aún no han terminado.
+	HabilidadInterrumpida = {
+		Direccion = "ServidorACliente",
+	},
+
 	-- Estado propio de combate: energía, cooldowns. Solo se envía al jugador afectado.
 	EstadoCombate = {
 		Direccion = "ServidorACliente",

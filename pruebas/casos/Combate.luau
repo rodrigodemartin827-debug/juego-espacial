@@ -417,6 +417,15 @@ return function(Marco)
 	end)
 
 	Marco.grupo("Combate: remotos", function()
+		Marco.prueba("los avisos del servidor al cliente existen, incluido el de interrupción", function()
+			local Remotos = cargar("Red.Remotos")
+			for _, nombre in { "HabilidadIniciada", "HabilidadImpacto", "HabilidadInterrumpida", "EstadoCombate" } do
+				local def = Remotos.Definiciones[nombre]
+				Marco.distinto(def, nil, `falta el remoto {nombre}`)
+				Marco.igual(def.Direccion, "ServidorACliente")
+			end
+		end)
+
 		Marco.prueba("UsarHabilidad solo acepta ids conocidos, direcciones razonables y distancias finitas", function()
 			local Remotos = cargar("Red.Remotos")
 			local Validador = cargar("Red.Validador")

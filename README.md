@@ -207,7 +207,8 @@ puede dañar y ser dañado por cualquiera).
 Si todo es válido, cobra la energía, arranca el cooldown y avisa a todos (`HabilidadIniciada`). Pasado el tiempo de carga y
 de viaje, el servidor calcula **él mismo** a quién alcanza (forma del golpe, alcance medido otra vez desde donde está ahora el
 lanzador, bando, invulnerabilidad), aplica el daño y avisa del impacto (`HabilidadImpacto`). El cliente no dice a quién
-golpea ni cuánto daño hace. Quien recibe un golpe queda aturdido (esto interrumpe lo que estuviera lanzando) y su propio
+golpea ni cuánto daño hace. Quien recibe un golpe queda aturdido (esto interrumpe lo que estuviera lanzando: el servidor cancela su golpe y avisa
+con `HabilidadInterrumpida` para que los clientes paren su animación y sus efectos de carga) y su propio
 cliente aplica el empuje.
 
 Las reglas son funciones puras (`Combate/Reglas`, `Combate/Arbitro`) y tienen pruebas propias.
@@ -269,8 +270,7 @@ Todo está en `src/shared/Combate/Datos/`:
 rigs **R15**. Con `Recursos.Mallas` ocurre lo mismo (el mesh debe medir 1 stud) y con las texturas de `Recursos.Texturas`.
 
 Limitaciones conocidas: no he podido probarlo dentro de Roblox Studio (las pruebas automáticas cubren reglas y datos, no el
-aspecto), así que los números de los efectos (tamaños, tiempos) son un primer ajuste. Si un jugador es aturdido mientras
-carga una habilidad, el servidor cancela el golpe pero su animación y efectos de carga terminan de reproducirse.
+aspecto), así que los números de los efectos (tamaños, tiempos) son un primer ajuste.
 
 ## Pruebas
 

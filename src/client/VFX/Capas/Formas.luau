@@ -80,6 +80,15 @@ local function seguir(parte: Part, ctx: any, capa: any, duracion: number, ajuste
 	local transcurrido = 0
 	Actores.Agregar(function(dt)
 		transcurrido += dt
+		if ctx.Cancelado then
+			-- Interrumpido: la forma (o la luz) desaparece al instante.
+			parte.Transparency = 1
+			local luz = parte:FindFirstChildOfClass("PointLight")
+			if luz then
+				luz.Enabled = false
+			end
+			return true
+		end
 		if transcurrido >= duracion or parte.Parent == nil then
 			return true
 		end
