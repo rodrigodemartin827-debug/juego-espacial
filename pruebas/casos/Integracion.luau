@@ -11,10 +11,13 @@ local RUTA_SERVIDOR = "ServerScriptService.Server"
 local RUTA_CLIENTE = "StarterPlayer.StarterPlayerScripts.Client"
 local ALMACEN = "DatosJugador"
 
--- Ejecuta init.server.luau. La zona de pruebas construye un escenario con Part, Color3, etc. que la simulación
--- no tiene, así que se sustituye por un módulo vacío (el combate tiene sus propias pruebas).
+-- Ejecuta init.server.luau. La zona de pruebas, los asteroides y las naves construyen un escenario con Part,
+-- CFrame, etc. y usan la física y la iluminación, que la simulación no tiene, así que se sustituyen por módulos
+-- vacíos (la lógica de las naves tiene sus propias pruebas: Naves y NavesVFX).
 local function arrancarScriptServidor(entorno)
-	entorno.servidor.buscar(`{RUTA_SERVIDOR}.Servicios.ZonaPruebas`).Source = "return { Iniciar = function() end }"
+	for _, nombre in { "ZonaPruebas", "ServicioAsteroides", "ServicioNaves" } do
+		entorno.servidor.buscar(`{RUTA_SERVIDOR}.Servicios.{nombre}`).Source = "return { Iniciar = function() end }"
+	end
 	entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
 end
 

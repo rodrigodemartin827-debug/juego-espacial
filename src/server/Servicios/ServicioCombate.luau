@@ -31,6 +31,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = ReplicatedStorage.Shared
 local Arbitro = require(Shared.Combate.Arbitro)
 local Config = require(Shared.Combate.Config)
+local NavesConfig = require(Shared.Naves.Config)
 local Reglas = require(Shared.Combate.Reglas)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioRed = require(script.Parent.ServicioRed)
@@ -228,8 +229,8 @@ local function aplicarImpacto(
 
 	local golpeados = {}
 	for _, objetivo in luchadores do
-		if objetivo == lanzador then
-			continue
+		if objetivo == lanzador or objetivo.Modelo:GetAttribute(NavesConfig.AtributoPilotando) then
+			continue -- quien pilota una nave no es objetivo de las habilidades de a pie
 		end
 		objetivo.Estado.Vivo = estaVivo(objetivo)
 		-- Enemigo (los del mismo bando no se hacen daño), vivo y no invulnerable.
@@ -279,8 +280,8 @@ end
 
 local function usarHabilidad(jugador: Player, idPedido: string, direccionPedida: Vector3, distanciaPedida: number)
 	local luchador = luchadorDe(jugador)
-	if luchador == nil then
-		return
+	if luchador == nil or luchador.Modelo:GetAttribute(NavesConfig.AtributoPilotando) then
+		return -- sin personaje, o dentro de una nave (ver Servicios/ServicioNaves)
 	end
 	local ahora = os.clock()
 	luchador.Estado.Vivo = estaVivo(luchador)
