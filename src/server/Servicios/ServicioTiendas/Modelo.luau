@@ -209,7 +209,7 @@ local function construirPersiana(modelo: Model, origen: CFrame)
 		origen,
 		"Baliza",
 		Vector3.new(0.9, 1, 0.9),
-		Vector3.new(-(ancho / 2 - 0.4), alto + 2.2, -0.9),
+		Vector3.new(-(ancho / 2 + 0.3), alto + 2.2, -1), -- a la izquierda del letrero, sin tocarlo
 		{ Color = hex(colores.Cerrado):Lerp(Color3.new(), 0.6), Material = Enum.Material.Glass, Colision = false }
 	)
 	baliza.Shape = Enum.PartType.Cylinder
@@ -303,7 +303,7 @@ function Modelo.Construir(idTienda: string, origen: CFrame): Model
 		origen,
 		"Suelo",
 		Vector3.new(mitad * 2, 0.4, 17),
-		Vector3.new(0, -0.2, 5),
+		Vector3.new(0, -0.15, 5), -- asoma 0,05 sobre el suelo de alrededor para que no parpadeen
 		{ Color = COLOR_SUELO, Material = Enum.Material.Pavement }
 	)
 	parte(
@@ -396,12 +396,13 @@ function Modelo.Construir(idTienda: string, origen: CFrame): Model
 	)
 	rotulo(estado, DatosPersiana.Textos.Abierto, hex(DatosPersiana.Colores.Abierto), Color3.fromRGB(12, 14, 20))
 
-	-- Interior: mostrador de lado a lado (no se puede entrar), estanterías y luz.
+	-- Interior: mostrador de pared a pared (no se puede entrar), estanterías y luz.
+	local anchoInterior = mitad * 2 - 2
 	local mostrador = parte(
 		modelo,
 		origen,
 		"Mostrador",
-		Vector3.new(ancho, 3.4, 1.8),
+		Vector3.new(anchoInterior, 3.4, 1.8),
 		Vector3.new(0, 1.7, 2.2),
 		{ Color = COLOR_PARED:Lerp(COLOR_ACENTO, 0.15), Material = Enum.Material.SmoothPlastic }
 	)
@@ -409,7 +410,7 @@ function Modelo.Construir(idTienda: string, origen: CFrame): Model
 		modelo,
 		origen,
 		"Encimera",
-		Vector3.new(ancho + 0.2, 0.25, 2.1),
+		Vector3.new(anchoInterior, 0.25, 2.1),
 		Vector3.new(0, 3.5, 2.2),
 		{ Color = COLOR_MADERA, Material = Enum.Material.Wood }
 	)
