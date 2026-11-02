@@ -9,11 +9,30 @@ Juego de Roblox de exploración espacial con PvP, de **calidad alta**. Nada de o
 Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (poderes, progresión larga, PvP con recompensa).
 
 ### Bandos
-- Dos bandos: **Héroes** y **Villanos**. Se elige al empezar y es permanente, pero se puede cambiar pagando muchas monedas del juego, como máximo una vez cada 7 días.
-- Cada bando tiene su **planeta grande**, que hace de base y de tutorial.
-- Alrededor de cada planeta de bando hay una **zona segura** sin PvP de naves.
-- En la v1 no se puede aterrizar en el planeta del bando contrario: está protegido.
+- Dos bandos: **Humanos** y **Monstruos**. Se elige al empezar y es permanente, pero se puede cambiar pagando muchas monedas del juego, como máximo una vez cada 7 días.
 - Los del mismo bando no se hacen daño.
+
+**Humanos**
+- Planeta como la Tierra: luminoso, con un sol normal, ciudades, tiendas y muchos materiales muy buenos.
+- Más fácil para empezar. Su ventaja: tiendas, materiales y mejores naves y tecnología.
+- Cuando llega un monstruo al planeta humano, las tiendas bajan las persianas y no le venden nada.
+
+**Monstruos**
+- Estilo creepypasta **original**: nada de copiar personajes conocidos. Forma de andar terrorífica.
+- Planeta oscuro cuyo "sol" es un **agujero negro**, a unos 10 minutos de viaje del planeta humano.
+- Más fuerza, agilidad y vida, pero menos materiales.
+- En su planeta hay algo valioso que **solo existe allí**, para que a los humanos les compense el riesgo de ir.
+
+**Planetas de bando**
+- Cada bando tiene su **planeta grande**, que hace de base y de tutorial.
+- Son **enormes**: desde el espacio se ven como esferas gigantes, y al aterrizar se pasa a un terreno inmenso.
+- Desde tu planeta se ve el otro mundo a lo lejos, en el cielo.
+- Se puede visitar el planeta del bando contrario y pelear allí, pero cada planeta tiene **zonas seguras para los visitantes** (por ejemplo, donde aterrizan).
+- Alrededor de cada planeta de bando hay una **zona segura** sin PvP de naves.
+
+**Primera entrada al juego**
+- Cámara fija, sin poder moverse, con la pantalla de elección: a un lado los Humanos con su planeta, en medio una grieta y al otro lado los Monstruos con su planeta.
+- Se elige con un clic y después empieza el tutorial. Esta pantalla solo sale la primera vez; luego el bando solo se cambia pagando (ver arriba).
 
 ### Bucle principal
 1. Empiezas en el planeta de tu bando, que te enseña a moverte, pelear, escanear y craftear.
@@ -32,6 +51,10 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 - 8-10 poderes, 3-4 armas, escáner, crafteo básico.
 - PvP en naves y en un planeta disputado, que es uno de los 4 planetas pequeños.
 - Cambio de bando de pago (monedas del juego, una vez cada 7 días).
+- Pantalla de elección de bando con la grieta (solo la primera vez).
+- Persianas: las tiendas humanas no venden a los monstruos.
+- Andar terrorífico de los monstruos.
+- Un recurso exclusivo del planeta de los monstruos (uno solo y sencillo).
 
 Lo que no esté en esta lista no se hace hasta después del lanzamiento. Por ejemplo, el motor de salto queda para después.
 
