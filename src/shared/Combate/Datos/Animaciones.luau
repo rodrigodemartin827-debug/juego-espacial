@@ -586,10 +586,12 @@ Animaciones.Definiciones = {
 		},
 	},
 	--[[
-		Remate: puñetazo fuerte a lo anime con la derecha. Sigue las mismas fases que la animación de Blender
-		(animaciones/herramientas/punetazo_fuerte.py): guardia, anticipación (el cuerpo se enrosca y el puño se
-		carga atrás), tensión, golpe (primero cadera y torso, luego el puño), impacto exagerado mantenido en T = 0.53
-		(igual que Tiempos.Carga del Remate) y recuperación (aquí se corta en 0.9 s).
+		Remate: puñetazo fuerte a lo anime con la derecha. Sigue las mismas fases y poses clave que la animación de
+		Blender (animaciones/herramientas/punetazo_fuerte.py): guardia, anticipación (el cuerpo se agacha y se
+		enrosca a la derecha con el puño cargado atrás), tensión, golpe (primero el torso, después el puño),
+		impacto exagerado mantenido en T = 0.53 (igual que Tiempos.Carga del Remate) y recuperación (aquí se corta
+		en 0.9 s). Las piernas se escriben contando con el giro del torso: R6 las cuelga del Torso, así que giran
+		con él y hay que repartir el ángulo entre cabeceo y ladeo para que sigan plantadas hacia delante.
 	]]
 	Combo4 = {
 		Duracion = 0.9,
@@ -597,70 +599,72 @@ Animaciones.Definiciones = {
 			{
 				T = 0,
 				Poses = {
-					["Right Arm"] = { 62, 0, -6 },
-					["Left Arm"] = { 66, 0, 14 },
-					Torso = { 6, 10, 0, 0, -0.15, 0 },
-					Head = { 0, -8, 0 },
-					["Right Leg"] = { -16, 0, 6 },
-					["Left Leg"] = { 18, 0, -6 },
+					["Right Arm"] = { 58, 0, -2 },
+					["Left Arm"] = { 52, 0, -28 },
+					Torso = { 6, -18, 0, 0, -0.15, 0 },
+					Head = { 0, 18, 0 },
+					["Right Leg"] = { -15, 0, 5 },
+					["Left Leg"] = { 17, 0, -6 },
 				},
 			},
-			{ -- máxima anticipación: se agacha, el torso se enrosca a la derecha y el puño se carga atrás
+			{ -- máxima anticipación: agachado, torso enroscado a la derecha, puño atrás y mano izquierda apuntando
 				T = 0.33,
 				Easing = "Cubic",
 				Direccion = "InOut",
 				Poses = {
-					["Right Arm"] = { 20, 0, 70 },
-					["Left Arm"] = { 90, 0, -6 },
-					Torso = { 14, -36, 0, 0, -0.35, -0.2 },
-					Head = { 4, 30, 0 },
-					["Right Leg"] = { -26, 0, 12 },
-					["Left Leg"] = { 26, 0, -8 },
+					["Right Arm"] = { 30, 0, 75 },
+					["Left Arm"] = { 90, 0, -55 },
+					Torso = { 10, -55, -4, 0.2, -0.35, -0.6 },
+					Head = { -4, 45, 0 },
+					["Right Leg"] = { -15, 0, 21 },
+					["Left Leg"] = { 10, 0, -15 },
 				},
 			},
 			{ -- tensión: casi quieto
 				T = 0.4,
 				Easing = "Cubic",
 				Direccion = "InOut",
-				Poses = { Torso = { 15, -38, 0, 0, -0.38, -0.22 }, ["Right Arm"] = { 16, 0, 74 } },
+				Poses = { Torso = { 10, -58, -4, 0.2, -0.38, -0.65 }, ["Right Arm"] = { 28, 0, 78 } },
 			},
-			{ -- la cadera y el torso arrancan antes que el puño
+			{ -- el torso arranca antes que el puño, que se queda atrás
 				T = 0.47,
 				Easing = "Cubic",
 				Poses = {
-					Torso = { 10, 20, 0, 0, -0.3, 0.35 },
-					["Right Arm"] = { 60, 0, 70 },
-					["Left Arm"] = { 60, 0, 10 },
-					Head = { 0, -20, 0 },
+					Torso = { 16, 0, 0, 0, -0.35, 0.2 },
+					["Right Arm"] = { 50, 0, 75 },
+					["Left Arm"] = { 70, 0, -20 },
+					Head = { -10, 0, 0 },
+					["Right Leg"] = { -5, 0, 10 },
+					["Left Leg"] = { 5, 0, -10 },
 				},
 			},
-			{ -- impacto exagerado
+			{ -- impacto exagerado: el cuerpo se lanza, el brazo recto y el otro recogido atrás
 				T = 0.53,
 				Easing = "Cubic",
 				Poses = {
-					["Right Arm"] = { 92, 0, 48 },
-					["Left Arm"] = { 30, 0, -26 },
-					Torso = { 18, 48, 0, 0, -0.4, 0.9 },
-					Head = { 0, -50, 0 },
-					["Right Leg"] = { -34, 0, 14 },
-					["Left Leg"] = { 38, 0, -10 },
+					["Right Arm"] = { 92, 0, 55 },
+					["Left Arm"] = { -30, 0, -55 },
+					Torso = { 30, 55, 5, 0, -0.4, 0.9 },
+					Head = { -26, -52, 0 },
+					["Right Leg"] = { -26, 0, -37 },
+					["Left Leg"] = { 18, 0, 26 },
 				},
 			},
 			{ -- se mantiene (hit stop) y se pasa un poco más
 				T = 0.7,
 				Easing = "Cubic",
-				Poses = { Torso = { 20, 52, 0, 0, -0.45, 1.0 }, ["Right Arm"] = { 94, 0, 52 } },
+				Poses = { Torso = { 32, 58, 5, 0, -0.45, 1.0 }, ["Right Arm"] = { 94, 0, 58 } },
 			},
 			{ -- recuperación
 				T = 0.9,
 				Easing = "Cubic",
 				Poses = {
-					["Right Arm"] = { 62, 0, -6 },
-					["Left Arm"] = { 66, 0, 14 },
-					Torso = { 6, 10, 0, 0, -0.15, 0 },
-					Head = { 0, -8, 0 },
-					["Right Leg"] = { -16, 0, 6 },
-					["Left Leg"] = { 18, 0, -6 },
+					["Right Arm"] = { 58, 0, -2 },
+					["Left Arm"] = { 52, 0, -28 },
+					Torso = { 6, -18, 0, 0, -0.15, 0 },
+					Head = { 0, 18, 0 },
+					["Right Leg"] = { -15, 0, 5 },
+					["Left Leg"] = { 17, 0, -6 },
 				},
 			},
 		},
