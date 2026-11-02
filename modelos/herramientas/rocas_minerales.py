@@ -168,7 +168,7 @@ def detallar(obj, d, rnd, voxel_studs=0.07):
         # donde otro ruido lo permite, para que no salga un dibujo de caparazón).
         pd = p * 0.42 + semilla + Vector(noise.noise_vector(p * 0.7 + semilla)) * 0.6
         dist = noise.voronoi(pd, distance_metric="DISTANCE", exponent=2.5)[0]
-        grieta = max(0.0, 0.05 - (dist[1] - dist[0])) / 0.05
+        grieta = max(0.0, 0.04 - (dist[1] - dist[0])) / 0.04
         grieta *= max(0.0, min(1.0, noise.noise(p * 0.5 + semilla * 3) * 2.5 + 0.3))
         # Desconchones: ruido "ridged" que deja escalones y aristas vivas, como roca que se ha partido.
         lasca = noise.ridged_multi_fractal(p * 0.9 + semilla * 2, 1.0, 2.0, 3, 0.0, 2.0)
@@ -196,7 +196,7 @@ def detallar(obj, d, rnd, voxel_studs=0.07):
         polvo = max(0.0, v.normal.z) ** 2 * 0.3  # las caras de arriba, más claras (polvo/luz del cielo)
         t = min(1.0, max(0.0, 0.15 + 0.35 * h + 0.3 * mancha + 0.2 * chorro + polvo))
         col = oscuro.lerp(claro, t)
-        col = col.lerp(grieta_c, min(1.0, cav * 0.75))
+        col = col.lerp(grieta_c, min(1.0, cav * 0.4))  # grietas en el relieve, apenas pintadas
         if d.get("estratos"):
             capa = (p.z * 1.9 + 0.35 * noise.noise(p * 0.35 + semilla)) % 1.0
             banda = 0.5 + 0.5 * math.sin(math.floor(p.z * 1.9 + 0.35 * noise.noise(p * 0.35 + semilla)) * 2.7)
