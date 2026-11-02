@@ -36,9 +36,9 @@ E = c.ESTUDIO
 # Paletas de roca: (color claro, color oscuro, color de las grietas). Neutras para poder teñirlas en Studio.
 PALETA_GRIS = ("#B3AEA5", "#6E6A64", "#2E2B29")
 PALETA_ARENISCA = ("#B49A82", "#7A6656", "#3A2E27")
-PALETA_BASALTO = ("#7C7B82", "#46464E", "#1C1C21")
-PALETA_VACIO = ("#5E5668", "#2F2A38", "#141018")
-PALETA_MUSGO = ("#A2A894", "#64695A", "#2A2C24")
+PALETA_BASALTO = ("#9A99A0", "#5A5A63", "#24242A")
+PALETA_VACIO = ("#7A7086", "#433B4F", "#18131D")
+PALETA_MUSGO = ("#B2B6A4", "#757A69", "#30322A")
 
 ROCAS = [
     dict(nombre="Roca_Canto", titulo="Canto rodado", tam=(6.0, 5.0, 4.0), cortes=6, redondez=0.85, semilla=11,
@@ -51,11 +51,11 @@ ROCAS = [
 ]
 
 MINERALES = [
-    dict(nombre="Mineral_Cristal", titulo="Cristal (cian)", color="#4FD8FF", brillo=0.9, semilla=3,
-         estilo="prismas", base=(4.2, 3.6, 1.6), paleta=PALETA_BASALTO, n=7, largo=(1.8, 4.2), grosor=(0.35, 0.7)),
-    dict(nombre="Mineral_Ambar", titulo="Ambar solar (oro)", color="#FFB23A", brillo=0.8, semilla=8,
+    dict(nombre="Mineral_Cristal", titulo="Cristal (cian)", color="#4FD8FF", brillo=0.55, semilla=3,
+         estilo="prismas", base=(4.2, 3.6, 1.6), paleta=PALETA_GRIS, n=7, largo=(1.8, 4.2), grosor=(0.35, 0.7)),
+    dict(nombre="Mineral_Ambar", titulo="Ambar solar (oro)", color="#FFB23A", brillo=0.5, semilla=8,
          estilo="geoda", base=(4.0, 4.0, 2.2), paleta=PALETA_ARENISCA, n=9, largo=(1.3, 2.4), grosor=(0.38, 0.62)),
-    dict(nombre="Mineral_Vacio", titulo="Esquirla del vacio (violeta)", color="#B54DFF", brillo=1.0, semilla=19,
+    dict(nombre="Mineral_Vacio", titulo="Esquirla del vacio (violeta)", color="#B54DFF", brillo=0.6, semilla=19,
          estilo="esquirlas", base=(4.4, 3.8, 1.6), paleta=PALETA_VACIO, n=7, largo=(2.4, 4.6), grosor=(0.38, 0.62)),
 ]
 
@@ -385,7 +385,7 @@ def main():
     solo = set(filter(None, args.solo.split(",")))
 
     c.escena_vacia()
-    c.preparar_estudio()
+    c.preparar_estudio(mundo=0.7)
     filas, etiquetas = [], []
     vistas = [("Frente", 0, 14), ("3/4", -45, 26), ("Lateral", -95, 10), ("Detrás", 170, 18), ("Arriba", 20, 75)]
     muestras = 16 if args.rapido else 64

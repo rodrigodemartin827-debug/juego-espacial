@@ -62,7 +62,7 @@ COLOR_OJOS = "#FF2B2B"
 ALTO_CADERA = 2.75  # en un R6 normal es 2: las piernas son más largas
 ARTICULACIONES = {
     "RootJoint": (0.0, 0.0, ALTO_CADERA + 1.0),
-    "Neck": (0.0, -0.55, ALTO_CADERA + 1.95),  # adelantado: la cabeza cuelga por delante de la joroba
+    "Neck": (0.0, -0.75, ALTO_CADERA + 1.8),  # adelantado: la cabeza cuelga por delante de la joroba
     "Left Shoulder": (1.15, 0.0, ALTO_CADERA + 1.55),
     "Right Shoulder": (-1.15, 0.0, ALTO_CADERA + 1.55),
     "Left Hip": (0.5, 0.0, ALTO_CADERA),
@@ -86,11 +86,14 @@ def esqueleto_torso():
         ("cintura", (0, 0.12, H + 0.65), (0.46, 0.31)),
         ("pecho", (0, 0.02, H + 1.15), (0.74, 0.48)),
         ("joroba", (0, 0.22, H + 1.65), (0.82, 0.56)),
-        ("cuello", (0, -0.45, H + 2.0), (0.24, 0.22)),
+        ("cuello", (0, -0.7, H + 1.85), (0.22, 0.2)),
         ("hombro_i", (1.08, 0.1, H + 1.62), (0.32, 0.32)),
         ("hombro_d", (-1.08, 0.1, H + 1.62), (0.32, 0.32)),
+        # Huesos que asoman por encima de los hombros (omóplatos y clavículas marcados).
+        ("omo_i", (0.8, 0.45, H + 2.0), (0.06, 0.06)),
+        ("omo_d", (-0.8, 0.45, H + 2.0), (0.06, 0.06)),
     ]
-    a = [("pelvis", "vientre"), ("vientre", "cintura"), ("cintura", "pecho"), ("pecho", "joroba"), ("joroba", "cuello"),
+    a = [("hombro_i", "omo_i"), ("hombro_d", "omo_d"), ("pelvis", "vientre"), ("vientre", "cintura"), ("cintura", "pecho"), ("pecho", "joroba"), ("joroba", "cuello"),
          ("joroba", "hombro_i"), ("joroba", "hombro_d")]
     # Vértebras: pinchos que salen de la espalda (+Y) a lo largo de la columna.
     for i in range(6):
@@ -104,6 +107,79 @@ def esqueleto_torso():
     return n, a
 
 
+# Torso y cabeza con METABOLAS: elipsoides y cápsulas que se funden entre sí. El Skin da secciones cuadradas y
+# pliegues en las ramas; las metabolas dan volúmenes orgánicos (costillar, vientre hundido, joroba, cráneo).
+# Cada elemento: (tipo, centro, semiejes (x, y, z) o (radio, semilargo), giro en grados (x, y, z), rigidez).
+
+
+def metabolas_torso():
+    el = [
+        ("ELLIPSOID", (0, 0.05, H + 1.2), (0.82, 0.52, 0.62), (0, 0, 0), 2.0),  # costillar
+        ("ELLIPSOID", (0, 0.0, H + 0.08), (0.6, 0.38, 0.32), (0, 0, 0), 2.0),  # pelvis
+        ("ELLIPSOID", (0, 0.12, H + 0.55), (0.4, 0.27, 0.42), (0, 0, 0), 1.6),  # vientre chupado
+        ("ELLIPSOID", (0, 0.32, H + 1.62), (0.7, 0.42, 0.42), (-25, 0, 0), 2.0),  # joroba
+        ("BALL", (1.06, 0.12, H + 1.62), (0.3,), (0, 0, 0), 2.0),  # hombros
+        ("BALL", (-1.06, 0.12, H + 1.62), (0.3,), (0, 0, 0), 2.0),
+        ("CAPSULE", (0.55, -0.25, H + 1.82), (0.09, 0.45), (0, -14, 18), 2.0),  # clavículas
+        ("CAPSULE", (-0.55, -0.25, H + 1.82), (0.09, 0.45), (0, 14, -18), 2.0),
+        ("CAPSULE", (0, -0.45, H + 1.82), (0.2, 0.3), (0, 90, 60), 2.0),  # cuello hacia delante
+        ("ELLIPSOID", (0.5, 0.5, H + 1.55), (0.3, 0.1, 0.36), (0, 0, -20), 2.0),  # omóplatos
+        ("ELLIPSOID", (-0.5, 0.5, H + 1.55), (0.3, 0.1, 0.36), (0, 0, 20), 2.0),
+    ]
+    for i in range(8):  # vértebras: bultos a lo largo de la columna, que sigue la joroba
+        t = i / 7
+        z = H + 0.35 + t * 1.5
+        y = 0.38 + 0.42 * math.sin(t * math.pi * 0.85)
+        el.append(("BALL", (0, y, z), (0.1 - 0.02 * abs(t - 0.6),), (0, 0, 0), 2.5))
+    return el
+
+
+def metabolas_cabeza():
+    nz = ARTICULACIONES["Neck"][2]
+    return [
+        ("CAPSULE", (0, -0.62, nz + 0.05), (0.19, 0.25), (0, 90, 60), 2.0),  # cuello
+        ("ELLIPSOID", (0, -0.62, nz + 1.35), (0.36, 0.4, 0.62), (-12, 0, 0), 2.0),  # cráneo alargado
+        ("ELLIPSOID", (0, -0.8, nz + 0.75), (0.3, 0.27, 0.48), (8, 0, 0), 2.0),  # cara
+        ("ELLIPSOID", (0, -0.86, nz + 0.28), (0.18, 0.2, 0.2), (0, 0, 0), 2.0),  # barbilla
+        ("BALL", (0.27, -0.9, nz + 0.78), (0.11,), (0, 0, 0), 2.0),  # pómulos
+        ("BALL", (-0.27, -0.9, nz + 0.74), (0.11,), (0, 0, 0), 2.0),
+        ("CAPSULE", (0, -0.95, nz + 1.18), (0.07, 0.24), (0, 0, 0), 2.0),  # arco de las cejas
+    ]
+
+
+# Una metabola sola, con umbral 0,6 y rigidez 2, mide 0,575 veces su radio: se compensa para que los tamaños
+# escritos arriba sean los reales (un poco menos, porque al fundirse las piezas ganan volumen).
+K_METABOLA = 1.6
+
+
+def malla_metabolas(nombre, elementos, resolucion=0.035):
+    mb = bpy.data.metaballs.new(nombre)
+    mb.resolution = resolucion * E
+    mb.threshold = 0.6
+    from mathutils import Euler
+    for tipo, co, tam, giro, rigidez in elementos:
+        e = mb.elements.new(type=tipo)
+        e.co = Vector(co) * E
+        e.stiffness = rigidez
+        e.rotation = Euler([math.radians(g) for g in giro]).to_quaternion()
+        if tipo == "BALL":
+            e.radius = tam[0] * E * K_METABOLA
+        elif tipo == "CAPSULE":
+            e.radius = tam[0] * E * K_METABOLA
+            e.size_x = tam[1] * E
+        else:
+            e.radius = E * K_METABOLA
+            e.size_x, e.size_y, e.size_z = tam
+    obj_mb = bpy.data.objects.new(nombre + "_mb", mb)
+    bpy.context.scene.collection.objects.link(obj_mb)
+    dep = bpy.context.evaluated_depsgraph_get()
+    malla = bpy.data.meshes.new_from_object(obj_mb.evaluated_get(dep))
+    bpy.data.objects.remove(obj_mb)
+    obj = bpy.data.objects.new(nombre, malla)
+    bpy.context.scene.collection.objects.link(obj)
+    return obj
+
+
 def esqueleto_brazo(derecho=True):
     s = -1 if derecho else 1
     largo = 1.0 if derecho else 0.9  # el derecho es más largo
@@ -114,13 +190,13 @@ def esqueleto_brazo(derecho=True):
         return (s * x, y - 0.22 * caida / 3.3, hz - caida)
     n = [
         ("hombro", p(1.2, 0.05, hz + 0.08), (0.30, 0.30)),
-        ("biceps", p(1.3, 0.04, hz - 0.45), (0.21, 0.21)),
-        ("brazo", p(1.36, 0.08, hz - 1.05), (0.14, 0.14)),
+        ("biceps", p(1.3, 0.04, hz - 0.45), (0.15, 0.15)),
+        ("brazo", p(1.36, 0.08, hz - 1.05), (0.10, 0.10)),
         ("codo", p(1.42, 0.24, hz - 1.6), (0.24, 0.22)),
         ("punta_codo", p(1.44, 0.42, hz - 1.62), (0.07, 0.07)),
-        ("antebrazo", p(1.47, 0.02, hz - 2.15), (0.16, 0.15)),
-        ("antebrazo2", p(1.5, -0.06, hz - 2.7), (0.10, 0.10)),
-        ("muneca", p(1.52, -0.1, hz - 2.98), (0.13, 0.12)),
+        ("antebrazo", p(1.47, 0.02, hz - 2.15), (0.12, 0.11)),
+        ("antebrazo2", p(1.5, -0.06, hz - 2.7), (0.075, 0.075)),
+        ("muneca", p(1.52, -0.1, hz - 2.98), (0.11, 0.10)),
         ("palma", p(1.55, -0.16, hz - 3.25), (0.18, 0.10)),
     ]
     a = [("hombro", "biceps"), ("biceps", "brazo"), ("brazo", "codo"), ("codo", "punta_codo"),
@@ -154,10 +230,10 @@ def esqueleto_pierna(derecha=True):
     s = -1 if derecha else 1
     n = [
         ("cadera", (s * 0.5, 0.0, H + 0.15), (0.36, 0.36)),
-        ("muslo", (s * 0.5, -0.08, H - 0.6), (0.24, 0.24)),
-        ("rodilla", (s * 0.52, -0.28, H - 1.2), (0.22, 0.21)),
-        ("espinilla", (s * 0.52, -0.05, H - 1.85), (0.14, 0.14)),
-        ("tobillo", (s * 0.52, 0.22, H - 2.45), (0.12, 0.12)),
+        ("muslo", (s * 0.5, -0.08, H - 0.6), (0.17, 0.17)),
+        ("rodilla", (s * 0.52, -0.3, H - 1.2), (0.2, 0.19)),
+        ("espinilla", (s * 0.52, -0.05, H - 1.85), (0.10, 0.10)),
+        ("tobillo", (s * 0.52, 0.22, H - 2.45), (0.11, 0.11)),
         ("talon", (s * 0.52, 0.24, 0.12), (0.12, 0.10)),
         ("planta", (s * 0.52, -0.15, 0.12), (0.17, 0.09)),
     ]
@@ -183,11 +259,14 @@ def esqueleto_cabeza():
     n = [
         ("nuca", (0, -0.45, nz - 0.2), (0.24, 0.22)),
         ("menton", (0, -0.78, nz + 0.3), (0.30, 0.28)),
-        ("cara", (0, -0.72, nz + 0.8), (0.44, 0.40)),
-        ("craneo", (0, -0.52, nz + 1.3), (0.48, 0.46)),
-        ("cima", (0, -0.22, nz + 1.8), (0.28, 0.28)),
+        ("pomulo_i", (0.3, -0.85, nz + 0.75), (0.1, 0.1)),
+        ("pomulo_d", (-0.3, -0.85, nz + 0.72), (0.1, 0.1)),
+        ("cara", (0, -0.72, nz + 0.8), (0.36, 0.34)),
+        ("craneo", (0, -0.52, nz + 1.3), (0.40, 0.40)),
+        ("cima", (0, -0.2, nz + 1.95), (0.22, 0.22)),
     ]
-    a = [("nuca", "menton"), ("menton", "cara"), ("cara", "craneo"), ("craneo", "cima")]
+    a = [("nuca", "menton"), ("menton", "cara"), ("cara", "craneo"), ("craneo", "cima"), ("cara", "pomulo_i"),
+         ("cara", "pomulo_d")]
     return n, a
 
 
@@ -282,7 +361,7 @@ def tallar_cara(obj):
             # Surco de la boca: estrecho en X, desde la barbilla hasta la frente; más ancho en el centro.
             t = (p.z - (nz + 0.18)) / 1.15
             if 0 < t < 1:
-                ancho = 0.05 + 0.13 * math.sin(t * math.pi) ** 0.8
+                ancho = ancho_boca(t)
                 dx = abs(p.x) / ancho
                 if dx < 1.6:
                     prof = (1 - min(1, dx) ** 2) * (0.30 * math.sin(t * math.pi) ** 0.5)
@@ -309,14 +388,19 @@ def superficie_y(x, z):
     return punto.y / E if ok else -0.9
 
 
+def ancho_boca(t):
+    """Medio ancho (studs) de la boca vertical a la altura relativa t (0 = barbilla, 1 = frente)."""
+    return 0.035 + 0.085 * math.sin(t * math.pi) ** 0.8
+
+
 def posiciones_ojos():
     """(centro en la superficie, radio) de los tres ojos, en studs: dos a los lados de la boca, desiguales, y uno
     en la frente."""
     nz = ARTICULACIONES["Neck"][2]
     ojos = [
-        ((0.30, nz + 1.0), 0.085),  # izquierdo del monstruo, más alto
-        ((-0.27, nz + 0.82), 0.11),  # derecho, más bajo y más grande
-        ((0.14, nz + 1.42), 0.05),  # tercer ojo, pequeño y torcido
+        ((0.2, nz + 1.02), 0.075),  # izquierdo del monstruo, más alto
+        ((-0.19, nz + 0.84), 0.095),  # derecho, más bajo y más grande
+        ((0.1, nz + 1.42), 0.045),  # tercer ojo, pequeño y torcido
     ]
     return [((x, superficie_y(x, z), z), r) for (x, z), r in ojos]
 
@@ -348,7 +432,7 @@ def pintar(obj, region, rnd):
         if region == "head":
             t = (p.z - (nz + 0.18)) / 1.15
             if v.normal.y < 0 and 0 < t < 1:
-                ancho = 0.05 + 0.13 * math.sin(t * math.pi) ** 0.8
+                ancho = ancho_boca(t)
                 dx = abs(p.x) / ancho
                 if dx < 1.0:
                     k = col["boca"]
@@ -385,7 +469,7 @@ def dientes(rnd):
         for i in range(n):
             t = 0.12 + 0.76 * i / (n - 1)
             z = nz + 0.18 + t * 1.15
-            ancho = 0.05 + 0.13 * math.sin(t * math.pi) ** 0.8
+            ancho = ancho_boca(t)
             ys = superficie_y(lado * ancho * 1.05, z)
             raiz = Vector((lado * ancho * 1.05, ys + 0.06, z))
             punta = Vector((-lado * ancho * 0.55, ys + 0.02, z + rnd.uniform(-0.04, 0.04)))
@@ -440,8 +524,8 @@ def construir(rapido, carpeta):
     altas = {}
     voxel = 0.05 if rapido else 0.028
     definicion = {
-        "Torso": (esqueleto_torso(), "torso"),
-        "Head": (esqueleto_cabeza(), "head"),
+        "Torso": (metabolas_torso(), "torso"),
+        "Head": (metabolas_cabeza(), "head"),
         "Right Arm": (esqueleto_brazo(True), "arm"),
         "Left Arm": (esqueleto_brazo(False), "arm"),
         "Right Leg": (esqueleto_pierna(True), "leg"),
@@ -449,9 +533,12 @@ def construir(rapido, carpeta):
     }
     for nombre, (esq, region) in definicion.items():
         # Las extremidades, más consumidas que el tronco.
-        alta = malla_skin(f"{nombre}_alta", esq, engorde=ENGORDE if region in ("torso", "head") else 1.08)
+        if region in ("torso", "head"):
+            alta = malla_metabolas(f"{nombre}_alta", esq)
+        else:
+            alta = malla_skin(f"{nombre}_alta", esq, engorde=1.08)
         _remallar(alta, voxel)
-        suavizar(alta, 0.5, 3)
+        suavizar(alta, 0.4, 2)
         if region == "head":
             ref = alta.copy()
             ref.data = alta.data.copy()
