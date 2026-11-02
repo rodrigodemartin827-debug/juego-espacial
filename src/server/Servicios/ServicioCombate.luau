@@ -32,6 +32,7 @@ local Shared = ReplicatedStorage.Shared
 local Arbitro = require(Shared.Combate.Arbitro)
 local Config = require(Shared.Combate.Config)
 local NavesConfig = require(Shared.Naves.Config)
+local Poderes = require(Shared.Combate.Datos.Poderes)
 local Reglas = require(Shared.Combate.Reglas)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioRed = require(script.Parent.ServicioRed)
