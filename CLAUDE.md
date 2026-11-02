@@ -32,7 +32,7 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 
 **Primera entrada al juego**
 - Cámara fija, sin poder moverse, con la pantalla de elección: a un lado los Humanos con su planeta, en medio una grieta y al otro lado los Monstruos con su planeta.
-- Se elige con un clic, una sola vez, y después empieza el tutorial.
+- Se elige con un clic y después empieza el tutorial. Esta pantalla solo sale la primera vez; luego el bando solo se cambia pagando (ver arriba).
 
 ### Bucle principal
 1. Empiezas en el planeta de tu bando, que te enseña a moverte, pelear, escanear y craftear.
@@ -51,6 +51,10 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 - 8-10 poderes, 3-4 armas, escáner, crafteo básico.
 - PvP en naves y en un planeta disputado, que es uno de los 4 planetas pequeños.
 - Cambio de bando de pago (monedas del juego, una vez cada 7 días).
+- Pantalla de elección de bando con la grieta (solo la primera vez).
+- Persianas: las tiendas humanas no venden a los monstruos.
+- Andar terrorífico de los monstruos.
+- Un recurso exclusivo del planeta de los monstruos (uno solo y sencillo).
 
 Lo que no esté en esta lista no se hace hasta después del lanzamiento. Por ejemplo, el motor de salto queda para después.
 
