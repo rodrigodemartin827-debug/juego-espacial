@@ -21,7 +21,8 @@
 	Además:
 	  - Genera el terreno de cada superficie (ServicioPlanetas/Terreno) y construye sus puertos (Puertos).
 	  - Si Datos.AparecerEnPlanetaDelBando está activo, cada jugador con bando aparece en el puerto de su planeta.
-	  - LlevarAPie lleva a un jugador a pie al puerto de un planeta (lo usan las plataformas de la zona de pruebas).
+	  - LlevarAPie lleva a un jugador a pie al puerto de un planeta (lo usan las plataformas de la zona de pruebas), y
+	    cada puerto tiene otra plataforma para volver a pie a la estación de pruebas.
 ]]
 
 local Players = game:GetService("Players")
@@ -196,6 +197,21 @@ function ServicioPlanetas.LlevarAPie(jugador: Player, planeta: string): boolean
 	return true
 end
 
+-- Lleva a un jugador a pie a la estación de pruebas del centro, con transición.
+function ServicioPlanetas.LlevarAEstacion(jugador: Player): boolean
+	local personaje = jugador.Character
+	if personaje == nil or enTransicion[jugador] or ServicioNaves.NaveDe(jugador) ~= nil then
+		return false
+	end
+	local destino = CFrame.new(aVector(Datos.Estacion.Aparicion))
+	task.spawn(transicion, jugador, "", "Viaje", destino.Position, function()
+		if jugador.Character == personaje and personaje.Parent ~= nil then
+			personaje:PivotTo(destino)
+		end
+	end)
+	return true
+end
+
 --[[
 	Construye los puertos, empieza a generar los terrenos y conecta las transiciones con las naves. Debe
 	llamarse una sola vez, después de ServicioNaves.Iniciar().
@@ -209,7 +225,9 @@ function ServicioPlanetas.Iniciar()
 	carpeta.Parent = workspace
 
 	for _, id in Datos.OrdenPlanetas do
-		Puertos.Crear(carpeta, id)
+		Puertos.Crear(carpeta, id, function(jugador)
+			ServicioPlanetas.LlevarAEstacion(jugador)
+		end)
 		-- Los dos terrenos se generan a la vez, cada uno empezando por su puerto.
 		task.spawn(Terreno.Generar, id, function()
 			puertoListo[id] = true

@@ -62,7 +62,8 @@ local function alTransicion(datos: any)
 		return
 	end
 	local planeta = Datos.Planetas[datos.Planeta]
-	local nombre = if planeta then planeta.Nombre else ""
+	-- Sin planeta: el viaje es a la estación de pruebas del centro.
+	local nombre = if planeta then planeta.Nombre else Datos.Estacion.Nombre
 	if datos.Fase == "Salida" then
 		if datos.Tipo == "Aterrizaje" then
 			EfectosEntorno.Entrada(raizNave)

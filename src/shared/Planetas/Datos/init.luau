@@ -445,4 +445,11 @@ Datos.AliasBandos = {
 -- Los jugadores con bando aparecen en el puerto de su planeta (false = en la zona de pruebas, como antes).
 Datos.AparecerEnPlanetaDelBando = true
 
+-- La estación de pruebas del centro (ZonaPruebas): cada puerto tiene una plataforma para volver a ella a pie.
+Datos.Estacion = {
+	Nombre = "Estación de pruebas",
+	Aparicion = { X = 0, Y = 4, Z = 60 },
+	PlataformaEnPuerto = { X = 0, Y = 0.5, Z = -120 }, -- relativa al puerto
+}
+
 return Datos

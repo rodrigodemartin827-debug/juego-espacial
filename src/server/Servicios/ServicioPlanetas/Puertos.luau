@@ -113,9 +113,10 @@ end
 
 --[[
 	Construye el puerto y los muros del planeta `id` en `padre`. Devuelve las plataformas de despegue
-	(para ServicioNaves.Despegar).
+	(para ServicioNaves.Despegar). `alVolver` (opcional) se llama cuando alguien usa la plataforma de vuelta a la
+	estación de pruebas.
 ]]
-function Puertos.Crear(padre: Instance, id: string): { any }
+function Puertos.Crear(padre: Instance, id: string, alVolver: ((jugador: Player) -> ())?): { any }
 	local planeta = Datos.Planetas[id]
 	local puerto = planeta.Puerto
 	local p = Espacio.PosicionPuerto(id)
@@ -143,12 +144,29 @@ function Puertos.Crear(padre: Instance, id: string): { any }
 	)
 	cartel(
 		carpeta,
-		"Despega desde un hangar · sube por encima de las nubes para volver al espacio",
+		"Despega desde un hangar y sube muy alto para volver al espacio",
 		centro + Vector3.new(0, 27, -40),
 		560,
 		34,
 		200
 	)
+
+	-- Plataforma de vuelta a la estación de pruebas (atajo para probar: el viaje en nave dura ~10 minutos).
+	if alVolver then
+		local relativa = Datos.Estacion.PlataformaEnPuerto
+		local posicion = centro + Vector3.new(relativa.X, relativa.Y, relativa.Z)
+		local base = parte(carpeta, "VueltaEstacion", Vector3.new(8, 1, 8), CFrame.new(posicion))
+		base.Material = Enum.Material.Neon
+		base.Color = neon
+		local prompt = Instance.new("ProximityPrompt")
+		prompt.ActionText = `Volver a la {Datos.Estacion.Nombre}`
+		prompt.ObjectText = "Pruebas"
+		prompt.HoldDuration = 0.4
+		prompt.MaxActivationDistance = 12
+		prompt.Parent = base
+		prompt.Triggered:Connect(alVolver)
+		cartel(carpeta, `Volver a la {Datos.Estacion.Nombre}`, posicion + Vector3.new(0, 6, 0), 300, 36, 120)
+	end
 
 	muros(padre, id)
 	return plataformas

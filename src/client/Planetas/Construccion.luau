@@ -514,7 +514,7 @@ function Construccion.AgujeroNegro(padre: Instance): Cuerpo
 		table.insert(particulas, particula)
 	end
 
-	local visibles = true
+	local visibles = false
 	local function mostrarParticulas(visible: boolean)
 		local limite = math.max(4, math.floor(#particulas * Calidad.Factor("Particulas")))
 		for i, p in particulas do
@@ -554,6 +554,9 @@ function Construccion.AgujeroNegro(padre: Instance): Cuerpo
 			elemento.Tamano = Vector3.new(rh * 0.04, rh * 0.04, rh * (0.1 + 0.5 * caida))
 		end
 	end
+
+	-- Empiezan ocultas: se muestran (las que permita la calidad) en cuanto el agujero se ve de cerca.
+	mostrarParticulas(false)
 
 	return {
 		Nombre = "AgujeroNegro",
