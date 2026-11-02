@@ -25,6 +25,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Shared = ReplicatedStorage.Shared
+local Ambiente = require(Shared.Juego.Ambiente)
 local Bandos = require(Shared.Juego.Bandos)
 local Config = require(Shared.Combate.Config)
 local Hangar = require(script.Parent.Hangar)
@@ -180,25 +181,27 @@ local function crearPedestal(padre: Instance, bando: Bandos.IdBando, posicion: V
 end
 
 -- Noche cerrada con un poco de luz ambiente, resplandor en lo que brilla y algo de contraste.
+-- Los valores están en Juego/Ambiente.
 local function ambientarEspacio()
-	Lighting.ClockTime = 0
-	Lighting.Ambient = Color3.fromRGB(38, 42, 68)
-	Lighting.OutdoorAmbient = Color3.fromRGB(46, 52, 86)
-	Lighting.ExposureCompensation = 0.25
-	Lighting.EnvironmentDiffuseScale = 0.6
-	Lighting.EnvironmentSpecularScale = 0.8
+	local iluminacion = Ambiente.Iluminacion
+	Lighting.ClockTime = iluminacion.ClockTime
+	Lighting.Ambient = iluminacion.Ambient
+	Lighting.OutdoorAmbient = iluminacion.OutdoorAmbient
+	Lighting.ExposureCompensation = iluminacion.ExposureCompensation
+	Lighting.EnvironmentDiffuseScale = iluminacion.EnvironmentDiffuseScale
+	Lighting.EnvironmentSpecularScale = iluminacion.EnvironmentSpecularScale
 
 	local resplandor = Instance.new("BloomEffect")
 	resplandor.Name = "ResplandorEspacial"
-	resplandor.Intensity = 0.75
-	resplandor.Size = 30
-	resplandor.Threshold = 0.85
+	resplandor.Intensity = Ambiente.Resplandor.Intensity
+	resplandor.Size = Ambiente.Resplandor.Size
+	resplandor.Threshold = Ambiente.Resplandor.Threshold
 	resplandor.Parent = Lighting
 
 	local color = Instance.new("ColorCorrectionEffect")
 	color.Name = "ColorEspacial"
-	color.Contrast = 0.12
-	color.Saturation = 0.18
+	color.Contrast = Ambiente.Color.Contrast
+	color.Saturation = Ambiente.Color.Saturation
 	color.Parent = Lighting
 end
 

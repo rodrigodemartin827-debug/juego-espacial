@@ -10,7 +10,8 @@
 	  Color, Material (por defecto "Neon"), Easing ("Quad", "Exponential"...)
 	  Orientacion    "Suelo" (tumbada), "Frente" (de pie, mirando al golpe) ("Suelo")
 	  Giro           grados que gira mientras crece
-	  Malla          nombre en Recursos.Mallas que sustituye al disco (el mesh debe medir 1 stud)
+	  Sigue          si es true, acompaña a su ancla mientras dura (ondas de una nave en marcha)
+	  Malla         nombre en Recursos.Mallas que sustituye al disco (el mesh debe medir 1 stud)
 
 	"Esfera"  Esfera que crece o se encoge (si Diametro va de grande a pequeño es una implosión).
 	  Diametro, Transparencia, Duracion, Color, Material, Easing, Malla
@@ -90,6 +91,12 @@ local function seguir(parte: Part, ctx: any, capa: any, duracion: number, ajuste
 			return true
 		end
 		if transcurrido >= duracion or parte.Parent == nil then
+			-- Al terminar se saca del mundo en el mismo fotograma. Si siguiera dentro hasta que Pool.LiberarEn la
+			-- recoja, se quedaría quieta (y aún visible: el tween de transparencia termina después) detrás de un
+			-- ancla rápida; a 80 u/s una nave se aleja varios studs en ese rato. No se libera aquí: el pool la
+			-- podría reutilizar y el LiberarEn ya programado se la quitaría al efecto nuevo. Al reutilizarla, el
+			-- pool la vuelve a meter en su carpeta.
+			parte.Parent = nil
 			return true
 		end
 		parte.CFrame = Utiles.Ancla(ctx, capa.Anclaje, capa.Desplazamiento) * ajuste
@@ -121,7 +128,11 @@ function Formas.Onda(capa: any, ctx: any)
 
 	animarTamano(parte, malla, Vector3.new(grosor, d1, d1), duracion, capa.Easing or "Quart")
 	Utiles.Tween(parte, duracion, { Transparency = t1 }, "Quad", true)
-	if capa.Giro then
+	if capa.Sigue then
+		-- Acompaña a su ancla (p. ej. una nave en marcha): si se quedara quieta en el mundo, la cámara que
+		-- persigue a la nave la atravesaría y taparía la pantalla. Con Sigue no se aplica Giro.
+		seguir(parte, ctx, capa, duracion, ajuste)
+	elseif capa.Giro then
 		Utiles.Tween(parte, duracion, { CFrame = marco * ajuste * CFrame.Angles(0, math.rad(capa.Giro), 0) }, "Quad")
 	end
 	Pool.LiberarEn(parte, duracion + 0.05)
