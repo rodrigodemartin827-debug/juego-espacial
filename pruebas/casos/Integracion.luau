@@ -11,11 +11,22 @@ local RUTA_SERVIDOR = "ServerScriptService.Server"
 local RUTA_CLIENTE = "StarterPlayer.StarterPlayerScripts.Client"
 local ALMACEN = "DatosJugador"
 
--- Ejecuta init.server.luau. La zona de pruebas, los asteroides y las naves construyen un escenario con Part,
+-- Ejecuta init.server.luau. La zona de pruebas, los asteroides, las naves y la exploración (minería, escáner,
+-- crafteo) construyen un escenario con Part,
 -- CFrame, etc. y usan la física y la iluminación, que la simulación no tiene, así que se sustituyen por módulos
--- vacíos (la lógica de las naves tiene sus propias pruebas: Naves y NavesVFX).
+-- vacíos (la lógica de las naves y de la exploración tiene sus propias pruebas: Naves, NavesVFX y Exploracion).
 local function arrancarScriptServidor(entorno)
-	for _, nombre in { "ZonaPruebas", "ServicioAsteroides", "ServicioNaves" } do
+	for _, nombre in
+		{
+			"ZonaPruebas",
+			"ServicioAsteroides",
+			"ServicioNaves",
+			"ServicioInventario",
+			"ServicioMinado",
+			"ServicioEscaner",
+			"ServicioCrafteo",
+		}
+	do
 		entorno.servidor.buscar(`{RUTA_SERVIDOR}.Servicios.{nombre}`).Source = "return { Iniciar = function() end }"
 	end
 	entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
@@ -46,6 +57,8 @@ local function arrancarCliente(entorno, jugador)
 	-- El combate del cliente usa cámara, interfaz y efectos que la simulación no tiene: se sustituye por un módulo vacío.
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Combate.ServicioCombate`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Naves.ServicioNaves`).Source = "return { Iniciar = function() end }"
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Exploracion.ServicioExploracion`).Source =
+		"return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
 		entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioRed`)

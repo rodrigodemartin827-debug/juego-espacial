@@ -11,7 +11,11 @@
 local ServicioAsteroides = require(script.Servicios.ServicioAsteroides)
 local ServicioBandos = require(script.Servicios.ServicioBandos)
 local ServicioCombate = require(script.Servicios.ServicioCombate)
+local ServicioCrafteo = require(script.Servicios.ServicioCrafteo)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
+local ServicioEscaner = require(script.Servicios.ServicioEscaner)
+local ServicioInventario = require(script.Servicios.ServicioInventario)
+local ServicioMinado = require(script.Servicios.ServicioMinado)
 local ServicioNaves = require(script.Servicios.ServicioNaves)
 local ServicioPersonaje = require(script.Servicios.ServicioPersonaje)
 local ServicioRed = require(script.Servicios.ServicioRed)
@@ -24,6 +28,7 @@ local ZonaPruebas = require(script.Servicios.ZonaPruebas)
 	  2. Los servicios que escuchan remotos o señales (replicación, personaje R6, bandos, combate y naves).
 	     El del personaje va antes que el combate para que sustituya cualquier R15 antes de que se registre.
 	     Los asteroides van antes que las naves, porque preparan los grupos de colisión que ellas usan.
+	     Exploración (inventario, minería, escáner y crafteo) va después de las naves, que le piden golpear minerales.
 	  3. Los datos, los últimos: empiezan a cargar jugadores y a disparar DatosCargados, y para entonces
 	     todos los demás servicios ya deben estar escuchando.
 ]]
@@ -34,6 +39,10 @@ ServicioBandos.Iniciar()
 ServicioCombate.Iniciar()
 ServicioAsteroides.Iniciar()
 ServicioNaves.Iniciar()
+ServicioInventario.Iniciar()
+ServicioMinado.Iniciar()
+ServicioEscaner.Iniciar()
+ServicioCrafteo.Iniciar()
 ZonaPruebas.Iniciar()
 ServicioDatos.Iniciar()
 

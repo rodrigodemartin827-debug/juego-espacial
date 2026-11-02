@@ -71,6 +71,14 @@ Recursos.Sonidos = {
 	NaveDespegue = "",
 	NaveTurbo = "",
 	AsteroideRoto = "",
+	-- Exploración.
+	EscanerCarga = "",
+	EscanerPulso = "",
+	EscanerCompleto = "",
+	EscanerFallo = "",
+	MinadoGolpe = "",
+	MinadoRotura = "",
+	CrafteoExito = "",
 }
 
 return Recursos

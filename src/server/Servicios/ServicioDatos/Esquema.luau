@@ -48,6 +48,7 @@ local PLANTILLA: Datos = {
 		Escaner = 0,
 		Carga = 0,
 	},
+	Descubrimientos = {}, -- { idEspecie = veces escaneada } (escáner de mano)
 }
 
 --[[
@@ -165,7 +166,7 @@ function Esquema.Conciliar(entrada: any): (Datos, number)
 	local reparaciones = 0
 
 	-- 1) Se limpian primero los mapas, quitando las entradas inválidas...
-	for _, campo in { "Inventario", "MejorasNave" } do
+	for _, campo in { "Inventario", "MejorasNave", "Descubrimientos" } do
 		if type(datos[campo]) == "table" then
 			reparaciones += repararMapa(datos[campo])
 		end

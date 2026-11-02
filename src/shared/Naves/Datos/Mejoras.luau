@@ -71,14 +71,16 @@ Mejoras.Lista = {
 	},
 	Escaner = {
 		Nombre = "Escáner",
-		Descripcion = "El radar detecta asteroides y naves desde más lejos.",
+		Descripcion = "El radar de la nave ve más lejos y el escáner de mano analiza desde más lejos y más deprisa.",
 		Efectos = {
-			RadioEscaner = { Base = 350, PorNivel = 120 },
+			RadioEscaner = { Base = 350, PorNivel = 120 }, -- radar de la nave (studs)
+			AlcanceEscaner = { Base = 40, PorNivel = 9 }, -- escáner de mano: distancia máxima (studs)
+			VelocidadEscaner = { Base = 1, PorNivel = 0.15 }, -- escáner de mano: 1 = normal, 2 = el doble de rápido
 		},
 	},
 	Carga = {
 		Nombre = "Carga",
-		Descripcion = "Más espacio en la bodega para llevar recursos.",
+		Descripcion = "Más espacio en la bodega: es el límite del inventario (minerales y componentes).",
 		Efectos = {
 			Capacidad = { Base = 20, PorNivel = 10 },
 		},

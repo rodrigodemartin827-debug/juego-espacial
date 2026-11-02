@@ -21,6 +21,8 @@
 
 local Bandos = require(script.Parent.Parent.Juego.Bandos)
 local Poderes = require(script.Parent.Parent.Combate.Datos.Poderes)
+local ConfigExploracion = require(script.Parent.Parent.Exploracion.Config)
+local Recetas = require(script.Parent.Parent.Exploracion.Datos.Recetas)
 local Validador = require(script.Parent.Validador)
 
 export type Direccion = "ClienteAServidor" | "ServidorACliente"
@@ -171,6 +173,90 @@ local definiciones: { [string]: Definicion } = {
 
 	-- Un asteroide ha estallado: dónde y su tamaño.
 	AsteroideDestruido = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- ===== Exploración: escáner de mano, minería y crafteo =====
+
+	-- El jugador apunta con el escáner a algo escaneable. Solo dice QUÉ: el servidor comprueba que se pueda analizar,
+	-- que esté al alcance de SU escáner (mejora Escáner), que lo vea, y cuánto tarda.
+	EscanearObjetivo = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 3,
+		Rafaga = 2,
+		Argumentos = { Validador.Instancia() },
+	},
+
+	-- El jugador suelta el escáner antes de terminar el análisis.
+	CancelarEscaneo = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 3,
+		Rafaga = 2,
+		Argumentos = {},
+	},
+
+	-- Un jugador ha empezado a escanear: quién, qué y cuánto dura (efectos de escaneo para todos los cercanos).
+	EscaneoIniciado = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Un escaneo se ha interrumpido (soltó, se alejó, murió, el objetivo desapareció): quién.
+	EscaneoCancelado = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Un escaneo ha terminado: quién, qué y dónde (efecto final para todos).
+	EscaneoCompletado = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- La ficha del análisis, solo para quien escaneó: especie, si es nueva, recompensa y veces escaneada.
+	FichaEscaner = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- El jugador pica un mineral con su pico. El servidor comprueba distancia, cadencia y espacio en la bodega.
+	PicarMineral = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 5,
+		Rafaga = 3,
+		Argumentos = { Validador.Instancia() },
+	},
+
+	-- Un mineral ha recibido un golpe (de pico o de láser): dónde, tipo y fracción de vida que le queda.
+	MineralGolpeado = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Un mineral se ha roto: dónde y tipo.
+	MineralRoto = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- Mensaje corto para el jugador ("+4 Hierro", "Bodega llena"): texto y tono ("Bien", "Mal" o "Info").
+	AvisoExploracion = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- El jugador pide fabricar una receta (una vez o varias, si es un objeto). El servidor comprueba que esté junto a
+	-- una mesa, que tenga los materiales y las monedas, y que quepa el resultado.
+	FabricarReceta = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 3,
+		Rafaga = 2,
+		Argumentos = {
+			Validador.Enumeracion(Recetas.Orden),
+			Validador.Opcional(Validador.Entero(1, ConfigExploracion.CantidadMaximaPorPeticion)),
+		},
+	},
+
+	-- Resultado de un intento de fabricar: receta, si salió bien y el motivo en texto si no.
+	ResultadoCrafteo = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- El jugador ha usado una mesa de crafteo: el cliente abre el panel de recetas.
+	AbrirMesaCrafteo = {
 		Direccion = "ServidorACliente",
 	},
 }

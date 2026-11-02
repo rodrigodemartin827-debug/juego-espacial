@@ -21,6 +21,8 @@ local Shared = ReplicatedStorage.Shared
 local Config = require(Shared.Naves.Config)
 local Generador = require(Shared.Naves.GeneradorAsteroides)
 local GruposColision = require(script.Parent.ServicioNaves.GruposColision)
+local Minerales = require(Shared.Exploracion.Datos.Minerales)
+local ServicioMinado = require(script.Parent.ServicioMinado)
 local ServicioRed = require(script.Parent.ServicioRed)
 
 export type OpcionesCampo = {
@@ -34,6 +36,8 @@ export type OpcionesCampo = {
 	TamanoMax: number?,
 	Separacion: number?,
 	Exclusiones: { { Centro: Vector3, Radio: number } }?,
+	-- Fracción de asteroides (0 a 1) que llevan una veta de mineral pegada a la roca. Sin esto, ninguno la lleva.
+	ProbabilidadVeta: number?,
 }
 
 local ServicioAsteroides = {}
@@ -42,6 +46,10 @@ local NOMBRE_RAIZ = "CamposDeAsteroides"
 local ESPERA_REINTENTO = 3 -- segundos antes de volver a probar si había una nave encima
 
 local raiz: Folder? = nil
+
+-- Tipo de veta de cada asteroide de cada campo: { [carpeta] = { [indice] = idMineral } }. Se decide al crear el campo
+-- (con la semilla, así es siempre el mismo) y se repite cuando el asteroide renace.
+local vetasPorCampo: { [Folder]: { [number]: string } } = setmetatable({}, { __mode = "k" }) :: any
 
 -- Descripción de cada asteroide vivo, para poder recrearlo cuando estalle.
 local descripciones: { [Model]: Generador.Asteroide } = setmetatable({}, { __mode = "k" }) :: any
@@ -71,8 +79,21 @@ function ServicioAsteroides.Raiz(): Folder
 	return raiz :: Folder
 end
 
--- Construye el modelo de un asteroide a partir de su descripción.
-local function construir(descripcion: Generador.Asteroide, indice: number): Model
+-- Pega a la roca una veta de mineral que sobresale: es lo que se puede picar con los láseres de la nave o a pie.
+local function anadirVeta(modelo: Model, descripcion: Generador.Asteroide, indice: number, tipo: string)
+	local rng = Random.new(math.floor(descripcion.Tamano * 1000) + indice)
+	local direccion = Vector3.new(rng:NextNumber(-1, 1), rng:NextNumber(-0.4, 1), rng:NextNumber(-1, 1))
+	direccion = if direccion.Magnitude > 0.1 then direccion.Unit else Vector3.yAxis
+	local tamanoVeta = math.max(4, descripcion.Tamano * 0.4)
+	-- Sobre la superficie del núcleo (radio 0,45 × tamaño), un poco hundida para que no parezca flotar.
+	local centro = vector(descripcion.Posicion) + direccion * (descripcion.Tamano * 0.45 + tamanoVeta * 0.1)
+	local veta = ServicioMinado.CrearNodo(tipo, CFrame.new(centro) * angulos(descripcion.Giro), tamanoVeta)
+	veta.Name = "Veta"
+	veta.Parent = modelo
+end
+
+-- Construye el modelo de un asteroide a partir de su descripción (con una veta de mineral si se indica el tipo).
+local function construir(descripcion: Generador.Asteroide, indice: number, tipoVeta: string?): Model
 	local claro = if descripcion.Material == "Basalto" then COLOR_BASALTO_CLARO else COLOR_ROCA_CLARO
 	local oscuro = if descripcion.Material == "Basalto" then COLOR_BASALTO_OSCURO else COLOR_ROCA_OSCURO
 	local color = claro:Lerp(oscuro, descripcion.Tono)
@@ -111,6 +132,10 @@ local function construir(descripcion: Generador.Asteroide, indice: number): Mode
 		parte.Anchored = true
 		parte.CanTouch = false
 		parte.Parent = modelo
+	end
+
+	if tipoVeta ~= nil then
+		anadirVeta(modelo, descripcion, indice, tipoVeta)
 	end
 
 	modelo:SetAttribute("Vida", descripcion.Vida)
@@ -168,8 +193,22 @@ function ServicioAsteroides.CrearCampo(opciones: OpcionesCampo): Folder
 		Exclusiones = exclusiones,
 	})
 
+	-- Qué asteroides llevan veta y de qué mineral (decidido con la semilla del campo).
+	local vetas: { [number]: string } = {}
+	local probabilidad = opciones.ProbabilidadVeta or 0
+	if probabilidad > 0 then
+		local sorteo = Random.new(opciones.Semilla + 7919)
+		for indice = 1, #lista do
+			local tipo = Minerales.Elegir("Asteroide", sorteo:NextNumber())
+			if sorteo:NextNumber() < probabilidad and tipo ~= nil then
+				vetas[indice] = tipo
+			end
+		end
+	end
+	vetasPorCampo[carpeta] = vetas
+
 	for indice, descripcion in lista do
-		local modelo = construir(descripcion, indice)
+		local modelo = construir(descripcion, indice, vetas[indice])
 		modelo:SetAttribute("Indice", indice)
 		modelo.Parent = carpeta
 		descripciones[modelo] = descripcion
@@ -189,7 +228,8 @@ local function renacer(descripcion: Generador.Asteroide, indice: number, carpeta
 		task.delay(ESPERA_REINTENTO, renacer, descripcion, indice, carpeta)
 		return
 	end
-	local modelo = construir(descripcion, indice)
+	local vetas = vetasPorCampo[carpeta]
+	local modelo = construir(descripcion, indice, if vetas then vetas[indice] else nil)
 	modelo:SetAttribute("Indice", indice)
 	modelo.Parent = carpeta
 	descripciones[modelo] = descripcion
@@ -198,8 +238,12 @@ end
 -- El asteroide al que pertenece una instancia (el Model etiquetado), o nil.
 function ServicioAsteroides.AsteroideDe(instancia: Instance): Model?
 	local modelo = if instancia:IsA("Model") then instancia else instancia:FindFirstAncestorWhichIsA("Model")
-	if modelo and modelo:HasTag(Config.EtiquetaAsteroide) then
-		return modelo
+	-- Sube por los Model antepasados: las vetas de mineral son Models anidados dentro del asteroide.
+	while modelo ~= nil do
+		if modelo:HasTag(Config.EtiquetaAsteroide) then
+			return modelo
+		end
+		modelo = modelo:FindFirstAncestorWhichIsA("Model")
 	end
 	return nil
 end

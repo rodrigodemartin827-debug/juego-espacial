@@ -26,11 +26,15 @@ export type Golpe = {
 
 local Choques = {}
 
--- El modelo de asteroide al que pertenece una parte (nil si no es de ninguno).
+-- El modelo de asteroide al que pertenece una parte (nil si no es de ninguno). Sube por todos los Model antepasados:
+-- las vetas de mineral son Models anidados dentro del asteroide.
 function Choques.AsteroideDe(instancia: Instance): Model?
 	local modelo = instancia:FindFirstAncestorWhichIsA("Model")
-	if modelo and modelo:HasTag(Config.EtiquetaAsteroide) then
-		return modelo
+	while modelo ~= nil do
+		if modelo:HasTag(Config.EtiquetaAsteroide) then
+			return modelo
+		end
+		modelo = modelo:FindFirstAncestorWhichIsA("Model")
 	end
 	return nil
 end

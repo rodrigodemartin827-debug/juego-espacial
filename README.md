@@ -13,11 +13,10 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
 - el **sistema de combate** (servidor autoritativo, poderes Rayo y Gravedad, combo, VFX por fases, interfaz y una zona de
   pruebas; ver [Combate](#combate)),
 - el **sistema de naves** (vuelo en el espacio para PC, móvil y mando, vida y escudo, armas validadas en el servidor,
-  campos de asteroides generados por código y mejoras leídas de los datos del jugador; ver [Naves](#naves)), y
+  campos de asteroides generados por código y mejoras leídas de los datos del jugador; ver [Naves](#naves)),
+- la **exploración**: escáner de mano con ficha en pantalla, minerales que se pican a pie y desde la nave, inventario con
+  límite según la mejora Carga y crafteo validado en el servidor; ver [Exploración](#exploración), y
 - pruebas automáticas que se ejecutan fuera de Studio.
-
-El escáner de recursos y el crafteo todavía no existen: se añadirán como servicios nuevos encima de esta base. (Las mejoras
-de nave `Escaner` y `Carga` ya se leen y se usan: el radar del panel y el tamaño de la bodega.)
 
 ## Puesta en marcha
 
@@ -92,6 +91,7 @@ src/
 │   ├── Juego/Bandos         Héroes, Villanos y "Ninguno"
 │   ├── Combate/             Datos y reglas del combate (ver más abajo)
 │   ├── Naves/               Datos y reglas puras de las naves (ver Naves)
+│   ├── Exploracion/         Escáner, minerales, inventario y crafteo: datos y reglas puras (ver Exploración)
 │   ├── Red/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
@@ -111,9 +111,13 @@ src/
 │       ├── ServicioBandos       Ejemplo: elegir bando
 │       ├── ServicioCombate      Combate: cooldown, energía, alcance, daño (autoritativo)
 │       ├── ServicioNaves/       Naves: despegue, vida y escudo, armas, choques, vigilancia
-│       ├── ServicioAsteroides   Campos de asteroides generados por código
+│       ├── ServicioAsteroides   Campos de asteroides generados por código (con vetas de mineral)
+│       ├── ServicioInventario   Inventario del jugador con el límite de su bodega (mejora Carga)
+│       ├── ServicioMinado       Minerales: pico a pie y láseres de la nave
+│       ├── ServicioEscaner      Escáner de mano: alcance, velocidad, ficha y recompensa
+│       ├── ServicioCrafteo      Mesa de crafteo: comprobación y cobro atómicos
 │       ├── Hangar               Hangar con plataforma de despegue
-│       └── ZonaPruebas          Plataforma con muñecos, hangar y campo de asteroides
+│       └── ZonaPruebas          Plataforma con muñecos, hangar, asteroides, minerales, criatura y mesa de crafteo
 └── client/                  → StarterPlayer.StarterPlayerScripts.Client (un LocalScript)
     ├── init.client.luau     Arranque del cliente
     ├── Servicios/
@@ -121,6 +125,7 @@ src/
     │   └── ServicioDatos    Copia local (solo lectura) de los datos
     ├── Combate/             Entrada, interfaz (vida, energía, cooldowns), números de daño
     ├── Naves/               Vuelo, cámara, panel de mandos, controles y efectos de las naves
+    ├── Exploracion/         Escáner (Q), pico (R), ficha, bodega (I), mesa de crafteo y efectos de escaneo
     └── VFX/                 Motor de efectos visuales (lo usan el combate y las naves)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
@@ -358,8 +363,8 @@ máximo...). Qué hace cada una, nivel a nivel, está en `Naves/Datos/Mejoras` (
 | Escudo | capacidad, velocidad de recarga y espera antes de recargar |
 | Motor | velocidad máxima, aceleración, potencia y depósito del turbo |
 | Armas | daño, cadencia y alcance de los láseres |
-| Escáner | alcance del radar |
-| Carga | capacidad de la bodega (se muestra; aún no hay nada que cargar) |
+| Escáner | alcance del radar de la nave y alcance y velocidad del escáner de mano |
+| Carga | capacidad de la bodega: es el límite del inventario (ver [Exploración](#exploración)) |
 
 `ServicioNaves.ActualizarMejoras(jugador)` recalcula las estadísticas de una nave en vuelo cuando cambien las mejoras
 (conserva la proporción de vida y escudo).
@@ -424,6 +429,108 @@ punta, dos propulsores y neón del color del bando. No hay assets que subir. Las
   no puede impedir cada movimiento, solo detectar y deshacer los imposibles.
 - Los sonidos están vacíos (`Recursos.Sonidos`); pega un ID y suenan sin tocar código.
 
+## Exploración
+
+Escáner de mano, minerales, inventario y crafteo. Se apoyan en la red, los datos, las naves y el motor de VFX de arriba, y
+siguen la misma regla: **el cliente pide, el servidor decide**.
+
+### Controles
+
+| Tecla | Qué hace |
+| --- | --- |
+| **Q** (mantener) | escanear lo que miras (mando: L1; móvil: botón *Escanear*) |
+| **R** (mantener) | picar el mineral que tienes delante (mando: R1; móvil: botón *Picar*) |
+| **I** | abrir o cerrar la bodega (también la pastilla *Bodega* de abajo a la izquierda) |
+| **E** en una mesa | abrir el panel de crafteo |
+| clic con la nave | los láseres rompen las vetas de mineral de los asteroides |
+
+### Escáner de mano
+
+Apunta a una criatura, una planta o un mineral y mantén Q. El servidor comprueba que sea escaneable (etiqueta `Escaneable` y
+atributo `EspecieId`), que esté **al alcance de tu escáner**, que lo veas (raycast) y que sigas cerca mientras dura; y calcula
+cuánto tarda con **la velocidad de tu escáner**. La mejora **Escáner** sube `AlcanceEscaner` (40 studs + 9 por nivel) y
+`VelocidadEscaner` (×1 + 0,15 por nivel) además del radar de la nave. Al terminar sale la **ficha** (nombre, rareza, datos de la
+especie y recompensa); el primer escaneo de cada especie paga la recompensa completa y se anota en `datos.Descubrimientos`,
+los siguientes pagan una fracción (`Config.RecompensaRepeticion`).
+
+Los **efectos de escaneo** usan el motor de VFX (`Exploracion/Datos/EfectosExploracion`) con todos los tipos de capa: carga de
+energía en la mano, un rayo con núcleo y halo y paquetes de datos que viajan hasta el objetivo, anillos y chispas sobre él, un
+contorno pulsante, barridos de luz de abajo arriba, y al terminar un estallido con esferas, anillos, arcos, esquirlas luminosas,
+destello, zoom, desenfoque y sacudida (la pantalla solo cambia a quien escanea). Los minerales tienen golpe y rotura con la
+paleta de cada uno.
+
+Para que algo sea escaneable desde otro código: `ServicioEscaner.Marcar(instancia, "Criatura_MedusaVacio")`.
+
+### Minerales
+
+Un nodo es un `Model` o `Part` etiquetado `Mineral` con el atributo `MineralTipo` (`ServicioMinado.CrearNodo` construye la roca y
+lo registra). Se pica **a pie** (R: el servidor comprueba distancia, cadencia y que quepa el botín) y **desde la nave** (los
+láseres que dan en un nodo llaman a `ServicioMinado.PicarDesdeNave`; el botín va al inventario del piloto). Hay nodos en el
+suelo (planetas) y, en los campos de asteroides con `ProbabilidadVeta`, vetas pegadas a la roca. Al agotarse el nodo suelta su
+botín, se oculta y reaparece a los `Config.SegundosRenacerMineral`. Con la bodega llena no se rompe nada (se avisa y el mineral
+queda como estaba).
+
+### Inventario
+
+`datos.Inventario` guarda `{ idObjeto = cantidad }`. Cada objeto ocupa su `Volumen` (`Exploracion/Datos/Objetos`) y la bodega
+tiene el espacio de la mejora **Carga** (`Capacidad`: 20 + 10 por nivel). Solo se cambia por `ServicioInventario`
+(`Anadir`/`Quitar`), que aplica `Exploracion/Inventario` (funciones puras) y rechaza cantidades inválidas.
+
+### Crafteo
+
+La mesa de crafteo (`ServicioCrafteo.CrearMesa`) abre un panel con las recetas. El cliente solo envía `FabricarReceta(id, cantidad)`;
+el servidor comprueba que estés **junto a una mesa**, a pie, y evalúa con `Exploracion/Crafteo.Planificar` (materiales, monedas,
+nivel máximo de la mejora y espacio en la bodega); si todo es válido, **cobra y entrega en el mismo instante** (`Aplicar`, sin
+esperas entre medias, así no se puede duplicar nada pidiendo dos veces a la vez), reenvía los datos, recalcula la nave si subió
+una mejora y guarda.
+
+### Cambiar cosas sin tocar código
+
+Todo está en módulos de datos:
+
+| Quiero... | Edito |
+| --- | --- |
+| añadir o equilibrar una **receta** (objeto o mejora de la nave) | `Exploracion/Datos/Recetas` |
+| añadir un **objeto** (espacio que ocupa, nombre, color) | `Exploracion/Datos/Objetos` |
+| añadir un **mineral** (vida, botín, dónde aparece, color) | `Exploracion/Datos/Minerales` (+ un objeto, y su paleta `Mineral_<id>` en `Combate/Datos/Paleta`) |
+| añadir una **criatura o planta** escaneable y su ficha | `Exploracion/Datos/Especies` |
+| cambiar los **efectos** de escaneo y minería | `Exploracion/Datos/EfectosExploracion` |
+| cambiar alcances, cadencias, daño del pico, tiempos | `Exploracion/Config` |
+| cambiar lo que da cada nivel de Escáner o de Carga | `Naves/Datos/Mejoras` |
+
+Una receta de mejora cuesta `Base + PorNivel × nivelActual` de cada ingrediente (redondeado hacia arriba). Ejemplo:
+
+```lua
+MejoraCasco = {
+    Nombre = "Casco reforzado",
+    Categoria = "Mejora",
+    Ingredientes = { PlacaTitanio = { Base = 1, PorNivel = 1 }, LingoteHierro = { Base = 2, PorNivel = 1 } },
+    Monedas = { Base = 40, PorNivel = 20 },
+    Resultado = { Mejora = "Casco" },
+},
+```
+
+Los ids válidos de `FabricarReceta` salen de `Recetas.Orden`, así que una receta nueva no exige tocar la red. Las pruebas
+comprueban que toda receta use objetos y mejoras que existen, que cada ingrediente se pueda conseguir y que haya una receta por
+cada mejora de la nave.
+
+### Zona de pruebas
+
+`ZonaPruebas` crea, a la izquierda del punto de aparición, un corro de **rocas minables** (hierro, cobre y cristal), una
+**medusa del vacío** flotante y dos plantas luminosas **escaneables**, y una **mesa de crafteo**. En el campo de asteroides, un
+tercio de las rocas lleva una veta (incluido titanio) que se pica con los láseres de la nave. Para fabricar mejoras hace
+falta recolectar y refinar materiales; las monedas se ganan escaneando.
+
+### Limitaciones conocidas
+
+- **No se ha podido probar dentro de Roblox Studio** (el entorno de desarrollo no lo tiene). La lógica pura (inventario, escáner,
+  crafteo, catálogos y datos de efectos), el cableado de red y las reglas de seguridad del servidor están cubiertas por
+  pruebas; la parte que usa el motor (interfaz, cámara, aspecto de los efectos, sensación de la puntería) **hay que ajustarla
+  probándola**: tamaños de la interfaz, distancia de los efectos, tiempos y cantidades de partículas.
+- Los sonidos están vacíos (`Recursos.Sonidos`); pega un ID y suenan sin tocar código.
+- El pico no tiene animación propia ni herramienta en la mano; los golpes se ven por los efectos del mineral.
+- El XP se acumula pero todavía no hay sistema de niveles del jugador (el pico mejora con `datos.Nivel` cuando exista).
+
 ## Pruebas
 
 Las pruebas ejecutan los módulos reales de `src/` fuera de Studio con [Lune](https://lune-org.github.io/docs), sobre una
@@ -445,7 +552,10 @@ las estadísticas por mejora (incluidos datos corruptos), el escudo y el daño, 
 vigilancia del movimiento, la física del vuelo, el generador de asteroides (determinismo, sin solapes, exclusiones), los datos
 de los efectos y que cada remoto de naves esté declarado, bien dirigido, usado por los dos lados y validado. El servidor y el
 cliente de las naves usan la API 3D de Roblox, que la simulación no tiene, así que en las pruebas de integración se
-sustituyen por módulos vacíos (como ya se hace con `ZonaPruebas`).
+sustituyen por módulos vacíos (como ya se hace con `ZonaPruebas`). Para la exploración comprueban los catálogos y las recetas
+(todo ingrediente se puede conseguir, hay una receta por mejora), el inventario con límite, la elección del objetivo del
+escáner, la recompensa, el crafteo (materiales, monedas, nivel máximo, bodega llena, plan que ya no vale), los datos de los
+efectos (calidad máxima del escaneo) y el cableado de red y las reglas de seguridad de los servicios.
 
 La simulación es una aproximación: sirve para comprobar la lógica, no sustituye a probar en Studio y en un servidor real.
 

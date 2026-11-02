@@ -11,6 +11,9 @@
 	  - un cartel con los controles.
 	  - un HANGAR con una nave para despegar (consola "Despegar") y, a unos cientos de studs, un pequeño CAMPO DE
 	    ASTEROIDES generado por código para probar el vuelo, las armas y los choques.
+	  - una ZONA DE EXPLORACIÓN: rocas de mineral para picar (R), una criatura (medusa del vacío) y dos plantas para
+	    escanear (Q), y una mesa de crafteo (E) donde fabricar componentes y mejoras de la nave. Los asteroides del campo
+	    llevan además vetas de mineral que los láseres de la nave pueden picar.
 	  - un ambiente nocturno con resplandor (bloom) para que se vean bien los efectos luminosos.
 
 	Se desactiva quitando la llamada a ZonaPruebas.Iniciar() en init.server. Todo se crea por código, no hay
@@ -28,6 +31,9 @@ local Hangar = require(script.Parent.Hangar)
 local ServicioAsteroides = require(script.Parent.ServicioAsteroides)
 local ServicioBandos = require(script.Parent.ServicioBandos)
 local ServicioCombate = require(script.Parent.ServicioCombate)
+local ServicioCrafteo = require(script.Parent.ServicioCrafteo)
+local ServicioEscaner = require(script.Parent.ServicioEscaner)
+local ServicioMinado = require(script.Parent.ServicioMinado)
 
 local ZonaPruebas = {}
 
@@ -39,6 +45,11 @@ local TAMANO = Vector3.new(220, 2, 220)
 local POSICION_HANGAR = Vector3.new(75, 0, 62)
 local CENTRO_CAMPO = Vector3.new(0, 130, -270)
 local RADIO_CAMPO = 140
+
+-- Zona de exploración (relativa al centro de la plataforma): rocas de mineral, bichos y plantas, y la mesa de crafteo.
+local POSICION_MINAS = Vector3.new(-72, 0, 38)
+local POSICION_CRIATURA = Vector3.new(-50, 0, -44)
+local POSICION_MESA = Vector3.new(-38, 0, 68)
 
 -- true = ambiente nocturno con bloom, que hace destacar láseres, explosiones y propulsores.
 local AMBIENTE_ESPACIAL = true
@@ -205,6 +216,8 @@ local function crearCampoDePruebas(zona: Folder)
 		Separacion = 14,
 		-- Un claro en el centro, donde está la baliza.
 		Exclusiones = { { Centro = CENTRO_CAMPO, Radio = 34 } },
+		-- Un tercio de los asteroides lleva una veta de mineral que los láseres de la nave pueden picar.
+		ProbabilidadVeta = 0.35,
 	})
 
 	local baliza = crearParte("Baliza", Vector3.one * 6, CENTRO_CAMPO, Color3.fromRGB(77, 240, 255), Enum.Material.Neon)
@@ -220,6 +233,175 @@ local function crearCampoDePruebas(zona: Folder)
 
 	-- Una señal a la salida del hangar, para saber hacia dónde volar.
 	crearCartel(zona, "↑ Campo de asteroides al norte (−Z)", CENTRO + Vector3.new(60, 30, -40), 440, 40)
+end
+
+-- Roca de mineral para picar: unas cuantas en un corro, de distintos tipos y tamaños.
+local function crearZonaMinera(zona: Folder)
+	local rocas = {
+		{ Tipo = "Hierro", Desplazamiento = Vector3.new(0, 0, 0), Tamano = 7 },
+		{ Tipo = "Hierro", Desplazamiento = Vector3.new(11, 0, 6), Tamano = 5 },
+		{ Tipo = "Cobre", Desplazamiento = Vector3.new(-10, 0, 7), Tamano = 6 },
+		{ Tipo = "Cobre", Desplazamiento = Vector3.new(6, 0, -11), Tamano = 5 },
+		{ Tipo = "Cristal", Desplazamiento = Vector3.new(-9, 0, -9), Tamano = 5 },
+		{ Tipo = "Cristal", Desplazamiento = Vector3.new(17, 0, -4), Tamano = 4 },
+	}
+	for _, roca in rocas do
+		-- La roca (una esfera de 0,8 × tamaño) se apoya en el suelo.
+		local posicion = POSICION_MINAS + roca.Desplazamiento + Vector3.new(0, roca.Tamano * 0.4, 0)
+		ServicioMinado.CrearNodo(roca.Tipo, CFrame.new(posicion), roca.Tamano).Parent = zona
+	end
+	crearCartel(
+		zona,
+		"ZONA DE MINERÍA · Mantén R para picar · Q para escanear",
+		POSICION_MINAS + Vector3.new(0, 16, 0),
+		440,
+		40
+	)
+end
+
+-- Medusa del vacío: una criatura flotante y escaneable, hecha con partes sencillas.
+local function crearMedusa(zona: Folder)
+	local base = POSICION_CRIATURA + Vector3.new(0, 8, 0)
+	local medusa = Instance.new("Model")
+	medusa.Name = "MedusaDelVacio"
+
+	local cuerpo = crearParte("Cuerpo", Vector3.one * 5.5, base, Color3.fromRGB(190, 150, 255), Enum.Material.Neon)
+	cuerpo.Shape = Enum.PartType.Ball
+	cuerpo.Transparency = 0.35
+	cuerpo.CanCollide = false
+	cuerpo.Parent = medusa
+	medusa.PrimaryPart = cuerpo
+
+	local nucleo = crearParte("Nucleo", Vector3.one * 2.2, base, Color3.fromRGB(255, 255, 255), Enum.Material.Neon)
+	nucleo.Shape = Enum.PartType.Ball
+	nucleo.CanCollide = false
+	nucleo.Parent = medusa
+	local luz = Instance.new("PointLight")
+	luz.Color = Color3.fromRGB(190, 150, 255)
+	luz.Range = 22
+	luz.Brightness = 2
+	luz.Parent = nucleo
+
+	-- Tentáculos colgando.
+	for indice = 1, 6 do
+		local angulo = (indice / 6) * math.pi * 2
+		local tentaculo = crearParte(
+			`Tentaculo{indice}`,
+			Vector3.new(0.45, 5, 0.45),
+			base + Vector3.new(math.cos(angulo) * 1.9, -4.2, math.sin(angulo) * 1.9),
+			Color3.fromRGB(150, 110, 230),
+			Enum.Material.Neon
+		)
+		tentaculo.Transparency = 0.4
+		tentaculo.CanCollide = false
+		tentaculo.Parent = medusa
+	end
+
+	medusa.Parent = zona
+	ServicioEscaner.Marcar(medusa, "Criatura_MedusaVacio")
+
+	-- Flota arriba y abajo girando despacio. Se mueve unas 15 veces por segundo: de sobra para un adorno.
+	task.spawn(function()
+		local origen = medusa:GetPivot()
+		local inicio = os.clock()
+		while medusa.Parent ~= nil do
+			local t = os.clock() - inicio
+			medusa:PivotTo(origen * CFrame.new(0, math.sin(t * 1.4) * 1.2, 0) * CFrame.Angles(0, t * 0.3, 0))
+			task.wait(0.07)
+		end
+	end)
+
+	crearCartel(zona, "CRIATURA · mantén Q para escanear", base + Vector3.new(0, 8, 0), 330, 36)
+end
+
+-- Una planta luminosa: tallo, pétalos de neón y una luz. `tipo` es "Flor" u "Hongo".
+local function crearPlanta(
+	zona: Folder,
+	nombre: string,
+	especie: string,
+	posicion: Vector3,
+	color: Color3,
+	tipo: string
+)
+	local planta = Instance.new("Model")
+	planta.Name = nombre
+
+	local altura = if tipo == "Flor" then 3.2 else 1.6
+	local tallo = crearParte(
+		"Tallo",
+		Vector3.new(0.4, altura, 0.4),
+		posicion + Vector3.new(0, altura / 2, 0),
+		Color3.fromRGB(70, 130, 80),
+		Enum.Material.Grass
+	)
+	tallo.CanCollide = false
+	tallo.Parent = planta
+	planta.PrimaryPart = tallo
+
+	if tipo == "Flor" then
+		for indice = 1, 6 do
+			local angulo = (indice / 6) * math.pi * 2
+			local petalo = crearParte(
+				`Petalo{indice}`,
+				Vector3.new(0.5, 0.2, 1.3),
+				posicion + Vector3.new(math.cos(angulo) * 0.9, altura + 0.1, math.sin(angulo) * 0.9),
+				color,
+				Enum.Material.Neon
+			)
+			petalo.CFrame = CFrame.lookAt(petalo.Position, posicion + Vector3.new(0, altura + 0.1, 0))
+			petalo.CanCollide = false
+			petalo.Parent = planta
+		end
+	else
+		local sombrero = crearParte(
+			"Sombrero",
+			Vector3.new(2.6, 1.1, 2.6),
+			posicion + Vector3.new(0, altura + 0.3, 0),
+			color,
+			Enum.Material.Neon
+		)
+		sombrero.Shape = Enum.PartType.Ball
+		sombrero.CanCollide = false
+		sombrero.Parent = planta
+	end
+
+	local luz = Instance.new("PointLight")
+	luz.Color = color
+	luz.Range = 12
+	luz.Brightness = 1.5
+	luz.Parent = tallo
+
+	planta.Parent = zona
+	ServicioEscaner.Marcar(planta, especie)
+end
+
+-- La mesa de crafteo y su cartel.
+local function crearMesa(zona: Folder)
+	ServicioCrafteo.CrearMesa(zona, POSICION_MESA)
+	crearCartel(zona, "MESA DE CRAFTEO · acércate y pulsa E", POSICION_MESA + Vector3.new(0, 9, 0), 380, 36)
+end
+
+-- Todo lo de la exploración: minerales, criatura, plantas y mesa de crafteo.
+local function crearZonaExploracion(zona: Folder)
+	crearZonaMinera(zona)
+	crearMedusa(zona)
+	crearPlanta(
+		zona,
+		"FlorEstelar",
+		"Planta_FlorEstelar",
+		POSICION_CRIATURA + Vector3.new(-14, 0, 6),
+		Color3.fromRGB(255, 160, 220),
+		"Flor"
+	)
+	crearPlanta(
+		zona,
+		"HongoLuminoso",
+		"Planta_HongoLuminoso",
+		POSICION_CRIATURA + Vector3.new(-9, 0, 14),
+		Color3.fromRGB(120, 255, 200),
+		"Hongo"
+	)
+	crearMesa(zona)
 end
 
 -- Crea la zona de pruebas. Debe llamarse una sola vez, después de ServicioCombate.Iniciar().
@@ -276,6 +458,7 @@ function ZonaPruebas.Iniciar()
 	-- Naves: el hangar y el campo de asteroides.
 	Hangar.Crear(zona, CENTRO + POSICION_HANGAR)
 	crearCampoDePruebas(zona)
+	crearZonaExploracion(zona)
 	if AMBIENTE_ESPACIAL then
 		ambientarEspacio()
 	end

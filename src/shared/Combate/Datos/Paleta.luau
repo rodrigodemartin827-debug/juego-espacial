@@ -81,6 +81,52 @@ local Paleta = {
 		Secundario = "#FF8B3D",
 		Oscuro = "#4A433C",
 	},
+
+	-- ===== Exploración (Exploracion/Datos/EfectosExploracion) =====
+	-- Escáner de mano: cian holográfico mientras analiza, verde al completar, rojo si se interrumpe.
+	Escaner = {
+		Nucleo = "#E8FFFF",
+		Principal = "#35E6FF",
+		Secundario = "#2F8BFF",
+		Oscuro = "#08233A",
+	},
+	EscanerCompleto = {
+		Nucleo = "#FFFFFF",
+		Principal = "#7DFFB4",
+		Secundario = "#35E6FF",
+		Oscuro = "#0B3A2A",
+	},
+	EscanerFallo = {
+		Nucleo = "#FFF1E8",
+		Principal = "#FF6B6B",
+		Secundario = "#FFA14D",
+		Oscuro = "#3A0B14",
+	},
+	-- Un color por mineral (los nombres son "Mineral_" + el id de Exploracion/Datos/Minerales).
+	Mineral_Hierro = {
+		Nucleo = "#FFFFFF",
+		Principal = "#C9C4BE",
+		Secundario = "#8C8782",
+		Oscuro = "#2C2A2E",
+	},
+	Mineral_Cobre = {
+		Nucleo = "#FFE2C7",
+		Principal = "#E08A4C",
+		Secundario = "#C46A2E",
+		Oscuro = "#3A2012",
+	},
+	Mineral_Cristal = {
+		Nucleo = "#FFFFFF",
+		Principal = "#5CE1FF",
+		Secundario = "#B58CFF",
+		Oscuro = "#10224A",
+	},
+	Mineral_Titanio = {
+		Nucleo = "#F0F6FF",
+		Principal = "#9DB6DA",
+		Secundario = "#6E86AD",
+		Oscuro = "#1D2636",
+	},
 }
 
 return Paleta

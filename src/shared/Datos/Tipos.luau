@@ -17,6 +17,9 @@ export type Inventario = { [string]: number }
 -- Nivel de cada mejora de la nave: { [idMejora] = nivel }. Un nivel 0 significa "sin mejorar".
 export type MejorasNave = { [string]: number }
 
+-- Veces que el jugador ha escaneado cada especie: { [idEspecie] = veces }. Una especie ausente no se ha descubierto.
+export type Descubrimientos = { [string]: number }
+
 export type Datos = {
 	Bando: Bandos.IdBando, -- "Ninguno" hasta que el jugador elige
 	Nivel: number, -- empieza en 1
@@ -24,6 +27,7 @@ export type Datos = {
 	Monedas: number,
 	Inventario: Inventario,
 	MejorasNave: MejorasNave,
+	Descubrimientos: Descubrimientos,
 }
 
 return {}
