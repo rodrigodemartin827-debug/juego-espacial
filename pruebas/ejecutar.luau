@@ -26,6 +26,7 @@ local CASOS = {
 	require("./casos/Integracion"),
 	require("./casos/Combate"),
 	require("./casos/CombateVFX"),
+	require("./casos/Naves"),
 }
 
 Marco.verificarAlTerminar(Entorno.verificarSinErrores)
