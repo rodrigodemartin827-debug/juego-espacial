@@ -14,6 +14,8 @@
 
 	  - Latencia: cada petición tarda `Latencia` segundos, así que las peticiones de varios servidores se
 	    entrelazan como en la realidad.
+	  - Pausada: mientras sea true, las peticiones que empiecen se quedan esperando. Sirve para dejar una
+	    operación a medias el tiempo que haga falta sin depender de la precisión del reloj.
 	  - Fallos: `Fallos` peticiones fallan sin llegar a aplicarse (red caída, límite de peticiones...).
 	  - FallosTrasAplicar: peticiones que SÍ se aplican pero cuya respuesta se pierde (el servidor cree que
 	    ha fallado aunque el dato se haya guardado).
@@ -96,6 +98,7 @@ end
 
 export type Nube = {
 	Latencia: number,
+	Pausada: boolean,
 	Fallos: number,
 	FallosTrasAplicar: number,
 	FallarSi: ((clave: string, operacion: string) -> boolean)?,
@@ -110,6 +113,7 @@ function NubeDatos.nueva(): Nube
 
 	local nube: any = {
 		Latencia = 0,
+		Pausada = false,
 		Fallos = 0,
 		FallosTrasAplicar = 0,
 		FallarSi = nil,
@@ -150,6 +154,9 @@ function NubeDatos.nueva(): Nube
 		-- Simula el tiempo de la petición y los fallos previos a aplicarla.
 		local function iniciarPeticion(clave: string, operacion: string)
 			nube.Peticiones += 1
+			while nube.Pausada do
+				task.wait()
+			end
 			if nube.Latencia > 0 then
 				task.wait(nube.Latencia)
 			end
