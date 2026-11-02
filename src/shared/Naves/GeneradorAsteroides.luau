@@ -100,7 +100,7 @@ function GeneradorAsteroides.Generar(opciones: Opciones): { Asteroide }
 	local separacion = opciones.Separacion or 10
 	local aplanado = opciones.Aplanado or 1
 	local centro = opciones.Centro
-	local exclusiones = opciones.Exclusiones or {}
+	local exclusiones: { Exclusion } = opciones.Exclusiones or {}
 
 	local resultado: { Asteroide } = {}
 	local INTENTOS = 40

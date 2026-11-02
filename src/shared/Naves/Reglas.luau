@@ -84,6 +84,11 @@ function Reglas.AplicarDano(estado: Estado, stats: Estadisticas, dano: number, a
 	return { Aplicado = true, DanoEscudo = alEscudo, DanoCasco = alCasco, Destruida = estado.Vida <= 0 }
 end
 
+-- ¿Puede aterrizar? No si ha recibido daño hace muy poco (así no se huye de un combate al instante).
+function Reglas.PuedeAterrizar(ultimoDano: number?, ahora: number): boolean
+	return ultimoDano == nil or ahora - ultimoDano >= Config.SegundosSinDanoParaAterrizar
+end
+
 -- ===== Choques =====
 
 --[[

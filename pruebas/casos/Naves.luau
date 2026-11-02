@@ -249,6 +249,12 @@ return function(Marco)
 			)
 		end)
 
+		Marco.prueba("no se puede aterrizar justo después de recibir daño", function()
+			Marco.verdadero(Reglas.PuedeAterrizar(nil, 10), "sin daño reciente")
+			Marco.falso(Reglas.PuedeAterrizar(10, 10 + Config.SegundosSinDanoParaAterrizar - 0.1))
+			Marco.verdadero(Reglas.PuedeAterrizar(10, 10 + Config.SegundosSinDanoParaAterrizar))
+		end)
+
 		Marco.prueba("el daño de choque crece con la velocidad y el tamaño, con mínimo y tope", function()
 			Marco.igual(Reglas.DanoChoque(Config.VelocidadMinimaChoque, 12), 0, "roce lento")
 			Marco.igual(Reglas.DanoChoque(0, 12), 0)
@@ -395,7 +401,11 @@ return function(Marco)
 			for _ = 1, 60 do
 				derecha = Fisica.Alabeo(derecha, 2, 0, 1 / 60)
 			end
-			Marco.verdadero(derecha < 0, "girando a la izquierda (guiñada +) se inclina a ese lado")
+			Marco.verdadero(derecha > 0, "girando a la izquierda (guiñada +) se inclina a la izquierda (alabeo +)")
+			Marco.verdadero(
+				Fisica.Alabeo(0, 0, 1, 1) < 0,
+				"desplazándose a la derecha se inclina a la derecha (alabeo -)"
+			)
 			for _ = 1, 240 do
 				derecha = Fisica.Alabeo(derecha, 0, 0, 1 / 60)
 			end

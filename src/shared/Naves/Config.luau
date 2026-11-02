@@ -35,6 +35,8 @@ local Config = {
 	SegundosInmunidadInicial = 3, -- tras despegar no se recibe daño
 	SegundosRenacer = 4, -- espera tras ser destruida antes de poder volver a despegar
 	SegundosEntreDespegues = 1.5,
+	SegundosArranque = 1.4, -- desde que el piloto sube hasta que los motores le dejan volar
+	SegundosSinDanoParaAterrizar = 4, -- no se puede huir de un combate aterrizando al instante
 
 	-- ===== Choques con asteroides =====
 	VelocidadMinimaChoque = 14, -- por debajo de esta velocidad un roce no hace daño
@@ -53,7 +55,8 @@ local Config = {
 	-- ===== Etiquetas y nombres =====
 	EtiquetaNave = "NaveEspacial", -- CollectionService: todo modelo de nave
 	EtiquetaAsteroide = "Asteroide", -- CollectionService: todo asteroide (modelo)
-	AtributoPiloto = "PilotoUserId",
+	AtributoPiloto = "PilotoUserId", -- en el modelo de la nave: el UserId de quien la pilota
+	AtributoPilotando = "Pilotando", -- en el personaje: true mientras va dentro de una nave
 	GrupoNaves = "NavesEspaciales", -- grupo de colisión de naves y pilotos
 	GrupoAsteroides = "AsteroidesEspaciales", -- grupo de colisión de asteroides
 

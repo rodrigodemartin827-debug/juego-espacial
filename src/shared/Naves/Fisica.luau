@@ -64,10 +64,14 @@ end
 --[[
 	Alabeo (inclinación lateral) visual: la nave se inclina hacia el lado en que gira o se desplaza. Se acerca
 	suavemente al valor deseado (`velocidadGiro` rad/s de guiñada y `lateral` -1..1).
+
+	Convenio de Roblox: una guiñada positiva gira hacia la IZQUIERDA y un alabeo positivo levanta el ala derecha,
+	es decir, inclina hacia la izquierda. Por eso girar a la izquierda da un alabeo positivo, y desplazarse a la
+	derecha (lateral positivo), uno negativo.
 ]]
 function Fisica.Alabeo(actual: number, velocidadGiro: number, lateral: number, dt: number): number
 	local maximo = math.rad(55)
-	local deseado = math.clamp(-velocidadGiro * 0.35 - lateral * 0.5, -1, 1) * maximo
+	local deseado = math.clamp(velocidadGiro * 0.35 - lateral * 0.5, -1, 1) * maximo
 	-- Aproximación exponencial: independiente de la tasa de fotogramas.
 	local alfa = 1 - math.exp(-6 * dt)
 	return actual + (deseado - actual) * alfa
