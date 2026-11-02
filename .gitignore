@@ -15,3 +15,6 @@ roblox.yml
 .DS_Store
 Thumbs.db
 .idea/
+
+# Caché de Python de las herramientas de animación
+__pycache__/
