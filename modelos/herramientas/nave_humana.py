@@ -53,9 +53,11 @@ COLORES = {
 
 # Fuselaje: (y, ancho, alto, z del centro, cuadratura). Cuadratura 2 = elipse, más alto = más cuadrado.
 FUSELAJE = [
-    (-9.2, 0.10, 0.08, -0.10, 2.0),
-    (-8.6, 0.55, 0.38, -0.08, 2.2),
+    (-8.9, 0.30, 0.20, -0.10, 2.0),
+    (-8.5, 0.70, 0.46, -0.08, 2.2),
     (-7.4, 1.20, 0.80, -0.02, 2.4),
+    (-6.9, 1.45, 0.95, 0.0, 2.5),  # banda naranja del morro entre -6,9 y -6,4
+    (-6.4, 1.62, 1.04, 0.02, 2.5),
     (-5.6, 1.85, 1.18, 0.05, 2.6),
     (-3.4, 2.35, 1.50, 0.10, 2.8),
     (-1.0, 2.70, 1.70, 0.10, 3.0),
@@ -64,7 +66,7 @@ FUSELAJE = [
     (5.6, 2.20, 1.30, 0.05, 3.0),
     (6.6, 1.80, 1.05, 0.05, 2.8),
 ]
-LADOS_FUSELAJE = 16
+LADOS_FUSELAJE = 20
 
 # Cabina: (y, ancho, alto sobre el fuselaje, z de la base)
 CABINA = [
@@ -77,14 +79,15 @@ CABINA = [
 ]
 
 # Góndolas de motor: centro x, z, y desde-hasta, radio.
-GONDOLA = dict(x=2.05, z=-0.05, y0=-0.6, y1=6.2, radio=0.78, lados=14)
+GONDOLA = dict(x=2.05, z=-0.05, y0=-0.6, y1=6.2, radio=0.78, lados=18)
 # Perfil de la tobera (y relativo al final de la góndola, radio): la campana que se ve desde atrás.
 TOBERA = [(0.0, 0.70), (0.25, 0.66), (0.55, 0.74), (0.95, 0.92), (1.15, 0.95)]
 NUCLEO_Y = 0.35  # dónde está el disco brillante dentro de la tobera
 
 # Ala: (x, y del borde de ataque, y del borde de salida, z, grosor)
-ALA = [(1.25, -2.4, 4.6, -0.15, 0.36), (4.0, 0.9, 4.4, -0.30, 0.24), (6.1, 2.3, 4.2, -0.40, 0.16)]
-CANON = dict(x=6.25, z=-0.40, y0=-2.3, y1=3.9, radio=0.24, lados=8)
+ALA = [(1.25, -2.6, 4.8, -0.05, 0.50), (2.9, -0.6, 4.7, -0.12, 0.42), (4.6, 1.0, 4.5, -0.20, 0.32),
+       (6.0, 2.0, 4.3, -0.26, 0.26)]
+CANON = dict(x=6.2, z=-0.26, y0=0.0, y1=4.5, radio=0.27, lados=8)
 
 DERIVA = dict(y0=2.8, y1=6.0, alto=1.9, inclinacion=22, grosor=0.14, retraso_punta=1.4)
 
@@ -152,6 +155,17 @@ def espejo_x(bm, verts):
     return nuevos
 
 
+def _en_flap(p):
+    """True si el punto del ala está en el último cuarto de la cuerda (el flap)."""
+    x = abs(p.x)
+    for (x0, a0, s0, _, _), (x1, a1, s1, _, _) in zip(ALA, ALA[1:]):
+        if x0 - 1e-4 <= x <= x1 + 1e-4:
+            t = (x - x0) / (x1 - x0)
+            ya, ys = a0 + (a1 - a0) * t, s0 + (s1 - s0) * t
+            return p.y >= ya + (ys - ya) * 0.73
+    return False
+
+
 # Índices de material del casco.
 M_CASCO, M_OSCURO, M_GRAFITO, M_ACENTO, M_TOBERA = range(5)
 
@@ -165,8 +179,12 @@ def construir_casco():
     # La panza del fuselaje, más oscura: caras cuyo centro está por debajo del eje.
     for f in caras:
         cen = f.calc_center_median()
-        if f.normal.z < -0.55:
-            f.material_index = M_OSCURO
+        if f.normal.z < -0.55 and abs(cen.x) < 0.75:
+            f.material_index = M_OSCURO  # quilla oscura bajo el fuselaje
+        elif cen.y < -8.0:
+            f.material_index = M_GRAFITO  # punta del morro (radomo)
+        elif -6.9 < cen.y < -6.4 and f.normal.z > -0.5:
+            f.material_index = M_ACENTO  # banda naranja en el morro
     # La tapa trasera del fuselaje (entre los motores): gris oscuro.
     caras[-1].material_index = M_GRAFITO
 
@@ -208,22 +226,28 @@ def construir_casco():
         anillos_a.append([
             Vector((-x, ya, z)),
             Vector((-x, ya + cuerda * 0.3, z + gr / 2)),
-            Vector((-x, ys, z + gr * 0.12)),
-            Vector((-x, ys, z - gr * 0.12)),
+            Vector((-x, ya + cuerda * 0.74, z + gr * 0.3)),  # inicio del flap
+            Vector((-x, ys, z + gr * 0.1)),
+            Vector((-x, ys, z - gr * 0.1)),
+            Vector((-x, ya + cuerda * 0.74, z - gr * 0.3)),
             Vector((-x, ya + cuerda * 0.35, z - gr / 2)),
         ])
     va, caras_a = loft(bm, anillos_a, mat=M_CASCO)
     # Franja de acento en el borde de ataque de la última sección del ala.
     for f in caras_a:
         cen = f.calc_center_median()
-        if abs(cen.x) > 4.6 and f.normal.y < -0.3:
-            f.material_index = M_ACENTO
+        ya_f = None
+        if abs(cen.x) > 4.0 and f.normal.y < -0.25:
+            f.material_index = M_ACENTO  # borde de ataque exterior en naranja
+        elif len(f.verts) == 4 and all(_en_flap(v.co) for v in f.verts):
+            f.material_index = M_OSCURO  # flaps del borde de salida, en gris
     verts_ala = [v for a in va for v in a]
 
     # Cañón en la punta del ala: soporte + tubo + boca.
     cn = CANON
-    perfil_c = [(cn["y0"], cn["radio"] * 0.6), (cn["y0"] + 0.25, cn["radio"] * 0.75), (cn["y0"] + 1.6, cn["radio"]),
-                (cn["y1"] - 0.6, cn["radio"] * 1.35), (cn["y1"], cn["radio"] * 0.9)]
+    perfil_c = [(cn["y0"] - 0.9, cn["radio"] * 0.55), (cn["y0"] - 0.6, cn["radio"] * 0.7),
+                (cn["y0"] + 0.2, cn["radio"] * 0.8), (cn["y0"] + 0.5, cn["radio"] * 1.25),
+                (cn["y1"] - 0.5, cn["radio"] * 1.3), (cn["y1"], cn["radio"] * 0.8)]
     anillos_c = [anillo_superelipse(y, r * 2, r * 2, cn["z"], cn["lados"], 2.0, xc=-cn["x"]) for y, r in perfil_c]
     vc, caras_c = loft(bm, anillos_c, mat=M_OSCURO)
     caras_c[-2].material_index = M_GRAFITO  # tapa delantera (la boca)
@@ -242,7 +266,17 @@ def construir_casco():
         capas.append([rot @ (p + Vector((s * d["grosor"] / 2, 0, 0))) + Vector((-g["x"], 0, base_z))
                       for p in perfil_d])
     vd, caras_d = loft(bm, [capas[0], capas[1]], mat=M_CASCO)
-    # La mitad de arriba de la deriva en color de acento.
+    # Punta de la deriva en naranja: se parte la deriva a 2/3 de su altura.
+    caras_f = set(caras_d)
+    aristas_f = {e for f in caras_f for e in f.edges}
+    verts_f = {v for f in caras_f for v in f.verts}
+    corte = bmesh.ops.bisect_plane(bm, geom=list(caras_f) + list(aristas_f) + list(verts_f),
+                                   plane_co=Vector((0, 0, base_z + d["alto"] * 0.62)), plane_no=Vector((0, 0, 1)))
+    verts_f |= {g for g in corte["geom"] if isinstance(g, bmesh.types.BMVert)}
+    for f in {f for v in verts_f for f in v.link_faces}:
+        if f.calc_center_median().z > base_z + d["alto"] * 0.62:
+            f.material_index = M_ACENTO
+    vd = [list(verts_f)]
     verts_motor += [v for a in vd for v in a]
 
     # Patines de aterrizaje (tres): bajo el morro y bajo cada góndola.
@@ -253,6 +287,24 @@ def construir_casco():
     espejo_x(bm, verts_motor + verts_ala)
 
     caja(bm, Vector((0, -5.6, -0.62)), (0.22, 1.2, 0.36), mat=M_GRAFITO)  # patín del morro
+
+    # Tomas de aire laterales junto a la cabina: una caja en cuña con la boca en grafito.
+    for sx in (-1, 1):
+        anillos_t = []
+        for y, w, h, z in [(-3.6, 0.15, 0.55, 0.0), (-3.2, 0.5, 0.75, 0.0), (-0.6, 0.55, 0.8, 0.0),
+                           (1.6, 0.25, 0.6, 0.0)]:
+            anillos_t.append(anillo_superelipse(y, w, h, z, 8, 3.5, xc=sx * (1.3 + w / 2 - 0.1)))
+        vt2, caras_t2 = loft(bm, anillos_t, mat=M_OSCURO)
+        caras_t2[-2].material_index = M_GRAFITO  # la boca
+        for f in caras_t2:
+            if f.normal.y < -0.6:
+                f.material_index = M_GRAFITO
+
+    # Antena dorsal y aleta ventral.
+    caja(bm, Vector((0, 3.2, 1.55)), (0.06, 0.9, 0.5), mat=M_GRAFITO,
+         giro=Matrix.Rotation(math.radians(-25), 3, "X"))
+    aleta = [Vector((0, 2.6, -0.7)), Vector((0, 5.8, -0.55)), Vector((0, 6.0, -1.25)), Vector((0, 4.6, -1.3))]
+    loft(bm, [[p + Vector((-0.07, 0, 0)) for p in aleta], [p + Vector((0.07, 0, 0)) for p in aleta]], mat=M_OSCURO)
 
     # Lomo: carenado sobre el fuselaje detrás de la cabina.
     lomo = [anillo_superelipse(y, w, h, z, 8, 2.6) for y, w, h, z in
@@ -297,7 +349,7 @@ def construir_neon():
         # Franja en el lateral de la góndola.
         caja(bm, Vector((s * (g["x"] + g["radio"] - 0.02), 2.6, g["z"] + 0.1)), (0.06, 3.0, 0.12))
         # Luz de posición en la punta del cañón y del ala.
-        caja(bm, Vector((s * (CANON["x"] + 0.02), CANON["y1"] - 0.3, CANON["z"] + 0.28)), (0.12, 0.4, 0.06))
+        caja(bm, Vector((s * (CANON["x"] + 0.02), CANON["y1"] - 0.6, CANON["z"] + 0.33)), (0.12, 0.5, 0.06))
         # Línea a lo largo del borde de la deriva.
     # Franjas a los lados del fuselaje, bajo la cabina.
     for s in (-1, 1):
@@ -313,8 +365,8 @@ def anclajes():
     return {
         "Ejes": (0, 0, 0),
         "Piloto": (0, -2.4, 0.9),
-        "CanonDer": (-cn["x"], cn["y1"] * 0 + cn["y0"] - 0.05, cn["z"]),
-        "CanonIzq": (cn["x"], cn["y0"] - 0.05, cn["z"]),
+        "CanonDer": (-cn["x"], cn["y0"] - 0.95, cn["z"]),
+        "CanonIzq": (cn["x"], cn["y0"] - 0.95, cn["z"]),
         "MotorDer": (-g["x"], g["y1"] + TOBERA[-1][0], g["z"]),
         "MotorIzq": (g["x"], g["y1"] + TOBERA[-1][0], g["z"]),
     }

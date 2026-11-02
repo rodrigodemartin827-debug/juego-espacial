@@ -34,10 +34,11 @@ E = c.ESTUDIO
 # --------------------------------------------------------------------------------------------------------------
 
 # Paletas de roca: (color claro, color oscuro, color de las grietas). Neutras para poder teñirlas en Studio.
-PALETA_GRIS = ("#9A968F", "#5E5B57", "#2B2927")
-PALETA_ARENISCA = ("#B8977A", "#7C6250", "#3A2C24")
-PALETA_BASALTO = ("#6A6A70", "#3C3C43", "#1A1A1E")
-PALETA_MUSGO = ("#8D9283", "#56594F", "#25261F")
+PALETA_GRIS = ("#B3AEA5", "#6E6A64", "#2E2B29")
+PALETA_ARENISCA = ("#B49A82", "#7A6656", "#3A2E27")
+PALETA_BASALTO = ("#7C7B82", "#46464E", "#1C1C21")
+PALETA_VACIO = ("#5E5668", "#2F2A38", "#141018")
+PALETA_MUSGO = ("#A2A894", "#64695A", "#2A2C24")
 
 ROCAS = [
     dict(nombre="Roca_Canto", titulo="Canto rodado", tam=(6.0, 5.0, 4.0), cortes=6, redondez=0.85, semilla=11,
@@ -45,17 +46,17 @@ ROCAS = [
     dict(nombre="Roca_Aguja", titulo="Aguja", tam=(3.2, 3.0, 9.0), cortes=14, redondez=0.15, semilla=27,
          ruido=0.12, estratos=0.0, paleta=PALETA_BASALTO, tris=420, inclinacion=8),
     dict(nombre="Roca_Losa", titulo="Losa en capas", tam=(8.0, 5.5, 2.6), cortes=9, redondez=0.4, semilla=5,
-         ruido=0.10, estratos=0.35, paleta=PALETA_ARENISCA, tris=560),
+         ruido=0.08, estratos=0.5, paleta=PALETA_ARENISCA, tris=560),
     dict(nombre="Roca_Grupo", titulo="Grupo de piedras", grupo=True, semilla=41, paleta=PALETA_MUSGO, tris=640),
 ]
 
 MINERALES = [
-    dict(nombre="Mineral_Cristal", titulo="Cristal (cian)", color="#4FD8FF", brillo=6.0, semilla=3,
+    dict(nombre="Mineral_Cristal", titulo="Cristal (cian)", color="#4FD8FF", brillo=0.9, semilla=3,
          estilo="prismas", base=(4.2, 3.6, 1.6), paleta=PALETA_BASALTO, n=7, largo=(1.8, 4.2), grosor=(0.35, 0.7)),
-    dict(nombre="Mineral_Ambar", titulo="Ambar solar (oro)", color="#FFB23A", brillo=5.0, semilla=8,
-         estilo="geoda", base=(4.0, 4.0, 2.2), paleta=PALETA_ARENISCA, n=11, largo=(0.9, 1.9), grosor=(0.35, 0.6)),
-    dict(nombre="Mineral_Vacio", titulo="Esquirla del vacio (violeta)", color="#B54DFF", brillo=6.5, semilla=19,
-         estilo="esquirlas", base=(4.4, 3.8, 1.4), paleta=PALETA_BASALTO, n=6, largo=(2.6, 5.2), grosor=(0.25, 0.5)),
+    dict(nombre="Mineral_Ambar", titulo="Ambar solar (oro)", color="#FFB23A", brillo=0.8, semilla=8,
+         estilo="geoda", base=(4.0, 4.0, 2.2), paleta=PALETA_ARENISCA, n=9, largo=(1.3, 2.4), grosor=(0.38, 0.62)),
+    dict(nombre="Mineral_Vacio", titulo="Esquirla del vacio (violeta)", color="#B54DFF", brillo=1.0, semilla=19,
+         estilo="esquirlas", base=(4.4, 3.8, 1.6), paleta=PALETA_VACIO, n=7, largo=(2.4, 4.6), grosor=(0.38, 0.62)),
 ]
 
 TAM_TEXTURA = 1024
@@ -162,12 +163,21 @@ def detallar(obj, d, rnd, voxel_studs=0.07):
         # Forma media (bultos), detalle fino y grietas de Voronoi (bordes entre celdas).
         bultos = noise.fractal(q, 0.6, 2.2, 4, noise_basis="PERLIN_ORIGINAL")
         fino = noise.noise(p * 3.1 + semilla, noise_basis="PERLIN_ORIGINAL")
-        dist = noise.voronoi(p * 0.9 + semilla, distance_metric="DISTANCE", exponent=2.5)[0]
-        grieta = max(0.0, 0.12 - (dist[1] - dist[0])) / 0.12  # 1 en la grieta
-        des = fuerza * (0.9 * bultos + 0.25 * fino) - 0.18 * grieta * (0.6 + fuerza * 2)
+        grano = noise.noise(p * 9.0 + semilla, noise_basis="PERLIN_ORIGINAL")
+        # Grietas: pocas, finas e irregulares (bordes de celdas de Voronoi sobre coordenadas deformadas, y solo
+        # donde otro ruido lo permite, para que no salga un dibujo de caparazón).
+        pd = p * 0.42 + semilla + Vector(noise.noise_vector(p * 0.7 + semilla)) * 0.6
+        dist = noise.voronoi(pd, distance_metric="DISTANCE", exponent=2.5)[0]
+        grieta = max(0.0, 0.05 - (dist[1] - dist[0])) / 0.05
+        grieta *= max(0.0, min(1.0, noise.noise(p * 0.5 + semilla * 3) * 2.5 + 0.3))
+        # Desconchones: ruido "ridged" que deja escalones y aristas vivas, como roca que se ha partido.
+        lasca = noise.ridged_multi_fractal(p * 0.9 + semilla * 2, 1.0, 2.0, 3, 0.0, 2.0)
+        des = fuerza * (0.55 * bultos + 0.3 * fino + 0.1 * grano) - 0.16 * grieta + 0.05 * (lasca - 0.6)
         if estratos:
-            capa = (p.z * 2.6 + 0.4 * noise.noise(p * 0.4 + semilla)) % 1.0
-            des -= estratos * 0.28 * (1.0 if capa < 0.18 else 0.0) + estratos * 0.06 * capa
+            capa = (p.z * 1.9 + 0.35 * noise.noise(p * 0.35 + semilla)) % 1.0
+            # Escalones: cada capa sobresale un poco más arriba que abajo, con un surco entre capas.
+            lado = 1.0 - abs(v.normal.z) ** 2  # las capas se ven en las paredes, no en la cara de arriba
+            des += lado * estratos * (0.35 * capa - 0.45 * (1.0 if capa < 0.14 else 0.0))
         # La base no se desplaza hacia fuera (para que siga plana).
         if v.co.z < 0.05 * E:
             des = min(des, 0.0) * 0.3
@@ -181,13 +191,18 @@ def detallar(obj, d, rnd, voxel_studs=0.07):
         p = v.co / E
         h = v.co.z / alt_max
         mancha = 0.5 + 0.5 * noise.fractal(p * 0.8 + semilla * 1.7, 0.7, 2.0, 3)
-        polvo = max(0.0, v.normal.z) ** 2 * 0.35  # las caras de arriba, más claras (polvo/luz del cielo)
-        t = min(1.0, max(0.0, 0.25 + 0.45 * h + 0.35 * mancha + polvo))
+        # Chorretones verticales: ruido estirado en Z (la lluvia y el polvo resbalan por las paredes).
+        chorro = 0.5 + 0.5 * noise.noise(Vector((p.x * 2.2, p.y * 2.2, p.z * 0.25)) + semilla)
+        polvo = max(0.0, v.normal.z) ** 2 * 0.3  # las caras de arriba, más claras (polvo/luz del cielo)
+        t = min(1.0, max(0.0, 0.15 + 0.35 * h + 0.3 * mancha + 0.2 * chorro + polvo))
         col = oscuro.lerp(claro, t)
-        col = col.lerp(grieta_c, min(1.0, cav * 0.9))
+        col = col.lerp(grieta_c, min(1.0, cav * 0.75))
         if d.get("estratos"):
-            banda = 0.5 + 0.5 * math.sin(p.z * 9.0 + 2 * noise.noise(p * 0.3))
-            col = col * (0.85 + 0.25 * banda)
+            capa = (p.z * 1.9 + 0.35 * noise.noise(p * 0.35 + semilla)) % 1.0
+            banda = 0.5 + 0.5 * math.sin(math.floor(p.z * 1.9 + 0.35 * noise.noise(p * 0.35 + semilla)) * 2.7)
+            col = col * (0.8 + 0.3 * banda)
+            if capa < 0.14 and abs(v.normal.z) < 0.7:
+                col = col.lerp(grieta_c, 0.6)
         colores[v.index] = col
     for f in bm.faces:
         for l in f.loops:
@@ -276,7 +291,7 @@ def cristales(d, rnd, base_obj):
             ang = t * math.tau * 0.999 + rnd.uniform(-0.2, 0.2)
             r = sx * 0.28 * rnd.uniform(0.6, 1.0)
             pos = Vector((math.cos(ang) * r, math.sin(ang) * r, sz * 0.62))
-            hacia = Vector((-math.cos(ang) * 0.5, -math.sin(ang) * 0.5, 1.0))
+            hacia = Vector((math.cos(ang) * 0.75, math.sin(ang) * 0.75, 1.0))  # se abren como una corona
             if i == d["n"] - 1:
                 pos, hacia = Vector((0, 0, sz * 0.4)), Vector((0.1, 0.05, 1))
             _prisma(bm, pos, hacia, rnd.uniform(lmin, lmax), rnd.uniform(gmin, gmax), 6, 0.4, rnd)
@@ -284,7 +299,7 @@ def cristales(d, rnd, base_obj):
             ang = rnd.uniform(0, math.tau)
             r = rnd.uniform(0.0, 1.0) * sx * 0.28
             pos = Vector((math.cos(ang) * r, math.sin(ang) * r, sz * 0.7))
-            abre = rnd.uniform(5, 55)
+            abre = rnd.uniform(8, 38)
             eje = Matrix.Rotation(math.radians(abre), 3, Vector((-math.sin(ang), math.cos(ang), 0))) @ Vector((0, 0, 1))
             _prisma(bm, pos, eje, rnd.uniform(lmin, lmax), rnd.uniform(gmin, gmax), 4, 0.55, rnd,
                     torcer=rnd.uniform(-0.5, 0.5))

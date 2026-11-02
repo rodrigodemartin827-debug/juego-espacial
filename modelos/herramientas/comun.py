@@ -290,7 +290,7 @@ def _fuente(tam, negrita=True):
     return ImageFont.load_default(tam)
 
 
-def preparar_estudio(tono_fondo=(0.035, 0.04, 0.055), suelo=True, z_suelo=0.0, luz_clave=650, mundo=0.35):
+def preparar_estudio(tono_fondo=(0.035, 0.04, 0.055), suelo=True, z_suelo=0.0, luz_clave=900, mundo=0.35):
     """Estudio de fotografía: fondo oscuro degradado, luz clave, de relleno y contraluz, y suelo que recibe sombra."""
     scn = bpy.context.scene
     scn.render.engine = "CYCLES"
@@ -312,6 +312,11 @@ def preparar_estudio(tono_fondo=(0.035, 0.04, 0.055), suelo=True, z_suelo=0.0, l
         d.color = color
         if tipo == "AREA":
             d.size = tam
+        if tipo == "SPOT":
+            # Foco muy abierto y difuso: una luz de área no ilumina detrás de su plano y deja una línea en el suelo.
+            d.spot_size = math.radians(150)
+            d.spot_blend = 1.0
+            d.shadow_soft_size = tam / 2
         o = bpy.data.objects.new(nombre, d)
         o.location = pos
         scn.collection.objects.link(o)
@@ -322,15 +327,17 @@ def preparar_estudio(tono_fondo=(0.035, 0.04, 0.055), suelo=True, z_suelo=0.0, l
         o["luz_estudio"] = True
         return o
 
-    luz("clave", "AREA", luz_clave, (-4.0, -5.0, 6.0), (1.0, 0.96, 0.9), 4)
-    luz("relleno", "AREA", luz_clave * 0.35, (5.5, -3.5, 2.5), (0.75, 0.85, 1.0), 6)
-    luz("contra", "AREA", luz_clave * 0.9, (2.0, 6.0, 5.0), (0.8, 0.9, 1.0), 3)
+    luz("clave", "SPOT", luz_clave * 2.2, (-4.0, -5.0, 6.0), (1.0, 0.96, 0.9), 4)
+    luz("relleno", "SPOT", luz_clave * 0.8, (5.5, -3.5, 2.5), (0.75, 0.85, 1.0), 6)
+    luz("contra", "SPOT", luz_clave * 1.8, (2.0, 6.0, 5.0), (0.8, 0.9, 1.0), 3)
+    luz("rebote", "AREA", luz_clave * 0.12, (0.0, -1.0, -5.0), (0.85, 0.85, 0.9), 8)  # para las vistas desde abajo
 
     if suelo:
-        bpy.ops.mesh.primitive_plane_add(size=300, location=(0, 0, z_suelo))
+        bpy.ops.mesh.primitive_plane_add(size=4000, location=(0, 0, z_suelo))
         s = bpy.context.active_object
         s.name = "Suelo_estudio"
-        m = material("suelo_estudio", (0.05, 0.055, 0.07), rugosidad=0.6)
+        m = material("suelo_estudio", (0.05, 0.055, 0.07), rugosidad=1.0)
+        m.node_tree.nodes["Principled BSDF"].inputs["Specular IOR Level"].default_value = 0.0  # sin brillo rasante
         s.data.materials.append(m)
         s["estudio"] = True
     return scn
@@ -393,7 +400,7 @@ def renderizar_vistas(objetos, carpeta, vistas=None, tam=460, muestras=48, con_m
 
     cam_d = bpy.data.cameras.new("cam_hoja")
     cam_d.lens = lente
-    cam_d.clip_end = 2000
+    cam_d.clip_end = 10000
     cam = bpy.data.objects.new("cam_hoja", cam_d)
     scn.collection.objects.link(cam)
     scn.camera = cam
