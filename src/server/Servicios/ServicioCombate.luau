@@ -350,10 +350,25 @@ local function registrar(modelo: Model, jugador: Player?, humanoid: Humanoid, ra
 	return luchador :: Luchador
 end
 
+-- Segundos que se espera a que un personaje recién aparecido entre en el mundo antes de darlo por perdido.
+local ESPERA_PERSONAJE = 10
+
 local function alAparecerPersonaje(jugador: Player, personaje: Model)
-	local humanoid = personaje:WaitForChild("Humanoid", 10) :: Humanoid?
-	local raiz = personaje:WaitForChild("HumanoidRootPart", 10) :: BasePart?
+	-- Roblox dispara CharacterAdded ANTES de meter el personaje en Workspace (Parent = nil), y el Humanoid
+	-- ya existe, así que WaitForChild no espera. Hay que esperar a que entre en el mundo; si no, el
+	-- personaje nunca se registra y el servidor ignora todas sus habilidades.
+	local limite = os.clock() + ESPERA_PERSONAJE
+	while personaje.Parent == nil and os.clock() < limite do
+		task.wait()
+	end
+	local humanoid = personaje:WaitForChild("Humanoid", ESPERA_PERSONAJE) :: Humanoid?
+	local raiz = personaje:WaitForChild("HumanoidRootPart", ESPERA_PERSONAJE) :: BasePart?
+	-- Si mientras tanto lo sustituyeron (p. ej. ServicioPersonaje cambia un R15 por un R6) o ya está
+	-- registrado, no se hace nada: el personaje nuevo dispara su propio CharacterAdded.
 	if humanoid == nil or raiz == nil or personaje.Parent == nil then
+		return
+	end
+	if jugador.Character ~= personaje or luchadores[personaje] ~= nil then
 		return
 	end
 	local luchador = registrar(personaje, jugador, humanoid, raiz)
