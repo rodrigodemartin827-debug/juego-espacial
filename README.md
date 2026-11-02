@@ -386,8 +386,6 @@ punta, dos propulsores y neón del color del bando. No hay assets que subir. Las
 - La nave de un piloto la simula su cliente: es la forma estándar de que el control sea inmediato, pero implica que el servidor
   no puede impedir cada movimiento, solo detectar y deshacer los imposibles.
 - Los sonidos están vacíos (`Recursos.Sonidos`); pega un ID y suenan sin tocar código.
-- Si el mismo jugador usa otro avatar con partes fuera de la jerarquía normal, podría verse algún trozo (el piloto se oculta
-  recorriendo todos sus descendientes).
 
 ## Pruebas
 
