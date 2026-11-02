@@ -127,6 +127,29 @@ local Paleta = {
 		Secundario = "#6E86AD",
 		Oscuro = "#1D2636",
 	},
+
+	-- ===== Elección de bando (Eleccion/Datos/EfectosEleccion) =====
+	-- Humanos: luz de amanecer, entre el azul de su cielo y el dorado de su sol.
+	EleccionHumanos = {
+		Nucleo = "#FFFFFF",
+		Principal = "#6FD3FF",
+		Secundario = "#FFD27A",
+		Oscuro = "#0E2A4A",
+	},
+	-- Monstruos: rojo sangre sobre negro, con el violeta del agujero negro.
+	EleccionMonstruos = {
+		Nucleo = "#FFE8EC",
+		Principal = "#FF2A45",
+		Secundario = "#9B2BFF",
+		Oscuro = "#07020A",
+	},
+	-- La grieta: energía violeta con núcleo blanco.
+	EleccionGrieta = {
+		Nucleo = "#FFFFFF",
+		Principal = "#C04BFF",
+		Secundario = "#6A2BFF",
+		Oscuro = "#0A0214",
+	},
 }
 
 return Paleta

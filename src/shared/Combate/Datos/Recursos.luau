@@ -79,6 +79,11 @@ Recursos.Sonidos = {
 	MinadoGolpe = "",
 	MinadoRotura = "",
 	CrafteoExito = "",
+	-- Elección de bando.
+	EleccionAnticipar = "",
+	EleccionConfirmar = "",
+	EleccionResaltar = "",
+	EleccionAmbiente = "", -- zumbido de la grieta mientras se elige (en bucle)
 }
 
 return Recursos
