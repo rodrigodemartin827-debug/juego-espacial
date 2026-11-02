@@ -288,6 +288,41 @@ function Roblox.nuevoMundo(opciones)
 		self.Parent = nil
 	end
 
+	-- Atributos (Instance:SetAttribute / GetAttribute), con la señal de cambio de cada uno.
+	local function senalAtributo(self, nombre)
+		local senales = rawget(self, "_senalesAtributos")
+		if senales == nil then
+			senales = {}
+			rawset(self, "_senalesAtributos", senales)
+		end
+		if senales[nombre] == nil then
+			senales[nombre] = nuevaSenal(mundo.task)
+		end
+		return senales[nombre]
+	end
+
+	function Instancia.SetAttribute(self, nombre, valor)
+		local atributos = rawget(self, "_atributos")
+		if atributos == nil then
+			atributos = {}
+			rawset(self, "_atributos", atributos)
+		end
+		if atributos[nombre] == valor then
+			return
+		end
+		atributos[nombre] = valor
+		senalAtributo(self, nombre):Fire()
+	end
+
+	function Instancia.GetAttribute(self, nombre)
+		local atributos = rawget(self, "_atributos")
+		return if atributos then atributos[nombre] else nil
+	end
+
+	function Instancia.GetAttributeChangedSignal(self, nombre)
+		return senalAtributo(self, nombre)
+	end
+
 	function Instancia.GetFullName(self)
 		local nombre = rawget(self, "Name")
 		local padre = rawget(self, "_padre")

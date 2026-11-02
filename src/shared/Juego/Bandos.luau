@@ -30,6 +30,14 @@ Bandos.Info = {
 	Monstruos = { Id = "Monstruos", Nombre = "Monstruos" },
 } :: { [string]: InfoBando }
 
+--[[
+	Atributo del Player con su bando, para que lo vean TODOS los clientes (por ejemplo, para poner el andar de
+	monstruo a los personajes del bando Monstruos). Lo pone y lo actualiza solo el servidor (ServicioBandos) a
+	partir de los datos guardados: los atributos que pone un cliente no se replican, así que no se puede falsear.
+	Vale nil mientras los datos del jugador no han cargado.
+]]
+Bandos.Atributo = "Bando"
+
 -- Los bandos que un jugador puede elegir ("Ninguno" no es una opción).
 Bandos.Elegibles = { "Humanos", "Monstruos" } :: { string }
 

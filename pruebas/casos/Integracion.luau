@@ -262,6 +262,76 @@ return function(Marco)
 		end)
 	end)
 
+	Marco.grupo("Integración: el bando se ve en el Player (atributo para todos los clientes)", function()
+		Marco.prueba("al cargar los datos se publica el bando guardado", function()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube)
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			Marco.esperarHasta(function()
+				return jugador:GetAttribute("Bando") == "Ninguno"
+			end, "un jugador nuevo aparece como 'Ninguno'")
+		end)
+
+		Marco.prueba("al elegir Monstruos el atributo cambia, y un segundo intento no lo toca", function()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube)
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			local DatosCliente, RedCliente = arrancarCliente(entorno, jugador)
+			Marco.esperarHasta(function()
+				return DatosCliente.Obtener() ~= nil
+			end)
+			RedCliente.Enviar("ElegirBando", "Monstruos")
+			Marco.esperarHasta(function()
+				return jugador:GetAttribute("Bando") == "Monstruos"
+			end, "el atributo debería pasar a Monstruos")
+
+			RedCliente.Enviar("ElegirBando", "Humanos")
+			Marco.dejarCorrer(10)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Monstruos")
+			Marco.igual(jugador:GetAttribute("Bando"), "Monstruos", "el atributo sigue a los datos del servidor")
+		end)
+
+		Marco.prueba("al volver a entrar, el atributo trae el bando guardado", function()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube)
+			local primera = entorno.mundo.unirJugador(1, "Ana")
+			local DatosCliente, RedCliente = arrancarCliente(entorno, primera)
+			Marco.esperarHasta(function()
+				return DatosCliente.Obtener() ~= nil
+			end)
+			RedCliente.Enviar("ElegirBando", "Monstruos")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(primera).Bando == "Monstruos"
+			end)
+			entorno.mundo.salirJugador(primera)
+			Marco.esperarHasta(function()
+				return leerRegistro(nube, 1).Bloqueo == nil
+			end)
+
+			local segunda = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return segunda:GetAttribute("Bando") == "Monstruos"
+			end, "el bando guardado debería publicarse al cargar")
+		end)
+
+		Marco.prueba("un atributo puesto a mano en el Player no cambia el bando de los datos", function()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube)
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return jugador:GetAttribute("Bando") == "Ninguno"
+			end)
+			-- (En Roblox un cliente ni siquiera puede: sus atributos no se replican. Esto comprueba que el servidor
+			-- no lee el atributo como fuente de verdad.)
+			jugador:SetAttribute("Bando", "Monstruos")
+			Marco.dejarCorrer(5)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Ninguno")
+		end)
+	end)
+
 	Marco.grupo("Integración: salida del jugador", function()
 		Marco.prueba("al salir se guarda el progreso, el bando incluido, y se libera el registro", function()
 			local nube = NubeDatos.nueva()
