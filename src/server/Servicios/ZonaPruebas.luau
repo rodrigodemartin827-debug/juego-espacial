@@ -10,8 +10,8 @@
 	  - dos pedestales "Unirse a Héroes / Villanos" (ProximityPrompt) para elegir bando sin interfaz.
 	  - un cartel con los controles.
 
-	Se desactiva con `ZonaPruebas.Activa = false` en Config del módulo (abajo) o quitando la llamada en
-	init.server. Todo se crea por código, no hay nada que montar a mano en Studio.
+	Se desactiva quitando la llamada a ZonaPruebas.Iniciar() en init.server. Todo se crea por código, no hay
+	nada que montar a mano en Studio.
 ]]
 
 local Players = game:GetService("Players")
@@ -194,11 +194,6 @@ function ZonaPruebas.Iniciar()
 	aparicion.Material = Enum.Material.Neon
 	aparicion.Parent = zona
 
-	-- Muñecos de entrenamiento.
-	crearMunieco(zona, "Muñeco Héroe", "Heroes", CENTRO + Vector3.new(-26, 0, 0), Color3.fromRGB(70, 140, 255))
-	crearMunieco(zona, "Muñeco Neutral", "Ninguno", CENTRO + Vector3.new(0, 0, -6), Color3.fromRGB(190, 190, 200))
-	crearMunieco(zona, "Muñeco Villano", "Villanos", CENTRO + Vector3.new(26, 0, 0), Color3.fromRGB(230, 70, 80))
-
 	crearPedestal(zona, Bandos.Heroes, CENTRO + Vector3.new(-14, 0.5, 52), Color3.fromRGB(70, 140, 255))
 	crearPedestal(zona, Bandos.Villanos, CENTRO + Vector3.new(14, 0.5, 52), Color3.fromRGB(230, 70, 80))
 
@@ -211,6 +206,13 @@ function ZonaPruebas.Iniciar()
 	)
 
 	zona.Parent = workspace
+
+	-- Los muñecos se crean aparte: CreateHumanoidModelFromDescription espera a Roblox y no debe retrasar el arranque.
+	task.spawn(function()
+		crearMunieco(zona, "Muñeco Héroe", "Heroes", CENTRO + Vector3.new(-26, 0, 0), Color3.fromRGB(70, 140, 255))
+		crearMunieco(zona, "Muñeco Neutral", "Ninguno", CENTRO + Vector3.new(0, 0, -6), Color3.fromRGB(190, 190, 200))
+		crearMunieco(zona, "Muñeco Villano", "Villanos", CENTRO + Vector3.new(26, 0, 0), Color3.fromRGB(230, 70, 80))
+	end)
 end
 
 return ZonaPruebas
