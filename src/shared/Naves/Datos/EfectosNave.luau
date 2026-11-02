@@ -621,27 +621,29 @@ local function propulsor(
 				Minimo = "Medio",
 			})
 		)
-		-- Núcleo incandescente en la boca del propulsor.
+		-- Núcleo incandescente en la boca del propulsor. Del tamaño de la tobera (1,2 studs): los pulsos se
+		-- solapan, así que uno mayor o más opaco se ve como una bola blanca que tapa la popa de la nave.
 		table.insert(
 			capas,
 			esfera(
 				motor,
-				tamano[1] * 0.9,
-				tamano[1] * 0.6,
+				tamano[1] * 0.5,
+				tamano[1] * 0.35,
 				0.3,
 				"Nucleo",
-				{ Sigue = true, Transparencia = { 0.1, 0.5 } }
+				{ Sigue = true, Transparencia = { 0.3, 0.75 } }
 			)
 		)
+		-- Halo de color alrededor del núcleo.
 		table.insert(
 			capas,
 			esfera(
 				motor,
-				tamano[1] * 2,
-				tamano[1] * 1.3,
+				tamano[1] * 1.15,
+				tamano[1] * 0.8,
 				0.3,
 				"Principal",
-				{ Sigue = true, Transparencia = { 0.6, 0.85 }, Minimo = "Medio" }
+				{ Sigue = true, Transparencia = { 0.78, 0.95 }, Minimo = "Medio" }
 			)
 		)
 	end
@@ -663,24 +665,36 @@ end
 Recetas.Nave_Propulsor = propulsor("NavePropulsor", 70, { 14, 26 }, { 0.2, 0.36 }, { 2.2, 0 }, 2)
 Recetas.Nave_Propulsor_Turbo = propulsor("NaveTurbo", 130, { 30, 60 }, { 0.3, 0.55 }, { 3.2, 0 }, 4)
 
--- Al encender el turbo: la nave "da un tirón", con un anillo de energía, un fogonazo y una estela de chispas.
+--[[
+	Al encender el turbo: la nave "da un tirón", con un anillo de energía, un fogonazo y una estela de chispas.
+
+	Todo lo que va pegado a la nave la SIGUE y las ondas van tumbadas en el plano de las alas. Antes eran discos de
+	30-40 studs de cara a la cámara y quietos en el mundo: la cámara, que persigue a la nave, se metía dentro y la
+	pantalla entera se volvía rosa. (Sin malla de anillo en Recursos.Mallas.Anillo, una onda es un disco relleno.)
+]]
 Recetas.Nave_Turbo_Arranque = {
 	Paleta = "NaveTurbo",
 	Fases = {
 		Lanzamiento = {
-			esfera("Lanzador", 3, 18, 0.3, "Nucleo", { Desplazamiento = { 0, 0, 5 }, Transparencia = { 0.2, 1 } }),
-			onda(
+			esfera(
 				"Lanzador",
-				4,
-				40,
-				0.5,
-				"Principal",
-				{ Orientacion = "Frente", Grosor = 0.3, Desplazamiento = { 0, 0, 4 }, Transparencia = { 0.2, 1 } }
+				2,
+				7,
+				0.25,
+				"Nucleo",
+				{ Sigue = true, Desplazamiento = { 0, 0, 3 }, Transparencia = { 0.35, 1 } }
 			),
-			onda("Lanzador", 3, 30, 0.6, "Secundario", {
-				Orientacion = "Frente",
-				Grosor = 0.25,
-				Desplazamiento = { 0, 0, 8 },
+			onda("Lanzador", 4, 26, 0.45, "Principal", {
+				Sigue = true,
+				Grosor = 0.2,
+				Desplazamiento = { 0, 0, 2 },
+				Transparencia = { 0.35, 1 },
+			}),
+			onda("Lanzador", 3, 18, 0.55, "Secundario", {
+				Sigue = true,
+				Grosor = 0.15,
+				Desplazamiento = { 0, 0, 3 },
+				Transparencia = { 0.45, 1 },
 				Retraso = 0.06,
 				Minimo = "Medio",
 			}),
