@@ -1,14 +1,39 @@
 # Animaciones de combate
 
-Animaciones para el rig **R15** de Roblox, creadas con Blender en modo sin pantalla (`bpy`) y exportadas a `.fbx`.
+Animaciones para el rig **R6** de Roblox, creadas con Blender en modo sin pantalla (`bpy`) y exportadas a `.fbx`.
+El juego entero es R6 (ver el README principal): no hay animaciones para R15.
 
 | Archivo | Qué es |
 | --- | --- |
-| `punetazo_fuerte_anime.fbx` | Rig R15 + cuerpo de cajas + animación. Sirve para previsualizar en Blender u otro programa. |
-| `punetazo_fuerte_anime_solo_huesos.fbx` | **El que se importa en Studio**: solo los 16 huesos R15 con la animación. |
+| `punetazo_fuerte_anime.fbx` | Rig R6 + cuerpo de cajas + animación. Sirve para previsualizar en Blender u otro programa. |
+| `punetazo_fuerte_anime_solo_huesos.fbx` | **El que se importa en Studio**: solo los 7 huesos R6 con la animación. |
 | `punetazo_fuerte_anime.blend` | Escena de Blender con la animación ya horneada, para retocarla a mano. |
-| `punetazo_fuerte_anime_hoja_de_contactos.png` | Fotogramas clave desde frente, lateral y 3/4. |
+| `punetazo_fuerte_anime_hoja_de_contactos.png` | Hoja final (ronda 3): fotogramas clave desde frente, lateral y 3/4. |
+| `rondas/` | Las hojas de contactos de las rondas anteriores (borrador, 1 y 2), a media resolución. |
 | `herramientas/` | Los scripts que lo generan todo (ver más abajo). |
+
+## El rig R6
+
+Los huesos llevan los nombres de las piezas de Roblox, porque el importador de animaciones empareja por nombre:
+
+```
+HumanoidRootPart
+└── Torso
+    ├── Head
+    ├── Right Arm      (con espacio, tal cual se llama la pieza en Roblox)
+    ├── Left Arm
+    ├── Right Leg
+    └── Left Leg
+```
+
+Diferencias con R15 que condicionan la animación:
+
+- **No hay codos, rodillas ni manos**: cada brazo y cada pierna es una pieza rígida. El movimiento sale del giro, la
+  inclinación y el desplazamiento del **torso entero**, de la dirección a la que apunta el brazo y de la posición de las piernas.
+- **Las piernas cuelgan del `Torso`** (no de la cadera como en R15), así que giran con él. Para que los pies queden
+  plantados la animación calcula, en cada fotograma, la **altura del torso** y apunta la pierna de apoyo a su pie.
+- Los huesos están en el **pivote de cada Motor6D** de Roblox (cuello, hombros y caderas), no en el centro de las piezas:
+  si no coinciden, el movimiento en Studio no sería el de Blender.
 
 ## Animación: puñetazo fuerte estilo anime
 
@@ -16,27 +41,41 @@ Animaciones para el rig **R15** de Roblox, creadas con Blender en modo sin panta
 
 | Fotogramas | Fase |
 | --- | --- |
-| 0 | Guardia |
-| 0–10 | **Anticipación**: cadera y torso giran hacia atrás (unos −75° en total), el cuerpo se agacha, el puño se carga detrás |
+| 0 | Guardia (cuerpo de lado, brazo izquierdo adelantado) |
+| 0–10 | **Anticipación**: el torso se enrosca hacia la derecha (unos −70° más que la guardia) y se agacha; el puño se carga detrás y la mano izquierda apunta al blanco |
 | 10–12 | Tensión: casi quieto |
-| 12–16 | **Golpe**: primero la cadera (12–14), luego el torso (13–15) y por último el puño (13–16). Son 3 fotogramas (0,1 s) de puño en el aire |
-| 16–22 | **Impacto exagerado** y mantenido: lunge profundo, torso inclinado, brazo recto, pie trasero pivotando sobre la punta |
+| 12–16 | **Golpe**: el torso gira primero (12–14) y el puño llega después (13–16), dibujando un arco. Son 3 fotogramas (0,1 s) de puño en el aire |
+| 16–22 | **Impacto exagerado** y mantenido: cuerpo lanzado hacia delante e inclinado, brazo recto, el otro brazo recogido atrás y la pierna trasera estirada de puntillas |
 | 22–40 | Recuperación hasta la guardia |
 
-El fotograma del **impacto es el 16** (0,53 s), que es el `Tiempos.Carga` del Remate.
+El fotograma del **impacto es el 16** (0,53 s), que es el `Tiempos.Carga` del Remate. Todas las curvas llevan easing
+(suave, entrada, salida, "golpe" explosivo y "rebote" con sobrepaso); no hay tramos lineales. Como Roblox no importa
+curvas Bézier, el `.fbx` lleva **una clave por fotograma** con el easing ya aplicado.
 
-Todas las curvas llevan easing (suave, entrada, salida, "golpe" explosivo y "rebote" con sobrepaso); no hay tramos
-lineales. Como Roblox no importa curvas Bézier, el `.fbx` lleva **una clave por fotograma** con el easing ya aplicado.
-Los pies no patinan (cinemática inversa de dos huesos; error medido 0,0000 studs) y el puño llega exactamente al punto de impacto.
+Mediciones del script: la pierna de apoyo llega al suelo con un error máximo de **0,02 studs** (no patina ni se hunde) y
+el puño llega al saco de los renders en el fotograma 16. La pierna trasera es libre: R6 no tiene rodilla, así que en el
+impacto queda estirada hacia atrás y no toca el suelo (a propósito: es la "patada atrás" de un golpe a lo anime).
+
+### Las rondas de mejora
+
+El proceso fue: renderizar la hoja de contactos (3 cámaras × 10 fotogramas), mirarla, anotar qué falla y corregirlo en
+`punetazo_fuerte.py`. Se hicieron tres rondas sobre el borrador:
+
+| Hoja | Lo que se vio | Lo que se cambió |
+| --- | --- | --- |
+| `rondas/ronda_0_borrador.png` | Con el pie adelantado dando un paso mientras el torso avanza, en el fotograma 14 el cuerpo se hunde hasta el suelo | — (es el punto de partida) |
+| `rondas/ronda_1.png` | Secuencia legible, pero el impacto es tímido: el cuerpo apenas se inclina | El pie adelantado queda plantado todo el golpe (las piernas rígidas no admiten otra cosa sin hundir el cuerpo) |
+| `rondas/ronda_2.png` | Impacto con más fuerza, pero la pierna trasera tenía un objetivo imposible (1,16 studs de error) y el cuerpo se pasaba de largo | Más inclinación (30°), más enroscado en la anticipación (−90°), brazo izquierdo recogido atrás, el golpe pasa a llevar más avance |
+| `punetazo_fuerte_anime_hoja_de_contactos.png` (ronda 3) | Funciona: guardia, enroscado, golpe, impacto y recuperación se leen en las tres cámaras | Pierna trasera con un objetivo alcanzable (de puntillas hacia atrás), menos avance del torso y un pequeño rebote tras el impacto (fotograma 18) |
 
 ## Importar en Roblox Studio
 
-1. Abre el lugar y añade un maniquí R15: pestaña **Avatar → Rig Builder → R15 → Block Rig**.
+1. Abre el lugar y añade un maniquí R6: pestaña **Avatar → Rig Builder → R6 → Block Rig**.
 2. Selecciona el rig y abre el **Animation Editor** (pestaña **Avatar → Animation Editor**, o *Plugins*). Pulsa **Create**
    y dale un nombre, p. ej. `PunetazoFuerte`.
 3. En el menú **⋮** de la ventana del editor elige **Import → From FBX** (*Import From FBX*) y selecciona
    `punetazo_fuerte_anime_solo_huesos.fbx`. Roblox empareja los huesos con las partes del rig por su nombre
-   (`LowerTorso`, `RightUpperArm`...), por eso no hay que cambiar nada.
+   (`Torso`, `Right Arm`...), por eso no hay que cambiar nada.
 4. Dale a ▶ para ver el resultado, deja **Looping** desactivado y en **⋮ → Set Animation Priority** elige **Action**.
 5. **⋮ → Save** y después **⋮ → Publish to Roblox**. La animación se publica a nombre del mismo creador (tu usuario o
    el grupo) que es dueño del juego: si no, otros jugadores no podrán reproducirla.
@@ -56,13 +95,12 @@ Recursos.Animaciones = {
 ```
 
 No hay que tocar nada más: mientras `Combo4` valga `""` se usa la animación provisional hecha por código, y con un ID
-el cliente (`VFX/Animador`) carga esa en su lugar, igual que con el resto de animaciones.
+el cliente (`VFX/Animador`) carga esa en su lugar, igual que con el resto de animaciones. La provisional (`Combo4` en
+`Datos/Animaciones.luau`) sigue las mismas fases y poses que esta.
 
 **Sincronización con el golpe.** El impacto de este puñetazo cae en el fotograma 16 (0,53 s), así que el Remate
 (`Combo4` en `Datos/Poderes`) tiene `Tiempos.Carga = 0.53`: el servidor aplica el daño y el cliente lanza el efecto de
-impacto justo cuando el puño llega. La animación provisional del Remate se retrasó igual (impacto en T = 0.53) para que
-también cuadre mientras no haya ID. Si cambias el ritmo de la animación, cambia `Carga` a la vez. El Remate queda así más
-pesado que los otros tres golpes del combo (que siguen siendo rápidos): es el golpe fuerte del final.
+impacto justo cuando el puño llega. Si cambias el ritmo de la animación, cambia `Carga` a la vez.
 
 ## Si algo sale mal en Studio
 
@@ -71,8 +109,11 @@ a importar en Blender (`herramientas/verificar_fbx.py`). Si al probarlo ves algo
 
 - **El personaje sale mirando hacia atrás o el golpe va en sentido contrario**: en `herramientas/exportar_fbx.py` cambia
   `axis_forward="Z"` por `"-Z"` y vuelve a generar.
-- **La cadera se desplaza demasiado o muy poco**: el avance del cuerpo se anima en la traslación de `LowerTorso`
-  (en studs de Blender: 1 stud = 0,28 m). Se puede suavizar en `CADERA_POS` de `herramientas/punetazo_fuerte.py`.
+- **El torso se desplaza demasiado o muy poco**: el avance del cuerpo se anima en la traslación del hueso `Torso` (en
+  studs de Blender: 1 stud = 0,28 m). Se puede suavizar en `TORSO_POS` de `herramientas/punetazo_fuerte.py`.
+- **Los brazos o las piernas giran alrededor de un punto raro**: los pivotes de los huesos deben coincidir con los
+  Motor6D de tu rig. Los de `rig_r6.py` son los del R6 estándar (Rig Builder); si usas un R6 con las articulaciones
+  movidas, ajusta `ARTICULACIONES`.
 - **Sale un hueso de más o una pieza suelta**: importa el `solo_huesos`, que no lleva mallas, y no el de rig + cuerpo.
 
 ## Regenerar las animaciones
@@ -97,8 +138,8 @@ python3 -m venv .venv && .venv/bin/pip install -r animaciones/herramientas/requi
 
 | Script | Para qué sirve |
 | --- | --- |
-| `rig_r15.py` | Crea los 16 huesos R15 (orientados con los ejes del mundo, como los Motor6D) y el cuerpo de cajas |
-| `punetazo_fuerte.py` | Las claves y curvas de la animación, la cinemática inversa y el horneado. **Aquí se retoca el movimiento** |
+| `rig_r6.py` | Crea los 7 huesos R6 (en el pivote de cada Motor6D, orientados con los ejes del mundo) y el cuerpo de cajas |
+| `punetazo_fuerte.py` | Las claves y curvas de la animación, la altura del torso, la orientación de brazos y piernas y el horneado. **Aquí se retoca el movimiento** |
 | `hoja_contactos.py` | Render con Cycles (CPU) y montaje de la hoja de contactos |
 | `exportar_fbx.py` | Exportación FBX con los ajustes para Roblox |
 | `verificar_fbx.py` | Reimporta el FBX y comprueba huesos, jerarquía, duración y posiciones |
@@ -113,4 +154,4 @@ Se intentó generar la base con un modelo de texto a movimiento y no fue posible
   tampoco cubre la UE, el Reino Unido ni Corea del Sur.
 - **MoMask** y **MDM**: repositorios en GitHub bloqueados y pesos en Hugging Face con acceso denegado.
 
-Por eso el movimiento está escrito a mano en código (poses clave con easing e IK), no generado por IA.
+Por eso el movimiento está escrito a mano en código (poses clave con easing y cinemática sencilla), no generado por IA.

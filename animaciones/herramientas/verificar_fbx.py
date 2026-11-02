@@ -1,6 +1,6 @@
 """
 Reimporta un FBX en una escena vacía y comprueba que contiene lo que Roblox espera:
-los 16 huesos con nombres R15 y su jerarquía, la animación completa a 30 fps y las mismas posiciones
+los 7 huesos con nombres R6 y su jerarquía, la animación completa a 30 fps y las mismas posiciones
 de articulaciones que la animación original en varios fotogramas.
 
 Uso: python animaciones/herramientas/verificar_fbx.py ruta.fbx
@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
 
 import punetazo_fuerte as anim  # noqa: E402
-import rig_r15 as r15  # noqa: E402
+import rig_r6 as r6  # noqa: E402
 
 
 def main(ruta):
@@ -22,11 +22,11 @@ def main(ruta):
     bpy.ops.import_scene.fbx(filepath=ruta, axis_forward="Z", axis_up="Y", automatic_bone_orientation=False)
     arm = next(o for o in bpy.data.objects if o.type == "ARMATURE")
     nombres = {b.name for b in arm.data.bones}
-    assert nombres == set(r15.ARTICULACIONES), f"huesos distintos: {nombres ^ set(r15.ARTICULACIONES)}"
+    assert nombres == set(r6.ARTICULACIONES), f"huesos distintos: {nombres ^ set(r6.ARTICULACIONES)}"
     for b in arm.data.bones:
-        esperado = r15.PADRE[b.name]
+        esperado = r6.PADRE[b.name]
         assert (b.parent.name if b.parent else None) == esperado, f"padre de {b.name}"
-    print(f"[ok] {len(nombres)} huesos con nombres y jerarquía R15")
+    print(f"[ok] {len(nombres)} huesos con nombres y jerarquía R6")
 
     accion = arm.animation_data.action
     inicio, fin = (int(round(x)) for x in accion.frame_range)
@@ -42,7 +42,7 @@ def main(ruta):
         bpy.context.view_layer.update()
         pose = anim.calcular_pose(f)
         for pb in arm.pose.bones:
-            real = (arm.matrix_world @ pb.head) / r15.ESTUDIO
+            real = (arm.matrix_world @ pb.head) / r6.ESTUDIO
             esperado = pose.mundo(pb.name)[0]
             peor = max(peor, (real - esperado).length)
     print(f"[ok] desviación máxima de articulaciones tras reimportar: {peor:.4f} studs")

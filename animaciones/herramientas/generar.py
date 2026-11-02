@@ -1,5 +1,5 @@
 """
-Genera la animación completa: rig R15 -> animación -> hoja de contactos -> FBX.
+Genera la animación completa: rig R6 -> animación -> hoja de contactos -> FBX.
 
 Uso (desde la raíz del repo, con bpy y pillow instalados):
     python animaciones/herramientas/generar.py --hoja ruta/hoja.png [--fbx]
@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
 
 import punetazo_fuerte as anim  # noqa: E402
-import rig_r15 as r15  # noqa: E402
+import rig_r6 as r6  # noqa: E402
 
 
 def escena_vacia():
@@ -32,9 +32,9 @@ def comprobar_contra_blender(armature):
         bpy.context.view_layer.update()
         pose = anim.calcular_pose(f)
         for pb in armature.pose.bones:
-            esperado = pose.mundo(pb.name)[0] * r15.ESTUDIO
+            esperado = pose.mundo(pb.name)[0] * r6.ESTUDIO
             peor = max(peor, (pb.head - esperado).length)
-    return peor / r15.ESTUDIO
+    return peor / r6.ESTUDIO
 
 
 def main():
@@ -47,21 +47,23 @@ def main():
     a = ap.parse_args()
 
     escena_vacia()
-    armature, mallas = r15.construir_rig()
+    armature, mallas = r6.construir_rig()
     anim.hornear(armature)
 
     error = comprobar_contra_blender(armature)
     print(f"[ok] FK propia vs Blender: desviación máxima {error:.5f} studs")
-    peor = max(max(e) for e in anim.ERRORES_PIE.values())
-    print(f"[ok] error máximo de IK en pies: {peor:.4f} studs")
-    for f, (i, d) in sorted(anim.ERRORES_PIE.items()):
-        if max(i, d) > 0.02:
-            print(f"     aviso: f{f} pie izq {i:.3f} der {d:.3f} (objetivo fuera de alcance)")
+    # La pierna adelantada (izquierda) apoya todo el movimiento: debe llegar al suelo sin patinar. La trasera
+    # solo apunta hacia su pie (R6 no tiene rodillas, así que no siempre llega) y puede quedar estirada.
+    peor_apoyo = max(i for i, _ in anim.ERRORES_PIE.values())
+    peor_trasera = max(d for _, d in anim.ERRORES_PIE.values())
+    print(f"[ok] error máximo de la pierna de apoyo respecto al suelo: {peor_apoyo:.4f} studs")
+    print(f"[ok] la pierna trasera (libre, de puntillas) queda como mucho a {peor_trasera:.2f} studs de su objetivo")
+    assert peor_apoyo < 0.05, "el pie de apoyo patina o se hunde"
 
     if a.hoja:
         import hoja_contactos
 
-        hoja_contactos.renderizar(anim.FOTOGRAMAS_CLAVE, a.render_dir, a.hoja)
+        hoja_contactos.renderizar(anim.FOTOGRAMAS_CLAVE, a.render_dir, a.hoja, anim.punto_de_impacto())
         print("[ok] hoja:", a.hoja)
     if a.fbx or a.fbx_huesos:
         import exportar_fbx

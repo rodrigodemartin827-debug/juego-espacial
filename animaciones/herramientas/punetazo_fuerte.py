@@ -1,16 +1,20 @@
 """
-Animación "puñetazo fuerte estilo anime" para el rig R15.
+Animación "puñetazo fuerte estilo anime" para el rig R6.
 
-Se describe con claves (fotograma, valor, easing) por canal. Cada canal se muestrea en Python con su
-propia curva de easing (nada lineal) y se hornea fotograma a fotograma en el armature de Blender.
-El puño y los dos pies se resuelven con cinemática inversa de dos huesos para que los pies no patinen
-y el puño llegue exactamente al punto de impacto; el resto va en cinemática directa.
+R6 no tiene codos ni rodillas: brazos y piernas son piezas rígidas. Por eso la expresividad sale de:
+  * el TORSO entero (giro, inclinación y desplazamiento), con la cabeza compensando para seguir mirando al blanco;
+  * el brazo que golpea, que apunta en una dirección del mundo (así el puño sigue la trayectoria que se quiere);
+  * las piernas, que van con cinemática inversa de "apuntar": cada pierna se orienta hacia donde está su pie y la
+    altura del torso se calcula en cada fotograma para que los pies lleguen al suelo sin atravesarlo.
+
+Cada canal se describe con claves (fotograma, valor, easing) y se muestrea en Python con su propia curva de
+easing (nada lineal); después se hornea fotograma a fotograma en el armature de Blender.
 
 Fases (30 fps):
     0        guardia
-    0-10     anticipación: cadera y torso giran hacia atrás, el puño se carga detrás del cuerpo
-    10-12    tensión (casi quieto, con un pequeño temblor)
-    12-16    golpe: primero cadera (12-14), luego torso (13-15), por último el puño (13-16)
+    0-10     anticipación: el torso se enrosca hacia atrás, el cuerpo se agacha, el puño se carga detrás
+    10-12    tensión (casi quieto)
+    12-16    golpe: el torso lidera y el puño llega después, dibujando un arco
     16-22    impacto exagerado y mantenido ("hit stop")
     22-40    recuperación hasta la guardia
 """
@@ -19,10 +23,11 @@ import math
 
 from mathutils import Euler, Quaternion, Vector
 
-import rig_r15 as r15
+import rig_r6 as r6
 
 FPS = 30
 ULTIMO_FOTOGRAMA = 40
+IMPACTO = 16  # fotograma del impacto (0,53 s): coincide con Tiempos.Carga del Remate en Datos/Poderes
 
 # ---------------------------------------------------------------------------------------------
 # Curvas de easing. Todas llevan t de 0 a 1 y devuelven el avance de 0 a 1 (pueden pasarse de 1).
@@ -67,97 +72,74 @@ def muestrear(claves, fotograma):
 
 
 # ---------------------------------------------------------------------------------------------
-# Datos de la animación. Ángulos en grados sobre los ejes del mundo (X derecha, Y profundidad, Z arriba).
-# En el eje Z, un ángulo positivo adelanta el lado DERECHO del personaje (el que golpea).
+# Datos de la animación. Mundo de Blender: X = izquierda del personaje, Y = hacia atrás (el personaje y el golpe
+# miran a -Y), Z = arriba. Ángulos en grados:
+#   TORSO_ROT = (inclinación hacia delante, ladeo hacia su izquierda, giro; giro positivo = a la izquierda).
 # ---------------------------------------------------------------------------------------------
 
-# Cadera (LowerTorso): traslación en studs y rotación.
-CADERA_POS = [
-    (0, (0.0, 0.0, -0.45), "suave"),
-    (10, (0.3, 0.65, -0.9), "suave"),
-    (12, (0.3, 0.7, -0.93), "suave"),
-    (14, (-0.1, -0.9, -0.7), "golpe"),
-    (16, (-0.1, -1.3, -0.78), "sale"),
-    (22, (-0.1, -1.45, -0.85), "suave"),
-    (32, (0.0, -0.3, -0.52), "suave"),
-    (40, (0.0, 0.0, -0.45), "suave"),
+# Torso: desplazamiento (x, y) en studs; la altura la calcula el suelo en cada fotograma.
+TORSO_POS = [
+    (0, (0.0, 0.0), "suave"),
+    (10, (-0.2, 0.6), "suave"),
+    (12, (-0.2, 0.65), "suave"),
+    (14, (0.0, -0.45), "golpe"),
+    (16, (0.05, -1.2), "sale"),
+    (18, (0.05, -1.3), "suave"),  # rebote: el cuerpo sigue empujando un poco tras el impacto
+    (22, (0.05, -1.4), "suave"),
+    (32, (0.0, -0.4), "suave"),
+    (40, (0.0, 0.0), "suave"),
 ]
-CADERA_ROT = [
-    (0, (0, 0, -12), "suave"),
-    (10, (-8, -8, -46), "suave"),
-    (12, (-8, -8, -48), "suave"),
-    (14, (10, 6, 46), "rebote"),
-    (16, (12, 6, 50), "sale"),
-    (22, (12, 5, 48), "suave"),
-    (32, (3, 1, 10), "suave"),
-    (40, (0, 0, -12), "suave"),
-]
-# El torso llega un fotograma tarde respecto a la cadera.
 TORSO_ROT = [
-    (0, (2, 0, -6), "suave"),
-    (10, (-18, -6, -26), "suave"),
-    (12, (-20, -6, -30), "suave"),
-    (15, (24, 8, 34), "rebote"),
-    (17, (28, 8, 40), "sale"),
-    (22, (28, 8, 38), "suave"),
-    (33, (6, 2, 4), "suave"),
-    (40, (2, 0, -6), "suave"),
+    (0, (6, 0, -18), "suave"),
+    (10, (10, 5, -90), "suave"),
+    (12, (11, 5, -94), "suave"),
+    (14, (18, 0, 30), "golpe"),
+    (16, (30, -5, 70), "rebote"),
+    (18, (27, -4, 64), "suave"),  # se asienta un poco tras pasarse
+    (22, (32, -5, 66), "suave"),
+    (33, (6, 0, -12), "suave"),
+    (40, (6, 0, -18), "suave"),
 ]
-# La cabeza compensa el giro del cuerpo para seguir mirando al objetivo.
+# La cabeza compensa el giro del torso para seguir mirando al blanco.
 CABEZA_ROT = [
-    (0, (0, 0, 14), "suave"),
-    (10, (14, 0, 52), "suave"),
-    (12, (14, 0, 54), "suave"),
-    (15, (-30, 0, -68), "rebote"),
-    (22, (-28, 0, -66), "suave"),
-    (33, (-4, 0, -10), "suave"),
-    (40, (0, 0, 14), "suave"),
+    (0, (0, 0, 18), "suave"),
+    (10, (-4, 0, 72), "suave"),
+    (12, (-4, 0, 76), "suave"),
+    (15, (-26, 0, -70), "rebote"),
+    (22, (-26, 0, -64), "suave"),
+    (33, (-2, 0, 10), "suave"),
+    (40, (0, 0, 18), "suave"),
 ]
-# Brazo izquierdo (guardia): se estira hacia delante al cargar y se recoge de golpe para dar contrapeso.
-BRAZO_I_SUP = [
-    (0, (-40, 0, -10), "suave"),
-    (10, (-75, 0, -8), "suave"),
-    (12, (-75, 0, -8), "suave"),
-    (15, (20, 0, -20), "golpe"),
-    (22, (28, 0, -24), "suave"),
-    (40, (-40, 0, -10), "suave"),
+# Brazo izquierdo (guardia): dirección en el sistema del torso. Se estira al cargar y se recoge de golpe.
+BRAZO_I_DIR = [
+    (0, (0.30, -0.70, -0.55), "suave"),
+    (10, (0.15, -0.95, -0.25), "suave"),
+    (12, (0.15, -0.95, -0.25), "suave"),
+    (15, (0.80, 0.35, -0.45), "golpe"),
+    (22, (0.85, 0.45, -0.35), "suave"),
+    (40, (0.30, -0.70, -0.55), "suave"),
 ]
-BRAZO_I_INF = [
-    (0, (-95, 0, 0), "suave"),
-    (10, (-35, 0, 0), "suave"),
-    (12, (-35, 0, 0), "suave"),
-    (15, (-115, 0, 0), "golpe"),
-    (22, (-120, 0, 0), "suave"),
-    (40, (-95, 0, 0), "suave"),
+# Brazo derecho (el que golpea): dirección en el MUNDO. Hacia atrás al cargar y recto hacia delante al golpear.
+BRAZO_D_DIR = [
+    (0, (-0.20, -0.75, -0.55), "suave"),
+    (10, (-0.50, 0.85, -0.25), "suave"),
+    (13, (-0.55, 0.75, -0.05), "suave"),
+    (16, (-0.04, -1.00, 0.04), "golpe"),
+    (22, (-0.04, -1.00, 0.02), "sale"),
+    (30, (-0.20, -0.80, -0.40), "suave"),
+    (40, (-0.20, -0.75, -0.55), "suave"),
 ]
-# Puño derecho (posición de la muñeca en el mundo, en studs) y hacia dónde apunta el codo.
-PUNO_POS = [
-    (0, (-0.9, -0.8, 4.3), "suave"),
-    (10, (-1.6, 1.0, 3.9), "suave"),
-    (13, (-1.65, 1.1, 3.8), "suave"),
-    (16, (-0.5, -4.6, 4.0), "golpe"),
-    (22, (-0.5, -4.7, 4.0), "sale"),
-    (30, (-1.0, -1.6, 4.2), "suave"),
-    (40, (-0.9, -0.8, 4.3), "suave"),
-]
-PUNO_CODO = [
-    (0, (-0.3, 0.4, -1.0), "suave"),
-    (10, (-0.2, 1.0, -0.3), "suave"),
-    (13, (-0.2, 1.0, -0.3), "suave"),
-    (16, (-0.4, 0.1, -1.0), "golpe"),
-    (40, (-0.3, 0.4, -1.0), "suave"),
-]
-# Pies (posición del tobillo en studs, guiñada y cabeceo en grados).
-PIE_I = [(0, (0.9, -1.0, 0.35, 12, 0), "suave"), (40, (0.9, -1.0, 0.35, 12, 0), "suave")]
+# Pies (posición de la punta de la pierna en studs). El izquierdo es el adelantado y no se mueve del suelo: con
+# piernas rígidas, un pie que viaja mientras el torso avanza obliga a hundir el cuerpo (se vio en la hoja de la ronda 0).
+PIE_I = [(0, (1.0, -1.5, 0.0), "suave"), (40, (1.0, -1.5, 0.0), "suave")]
 PIE_D = [
-    (0, (-0.9, 0.7, 0.35, -35, 0), "suave"),
-    (12, (-0.9, 0.7, 0.35, -35, 0), "suave"),
-    (13, (-0.85, 0.3, 0.7, -26, 35), "golpe"),
-    (14, (-0.85, 0.25, 0.75, -24, 40), "sale"),
-    (16, (-0.8, 0.1, 0.85, -20, 50), "sale"),
-    (22, (-0.8, 0.1, 0.85, -20, 50), "suave"),
-    (31, (-0.9, 0.7, 0.35, -35, 0), "suave"),
-    (40, (-0.9, 0.7, 0.35, -35, 0), "suave"),
+    (0, (-1.2, 0.8, 0.0), "suave"),
+    (12, (-1.2, 0.8, 0.0), "suave"),
+    (14, (-1.1, 0.4, 0.2), "golpe"),
+    (16, (-0.9, -0.3, 0.3), "sale"),  # la pierna trasera se queda estirada hacia atrás, de puntillas
+    (22, (-0.9, -0.3, 0.3), "suave"),
+    (31, (-1.2, 0.8, 0.0), "suave"),
+    (40, (-1.2, 0.8, 0.0), "suave"),
 ]
 
 # Fotogramas que se enseñan en la hoja de contactos: (fotograma, nombre).
@@ -165,8 +147,8 @@ FOTOGRAMAS_CLAVE = [
     (0, "Guardia"),
     (6, "Anticipación"),
     (10, "Máx. anticipación"),
-    (13, "Cadera lidera"),
-    (14, "Torso sigue"),
+    (13, "El torso arranca"),
+    (14, "El puño sigue"),
     (16, "IMPACTO"),
     (19, "Impacto mantenido"),
     (24, "Recuperación"),
@@ -181,20 +163,25 @@ FOTOGRAMAS_CLAVE = [
 
 class Pose:
     def __init__(self):
-        self.q = {b: Quaternion() for b in r15.ARTICULACIONES}
-        self.loc = {b: Vector((0, 0, 0)) for b in r15.ARTICULACIONES}
+        self.q = {b: Quaternion() for b in r6.ARTICULACIONES}
+        self.loc = {b: Vector((0, 0, 0)) for b in r6.ARTICULACIONES}
 
     def mundo(self, hueso):
         """(posición de la articulación en studs, rotación en el mundo)."""
-        padre = r15.PADRE[hueso]
+        padre = r6.PADRE[hueso]
         if padre is None:
-            return Vector(r15.ARTICULACIONES[hueso]) + self.loc[hueso], self.q[hueso].copy()
+            return Vector(r6.ARTICULACIONES[hueso]) + self.loc[hueso], self.q[hueso].copy()
         pp, pr = self.mundo(padre)
-        desfase = Vector(r15.ARTICULACIONES[hueso]) - Vector(r15.ARTICULACIONES[padre])
+        desfase = Vector(r6.ARTICULACIONES[hueso]) - Vector(r6.ARTICULACIONES[padre])
         return pp + pr @ (desfase + self.loc[hueso]), pr @ self.q[hueso]
 
+    def punta(self, hueso, largo):
+        """Posición de la punta de un brazo o una pierna (el puño, el pie)."""
+        pos, rot = self.mundo(hueso)
+        return pos + rot @ Vector((0, 0, -largo))
+
     def poner_rot_mundo(self, hueso, q_mundo):
-        padre = r15.PADRE[hueso]
+        padre = r6.PADRE[hueso]
         q_padre = self.mundo(padre)[1] if padre else Quaternion()
         self.q[hueso] = q_padre.inverted() @ q_mundo
 
@@ -203,61 +190,71 @@ def _euler(grados):
     return Euler([math.radians(g) for g in grados], "XYZ").to_quaternion()
 
 
-def _ik_dos_huesos(origen, objetivo, largo_a, largo_b, polo):
-    """Devuelve las direcciones (hueso superior, hueso inferior); la articulación media se dobla hacia `polo`."""
-    d = objetivo - origen
-    dist = min(max(d.length, abs(largo_a - largo_b) + 1e-4), largo_a + largo_b - 1e-4)
-    dn = d.normalized()
-    perp = polo - dn * polo.dot(dn)
-    perp = perp.normalized() if perp.length > 1e-6 else Vector((0, -1, 0))
-    cos_a = (largo_a * largo_a + dist * dist - largo_b * largo_b) / (2 * largo_a * dist)
-    a = math.acos(max(-1.0, min(1.0, cos_a)))
-    dir_sup = dn * math.cos(a) + perp * math.sin(a)
-    medio = origen + dir_sup * largo_a
-    dir_inf = (origen + dn * dist - medio).normalized()
-    return dir_sup, dir_inf
+def _torso_euler(inclinacion, ladeo, giro):
+    """Inclinación hacia delante (-Y) = giro positivo alrededor de X; ladeo hacia su izquierda (+X) = giro positivo
+    alrededor de Y; giro a la izquierda = giro positivo alrededor de Z. Orden: ladeo, giro, inclinación."""
+    return _euler((inclinacion, ladeo, giro))
 
 
 ABAJO = Vector((0, 0, -1))
-ERRORES_PIE = {}  # fotograma -> (error pie izq., error pie der.) en studs, para comprobar que no patinan
+ERRORES_PIE = {}  # fotograma -> (error pie izq., error pie der.) en studs, para comprobar que llegan al suelo
+
+
+def _apuntar(pose, hueso, direccion):
+    """Orienta una pieza rígida (que en reposo cuelga hacia abajo) para que apunte hacia `direccion` (en el mundo)."""
+    pose.poner_rot_mundo(hueso, ABAJO.rotation_difference(direccion.normalized()))
+
+
+def _altura_del_torso(pose, objetivo):
+    """Busca la altura del torso para que la pierna adelantada (la que apoya todo el rato) llegue exactamente a su
+    punto del suelo. La trasera solo apunta hacia el suyo: puede levantarse (de puntillas) sin condicionar la altura."""
+
+    def sobrante(z):
+        pose.loc["Torso"].z = z
+        cadera = pose.mundo("Left Leg")[0]
+        return (objetivo - cadera).length - r6.LARGO_PIERNA
+
+    bajo, alto = -2.5, 1.0  # más alto el torso, más lejos quedan los pies
+    for _ in range(40):
+        medio = (bajo + alto) / 2
+        if sobrante(medio) > 0:
+            alto = medio
+        else:
+            bajo = medio
+    pose.loc["Torso"].z = (bajo + alto) / 2
 
 
 def calcular_pose(fotograma):
     p = Pose()
-    p.loc["LowerTorso"] = Vector(muestrear(CADERA_POS, fotograma))
-    p.q["LowerTorso"] = _euler(muestrear(CADERA_ROT, fotograma))
-    p.q["UpperTorso"] = _euler(muestrear(TORSO_ROT, fotograma))
+    x, y = muestrear(TORSO_POS, fotograma)
+    p.loc["Torso"] = Vector((x, y, 0))
+    p.q["Torso"] = _torso_euler(*muestrear(TORSO_ROT, fotograma))
     p.q["Head"] = _euler(muestrear(CABEZA_ROT, fotograma))
-    p.q["LeftUpperArm"] = _euler(muestrear(BRAZO_I_SUP, fotograma))
-    p.q["LeftLowerArm"] = _euler(muestrear(BRAZO_I_INF, fotograma))
 
-    # Piernas con IK: los pies se quedan donde dicen las claves, sin patinar.
+    # Piernas: primero la altura del torso (según la pierna de apoyo), luego cada pierna apunta a su pie.
+    objetivos = {
+        "Left": Vector(muestrear(PIE_I, fotograma)),
+        "Right": Vector(muestrear(PIE_D, fotograma)),
+    }
+    _altura_del_torso(p, objetivos["Left"])
     errores = []
-    for lado, claves in (("Left", PIE_I), ("Right", PIE_D)):
-        x, y, z, guinada, cabeceo = muestrear(claves, fotograma)
-        objetivo = Vector((x, y, z))
-        yaw = math.radians(guinada)
-        polo = Vector((math.sin(yaw), -math.cos(yaw), 0.0))
-        cadera = p.mundo(f"{lado}UpperLeg")[0]
-        dir_sup, dir_inf = _ik_dos_huesos(cadera, objetivo, r15.LARGO_PIERNA_SUP, r15.LARGO_PIERNA_INF, polo)
-        p.poner_rot_mundo(f"{lado}UpperLeg", ABAJO.rotation_difference(dir_sup))
-        p.poner_rot_mundo(f"{lado}LowerLeg", ABAJO.rotation_difference(dir_inf))
-        p.poner_rot_mundo(
-            f"{lado}Foot", Quaternion((0, 0, 1), yaw) @ Quaternion((1, 0, 0), math.radians(cabeceo))
-        )
-        errores.append((p.mundo(f"{lado}Foot")[0] - objetivo).length)
-    ERRORES_PIE[fotograma] = tuple(errores)
+    for lado, objetivo in objetivos.items():
+        cadera = p.mundo(f"{lado} Leg")[0]
+        _apuntar(p, f"{lado} Leg", objetivo - cadera)
+        errores.append((p.punta(f"{lado} Leg", r6.LARGO_PIERNA) - objetivo).length)
+    ERRORES_PIE[fotograma] = (errores[0], errores[1])
 
-    # Brazo derecho con IK hacia el puño.
-    objetivo = Vector(muestrear(PUNO_POS, fotograma))
-    polo = Vector(muestrear(PUNO_CODO, fotograma))
-    hombro = p.mundo("RightUpperArm")[0]
-    dir_sup, dir_inf = _ik_dos_huesos(hombro, objetivo, r15.LARGO_BRAZO_SUP, r15.LARGO_BRAZO_INF, polo)
-    p.poner_rot_mundo("RightUpperArm", ABAJO.rotation_difference(dir_sup))
-    q_antebrazo = ABAJO.rotation_difference(dir_inf)
-    p.poner_rot_mundo("RightLowerArm", q_antebrazo)
-    p.poner_rot_mundo("RightHand", q_antebrazo)  # la mano sigue la línea del antebrazo
+    # Brazos: el izquierdo en el sistema del torso, el derecho (que golpea) en el del mundo.
+    _, rot_torso = p.mundo("Torso")
+    _apuntar(p, "Left Arm", rot_torso @ Vector(muestrear(BRAZO_I_DIR, fotograma)))
+    _apuntar(p, "Right Arm", Vector(muestrear(BRAZO_D_DIR, fotograma)))
     return p
+
+
+def punto_de_impacto():
+    """Dónde está el puño en el fotograma del impacto (studs), para colocar el saco del render."""
+    pose = calcular_pose(IMPACTO)
+    return pose.punta("Right Arm", r6.LARGO_BRAZO), pose.mundo("Right Arm")[1] @ ABAJO * -1
 
 
 # ---------------------------------------------------------------------------------------------
@@ -287,7 +284,7 @@ def hornear(armature):
             anterior[pb.name] = q
             pb.rotation_quaternion = q
             pb.keyframe_insert("rotation_quaternion", frame=f)
-            if pb.name == "LowerTorso":
-                pb.location = pose.loc[pb.name] * r15.ESTUDIO
+            if pb.name == "Torso":
+                pb.location = pose.loc[pb.name] * r6.ESTUDIO
                 pb.keyframe_insert("location", frame=f)
     return accion
