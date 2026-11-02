@@ -40,6 +40,8 @@ local PADRES = {
 	Script = { "LuaSourceContainer" },
 	LocalScript = { "LuaSourceContainer" },
 	ModuleScript = { "LuaSourceContainer" },
+	Part = { "BasePart", "PVInstance" },
+	Model = { "PVInstance" },
 }
 
 -- ===== Señales =====
@@ -286,6 +288,23 @@ function Roblox.nuevoMundo(opciones)
 
 	function Instancia.Destroy(self)
 		self.Parent = nil
+	end
+
+	-- Atributos: como en Roblox, poner nil borra el atributo. Solo se aceptan valores simples.
+	function Instancia.SetAttribute(self, nombre, valor)
+		assert(type(nombre) == "string", "SetAttribute necesita un nombre")
+		assert(type(valor) ~= "table" and type(valor) ~= "function", "valor de atributo no admitido")
+		local atributos = rawget(self, "_atributos")
+		if atributos == nil then
+			atributos = {}
+			rawset(self, "_atributos", atributos)
+		end
+		atributos[nombre] = valor
+	end
+
+	function Instancia.GetAttribute(self, nombre)
+		local atributos = rawget(self, "_atributos")
+		return if atributos then atributos[nombre] else nil
 	end
 
 	function Instancia.GetFullName(self)

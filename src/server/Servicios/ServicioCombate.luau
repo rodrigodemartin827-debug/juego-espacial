@@ -31,6 +31,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = ReplicatedStorage.Shared
 local Arbitro = require(Shared.Combate.Arbitro)
 local Config = require(Shared.Combate.Config)
+local ConfigEleccion = require(Shared.Eleccion.Config)
 local NavesConfig = require(Shared.Naves.Config)
 local Poderes = require(Shared.Combate.Datos.Poderes)
 local Reglas = require(Shared.Combate.Reglas)
@@ -71,6 +72,13 @@ local function bandoDe(luchador: Luchador): string
 	end
 	local bando = luchador.Modelo:GetAttribute(Config.AtributoBando)
 	return if type(bando) == "string" then bando else "Ninguno"
+end
+
+-- ¿Está el jugador de este luchador en la pantalla de elección de bando? Mientras elige no lanza habilidades ni
+-- es objetivo de nadie (ver Servicios/ServicioBandos).
+local function estaEligiendo(luchador: Luchador): boolean
+	local jugador = luchador.Jugador
+	return jugador ~= nil and jugador:GetAttribute(ConfigEleccion.AtributoEligiendo) == true
 end
 
 local function estaVivo(luchador: Luchador): boolean
@@ -233,6 +241,9 @@ local function aplicarImpacto(
 		if objetivo == lanzador or objetivo.Modelo:GetAttribute(NavesConfig.AtributoPilotando) then
 			continue -- quien pilota una nave no es objetivo de las habilidades de a pie
 		end
+		if estaEligiendo(objetivo) then
+			continue -- está en la pantalla de elección de bando: no puede defenderse
+		end
 		objetivo.Estado.Vivo = estaVivo(objetivo)
 		-- Enemigo (los del mismo bando no se hacen daño), vivo y no invulnerable.
 		if not Arbitro.PuedeSerGolpeado(bandoLanzador, bandoDe(objetivo), objetivo, ahora) then
@@ -283,6 +294,9 @@ local function usarHabilidad(jugador: Player, idPedido: string, direccionPedida:
 	local luchador = luchadorDe(jugador)
 	if luchador == nil or luchador.Modelo:GetAttribute(NavesConfig.AtributoPilotando) then
 		return -- sin personaje, o dentro de una nave (ver Servicios/ServicioNaves)
+	end
+	if estaEligiendo(luchador) then
+		return -- aún está eligiendo bando: protegido e invulnerable, así que tampoco puede atacar
 	end
 	local ahora = os.clock()
 	luchador.Estado.Vivo = estaVivo(luchador)
