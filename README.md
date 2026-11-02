@@ -59,8 +59,6 @@ src/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
 │   │   └── LimitadorDeTasa  Cubo de fichas (peticiones por segundo)
-│   ├── Recursos/
-│   │   └── Animaciones      IDs de las animaciones subidas a Roblox (ver `animaciones/README.md`)
 │   └── Utilidades/          Senal (eventos) y Tablas (copia profunda)
 ├── server/                  → ServerScriptService.Server (un Script con sus módulos)
 │   ├── init.server.luau     Arranque: inicia los servicios en orden

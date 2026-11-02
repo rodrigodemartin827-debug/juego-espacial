@@ -305,7 +305,8 @@ local habilidades: { [string]: Habilidad } = {
 		Dano = 22,
 		Empuje = { Horizontal = 46, Vertical = 38 },
 		Aturdimiento = 0.9,
-		Tiempos = { Carga = 0.24, Viaje = 0, Recuperacion = 0.2 },
+		-- Carga = 0.53: el impacto del "puñetazo fuerte" (animaciones/, fotograma 16 a 30 fps) cae en 0,533 s.
+		Tiempos = { Carga = 0.53, Viaje = 0, Recuperacion = 0.2 },
 		Inmoviliza = false,
 		Invulnerable = false,
 		Animaciones = { Carga = "Combo4" },

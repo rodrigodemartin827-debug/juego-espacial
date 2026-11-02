@@ -23,7 +23,7 @@ Animaciones para el rig **R15** de Roblox, creadas con Blender en modo sin panta
 | 16–22 | **Impacto exagerado** y mantenido: lunge profundo, torso inclinado, brazo recto, pie trasero pivotando sobre la punta |
 | 22–40 | Recuperación hasta la guardia |
 
-El fotograma del **impacto es el 16** (0,53 s): úsalo para aplicar el daño (por ejemplo con un marcador de evento).
+El fotograma del **impacto es el 16** (0,53 s), que es el `Tiempos.Carga` del Remate.
 
 Todas las curvas llevan easing (suave, entrada, salida, "golpe" explosivo y "rebote" con sobrepaso); no hay tramos
 lineales. Como Roblox no importa curvas Bézier, el `.fbx` lleva **una clave por fotograma** con el easing ya aplicado.
@@ -42,30 +42,27 @@ Los pies no patinan (cinemática inversa de dos huesos; error medido 0,0000 stud
    el grupo) que es dueño del juego: si no, otros jugadores no podrán reproducirla.
 6. Al publicar, Studio te da el **ID** (también sale en la ventana *Output*). Solo necesitas el número.
 
-## Poner el ID en `Recursos.Animaciones`
+## Poner el ID: es el **Remate** del combo (`Combo4`)
 
-Abre `src/shared/Recursos/Animaciones.luau` y pon el número en la tabla `ID`:
+El combate ya tiene su sitio para los IDs: `src/shared/Combate/Datos/Recursos.luau`, tabla `Recursos.Animaciones`
+(ver el README principal, sección del combate). El puñetazo fuerte es la animación del cuarto golpe del combo, así que
+su ID se pega en `Combo4`:
 
 ```lua
-Animaciones.ID = {
-	PunetazoFuerte = 1234567890, -- el ID que te dio Studio
+Recursos.Animaciones = {
+	...
+	Combo4 = "rbxassetid://1234567890", -- el ID que te dio Studio, con el prefijo rbxassetid://
 }
 ```
 
-Desde cualquier script del juego (`ReplicatedStorage.Shared.Recursos.Animaciones`):
+No hay que tocar nada más: mientras `Combo4` valga `""` se usa la animación provisional hecha por código, y con un ID
+el cliente (`VFX/Animador`) carga esa en su lugar, igual que con el resto de animaciones.
 
-```lua
-local Animaciones = require(ReplicatedStorage.Shared.Recursos.Animaciones)
-
-local animacion = Animaciones.Obtener("PunetazoFuerte") -- nil si el ID sigue siendo 0
-if animacion then
-	local pista = humanoide.Animator:LoadAnimation(animacion)
-	pista.Priority = Enum.AnimationPriority.Action
-	pista:Play()
-end
-```
-
-`Animaciones.Info.PunetazoFuerte.SegundoDelImpacto` indica en qué segundo de la animación cae el golpe.
+**Sincronización con el golpe.** El impacto de este puñetazo cae en el fotograma 16 (0,53 s), así que el Remate
+(`Combo4` en `Datos/Poderes`) tiene `Tiempos.Carga = 0.53`: el servidor aplica el daño y el cliente lanza el efecto de
+impacto justo cuando el puño llega. La animación provisional del Remate se retrasó igual (impacto en T = 0.53) para que
+también cuadre mientras no haya ID. Si cambias el ritmo de la animación, cambia `Carga` a la vez. El Remate queda así más
+pesado que los otros tres golpes del combo (que siguen siendo rápidos): es el golpe fuerte del final.
 
 ## Si algo sale mal en Studio
 
