@@ -22,8 +22,10 @@ local RunService = game:GetService("RunService")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local CombateReglas = require(Shared.Combate.Reglas)
 local Config = require(Shared.Naves.Config)
+local Inventario = require(Shared.Exploracion.Inventario)
 local Mejoras = require(Shared.Naves.Datos.Mejoras)
 local Calidad = require(script.Parent.Parent.VFX.Calidad)
+local ServicioDatos = require(script.Parent.Parent.Servicios.ServicioDatos)
 
 local Panel = {}
 
@@ -447,7 +449,10 @@ function Panel.Actualizar(datos: any)
 	if gui == nil then
 		return
 	end
-	textoBodega.Text = `Bodega 0/{math.floor(datos.Capacidad)}`
+	-- La bodega es el inventario del jugador: lo que lleva, sobre el límite que marca la mejora Carga.
+	local misDatos = ServicioDatos.Obtener()
+	local ocupado = if misDatos then Inventario.Volumen(misDatos.Inventario) else 0
+	textoBodega.Text = `Bodega {math.floor(ocupado)}/{math.floor(datos.Capacidad)}`
 	local partes = {}
 	for _, id in Mejoras.Orden do
 		table.insert(partes, `{Mejoras.Lista[id].Nombre} {datos.Niveles[id] or 0}`)
