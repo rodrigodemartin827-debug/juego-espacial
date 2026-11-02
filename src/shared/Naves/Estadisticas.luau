@@ -25,8 +25,10 @@ export type Estadisticas = {
 	Dano: number, -- daño de cada disparo
 	Cadencia: number, -- disparos por segundo
 	Alcance: number, -- studs
-	RadioEscaner: number, -- studs
-	Capacidad: number, -- espacio de la bodega
+	RadioEscaner: number, -- radar de la nave, studs
+	AlcanceEscaner: number, -- escáner de mano: distancia máxima, studs
+	VelocidadEscaner: number, -- escáner de mano: multiplicador de velocidad (1 = normal)
+	Capacidad: number, -- espacio de la bodega = límite del inventario
 }
 
 local Estadisticas = {}
