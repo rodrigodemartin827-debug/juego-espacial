@@ -383,8 +383,10 @@ end
 
 -- ===== La grieta =====
 
-local function nuevaCinta(padre: Instance, a0: Attachment, a1: Attachment, datos: any): Beam
+-- Una cinta de luz entre dos adjuntos. `orden` decide qué capa se dibuja delante (ZOffset: más alto, más delante).
+local function nuevaCinta(padre: Instance, a0: Attachment, a1: Attachment, datos: any, orden: number): Beam
 	local cinta = Instance.new("Beam")
+	cinta.ZOffset = orden * 0.1
 	cinta.Attachment0 = a0
 	cinta.Attachment1 = a1
 	cinta.FaceCamera = true
@@ -430,7 +432,7 @@ local function construirGrieta(padre: Instance)
 	end
 	grietaAdjuntos = centrales
 
-	for _, datosCapa in datos.Capas do
+	for orden, datosCapa in datos.Capas do
 		if not Calidad.Permite(datosCapa.Minimo) then
 			continue
 		end
@@ -446,7 +448,7 @@ local function construirGrieta(padre: Instance)
 		end
 		local cintas: { Beam } = {}
 		for indice = 1, puntos - 1 do
-			table.insert(cintas, nuevaCinta(ancla, adjuntos[indice], adjuntos[indice + 1], datosCapa))
+			table.insert(cintas, nuevaCinta(ancla, adjuntos[indice], adjuntos[indice + 1], datosCapa, orden))
 		end
 		table.insert(grietaCapas, { Beams = cintas, Datos = datosCapa, Adjuntos = adjuntos })
 	end
@@ -464,10 +466,15 @@ local function construirGrieta(padre: Instance)
 				adjuntos[indice] = adjunto
 			end
 			local capas: { Capa } = {}
-			for _, datosCapa in { datos.Ramas.Halo, datos.Ramas.Nucleo } do
+			for orden, datosCapa in { datos.Ramas.Halo, datos.Ramas.Nucleo } do
 				local cintas: { Beam } = {}
 				for indice = 1, rama.Puntos do
-					table.insert(cintas, nuevaCinta(ancla, adjuntos[indice], adjuntos[indice + 1], datosCapa))
+					-- Detrás del vacío de la grieta principal (las ramas nacen de su borde).
+					local capaOrden = orden - 2
+					table.insert(
+						cintas,
+						nuevaCinta(ancla, adjuntos[indice], adjuntos[indice + 1], datosCapa, capaOrden)
+					)
 				end
 				table.insert(capas, { Beams = cintas, Datos = datosCapa, Adjuntos = adjuntos })
 			end

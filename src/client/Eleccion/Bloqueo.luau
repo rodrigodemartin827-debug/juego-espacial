@@ -61,6 +61,7 @@ type Guardado = {
 	Raton: Enum.MouseBehavior,
 	IconoRaton: boolean,
 	Exposicion: number,
+	Campo: number, -- campo de visión de la cámara (la escena lo cambia según la pantalla)
 	Color: ColorCorrectionEffect?,
 	PalancaX: number, -- última posición del stick (para moverse con él una vez por empujón)
 }
@@ -178,6 +179,7 @@ function Bloqueo.Activar(alPulsar: (Tecla) -> ())
 		Raton = UserInputService.MouseBehavior,
 		IconoRaton = UserInputService.MouseIconEnabled,
 		Exposicion = Lighting.ExposureCompensation,
+		Campo = if workspace.CurrentCamera then workspace.CurrentCamera.FieldOfView else 70,
 		Color = nil,
 		PalancaX = 0,
 	}
@@ -293,6 +295,7 @@ function Bloqueo.Desactivar()
 	local camara = workspace.CurrentCamera
 	if camara then
 		camara.CameraType = Enum.CameraType.Custom
+		camara.FieldOfView = estado.Campo
 		local personaje = Players.LocalPlayer.Character
 		local humanoid = personaje and personaje:FindFirstChildOfClass("Humanoid")
 		if humanoid then
