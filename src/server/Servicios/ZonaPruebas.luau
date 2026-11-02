@@ -5,9 +5,9 @@
 	Al arrancar el servidor crea (en el Workspace):
 	  - una plataforma amplia con muros bajos y columnas (para ver los escombros y los cráteres),
 	  - un punto de aparición (SpawnLocation) en ella,
-	  - tres muñecos de entrenamiento: uno de los Héroes, uno de los Villanos y uno sin bando.
+	  - tres muñecos de entrenamiento: uno de los Humanos, uno de los Monstruos y uno sin bando.
 	    Sirven para comprobar que los del mismo bando no se hacen daño, y renacen solos al "morir".
-	  - dos pedestales "Unirse a Héroes / Villanos" (ProximityPrompt) para elegir bando sin interfaz.
+	  - dos pedestales "Unirse a Humanos / Monstruos" (ProximityPrompt) para elegir bando sin interfaz.
 	  - un cartel con los controles.
 	  - un HANGAR con una nave para despegar (consola "Despegar") y, a unos cientos de studs, un pequeño CAMPO DE
 	    ASTEROIDES generado por código para probar el vuelo, las armas y los choques.
@@ -447,8 +447,8 @@ function ZonaPruebas.Iniciar()
 	aparicion.Material = Enum.Material.Neon
 	aparicion.Parent = zona
 
-	crearPedestal(zona, Bandos.Heroes, CENTRO + Vector3.new(-14, 0.5, 52), Color3.fromRGB(70, 140, 255))
-	crearPedestal(zona, Bandos.Villanos, CENTRO + Vector3.new(14, 0.5, 52), Color3.fromRGB(230, 70, 80))
+	crearPedestal(zona, Bandos.Humanos, CENTRO + Vector3.new(-14, 0.5, 52), Color3.fromRGB(70, 140, 255))
+	crearPedestal(zona, Bandos.Monstruos, CENTRO + Vector3.new(14, 0.5, 52), Color3.fromRGB(230, 70, 80))
 
 	crearCartel(
 		zona,
@@ -470,9 +470,9 @@ function ZonaPruebas.Iniciar()
 
 	-- Los muñecos se crean aparte: CreateHumanoidModelFromDescription espera a Roblox y no debe retrasar el arranque.
 	task.spawn(function()
-		crearMunieco(zona, "Muñeco Héroe", "Heroes", CENTRO + Vector3.new(-26, 0, 0), Color3.fromRGB(70, 140, 255))
+		crearMunieco(zona, "Muñeco Humano", "Humanos", CENTRO + Vector3.new(-26, 0, 0), Color3.fromRGB(70, 140, 255))
 		crearMunieco(zona, "Muñeco Neutral", "Ninguno", CENTRO + Vector3.new(0, 0, -6), Color3.fromRGB(190, 190, 200))
-		crearMunieco(zona, "Muñeco Villano", "Villanos", CENTRO + Vector3.new(26, 0, 0), Color3.fromRGB(230, 70, 80))
+		crearMunieco(zona, "Muñeco Monstruo", "Monstruos", CENTRO + Vector3.new(26, 0, 0), Color3.fromRGB(230, 70, 80))
 	end)
 end
 
