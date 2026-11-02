@@ -10,12 +10,10 @@ import bpy
 from mathutils import Vector
 from PIL import Image, ImageDraw, ImageFont
 
-import rig_r15 as r15
+import rig_r6 as r6
 
 ANCHO, ALTO = 340, 420
-E = r15.ESTUDIO
-# Dónde está el "saco" que recibe el golpe (solo se ve en los renders, no se exporta).
-CENTRO_SACO = Vector((-0.5, -5.75, 4.0)) * E
+E = r6.ESTUDIO
 
 # Posiciones de cámara en metros.
 VISTAS = {
@@ -35,7 +33,10 @@ def _material(nombre, color, rugosidad=0.7):
     return mat
 
 
-def preparar_escena():
+def preparar_escena(punto_impacto):
+    """punto_impacto = (posición del puño, dirección del golpe) en studs: ahí se coloca el saco."""
+    puno, direccion = punto_impacto
+    centro_saco = (puno + direccion * 0.62) * E
     scn = bpy.context.scene
     scn.render.engine = "CYCLES"
     scn.cycles.device = "CPU"
@@ -58,12 +59,12 @@ def preparar_escena():
     nt.links.new(chk.outputs["Color"], nt.nodes["Principled BSDF"].inputs["Base Color"])
     suelo.data.materials.append(mat)
 
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.62 * E, location=CENTRO_SACO, segments=24, ring_count=16)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.62 * E, location=centro_saco, segments=24, ring_count=16)
     saco = bpy.context.active_object
     saco.name = "Saco_render"
     saco.scale.z = 1.5
     saco.data.materials.append(_material("saco", (0.35, 0.35, 0.4)))
-    bpy.ops.mesh.primitive_cylinder_add(radius=0.04 * E, depth=3.0 * E, location=CENTRO_SACO + Vector((0, 0, -0.75 * E)))
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.04 * E, depth=3.0 * E, location=centro_saco + Vector((0, 0, -0.75 * E)))
     bpy.context.active_object.name = "Poste_render"
     bpy.context.active_object.data.materials.append(_material("poste", (0.2, 0.2, 0.2)))
 
@@ -105,10 +106,10 @@ def _fuente(tam):
     return ImageFont.load_default(tam)
 
 
-def renderizar(fotogramas, directorio, salida_hoja):
+def renderizar(fotogramas, directorio, salida_hoja, punto_impacto):
     """fotogramas: [(numero, nombre)]. Devuelve la ruta de la hoja."""
     os.makedirs(directorio, exist_ok=True)
-    cam = preparar_escena()
+    cam = preparar_escena(punto_impacto)
     scn = bpy.context.scene
     rutas = {}
     for nombre_vista, pos in VISTAS.items():
