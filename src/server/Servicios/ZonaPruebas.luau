@@ -86,11 +86,11 @@ local function crearCartel(padre: Instance, texto: string, posicion: Vector3, an
 	esquina.Parent = etiqueta
 end
 
--- Muñeco con aspecto de personaje R15 (si el motor lo permite) o, si no, una figura sencilla.
+-- Muñeco con aspecto de personaje R6 (si el motor lo permite) o, si no, una figura sencilla.
 local function crearModeloMunieco(nombre: string, posicion: Vector3, color: Color3): Model
 	local modelo: Model? = nil
 	local ok, resultado = pcall(function()
-		return Players:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
+		return Players:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
 	end)
 	if ok and resultado then
 		modelo = resultado

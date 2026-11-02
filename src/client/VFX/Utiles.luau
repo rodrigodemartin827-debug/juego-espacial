@@ -217,7 +217,7 @@ end
 --[[
 	Marco de referencia (posición + orientación mirando en la dirección del golpe) de un "ancla".
 	  "Lanzador"  el cuerpo del que lanza (posición actual)
-	  "Mano"      su mano derecha (o el cuerpo si no la encuentra)
+	  "Mano"      el puño derecho: la punta del "Right Arm" R6 (o el cuerpo si no lo encuentra)
 	  "Origen"    donde estaba el lanzador al empezar
 	  "Objetivo"  el punto de impacto
 	  "Suelo"     el punto de impacto, a la altura del suelo
@@ -237,10 +237,11 @@ function Utiles.Ancla(ctx: any, nombre: string?, desplazamiento: { number }?): C
 	if clave == "Lanzador" then
 		posicion = if ctx.Raiz and ctx.Raiz.Parent then ctx.Raiz.Position else ctx.Origen
 	elseif clave == "Mano" then
-		local mano = ctx.Lanzador
-			and (ctx.Lanzador:FindFirstChild("RightHand") or ctx.Lanzador:FindFirstChild("Right Arm"))
-		if mano then
-			posicion = (mano :: BasePart).Position
+		local brazo = ctx.Lanzador and ctx.Lanzador:FindFirstChild("Right Arm")
+		if brazo and brazo:IsA("BasePart") then
+			-- R6 no tiene mano: el puño es la punta del brazo, que mide 2 studs de alto con su centro a 1 de la punta.
+			-- Al girar el brazo en la animación, la punta lo sigue.
+			posicion = (brazo.CFrame * CFrame.new(0, -1, 0)).Position
 		elseif ctx.Raiz and ctx.Raiz.Parent then
 			posicion = ctx.Raiz.Position
 		else

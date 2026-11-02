@@ -16,6 +16,7 @@ local Marco = require("./infraestructura/Marco")
 -- Archivos de pruebas/casos/ (sin extensión), en el orden en que se ejecutan.
 local CASOS = {
 	require("./casos/Estructura"),
+	require("./casos/SoloR6"),
 	require("./casos/Utilidades"),
 	require("./casos/Red"),
 	require("./casos/ServicioRed"),
@@ -24,6 +25,7 @@ local CASOS = {
 	require("./casos/AlmacenMemoria"),
 	require("./casos/ServicioDatos"),
 	require("./casos/Integracion"),
+	require("./casos/ServicioPersonaje"),
 	require("./casos/Combate"),
 	require("./casos/CombateVFX"),
 	require("./casos/Naves"),

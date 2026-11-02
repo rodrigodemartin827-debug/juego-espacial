@@ -47,7 +47,7 @@ Recursos.Animaciones = {
 	Combo1 = "",
 	Combo2 = "",
 	Combo3 = "",
-	Combo4 = "",
+	Combo4 = "", -- Remate: aquí va el ID del "puñetazo fuerte" (ver animaciones/README.md)
 	-- Reacción del que recibe un golpe.
 	Impacto = "",
 }

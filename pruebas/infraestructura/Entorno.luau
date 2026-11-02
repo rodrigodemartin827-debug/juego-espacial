@@ -141,6 +141,10 @@ local function nuevoLado(mundo)
 			typeof = mundo.typeof,
 			Instance = mundo.Instance,
 			Vector3 = mundo.Vector3,
+			-- Solo los enumerados que usa el código del servidor (cada valor es una tabla con su Name).
+			Enum = {
+				HumanoidRigType = { R6 = { Name = "R6" }, R15 = { Name = "R15" } },
+			},
 			os = mundo.os,
 		}
 	end

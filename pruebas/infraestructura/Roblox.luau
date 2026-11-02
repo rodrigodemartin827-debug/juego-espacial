@@ -243,6 +243,39 @@ function Roblox.nuevoMundo(opciones)
 		return hijo
 	end
 
+	-- Primer hijo cuya clase es (o hereda de) `clase`.
+	function Instancia.FindFirstChildOfClass(self, clase)
+		for _, hijo in rawget(self, "_hijos") do
+			if hijo:IsA(clase) then
+				return hijo
+			end
+		end
+		return nil
+	end
+
+	-- Copia profunda sin padre. Solo copia los campos públicos simples (nombre, código, números...).
+	function Instancia.Clone(self)
+		local copia = mundo.Instance.new(rawget(self, "ClassName"))
+		for clave, valor in self do
+			if string.sub(clave, 1, 1) ~= "_" and type(valor) ~= "table" and clave ~= "ClassName" then
+				rawset(copia, clave, valor)
+			end
+		end
+		for _, hijo in rawget(self, "_hijos") do
+			hijo:Clone().Parent = copia
+		end
+		return copia
+	end
+
+	-- Posición del modelo (la simulación guarda un valor opaco: basta para comprobar que se copia).
+	function Instancia.GetPivot(self)
+		return rawget(self, "_pivote")
+	end
+
+	function Instancia.PivotTo(self, pivote)
+		rawset(self, "_pivote", pivote)
+	end
+
 	function Instancia.IsA(self, clase)
 		local propia = rawget(self, "ClassName")
 		if clase == propia or clase == "Instance" then
