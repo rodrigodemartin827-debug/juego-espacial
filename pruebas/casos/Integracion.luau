@@ -59,6 +59,8 @@ local function arrancarCliente(entorno, jugador)
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Naves.ServicioNaves`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Exploracion.ServicioExploracion`).Source =
 		"return { Iniciar = function() end }"
+	-- La pantalla de elección de bando monta una escena 3D e interfaz: tiene sus propias pruebas (EleccionBando).
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Eleccion.ServicioEleccion`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
 		entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioRed`)
@@ -259,6 +261,164 @@ return function(Marco)
 
 			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Ninguno")
 			Marco.algunoContiene(entorno.mundo.Avisos, "ElegirBando")
+		end)
+	end)
+
+	Marco.grupo("Integración: protección mientras se elige bando", function()
+		local ATRIBUTO = "EligiendoBando"
+		local PROTECCION = "ProteccionEleccion"
+
+		-- Personaje simulado con su HumanoidRootPart, asignado al jugador y anunciado con CharacterAdded.
+		local function darPersonaje(entorno, jugador, nombre, anclado)
+			local mundo = entorno.mundo
+			local modelo = mundo.Instance.new("Model")
+			modelo.Name = nombre or jugador.Name
+			local raiz = mundo.Instance.new("Part")
+			raiz.Name = "HumanoidRootPart"
+			raiz.Anchored = anclado == true
+			raiz.Parent = modelo
+			jugador.Character = modelo
+			jugador.CharacterAdded:Fire(modelo)
+			return modelo, raiz
+		end
+
+		local function protegido(modelo, raiz)
+			local escudo = modelo:FindFirstChild(PROTECCION)
+			return escudo ~= nil and escudo.ClassName == "ForceField" and escudo.Visible == false and raiz.Anchored
+		end
+
+		local function preparar()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube)
+			local ServicioBandos = entorno.servidor.requerir(`{RUTA_SERVIDOR}.Servicios.ServicioBandos`)
+			return nube, entorno, ServicioDatos, ServicioBandos
+		end
+
+		Marco.prueba("sin bando: el personaje queda quieto, protegido y marcado como eligiendo", function()
+			local _, entorno, ServicioDatos, ServicioBandos = preparar()
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			local modelo, raiz = darPersonaje(entorno, jugador) -- el personaje aparece antes de cargar los datos
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			Marco.dejarCorrer(5)
+
+			Marco.verdadero(ServicioBandos.EstaEligiendo(jugador))
+			Marco.igual(jugador:GetAttribute(ATRIBUTO), true)
+			Marco.verdadero(protegido(modelo, raiz), "debe estar anclado y con ForceField invisible")
+		end)
+
+		Marco.prueba("al elegir se quita todo, se avisa al tutorial y no se puede volver a elegir", function()
+			local _, entorno, ServicioDatos, ServicioBandos = preparar()
+			local elegidos = {}
+			ServicioBandos.BandoElegido:Conectar(function(quien, bando)
+				table.insert(elegidos, { Jugador = quien, Bando = bando })
+			end)
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			local modelo, raiz = darPersonaje(entorno, jugador) -- aparece con los datos ya cargados
+			Marco.esperarHasta(function()
+				return protegido(modelo, raiz)
+			end, "el personaje nuevo también se protege")
+			entorno.mundo.establecerJugadorLocal(jugador)
+			local remoto = entorno.game.ReplicatedStorage.Remotos.ElegirBando
+
+			remoto:FireServer("Monstruos")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador).Bando == "Monstruos"
+			end)
+			Marco.esNil(jugador:GetAttribute(ATRIBUTO), "ya no está eligiendo")
+			Marco.esNil(modelo:FindFirstChild(PROTECCION), "sin ForceField")
+			Marco.falso(raiz.Anchored, "se puede mover")
+			Marco.dejarCorrer(5)
+			Marco.igual(#elegidos, 1)
+			Marco.igual(elegidos[1].Jugador, jugador)
+			Marco.igual(elegidos[1].Bando, "Monstruos")
+
+			-- Un cliente manipulado insiste: ni por el remoto ni llamando de nuevo cambia nada.
+			entorno.mundo.avanzarReloj(1)
+			remoto:FireServer("Humanos")
+			Marco.dejarCorrer(5)
+			Marco.falso(ServicioBandos.Elegir(jugador, "Humanos"))
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Monstruos")
+			Marco.igual(#elegidos, 1, "el tutorial solo empieza una vez")
+		end)
+
+		Marco.prueba("dos peticiones seguidas con bandos distintos: solo cuenta la primera", function()
+			local _, entorno, ServicioDatos = preparar()
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			entorno.mundo.establecerJugadorLocal(jugador)
+			local remoto = entorno.game.ReplicatedStorage.Remotos.ElegirBando
+			remoto:FireServer("Humanos")
+			remoto:FireServer("Monstruos") -- en el mismo instante: además, el límite es de 1 por segundo
+			Marco.dejarCorrer(5)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Humanos")
+		end)
+
+		Marco.prueba("el servidor rechaza bandos inventados aunque se le llame directamente", function()
+			local _, entorno, ServicioDatos, ServicioBandos = preparar()
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			for _, malo in { "Ninguno", "Piratas", 3, nil } do
+				Marco.falso(ServicioBandos.Elegir(jugador, malo :: any), `aceptó {tostring(malo)}`)
+			end
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Ninguno")
+			Marco.igual(jugador:GetAttribute(ATRIBUTO), true, "sigue eligiendo")
+		end)
+
+		Marco.prueba("quien ya tiene bando entra sin protección ni pantalla", function()
+			local nube, entorno, ServicioDatos = preparar()
+			nube:Escribir(ALMACEN, "Jugador_1", {
+				Version = 2,
+				Datos = { Bando = "Humanos", Nivel = 3, XP = 0, Monedas = 10, Inventario = {}, MejorasNave = {} },
+			})
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			local modelo, raiz = darPersonaje(entorno, jugador)
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			Marco.dejarCorrer(5)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Humanos")
+			Marco.esNil(jugador:GetAttribute(ATRIBUTO))
+			Marco.esNil(modelo:FindFirstChild(PROTECCION))
+			Marco.falso(raiz.Anchored)
+		end)
+
+		Marco.prueba("si reaparece antes de elegir, el personaje nuevo también queda protegido", function()
+			local _, entorno, ServicioDatos = preparar()
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			local primero, raizPrimera = darPersonaje(entorno, jugador, "Primero")
+			Marco.esperarHasta(function()
+				return protegido(primero, raizPrimera)
+			end)
+			local segundo, raizSegunda = darPersonaje(entorno, jugador, "Segundo")
+			Marco.esperarHasta(function()
+				return protegido(segundo, raizSegunda)
+			end, "el personaje nuevo debe protegerse")
+		end)
+
+		Marco.prueba("no desancla lo que anclara otro sistema", function()
+			local _, entorno, ServicioDatos, ServicioBandos = preparar()
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			-- Aparece ya anclado por otro sistema (por ejemplo, una cinemática del servidor).
+			local modelo, raiz = darPersonaje(entorno, jugador, nil, true)
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			Marco.dejarCorrer(5)
+			Marco.verdadero(ServicioBandos.Elegir(jugador, "Humanos"))
+			Marco.verdadero(raiz.Anchored, "no lo ancló este servicio: no le toca soltarlo")
+			Marco.esNil(modelo:FindFirstChild(PROTECCION))
 		end)
 	end)
 

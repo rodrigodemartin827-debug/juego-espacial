@@ -11,16 +11,19 @@
 
 local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
+local ServicioEleccion = require(script.Eleccion.ServicioEleccion)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
 local ServicioNaves = require(script.Naves.ServicioNaves)
 local ServicioRed = require(script.Servicios.ServicioRed)
 
--- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa.
+-- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa. La pantalla de elección
+-- de bando va la última: pausa y oculta lo de los demás mientras el jugador elige (solo la primera vez).
 ServicioRed.Iniciar()
 ServicioDatos.Iniciar()
 ServicioCombate.Iniciar()
 ServicioNaves.Iniciar()
 ServicioExploracion.Iniciar()
+ServicioEleccion.Iniciar()
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
 ServicioDatos.Actualizados:Conectar(function(datos)

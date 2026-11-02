@@ -72,13 +72,23 @@ Config.Camara = {
 
 -- ===== Escena =====
 
--- Cuántas veces por segundo se recalcula la forma de la grieta (además de girar planetas, etc.).
+-- Cómo reacciona la escena al resaltar un lado.
 Config.Escena = {
 	-- Multiplicador de tamaño de los planetas al resaltarlos, y del lado contrario (se encoge un poco).
 	EscalaResaltado = 1.07,
 	EscalaApagado = 0.97,
 	-- Brillo de las luces del lado no resaltado (fracción del normal).
 	LuzApagada = 0.35,
+	-- Al confirmar: golpe de escala del planeta elegido (y en lo que se asienta) y del lado que se apaga.
+	EscalaGolpe = 1.22,
+	EscalaElegido = 1.1,
+	EscalaDescartado = 0.9,
+	-- Fracción del camino hacia el planeta elegido que avanza la cámara durante la celebración.
+	AcercamientoCamara = 0.22,
+	-- Segundos mínimos entre dos rayos de "resaltar" (pasar el ratón de un lado a otro muy deprisa).
+	EsperaRayoResaltar = 0.45,
+	-- Polvo estelar delante del fondo (partículas por segundo en calidad alta).
+	Polvo = { Tasa = 14, Color = "#BFD4FF" },
 }
 
 export type Mancha = {
@@ -200,7 +210,7 @@ Config.Sol = {
 Config.AgujeroNegro = {
 	Posicion = { 80, 30, -155 },
 	Radio = 7.5,
-	Inclinacion = { 72, 0, -18 }, -- grados (X, Y, Z) del disco
+	Inclinacion = { 16, 0, -14 }, -- grados: X = cuánto se ve el disco desde arriba, Z = ladeo
 	Disco = { Radio = 19, Color = "#FF6A2A", Transparencia = 0.25 },
 	DiscoExterior = { Radio = 25, Color = "#B0204A", Transparencia = 0.6 },
 	Anillo = { Color = "#FFB36B", Escala = 1.12, Transparencia = 0.2 }, -- anillo de fotones (ForceField)
@@ -218,15 +228,25 @@ Config.Grieta = {
 	Temblor = 0.7, -- cuánto ondula con el tiempo
 	VelocidadTemblor = 1.6,
 	Semilla = 7, -- forma del zigzag (cambiarla da otra grieta)
-	-- Capas del trazo, de la más ancha a la más fina. Grosor en studs (en el centro de la grieta; en las puntas, la
-	-- mitad), Pulso = cuánto late el grosor.
+	-- Capas del trazo (cintas de luz que siempre miran a la cámara), de atrás adelante. Grosor en studs en el centro
+	-- de la grieta (en las puntas, la mitad); Brillo > 1 hace que resplandezca; Pulso = cuánto late el grosor; Emite =
+	-- false para el vacío (negro, no suma luz). Lado = -1 / 1: es un borde, desplazado a ese lado del vacío.
+	-- Minimo: nivel de calidad (VFX/Calidad) a partir del cual se dibuja.
 	Capas = {
-		{ Grosor = 5.5, Color = "#7A1FFF", Transparencia = 0.82, Pulso = 0.25 }, -- halo
-		{ Grosor = 2.2, Color = "#C04BFF", Transparencia = 0.35, Pulso = 0.15 }, -- cuerpo
-		{ Grosor = 0.7, Color = "#FFFFFF", Transparencia = 0, Pulso = 0.1 }, -- núcleo
+		{ Grosor = 7, Color = "#6A1FFF", Transparencia = 0.72, Brillo = 1.6, Pulso = 0.25 }, -- halo
+		{ Grosor = 3.2, Color = "#C04BFF", Transparencia = 0.45, Brillo = 2.2, Pulso = 0.2, Minimo = "Medio" },
+		{ Grosor = 1.7, Color = "#020005", Transparencia = 0.02, Brillo = 0, Pulso = 0.12, Emite = false }, -- vacío
+		{ Grosor = 0.35, Color = "#F2D6FF", Transparencia = 0, Brillo = 4, Pulso = 0.1, Lado = -1 }, -- bordes
+		{ Grosor = 0.35, Color = "#F2D6FF", Transparencia = 0, Brillo = 4, Pulso = 0.1, Lado = 1 },
 	},
-	-- Grietas secundarias que salen de la principal.
-	Ramas = { Cantidad = 6, Largo = { 5, 11 }, Puntos = 4 },
+	-- Grietas secundarias que salen de la principal (halo y núcleo). No se dibujan en calidad baja.
+	Ramas = {
+		Cantidad = 6,
+		Largo = { 5, 11 },
+		Puntos = 4,
+		Halo = { Grosor = 2.2, Color = "#8A2BFF", Transparencia = 0.6, Brillo = 1.8 },
+		Nucleo = { Grosor = 0.4, Color = "#F2D6FF", Transparencia = 0, Brillo = 3.5 },
+	},
 	PeriodoLatido = 1.7, -- segundos entre latidos
 	-- Luz violeta del centro.
 	Luz = { Color = "#B04BFF", Brillo = 2.5, Rango = 45 },
@@ -248,13 +268,16 @@ export type Figura = {
 	Ojos: { Color: string, Tamano: number }?, -- dos ojos de Neon
 	Visor: { Color: string }?, -- visor de casco (los humanos)
 	Inclinacion: number?, -- grados de inclinación de la cabeza
+	Luz: { Desplazamiento: { number }, Color: string, Brillo: number, Rango: number },
 	Espasmos: { Intervalo: { number }, Fuerza: number }?, -- tirones bruscos de la cabeza (los monstruos)
 }
 
 Config.FiguraHumanos = {
-	Posicion = { -27, -21, -44 },
+	Posicion = { -27, -15, -44 },
 	Escala = 2.2,
 	GiroY = -18,
+	-- Luz de relleno que ilumina la figura (posición relativa a la figura).
+	Luz = { Desplazamiento = { 7, 6, 10 }, Color = "#DDEBFF", Brillo = 1.3, Rango = 24 },
 	Colores = {
 		Head = "#E8EDF5",
 		Torso = "#DDE4EE",
@@ -268,9 +291,11 @@ Config.FiguraHumanos = {
 } :: Figura
 
 Config.FiguraMonstruos = {
-	Posicion = { 27, -20, -44 },
+	Posicion = { 27, -14.5, -44 },
 	Escala = 2.3,
 	GiroY = 18,
+	-- Contraluz rojo detrás: la figura se ve como una silueta negra recortada.
+	Luz = { Desplazamiento = { -2, 5, -7 }, Color = "#FF2238", Brillo = 4, Rango = 18 },
 	Colores = {
 		Head = "#0B090D",
 		Torso = "#0E0B11",

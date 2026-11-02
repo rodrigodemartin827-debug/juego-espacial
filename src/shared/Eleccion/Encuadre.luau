@@ -34,7 +34,7 @@ end
 
 export type Disposicion = {
 	Compacta: boolean, -- pantalla pequeña: textos y paneles más apretados
-	Vertical: boolean, -- más alta que ancha: los paneles van uno encima del otro
+	Vertical: boolean, -- más alta que ancha (raro en Roblox, que juega en horizontal): los paneles se estrechan
 	Escala: number, -- multiplicador del tamaño de toda la interfaz (UIScale)
 	AnchoPanel: number, -- fracción del ancho de la pantalla que ocupa cada panel de bando
 }
@@ -57,7 +57,7 @@ function Encuadre.Disposicion(ancho: number, alto: number): Disposicion
 		Compacta = compacta,
 		Vertical = vertical,
 		Escala = math.clamp(escala, if compacta then 0.62 else 0.75, 1.6),
-		AnchoPanel = if vertical then 0.86 elseif compacta then 0.4 else 0.3,
+		AnchoPanel = if vertical then 0.46 elseif compacta then 0.42 else 0.3,
 	}
 end
 
