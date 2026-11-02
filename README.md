@@ -43,6 +43,39 @@ Las naves, el escáner y el crafteo todavía no existen: se añadirán como serv
 > trabajar sin configurar nada. Con el DataStore real, en Studio se usa un almacén aparte (`DatosJugador_Studio`)
 > para no mezclar datos de prueba con los de los jugadores.
 
+## Avatar R6
+
+**El juego es solo R6**: todos los personajes usan las 6 piezas clásicas (`Torso`, `Head`, `Right Arm`, `Left Arm`,
+`Right Leg`, `Left Leg`, más `HumanoidRootPart`). Las animaciones del combate, las anclas de los efectos (el puño es la punta
+del `Right Arm`), los muñecos de entrenamiento y las animaciones de Blender están hechos para ese rig. R6 no tiene codos,
+rodillas ni manos, así que cada brazo y cada pierna se anima como una pieza rígida.
+
+### Dónde se pone R6
+
+El tipo de avatar es un ajuste **del juego en la web de Roblox**, no una propiedad de `StarterPlayer`, así que Rojo no
+puede fijarlo desde `default.project.json`. Ponlo una vez a mano:
+
+1. En Roblox Studio, abre el lugar y ve a **Home → Game Settings** (o en [create.roblox.com](https://create.roblox.com):
+   **Creations →** tu experiencia **→ Configure**).
+2. Entra en la pestaña **Avatar**.
+3. En **Avatar Type** elige **R6** (no *R15* ni *Player Choice*) y guarda con **Save**.
+4. Publica el lugar (**File → Publish to Roblox**). En Studio, para probarlo, vuelve a abrir el lugar o pulsa **Play** de nuevo.
+
+### Red de seguridad por código
+
+Si ese ajuste se olvida (o el lugar no está publicado), `ServicioPersonaje` lo corrige al instante: cuando aparece un
+personaje que no es R6, crea otro **R6 con el mismo aspecto** (`Humanoid:GetAppliedDescription`), lo coloca en la misma
+posición, le copia los scripts del personaje (`Animate` y los de `StarterCharacterScripts`) y se lo asigna al jugador. Además avisa por
+consola (`[ServicioPersonaje] ... no es R6`) para que te acuerdes de poner el ajuste de arriba. Con el ajuste bien puesto
+no hace nada.
+
+Limitaciones: la sustitución se ve como un parpadeo del personaje al aparecer, y no he podido probarla en Studio (las
+pruebas automáticas la cubren con personajes simulados). Si usas un script `Animate` propio, asegúrate de que soporta R6.
+Ni el `Animator` del combate (`VFX/Animador`) ni las animaciones importadas funcionan en R15: el animador avisa y las ignora.
+
+La prueba `pruebas/casos/SoloR6` **falla si aparece cualquier pieza de R15** (`UpperTorso`, `RightHand`, `LeftLowerLeg`...) en
+`src/` o en los scripts de Blender, para que no se cuele por error.
+
 ## Estructura
 
 ```
@@ -70,6 +103,7 @@ src/
 │       │   ├── Esquema          Plantilla, reparación de datos, migraciones
 │       │   └── AlmacenMemoria   DataStore falso para Studio
 │       ├── ServicioReplicacion  Envía al cliente una copia de sus datos
+│       ├── ServicioPersonaje    Garantiza que todos los personajes son R6
 │       ├── ServicioBandos       Ejemplo: elegir bando
 │       ├── ServicioCombate      Combate: cooldown, energía, alcance, daño (autoritativo)
 │       └── ZonaPruebas          Plataforma con muñecos de entrenamiento
@@ -82,7 +116,7 @@ src/
     └── VFX/                 Motor de efectos visuales (ver Combate)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
-animaciones/                 Animaciones de combate (.fbx para R15) y los scripts de Blender que las generan
+animaciones/                 Animaciones de combate (.fbx para R6) y los scripts de Blender que las generan
 ```
 
 Convenciones: todo el código de `src/` va en módulos con `--!strict` y comentarios en español; los nombres de módulos,
@@ -266,9 +300,11 @@ Todo está en `src/shared/Combate/Datos/`:
 | Las animaciones provisionales | `Animaciones` |
 
 **Sustituir una animación**: las animaciones provisionales están hechas por código (`Animaciones`) y se convierten en una
-`KeyframeSequence` al jugarse. Para usar una hecha en el editor de Roblox, pega su ID en `Recursos.Animaciones`
+`KeyframeSequence` al jugarse. Cada cuadro da, para cada pieza R6, tres ángulos en grados desde el punto de vista del
+personaje (`cabeceo`, `giro`, `ladeo`) y opcionalmente una traslación en studs; `Animaciones.Articulacion` los convierte al eje
+de cada `Motor6D` (en R6 cada articulación tiene el suyo). Todas tienen anticipación, impacto exagerado y recuperación. Para usar una hecha en el editor de Roblox, pega su ID en `Recursos.Animaciones`
 (por ejemplo `Combo1 = "rbxassetid://123456"`); desde ese momento se usa esa, sin más cambios. Las animaciones están hechas para
-rigs **R15**. Con `Recursos.Mallas` ocurre lo mismo (el mesh debe medir 1 stud) y con las texturas de `Recursos.Texturas`.
+el rig **R6** (ver *Avatar R6*). Con `Recursos.Mallas` ocurre lo mismo (el mesh debe medir 1 stud) y con las texturas de `Recursos.Texturas`.
 
 Limitaciones conocidas: no he podido probarlo dentro de Roblox Studio (las pruebas automáticas cubren reglas y datos, no el
 aspecto), así que los números de los efectos (tamaños, tiempos) son un primer ajuste.
@@ -287,7 +323,8 @@ Cubren la red (validación, límites, expulsión, envío en ambos sentidos), el 
 datos con **varios servidores simulados compitiendo por el mismo DataStore** (traspaso sin perder progreso, servidor caído,
 bloqueo perdido, fallos y respuestas perdidas del DataStore, reconexiones rápidas, cierre del servidor...) y la integración
 de punta a punta con los scripts de arranque reales. Para el combate comprueban el árbitro (cooldown, energía, alcance,
-estado, combo, fuego amistoso), la geometría de los golpes y que los datos visuales sean coherentes (colores, texturas y
+estado, combo, fuego amistoso), la geometría de los golpes, la conversión de las poses a los ejes de los `Motor6D` de R6, el
+servicio que fuerza el personaje R6 y que los datos visuales sean coherentes (colores, texturas y
 animaciones que existen, límites de partículas para móvil, cinemáticas que cubren el impacto).
 
 La simulación es una aproximación: sirve para comprobar la lógica, no sustituye a probar en Studio y en un servidor real.
