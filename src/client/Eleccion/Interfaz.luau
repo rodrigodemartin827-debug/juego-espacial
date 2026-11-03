@@ -131,8 +131,7 @@ local function crearPanel(padre: Instance, bando: string, lado: number): Panel
 	grupo.Position = UDim2.fromScale(if lado == 1 then 0.25 else 0.75, 0.88)
 	grupo.Size = UDim2.fromScale(0.3, 0)
 	grupo.AutomaticSize = Enum.AutomaticSize.Y
-	grupo.BackgroundColor3 = color(Config.Interfaz.Fondo)
-	grupo.BackgroundTransparency = 0.3
+	grupo.BackgroundTransparency = 1
 	grupo.GroupTransparency = 0
 	grupo.Parent = padre
 	local esquina = Instance.new("UICorner")
@@ -144,25 +143,49 @@ local function crearPanel(padre: Instance, bando: string, lado: number): Panel
 	trazo.Transparency = 0.5
 	trazo.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 	trazo.Parent = grupo
+	local escala = Instance.new("UIScale")
+	escala.Parent = grupo
+
+	-- El fondo con su degradado va en un marco propio: un UIGradient puesto directamente en el CanvasGroup
+	-- tiñe TODO lo que contiene (también los textos, que se veían casi negros).
+	local fondo = Instance.new("Frame")
+	fondo.Name = "Fondo"
+	fondo.BorderSizePixel = 0
+	fondo.Size = UDim2.fromScale(1, 1)
+	fondo.BackgroundColor3 = color(Config.Interfaz.Fondo)
+	fondo.BackgroundTransparency = 0.3
+	fondo.ZIndex = 0
+	fondo.Parent = grupo
+	local esquinaFondo = Instance.new("UICorner")
+	esquinaFondo.CornerRadius = UDim.new(0, 14)
+	esquinaFondo.Parent = fondo
 	local degradado = Instance.new("UIGradient")
 	degradado.Color = ColorSequence.new(color(t.ColorSuave), color(Config.Interfaz.Fondo))
 	degradado.Rotation = 90
-	degradado.Parent = grupo
+	degradado.Parent = fondo
+
+	-- Los textos, encima del fondo.
+	local cuerpo = Instance.new("Frame")
+	cuerpo.Name = "Cuerpo"
+	cuerpo.BackgroundTransparency = 1
+	cuerpo.Size = UDim2.fromScale(1, 0)
+	cuerpo.AutomaticSize = Enum.AutomaticSize.Y
+	cuerpo.ZIndex = 1
+	cuerpo.Parent = grupo
 	local relleno = Instance.new("UIPadding")
 	relleno.PaddingTop = UDim.new(0, 14)
 	relleno.PaddingBottom = UDim.new(0, 16)
 	relleno.PaddingLeft = UDim.new(0, 18)
 	relleno.PaddingRight = UDim.new(0, 18)
-	relleno.Parent = grupo
-	lista(grupo, 6)
-	local escala = Instance.new("UIScale")
-	escala.Parent = grupo
+	relleno.Parent = cuerpo
+	lista(cuerpo, 6)
 
-	local nombre = etiqueta(grupo, t.Nombre, 40, FUENTE_TITULO, principal)
+	local nombre = etiqueta(cuerpo, t.Nombre, 40, FUENTE_TITULO, principal)
 	nombre.LayoutOrder = 1
 	sombra(nombre, 3)
 
-	local dificultad = etiqueta(grupo, string.upper(t.Dificultad), 13, FUENTE_FUERTE, color(Config.Interfaz.TextoSuave))
+	local dificultad =
+		etiqueta(cuerpo, string.upper(t.Dificultad), 13, FUENTE_FUERTE, color(Config.Interfaz.TextoSuave))
 	dificultad.LayoutOrder = 2
 
 	-- Lo que se despliega al resaltar: lema, ventajas y debilidad.
@@ -172,7 +195,7 @@ local function crearPanel(padre: Instance, bando: string, lado: number): Panel
 	detalle.Size = UDim2.fromScale(1, 0)
 	detalle.AutomaticSize = Enum.AutomaticSize.Y
 	detalle.LayoutOrder = 3
-	detalle.Parent = grupo
+	detalle.Parent = cuerpo
 	lista(detalle, 5, Enum.HorizontalAlignment.Left)
 
 	local lema = etiqueta(detalle, t.Lema, 15, Enum.Font.GothamMedium, color(Config.Interfaz.TextoSuave))
@@ -186,7 +209,7 @@ local function crearPanel(padre: Instance, bando: string, lado: number): Panel
 	separador.LayoutOrder = 2
 	separador.Parent = detalle
 	for indice, ventaja in t.Ventajas do
-		local linea = etiqueta(detalle, `✦  {ventaja}`, 17, FUENTE_FUERTE, color(Config.Interfaz.Texto))
+		local linea = etiqueta(detalle, `•  {ventaja}`, 17, FUENTE_FUERTE, color(Config.Interfaz.Texto))
 		linea.TextXAlignment = Enum.TextXAlignment.Left
 		linea.LayoutOrder = 2 + indice
 	end
