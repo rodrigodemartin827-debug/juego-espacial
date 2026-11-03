@@ -36,6 +36,10 @@ local DatosLuz = require(Shared.Planetas.Datos.Iluminacion)
 local Espacio = require(Shared.Planetas.Espacio)
 local Luz = require(Shared.Planetas.Luz)
 local V = require(Shared.Planetas.Vectores)
+local Experimento = require(Shared.Experimentos.PlanetaRedondo)
+
+-- EXPERIMENTO planeta redondo: por debajo de esta altura sobre su superficie se usa la luz de superficie.
+local ALTURA_LUZ_SUPERFICIE = 1200
 
 type Vec = V.Vec
 
@@ -78,6 +82,18 @@ end
 -- ===== Preset y dirección que tocan =====
 
 local function objetivoDe(zona: Espacio.Zona, posicion: Vec): (any, Vec)
+	-- EXPERIMENTO planeta redondo: cerca de su superficie se usa la luz de superficie (cielo de día) en el lado que da
+	-- al Sol y la del espacio (noche) en el otro, con la dirección real del Sol. Cada cliente pone la suya.
+	if Experimento.Activado() then
+		local centro = Experimento.Centro()
+		local desde = Vector3.new(posicion.X, posicion.Y, posicion.Z) - centro
+		if desde.Magnitude - Experimento.Radio < ALTURA_LUZ_SUPERFICIE then
+			local direccion = Luz.DireccionEspacio(posicion)
+			local arriba = desde.Unit
+			local deDia = arriba.X * direccion.X + arriba.Y * direccion.Y + arriba.Z * direccion.Z > -0.05
+			return presets[if deDia then "SuperficieHumanos" else "EspacioHumanos"], direccion
+		end
+	end
 	if zona.Tipo == "Superficie" and zona.Planeta then
 		local planeta = zona.Planeta :: string
 		local preset = presets[Datos.Planetas[planeta].Superficie.Iluminacion]

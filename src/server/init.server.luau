@@ -8,6 +8,9 @@
 	Aquí solo se arrancan los servicios; la lógica vive en los módulos de `Servicios/`.
 ]]
 
+-- EXPERIMENTO planeta redondo (solo en Studio): ajusta los datos de los planetas ANTES de que nadie los lea.
+require(game:GetService("ReplicatedStorage").Shared.Experimentos.PlanetaRedondo).Aplicar()
+
 local ServicioAsteroides = require(script.Servicios.ServicioAsteroides)
 local ServicioBandos = require(script.Servicios.ServicioBandos)
 local ServicioCombate = require(script.Servicios.ServicioCombate)
@@ -22,6 +25,7 @@ local ServicioPlanetas = require(script.Servicios.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
 local ServicioReplicacion = require(script.Servicios.ServicioReplicacion)
 local ZonaPruebas = require(script.Servicios.ZonaPruebas)
+local ExperimentoPlanetaRedondo = require(script.Experimentos.PlanetaRedondo)
 
 --[[
 	El orden importa:
@@ -48,6 +52,12 @@ ServicioEscaner.Iniciar()
 ServicioCrafteo.Iniciar()
 ServicioPlanetas.Iniciar()
 ZonaPruebas.Iniciar()
+ExperimentoPlanetaRedondo.Iniciar() -- solo hace algo en Studio, con el experimento activo
+-- EXPERIMENTO: esta rama sale de antes del cambio de bandos y no entiende los datos de Studio ya migrados. Usa su
+-- propio almacén de pruebas para no tocar ni rechazar los datos de Studio de siempre.
+if require(game:GetService("ReplicatedStorage").Shared.Experimentos.PlanetaRedondo).Activado() then
+	ServicioDatos.Configuracion.NombreAlmacen = "DatosJugadorExperimentoPlaneta"
+end
 ServicioDatos.Iniciar()
 
 print("[Servidor] Juego espacial iniciado")

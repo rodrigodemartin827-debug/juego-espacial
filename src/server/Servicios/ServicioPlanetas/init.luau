@@ -29,6 +29,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Datos = require(ReplicatedStorage.Shared.Planetas.Datos)
+local ExperimentoPlanetaRedondo = require(game:GetService("ReplicatedStorage").Shared.Experimentos.PlanetaRedondo)
 local Espacio = require(ReplicatedStorage.Shared.Planetas.Espacio)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioNaves = require(script.Parent.ServicioNaves)
@@ -228,6 +229,11 @@ function ServicioPlanetas.Iniciar()
 		Puertos.Crear(carpeta, id, function(jugador)
 			ServicioPlanetas.LlevarAEstacion(jugador)
 		end)
+		-- EXPERIMENTO planeta redondo (solo Studio): las superficies planas no se usan y falsearían las medidas de
+		-- memoria y rendimiento de la esfera, así que no se generan.
+		if ExperimentoPlanetaRedondo.Activado() then
+			continue
+		end
 		-- Los dos terrenos se generan a la vez, cada uno empezando por su puerto.
 		task.spawn(Terreno.Generar, id, function()
 			puertoListo[id] = true
