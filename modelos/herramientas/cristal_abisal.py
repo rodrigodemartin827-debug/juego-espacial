@@ -32,7 +32,7 @@ from planeta_monstruos import MORADO, ROCA, baja_horneada, luz_de_pieza  # noqa:
 
 PALETA = {
     "Obsidiana": ("#1A1023", 0.08, 0.3, 0.0),
-    "Neon": (MORADO, 0.3, 0.0, 0.0, 1.6),
+    "Neon": (MORADO, 0.3, 0.0, 0.0, 2.2),
 }
 # Cristales: (ángulo alrededor, distancia al centro, inclinación en grados, largo, grosor, lados)
 CRISTALES = [
@@ -68,7 +68,7 @@ def construir(carpeta, rapido):
         # Obsidiana: prisma con la punta cortada en bisel (la punta brillante sale de dentro).
         cr.prisma(pos, eje, largo * 0.86, grosor, lados, 0.18, "Obsidiana", rnd=rnd, giro=giro)
         # Corazón: prisma fino que recorre el cristal por dentro y asoma más allá de la punta.
-        br.prisma(pos + eje * 0.2, eje, largo, grosor * 0.42, lados, 0.32, "Neon", giro=giro)
+        br.prisma(pos + eje * 0.2, eje, largo, grosor * 0.5, lados, 0.32, "Neon", giro=giro)
         puntas.append(pos + eje * largo)
     # Cristalitos sueltos alrededor de la base, medio enterrados.
     for i in range(6):
@@ -79,13 +79,23 @@ def construir(carpeta, rapido):
         largo = rnd.uniform(0.8, 1.5)
         cr.prisma(pos, eje, largo * 0.85, 0.22, 5, 0.25, "Obsidiana", rnd=rnd, giro=g)
         br.prisma(pos + eje.normalized() * 0.1, eje, largo, 0.1, 5, 0.4, "Neon", giro=g)
-    # Grieta brillante en la base, de la que nacen los cristales (una estrella de cuñas planas).
-    for i in range(5):
-        a = i * math.tau / 5 + 0.3
-        p0 = Vector((0, 0, z0 - 0.25))
-        p1 = Vector((math.cos(a) * 2.6, math.sin(a) * 2.3, z0 - 0.75))
-        br.caja((p0 + p1) / 2, ((p1 - p0).length, 0.16, 0.08), "Neon",
-                giro=Matrix.Rotation(a, 3, "Z") @ Matrix.Rotation(math.atan2(0.5, 2.6), 3, "Y"))
+    # Grietas brillantes sobre la roca: líneas que salen del centro y siguen la superficie (rayos hacia abajo).
+    E = c.ESTUDIO
+    for i in range(6):
+        a = i * math.tau / 6 + 0.25
+        anterior = None
+        for k in range(6):
+            r = 1.0 + k * 0.5
+            x, y = math.cos(a) * r + math.sin(k * 1.7) * 0.15, math.sin(a) * r * 0.9
+            ok, punto, normal, _ = base.ray_cast(Vector((x, y, 20)) * E, Vector((0, 0, -1)))
+            if not ok:
+                break
+            p = punto / E + Vector(normal) * 0.03
+            if anterior is not None:
+                tramo = p - anterior
+                br.caja((p + anterior) / 2, (tramo.length + 0.05, 0.14 * (1 - k / 7), 0.06), "Neon",
+                        giro=Vector(tramo).to_track_quat("X", "Z").to_matrix())
+            anterior = p
     # Esquirlas flotantes: octaedros pequeños en un anillo inclinado alrededor.
     for i in range(7):
         a = i * math.tau / 7 + rnd.uniform(-0.2, 0.2)

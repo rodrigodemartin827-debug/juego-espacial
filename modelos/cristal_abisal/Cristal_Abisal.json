@@ -1,0 +1,15 @@
+{
+  "nota": "studs, ejes de Roblox, respecto al centro de la base",
+  "Luz": [
+    0.056,
+    2.997,
+    -0.034
+  ],
+  "luz_recomendada": "PointLight #B54DFF, Brightness 1.5, Range 14",
+  "CentroEsquirlas": [
+    0.056,
+    3.197,
+    -0.034
+  ],
+  "como_animar_esquirlas": "girar Cristal_Abisal_Esquirlas en Y alrededor de CentroEsquirlas (una vuelta cada ~8 s) y subirla y bajarla 0,3 studs: en el cliente"
+}
