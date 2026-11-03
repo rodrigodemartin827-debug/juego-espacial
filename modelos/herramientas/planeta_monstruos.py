@@ -218,7 +218,7 @@ def rama(nodos, aristas, desde, pos, direccion, largo, radio, segmentos, rnd, gi
 
 
 def arbol(carpeta, rapido, nombre, semilla, tronco_alto, tronco_radio, n_ramas, giro, gravedad, inclinacion,
-          raices=5, partido=False, n_astillas=None):
+          raices=5, partido=False, n_astillas=None, ojos=False):
     rnd = random.Random(semilla)
     nodos = [((0, 0, -0.6), tronco_radio * 1.25)]
     aristas = []
@@ -267,19 +267,39 @@ def arbol(carpeta, rapido, nombre, semilla, tronco_alto, tronco_radio, n_ramas, 
     bm = bmesh.new()
     rnd2 = random.Random(semilla + 1)
     for i in range(5):
-        z = rnd2.uniform(0.6, tronco_alto * 0.5)
+        z = rnd2.uniform(0.6, tronco_alto * 0.3)  # por debajo de los ojos del árbol retorcido
         a = rnd2.uniform(0, math.tau)
         r = tronco_radio * (1 - 0.55 * z / tronco_alto) * 1.25
         base = Vector((math.cos(a) * r + math.sin(inclinacion) * z, math.sin(a) * r, z))
         res = bmesh.ops.create_cone(bm, cap_ends=True, segments=6, radius1=0.35, radius2=0.05, depth=0.18)
         m = Matrix.Translation(base) @ Vector((math.cos(a), math.sin(a), 0.3)).to_track_quat("Z", "Y").to_matrix().to_4x4()
         bmesh.ops.transform(bm, matrix=m, verts=res["verts"])
+    if ojos:
+        # Dos ojos rasgados en el tronco, mirando al frente: se colocan lanzando un rayo contra la corteza.
+        zo = tronco_alto * 0.42
+        # Centro del tronco a esa altura (a media altura del tronco todavía no salen ramas).
+        corte = [v.co / E for v in alta.data.vertices if abs(v.co.z / E - zo) < 0.25]
+        cx = sum(v.x for v in corte) / max(1, len(corte))
+        for sx, alto_ojo in ((-1, 0.0), (1, 0.15)):
+            x0 = cx + sx * 0.45
+            ok, punto, normal, _ = alta.ray_cast(Vector((x0, -20, zo + alto_ojo)) * E, Vector((0, 1, 0)))
+            if not ok:
+                continue
+            centro = punto / E - Vector(normal) * 0.0 + Vector(normal) * 0.06
+            q = Vector(normal).to_track_quat("Z", "X")
+            inclin = Matrix.Rotation(sx * 0.35, 3, "Z")
+            vs = []
+            for vx, vy in ((-0.55, 0), (0, 0.17), (0.55, 0), (0, -0.12)):  # rombo alargado, con caída
+                p3 = centro + q @ (inclin @ Vector((vx, vy, 0.0)))
+                vs.append(bm.verts.new(p3))
+            bm.faces.new(vs)
     setas = neon(f"{nombre}_Neon", bm, fuerza=1.5)
     return [baja, setas], None
 
 
 def arbol_retorcido(carpeta, rapido):
-    return arbol(carpeta, rapido, "Arbol_Retorcido", 5, 15.0, 1.1, 4, giro=0.35, gravedad=0.0, inclinacion=0.15)
+    return arbol(carpeta, rapido, "Arbol_Retorcido", 5, 15.0, 1.1, 4, giro=0.35, gravedad=0.0, inclinacion=0.15,
+                 ojos=True)
 
 
 def arbol_colgante(carpeta, rapido):
