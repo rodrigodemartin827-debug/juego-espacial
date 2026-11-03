@@ -1,0 +1,93 @@
+{
+  "nota": "studs, ejes de Roblox, respecto al centro de la base",
+  "EspecieId": "Criatura_BrincadorLanudo",
+  "Raiz": "Brincador_Cuerpo",
+  "Pivotes": {
+    "Brincador_OrejaIzq": [
+      -0.369,
+      2.279,
+      -0.689
+    ],
+    "Brincador_OrejaDer": [
+      0.391,
+      2.279,
+      -0.689
+    ],
+    "Brincador_Pata1": [
+      -0.489,
+      0.879,
+      -0.489
+    ],
+    "Brincador_Pata2": [
+      0.511,
+      0.879,
+      -0.489
+    ],
+    "Brincador_Pata3": [
+      -0.489,
+      0.879,
+      0.811
+    ],
+    "Brincador_Pata4": [
+      0.511,
+      0.879,
+      0.811
+    ],
+    "Brincador_Cola": [
+      0.011,
+      1.529,
+      1.011
+    ]
+  },
+  "Centros": {
+    "Brincador_Cuerpo": [
+      0.014,
+      1.538,
+      -0.223
+    ],
+    "Brincador_OrejaIzq": [
+      -0.77,
+      2.265,
+      -0.564
+    ],
+    "Brincador_OrejaDer": [
+      0.779,
+      2.273,
+      -0.581
+    ],
+    "Brincador_Pata1": [
+      -0.531,
+      0.562,
+      -0.615
+    ],
+    "Brincador_Pata2": [
+      0.553,
+      0.566,
+      -0.607
+    ],
+    "Brincador_Pata3": [
+      -0.522,
+      0.565,
+      0.686
+    ],
+    "Brincador_Pata4": [
+      0.546,
+      0.576,
+      0.688
+    ],
+    "Brincador_Cola": [
+      -0.014,
+      1.528,
+      1.269
+    ],
+    "Brincador_Ojos": [
+      0.011,
+      2.029,
+      -1.419
+    ]
+  },
+  "Soldadas": [
+    "Brincador_Ojos"
+  ],
+  "OjosNeon": false
+}

@@ -53,8 +53,14 @@ def capsula(a, b, r, rigidez=2.0):
     return ("CAPSULE", tuple((a + b) / 2), (r, d.length / 2), tuple(math.degrees(x) for x in eul), rigidez)
 
 
-def pieza(nombre, elementos, pintar, rnd, tris, carpeta, rapido, tam_tex=512, relieve=0.03, resolucion=0.03):
+def pieza(nombre, elementos, pintar, rnd, tris, carpeta, rapido, tam_tex=512, relieve=0.03, resolucion=0.03,
+          suavizado=0):
     alta = malla_metabolas(f"{nombre}_alta", elementos, resolucion=resolucion if not rapido else resolucion * 1.6)
+    if suavizado:  # superficie de peluche: sin los bultos de las metabolas
+        mod = alta.modifiers.new("suave", "SMOOTH")
+        mod.factor = 0.8
+        mod.iterations = suavizado * 3
+        c.aplicar_modificadores(alta)
     sem = Vector((rnd.uniform(0, 50), rnd.uniform(0, 50), rnd.uniform(0, 50)))
     bm = bmesh.new()
     bm.from_mesh(alta.data)
@@ -128,7 +134,7 @@ def brincador(carpeta, rapido):
     n = "Brincador"
 
     def pintar_cuerpo(p, nrm, sem):
-        lana = 0.5 + 0.5 * noise.noise(p * 9.0 + sem)
+        lana = 0.5 + 0.5 * noise.noise(p * 14.0 + sem)
         col = V(k["crema"]) * (0.88 + 0.16 * lana)
         # Panza y hocico más rosados.
         col = col.lerp(V(k["panza"]), suave((-nrm.z - 0.1) * 2.0) * 0.8)
@@ -157,7 +163,8 @@ def brincador(carpeta, rapido):
         a = i * 2.4
         cuerpo_el.append(("BALL", (math.cos(a) * 0.5, 0.35 + math.sin(a) * 0.6, 1.8 + 0.1 * math.sin(a * 3)),
                           (0.2,), (0, 0, 0), 1.1))
-    piezas = [pieza(f"{n}_Cuerpo", cuerpo_el, pintar_cuerpo, rnd, 1100, carpeta, rapido, relieve=0.022)]
+    piezas = [pieza(f"{n}_Cuerpo", cuerpo_el, pintar_cuerpo, rnd, 1100, carpeta, rapido, relieve=0.008,
+                    suavizado=3)]
     pivotes = {}
     # Orejas: largas, caídas hacia atrás y hacia fuera.
     for nombre, sx in (("OrejaIzq", 1), ("OrejaDer", -1)):
@@ -233,7 +240,10 @@ def acechador(carpeta, rapido):
     for i in range(6):  # púas del lomo, inclinadas hacia atrás
         y = -0.6 + i * 0.55
         z = 1.85 + 0.25 * math.sin((i + 1) / 7 * math.pi)
-        cuerpo_el.append(capsula((0, y, z), (0, y + 0.4, z + 0.95 - 0.08 * i), 0.13, rigidez=2.5))
+        # Púa en dos tramos (gruesa en la base, afilada en la punta): sin esto parecían dedos.
+        medio = Vector((0, y + 0.2, z + 0.45 - 0.04 * i))
+        cuerpo_el.append(capsula((0, y, z), medio, 0.15, rigidez=2.5))
+        cuerpo_el.append(capsula(medio, (0, y + 0.5, z + 1.0 - 0.08 * i), 0.05, rigidez=2.5))
     for sx in (-1, 1):  # púas laterales del abdomen
         for j in range(2):
             y = 1.0 + j * 0.8

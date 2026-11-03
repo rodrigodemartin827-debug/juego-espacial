@@ -1,0 +1,103 @@
+{
+  "nota": "studs, ejes de Roblox, respecto al centro de la base",
+  "EspecieId": "Criatura_AcechadorAbismo",
+  "Raiz": "Acechador_Cuerpo",
+  "Pivotes": {
+    "Acechador_Pata1": [
+      -0.619,
+      1.423,
+      -0.472
+    ],
+    "Acechador_Pata2": [
+      0.621,
+      1.423,
+      -0.472
+    ],
+    "Acechador_Pata3": [
+      -0.619,
+      1.423,
+      0.328
+    ],
+    "Acechador_Pata4": [
+      0.621,
+      1.423,
+      0.328
+    ],
+    "Acechador_Pata5": [
+      -0.619,
+      1.423,
+      1.128
+    ],
+    "Acechador_Pata6": [
+      0.621,
+      1.423,
+      1.128
+    ],
+    "Acechador_MandibulaIzq": [
+      -0.299,
+      1.273,
+      -1.522
+    ],
+    "Acechador_MandibulaDer": [
+      0.301,
+      1.273,
+      -1.522
+    ]
+  },
+  "Centros": {
+    "Acechador_Cuerpo": [
+      -0.007,
+      1.993,
+      0.597
+    ],
+    "Acechador_Pata1": [
+      -1.644,
+      1.358,
+      -0.81
+    ],
+    "Acechador_Pata2": [
+      1.647,
+      1.347,
+      -0.8
+    ],
+    "Acechador_Pata3": [
+      -1.648,
+      1.371,
+      0.329
+    ],
+    "Acechador_Pata4": [
+      1.641,
+      1.371,
+      0.324
+    ],
+    "Acechador_Pata5": [
+      -1.64,
+      1.351,
+      1.43
+    ],
+    "Acechador_Pata6": [
+      1.633,
+      1.358,
+      1.414
+    ],
+    "Acechador_MandibulaIzq": [
+      -0.39,
+      1.151,
+      -2.093
+    ],
+    "Acechador_MandibulaDer": [
+      0.388,
+      1.154,
+      -2.088
+    ],
+    "Acechador_Ojos": [
+      0.001,
+      1.798,
+      -1.507
+    ]
+  },
+  "Soldadas": [
+    "Acechador_Ojos"
+  ],
+  "OjosNeon": true
+}
