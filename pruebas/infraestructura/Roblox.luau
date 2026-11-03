@@ -33,6 +33,7 @@ local SERVICIOS = {
 	HttpService = true,
 	RunService = true,
 	CollectionService = true,
+	TextChatService = true,
 }
 
 -- Clases que cuentan como "padres" de otras para Instance:IsA.
@@ -408,7 +409,22 @@ function Roblox.nuevoMundo(opciones)
 				end
 				return lista
 			end,
+			GetPlayerByUserId = function(self, id)
+				for _, hijo in rawget(self, "_hijos") do
+					if rawget(hijo, "ClassName") == "Player" and hijo.UserId == id then
+						return hijo
+					end
+				end
+				return nil
+			end,
 		},
+	}
+
+	-- Comando de chat: la prueba dispara Triggered a mano, como si alguien lo hubiera escrito.
+	PorClase.TextChatCommand = {
+		iniciar = function(self)
+			rawset(self, "Triggered", nuevaSenal(mundo.task))
+		end,
 	}
 
 	PorClase.DataStoreService = {

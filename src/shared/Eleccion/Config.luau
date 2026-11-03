@@ -27,6 +27,10 @@ Config.AtributoEligiendo = "EligiendoBando"
 -- Nombre del ForceField invisible que protege al personaje mientras elige.
 Config.NombreProteccion = "ProteccionEleccion"
 
+-- Comando de chat, SOLO EN STUDIO, que devuelve el bando del jugador a "Ninguno" para volver a ver la pantalla
+-- (ver Servicios/ServicioBandos). En el juego publicado no existe.
+Config.ComandoReiniciarBando = "/reiniciarbando"
+
 -- ===== Tiempos (segundos) =====
 
 Config.Tiempos = {

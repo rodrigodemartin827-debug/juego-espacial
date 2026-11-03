@@ -108,11 +108,29 @@ return function(Marco)
 				local flujo = Flujo.nuevo(ESPERA)
 				Marco.igual(Flujo.AlRecibirDatos(flujo, { Bando = bando }), "Omitir")
 				Marco.igual(flujo.Estado, "Terminado")
-				Marco.igual(Flujo.AlRecibirDatos(flujo, { Bando = "Ninguno" }), "Nada", "una vez decidido, no vuelve")
+				Marco.igual(Flujo.AlRecibirDatos(flujo, { Bando = bando }), "Nada", "una vez decidido, no vuelve")
 				Marco.falso(Flujo.Elegir(flujo, "Humanos", 0))
 				Marco.falso(flujo.Mostrada)
 			end
 		end)
+
+		Marco.prueba(
+			"si el servidor le devuelve a Ninguno (comando de Studio), la pantalla sale otra vez desde cero",
+			function()
+				local flujo = flujoEnPantalla()
+				Marco.verdadero(Flujo.Elegir(flujo, "Monstruos", 0))
+				Marco.igual(Flujo.AlRecibirDatos(flujo, { Bando = "Monstruos" }), "Confirmar")
+				Flujo.Terminar(flujo)
+
+				Marco.igual(Flujo.AlRecibirDatos(flujo, { Bando = "Ninguno" }), "Mostrar")
+				Marco.igual(flujo.Estado, "Eligiendo")
+				Marco.igual(flujo.Pedido, nil)
+				Marco.igual(flujo.Confirmado, nil)
+				Marco.igual(flujo.Resaltado, nil)
+				Marco.verdadero(Flujo.PuedeElegir(flujo))
+				Marco.igual(Flujo.AlRecibirDatos(flujo, { Bando = "Ninguno" }), "Nada", "no se monta dos veces")
+			end
+		)
 
 		Marco.prueba("datos repetidos sin bando no vuelven a montar la pantalla", function()
 			local flujo = flujoEnPantalla()

@@ -36,8 +36,8 @@ end
 	Arranca el servidor completo (init.server.luau) sobre `nube`. Devuelve el entorno y el ServicioDatos del
 	servidor. Los tiempos del servicio se acortan para que las pruebas vayan rápido.
 ]]
-local function arrancarServidor(nube)
-	local entorno = Entorno.nuevo({ Nube = nube, JobId = "servidor-integracion" })
+local function arrancarServidor(nube, studio: boolean?)
+	local entorno = Entorno.nuevo({ Nube = nube, JobId = "servidor-integracion", Studio = studio })
 
 	local ServicioDatos = entorno.servidor.requerir(`{RUTA_SERVIDOR}.Servicios.ServicioDatos`)
 	ServicioDatos.Configuracion.IntervaloComprobacion = 0.01
@@ -420,6 +420,45 @@ return function(Marco)
 			Marco.verdadero(ServicioBandos.Elegir(jugador, "Humanos"))
 			Marco.verdadero(raiz.Anchored, "no lo ancló este servicio: no le toca soltarlo")
 			Marco.esNil(modelo:FindFirstChild(PROTECCION))
+		end)
+
+		Marco.prueba("fuera de Studio no se puede reiniciar el bando ni existe el comando", function()
+			local _, entorno, ServicioDatos, ServicioBandos = preparar()
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			Marco.verdadero(ServicioBandos.Elegir(jugador, "Humanos"))
+			Marco.falso(ServicioBandos.ReiniciarParaPruebas(jugador))
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Humanos")
+			Marco.esNil(jugador:GetAttribute(ATRIBUTO))
+			Marco.esNil(entorno.game:GetService("TextChatService"):FindFirstChild("ReiniciarBando"))
+		end)
+
+		Marco.prueba("en Studio, el comando de chat devuelve al jugador a Ninguno y vuelve a protegerle", function()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube, true)
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			local modelo, raiz = darPersonaje(entorno, jugador)
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(jugador) ~= nil
+			end)
+			local ServicioBandos = entorno.servidor.requerir(`{RUTA_SERVIDOR}.Servicios.ServicioBandos`)
+			Marco.verdadero(ServicioBandos.Elegir(jugador, "Monstruos"))
+			Marco.falso(protegido(modelo, raiz))
+
+			local comando = entorno.game:GetService("TextChatService"):FindFirstChild("ReiniciarBando")
+			Marco.distinto(comando, nil, "en Studio debe existir el comando")
+			Marco.igual(comando.PrimaryAlias, "/reiniciarbando")
+			comando.Triggered:Fire({ UserId = 1 }, "/reiniciarbando")
+			Marco.dejarCorrer(5)
+
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Ninguno")
+			Marco.igual(jugador:GetAttribute(ATRIBUTO), true)
+			Marco.verdadero(protegido(modelo, raiz), "vuelve a quedar quieto y protegido")
+			Marco.igual(nube:Leer("DatosJugador_Studio", "Jugador_1").Datos.Bando, "Ninguno", "se guarda en el acto")
+			-- Y puede volver a elegir.
+			Marco.verdadero(ServicioBandos.Elegir(jugador, "Humanos"))
 		end)
 	end)
 

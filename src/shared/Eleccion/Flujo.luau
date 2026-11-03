@@ -54,7 +54,8 @@ end
 
 --[[
 	Llegan datos nuevos del servidor (la primera copia o una actualización). Devuelve qué hacer:
-	  "Mostrar"    primera copia y el bando es Ninguno: hay que montar la pantalla
+	  "Mostrar"    primera copia y el bando es Ninguno: hay que montar la pantalla (o ha vuelto a ser Ninguno
+	               después de cerrarla, con el comando de pruebas de Studio)
 	  "Omitir"     primera copia y ya tiene bando: no se muestra nada
 	  "Confirmar"  estaba en pantalla y el servidor ya le ha puesto un bando (segundo valor: cuál)
 	  "Nada"       nada que hacer (datos repetidos, o la pantalla ya terminó)
@@ -73,6 +74,18 @@ function Modulo.AlRecibirDatos(flujo: Flujo, datos: any): (Accion, string?)
 		end
 		flujo.Estado = "Terminado"
 		return "Omitir", nil
+	end
+
+	-- La pantalla ya se cerró, pero el bando ha vuelto a ser "Ninguno" (solo pasa con el comando de pruebas de
+	-- Studio, ver Servicios/ServicioBandos): se vuelve a mostrar desde cero.
+	if flujo.Estado == "Terminado" and bando == Bandos.Ninguno then
+		flujo.Estado = "Eligiendo"
+		flujo.Resaltado = nil
+		flujo.Pedido = nil
+		flujo.PedidoEn = 0
+		flujo.Confirmado = nil
+		flujo.Mostrada = true
+		return "Mostrar", nil
 	end
 
 	if flujo.Estado == "Eligiendo" or flujo.Estado == "Enviado" then
