@@ -56,6 +56,37 @@ local lista: { [string]: Especie } = {
 		XP = 60,
 		Monedas = 40,
 	},
+	-- Modelos en modelos/criaturas (montar_brincador.luau y montar_acechador.luau ya les ponen etiqueta y EspecieId).
+	Criatura_BrincadorLanudo = {
+		Categoria = "Criatura",
+		Nombre = "Brincador lanudo",
+		Descripcion = "Herbívoro dócil de lana espesa que pasta en los prados del planeta humano. Se acerca a los curiosos.",
+		Rareza = "Comun",
+		Duracion = 1.6,
+		Datos = {
+			{ "Hábitat", "Prados del planeta humano" },
+			{ "Dieta", "Hierba y flores" },
+			{ "Peligrosidad", "Ninguna" },
+			{ "Tamaño", "0,9 m" },
+		},
+		XP = 20,
+		Monedas = 12,
+	},
+	Criatura_AcechadorAbismo = {
+		Categoria = "Criatura",
+		Nombre = "Acechador del abismo",
+		Descripcion = "Depredador de seis patas que caza en la penumbra del planeta de los monstruos. Sus ojos delatan dónde espera.",
+		Rareza = "Poco comun",
+		Duracion = 2.4,
+		Datos = {
+			{ "Hábitat", "Bosques muertos del planeta de los monstruos" },
+			{ "Dieta", "Carne" },
+			{ "Peligrosidad", "Alta" },
+			{ "Tamaño", "1,6 m" },
+		},
+		XP = 45,
+		Monedas = 30,
+	},
 	Criatura_ReptadorLunar = {
 		Categoria = "Criatura",
 		Nombre = "Reptador lunar",
