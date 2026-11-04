@@ -1,14 +1,16 @@
 """
-Mallas low-poly hechas a mano en Python: primitivas (cajas, prismas, cilindros, conos, cascos convexos...),
-transformaciones y unión. No depende de Blender: las piezas del kit se construyen aquí y luego `a_blender()` las
+Mallas low-poly hechas a mano en Python: primitivas (cajas, prismas, troncos de cono, tornos, icosferas, cascos
+convexos), transformaciones y unión. No depende de Blender: las piezas del kit se construyen aquí y `a_blender()` las
 convierte en objetos.
 
 Cada cara guarda:
-  * su material (un nombre: "PARED", "TEJA", "MADERA"... Los nombres en MAYÚSCULAS son «ranuras» que el edificio
-    sustituye por una variante concreta, p. ej. PARED -> Yeso_Crema);
-  * un «tinte» (un número cerca de 1) que multiplica el color en el material: así cada teja, piedra o tabla tiene un
-    tono un poco distinto sin texturas;
-  * si se sombrea liso o plano (casi todo es plano: el estilo low-poly).
+  * su «material», que casi siempre es el nombre de una casilla del atlas (atlas.py): «pared_ventana», «teja_16»,
+    «piedra_clara»... Los nombres que no son casillas del atlas («Agua», «Mar») son materiales propios.
+  * cómo se le ponen las UV:
+      - por defecto, «ajustada»: la cara entera ocupa su casilla (la v sigue la pendiente o la vertical de la cara);
+      - «plana»: uv = A·p + b, una proyección fija que comparten varias caras (así el dibujo de una casilla continúa
+        de una cara a otra, p. ej. una fachada con el hueco de la ventana).
+  * si se sombrea liso o plano (casi todo es plano: estilo low-poly).
 
 Unidades: studs. Ejes de Blender: Z arriba.
 """
@@ -17,7 +19,6 @@ import math
 
 import numpy as np
 from scipy.spatial import ConvexHull
-
 
 # --------------------------------------------------------------------------------------------------------------
 # Matrices 4x4
@@ -73,6 +74,38 @@ def marco_matriz(origen, ex, ey, ez):
     return m
 
 
+def uv_plano(origen, eu, ev, su, sv):
+    """Proyección plana: u = (p - origen)·eu / su, v = (p - origen)·ev / sv."""
+    o, eu, ev = (np.asarray(x, float) for x in (origen, eu, ev))
+    A = np.stack([eu / su, ev / sv])
+    return ("plano", A, -A @ o)
+
+
+def _normal(p):
+    """Normal de Newell (vale para polígonos no convexos)."""
+    n = np.zeros(3)
+    for a, b in zip(p, np.roll(p, -1, axis=0)):
+        n += np.array([(a[1] - b[1]) * (a[2] + b[2]), (a[2] - b[2]) * (a[0] + b[0]), (a[0] - b[0]) * (a[1] + b[1])])
+    L = np.linalg.norm(n)
+    return n / L if L > 1e-12 else np.array([0, 0, 1.0])
+
+
+def uv_ajustada(p):
+    """UV de una cara que ocupa su casilla entera: v sube por la cara (o hacia +Y si es horizontal), u a la derecha
+    vista desde fuera."""
+    n = _normal(p)
+    z = np.array([0, 0, 1.0])
+    ev = z - np.dot(z, n) * n
+    if np.linalg.norm(ev) < 1e-3:
+        ev = np.array([0, 1.0, 0]) - n[1] * n
+    ev /= np.linalg.norm(ev)
+    eu = np.cross(ev, n)
+    u = p @ eu
+    v = p @ ev
+    du, dv = max(u.max() - u.min(), 1e-9), max(v.max() - v.min(), 1e-9)
+    return np.stack([(u - u.min()) / du, (v - v.min()) / dv], -1)
+
+
 # --------------------------------------------------------------------------------------------------------------
 # La malla
 # --------------------------------------------------------------------------------------------------------------
@@ -80,14 +113,12 @@ def marco_matriz(origen, ex, ey, ez):
 
 class Malla:
     def __init__(self):
-        self.v = []  # lista de arrays (k, 3)
-        self.caras = []  # lista de tuplas de índices (globales)
+        self.v = []
+        self.caras = []
         self.mat = []
-        self.tinte = []
+        self.uv = []  # None (ajustada) o ("plano", A, b)
         self.liso = []
         self._n = 0
-
-    # -------------------------------------------------------------------------------- básicos
 
     def _vertices(self, pts):
         pts = np.asarray(pts, dtype=np.float64).reshape(-1, 3)
@@ -96,20 +127,22 @@ class Malla:
         self._n += len(pts)
         return base
 
-    def poligono(self, pts, mat, tinte=1.0, liso=False):
+    def poligono(self, pts, mat, uv=None, liso=False):
         b = self._vertices(pts)
         self.caras.append(tuple(range(b, b + len(pts))))
         self.mat.append(mat)
-        self.tinte.append(tinte)
+        self.uv.append(uv)
         self.liso.append(liso)
+        return self
 
-    def caras_indexadas(self, pts, caras, mat, tinte=1.0, liso=False):
+    def caras_indexadas(self, pts, caras, mat, uv=None, liso=False):
         b = self._vertices(pts)
         for k, c in enumerate(caras):
             self.caras.append(tuple(b + i for i in c))
-            self.mat.append(mat)
-            self.tinte.append(float(tinte) if np.isscalar(tinte) else float(tinte[k]))
+            self.mat.append(mat if isinstance(mat, str) else mat[k])
+            self.uv.append(uv)
             self.liso.append(liso)
+        return self
 
     @property
     def n_triangulos(self):
@@ -120,24 +153,23 @@ class Malla:
 
     # -------------------------------------------------------------------------------- unión y transformación
 
-    def anadir(self, otra, m=None, remap=None, tinte=1.0):
-        """Añade otra malla transformada por m (4x4). remap: {material: material} para cambiar ranuras."""
+    def anadir(self, otra, m=None):
+        """Añade otra malla transformada por m (4x4, sin espejo). Las UV planas se transforman con ella."""
         if not otra.v:
             return self
         pts = otra.todos_vertices()
         if m is not None:
             pts = pts @ m[:3, :3].T + m[:3, 3]
-            invertir = np.linalg.det(m[:3, :3]) < 0
-        else:
-            invertir = False
+            inv = np.linalg.inv(m)
         base = self._vertices(pts)
-        for c, mt, ti, li in zip(otra.caras, otra.mat, otra.tinte, otra.liso):
-            c2 = tuple(base + i for i in c)
-            if invertir:
-                c2 = c2[::-1]
-            self.caras.append(c2)
-            self.mat.append(remap.get(mt, mt) if remap else mt)
-            self.tinte.append(ti * tinte)
+        for c, mt, uv, li in zip(otra.caras, otra.mat, otra.uv, otra.liso):
+            self.caras.append(tuple(base + i for i in c))
+            self.mat.append(mt)
+            if uv is not None and m is not None:
+                _, A, b = uv
+                # uv = A·p_hijo + b, con p_hijo = inv·p  ->  A' = A·inv[:3,:3], b' = A·inv[:3,3] + b
+                uv = ("plano", A @ inv[:3, :3], A @ inv[:3, 3] + b)
+            self.uv.append(uv)
             self.liso.append(li)
         return self
 
@@ -150,34 +182,26 @@ class Malla:
 
     # -------------------------------------------------------------------------------- primitivas
 
-    def caja(self, a, b, mat, tinte=1.0, sin=()):
-        """Caja alineada de la esquina a a la b. `sin`: caras que no se crean ('-x','+x','-y','+y','-z','+z')."""
+    CARAS_CAJA = {"-z": (0, 3, 2, 1), "+z": (4, 5, 6, 7), "-y": (0, 1, 5, 4), "+y": (2, 3, 7, 6),
+                  "-x": (3, 0, 4, 7), "+x": (1, 2, 6, 5)}
+
+    def caja(self, a, b, mat, sin=(), solo=None, mats=None, uv=None):
+        """Caja alineada de la esquina a a la b. `sin`: caras que no se crean; `solo`: las únicas que se crean;
+        `mats`: material por cara ({'-y': 'pared_lisa'})."""
         (x0, y0, z0), (x1, y1, z1) = a, b
         p = [(x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0), (x0, y0, z1), (x1, y0, z1), (x1, y1, z1),
              (x0, y1, z1)]
-        caras = {"-z": (0, 3, 2, 1), "+z": (4, 5, 6, 7), "-y": (0, 1, 5, 4), "+y": (2, 3, 7, 6),
-                 "-x": (3, 0, 4, 7), "+x": (1, 2, 6, 5)}
-        self.caras_indexadas(p, [c for k, c in caras.items() if k not in sin], mat, tinte)
+        for k, c in self.CARAS_CAJA.items():
+            if k in sin or (solo is not None and k not in solo):
+                continue
+            self.poligono([p[i] for i in c], (mats or {}).get(k, mat), uv)
         return self
 
-    def caja_c(self, centro, tam, mat, tinte=1.0, sin=()):
+    def caja_c(self, centro, tam, mat, **kw):
         c, t = np.asarray(centro, float), np.asarray(tam, float) / 2
-        return self.caja(c - t, c + t, mat, tinte, sin)
+        return self.caja(c - t, c + t, mat, **kw)
 
-    def caja_biselada(self, a, b, bisel, mat, tinte=1.0):
-        a, b = np.asarray(a, float), np.asarray(b, float)
-        c, h = (a + b) / 2, (b - a) / 2
-        e = np.minimum(bisel, h * 0.49)
-        pts = []
-        for sx in (-1, 1):
-            for sy in (-1, 1):
-                for sz in (-1, 1):
-                    s = np.array([sx, sy, sz])
-                    pts += [c + s * (h - e * np.array(m)) for m in ((0, 1, 1), (1, 0, 1), (1, 1, 0))]
-        return self.convexo(pts, mat, tinte)
-
-    def convexo(self, pts, mat, tinte=1.0, liso=False):
-        """Casco convexo de unos puntos (rocas, piezas biseladas). Une los triángulos coplanarios."""
+    def convexo(self, pts, mat, liso=False):
         pts = np.asarray(pts, dtype=np.float64)
         h = ConvexHull(pts)
         centro = pts.mean(axis=0)
@@ -187,94 +211,68 @@ class Malla:
             if np.dot(np.cross(b - a, c - a), a - centro) < 0:
                 s = s[::-1]
             caras.append(tuple(s))
-        self.caras_indexadas(pts, caras, mat, tinte, liso)
-        return self
+        return self.caras_indexadas(pts, caras, mat, liso=liso)
 
-    def prisma(self, poli, z0, z1, mat, tinte=1.0, tapas=True, mat_tapa=None):
+    def prisma(self, poli, z0, z1, mat, tapas=True, mat_tapa=None, uv=None):
         """Extruye un polígono 2D (en XY, antihorario) de z0 a z1."""
         poli = np.asarray(poli, dtype=np.float64)
         n = len(poli)
         p = np.concatenate([np.c_[poli, np.full(n, z0)], np.c_[poli, np.full(n, z1)]])
-        caras = [(i, (i + 1) % n, n + (i + 1) % n, n + i) for i in range(n)]
-        self.caras_indexadas(p, caras, mat, tinte)
+        self.caras_indexadas(p, [(i, (i + 1) % n, n + (i + 1) % n, n + i) for i in range(n)], mat, uv)
         if tapas:
-            self.caras_indexadas(p, [tuple(range(n - 1, -1, -1)), tuple(range(n, 2 * n))], mat_tapa or mat, tinte)
+            self.caras_indexadas(p, [tuple(range(n - 1, -1, -1)), tuple(range(n, 2 * n))], mat_tapa or mat, uv)
         return self
 
-    def tronco(self, c, r0, r1, h, n, mat, tinte=1.0, tapa_abajo=True, tapa_arriba=True, liso=False, giro=0.0,
-               mat_tapa=None):
-        """Cilindro o tronco de cono de n lados con la base en c (z hacia arriba). r1 = 0: cono."""
+    def tronco(self, c, r0, r1, h, n, mat, tapa_abajo=True, tapa_arriba=True, liso=False, giro=0.0, mat_tapa=None):
         cx, cy, cz = c
         ang = np.radians(giro) + 2 * np.pi * np.arange(n) / n
         aro0 = np.c_[cx + r0 * np.cos(ang), cy + r0 * np.sin(ang), np.full(n, cz)]
         if r1 <= 1e-6:
             p = np.concatenate([aro0, [[cx, cy, cz + h]]])
-            caras = [(i, (i + 1) % n, n) for i in range(n)]
-            self.caras_indexadas(p, caras, mat, tinte, liso)
+            self.caras_indexadas(p, [(i, (i + 1) % n, n) for i in range(n)], mat, liso=liso)
             if tapa_abajo:
-                self.caras_indexadas(aro0, [tuple(range(n - 1, -1, -1))], mat_tapa or mat, tinte)
+                self.caras_indexadas(aro0, [tuple(range(n - 1, -1, -1))], mat_tapa or mat)
             return self
         aro1 = np.c_[cx + r1 * np.cos(ang), cy + r1 * np.sin(ang), np.full(n, cz + h)]
         p = np.concatenate([aro0, aro1])
-        caras = [(i, (i + 1) % n, n + (i + 1) % n, n + i) for i in range(n)]
-        self.caras_indexadas(p, caras, mat, tinte, liso)
+        self.caras_indexadas(p, [(i, (i + 1) % n, n + (i + 1) % n, n + i) for i in range(n)], mat, liso=liso)
         if tapa_abajo:
-            self.caras_indexadas(aro0, [tuple(range(n - 1, -1, -1))], mat_tapa or mat, tinte)
+            self.caras_indexadas(aro0, [tuple(range(n - 1, -1, -1))], mat_tapa or mat)
         if tapa_arriba:
-            self.caras_indexadas(aro1, [tuple(range(n))], mat_tapa or mat, tinte)
+            self.caras_indexadas(aro1, [tuple(range(n))], mat_tapa or mat)
         return self
 
-    def torno(self, perfil, n, mat, c=(0, 0, 0), liso=True, tinte=1.0, giro=0.0):
-        """Superficie de revolución: perfil = [(radio, z), ...] de abajo arriba."""
+    def torno(self, perfil, n, mat, c=(0, 0, 0), liso=False, giro=0.0, tapas=True):
+        """Superficie de revolución: perfil = [(radio, z), ...] de abajo arriba. mat puede ser una lista (por tramo)."""
         cx, cy, cz = c
         ang = np.radians(giro) + 2 * np.pi * np.arange(n) / n
-        pts, caras = [], []
+        pts = []
         for (r, z) in perfil:
             pts += [(cx + r * math.cos(a), cy + r * math.sin(a), cz + z) for a in ang]
+        caras, mats = [], []
         for k in range(len(perfil) - 1):
             for i in range(n):
                 a, b = k * n + i, k * n + (i + 1) % n
                 caras.append((a, b, b + n, a + n))
-        # tapas si el perfil empieza o acaba en radio > 0
-        if perfil[0][0] > 1e-6:
+                mats.append(mat if isinstance(mat, str) else mat[k])
+        if tapas and perfil[0][0] > 1e-6:
             caras.append(tuple(range(n - 1, -1, -1)))
-        if perfil[-1][0] > 1e-6:
+            mats.append(mat if isinstance(mat, str) else mat[0])
+        if tapas and perfil[-1][0] > 1e-6:
             k = len(perfil) - 1
             caras.append(tuple(k * n + i for i in range(n)))
-        self.caras_indexadas(pts, caras, mat, tinte, liso)
-        return self
+            mats.append(mat if isinstance(mat, str) else mat[-1])
+        return self.caras_indexadas(pts, caras, mats, liso=liso)
 
-    def esfera(self, c, r, mat, sub=1, tinte=1.0, liso=False, jitter=0.0, rng=None, escala=(1, 1, 1)):
-        """Icosfera low-poly (sub 0 = 20 caras, 1 = 80). jitter deforma los vértices (copas de árbol, rocas)."""
+    def esfera(self, c, r, mat, sub=0, liso=False, jitter=0.0, rng=None, escala=(1, 1, 1)):
         v, f = _icosfera(sub)
         if jitter and rng is not None:
             v = v * (1.0 + rng.uniform(-jitter, jitter, size=(len(v), 1)))
         v = v * np.asarray(escala) * r + np.asarray(c)
-        self.caras_indexadas(v, f, mat, tinte, liso)
-        return self
+        return self.caras_indexadas(v, f, mat, liso=liso)
 
-    def tira(self, puntos, ancho, alto, mat, tinte=1.0, arriba=(0, 0, 1)):
-        """Viga de sección rectangular a lo largo de una polilínea 3D."""
-        P = np.asarray(puntos, float)
-        up = np.asarray(arriba, float)
-        for a, b in zip(P[:-1], P[1:]):
-            d = b - a
-            L = np.linalg.norm(d)
-            if L < 1e-9:
-                continue
-            ex = d / L
-            ey = np.cross(up, ex)
-            if np.linalg.norm(ey) < 1e-6:
-                ey = np.array([0, 1.0, 0])
-            ey /= np.linalg.norm(ey)
-            ez = np.cross(ex, ey)
-            m = marco_matriz(a, ex, ey, ez)
-            pieza = Malla().caja((0, -ancho / 2, -alto / 2), (L, ancho / 2, alto / 2), mat, tinte)
-            self.anadir(pieza, m)
-        return self
-
-    def viga(self, a, b, grosor, mat, tinte=1.0):
-        """Viga cuadrada entre dos puntos (cualquier dirección)."""
+    def viga(self, a, b, grosor, mat, lados=4):
+        """Viga entre dos puntos (cualquier dirección): sección cuadrada, sin tapas."""
         a, b = np.asarray(a, float), np.asarray(b, float)
         d = b - a
         L = np.linalg.norm(d)
@@ -284,43 +282,120 @@ class Malla:
         ey /= np.linalg.norm(ey)
         ez = np.cross(ex, ey)
         g = grosor / 2
-        self.anadir(Malla().caja((0, -g, -g), (L, g, g), mat, tinte), marco_matriz(a, ex, ey, ez))
+        self.anadir(Malla().caja((0, -g, -g), (L, g, g), mat, sin=("-x", "+x")), marco_matriz(a, ex, ey, ez))
         return self
 
-    # -------------------------------------------------------------------------------- a Blender
+    # -------------------------------------------------------------------------------- UV y triángulos
 
-    def a_blender(self, nombre, materiales, coleccion=None, suavizado_auto=None):
-        """Crea un objeto de Blender. `materiales`: {nombre: bpy.types.Material}. Devuelve el objeto."""
-        import bpy
+    def uvs_atlas(self):
+        """UV de cada esquina de cada cara, ya en el atlas. Devuelve una lista de arrays (k, 2)."""
+        import atlas as AT
 
         pts = self.todos_vertices()
+        salida = []
+        for c, mt, uv in zip(self.caras, self.mat, self.uv):
+            p = pts[list(c)]
+            if mt not in AT.INDICE:
+                salida.append(np.zeros((len(c), 2)))
+                continue
+            if uv is None:
+                loc = uv_ajustada(p)
+            else:
+                _, A, b = uv
+                loc = p @ A.T + b
+            uu, vv = AT.a_atlas(mt, loc[:, 0], loc[:, 1])
+            salida.append(np.stack([uu, vv], -1))
+        return salida
+
+    def triangulada(self):
+        """Malla equivalente con las caras de más de 4 lados partidas en triángulos (sirve para polígonos cóncavos:
+        el importador de Roblox no siempre los triangula bien)."""
+        from mathutils import Vector
+        from mathutils.geometry import tessellate_polygon
+
+        pts = self.todos_vertices()
+        m = Malla()
+        m._vertices(pts)
+        for c, mt, uv, li in zip(self.caras, self.mat, self.uv, self.liso):
+            if len(c) <= 4:
+                m.caras.append(c)
+                m.mat.append(mt)
+                m.uv.append(uv)
+                m.liso.append(li)
+                continue
+            p = pts[list(c)]
+            n = _normal(p)
+            ref = np.array([0, 0, 1.0]) if abs(n[2]) < 0.9 else np.array([1.0, 0, 0])
+            e1 = np.cross(ref, n)
+            e1 /= np.linalg.norm(e1)
+            e2 = np.cross(n, e1)
+            plano = [Vector((float(q @ e1), float(q @ e2), 0.0)) for q in p]
+            tris = tessellate_polygon([plano])
+            for t in tris:
+                tri = [c[i] for i in t]
+                # orientación igual que la cara original
+                a, b, d = pts[tri[0]], pts[tri[1]], pts[tri[2]]
+                if np.dot(np.cross(b - a, d - a), n) < 0:
+                    tri = tri[::-1]
+                m.caras.append(tuple(tri))
+                m.mat.append(mt)
+                # una cara «ajustada» partida en triángulos tiene que seguir ajustada a la cara ENTERA
+                m.uv.append(uv if uv is not None else ("plano",) + _ajuste_como_plano(p))
+                m.liso.append(li)
+        return m
+
+    def a_blender(self, nombre, materiales, coleccion=None):
+        """Crea un objeto de Blender. `materiales`: {nombre: bpy.types.Material}; las casillas del atlas usan
+        materiales['Atlas_Kit']. Devuelve el objeto."""
+        import bpy
+
+        import atlas as AT
+
+        m = self.triangulada()
+        pts = m.todos_vertices()
         me = bpy.data.meshes.new(nombre)
-        nombres = sorted(set(self.mat))
+        nombres = sorted({("Atlas_Kit" if x in AT.INDICE else x) for x in m.mat})
         for n in nombres:
             me.materials.append(materiales[n])
         idx = {n: i for i, n in enumerate(nombres)}
-        tam = np.array([len(c) for c in self.caras], dtype=np.int32)
+        tam = np.array([len(c) for c in m.caras], dtype=np.int32)
         inicio = np.concatenate([[0], np.cumsum(tam)[:-1]]).astype(np.int32)
-        bucles = np.fromiter((i for c in self.caras for i in c), dtype=np.int32, count=int(tam.sum()))
+        bucles = np.fromiter((i for c in m.caras for i in c), dtype=np.int32, count=int(tam.sum()))
         me.vertices.add(len(pts))
         me.vertices.foreach_set("co", pts.astype(np.float32).ravel())
         me.loops.add(len(bucles))
         me.loops.foreach_set("vertex_index", bucles)
-        me.polygons.add(len(self.caras))
+        me.polygons.add(len(m.caras))
         me.polygons.foreach_set("loop_start", inicio)
-        me.polygons.foreach_set("material_index", np.array([idx[m] for m in self.mat], dtype=np.int32))
-        me.polygons.foreach_set("use_smooth", np.array(self.liso, dtype=bool))
-        at = me.attributes.new("Tinte", "FLOAT", "FACE")
-        at.data.foreach_set("value", np.array(self.tinte, dtype=np.float32))
+        me.polygons.foreach_set("material_index",
+                                np.array([idx["Atlas_Kit" if x in AT.INDICE else x] for x in m.mat], dtype=np.int32))
+        me.polygons.foreach_set("use_smooth", np.array(m.liso, dtype=bool))
+        capa = me.uv_layers.new(name="UVMap")
+        uvs = np.concatenate(m.uvs_atlas())
+        capa.data.foreach_set("uv", uvs.astype(np.float32).ravel())
         me.update(calc_edges=True)
         me.validate(clean_customdata=False)
         ob = bpy.data.objects.new(nombre, me)
-        (coleccion or bpy.context.scene.collection).objects.link(ob)
-        ob["triangulos"] = self.n_triangulos
+        if coleccion is not None:
+            coleccion.objects.link(ob)
+        ob["triangulos"] = m.n_triangulos
         return ob
 
 
-# --------------------------------------------------------------------------------------------------------------
+def _ajuste_como_plano(p):
+    """La proyección «ajustada» de una cara expresada como proyección plana (A, b)."""
+    n = _normal(p)
+    z = np.array([0, 0, 1.0])
+    ev = z - np.dot(z, n) * n
+    if np.linalg.norm(ev) < 1e-3:
+        ev = np.array([0, 1.0, 0]) - n[1] * n
+    ev /= np.linalg.norm(ev)
+    eu = np.cross(ev, n)
+    u, v = p @ eu, p @ ev
+    du, dv = max(u.max() - u.min(), 1e-9), max(v.max() - v.min(), 1e-9)
+    A = np.stack([eu / du, ev / dv])
+    b = np.array([-u.min() / du, -v.min() / dv])
+    return A, b
 
 
 _ICO_CACHE = {}

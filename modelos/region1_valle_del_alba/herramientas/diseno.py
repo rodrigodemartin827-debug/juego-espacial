@@ -154,4 +154,20 @@ BOSQUE_SIERRA = dict(desde=0.62, hasta=1.12, densidad=0.85, umbral=0.05)
 ROCAS_LADERA = 0.012  # probabilidad de roca en laderas de más de ~20° (por punto de la rejilla)
 ARBOLES_SUELTOS = 0.0025  # probabilidad de árbol suelto en pradera (por punto de la rejilla de 8 studs)
 
+# --------------------------------------------------------------------------------------------------------------
+# Niveles de detalle (LOD), en studs. Los usan los renders (lod.py) y el script de Roblox (datos exportados).
+# Cada cosa se dibuja DETALLADA hasta «detalle», SIMPLE hasta «simple» y no se dibuja más allá. Además, lo que queda
+# por debajo del horizonte del planeta (radio 2400: la curva tapa mucho) no se dibuja nunca.
+# --------------------------------------------------------------------------------------------------------------
+LOD = dict(
+    edificios=dict(detalle=220.0, simple=2600.0),
+    mobiliario=dict(detalle=140.0, simple=500.0),
+    vegetacion=dict(detalle=160.0, simple=1100.0),
+    hierba=dict(detalle=110.0, simple=110.0),
+    terreno=dict(detalle=650.0, simple=1e9),  # distancia al punto más cercano del trozo
+    silueta_aurora=700.0,  # más allá, Aurora entera se cambia por su silueta (una malla)
+    horizonte_margen=40.0,  # el horizonte se calcula con el radio del planeta menos esto (por prudencia)
+)
+TERRENO_TROZOS = dict(trozos=8, cuadros_detalle=96, cuadros_simple=16, faldon=8.0)
+
 DISTANCIAS_LIBRES = dict(sitio=40.0, camino=14.0, rio=20.0)  # sin árboles a menos de esto

@@ -1,48 +1,73 @@
 """
-Kit de construcción del Valle del Alba: las piezas con las que se montan los edificios y el mobiliario.
+Kit de construcción del Valle del Alba, versión optimizada para móvil.
 
-Estilo: pueblo europeo de cuento, limpio y luminoso. Paredes de yeso de colores claros, zócalo y esquinas de piedra,
-tejados de teja roja por hiladas, contraventanas pintadas, jardineras con flores, farolas de hierro.
+El estilo es el de la primera versión: pueblo europeo de cuento, yeso claro, sillares, tejas rojas, contraventanas
+pintadas, farolas de hierro. Pero ahora el detalle pequeño (tejas, juntas, sillares, marcos, lamas, tablas) va
+PINTADO EN EL ATLAS (atlas.py) y la geometría solo conserva lo que da volumen de verdad: el hueco de ventanas y
+puertas, alféizares, aleros, cornisas y esquinas.
 
-Todas las piezas son mallas low-poly (`malla.Malla`), en studs, con Z arriba. Escala: un personaje R6 mide 5 studs;
-una puerta, 4 × 7,4; un piso, 10 (la planta baja, 11).
+Reglas para que en Roblox se reutilicen:
+  * Cada pieza es una malla que se exporta UNA vez y se copia muchas (los edificios son listas de piezas).
+  * Cada pieza tiene UN color de instancia (el que se ve a través de las zonas teñibles del atlas). Por eso las
+    contraventanas, la puerta o el toldo son piezas aparte de la pared: cada una lleva su color.
+  * Ninguna colocación usa espejo (un CFrame de Roblox no puede reflejar): el lado derecho de un tejado o de un
+    hastial es la misma pieza girada 180°.
+  * Cada pieza tiene una versión DETALLADA y una SIMPLE para lejos (ver PIEZAS al final).
+  * Las caras que nunca se ven (dorso de las paredes, bases enterradas) no se crean.
 
-CONVENCIÓN DE LAS PIEZAS DE PARED: ocupan x ∈ [0, MODULO] a lo largo de la pared, y ∈ [0, GROSOR] hacia DENTRO del
-edificio (la cara exterior está en y = 0 y mira a -Y) y z ∈ [0, altura del piso]. Los adornos (alféizares,
-contraventanas, toldos) salen hacia -Y.
-
-Las ranuras de material (PARED, TEJA, PINTURA, PUERTA, TOLDO_A, PIEDRA, MARCO...) las elige cada edificio.
-
-Todo lo ajustable (medidas) está en MEDIDAS, arriba.
+Convención de las paredes: x ∈ [0, 8] a lo largo de la pared, cara exterior en y = 0 mirando a -Y (+Y es hacia
+dentro del edificio), z ∈ [0, 10]. Escala: un R6 mide 5 studs; una puerta, 4 × 7,4.
 """
 
 import math
 
 import numpy as np
 
-from malla import Malla, Rx, Ry, Rz, S, T, compone
+import atlas as AT
+from malla import Malla, Rx, Ry, Rz, T, _normal, compone, uv_plano
 
 MEDIDAS = dict(
-    modulo=8.0,  # ancho de un tramo de pared
-    grosor=1.0,  # grosor de pared
-    piso_bajo=11.0,
+    modulo=8.0,
     piso=10.0,
-    zocalo=0.6,  # losa de piedra sobre la que se asienta cada edificio (tapa los desniveles del suelo)
-    puerta=(4.0, 7.4),
-    ventana=(3.0, 4.2),
-    alfeizar=3.2,  # altura del alféizar sobre el suelo del piso
     pendiente=0.62,  # subida del tejado por stud horizontal (~32°)
     alero=1.3,
     vuelo=0.9,  # lo que sale el tejado por el hastial
-    hilada=1.35,  # alto de cada hilada de tejas (medido en la pendiente)
-    teja=2.0,  # ancho de cada teja
+    hondo_ventana=0.55,  # profundidad del hueco de la ventana
+    hondo_puerta=0.6,
 )
 M = MEDIDAS["modulo"]
-G = MEDIDAS["grosor"]
+H = MEDIDAS["piso"]
+PEND = MEDIDAS["pendiente"]
+ALERO = MEDIDAS["alero"]
+VUELO = MEDIDAS["vuelo"]
+UV_FACHADA = uv_plano((0, 0, 0), (1, 0, 0), (0, 0, 1), M, H)  # la casilla de pared cubre el módulo entero
+VENTANA = (AT.VENTANA[0] * M, AT.VENTANA[1] * H, AT.VENTANA[2] * M, AT.VENTANA[3] * H)  # x0, z0, x1, z1
+PUERTA = (AT.PUERTA[0] * M, 0.0, AT.PUERTA[2] * M, AT.PUERTA[3] * H)
+ESCAPARATE = (AT.ESCAPARATE[0] * M, AT.ESCAPARATE[1] * H, AT.ESCAPARATE[2] * M, AT.ESCAPARATE[3] * H)
 
 
-def _rng(semilla):
-    return np.random.default_rng(semilla)
+def cara(m, pts, normal, mat, uv=None, liso=False):
+    """Añade un polígono con la orientación que dé la normal pedida."""
+    p = np.asarray(pts, float)
+    if np.dot(_normal(p), normal) < 0:
+        p = p[::-1]
+    return m.poligono(p, mat, uv, liso)
+
+
+def uv_recorte(x0, x1, z0, z1, u0, u1, v0, v1):
+    """Proyección plana (en X y Z) que lleva el rectángulo [x0, x1] × [z0, z1] al trozo [u0, u1] × [v0, v1] de la
+    casilla. Sirve para enseñar solo una parte de una casilla (la ventana de una pared, por ejemplo)."""
+    su = (x1 - x0) / (u1 - u0)
+    sv = (z1 - z0) / (v1 - v0)
+    return uv_plano((x0 - u0 * su, 0, z0 - v0 * sv), (1, 0, 0), (0, 0, 1), su, sv)
+
+
+def _rng(s):
+    return np.random.default_rng(s)
+
+
+def _cuadro(m, mat, uv=UV_FACHADA):
+    return cara(m, [(0, 0, 0), (M, 0, 0), (M, 0, H), (0, 0, H)], (0, -1, 0), mat, uv)
 
 
 # ==============================================================================================================
@@ -50,775 +75,451 @@ def _rng(semilla):
 # ==============================================================================================================
 
 
-def pared_lisa(alto=MEDIDAS["piso"]):
-    return Malla().caja((0, 0, 0), (M, G, alto), "PARED")
-
-
-def _pared_con_hueco(alto, x0, x1, z0, z1):
-    m = Malla()
-    m.caja((0, 0, 0), (x0, G, alto), "PARED")
-    m.caja((x1, 0, 0), (M, G, alto), "PARED")
+def _fachada_con_hueco(m, mat, x0, z0, x1, z1, hondo, fondo_mat, mat_jambas="piedra_clara"):
+    """Frente de un módulo de pared con un hueco: tres o cuatro paños, las caras del hueco y el fondo."""
+    Y = np.array([0, -1.0, 0])
+    trozos = [(0, 0, x0, H), (x1, 0, M, H), (x0, z1, x1, H)]
     if z0 > 0:
-        m.caja((x0, 0, 0), (x1, G, z0), "PARED")
-    if z1 < alto:
-        m.caja((x0, 0, z1), (x1, G, alto), "PARED")
+        trozos.append((x0, 0, x1, z0))
+    for (a, b, c, d) in trozos:
+        cara(m, [(a, 0, b), (c, 0, b), (c, 0, d), (a, 0, d)], Y, mat, UV_FACHADA)
+    hd = hondo
+    if z0 > 0:
+        cara(m, [(x0, 0, z0), (x1, 0, z0), (x1, hd, z0), (x0, hd, z0)], (0, 0, 1), mat_jambas)
+    cara(m, [(x0, 0, z1), (x1, 0, z1), (x1, hd, z1), (x0, hd, z1)], (0, 0, -1), mat_jambas)
+    cara(m, [(x0, 0, z0), (x0, hd, z0), (x0, hd, z1), (x0, 0, z1)], (1, 0, 0), mat_jambas)
+    cara(m, [(x1, 0, z0), (x1, hd, z0), (x1, hd, z1), (x1, 0, z1)], (-1, 0, 0), mat_jambas)
+    if fondo_mat:
+        cara(m, [(x0, hd, z0), (x1, hd, z0), (x1, hd, z1), (x0, hd, z1)], Y, fondo_mat)
     return m
 
 
-def ventana(ancho=MEDIDAS["ventana"][0], alto=MEDIDAS["ventana"][1], contraventanas=True, jardinera=False,
-            semilla=0):
-    """Ventana para un hueco de ancho × alto con la esquina inferior izquierda en el origen."""
-    rng = _rng(semilla)
+def _alfeizar(m, x0, x1, z, salida=0.45, alto=0.35):
+    return m.caja((x0 - 0.5, -salida, z - alto), (x1 + 0.5, 0.0, z), "piedra_clara", sin=("+y",))
+
+
+def pared_lisa(baja=False):
+    return _cuadro(Malla(), "pared_lisa_baja" if baja else "pared_lisa")
+
+
+def pared_ventana(baja=False, entramado=False):
+    x0, z0, x1, z1 = VENTANA
+    mat = "entramado_ventana" if entramado else ("pared_ventana_baja" if baja else "pared_ventana")
+    m = _fachada_con_hueco(Malla(), mat, x0, z0, x1, z1, MEDIDAS["hondo_ventana"], "ventana",
+                           "madera_oscura" if entramado else "piedra_clara")
+    return _alfeizar(m, x0, x1, z0)
+
+
+def pared_ventana_simple(baja=False, entramado=False):
+    mat = "entramado_ventana_lejos" if entramado else ("pared_ventana_baja_lejos" if baja else "pared_ventana_lejos")
+    return _cuadro(Malla(), mat)
+
+
+def pared_puerta():
+    x0, z0, x1, z1 = PUERTA
+    m = _fachada_con_hueco(Malla(), "pared_puerta", x0, z0, x1, z1, MEDIDAS["hondo_puerta"], None)
+    return m.caja((x0 - 0.8, -1.5, -0.6), (x1 + 0.8, 0.0, 0.0), "piedra_media", sin=("+y", "-z"))  # escalón
+
+
+def puerta():
+    """La hoja de la puerta (teñible), al fondo del hueco de pared_puerta."""
+    x0, z0, x1, z1 = PUERTA
+    y = MEDIDAS["hondo_puerta"] - 0.05
+    return cara(Malla(), [(x0, y, 0), (x1, y, 0), (x1, y, z1), (x0, y, z1)], (0, -1, 0), "puerta")
+
+
+def pared_escaparate():
+    x0, z0, x1, z1 = ESCAPARATE
+    m = _fachada_con_hueco(Malla(), "pared_escaparate", x0, z0, x1, z1, 0.5, "escaparate", "madera_oscura")
+    return _alfeizar(m, x0 + 0.3, x1 - 0.3, z0, 0.35, 0.3)
+
+
+def contraventanas():
+    """Las dos contraventanas abiertas contra la fachada, a los lados de la ventana (teñibles)."""
+    x0, z0, x1, z1 = VENTANA
+    w = (x1 - x0) / 2 + 0.05
     m = Malla()
-    w, h = ancho, alto
-    # Vidrio y cruceta
-    m.caja((0.1, 0.55, 0.1), (w - 0.1, 0.62, h - 0.1), "Vidrio", tinte=float(rng.uniform(0.85, 1.15)))
-    m.caja((w / 2 - 0.11, 0.42, 0.1), (w / 2 + 0.11, 0.55, h - 0.1), "MARCO")
-    m.caja((0.1, 0.42, h * 0.62 - 0.11), (w - 0.1, 0.55, h * 0.62 + 0.11), "MARCO")
-    # Marco
-    for a, b in (((0, 0.3, 0), (0.28, 0.7, h)), ((w - 0.28, 0.3, 0), (w, 0.7, h)), ((0, 0.3, h - 0.28), (w, 0.7, h)),
-                 ((0, 0.3, 0), (w, 0.7, 0.28))):
-        m.caja(a, b, "MARCO")
-    # Recercado de piedra en la fachada, alféizar y dintel
-    m.caja((-0.45, -0.14, 0), (0, 0.02, h), "PIEDRA", sin=("+y",))
-    m.caja((w, -0.14, 0), (w + 0.45, 0.02, h), "PIEDRA", sin=("+y",))
-    m.caja((-0.55, -0.5, -0.38), (w + 0.55, 0.32, 0.02), "PIEDRA")
-    m.caja((-0.5, -0.22, h), (w + 0.5, 0.02, h + 0.55), "PIEDRA", sin=("+y",))
-    m.caja((w / 2 - 0.35, -0.3, h - 0.05), (w / 2 + 0.35, 0.02, h + 0.62), "PIEDRA", tinte=0.93)  # clave
-    if contraventanas:
-        sw = w / 2 + 0.05
-        for lado in (-1, 1):
-            x0 = -0.5 - sw if lado < 0 else w + 0.5
-            m.caja((x0, -0.32, 0.1), (x0 + sw, -0.12, h - 0.1), "PINTURA")
-            for k in range(3):  # lamas
-                z = 0.7 + k * (h - 1.4) / 2.6
-                m.caja((x0 + 0.15, -0.42, z), (x0 + sw - 0.15, -0.3, z + 0.32), "PINTURA", tinte=0.88)
-    if jardinera:
-        m.caja((0.0, -1.15, -1.3), (w, -0.5, -0.38), "Madera_Media")
-        colores = ["Flor_Roja", "Flor_Rosa", "Flor_Amarilla", "Flor_Blanca", "Flor_Lila"]
-        c1 = colores[int(rng.integers(len(colores)))]
-        c2 = colores[int(rng.integers(len(colores)))]
-        for k in range(3):
-            x = 0.45 + k * (w - 0.9) / 2
-            m.esfera((x, -0.85, -0.3), 0.55, "Hoja_Verde", sub=0, jitter=0.2, rng=rng)
-            m.esfera((x + rng.uniform(-0.15, 0.15), -0.95, 0.05 + rng.uniform(0, 0.2)), 0.3,
-                     c1 if k % 2 else c2, sub=0)
+    y = -0.14
+    for a in (x0 - 0.5 - w, x1 + 0.5):
+        cara(m, [(a, y, z0 + 0.1), (a + w, y, z0 + 0.1), (a + w, y, z1 - 0.1), (a, y, z1 - 0.1)], (0, -1, 0),
+             "contraventana")
+        izq = a < x0
+        borde = a if izq else a + w  # canto exterior: da grosor
+        cara(m, [(borde, y, z0 + 0.1), (borde, 0, z0 + 0.1), (borde, 0, z1 - 0.1), (borde, y, z1 - 0.1)],
+             (-1 if izq else 1, 0, 0), "contraventana")
     return m
 
 
-def pared_ventana(alto=MEDIDAS["piso"], contraventanas=True, jardinera=False, semilla=0):
-    w, h = MEDIDAS["ventana"]
-    x0 = (M - w) / 2
-    z0 = MEDIDAS["alfeizar"]
-    m = _pared_con_hueco(alto, x0, x0 + w, z0, z0 + h)
-    m.anadir(ventana(w, h, contraventanas, jardinera, semilla), T(x0, 0, z0))
-    return m
-
-
-def puerta(ancho=MEDIDAS["puerta"][0], alto=MEDIDAS["puerta"][1], semilla=0, farolillo=True):
-    """Puerta de tablas con recercado de sillares, escalón y farolillo."""
-    rng = _rng(semilla)
+def jardinera():
+    x0, z0, x1, z1 = VENTANA
     m = Malla()
-    w, h = ancho, alto
-    n = 5
-    for k in range(n):  # tablas
-        x0 = 0.1 + k * (w - 0.2) / n
-        m.caja((x0 + 0.03, 0.5, 0.0), (x0 + (w - 0.2) / n - 0.03, 0.72, h - 0.1), "PUERTA",
-               tinte=float(rng.uniform(0.9, 1.08)))
-    m.caja((0.1, 0.42, 1.4), (w - 0.1, 0.5, 1.9), "PUERTA", tinte=0.85)  # travesaños
-    m.caja((0.1, 0.42, h - 2.2), (w - 0.1, 0.5, h - 1.7), "PUERTA", tinte=0.85)
-    m.caja((w - 0.85, 0.3, 3.4), (w - 0.55, 0.42, 3.9), "Oro")  # tirador
-    # Sillares de las jambas (alternos, como en las esquinas)
-    z, k = 0.0, 0
-    while z < h - 0.1:
-        alto_s = min(1.25, h - z)
-        ancho_s = 0.75 if k % 2 else 1.05
-        t = float(rng.uniform(0.9, 1.06))
-        m.caja((-ancho_s, -0.16, z), (0, 0.02, z + alto_s - 0.06), "PIEDRA", tinte=t, sin=("+y",))
-        m.caja((w, -0.16, z), (w + ancho_s, 0.02, z + alto_s - 0.06), "PIEDRA", tinte=t, sin=("+y",))
-        z += alto_s
-        k += 1
-    # Dintel con clave
-    m.caja((-1.05, -0.2, h), (w + 1.05, 0.02, h + 0.8), "PIEDRA", sin=("+y",))
-    m.prisma([(w / 2 - 0.45, -0.32), (w / 2 + 0.45, -0.32), (w / 2 + 0.45, 0.02), (w / 2 - 0.45, 0.02)],
-             h - 0.1, h + 1.05, "PIEDRA", tinte=0.92)
-    # Escalón (por debajo del suelo del piso: llega a la losa)
-    m.caja((-0.8, -1.5, -MEDIDAS["zocalo"]), (w + 0.8, 0.3, 0.0), "Piedra_Media")
-    if farolillo:
-        m.anadir(farolillo_pared(), T(w + 1.5, 0, h - 0.6))
+    m.caja((x0, -1.1, z0 - 1.25), (x1, -0.45, z0 - 0.35), "jardinera", sin=("+y", "+z"))
+    a, b = -1.1, -0.45
+    zt = z0 - 0.35
+    mid = (a + b) / 2
+    cara(m, [(x0, a, zt), (x1, a, zt), (x1, mid, zt + 0.7), (x0, mid, zt + 0.7)], (0, -1, 1), "flores")
+    cara(m, [(x0, b, zt), (x1, b, zt), (x1, mid, zt + 0.7), (x0, mid, zt + 0.7)], (0, 1, 1), "flores")
     return m
 
 
-def farolillo_pared():
+def farolillo():
+    """Farolillo de pared: brazo de hierro y farol de cristal cálido."""
     m = Malla()
-    m.caja((-0.15, -1.3, 1.35), (0.15, 0.0, 1.6), "Hierro")  # brazo
-    m.caja((-0.13, -1.28, 0.2), (0.13, -1.02, 1.35), "Hierro")
-    m.tronco((0, -1.15, -1.1), 0.42, 0.42, 1.2, 4, "Luz_Calida", giro=45)
-    m.tronco((0, -1.15, 0.1), 0.62, 0.15, 0.55, 4, "Hierro", giro=45)
-    m.tronco((0, -1.15, -1.3), 0.3, 0.55, 0.22, 4, "Hierro", giro=45)
+    m.caja((-0.13, -1.3, 1.35), (0.13, 0.0, 1.6), "hierro", sin=("+y",))
+    m.caja((-0.4, -1.55, -1.0), (0.4, -0.75, 0.2), "luz", sin=("+z",))
+    m.tronco((0, -1.15, 0.2), 0.62, 0.12, 0.6, 4, "hierro", giro=45, tapa_abajo=False)
     return m
 
 
-def pared_puerta(alto=MEDIDAS["piso_bajo"], semilla=0):
-    w, h = MEDIDAS["puerta"]
-    x0 = (M - w) / 2
-    m = _pared_con_hueco(alto, x0, x0 + w, 0.0, h)
-    m.anadir(puerta(w, h, semilla), T(x0, 0, 0))
-    return m
-
-
-def pared_escaparate(alto=MEDIDAS["piso_bajo"], semilla=0):
-    """Escaparate de tienda: zócalo de madera, cristal grande con parteluces y montante."""
-    x0, x1, z0, z1 = 0.9, M - 0.9, 1.3, 7.6
-    m = _pared_con_hueco(alto, x0, x1, 0.0, z1)
-    w = x1 - x0
-    m.caja((x0, 0.2, 0), (x1, 0.9, z0), "MARCO")
-    m.caja((x0 + 0.3, 0.1, 0.25), (x1 - 0.3, 0.2, z0 - 0.25), "MARCO", tinte=0.85)
-    m.caja((x0, 0.55, z0), (x1, 0.62, z1), "Vidrio", tinte=1.1)
-    for k in (1, 2):
-        xm = x0 + w * k / 3
-        m.caja((xm - 0.12, 0.4, z0), (xm + 0.12, 0.55, z1), "MARCO")
-    m.caja((x0, 0.4, z1 - 1.5), (x1, 0.55, z1 - 1.3), "MARCO")
-    for a, b in (((x0, 0.2, z1 - 0.3), (x1, 0.75, z1)), ((x0, 0.2, z0), (x0 + 0.3, 0.75, z1)),
-                 ((x1 - 0.3, 0.2, z0), (x1, 0.75, z1))):
-        m.caja(a, b, "MARCO")
-    # Repisa de piedra bajo el cristal y friso para el rótulo
-    m.caja((x0 - 0.3, -0.35, z0 - 0.2), (x1 + 0.3, 0.2, z0), "PIEDRA")
-    m.caja((x0 - 0.5, -0.3, z1), (x1 + 0.5, 0.02, z1 + 1.3), "MARCO", sin=("+y",))
-    return m
-
-
-def toldo(ancho=M - 0.8, salida=3.0, alto=8.9, caida=1.3, franja=1.0):
-    """Toldo a rayas, inclinado, con faldón festoneado. Ocupa x ∈ [0, ancho]."""
+def toldo():
+    """Toldo a rayas (teñible) sobre un escaparate: lona inclinada, faldón festoneado y costados."""
     m = Malla()
-    n = max(2, int(round(ancho / franja)))
-    fw = ancho / n
-    for k in range(n):
-        mat = "TOLDO_A" if k % 2 == 0 else "TOLDO_B"
-        xa, xb = k * fw, (k + 1) * fw
-        # lona inclinada (dos caras, para verse desde abajo)
-        p = [(xa, 0.0, alto), (xb, 0.0, alto), (xb, -salida, alto - caida), (xa, -salida, alto - caida)]
-        m.poligono(p, mat)  # Cycles pinta las dos caras: no se duplica (dos caras coincidentes salen negras)
-        # festón: rectángulo + pico
-        y = -salida
-        z = alto - caida
-        f = [(xa, y, z), (xa, y, z - 0.7), ((xa + xb) / 2, y, z - 1.1), (xb, y, z - 0.7), (xb, y, z)]
-        m.poligono(f[::-1], mat)
-    # barra de hierro y tirantes
-    m.viga((0, -salida, alto - caida), (ancho, -salida, alto - caida), 0.18, "Hierro")
-    m.viga((0.2, 0, alto - 1.8), (0.2, -salida, alto - caida), 0.14, "Hierro")
-    m.viga((ancho - 0.2, 0, alto - 1.8), (ancho - 0.2, -salida, alto - caida), 0.14, "Hierro")
+    x0, x1 = 0.4, M - 0.4
+    zs, zi, sal = 8.9, 7.6, 3.0
+    cara(m, [(x0, 0, zs), (x1, 0, zs), (x1, -sal, zi), (x0, -sal, zi)], (0, -1, 1), "toldo")
+    picos = 8
+    p = [(x0, -sal, zi)]
+    for k in range(picos):
+        xa = x0 + (x1 - x0) * k / picos
+        xb = x0 + (x1 - x0) * (k + 1) / picos
+        p += [(xa, -sal, zi - 0.6), ((xa + xb) / 2, -sal, zi - 1.0)]
+    p += [(x1, -sal, zi - 0.6), (x1, -sal, zi)]
+    cara(m, p, (0, -1, 0), "toldo", uv_plano((x0, -sal, zi - 1.0), (1, 0, 0), (0, 0, 1), x1 - x0, 1.0))
+    for x, nx in ((x0, -1), (x1, 1)):
+        cara(m, [(x, 0, zs), (x, -sal, zi), (x, 0, zi)], (nx, 0, 0), "toldo")
     return m
 
 
-def entramado(alto=MEDIDAS["piso"], con_ventana=True):
-    """Vigas de madera vistas sobre la fachada (estilo rústico de Pradoverde)."""
+def cartel(emblema):
+    """Cartel colgante con el emblema de la tienda (en las dos caras)."""
     m = Malla()
-    y0, y1 = -0.16, 0.02
-    m.caja((0, y0, 0.0), (M, y1, 0.55), "Madera_Oscura", sin=("+y",))
-    m.caja((0, y0, alto - 0.55), (M, y1, alto), "Madera_Oscura", sin=("+y",))
-    for x in (0.0, M - 0.55):  # los pies derechos sobresalen 2 centésimas: sin caras coincidentes con las soleras
-        m.caja((x, y0 - 0.02, 0.0), (x + 0.55, y1, alto), "Madera_Oscura", sin=("+y",))
-    if con_ventana:
-        w, h = MEDIDAS["ventana"]
-        z0 = MEDIDAS["alfeizar"]
-        x0 = (M - w) / 2
-        # diagonales en los paños de los lados de la ventana (sin pisar contraventanas: van por debajo)
-        m.viga((0.5, y0 + 0.08, 0.5), (x0 - 1.9, y0 + 0.08, z0 - 0.4), 0.45, "Madera_Oscura")
-        m.viga((M - 0.5, y0 + 0.08, 0.5), (x0 + w + 1.9, y0 + 0.08, z0 - 0.4), 0.45, "Madera_Oscura")
-    else:
-        m.viga((0.5, y0 + 0.08, 0.5), (M / 2, y0 + 0.08, alto - 0.5), 0.45, "Madera_Oscura")
-        m.viga((M - 0.5, y0 + 0.08, 0.5), (M / 2, y0 + 0.08, alto - 0.5), 0.45, "Madera_Oscura")
-        m.caja((M / 2 - 0.27, y0 - 0.02, 0.0), (M / 2 + 0.27, y1, alto), "Madera_Oscura", sin=("+y",))
+    m.caja((-0.13, -3.0, 2.6), (0.13, 0.0, 2.85), "hierro", sin=("+y",))
+    m.caja((-0.15, -2.9, -0.1), (0.15, -0.8, 2.3), "madera_media",
+           mats={"-x": "cartel_" + emblema, "+x": "cartel_" + emblema})
     return m
 
 
-def esquina(alto, semilla=0):
-    """Sillares de esquina (alternos) para la esquina delantera izquierda: fachadas y = 0 (-Y) y x = 0 (-X)."""
-    rng = _rng(semilla)
+def esquina(lejos=False):
+    """Sillares de esquina de un piso para la esquina delantera izquierda (fachadas y = 0 y x = 0). Sobresale 0,2.
+    Teñible: el yeso entre sillares toma el color de la pared."""
     m = Malla()
-    z, k = 0.0, 0
-    while z < alto - 0.05:
-        h = min(1.3, alto - z)
-        t = float(rng.uniform(0.9, 1.07))
-        largo, corto = (1.9, 1.05) if k % 2 == 0 else (1.05, 1.9)
-        # sillar en L (un solo prisma: dos cajas solapadas dejarían caras coincidentes, que salen negras)
-        ele = [(-0.22, -0.22), (largo, -0.22), (largo, 0.3), (0.3, 0.3), (0.3, corto), (-0.22, corto)]
-        m.prisma(ele, z + 0.04, z + h - 0.04, "PIEDRA", tinte=t)
-        z += h
-        k += 1
+    s, w = 0.2, 1.9
+    mat = "sillares"
+    cara(m, [(-s, -s, 0), (w, -s, 0), (w, -s, H), (-s, -s, H)], (0, -1, 0), mat,
+         uv_plano((-s, 0, 0), (1, 0, 0), (0, 0, 1), w + s, H))
+    cara(m, [(-s, -s, 0), (-s, w, 0), (-s, w, H), (-s, -s, H)], (-1, 0, 0), mat,
+         uv_plano((0, w, 0), (0, -1, 0), (0, 0, 1), w + s, H))
+    if not lejos:
+        cara(m, [(w, -s, 0), (w, 0, 0), (w, 0, H), (w, -s, H)], (1, 0, 0), "piedra_clara")
+        cara(m, [(-s, w, 0), (0, w, 0), (0, w, H), (-s, w, H)], (0, 1, 0), "piedra_clara")
     return m
 
 
-def cornisa(largo, alto=0.55, salida=0.38):
+def cornisa(lejos=False):
+    """Cornisa de un módulo (8 studs) en lo alto de la fachada."""
     m = Malla()
-    m.caja((-salida, -salida, 0), (largo + salida, 0.3, alto), "PIEDRA")
-    m.caja((-salida - 0.15, -salida - 0.15, alto), (largo + salida + 0.15, 0.3, alto + 0.22), "PIEDRA", tinte=0.95)
+    if lejos:
+        return cara(m, [(0, -0.45, 0), (M, -0.45, 0), (M, -0.45, 0.85), (0, -0.45, 0.85)], (0, -1, 0),
+                    "piedra_clara")
+    m.caja((0, -0.45, 0), (M, 0.0, 0.6), "piedra_clara", solo=("-y", "-z"))
+    m.caja((0, -0.6, 0.6), (M, 0.0, 0.85), "piedra_clara", solo=("-y", "+z", "-z"))
     return m
 
 
-def zocalo(largo, alto=1.8, semilla=0):
-    """Zócalo de sillares a lo largo de una fachada (desde la losa)."""
-    rng = _rng(semilla)
+def cornisa_esquina():
     m = Malla()
-    x = -0.25
-    while x < largo + 0.25 - 0.05:
-        l = min(float(rng.uniform(1.5, 2.6)), largo + 0.25 - x)
-        m.caja((x + 0.03, -0.28, -MEDIDAS["zocalo"]), (x + l - 0.03, 0.4, alto), "Piedra_Media",
-               tinte=float(rng.uniform(0.88, 1.08)))
-        x += l
+    m.caja((-0.45, -0.45, 0), (0.0, 0.0, 0.6), "piedra_clara", solo=("-y", "-x", "-z"))
+    m.caja((-0.6, -0.6, 0.6), (0.0, 0.0, 0.85), "piedra_clara", solo=("-y", "-x", "+z", "-z"))
     return m
+
+
+def losa(nx, ny):
+    """Losa de piedra bajo un edificio de nx × ny módulos (baja a z = -4 para tapar desniveles)."""
+    W, D = nx * M, ny * M
+    return Malla().caja((-1.0, -1.0, -4.0), (W + 1.0, D + 1.0, 0.0), "piedra_media", sin=("-z",))
 
 
 # ==============================================================================================================
-# Tejados
+# Tejados (cumbrera a lo largo de X; muros de y = 0 a y = fondo; z = 0 es lo alto de los muros)
 # ==============================================================================================================
 
 
-def faldon(m, A, B, C, Dd, rng, mat="TEJA", grosor=0.36, hilada=MEDIDAS["hilada"], teja=MEDIDAS["teja"],
-           n_hiladas=None, desfase=0.0):
-    """Faldón de tejas por hiladas, de la línea de alero A-B a la de cumbre Dd-C (C = Dd: triángulo).
-    Cada hilada es un prisma con el borde de abajo grueso (goterón) y se parte en tejas de tono variable."""
-    A, B, C, Dd = (np.asarray(p, float) for p in (A, B, C, Dd))
-    nrm = np.cross(B - A, Dd - A)
-    nrm /= np.linalg.norm(nrm)
-    largo = np.linalg.norm((Dd + C) / 2 - (A + B) / 2)
-    nh = n_hiladas or max(2, int(math.ceil(largo / hilada)))
-    for k in range(nh):
-        t0, t1 = k / nh, (k + 1) / nh
-        L0, R0 = A + t0 * (Dd - A), B + t0 * (C - B)
-        L1, R1 = A + t1 * (Dd - A), B + t1 * (C - B)
-        ancho = np.linalg.norm(R0 - L0)
-        nt = max(1, int(round(ancho / teja)))
-        g0, g1 = nrm * grosor, nrm * 0.07
-        for j in range(nt):
-            s0, s1 = j / nt, (j + 1) / nt
-            a0, b0 = L0 + s0 * (R0 - L0), L0 + s1 * (R0 - L0)
-            a1, b1 = L1 + s0 * (R1 - L1), L1 + s1 * (R1 - L1)
-            ti = float(rng.uniform(0.84, 1.1))
-            m.poligono([a0 + g0, b0 + g0, b1 + g1, a1 + g1], mat, tinte=ti)  # cara de arriba
-            m.poligono([a0, b0, b0 + g0, a0 + g0], mat, tinte=ti * 0.8)  # goterón
-        # costados y panza
-        m.poligono([L0, L0 + g0, L1 + g1, L1], mat, tinte=0.7)
-        m.poligono([R0, R1, R1 + g1, R0 + g0], mat, tinte=0.7)
-        m.poligono([L0, L1, R1, R0], "Madera_Oscura")
-
-
-def tejado_tramo(fondo, largo=M, semilla=0, pendiente=MEDIDAS["pendiente"], alero=MEDIDAS["alero"]):
-    """Tramo de tejado a dos aguas de x = 0 a x = largo, sobre muros de y = 0 a y = fondo, con la base en z = 0
-    (lo alto de los muros). La cumbrera va a lo largo de X."""
-    rng = _rng(semilla)
-    m = Malla()
+def _faldones(m, x0, x1, fondo, mat, detalle=True, uv_x0=None, uv_ancho=None):
+    """Los dos faldones de un tramo de tejado de x0 a x1. La casilla de tejas cubre `uv_ancho` studs en X a partir
+    de `uv_x0` (por defecto, el tramo entero)."""
     medio = fondo / 2
-    sube = medio * pendiente
-    za = -alero * pendiente
-    faldon(m, (0, -alero, za), (largo, -alero, za), (largo, medio, sube), (0, medio, sube), rng)
-    faldon(m, (largo, fondo + alero, za), (0, fondo + alero, za), (0, medio, sube), (largo, medio, sube), rng)
-    # tabla de alero
-    m.caja((0, -alero - 0.05, za - 0.5), (largo, -alero + 0.25, za + 0.05), "MARCO")
-    m.caja((0, fondo + alero - 0.25, za - 0.5), (largo, fondo + alero + 0.05, za + 0.05), "MARCO")
-    return m
-
-
-def tejado_remate(fondo, lado=-1, semilla=0, pendiente=MEDIDAS["pendiente"], alero=MEDIDAS["alero"],
-                  vuelo=MEDIDAS["vuelo"]):
-    """Vuelo del tejado sobre el hastial (lado -1: x ∈ [-vuelo, 0]; lado +1: x ∈ [0, vuelo]) con su tabla de canto."""
-    m = tejado_tramo(fondo, vuelo, semilla, pendiente, alero)
-    medio = fondo / 2
-    sube = medio * pendiente
-    za = -alero * pendiente
-    xb = 0.0 if lado < 0 else vuelo - 0.3
-    m.viga((xb + 0.15, -alero, za + 0.1), (xb + 0.15, medio, sube + 0.25), 0.5, "MARCO")
-    m.viga((xb + 0.15, fondo + alero, za + 0.1), (xb + 0.15, medio, sube + 0.25), 0.5, "MARCO")
-    return m.transformada(T(-vuelo if lado < 0 else 0.0, 0, 0))
-
-
-def hastial(fondo, pendiente=MEDIDAS["pendiente"], oculo=True):
-    """Muro triangular del hastial, en x ∈ [0, G] (la cara exterior en x = 0, mirando a -X)."""
-    m = Malla()
-    medio = fondo / 2
-    sube = medio * pendiente
-    tri = [(0, 0), (fondo, 0), (medio, sube)]
-    # prisma en el plano YZ: se construye en XY y se gira
-    m.anadir(Malla().prisma(tri, 0, G, "PARED"), _yz_a_x())
-    if oculo and sube > 4.0:
-        o = Malla()
-        o.tronco((0, 0, 0), 1.25, 1.25, 0.32, 8, "PIEDRA", giro=22.5)
-        o.tronco((0, 0, 0.32), 0.85, 0.85, 0.05, 8, "Vidrio", giro=22.5)
-        m.anadir(o, compone(T(0.02, medio, sube * 0.42), Ry(-90)))
-    return m
-
-
-def _yz_a_x():
-    """Devuelve una matriz que lleva el prisma construido en XY (z = grosor) a un muro en YZ con grosor en X."""
-    # (x, y, z) -> (z, x, y): la base del triángulo (x) va a Y, la altura (y) va a Z, la extrusión (z) va a X.
-    m = np.eye(4)
-    m[:3, :3] = [[0, 0, 1], [1, 0, 0], [0, 1, 0]]
-    return m
-
-
-def cumbrera(largo, fondo, pendiente=MEDIDAS["pendiente"], semilla=0):
-    """Caballete de tejas redondas a lo largo de la cumbre, de x = 0 a x = largo."""
-    rng = _rng(semilla)
-    m = Malla()
-    sube = fondo / 2 * pendiente
-    n = max(1, int(round(largo / 1.6)))
-    for k in range(n):
-        x0, x1 = k * largo / n, (k + 1) * largo / n
-        pieza = Malla().tronco((0, 0, 0), 0.5, 0.46, x1 - x0 + 0.05, 6, "TEJA_B", tinte=float(rng.uniform(0.85, 1.05)))
-        m.anadir(pieza, compone(T(x0, fondo / 2, sube + 0.38), Ry(90)))
-    return m
-
-
-def tejado_cuatro_aguas(ancho, fondo, semilla=0, pendiente=MEDIDAS["pendiente"], alero=MEDIDAS["alero"],
-                        remate=True):
-    """Tejado a cuatro aguas sobre un rectángulo [0, ancho] × [0, fondo] (pirámide si es cuadrado)."""
-    rng = _rng(semilla)
-    m = Malla()
-    a, f = ancho + 2 * alero, fondo + 2 * alero
-    x0, y0 = -alero, -alero
-    za = -alero * pendiente
-    r = min(a, f) / 2
-    sube = r * pendiente
-    if a >= f:
-        c0, c1 = (x0 + r, y0 + r, za + sube), (x0 + a - r, y0 + r, za + sube)
-    else:
-        c0, c1 = (x0 + r, y0 + r, za + sube), (x0 + r, y0 + f - r, za + sube)
-    A, B, Cc, Dd = (x0, y0, za), (x0 + a, y0, za), (x0 + a, y0 + f, za), (x0, y0 + f, za)
-    if a >= f:
-        faldon(m, A, B, c1, c0, rng)
-        faldon(m, Cc, Dd, c0, c1, rng)
-        faldon(m, B, Cc, c1, c1, rng)
-        faldon(m, Dd, A, c0, c0, rng)
-    else:
-        faldon(m, A, B, c0, c0, rng)
-        faldon(m, B, Cc, c1, c0, rng)
-        faldon(m, Cc, Dd, c1, c1, rng)
-        faldon(m, Dd, A, c0, c1, rng)
-    # limas (aristas) y cumbrera
-    for esq, c in ((A, c0), (B, c1 if a >= f else c0), (Cc, c1), (Dd, c0 if a >= f else c1)):
-        e = np.asarray(esq, float) + np.array([0, 0, 0.35])
-        m.viga(e, np.asarray(c, float) + np.array([0, 0, 0.35]), 0.6, "TEJA_B")
-    if np.linalg.norm(np.subtract(c1, c0)) > 0.1:
-        m.viga(np.add(c0, (0, 0, 0.38)), np.add(c1, (0, 0, 0.38)), 0.8, "TEJA_B")
-    if remate:
-        for c in (c0, c1):
-            m.tronco((c[0], c[1], c[2] + 0.2), 0.35, 0.1, 1.8, 6, "Oro")
-    for (p, q) in ((A, B), (B, Cc), (Cc, Dd), (Dd, A)):
-        m.viga(np.add(p, (0, 0, -0.25)), np.add(q, (0, 0, -0.25)), 0.5, "MARCO")
-    return m
-
-
-def chimenea(alto=6.0):
-    m = Malla()
-    m.caja((-1.1, -1.1, 0), (1.1, 1.1, alto), "Ladrillo")
-    m.caja((-1.45, -1.45, alto), (1.45, 1.45, alto + 0.45), "Piedra_Clara")
-    m.caja((-0.7, -0.7, alto + 0.45), (0.7, 0.7, alto + 0.9), "Ladrillo", tinte=0.8)
-    m.caja((-0.45, -0.45, alto + 0.9), (0.45, 0.45, alto + 0.92), "Hierro")
-    return m
-
-
-# ==============================================================================================================
-# Mobiliario urbano y de campo
-# ==============================================================================================================
-
-
-def farola(alto=12.0):
-    """Farola de hierro: basa de piedra, fuste con anillos, farol de cuatro cristales y remate."""
-    m = Malla()
-    m.tronco((0, 0, 0), 0.95, 0.8, 1.2, 8, "Piedra_Clara", giro=22.5)
-    m.tronco((0, 0, 1.2), 0.5, 0.4, 0.6, 8, "Hierro")
-    m.tronco((0, 0, 1.8), 0.24, 0.2, alto - 3.8, 8, "Hierro")
-    for z in (3.0, alto - 3.0):
-        m.tronco((0, 0, z), 0.36, 0.36, 0.25, 8, "Hierro")
-    zt = alto - 2.0
-    m.tronco((0, 0, zt - 0.2), 0.35, 0.7, 0.3, 4, "Hierro", giro=45)
-    m.tronco((0, 0, zt + 0.1), 0.62, 0.72, 1.4, 4, "Luz_Calida", giro=45)
-    for k in range(4):  # montantes del farol
-        a = math.radians(45 + 90 * k)
-        m.caja_c((0.7 * math.cos(a), 0.7 * math.sin(a), zt + 0.8), (0.12, 0.12, 1.45), "Hierro")
-    m.tronco((0, 0, zt + 1.5), 1.05, 0.2, 0.75, 4, "Hierro", giro=45)
-    m.tronco((0, 0, zt + 2.25), 0.15, 0.0, 0.6, 6, "Hierro")
-    return m
-
-
-def valla_madera(largo=M, semilla=0):
-    rng = _rng(semilla)
-    m = Malla()
-    n = max(1, int(round(largo / 4)))
-    for k in range(n + 1):
-        x = k * largo / n
-        h = 3.9 + float(rng.uniform(-0.2, 0.2))
-        t = float(rng.uniform(0.85, 1.08))
-        m.caja((x - 0.28, -0.28, -0.6), (x + 0.28, 0.28, h), "Madera_Media", tinte=t)
-        m.tronco((x, 0, h), 0.4, 0.0, 0.45, 4, "Madera_Media", giro=45, tinte=t)
-    for z in (1.5, 3.0):
-        m.caja((0, -0.42, z - 0.22), (largo, -0.28, z + 0.22), "Madera_Clara", tinte=float(rng.uniform(0.9, 1.05)))
-    return m
-
-
-def valla_piedra(largo=M, semilla=0):
-    """Muro bajo de piedra seca con albardilla."""
-    rng = _rng(semilla)
-    m = Malla()
-    x = 0.0
-    while x < largo - 0.1:
-        l = min(float(rng.uniform(1.3, 2.3)), largo - x)
-        for z0, z1 in ((-0.4, 1.1), (1.1, 2.1)):
-            xa = x + (0.6 if z0 > 0 else 0) * (rng.uniform() > 0.5)
-            pts = []
-            for px in (xa, min(xa + l, largo)):
-                for py in (-0.8, 0.8):
-                    for pz in (z0, z1):
-                        pts.append((px + rng.uniform(-0.12, 0.12), py + rng.uniform(-0.12, 0.12),
-                                    pz + rng.uniform(-0.1, 0.1)))
-            m.convexo(pts, "Piedra_Media", tinte=float(rng.uniform(0.82, 1.1)))
-        x += l
-    m.caja((-0.1, -0.95, 2.1), (largo + 0.1, 0.95, 2.55), "Piedra_Clara")
-    return m
-
-
-def banco():
-    m = Malla()
-    for x in (0.4, 4.6):
-        m.caja((x - 0.2, -0.9, 0), (x + 0.2, 0.9, 1.6), "Hierro")
-        m.caja((x - 0.2, 0.7, 1.6), (x + 0.2, 0.95, 3.2), "Hierro")
-    for k in range(3):
-        m.caja((0, -0.9 + k * 0.6, 1.6), (5, -0.4 + k * 0.6, 1.85), "Madera_Clara", tinte=1 - 0.04 * k)
-    for k in range(2):
-        m.caja((0, 0.75, 2.2 + k * 0.6), (5, 0.95, 2.6 + k * 0.6), "Madera_Clara")
-    return m
-
-
-def barril(semilla=0):
-    m = Malla()
-    m.torno([(1.0, 0), (1.18, 0.8), (1.22, 1.5), (1.18, 2.2), (1.0, 3.0)], 10, "Madera_Media", liso=True)
-    for z in (0.35, 2.65):
-        m.tronco((0, 0, z - 0.15), 1.17, 1.17, 0.3, 10, "Hierro", tapa_abajo=False, tapa_arriba=False)
-    return m
-
-
-def caja_madera(lado=2.4, semilla=0):
-    rng = _rng(semilla)
-    m = Malla()
-    t = float(rng.uniform(0.9, 1.1))
-    m.caja((0.1, 0.1, 0.1), (lado - 0.1, lado - 0.1, lado - 0.1), "Madera_Clara", tinte=t)
-    e = 0.3
-    for y0, y1 in ((-0.02, e), (lado - e, lado + 0.02)):  # marcos delantero y trasero
-        m.caja((e, y0, 0), (lado - e, y1, e), "Madera_Media", tinte=t)
-        m.caja((e, y0, lado - e), (lado - e, y1, lado), "Madera_Media", tinte=t)
-        m.caja((-0.02, y0 - 0.01, -0.01), (e, y1 + 0.01, lado + 0.01), "Madera_Media", tinte=t)
-        m.caja((lado - e, y0 - 0.01, -0.01), (lado + 0.02, y1 + 0.01, lado + 0.01), "Madera_Media", tinte=t)
-    return m
-
-
-def maceta(semilla=0):
-    rng = _rng(semilla)
-    m = Malla()
-    m.tronco((0, 0, 0), 1.3, 1.6, 1.8, 8, "Piedra_Clara", giro=22.5)
-    m.tronco((0, 0, 1.8), 1.7, 1.7, 0.3, 8, "Piedra_Clara", giro=22.5, tinte=0.95)
-    m.esfera((0, 0, 2.6), 1.5, "Hoja_Verde", sub=1, jitter=0.15, rng=rng, escala=(1, 1, 0.8))
-    flores = ["Flor_Roja", "Flor_Rosa", "Flor_Amarilla", "Flor_Lila", "Flor_Blanca"]
-    c = flores[int(rng.integers(len(flores)))]
-    for k in range(7):
-        a = rng.uniform(0, 2 * math.pi)
-        rr = rng.uniform(0.4, 1.2)
-        m.esfera((rr * math.cos(a), rr * math.sin(a), 3.2 + rng.uniform(-0.2, 0.2)), 0.32, c, sub=0)
-    return m
-
-
-def puesto(semilla=0, ancho=8.0, fondo=5.0):
-    """Puesto de mercado: estructura de madera, mostrador con género y toldo a rayas."""
-    rng = _rng(semilla)
-    m = Malla()
-    for x in (0.3, ancho - 0.3):
-        for y, h in ((0.3, 7.0), (fondo - 0.3, 8.4)):
-            m.caja((x - 0.3, y - 0.3, 0), (x + 0.3, y + 0.3, h), "Madera_Media")
-    m.caja((0, -0.2, 0), (ancho, 1.6, 3.2), "Madera_Clara")  # mostrador
-    m.caja((-0.2, -0.4, 3.2), (ancho + 0.2, 1.8, 3.55), "Madera_Media")
-    for k in range(4):
-        m.caja((0.3 + k * ancho / 4, -0.25, 0.4), (ancho / 4 + k * ancho / 4 - 0.3, -0.2, 2.8), "Madera_Media",
-               tinte=0.85)
-    # género
-    frutas = ["Fruta_Roja", "Fruta_Naranja", "Col", "Calabaza", "Flor_Amarilla"]
-    for k in range(3):
-        x0 = 0.6 + k * (ancho - 1.2) / 3
-        m.anadir(caja_madera(2.0, semilla + k), compone(T(x0, -0.1, 3.55), S(1.0, 0.85, 0.5)))
-        f = frutas[int(rng.integers(len(frutas)))]
-        for j in range(5):
-            m.esfera((x0 + 0.5 + rng.uniform(0, 1.0), 0.75 + rng.uniform(-0.3, 0.3), 4.7 + rng.uniform(0, 0.3)), 0.42,
-                     f, sub=0)
-    # toldo inclinado hacia delante
-    n = 8
-    for k in range(n):
-        mat = "TOLDO_A" if k % 2 == 0 else "TOLDO_B"
-        xa, xb = -0.4 + k * (ancho + 0.8) / n, -0.4 + (k + 1) * (ancho + 0.8) / n
-        p = [(xa, fondo + 0.3, 8.9), (xb, fondo + 0.3, 8.9), (xb, -1.6, 6.8), (xa, -1.6, 6.8)]
-        m.poligono(p, mat)
-        f = [(xa, -1.6, 6.8), (xa, -1.6, 6.1), ((xa + xb) / 2, -1.6, 5.7), (xb, -1.6, 6.1), (xb, -1.6, 6.8)]
-        m.poligono(f[::-1], mat)
-    return m
-
-
-def cartel(emblema="bolsa", semilla=0):
-    """Cartel colgante de tienda con un emblema sencillo (bolsa, espada, gema, yunque, pan, pocion)."""
-    m = Malla()
-    m.caja((-0.15, -3.0, 2.6), (0.15, 0.0, 2.9), "Hierro")
-    m.viga((0, -0.1, 1.2), (0, -1.6, 2.7), 0.2, "Hierro")
-    m.caja((-0.12, -2.8, 2.3), (0.12, -2.7, 2.6), "Hierro")
-    m.caja((-0.12, -1.0, 2.3), (0.12, -0.9, 2.6), "Hierro")
-    m.caja((-0.18, -3.0, -0.2), (0.18, -0.7, 2.3), "Madera_Media")
-    m.caja((-0.25, -2.95, -0.1), (0.25, -0.75, 2.2), "Pintura_Crema")
-    e = Malla()
-    if emblema == "bolsa":
-        e.esfera((0, 0, 0), 0.7, "Madera_Clara", sub=1, escala=(1, 1, 0.9))
-        e.tronco((0, 0, 0.5), 0.3, 0.45, 0.5, 6, "Madera_Clara")
-    elif emblema == "espada":
-        e.caja((-0.12, -0.12, -0.6), (0.12, 0.12, 1.0), "Hierro", tinte=2.2)
-        e.caja((-0.12, -0.5, -0.4), (0.12, 0.5, -0.25), "Oro")
-        e.caja((-0.12, -0.1, -1.0), (0.12, 0.1, -0.4), "Madera_Oscura")
-    elif emblema == "gema":
-        e.esfera((0, 0, 0), 0.75, "Toldo_Azul", sub=0, escala=(0.6, 1, 1.2))
-    elif emblema == "yunque":
-        e.caja((-0.2, -0.7, 0.1), (0.2, 0.7, 0.45), "Hierro", tinte=1.6)
-        e.caja((-0.2, -0.3, -0.5), (0.2, 0.3, 0.1), "Hierro", tinte=1.6)
-    elif emblema == "pan":
-        e.esfera((0, 0, 0), 0.7, "Madera_Clara", sub=1, escala=(0.5, 1.3, 0.7))
-    elif emblema == "pocion":
-        e.esfera((0, 0, -0.2), 0.6, "Fruta_Roja", sub=1)
-        e.tronco((0, 0, 0.3), 0.22, 0.22, 0.6, 6, "Vidrio")
+    sube = medio * PEND
+    za = -ALERO * PEND
+    g = 0.35  # grosor del faldón (el canto se ve en el alero)
+    su = uv_ancho or (x1 - x0)
+    ox = x0 if uv_x0 is None else uv_x0
     for lado in (-1, 1):
-        m.anadir(e, T(0.3 * lado, -1.85, 1.05))
+        ye = -ALERO if lado < 0 else fondo + ALERO
+        A = np.array([x0, ye, za])
+        B = np.array([x1, ye, za])
+        C = np.array([x1, medio, sube])
+        Dd = np.array([x0, medio, sube])
+        n = _normal(np.array([A, B, C, Dd]))
+        if n[2] < 0:
+            n = -n
+        up = n * g
+        largo = np.linalg.norm(Dd - A)
+        ev = (Dd - A) / largo
+        # u hacia la derecha visto desde fuera: +X en el faldón delantero, -X en el trasero
+        eu = np.array([1.0, 0, 0]) if lado < 0 else np.array([-1.0, 0, 0])
+        u_cero = np.array([ox, 0, 0]) if lado < 0 else np.array([ox + su, 0, 0])
+        Am = np.stack([eu / su, ev / largo])
+        b = np.array([-(eu @ u_cero) / su, -(ev @ A) / largo])
+        cara(m, [A + up, B + up, C + up, Dd + up], n, mat, ("plano", Am, b))
+        if detalle:
+            cara(m, [A, B, B + up, A + up], -ev, "teja_lejos")  # canto del alero
+            cara(m, [A, B, C, Dd], -n, "madera_oscura")  # panza (se ve desde abajo)
+            cara(m, [(x0, ye, za - 0.5), (x1, ye, za - 0.5), (x1, ye, za + 0.05), (x0, ye, za + 0.05)],
+                 (0, lado, 0), "madera_oscura")  # tabla de alero
     return m
 
 
-def tablon_misiones(semilla=0):
-    """Tablón de misiones: dos postes, tejadillo, tablero con papeles clavados y un «!» dorado encima."""
-    rng = _rng(semilla)
+def _mat_teja(fondo, lejos):
+    return "teja_lejos" if lejos else ("teja_16" if fondo <= 16 else "teja_24")
+
+
+def tejado_tramo(fondo, lejos=False):
+    """Tramo de tejado a dos aguas de un módulo (x ∈ [0, 8]) sobre muros de fondo `fondo`."""
+    return _faldones(Malla(), 0.0, M, fondo, _mat_teja(fondo, lejos), detalle=not lejos)
+
+
+def tejado_remate(fondo, lejos=False):
+    """Vuelo del tejado sobre el hastial izquierdo (x ∈ [-0,9, 0]) con sus tablas de canto. El derecho es esta misma
+    pieza girada 180° alrededor del centro del edificio (sin espejo)."""
+    m = _faldones(Malla(), -VUELO, 0.0, fondo, _mat_teja(fondo, lejos), detalle=not lejos, uv_x0=-VUELO, uv_ancho=M)
+    medio = fondo / 2
+    sube = medio * PEND
+    za = -ALERO * PEND
+    for y0 in (-ALERO, fondo + ALERO):
+        p0 = np.array([-VUELO, y0, za - 0.3])
+        p1 = np.array([-VUELO, medio, sube - 0.1])
+        q0, q1 = p0 + (0, 0, 0.75), p1 + (0, 0, 0.75)
+        cara(m, [p0, p1, q1, q0], (-1, 0, 0), "madera_oscura")
+        if not lejos:
+            cara(m, [q0, q1, q1 + (0.3, 0, 0), q0 + (0.3, 0, 0)], (0, 0, 1), "madera_oscura")
+    return m
+
+
+def hastial(fondo):
+    """Muro triangular del hastial izquierdo (cara exterior en x = 0, mirando a -X). Teñible, con óculo pintado."""
+    medio = fondo / 2
+    return cara(Malla(), [(0, 0, 0), (0, fondo, 0), (0, medio, medio * PEND)], (-1, 0, 0), "hastial")
+
+
+def cumbrera(fondo, largo=M):
+    """Caballete a lo largo de la cumbre, de x = 0 a x = largo (dos caras inclinadas)."""
+    m = Malla()
+    medio = fondo / 2
+    z = medio * PEND + 0.35
+    w, h = 0.55, 0.45
+    for lado in (-1, 1):
+        cara(m, [(0, medio + lado * w, z), (largo, medio + lado * w, z), (largo, medio, z + h), (0, medio, z + h)],
+             (0, lado, 1), "cumbrera")
+    return m
+
+
+def chimenea(alto=6.0, lejos=False):
+    m = Malla()
+    m.caja((-1.1, -1.1, 0), (1.1, 1.1, alto), "ladrillo", solo=("-x", "+x", "-y", "+y") + (("+z",) if lejos else ()))
+    if not lejos:
+        m.caja((-1.45, -1.45, alto), (1.45, 1.45, alto + 0.45), "piedra_clara")
+    return m
+
+
+def tejado_piramide(lado, pendiente, alero=1.4, lejos=False):
+    """Pirámide de cuatro faldones sobre el cuadrado [0, lado]²."""
+    m = Malla()
+    a = lado + 2 * alero
+    x0 = -alero
+    za = -alero * pendiente
+    cima = np.array([lado / 2, lado / 2, za + a / 2 * pendiente])
+    esq = [np.array(p, float) for p in ((x0, x0, za), (x0 + a, x0, za), (x0 + a, x0 + a, za), (x0, x0 + a, za))]
+    for i in range(4):
+        p, q = esq[i], esq[(i + 1) % 4]
+        n = _normal(np.array([p, q, cima]))
+        if n[2] < 0:
+            n = -n
+        cara(m, [p, q, cima], n, "teja_lejos" if lejos else "teja_24")
+        if not lejos:
+            cara(m, [p, q, q + (0, 0, -0.5), p + (0, 0, -0.5)], n * np.array([1, 1, 0]), "madera_oscura")
+    return m
+
+
+# ==============================================================================================================
+# Mobiliario
+# ==============================================================================================================
+
+
+def farola(lejos=False, alto=12.0):
+    m = Malla()
+    zt = alto - 2.0
+    if lejos:
+        m.caja((-0.25, -0.25, 0), (0.25, 0.25, zt), "hierro", solo=("-x", "+x", "-y", "+y"))
+        m.caja((-0.6, -0.6, zt), (0.6, 0.6, zt + 1.4), "luz", solo=("-x", "+x", "-y", "+y", "+z"))
+        return m
+    m.tronco((0, 0, 0), 0.95, 0.75, 1.2, 6, "piedra_clara", tapa_abajo=False)
+    m.tronco((0, 0, 1.2), 0.24, 0.2, alto - 3.2, 6, "hierro", tapa_abajo=False, tapa_arriba=False)
+    m.tronco((0, 0, zt - 0.2), 0.35, 0.7, 0.3, 4, "hierro", giro=45, tapa_arriba=False)
+    m.tronco((0, 0, zt + 0.1), 0.62, 0.72, 1.4, 4, "luz", giro=45, tapa_abajo=False, tapa_arriba=False)
+    m.tronco((0, 0, zt + 1.5), 1.05, 0.0, 0.85, 4, "hierro", giro=45)
+    return m
+
+
+def banco(lejos=False):
+    m = Malla()
+    m.caja((0, -0.9, 1.6), (5, 0.9, 1.9), "madera_clara", sin=("-z",) if lejos else ())
+    m.caja((0, 0.6, 1.9), (5, 0.95, 3.4), "madera_clara", sin=("-z",))
+    if not lejos:
+        for x in (0.3, 4.3):
+            m.caja((x, -0.8, 0), (x + 0.4, 0.8, 1.6), "hierro", sin=("+z", "-z"))
+    return m
+
+
+def barril(lejos=False):
+    if lejos:
+        return Malla().torno([(1.0, 0), (1.2, 1.5), (1.0, 3.0)], 6, "madera_media", tapas=True)
+    return Malla().torno([(1.0, 0), (1.18, 0.8), (1.22, 1.5), (1.18, 2.2), (1.0, 3.0)], 8,
+                         ["madera_media", "hierro", "madera_media", "madera_media"])
+
+
+def caja_madera(lado=2.4):
+    return Malla().caja((0, 0, 0), (lado, lado, lado), "madera_clara", sin=("-z",))
+
+
+def maceta():
+    m = Malla()
+    m.tronco((0, 0, 0), 1.3, 1.65, 2.0, 6, "piedra_clara", tapa_abajo=False)
+    m.esfera((0, 0, 2.6), 1.6, "flores", sub=0, jitter=0.12, rng=_rng(3), escala=(1, 1, 0.8))
+    return m
+
+
+def valla_madera(lejos=False):
+    m = Malla()
+    if not lejos:
+        for x in (0.0, 4.0, 8.0):
+            m.caja((x - 0.28, -0.28, -0.6), (x + 0.28, 0.28, 4.0), "madera_media", sin=("-z",))
+    for z in (1.5, 3.0):
+        m.caja((0, -0.42, z - 0.22), (M, -0.28, z + 0.22), "madera_clara", solo=("-y", "+y", "+z"))
+    return m
+
+
+def valla_piedra(lejos=False):
+    m = Malla()
+    m.caja((0, -0.8, -0.4), (M, 0.8, 2.1), "sillar_muro", sin=("-z",) + (("+z",) if not lejos else ()))
+    if not lejos:
+        m.caja((-0.1, -0.95, 2.1), (M + 0.1, 0.95, 2.55), "piedra_clara", sin=("-z",))
+    return m
+
+
+def puesto(lejos=False, ancho=8.0, fondo=5.0):
+    """Puesto de mercado: estructura de madera, mostrador con género y toldo (el color de la instancia es el toldo)."""
+    m = Malla()
+    if not lejos:
+        for x in (0.3, ancho - 0.3):
+            for y, h in ((0.3, 7.0), (fondo - 0.3, 8.6)):
+                m.caja((x - 0.3, y - 0.3, 0), (x + 0.3, y + 0.3, h), "madera_media", solo=("-x", "+x", "-y", "+y"))
+        for k in range(3):
+            x0 = 0.6 + k * (ancho - 1.2) / 3
+            m.caja((x0, -0.1, 3.4), (x0 + 2.0, 1.5, 4.4), "fruta", sin=("-z",))
+    m.caja((0, -0.2, 0), (ancho, 1.6, 3.4), "madera_clara", sin=("-z",))
+    cara(m, [(-0.4, fondo + 0.3, 8.9), (ancho + 0.4, fondo + 0.3, 8.9), (ancho + 0.4, -1.6, 6.8), (-0.4, -1.6, 6.8)],
+         (0, -1, 1), "toldo")
+    cara(m, [(-0.4, -1.6, 6.8), (ancho + 0.4, -1.6, 6.8), (ancho + 0.4, -1.6, 5.9), (-0.4, -1.6, 5.9)], (0, -1, 0),
+         "toldo")
+    return m
+
+
+def tablon_misiones(lejos=False):
+    """Tablón de misiones: dos postes, tablero con papeles en las dos caras, tejadillo (color de la instancia) y un
+    «!» dorado encima."""
     m = Malla()
     for x in (-4.2, 4.2):
-        m.caja((x - 0.45, -0.45, 0), (x + 0.45, 0.45, 10.2), "Madera_Oscura")
-        m.caja((x - 0.8, -0.8, 0), (x + 0.8, 0.8, 0.8), "Piedra_Clara")
-    m.caja((-3.8, -0.25, 2.6), (3.8, 0.25, 8.4), "Madera_Media")  # tablero
-    m.caja((-4.0, -0.4, 8.4), (4.0, 0.4, 8.8), "Madera_Oscura")
-    m.caja((-4.0, -0.4, 2.3), (4.0, 0.4, 2.7), "Madera_Oscura")
-    m.caja((-3.4, -0.4, 2.7), (-3.0, 0.4, 8.4), "Madera_Oscura", tinte=0.9)
-    m.caja((3.0, -0.4, 2.7), (3.4, 0.4, 8.4), "Madera_Oscura", tinte=0.9)
-    # papeles en las dos caras
-    for cara in (-1, 1):
-        for k in range(7):
-            x = rng.uniform(-2.5, 2.5)
-            z = rng.uniform(3.2, 7.4)
-            w, h = rng.uniform(0.9, 1.5), rng.uniform(1.0, 1.6)
-            mat = "Papel" if rng.uniform() > 0.3 else "Papel_Amarillo"
-            g = rng.uniform(-12, 12)
-            hoja = Malla().caja((-w / 2, -0.04, -h / 2), (w / 2, 0.04, h / 2), mat)
-            hoja.caja((-0.1, -0.1, h / 2 - 0.3), (0.1, 0.06, h / 2 - 0.1), "Fruta_Roja")
-            m.anadir(hoja, compone(T(x, cara * 0.3, z), Rz(0 if cara > 0 else 180), Ry(g)))
-    # tejadillo
-    faldon(m, (-5.2, -2.2, 10.0), (5.2, -2.2, 10.0), (5.2, 0, 11.6), (-5.2, 0, 11.6), rng)
-    faldon(m, (5.2, 2.2, 10.0), (-5.2, 2.2, 10.0), (-5.2, 0, 11.6), (5.2, 0, 11.6), rng)
-    m.viga((-5.2, 0, 11.9), (5.2, 0, 11.9), 0.7, "TEJA_B")
-    # «!» dorado
-    m.caja((-0.45, -0.3, 12.8), (0.45, 0.3, 15.6), "Oro")
-    m.caja((-0.45, -0.3, 11.9), (0.45, 0.3, 12.5), "Oro")
+        m.caja((x - 0.45, -0.45, 0), (x + 0.45, 0.45, 10.2), "madera_oscura", solo=("-x", "+x", "-y", "+y"))
+        if not lejos:
+            m.caja((x - 0.8, -0.8, 0), (x + 0.8, 0.8, 0.8), "piedra_clara", sin=("-z",))
+    m.caja((-3.9, -0.3, 2.4), (3.9, 0.3, 8.6), "madera_oscura", mats={"-y": "tablon", "+y": "tablon"})
+    for lado in (-1, 1):
+        cara(m, [(-5.2, 0, 11.6), (5.2, 0, 11.6), (5.2, lado * 2.2, 10.0), (-5.2, lado * 2.2, 10.0)], (0, lado, 1),
+             "teja_lejos" if lejos else "teja_16")
+    if lejos:
+        m.caja((-0.45, -0.3, 11.9), (0.45, 0.3, 15.6), "oro", solo=("-y", "+y"))
+    else:
+        m.caja((-0.45, -0.3, 12.8), (0.45, 0.3, 15.6), "oro", sin=("-z",))
+        m.caja((-0.45, -0.3, 11.9), (0.45, 0.3, 12.5), "oro", sin=("-z",))
     return m
 
 
-def pozo():
+def pozo(lejos=False):
     m = Malla()
-    m.tronco((0, 0, 0), 2.6, 2.6, 2.8, 10, "Piedra_Media")
-    m.tronco((0, 0, 2.8), 2.85, 2.85, 0.4, 10, "Piedra_Clara")
-    m.tronco((0, 0, 2.5), 1.9, 1.9, 0.33, 10, "Agua_Fuente", tapa_abajo=False)
-    for y in (-2.3, 2.3):
-        m.caja((-0.3, y - 0.3, 2.8), (0.3, y + 0.3, 8.0), "Madera_Oscura")
-    m.viga((0, -2.6, 6.6), (0, 2.6, 6.6), 0.35, "Madera_Media")
-    m.tronco((0, 0, 4.3), 0.45, 0.55, 0.9, 8, "Madera_Media")
-    m.viga((0, 0, 5.2), (0, 0, 6.5), 0.08, "Paja")
-    rng = _rng(4)
-    faldon(m, (-3.5, 3.2, 7.4), (-3.5, -3.2, 7.4), (0, -3.2, 9.6), (0, 3.2, 9.6), rng)
-    faldon(m, (3.5, -3.2, 7.4), (3.5, 3.2, 7.4), (0, 3.2, 9.6), (0, -3.2, 9.6), rng)
+    n = 6 if lejos else 8
+    m.tronco((0, 0, 0), 2.6, 2.6, 2.8, n, "sillar_muro", tapa_abajo=False, tapa_arriba=False)
+    m.tronco((0, 0, 2.8), 2.85, 2.85, 0.4, n, "piedra_clara", tapa_abajo=False)
+    if not lejos:
+        for y in (-2.3, 2.3):
+            m.caja((-0.3, y - 0.3, 2.8), (0.3, y + 0.3, 8.0), "madera_oscura", solo=("-x", "+x", "-y", "+y"))
+        m.viga((0, -2.6, 6.6), (0, 2.6, 6.6), 0.35, "madera_media")
+    for lado in (-1, 1):
+        cara(m, [(0, -3.2, 9.6), (0, 3.2, 9.6), (lado * 3.5, 3.2, 7.4), (lado * 3.5, -3.2, 7.4)], (lado, 0, 1),
+             "teja_lejos" if lejos else "teja_16")
     return m
 
 
-def carro():
+def carro(lejos=False):
     m = Malla()
-    m.caja((-3.0, -1.8, 1.8), (3.0, 1.8, 2.3), "Madera_Media")
-    for y in (-1.8, 1.8):
-        m.caja((-3.0, y - 0.2, 2.3), (3.0, y + 0.2, 3.5), "Madera_Clara")
-    m.caja((-3.0, -1.8, 2.3), (-2.6, 1.8, 3.5), "Madera_Clara")
-    for y in (-2.1, 2.1):
-        rueda = Malla().tronco((0, 0, -0.2), 1.6, 1.6, 0.4, 10, "Madera_Oscura")
-        rueda.tronco((0, 0, -0.3), 0.4, 0.4, 0.6, 6, "Hierro")
-        m.anadir(rueda, compone(T(0.6, y, 1.6), Rx(90)))
-    m.viga((3.0, -0.6, 2.0), (7.0, -0.6, 1.0), 0.3, "Madera_Media")
-    m.viga((3.0, 0.6, 2.0), (7.0, 0.6, 1.0), 0.3, "Madera_Media")
-    for k in range(4):
-        m.anadir(Malla().tronco((0, 0, 0), 0.9, 0.9, 2.2, 8, "Paja"), compone(T(-1.8 + k * 1.3, 0, 3.4), Rx(90)))
+    m.caja((-3.0, -1.8, 1.8), (3.0, 1.8, 3.4), "madera_media", sin=("+z",) if not lejos else ())
+    if not lejos:
+        m.caja((-2.8, -1.6, 2.3), (2.8, 1.6, 3.2), "paja", solo=("+z",))
+        for y in (-2.1, 2.1):
+            m.anadir(Malla().tronco((0, 0, -0.2), 1.6, 1.6, 0.4, 8, "madera_oscura"), compone(T(0.6, y, 1.6), Rx(90)))
+        m.viga((3.0, -0.6, 2.0), (7.0, -0.6, 1.0), 0.3, "madera_media")
+        m.viga((3.0, 0.6, 2.0), (7.0, 0.6, 1.0), 0.3, "madera_media")
     return m
 
 
-def pajar(semilla=0):
-    rng = _rng(semilla)
+def pajar(lejos=False):
+    if lejos:
+        return Malla().torno([(3.0, 0), (2.8, 3.4), (0.0, 6.0)], 6, "paja", tapas=False)
+    return Malla().torno([(3.0, 0), (3.2, 1.6), (2.8, 3.4), (1.8, 4.8), (0.6, 5.7), (0.0, 6.0)], 9, "paja",
+                         tapas=False)
+
+
+def espantapajaros(lejos=False):
     m = Malla()
-    m.torno([(3.0, 0), (3.2, 1.6), (2.8, 3.4), (1.8, 4.8), (0.6, 5.7), (0.0, 6.0)], 9, "Paja", liso=False,
-            giro=float(rng.uniform(0, 40)))
-    m.viga((0, 0, 5.5), (0, 0, 7.0), 0.25, "Madera_Media")
+    m.caja((-0.2, -0.2, 0), (0.2, 0.2, 7.5), "madera_media", solo=("-x", "+x", "-y", "+y"))
+    m.caja((-2.6, -0.15, 5.6), (2.6, 0.15, 5.9), "madera_media", solo=("-y", "+y", "+z", "-z"))
+    m.tronco((0, 0, 3.4), 1.2, 1.5, 2.6, 4 if lejos else 6, "toldo", tapa_abajo=False)
+    if not lejos:
+        m.esfera((0, 0, 6.8), 0.8, "paja", sub=0)
+        m.tronco((0, 0, 7.3), 1.6, 0.6, 0.4, 8, "paja")
+        m.tronco((0, 0, 7.7), 0.7, 0.0, 1.2, 6, "paja", tapa_abajo=False)
     return m
 
 
-def espantapajaros():
-    m = Malla()
-    m.caja((-0.2, -0.2, 0), (0.2, 0.2, 7.5), "Madera_Media")
-    m.caja((-2.6, -0.15, 5.6), (2.6, 0.15, 5.9), "Madera_Media")
-    m.tronco((0, 0, 3.4), 1.2, 1.5, 2.6, 6, "Pintura_Azul")
-    m.caja((-2.2, -0.5, 5.3), (2.2, 0.5, 6.1), "Pintura_Roja")
-    m.esfera((0, 0, 6.8), 0.8, "Paja", sub=1)
-    m.tronco((0, 0, 7.3), 1.6, 1.6, 0.15, 10, "Paja")
-    m.tronco((0, 0, 7.45), 0.75, 0.15, 1.4, 8, "Paja")
-    return m
-
-
-def portal(ancho=16.0):
-    """Entrada de ciudad: dos pilares de sillería con farol encima y un tramo de muro bajo a cada lado."""
+def portal(lejos=False, ancho=16.0):
+    """Entrada de ciudad: dos pilares de sillería (las farolas y los muretes son piezas aparte)."""
     m = Malla()
     for sgn in (-1, 1):
         x = sgn * (ancho / 2 + 1.8)
-        m.caja((x - 1.8, -1.8, -1.0), (x + 1.8, 1.8, 1.2), "Piedra_Media")
-        m.caja((x - 1.5, -1.5, 1.2), (x + 1.5, 1.5, 11.0), "Piedra_Clara")
-        for z in (3.0, 6.0, 9.0):
-            m.caja((x - 1.62, -1.62, z), (x + 1.62, 1.62, z + 0.25), "Piedra_Media")
-        m.caja((x - 2.0, -2.0, 11.0), (x + 2.0, 2.0, 11.8), "Piedra_Clara")
-        m.tronco((x, 0, 11.8), 1.4, 0.5, 1.2, 4, "Piedra_Clara", giro=45)
-        m.anadir(farola(4.5).transformada(T(0, 0, 0)), T(x, 0, 12.4))
-        m.anadir(valla_piedra(10.0, semilla=7 + sgn), T(x + (1.8 if sgn > 0 else -11.8), -0.2, 0))
+        m.caja((x - 1.5, -1.5, -1.0), (x + 1.5, 1.5, 11.0), "sillar_muro", solo=("-x", "+x", "-y", "+y"))
+        m.caja((x - 2.0, -2.0, 11.0), (x + 2.0, 2.0, 11.8), "piedra_clara")
+        if not lejos:
+            m.caja((x - 1.8, -1.8, -1.0), (x + 1.8, 1.8, 1.2), "piedra_media", sin=("-z",))
+            m.tronco((x, 0, 11.8), 1.4, 0.5, 1.2, 4, "piedra_clara", giro=45, tapa_abajo=False)
     return m
 
 
-def poste_indicador(rumbos=(0.0, 120.0, 230.0)):
-    """Poste de cruce con tablillas en forma de flecha (una por rumbo, en grados desde +X)."""
+def poste_indicador(lejos=False, rumbos=(0.0, 120.0, 230.0)):
     m = Malla()
-    m.caja((-0.35, -0.35, -1.0), (0.35, 0.35, 9.0), "Madera_Oscura")
-    m.tronco((0, 0, 9.0), 0.55, 0.0, 0.7, 4, "Madera_Oscura", giro=45)
-    for k, r in enumerate(rumbos):
-        f = Malla()
-        f.prisma([(0.3, -0.5), (3.6, -0.5), (4.5, 0.0), (3.6, 0.5), (0.3, 0.5)], 0, 0.25, "Madera_Clara")
-        f.prisma([(0.6, -0.3), (3.4, -0.3), (3.9, 0.0), (3.4, 0.3), (0.6, 0.3)], 0.25, 0.3, "Pintura_Crema")
+    m.caja((-0.35, -0.35, -1.0), (0.35, 0.35, 9.0), "madera_oscura", solo=("-x", "+x", "-y", "+y"))
+    m.tronco((0, 0, 9.0), 0.55, 0.0, 0.7, 4, "madera_oscura", giro=45, tapa_abajo=False)
+    for k, r in enumerate(rumbos if not lejos else rumbos[:1]):
+        f = Malla().prisma([(0.3, -0.5), (3.6, -0.5), (4.5, 0.0), (3.6, 0.5), (0.3, 0.5)], 0, 0.25, "madera_clara")
         m.anadir(f, compone(T(0, 0, 7.8 - 1.25 * k), Rz(r), Rx(90)))
-    return m
-
-
-# ==============================================================================================================
-# Vegetación y rocas (variantes por semilla; en la región se instancian por miles)
-# ==============================================================================================================
-
-
-def arbol_frondoso(semilla=0, alto=None):
-    rng = _rng(semilla)
-    h = alto or float(rng.uniform(17, 26))
-    m = Malla()
-    t = h * 0.42
-    m.tronco((0, 0, -1.0), 1.15, 0.75, t + 1.0, 6, "Corteza", giro=float(rng.uniform(0, 60)))
-    # dos ramas
-    for k in range(2):
-        a = rng.uniform(0, 2 * math.pi)
-        m.viga((0, 0, t * 0.8), (math.cos(a) * h * 0.18, math.sin(a) * h * 0.18, t + h * 0.15), 0.7, "Corteza")
-    hoja = ["Hoja_Verde", "Hoja_Clara", "Hoja_Oscura"][int(rng.integers(3))]
-    r = h * 0.3
-    m.esfera((0, 0, t + r * 0.95), r, hoja, sub=1, jitter=0.12, rng=rng, escala=(1, 1, 0.85))
-    for k in range(int(rng.integers(3, 5))):
-        a = rng.uniform(0, 2 * math.pi)
-        d = r * rng.uniform(0.55, 0.8)
-        rr = r * rng.uniform(0.55, 0.72)
-        m.esfera((math.cos(a) * d, math.sin(a) * d, t + r * rng.uniform(0.5, 1.2)), rr, hoja, sub=1, jitter=0.14,
-                 rng=rng, tinte=float(rng.uniform(0.88, 1.1)), escala=(1, 1, 0.85))
-    return m
-
-
-def pino(semilla=0, alto=None):
-    rng = _rng(semilla)
-    h = alto or float(rng.uniform(22, 34))
-    m = Malla()
-    m.tronco((0, 0, -1.0), 0.9, 0.5, h * 0.35, 6, "Corteza")
-    n = 4
-    for k in range(n):
-        z0 = h * (0.18 + 0.19 * k)
-        r = h * (0.27 - 0.05 * k)
-        alto_c = h * (0.42 - 0.04 * k)
-        cono = Malla().tronco((0, 0, 0), r, r * 0.08, alto_c, 7, "Hoja_Pino", giro=float(rng.uniform(0, 50)),
-                              tinte=float(rng.uniform(0.9, 1.08)))
-        # bajo de cada piso un poco más ancho y caído
-        m.anadir(cono, T(rng.uniform(-0.3, 0.3), rng.uniform(-0.3, 0.3), z0))
-    return m
-
-
-def abedul(semilla=0, alto=None):
-    rng = _rng(semilla)
-    h = alto or float(rng.uniform(18, 26))
-    m = Malla()
-    m.tronco((0, 0, -1.0), 0.55, 0.35, h * 0.75, 6, "Corteza_Abedul")
-    for k in range(4):  # manchas oscuras del tronco
-        z = rng.uniform(1.5, h * 0.6)
-        m.caja_c((0.45, 0, z), (0.25, 0.5, 0.25), "Madera_Oscura")
-    hoja = ["Hoja_Clara", "Hoja_Verde"][int(rng.integers(2))]
-    for k in range(4):
-        a = rng.uniform(0, 2 * math.pi)
-        m.esfera((math.cos(a) * 1.5, math.sin(a) * 1.5, h * (0.6 + 0.08 * k)), h * 0.16, hoja, sub=1, jitter=0.15,
-                 rng=rng, escala=(1, 1, 1.35), tinte=float(rng.uniform(0.9, 1.1)))
-    return m
-
-
-def arbol_flor(semilla=0, alto=None):
-    """Cerezo en flor: para los pueblos (rosa claro, el toque cálido del valle)."""
-    m = arbol_frondoso(semilla, alto or float(_rng(semilla).uniform(13, 17)))
-    for i, mt in enumerate(m.mat):
-        if mt.startswith("Hoja"):
-            m.mat[i] = "Flor_Rosa"
-    return m
-
-
-def arbusto(semilla=0):
-    rng = _rng(semilla)
-    m = Malla()
-    hoja = ["Hoja_Verde", "Hoja_Oscura", "Hoja_Clara"][int(rng.integers(3))]
-    for k in range(int(rng.integers(2, 4))):
-        m.esfera((rng.uniform(-1.4, 1.4), rng.uniform(-1.4, 1.4), 1.4), rng.uniform(1.6, 2.4), hoja, sub=1,
-                 jitter=0.18, rng=rng, escala=(1, 1, 0.75), tinte=float(rng.uniform(0.9, 1.1)))
-    return m
-
-
-def roca(semilla=0, tam=None):
-    rng = _rng(semilla)
-    s = tam or float(rng.uniform(2.5, 7))
-    # puntos de un elipsoide deformado; la base queda enterrada
-    d = rng.normal(size=(22, 3))
-    d /= np.linalg.norm(d, axis=1, keepdims=True)
-    pts = d * np.array([1.0, rng.uniform(0.6, 0.9), rng.uniform(0.5, 0.75)]) * s * rng.uniform(0.8, 1.15, (22, 1))
-    pts[:, 2] = np.maximum(pts[:, 2], -0.3 * s) + 0.15 * s
-    m = Malla().convexo(pts, "Piedra_Media", tinte=float(rng.uniform(0.8, 1.1)))
-    return m
-
-
-def mata_hierba(semilla=0):
-    rng = _rng(semilla)
-    m = Malla()
-    for k in range(7):
-        a = rng.uniform(0, 2 * math.pi)
-        h = rng.uniform(1.4, 2.6)
-        b = np.array([math.cos(a), math.sin(a), 0]) * 0.25
-        tip = np.array([math.cos(a) * rng.uniform(0.6, 1.2), math.sin(a) * rng.uniform(0.6, 1.2), h])
-        lat = np.array([-math.sin(a), math.cos(a), 0]) * 0.28
-        p = [b - lat, b + lat, tip]
-        m.poligono(p, "Hierba", tinte=float(rng.uniform(0.85, 1.15)))
-    return m
-
-
-def mata_flores(semilla=0):
-    rng = _rng(semilla)
-    m = mata_hierba(semilla)
-    c = ["Flor_Roja", "Flor_Amarilla", "Flor_Blanca", "Flor_Lila", "Flor_Rosa"][int(rng.integers(5))]
-    for k in range(int(rng.integers(3, 6))):
-        m.esfera((rng.uniform(-0.9, 0.9), rng.uniform(-0.9, 0.9), rng.uniform(1.5, 2.4)), 0.28, c, sub=0)
     return m
 
 
@@ -827,190 +528,170 @@ def mata_flores(semilla=0):
 # ==============================================================================================================
 
 
-def fuente(radio=9.0):
-    """Fuente de la plaza: pilón octogonal, dos tazas, surtidor y caños de agua."""
+def fuente(lejos=False, radio=9.0):
+    """Fuente de la plaza: pilón octogonal, dos tazas, surtidor y chorros."""
     m = Malla()
-    n = 8
-    g = 22.5
-    m.tronco((0, 0, -0.6), radio + 1.2, radio + 1.2, 0.8, n, "Piedra_Media", giro=g)  # grada
-    m.tronco((0, 0, 0.2), radio, radio, 2.4, n, "Piedra_Clara", giro=g, tapa_arriba=False)  # pretil exterior
-    m.tronco((0, 0, 0.2), radio - 1.0, radio - 1.0, 2.4, n, "Piedra_Clara", giro=g, tapa_abajo=False,
-             tapa_arriba=False)
-    # albardilla del pretil (anillo)
-    ang = np.radians(g) + 2 * np.pi * np.arange(n) / n
-    for i in range(n):
-        a0, a1 = ang[i], ang[(i + 1) % n]
-        ro, ri = radio + 0.35, radio - 1.3
-        p = [(ri * math.cos(a0), ri * math.sin(a0)), (ro * math.cos(a0), ro * math.sin(a0)),
-             (ro * math.cos(a1), ro * math.sin(a1)), (ri * math.cos(a1), ri * math.sin(a1))]
-        m.prisma(p, 2.6, 3.1, "Piedra_Clara", tinte=0.96 + 0.06 * (i % 2))
-    m.tronco((0, 0, 0.2), radio - 1.0, radio - 1.0, 1.8, n, "Agua_Fuente", giro=g, tapa_abajo=False)  # agua
-    # fuste y tazas (torneadas, sombreado liso)
-    m.torno([(1.9, 2.0), (1.5, 3.0), (1.2, 6.0), (1.5, 7.0)], 12, "Piedra_Clara")
-    m.torno([(1.4, 6.8), (3.0, 7.4), (4.6, 8.4), (4.8, 8.9), (4.4, 9.0), (1.0, 8.6)], 16, "Piedra_Clara")
-    m.tronco((0, 0, 8.55), 4.3, 4.3, 0.25, 16, "Agua_Fuente", liso=True, tapa_abajo=False)
-    m.torno([(0.9, 8.6), (0.7, 10.0), (0.9, 11.2)], 10, "Piedra_Clara")
-    m.torno([(0.8, 11.0), (2.0, 11.5), (2.4, 12.2), (2.1, 12.3), (0.5, 12.0)], 12, "Piedra_Clara")
-    m.tronco((0, 0, 11.95), 2.0, 2.0, 0.2, 12, "Agua_Fuente", liso=True, tapa_abajo=False)
-    m.torno([(0.45, 12.0), (0.3, 13.2), (0.55, 13.6), (0.0, 14.4)], 8, "Oro")
-    # surtidor y caños
-    m.torno([(0.35, 14.0), (0.18, 15.6), (0.0, 16.2)], 6, "Agua_Chorro")
-    for k in range(8):
+    n, g = 8, 22.5
+    if lejos:
+        m.tronco((0, 0, 0), radio, radio, 3.0, n, "piedra_clara", giro=g, tapa_abajo=False, tapa_arriba=False)
+        m.tronco((0, 0, 2.2), radio - 0.3, radio - 0.3, 0.1, n, "agua", giro=g, tapa_abajo=False)
+        m.torno([(1.6, 2.0), (1.2, 7.0), (4.6, 8.6), (0.6, 9.0), (0.3, 13.6)], 6, "piedra_clara", tapas=False)
+        return m
+    m.tronco((0, 0, -0.6), radio + 1.2, radio + 1.2, 0.8, n, "piedra_media", giro=g, tapa_abajo=False)
+    m.tronco((0, 0, 0.2), radio, radio, 2.4, n, "piedra_clara", giro=g, tapa_abajo=False, tapa_arriba=False)
+    m.torno([(radio + 0.35, 2.6), (radio + 0.35, 3.1), (radio - 1.3, 3.1), (radio - 1.3, 2.4)], n, "piedra_clara",
+            giro=g, tapas=False)
+    m.tronco((0, 0, 2.0), radio - 1.3, radio - 1.3, 0.05, n, "agua", giro=g, tapa_abajo=False)
+    m.torno([(1.9, 2.0), (1.3, 3.0), (1.2, 6.2), (1.5, 7.0)], 8, "piedra_clara", tapas=False)
+    m.torno([(1.4, 6.8), (3.4, 7.6), (4.7, 8.6), (4.8, 9.0), (4.2, 9.0)], 10, "piedra_clara", tapas=False)
+    m.tronco((0, 0, 8.7), 4.3, 4.3, 0.05, 10, "agua", tapa_abajo=False)
+    m.torno([(0.9, 8.6), (0.7, 10.0), (0.9, 11.2), (2.0, 11.6), (2.4, 12.2), (2.0, 12.3)], 8, "piedra_clara",
+            tapas=False)
+    m.tronco((0, 0, 12.0), 2.0, 2.0, 0.05, 8, "agua", tapa_abajo=False)
+    m.torno([(0.45, 12.0), (0.3, 13.2), (0.55, 13.6), (0.0, 14.4)], 6, "oro", tapas=False)
+    for k in range(8):  # chorros: cintas de agua con sus dos caras
         a = 2 * math.pi * k / 8
-        p0 = np.array([2.3 * math.cos(a), 2.3 * math.sin(a), 12.1])
-        p1 = np.array([3.3 * math.cos(a), 3.3 * math.sin(a), 10.8])
-        p2 = np.array([3.8 * math.cos(a), 3.8 * math.sin(a), 9.0])
-        m.viga(p0, p1, 0.13, "Agua_Chorro")
-        m.viga(p1, p2, 0.13, "Agua_Chorro")
-        q0 = np.array([4.7 * math.cos(a), 4.7 * math.sin(a), 8.8])
-        q1 = np.array([5.9 * math.cos(a), 5.9 * math.sin(a), 6.0])
-        q2 = np.array([6.4 * math.cos(a), 6.4 * math.sin(a), 2.0])
-        m.viga(q0, q1, 0.16, "Agua_Chorro")
-        m.viga(q1, q2, 0.16, "Agua_Chorro")
+        e = np.array([math.cos(a), math.sin(a), 0])
+        t = np.array([-math.sin(a), math.cos(a), 0]) * 0.18
+        for (r0, z0, r1, z1, r2, z2) in ((2.3, 12.1, 3.4, 10.6, 3.8, 9.0), (4.7, 8.8, 6.0, 5.8, 6.4, 2.0)):
+            p0, p1, p2 = e * r0 + (0, 0, z0), e * r1 + (0, 0, z1), e * r2 + (0, 0, z2)
+            for (a_, b_) in ((p0, p1), (p1, p2)):
+                cara(m, [a_ - t, a_ + t, b_ + t, b_ - t], e, "agua")
+                cara(m, [a_ - t, a_ + t, b_ + t, b_ - t], -e, "agua")
     return m
 
 
-def reloj(radio=3.4):
-    """Esfera de reloj en el plano XZ, mirando a -Y."""
-    m = Malla()
-    disco = Malla().tronco((0, 0, 0), radio + 0.5, radio + 0.5, 0.35, 16, "Oro", liso=False)
-    disco.tronco((0, 0, 0.35), radio, radio, 0.12, 16, "Papel")
-    for k in range(12):
-        a = 2 * math.pi * k / 12
-        largo = 0.9 if k % 3 == 0 else 0.5
-        disco.caja_c(((radio - 0.6) * math.cos(a), (radio - 0.6) * math.sin(a), 0.5), (largo, 0.22, 0.1), "Hierro")
-    disco.caja((-0.15, -0.15, 0.55), (0.15, radio * 0.55, 0.68), "Hierro")  # horaria
-    disco.caja((-0.1, -0.1, 0.68), (radio * 0.82, 0.1, 0.8), "Hierro")  # minutero
-    m.anadir(disco, Rx(90))
-    return m
-
-
-def torre_reloj(semilla=3):
-    """Torre del reloj de Aurora (~92 studs): basa de piedra, fuste de yeso con esquinas de sillar, cuerpo del reloj,
-    campanario con arcos y chapitel de teja roja."""
-    rng = _rng(semilla)
+def torre_reloj(lejos=False):
+    """Torre del reloj de Aurora (~92 studs con el chapitel): basa de sillería, fuste con ventanas, cuerpo del reloj
+    y campanario. El color de la instancia es el del yeso; el chapitel es otra pieza (color de las tejas)."""
     m = Malla()
     a = 14.0
-    # basa
-    m.caja((-a / 2 - 1, -a / 2 - 1, -1.0), (a / 2 + 1, a / 2 + 1, 6.0), "Piedra_Media")
-    m.caja((-a / 2 - 1.3, -a / 2 - 1.3, 6.0), (a / 2 + 1.3, a / 2 + 1.3, 6.6), "Piedra_Clara")
-    # puerta en la basa
-    m.anadir(puerta(4.4, 5.8, semilla, farolillo=False), T(-2.2, -a / 2 - 1, 0))
-    # fuste
-    m.caja((-a / 2, -a / 2, 6.6), (a / 2, a / 2, 52.0), "Yeso_Crema")
-    for (sx, sy, r) in ((-1, -1, 0), (1, -1, 90), (1, 1, 180), (-1, 1, 270)):
-        m.anadir(esquina(52.0 - 6.6, semilla + r), compone(T(sx * a / 2, sy * a / 2, 6.6), Rz(r)))
-    # ventanas estrechas del fuste en cada cara
-    for r in (0, 90, 180, 270):
-        for z in (16.0, 30.0):  # el fuste es macizo: la ventana se adelanta hasta que el cristal asoma
-            m.anadir(ventana(2.2, 4.4, contraventanas=False), compone(Rz(r), T(-1.1, -a / 2 - 0.7, z)))
-        m.anadir(cornisa(a, 0.8, 0.6), compone(Rz(r), T(-a / 2, -a / 2, 40.0)))
-    # cuerpo del reloj
-    m.caja((-a / 2 - 0.8, -a / 2 - 0.8, 41.0), (a / 2 + 0.8, a / 2 + 0.8, 54.0), "Piedra_Clara")
-    for r in (0, 90, 180, 270):
-        m.anadir(reloj(4.4), compone(Rz(r), T(0, -a / 2 - 0.8, 47.5)))
-        m.anadir(cornisa(a + 1.6, 0.8, 0.7), compone(Rz(r), T(-a / 2 - 0.8, -a / 2 - 0.8, 54.0)))
-    # campanario: pilares en las esquinas y arcos (dos por cara)
+    h2 = a / 2
+    m.caja((-h2 - 1, -h2 - 1, -1.0), (h2 + 1, h2 + 1, 6.6), "sillar_muro", sin=("-z",))
     z0, z1 = 55.5, 66.0
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            xa, xb = (a / 2 - 1.8, a / 2) if sx > 0 else (-a / 2, -a / 2 + 1.8)
-            ya, yb = (a / 2 - 1.8, a / 2) if sy > 0 else (-a / 2, -a / 2 + 1.8)
-            m.caja((xa, ya, z0), (xb, yb, z1), "Yeso_Crema")
     for r in (0, 90, 180, 270):
-        cara = Malla()
-        cara.caja((-1.0, 0, z0), (1.0, 1.2, z1), "Yeso_Crema")  # parteluz
-        # dos vanos de medio punto por cara: enjutas macizas y dovelas que sobresalen
-        for cx in (-3.0, 3.0):
-            ancho = 2.0
-            zc = z1 - 3.0
-            n = 7
-            arco = [(cx + ancho * math.cos(math.pi * k / n), zc + ancho * math.sin(math.pi * k / n))
-                    for k in range(n, -1, -1)]
-            # contorno: esquina izq. de abajo, arco de izquierda a derecha, esquina der., arriba der., arriba izq.
-            contorno = arco + [(cx + ancho, z1), (cx - ancho, z1)]
-            cara.anadir(Malla().prisma(contorno, 0.0, 1.2, "Yeso_Crema"), compone(T(0, 1.2, 0), Rx(90)))
-            for k in range(n):
-                a0 = math.pi * k / n
-                a1 = math.pi * (k + 1) / n
-                p = [(cx + ancho * math.cos(a0), zc + ancho * math.sin(a0)),
-                     (cx + (ancho + 0.7) * math.cos(a0), zc + (ancho + 0.7) * math.sin(a0)),
-                     (cx + (ancho + 0.7) * math.cos(a1), zc + (ancho + 0.7) * math.sin(a1)),
-                     (cx + ancho * math.cos(a1), zc + ancho * math.sin(a1))]
-                dov = Malla().prisma(p, -0.3, 1.2, "Piedra_Clara", tinte=float(rng.uniform(0.9, 1.05)))
-                cara.anadir(dov, compone(T(0, 0.9, 0), Rx(90)))
-        # tímpano macizo por encima de los arcos
-        cara.caja((-a / 2, -0.2, z1 - 0.4), (a / 2, 1.2, z1), "Yeso_Crema")
-        cara.caja((-a / 2, 0.2, z0), (a / 2, 0.5, z0 + 1.6), "Piedra_Clara")  # antepecho
-        m.anadir(cara, compone(Rz(r), T(0, -a / 2, 0)))
-    # campana
-    m.torno([(0.0, 0.0), (2.3, 0.0), (2.0, 0.6), (1.5, 2.6), (1.4, 3.6), (0.8, 4.2), (0.0, 4.3)], 12, "Oro",
-            c=(0, 0, z0 + 2.6))
-    m.viga((-a / 2, 0, z0 + 7.2), (a / 2, 0, z0 + 7.2), 0.6, "Madera_Oscura")
-    for r in (0, 90, 180, 270):
-        m.anadir(cornisa(a, 0.9, 0.9), compone(Rz(r), T(-a / 2, -a / 2, z1)))
-    # chapitel
-    chap = tejado_cuatro_aguas(a, a, semilla, pendiente=2.6, alero=1.4, remate=False)
-    m.anadir(chap, T(-a / 2, -a / 2, z1 + 1.1))
-    zt = z1 + 1.1 + (a / 2 + 1.4) * 2.6 - 1.4 * 2.6
-    m.tronco((0, 0, zt - 0.5), 0.9, 0.5, 2.0, 8, "Oro")
-    m.esfera((0, 0, zt + 2.0), 0.8, "Oro", sub=1, liso=True)
-    m.viga((0, 0, zt + 2.5), (0, 0, zt + 7.5), 0.25, "Hierro")
-    m.poligono([(0, 0, zt + 7.3), (0, 0, zt + 5.4), (3.6, 0, zt + 6.35)], "Toldo_Rojo")  # banderola
+        f = Malla()
+        if lejos:
+            cara(f, [(-h2, -h2, 6.6), (h2, -h2, 6.6), (h2, -h2, 41), (-h2, -h2, 41)], (0, -1, 0), "pared_lisa")
+        else:
+            for zb in (6.6, 16.6, 26.6):
+                for (xa, xb) in ((-h2, -1.5), (1.5, h2)):
+                    cara(f, [(xa, -h2, zb), (xb, -h2, zb), (xb, -h2, zb + 10), (xa, -h2, zb + 10)], (0, -1, 0),
+                         "pared_lisa", uv_plano((xa, -h2, zb), (1, 0, 0), (0, 0, 1), 8, 10))
+                # tira central: la ventana de la casilla lejana (3 studs de ancho = el hueco de la casilla)
+                cara(f, [(-1.5, -h2, zb), (1.5, -h2, zb), (1.5, -h2, zb + 10), (-1.5, -h2, zb + 10)], (0, -1, 0),
+                     "pared_ventana_lejos", uv_plano((-4.0, -h2, zb), (1, 0, 0), (0, 0, 1), 8, 10))
+            cara(f, [(-h2, -h2, 36.6), (h2, -h2, 36.6), (h2, -h2, 41), (-h2, -h2, 41)], (0, -1, 0), "pared_lisa")
+        b = h2 + 0.8
+        cara(f, [(-b, -b, 41), (b, -b, 41), (b, -b, 54), (-b, -b, 54)], (0, -1, 0), "piedra_clara")
+        cara(f, [(-4.6, -b - 0.1, 43), (4.6, -b - 0.1, 43), (4.6, -b - 0.1, 52.2), (-4.6, -b - 0.1, 52.2)],
+             (0, -1, 0), "reloj")
+        if lejos:
+            cara(f, [(-h2, -h2, 54), (h2, -h2, 54), (h2, -h2, z1 + 1), (-h2, -h2, z1 + 1)], (0, -1, 0), "pared_lisa")
+        else:
+            cara(f, [(-b, -b, 41), (b, -b, 41), (h2, -h2, 41), (-h2, -h2, 41)], (0, 0, -1), "piedra_clara")
+            f.caja((-b - 0.4, -b - 0.4, 54), (b + 0.4, -b, 54.9), "piedra_clara", solo=("-y", "+z", "-z"))
+            # campanario: parteluz, antepecho y dos vanos de medio punto
+            f.caja((-1.0, -h2, z0), (1.0, -h2 + 1.2, z1), "pared_lisa", solo=("-y", "-x", "+x", "+y"))
+            f.caja((-h2 + 1.8, -h2 + 0.2, z0), (h2 - 1.8, -h2 + 0.5, z0 + 1.6), "piedra_clara",
+                   solo=("-y", "+z", "+y"))
+            for cx in (-3.0, 3.0):
+                w = 2.0
+                zc = z1 - 3.0
+                nseg = 6
+                arco = [(cx + w * math.cos(math.pi * k / nseg), zc + w * math.sin(math.pi * k / nseg))
+                        for k in range(nseg, -1, -1)]
+                contorno = arco + [(cx + w, z1), (cx - w, z1)]
+                for yy, nn in ((-h2, -1), (-h2 + 1.2, 1)):
+                    cara(f, [(x, yy, z) for (x, z) in contorno], (0, nn, 0), "pared_lisa")
+                for k in range(len(arco) - 1):  # intradós
+                    (xa, za), (xb, zb) = arco[k], arco[k + 1]
+                    cara(f, [(xa, -h2, za), (xb, -h2, zb), (xb, -h2 + 1.2, zb), (xa, -h2 + 1.2, za)],
+                         (cx - (xa + xb) / 2, 0, zc - (za + zb) / 2), "piedra_clara")
+            f.caja((-b - 0.4, -b - 0.4, z1), (b + 0.4, -b, z1 + 1.1), "piedra_clara", solo=("-y", "+z", "-z"))
+        m.anadir(f, Rz(r))
+    if not lejos:
+        for r in (0, 90, 180, 270):
+            for k in range(3):
+                m.anadir(esquina(), compone(Rz(r), T(-h2, -h2, 6.6 + k * H)))
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                xa, xb = (h2 - 1.8, h2) if sx > 0 else (-h2, -h2 + 1.8)
+                ya, yb = (h2 - 1.8, h2) if sy > 0 else (-h2, -h2 + 1.8)
+                m.caja((xa, ya, z0), (xb, yb, z1), "pared_lisa", solo=("-x", "+x", "-y", "+y"))
+        m.torno([(0.0, 0.0), (2.3, 0.0), (1.5, 2.6), (0.8, 4.2), (0.0, 4.3)], 8, "oro", c=(0, 0, z0 + 2.6),
+                tapas=False)
     return m
 
 
-def molino(semilla=0, angulo_aspas=20.0):
-    """Molino de viento: torre de piedra troncocónica encalada, caperuza cónica roja y cuatro aspas de celosía."""
-    rng = _rng(semilla)
+def chapitel(lejos=False):
+    """Chapitel de la torre del reloj (color de las tejas), con remate dorado. Origen: centro de la torre."""
+    a = 14.0
+    m = tejado_piramide(a, 2.6, 1.4, lejos).transformada(T(-a / 2, -a / 2, 0))
+    zt = a / 2 * 2.6
+    if not lejos:
+        m.tronco((0, 0, zt - 0.5), 0.9, 0.5, 2.0, 6, "oro", tapa_abajo=False)
+        m.esfera((0, 0, zt + 2.0), 0.8, "oro", sub=0)
+        m.viga((0, 0, zt + 2.5), (0, 0, zt + 7.5), 0.25, "hierro")
+    return m
+
+
+def molino_torre(lejos=False):
+    """Torre del molino (color de la instancia: el encalado). La caperuza y las aspas son piezas aparte."""
     m = Malla()
-    n = 10
-    # torno de 10 lados con giro 0: hay una cara plana mirando a -Y (y a cada múltiplo de 36°)
-    m.torno([(7.6, 1.4), (6.0, 26.0), (6.4, 26.2), (6.4, 27.0)], n, "Yeso_Blanco", liso=False, giro=0)
-    m.tronco((0, 0, -1.0), 8.7, 8.5, 2.6, n, "Piedra_Media", giro=0)  # zócalo
-    apotema = math.cos(math.pi / n)
+    n = 6 if lejos else 8
+    giro = 30 if lejos else 0
+    m.torno([(7.6, 1.4), (6.0, 26.0), (6.4, 26.6)], n, "pared_lisa", tapas=False, giro=giro)
+    m.tronco((0, 0, -1.0), 8.7, 8.5, 2.6, n, "sillar_muro", tapa_abajo=False, giro=giro)
+    if lejos:
+        return m
+    ap = math.cos(math.pi / n)
 
-    def radio_en(z):
-        return (7.6 - 1.6 * (z - 1.4) / 24.6) * apotema
+    def r_en(z):
+        return (7.6 - 1.6 * (z - 1.4) / 24.6) * ap
 
-    inclinacion = math.degrees(math.atan(1.6 / 24.6 * apotema))
-    # puerta y ventanucos (la torre es maciza: se adelantan lo justo para que asome la hoja y el cristal)
-    m.anadir(puerta(3.4, 6.4, semilla, farolillo=False), compone(T(-1.7, -radio_en(1.6) - 0.75, 1.6),
-                                                                  Rx(-inclinacion)))
-    for z, r in ((11.0, 72), (18.0, 180), (14.0, 288)):
-        m.anadir(ventana(1.8, 2.6, contraventanas=True),
-                 compone(Rz(r), T(-0.9, -radio_en(z) - 0.7, z), Rx(-inclinacion)))
-    # caperuza
-    m.torno([(6.9, 26.6), (6.6, 28.4), (4.6, 32.6), (1.4, 35.6), (0.0, 36.4)], 12, "TEJA", liso=False)
-    for k in range(12):  # tablas de la caperuza (relieve)
-        a = 2 * math.pi * (k + 0.5) / 12
-        m.viga((6.95 * math.cos(a), 6.95 * math.sin(a), 26.7), (1.2 * math.cos(a), 1.2 * math.sin(a), 35.8), 0.35,
-               "TEJA_B")
-    m.tronco((0, 0, 35.9), 0.4, 0.0, 2.0, 6, "Hierro")
-    # eje y aspas (miran a -Y)
-    eje = (0, -6.4, 30.0)
-    m.anadir(Malla().tronco((0, 0, 0), 1.2, 0.9, 3.5, 8, "Madera_Oscura"), compone(T(*eje), Rx(90)))
-    aspas = Malla()
+    # puerta y ventanucos: paños con un trozo de casilla de pared lejana, pegados a la torre (8 caras: una mira a -Y
+    # cuando el giro es múltiplo de 45° más 22,5°... con giro 0 las caras miran a 22,5° + 45°·k; se usan 247,5°...)
+    huecos = ((1.6, 9.6, -3.0, 3.0, "pared_puerta_lejos", (0.125, 0.875, 0.0, 0.85)),
+              (10.0, 15.0, -2.2, 2.2, "pared_ventana_lejos", (0.04, 0.96, 0.27, 0.79)),
+              (16.0, 21.0, -2.2, 2.2, "pared_ventana_lejos", (0.04, 0.96, 0.27, 0.79)))
+    for k, (z0, z1, x0, x1, mat, (u0, u1, v0, v1)) in enumerate(huecos):
+        f = Malla()
+        y0, y1 = -r_en(z0) - 0.06, -r_en(z1) - 0.06
+        cara(f, [(x0, y0, z0), (x1, y0, z0), (x1, y1, z1), (x0, y1, z1)], (0, -1, 0), mat,
+             uv_recorte(x0, x1, z0, z1, u0, u1, v0, v1))
+        # con 8 lados y giro 0 hay una cara plana mirando a -Y girando 22,5°: se orienta cada hueco a una cara
+        m.anadir(f, Rz(22.5 + 90 * k))
+    return m
+
+
+def molino_caperuza(lejos=False):
+    """Caperuza cónica del molino (color de las tejas)."""
+    n = 6 if lejos else 8
+    perfil = [(6.9, 26.6), (0.0, 36.4)] if lejos else [(6.9, 26.6), (6.6, 28.4), (4.6, 32.6), (0.0, 36.4)]
+    m = Malla().torno(perfil, n, "teja_lejos" if lejos else "teja_24", tapas=False)
+    m.tronco((0, 0, 26.2), 6.9, 6.9, 0.4, n, "madera_oscura", tapa_arriba=False)
+    return m
+
+
+def molino_aspas(lejos=False):
+    """Las cuatro aspas con su eje (miran a -Y; el centro del eje en el origen)."""
+    m = Malla()
     largo = 25.0
     for k in range(4):
         a = Malla()
-        a.caja((-0.5, -0.5, 0), (0.5, 0.5, largo), "Madera_Oscura")  # palo
-        # celosía: largueros y travesaños de un lado, con la tela
-        a.caja((0.5, -0.25, 5.0), (4.6, 0.25, 5.3), "Madera_Media")
-        a.caja((4.4, -0.25, 5.0), (4.7, 0.25, largo), "Madera_Media")
-        for j in range(9):
-            z = 5.0 + j * (largo - 5.0) / 8.5
-            a.caja((0.5, -0.22, z), (4.6, 0.22, z + 0.22), "Madera_Media")
-        a.caja((0.6, -0.08, 5.3), (4.4, 0.08, largo - 0.2), "Tela_Vela", tinte=float(rng.uniform(0.9, 1.05)))
-        aspas.anadir(a, Ry(90 * k))
-    m.anadir(aspas, compone(T(eje[0], eje[1] - 3.3, eje[2]), Ry(angulo_aspas), Rx(0)))
+        if not lejos:
+            a.caja((-0.45, -0.45, 0), (0.45, 0.45, largo), "madera_oscura", solo=("-x", "+x", "-y", "+y"))
+        for yy, nn in ((-0.1, -1), (0.1, 1)):  # lona con la celosía pintada, dos caras
+            cara(a, [(0.5, yy, 5.0), (4.6, yy, 5.0), (4.6, yy, largo), (0.5, yy, largo)], (0, nn, 0), "vela")
+        m.anadir(a, Ry(90 * k))
+    if not lejos:
+        m.anadir(Malla().tronco((0, 0, 0), 1.2, 0.9, 3.5, 6, "madera_oscura", tapa_abajo=False), Rx(-90))
     return m
 
 
-def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, semilla=0):
-    """Puente de piedra de `arcos` ojos a lo largo de X, centrado en el origen, con el tablero en z = 0.
-    Pila con tajamares, dovelas marcadas, pretiles con albardilla y farolas en los extremos."""
-    rng = _rng(semilla)
+def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, lejos=False):
+    """Puente de piedra de `arcos` ojos a lo largo de X, centrado en el origen, con el tablero en z = 0."""
     m = Malla()
     L = largo
     w = ancho / 2
@@ -1021,126 +702,312 @@ def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, semilla=0):
     for k in range(arcos):
         centros.append(x + luz / 2)
         x += luz + pila
-    # tablero macizo por encima de los arcos: se construye por perfiles (de lado) con el intradós recortado
-    n = 10
-    perfil_bajo = []
-    xs = np.linspace(-L / 2, L / 2, 120)
-    for xv in xs:
-        z = -12.0  # cimiento por defecto (pilas y estribos)
-        for c in centros:
-            if abs(xv - c) < luz / 2:
-                r = luz / 2
-                z = -alto + math.sqrt(max(r * r - (xv - c) ** 2, 0)) * (alto * 0.85 / r)
-        perfil_bajo.append(z)
-    perfil_bajo = np.array(perfil_bajo)
-    # se hace como tiras verticales (prismas) de piedra con tinte por bloque
-    for i in range(len(xs) - 1):
-        x0, x1 = xs[i], xs[i + 1]
-        zb = min(perfil_bajo[i], perfil_bajo[i + 1])
-        m.caja((x0, -w + 0.8, zb), (x1, w - 0.8, -0.6), "Piedra_Media", tinte=float(rng.uniform(0.92, 1.04)))
-    # dovelas de cada arco en las dos caras
-    for c in centros:
-        r = luz / 2
-        k_z = alto * 0.85 / r
-        for j in range(n):
-            a0, a1 = math.pi * j / n, math.pi * (j + 1) / n
-            p = []
-            for (aa, rr) in ((a0, r), (a0, r + 1.6), (a1, r + 1.6), (a1, r)):
-                p.append((c + rr * math.cos(aa), -alto + rr * math.sin(aa) * k_z * (1 if rr == r else 0.92)))
-            for lado in (-1, 1):
-                dov = Malla().prisma(p, 0, 0.5, "Piedra_Clara", tinte=float(rng.uniform(0.88, 1.06)))
-                yy = -w + 0.3 if lado < 0 else w - 0.8
-                m.anadir(dov, compone(T(0, yy + 0.5, 0), Rx(90)))
-    # tímpanos (paramentos) entre arcos: cajas de sillares
-    for i in range(len(xs) - 1):
-        x0, x1 = xs[i], xs[i + 1]
-        zb = min(perfil_bajo[i], perfil_bajo[i + 1]) + 1.3
-        for lado in (-1, 1):
-            y0, y1 = (-w + 0.3, -w + 0.8) if lado < 0 else (w - 0.8, w - 0.3)
-            if zb < -0.6:
-                m.caja((x0, y0, zb), (x1, y1, -0.6), "Piedra_Media", tinte=float(rng.uniform(0.9, 1.05)))
-    # tajamares en las pilas
-    for k in range(arcos - 1):
-        xp = (centros[k] + centros[k + 1]) / 2
-        for lado in (-1, 1):
-            tri = [(xp - pila / 2, lado * (w - 0.3)), (xp + pila / 2, lado * (w - 0.3)), (xp, lado * (w + pila * 0.7))]
-            if lado < 0:
-                tri = tri[::-1]
-            m.prisma(tri, -12.0, -alto * 0.45, "Piedra_Media")
-            # sombrerete del tajamar
-            m.tronco((xp, lado * (w + pila * 0.2), -alto * 0.45), pila * 0.62, 0.0, 2.2, 3, "Piedra_Clara",
-                     giro=90 if lado > 0 else -90)
-    # calzada, imposta y pretiles
-    m.caja((-L / 2 - 2, -w + 0.3, -0.6), (L / 2 + 2, w - 0.3, 0.0), "Piedra_Oscura")
-    m.caja((-L / 2 - 2, -w, -1.2), (L / 2 + 2, -w + 0.6, -0.4), "Piedra_Clara")
-    m.caja((-L / 2 - 2, w - 0.6, -1.2), (L / 2 + 2, w, -0.4), "Piedra_Clara")
+    r = luz / 2
+    kz = alto * 0.85 / r
+    nseg = 4 if lejos else 8
+    xs, zs = [-L / 2 - 2.0], [-12.0]
+    for c in centros:  # contorno del paramento: abajo sigue los arcos; arriba, el tablero
+        xs.append(c - r)
+        zs.append(-12.0)
+        for k in range(nseg + 1):
+            ang = math.pi - math.pi * k / nseg
+            xs.append(c + r * math.cos(ang))
+            zs.append(-alto + r * math.sin(ang) * kz)
+        xs.append(c + r)
+        zs.append(-12.0)
+    xs += [L / 2 + 2.0, L / 2 + 2.0, -L / 2 - 2.0]
+    zs += [-12.0, 0.0, 0.0]
+    for yy, nn in ((-w + 0.3, -1), (w - 0.3, 1)):
+        cara(m, [(x_, yy, z_) for x_, z_ in zip(xs, zs)], (0, nn, 0), "sillar_muro",
+             uv_plano((-L / 2, yy, -12), (1, 0, 0), (0, 0, 1), 12, 12))
+    for c in centros:  # intradós
+        for k in range(nseg):
+            a0, a1 = math.pi - math.pi * k / nseg, math.pi - math.pi * (k + 1) / nseg
+            p0 = (c + r * math.cos(a0), -alto + r * math.sin(a0) * kz)
+            p1 = (c + r * math.cos(a1), -alto + r * math.sin(a1) * kz)
+            cara(m, [(p0[0], -w + 0.3, p0[1]), (p1[0], -w + 0.3, p1[1]), (p1[0], w - 0.3, p1[1]),
+                     (p0[0], w - 0.3, p0[1])], (c - (p0[0] + p1[0]) / 2, 0, -1), "piedra_media")
+    cara(m, [(-L / 2 - 2, -w + 0.3, 0.0), (L / 2 + 2, -w + 0.3, 0.0), (L / 2 + 2, w - 0.3, 0.0),
+             (-L / 2 - 2, w - 0.3, 0.0)], (0, 0, 1), "piedra_oscura")
     for lado in (-1, 1):
         y0 = -w if lado < 0 else w - 1.4
-        x = -L / 2 - 2
-        while x < L / 2 + 2 - 0.1:
-            l = min(float(rng.uniform(1.8, 2.8)), L / 2 + 2 - x)
-            m.caja((x + 0.04, y0, 0.0), (x + l - 0.04, y0 + 1.4, 2.8), "Piedra_Media", tinte=float(rng.uniform(0.88, 1.06)))
-            x += l
-        m.caja((-L / 2 - 2.1, y0 - 0.15, 2.8), (L / 2 + 2.1, y0 + 1.55, 3.3), "Piedra_Clara")
-        for xe in (-L / 2 - 1.5, L / 2 + 1.5):
-            m.caja((xe - 1.2, y0 - 0.3, 0.0), (xe + 1.2, y0 + 1.7, 4.2), "Piedra_Clara")
-            m.anadir(farola(10.0), T(xe, y0 + 0.7, 4.2))
+        m.caja((-L / 2 - 2.0, y0, 0.0), (L / 2 + 2.0, y0 + 1.4, 3.2), "sillar_muro", sin=("-z", "-x", "+x"))
+        if not lejos:
+            for xe in (-L / 2 - 1.5, L / 2 + 1.5):
+                m.caja((xe - 1.2, y0 - 0.3, 0.0), (xe + 1.2, y0 + 1.7, 4.2), "piedra_clara", sin=("-z",))
+    if not lejos:  # tajamares
+        for k in range(arcos - 1):
+            xp = (centros[k] + centros[k + 1]) / 2
+            for lado in (-1, 1):
+                tri = [(xp - pila / 2, lado * (w - 0.3)), (xp + pila / 2, lado * (w - 0.3)),
+                       (xp, lado * (w + pila * 0.7))]
+                if lado < 0:
+                    tri = tri[::-1]
+                m.prisma(tri, -12.0, -alto * 0.45, "sillar_muro", tapas=False)
+                m.tronco((xp, lado * (w + pila * 0.2), -alto * 0.45), pila * 0.62, 0.0, 2.2, 3, "piedra_clara",
+                         giro=90 if lado > 0 else -90, tapa_abajo=False)
+    return m
+
+
+def portada_ayuntamiento(lejos=False, ancho=48.0):
+    """Portada del ayuntamiento: escalinata, columnas, entablamento, balcón, frontón con reloj y banderas (el color
+    de la instancia es el de las banderas). Origen: esquina delantera izquierda del edificio (fachada en y = 0)."""
+    m = Malla()
+    cx = ancho / 2
+    for k in range(3):
+        m.caja((cx - 10 - 1.2 * (2 - k), -7.0 + 1.6 * k, -4.0), (cx + 10 + 1.2 * (2 - k), 0.0, -0.6 + 0.2 * k),
+               "piedra_clara", sin=("-z", "+y"))
+    for xc in (cx - 8.5, cx - 3.2, cx + 3.2, cx + 8.5):
+        if lejos:
+            m.caja((xc - 0.9, -5.1, 0), (xc + 0.9, -3.3, 10), "piedra_clara", solo=("-y", "-x", "+x"))
+            continue
+        m.tronco((xc, -4.2, -0.2), 1.3, 1.3, 0.9, 6, "piedra_clara", tapa_abajo=False)
+        m.tronco((xc, -4.2, 0.7), 0.92, 0.85, 8.6, 8, "piedra_clara", tapa_abajo=False, tapa_arriba=False)
+        m.tronco((xc, -4.2, 9.3), 1.0, 1.35, 0.8, 6, "piedra_clara", tapa_abajo=False)
+    m.caja((cx - 10.5, -5.8, 10.1), (cx + 10.5, 0.0, 11.6), "piedra_clara", sin=("+y",))
+    m.caja((cx - 10.5, -5.8, 11.6), (cx + 10.5, 0.0, 12.0), "piedra_media", sin=("+y", "-z"))
+    if not lejos:  # barandilla del balcón: barandal y balaustres
+        m.caja((cx - 10.4, -5.75, 14.5), (cx + 10.4, -5.25, 14.9), "hierro", sin=("+y",))
+        for k in range(9):
+            x = cx - 10.2 + k * 20.4 / 8
+            m.caja((x - 0.12, -5.6, 12.0), (x + 0.12, -5.36, 14.5), "hierro", solo=("-y", "-x", "+x"))
+    zt = H * 3
+    cara(m, [(cx - 11.5, -1.6, zt - 0.6), (cx + 11.5, -1.6, zt - 0.6), (cx, -1.6, zt + 6.9)], (0, -1, 0),
+         "piedra_clara")
+    for sgn in (-1, 1):
+        p0, p1 = np.array([cx + sgn * 12.3, -1.8, zt - 0.6]), np.array([cx, -1.8, zt + 7.2])
+        cara(m, [p0, p1, p1 + (0, 0, 0.8), p0 + (0, 0, 0.8)], (0, -1, 0), "piedra_clara")
+        if not lejos:
+            cara(m, [p0 + (0, 0, 0.8), p1 + (0, 0, 0.8), p1 + (0, 1.8, 0.8), p0 + (0, 1.8, 0.8)], (0, 0, 1),
+                 "piedra_clara")
+    cara(m, [(cx - 2.6, -1.7, zt + 0.4), (cx + 2.6, -1.7, zt + 0.4), (cx + 2.6, -1.7, zt + 5.6),
+             (cx - 2.6, -1.7, zt + 5.6)], (0, -1, 0), "reloj")
+    if not lejos:
+        for sgn in (-1, 1):
+            x = cx + sgn * 16
+            m.viga((x, -0.2, 11.0), (x, -5.0, 16.0), 0.25, "hierro")
+            p0 = np.array([x, -5.0, 16.0])
+            q = [p0, p0 + (0, 2.2, -2.2), p0 + (0, 2.2, -6.2), p0 + (0, 0, -4.0)]
+            cara(m, q, (1, 0, 0), "toldo")
+            cara(m, q, (-1, 0, 0), "toldo")
     return m
 
 
 # ==============================================================================================================
-# Catálogo (para el .blend del kit y la hoja de piezas)
+# Vegetación y rocas
 # ==============================================================================================================
 
-CATALOGO = [
-    # (nombre del objeto, categoría, función sin argumentos)
-    ("Pared_Lisa", "Paredes", lambda: pared_lisa()),
-    ("Pared_Ventana", "Paredes", lambda: pared_ventana(semilla=1)),
-    ("Pared_Ventana_Jardinera", "Paredes", lambda: pared_ventana(jardinera=True, semilla=2)),
-    ("Pared_Puerta", "Paredes", lambda: pared_puerta(semilla=3)),
-    ("Pared_Escaparate", "Paredes", lambda: pared_escaparate()),
-    ("Entramado_Ventana", "Paredes", lambda: pared_ventana(semilla=4).anadir(entramado(con_ventana=True))),
-    ("Entramado_Liso", "Paredes", lambda: pared_lisa().anadir(entramado(con_ventana=False))),
-    ("Esquina_Sillares", "Paredes", lambda: esquina(11.0)),
-    ("Cornisa", "Paredes", lambda: cornisa(M)),
-    ("Zocalo", "Paredes", lambda: zocalo(M)),
-    ("Toldo", "Paredes", lambda: toldo()),
-    ("Ventana", "Puertas y ventanas", lambda: ventana()),
-    ("Ventana_Jardinera", "Puertas y ventanas", lambda: ventana(jardinera=True, semilla=5)),
-    ("Puerta", "Puertas y ventanas", lambda: puerta()),
-    ("Farolillo_Pared", "Puertas y ventanas", lambda: farolillo_pared()),
-    ("Tejado_Tramo", "Tejados", lambda: tejado_tramo(16.0)),
-    ("Tejado_Remate", "Tejados", lambda: tejado_remate(16.0)),
-    ("Hastial", "Tejados", lambda: hastial(16.0)),
-    ("Cumbrera", "Tejados", lambda: cumbrera(M, 16.0)),
-    ("Tejado_Cuatro_Aguas", "Tejados", lambda: tejado_cuatro_aguas(16.0, 16.0)),
-    ("Chimenea", "Tejados", lambda: chimenea()),
-    ("Farola", "Mobiliario", lambda: farola()),
-    ("Valla_Madera", "Mobiliario", lambda: valla_madera()),
-    ("Valla_Piedra", "Mobiliario", lambda: valla_piedra()),
-    ("Puesto", "Mobiliario", lambda: puesto()),
-    ("Banco", "Mobiliario", lambda: banco()),
-    ("Barril", "Mobiliario", lambda: barril()),
-    ("Caja", "Mobiliario", lambda: caja_madera()),
-    ("Maceta", "Mobiliario", lambda: maceta()),
-    ("Cartel_Tienda", "Mobiliario", lambda: cartel("bolsa")),
-    ("Tablon_Misiones", "Mobiliario", lambda: tablon_misiones()),
-    ("Pozo", "Mobiliario", lambda: pozo()),
-    ("Portal_Ciudad", "Mobiliario", lambda: portal()),
-    ("Poste_Indicador", "Mobiliario", lambda: poste_indicador()),
-    ("Carro", "Mobiliario", lambda: carro()),
-    ("Pajar", "Campo", lambda: pajar()),
-    ("Espantapajaros", "Campo", lambda: espantapajaros()),
-    ("Arbol_Frondoso", "Vegetacion", lambda: arbol_frondoso(1)),
-    ("Pino", "Vegetacion", lambda: pino(1)),
-    ("Abedul", "Vegetacion", lambda: abedul(1)),
-    ("Arbol_Flor", "Vegetacion", lambda: arbol_flor(1)),
-    ("Arbusto", "Vegetacion", lambda: arbusto(1)),
-    ("Roca", "Vegetacion", lambda: roca(1, 4.0)),
-    ("Mata_Hierba", "Vegetacion", lambda: mata_hierba(1)),
-    ("Mata_Flores", "Vegetacion", lambda: mata_flores(1)),
-    ("Fuente", "Especiales", lambda: fuente()),
-    ("Torre_Reloj", "Especiales", lambda: torre_reloj()),
-    ("Molino", "Especiales", lambda: molino()),
-    ("Puente", "Especiales", lambda: puente()),
-]
+
+def arbol_frondoso(semilla=0, alto=None, lejos=False, hoja=None):
+    rng = _rng(semilla)
+    h = alto or float(rng.uniform(17, 26))
+    hoja = hoja or ["hoja_verde", "hoja_clara", "hoja_oscura"][int(rng.integers(3))]
+    m = Malla()
+    t = h * 0.42
+    r = h * 0.3
+    if lejos:
+        m.tronco((0, 0, -1.0), 1.0, 0.7, t + 1.0, 3, "corteza", tapa_abajo=False, tapa_arriba=False)
+        return m.esfera((0, 0, t + r * 0.9), r * 1.15, hoja, sub=0, escala=(1, 1, 0.85))
+    m.tronco((0, 0, -1.0), 1.15, 0.75, t + 1.0, 5, "corteza", tapa_abajo=False, tapa_arriba=False)
+    m.esfera((0, 0, t + r * 0.95), r, hoja, sub=1, jitter=0.12, rng=rng, escala=(1, 1, 0.85))
+    for k in range(2):
+        a = rng.uniform(0, 2 * math.pi)
+        d = r * rng.uniform(0.6, 0.8)
+        m.esfera((math.cos(a) * d, math.sin(a) * d, t + r * rng.uniform(0.6, 1.1)), r * rng.uniform(0.55, 0.7), hoja,
+                 sub=0, jitter=0.12, rng=rng, escala=(1, 1, 0.85))
+    return m
+
+
+def arbol_flor(semilla=0, alto=None, lejos=False):
+    return arbol_frondoso(semilla, alto or float(_rng(semilla).uniform(13, 17)), lejos, hoja="flor_rosa")
+
+
+def pino(semilla=0, alto=None, lejos=False):
+    rng = _rng(semilla)
+    h = alto or float(rng.uniform(22, 34))
+    m = Malla()
+    m.tronco((0, 0, -1.0), 0.9, 0.5, h * 0.35, 4, "corteza", tapa_abajo=False, tapa_arriba=False)
+    if lejos:
+        return m.tronco((0, 0, h * 0.18), h * 0.3, 0.0, h * 0.82, 5, "hoja_pino", tapa_abajo=True)
+    for k in range(3):
+        m.tronco((0, 0, h * (0.18 + 0.25 * k)), h * (0.28 - 0.06 * k), 0.0, h * (0.5 - 0.06 * k), 6, "hoja_pino",
+                 giro=float(rng.uniform(0, 60)), tapa_abajo=(k == 0))
+    return m
+
+
+def abedul(semilla=0, alto=None, lejos=False):
+    rng = _rng(semilla)
+    h = alto or float(rng.uniform(18, 26))
+    hoja = ["hoja_clara", "hoja_verde"][int(rng.integers(2))]
+    m = Malla()
+    m.tronco((0, 0, -1.0), 0.55, 0.35, h * 0.75, 4 if lejos else 5, "abedul", tapa_abajo=False, tapa_arriba=False)
+    if lejos:
+        return m.esfera((0, 0, h * 0.68), h * 0.24, hoja, sub=0, escala=(1, 1, 1.35))
+    for k in range(3):
+        a = rng.uniform(0, 2 * math.pi)
+        m.esfera((math.cos(a) * 1.5, math.sin(a) * 1.5, h * (0.62 + 0.1 * k)), h * 0.17, hoja, sub=0, jitter=0.15,
+                 rng=rng, escala=(1, 1, 1.35))
+    return m
+
+
+def arbusto(semilla=0, lejos=False):
+    rng = _rng(semilla)
+    hoja = ["hoja_verde", "hoja_oscura", "hoja_clara"][int(rng.integers(3))]
+    m = Malla()
+    if lejos:
+        return m.esfera((0, 0, 1.2), 2.6, hoja, sub=0, escala=(1.2, 1.2, 0.7))
+    for k in range(2):
+        m.esfera((rng.uniform(-1.4, 1.4), rng.uniform(-1.4, 1.4), 1.4), rng.uniform(1.8, 2.4), hoja, sub=0,
+                 jitter=0.18, rng=rng, escala=(1, 1, 0.75))
+    return m
+
+
+def roca(semilla=0, tam=None, lejos=False):
+    rng = _rng(semilla)
+    s = tam or float(rng.uniform(2.5, 7))
+    n = 6 if lejos else 11
+    d = rng.normal(size=(n, 3))
+    d /= np.linalg.norm(d, axis=1, keepdims=True)
+    pts = d * np.array([1.0, rng.uniform(0.6, 0.9), rng.uniform(0.5, 0.75)]) * s * rng.uniform(0.8, 1.15, (n, 1))
+    pts[:, 2] = np.maximum(pts[:, 2], -0.3 * s) + 0.15 * s
+    return Malla().convexo(pts, "piedra_media")
+
+
+def mata_hierba(semilla=0):
+    rng = _rng(semilla)
+    m = Malla()
+    for k in range(3):  # tres hojas, cada una con sus dos caras (Roblox no dibuja el dorso)
+        a = rng.uniform(0, 2 * math.pi) + k * 2.1
+        h = rng.uniform(1.6, 2.6)
+        b = np.array([math.cos(a), math.sin(a), 0]) * 0.25
+        tip = np.array([math.cos(a) * rng.uniform(0.6, 1.2), math.sin(a) * rng.uniform(0.6, 1.2), h])
+        lat = np.array([-math.sin(a), math.cos(a), 0]) * 0.35
+        p = [b - lat, b + lat, tip]
+        m.poligono(p, "hierba")
+        m.poligono(p[::-1], "hierba")
+    return m
+
+
+def mata_flores(semilla=0):
+    m = mata_hierba(semilla)
+    rng = _rng(semilla + 1)
+    for k in range(3):
+        m.tronco((rng.uniform(-0.9, 0.9), rng.uniform(-0.9, 0.9), rng.uniform(1.6, 2.3)), 0.4, 0.0, 0.3, 4, "flores")
+    return m
+
+
+# ==============================================================================================================
+# Catálogo: nombre -> (detallada, simple, color de la instancia por defecto, categoría)
+#   simple = None        -> de lejos se usa la misma malla (ya es mínima)
+#   simple = SIN_LEJOS   -> de lejos no se dibuja (detalle pequeño: contraventanas, matas de hierba...)
+# ==============================================================================================================
+
+YESO = "#EFE2C6"
+TEJA = "#B4452C"
+BLANCO = "#F4F1EA"
+
+
+def SIN_LEJOS():
+    return None
+
+
+PIEZAS = {
+    "Pared_Lisa": (lambda: pared_lisa(), None, YESO, "Paredes"),
+    "Pared_Lisa_Baja": (lambda: pared_lisa(True), None, YESO, "Paredes"),
+    "Pared_Ventana": (lambda: pared_ventana(), lambda: pared_ventana_simple(), YESO, "Paredes"),
+    "Pared_Ventana_Baja": (lambda: pared_ventana(True), lambda: pared_ventana_simple(True), YESO, "Paredes"),
+    "Pared_Puerta": (pared_puerta, lambda: _cuadro(Malla(), "pared_puerta_lejos"), YESO, "Paredes"),
+    "Pared_Escaparate": (pared_escaparate, lambda: _cuadro(Malla(), "pared_escaparate_lejos"), YESO, "Paredes"),
+    "Entramado_Lisa": (lambda: _cuadro(Malla(), "entramado_lisa"), None, YESO, "Paredes"),
+    "Entramado_Ventana": (lambda: pared_ventana(entramado=True), lambda: pared_ventana_simple(entramado=True), YESO,
+                          "Paredes"),
+    "Esquina": (lambda: esquina(), lambda: esquina(True), YESO, "Paredes"),
+    "Cornisa": (lambda: cornisa(), lambda: cornisa(True), "#FFFFFF", "Paredes"),
+    "Cornisa_Esquina": (cornisa_esquina, SIN_LEJOS, "#FFFFFF", "Paredes"),
+    "Contraventanas": (contraventanas, SIN_LEJOS, "#4F7F5E", "Fachada"),
+    "Jardinera": (jardinera, SIN_LEJOS, "#FFFFFF", "Fachada"),
+    "Puerta": (puerta, SIN_LEJOS, "#8A6340", "Fachada"),
+    "Farolillo": (farolillo, SIN_LEJOS, "#FFFFFF", "Fachada"),
+    "Toldo": (toldo, None, "#C2413A", "Fachada"),
+    **{f"Cartel_{e.capitalize()}": ((lambda e=e: cartel(e)), SIN_LEJOS, "#FFFFFF", "Fachada")
+       for e in ("bolsa", "espada", "gema", "yunque", "pan", "pocion")},
+    "Tejado_Tramo_16": (lambda: tejado_tramo(16), lambda: tejado_tramo(16, True), TEJA, "Tejados"),
+    "Tejado_Tramo_24": (lambda: tejado_tramo(24), lambda: tejado_tramo(24, True), TEJA, "Tejados"),
+    "Tejado_Remate_16": (lambda: tejado_remate(16), lambda: tejado_remate(16, True), TEJA, "Tejados"),
+    "Tejado_Remate_24": (lambda: tejado_remate(24), lambda: tejado_remate(24, True), TEJA, "Tejados"),
+    "Hastial_16": (lambda: hastial(16), None, YESO, "Tejados"),
+    "Hastial_24": (lambda: hastial(24), None, YESO, "Tejados"),
+    "Cumbrera_16": (lambda: cumbrera(16), None, TEJA, "Tejados"),
+    "Cumbrera_24": (lambda: cumbrera(24), None, TEJA, "Tejados"),
+    "Cumbrera_Remate_16": (lambda: cumbrera(16, VUELO), SIN_LEJOS, TEJA, "Tejados"),
+    "Cumbrera_Remate_24": (lambda: cumbrera(24, VUELO), SIN_LEJOS, TEJA, "Tejados"),
+    "Chimenea": (lambda: chimenea(), lambda: chimenea(lejos=True), "#FFFFFF", "Tejados"),
+    "Farola": (farola, lambda: farola(True), "#FFFFFF", "Mobiliario"),
+    "Banco": (banco, lambda: banco(True), "#FFFFFF", "Mobiliario"),
+    "Barril": (barril, lambda: barril(True), "#FFFFFF", "Mobiliario"),
+    "Caja": (caja_madera, None, "#FFFFFF", "Mobiliario"),
+    "Maceta": (maceta, None, "#FFFFFF", "Mobiliario"),
+    "Valla_Madera": (valla_madera, lambda: valla_madera(True), "#FFFFFF", "Mobiliario"),
+    "Valla_Piedra": (valla_piedra, lambda: valla_piedra(True), "#FFFFFF", "Mobiliario"),
+    "Puesto": (puesto, lambda: puesto(True), "#C2413A", "Mobiliario"),
+    "Tablon_Misiones": (tablon_misiones, lambda: tablon_misiones(True), TEJA, "Mobiliario"),
+    "Pozo": (pozo, lambda: pozo(True), TEJA, "Mobiliario"),
+    "Carro": (carro, lambda: carro(True), "#FFFFFF", "Mobiliario"),
+    "Pajar": (pajar, lambda: pajar(True), "#FFFFFF", "Campo"),
+    "Espantapajaros": (espantapajaros, lambda: espantapajaros(True), "#4C6F94", "Campo"),
+    "Portal_Ciudad": (portal, lambda: portal(True), "#FFFFFF", "Mobiliario"),
+    "Poste_Indicador": (poste_indicador, lambda: poste_indicador(True), "#FFFFFF", "Mobiliario"),
+    "Fuente": (fuente, lambda: fuente(True), "#FFFFFF", "Especiales"),
+    "Torre_Reloj": (torre_reloj, lambda: torre_reloj(True), BLANCO, "Especiales"),
+    "Chapitel": (chapitel, lambda: chapitel(True), TEJA, "Especiales"),
+    "Molino_Torre": (molino_torre, lambda: molino_torre(True), BLANCO, "Especiales"),
+    "Molino_Caperuza": (molino_caperuza, lambda: molino_caperuza(True), TEJA, "Especiales"),
+    "Molino_Aspas": (molino_aspas, lambda: molino_aspas(True), "#FFFFFF", "Especiales"),
+    "Portada_Ayuntamiento": (lambda: portada_ayuntamiento(ancho=56.0), lambda: portada_ayuntamiento(True, 56.0),
+                             "#3F6FA8", "Especiales"),
+    **{f"Frondoso_{c}": ((lambda s=s: arbol_frondoso(s)), (lambda s=s: arbol_frondoso(s, lejos=True)), "#FFFFFF",
+                         "Vegetacion") for c, s in zip("abcd", (101, 102, 103, 104))},
+    **{f"Pino_{c}": ((lambda s=s: pino(s)), (lambda s=s: pino(s, lejos=True)), "#FFFFFF", "Vegetacion")
+       for c, s in zip("abc", (201, 202, 203))},
+    **{f"Abedul_{c}": ((lambda s=s: abedul(s)), (lambda s=s: abedul(s, lejos=True)), "#FFFFFF", "Vegetacion")
+       for c, s in zip("ab", (301, 302))},
+    **{f"Arbusto_{c}": ((lambda s=s: arbusto(s)), (lambda s=s: arbusto(s, lejos=True)), "#FFFFFF", "Vegetacion")
+       for c, s in zip("abc", (401, 402, 403))},
+    **{f"Roca_{c}": ((lambda s=s: roca(s)), (lambda s=s: roca(s, lejos=True)), "#FFFFFF", "Vegetacion")
+       for c, s in zip("abc", (501, 502, 503))},
+    **{f"Hierba_{c}": ((lambda s=s: mata_hierba(s)), SIN_LEJOS, "#FFFFFF", "Vegetacion")
+       for c, s in zip("ab", (601, 602))},
+    **{f"Flores_{c}": ((lambda s=s: mata_flores(s)), SIN_LEJOS, "#FFFFFF", "Vegetacion")
+       for c, s in zip("abc", (701, 702, 703))},
+    "Arbol_Flor": (lambda: arbol_flor(801), lambda: arbol_flor(801, lejos=True), "#FFFFFF", "Vegetacion"),
+    "Arbol_Flor_B": (lambda: arbol_flor(9), lambda: arbol_flor(9, lejos=True), "#FFFFFF", "Vegetacion"),
+    "Arbol_Grande": (lambda: arbol_frondoso(33, alto=34.0), lambda: arbol_frondoso(33, alto=34.0, lejos=True),
+                     "#FFFFFF", "Vegetacion"),
+}
+
+
+def losa_nombre(nx, ny):
+    """Las losas dependen del tamaño del edificio: se registran a demanda."""
+    nombre = f"Losa_{nx}x{ny}"
+    if nombre not in PIEZAS:
+        PIEZAS[nombre] = ((lambda: losa(nx, ny)), None, "#FFFFFF", "Paredes")
+    return nombre
+
+
+def registrar_puente(largo, alto, arcos):
+    PIEZAS["Puente"] = ((lambda: puente(largo, 13.0, alto, arcos)), (lambda: puente(largo, 13.0, alto, arcos, True)),
+                        "#FFFFFF", "Especiales")
+    return "Puente"
+
+
+def malla(nombre, lejos=False):
+    """Malla de una pieza: la detallada o la simple (si no tiene simple propia, la detallada; si de lejos no se
+    dibuja, None)."""
+    det, sim, _, _ = PIEZAS[nombre]
+    if not lejos or sim is None:
+        return det()
+    return sim()
+
+
+def color_defecto(nombre):
+    return PIEZAS[nombre][2]

@@ -316,3 +316,89 @@ def todos():
     for ranura, defecto in RANURAS.items():
         mats[ranura] = mats[defecto]
     return mats
+
+
+# --------------------------------------------------------------------------------------------------------------
+# Material del atlas del kit (todas las piezas)
+# --------------------------------------------------------------------------------------------------------------
+
+
+def material_atlas(ruta_atlas, ruta_datos):
+    """El único material de las piezas del kit.
+
+    Color = mezcla del color de la INSTANCIA (Object Info › Color; en Roblox, MeshPart.Color) y el del atlas, según el
+    alfa del atlas: donde el atlas es transparente (yeso, tejas...) manda el color de la instancia.
+    Luz propia y brillo salen del mapa de datos (ver atlas.generar)."""
+    if "Atlas_Kit" in bpy.data.materials:
+        return bpy.data.materials["Atlas_Kit"]
+    mat = bpy.data.materials.new("Atlas_Kit")
+    mat.use_nodes = True
+    nt = mat.node_tree
+    nt.nodes.clear()
+    n, l = nt.nodes, nt.links
+    tex = n.new("ShaderNodeTexImage")
+    tex.image = bpy.data.images.load(ruta_atlas)
+    tex.interpolation = "Linear"
+    datos = n.new("ShaderNodeTexImage")
+    datos.image = bpy.data.images.load(ruta_datos)
+    datos.image.colorspace_settings.name = "Non-Color"
+    datos.interpolation = "Closest"
+    obj = n.new("ShaderNodeObjectInfo")
+    mezcla = n.new("ShaderNodeMix")
+    mezcla.data_type = "RGBA"
+    l.new(tex.outputs["Alpha"], mezcla.inputs["Factor"])
+    l.new(obj.outputs["Color"], mezcla.inputs["A"])
+    l.new(tex.outputs["Color"], mezcla.inputs["B"])
+    bsdf = n.new("ShaderNodeBsdfPrincipled")
+    l.new(mezcla.outputs["Result"], bsdf.inputs["Base Color"])
+    sep = n.new("ShaderNodeSeparateColor")
+    l.new(datos.outputs["Color"], sep.inputs[0])
+    # rugosidad = 0,85 - 0,8·brillo
+    rug = n.new("ShaderNodeMath")
+    rug.operation = "MULTIPLY_ADD"
+    rug.inputs[1].default_value = -0.8
+    rug.inputs[2].default_value = 0.85
+    l.new(sep.outputs["Green"], rug.inputs[0])
+    l.new(rug.outputs[0], bsdf.inputs["Roughness"])
+    # luz propia: faroles (R ≈ 1) siempre un poco y mucho al atardecer; ventanas (R ≈ 0,5) solo al atardecer y solo
+    # en parte de los edificios (azar por objeto)
+    luces = n.new("ShaderNodeGroup")
+    luces.node_tree = grupo_luces()
+    farol = n.new("ShaderNodeMapRange")
+    farol.inputs["From Min"].default_value = 0.75
+    farol.inputs["From Max"].default_value = 0.9
+    l.new(sep.outputs["Red"], farol.inputs["Value"])
+    ventana = n.new("ShaderNodeMath")
+    ventana.operation = "COMPARE"
+    ventana.inputs[1].default_value = 0.5
+    ventana.inputs[2].default_value = 0.2
+    l.new(sep.outputs["Red"], ventana.inputs[0])
+    azar = n.new("ShaderNodeMath")
+    azar.operation = "GREATER_THAN"
+    azar.inputs[1].default_value = 0.35
+    l.new(obj.outputs["Random"], azar.inputs[0])
+    v2 = n.new("ShaderNodeMath")
+    v2.operation = "MULTIPLY"
+    l.new(ventana.outputs[0], v2.inputs[0])
+    l.new(azar.outputs[0], v2.inputs[1])
+    v3 = n.new("ShaderNodeMath")
+    v3.operation = "MULTIPLY"
+    l.new(v2.outputs[0], v3.inputs[0])
+    l.new(luces.outputs[0], v3.inputs[1])
+    f2 = n.new("ShaderNodeMath")
+    f2.operation = "MULTIPLY_ADD"  # farol · (0,3 + 3·luces)
+    l.new(luces.outputs[0], f2.inputs[0])
+    f2.inputs[1].default_value = 3.0
+    f2.inputs[2].default_value = 0.3
+    f3 = n.new("ShaderNodeMath")
+    f3.operation = "MULTIPLY"
+    l.new(farol.outputs[0], f3.inputs[0])
+    l.new(f2.outputs[0], f3.inputs[1])
+    total = n.new("ShaderNodeMath")
+    total.operation = "ADD"
+    l.new(v3.outputs[0], total.inputs[0])
+    l.new(f3.outputs[0], total.inputs[1])
+    l.new(total.outputs[0], bsdf.inputs["Emission Strength"])
+    bsdf.inputs["Emission Color"].default_value = (*srgb_a_lineal("#FFB65C"), 1)
+    salida_con_niebla(mat, bsdf.outputs[0])
+    return mat
