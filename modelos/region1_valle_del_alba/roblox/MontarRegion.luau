@@ -133,6 +133,19 @@ local function modelo(padre: Instance, nombre: string): Model
 	return m
 end
 
+--[[
+	RenderFidelity y CollisionFidelity solo se pueden cambiar en Studio, NO durante el juego (PROBADO: "lacking capability
+	PluginOrOpenCloud"). Las pone en las plantillas EjemploArranque.prepararPiezasEnStudio; las copias las heredan y
+	aquí solo se intenta si la plantilla no la trae (en Studio funciona; en el juego no se toca).
+]]
+local function ponerRenderFidelity(p: MeshPart, valor: Enum.RenderFidelity)
+	if p.RenderFidelity ~= valor then
+		pcall(function()
+			p.RenderFidelity = valor
+		end)
+	end
+end
+
 local function prepararParte(p: BasePart, colision: boolean)
 	p.Anchored = true
 	p.CanCollide = colision
@@ -180,7 +193,7 @@ function MontarRegion.copiarPieza(
 		parte.TextureID = opciones.IdAtlas :: string
 	end
 	parte.CastShadow = not (SIN_SOMBRA[nombre] == true) and not lejos
-	parte.RenderFidelity = Enum.RenderFidelity.Performance
+	ponerRenderFidelity(parte, Enum.RenderFidelity.Performance)
 	prepararParte(parte, false)
 	parte.Parent = destino
 	return parte
@@ -262,7 +275,7 @@ function MontarRegion.montar(opciones: Opciones): Model
 					p.CollisionFidelity = Enum.CollisionFidelity.PreciseConvexDecomposition
 				end)
 			end
-			p.RenderFidelity = Enum.RenderFidelity.Precise -- evita grietas entre trozos
+			ponerRenderFidelity(p, Enum.RenderFidelity.Precise) -- evita grietas entre trozos
 			p.Parent = m
 		else
 			warn(`MontarRegion: falta el trozo de terreno {t.nombre}`)

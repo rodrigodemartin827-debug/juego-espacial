@@ -76,6 +76,8 @@ end
 	MeshPart.Color a través de las zonas transparentes del atlas (se ve el ruido de color escondido detrás de la
 	transparencia: paredes moteadas y tejados grises). Con Overlay sí: tejados rojos y yeso liso del color de cada copia.
 	SurfaceAppearance no se puede configurar durante el juego, por eso va en las plantillas: las copias lo heredan.
+	También pone RenderFidelity (piezas y terreno) y la colisión precisa del terreno detallado, que tampoco se pueden
+	cambiar durante el juego.
 ]]
 function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
@@ -91,7 +93,21 @@ function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 				sa.ColorMap = idAtlas
 				sa.AlphaMode = Enum.AlphaMode.Overlay
 				sa.Parent = p
+				p.RenderFidelity = Enum.RenderFidelity.Performance
 				n += 1
+			end
+		end
+	end
+	-- Terreno: el detallado con colisión precisa y render preciso (sin grietas); el lejano no choca.
+	local terreno = carpeta:FindFirstChild("Terreno")
+	if terreno then
+		for _, p in terreno:GetChildren() do
+			if p:IsA("MeshPart") then
+				local lejos = string.find(p.Name, "__lejos") ~= nil
+				p.RenderFidelity = if lejos then Enum.RenderFidelity.Performance else Enum.RenderFidelity.Precise
+				if not lejos and p.CollisionFidelity ~= Enum.CollisionFidelity.PreciseConvexDecomposition then
+					p.CollisionFidelity = Enum.CollisionFidelity.PreciseConvexDecomposition
+				end
 			end
 		end
 	end
