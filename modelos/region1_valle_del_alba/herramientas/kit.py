@@ -168,6 +168,7 @@ def farolillo():
     m.caja((-0.13, -1.3, 1.35), (0.13, 0.0, 1.6), "hierro", sin=("+y",))
     m.caja((-0.4, -1.55, -1.0), (0.4, -0.75, 0.2), "luz", sin=("+z",))
     m.tronco((0, -1.15, 0.2), 0.62, 0.12, 0.6, 4, "hierro", giro=45, tapa_abajo=False)
+    m.caja((-0.1, -1.25, 0.75), (0.1, -1.05, 1.36), "hierro", solo=("-x", "+x", "-y", "+y"))  # colgador
     return m
 
 

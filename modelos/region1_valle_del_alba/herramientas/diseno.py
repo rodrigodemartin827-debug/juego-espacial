@@ -162,7 +162,8 @@ ARBOLES_SUELTOS = 0.0025  # probabilidad de árbol suelto en pradera (por punto 
 LOD = dict(
     edificios=dict(detalle=220.0, simple=2600.0),
     mobiliario=dict(detalle=140.0, simple=500.0),
-    vegetacion=dict(detalle=160.0, simple=1100.0),
+    vegetacion=dict(detalle=160.0, simple=1100.0),  # arbustos y rocas
+    arboles=dict(detalle=160.0, simple=3000.0),  # los árboles simples (16-26 triángulos) se ven de lejos: bosques
     hierba=dict(detalle=110.0, simple=110.0),
     terreno=dict(detalle=650.0, simple=1e9),  # distancia al punto más cercano del trozo
     silueta_aurora=700.0,  # más allá, Aurora entera se cambia por su silueta (una malla)

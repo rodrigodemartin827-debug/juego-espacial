@@ -138,11 +138,20 @@ def aplicar(cam, informe=False):
         co = co.reshape(-1, 3)
         base = np.zeros(n, np.int32)
         me.attributes["tipo_base"].data.foreach_get("value", base)
-        cfg = L["hierba" if o.get("categoria") == "hierba" else "vegetacion"]
+        from region import FUENTES_VEG
+
+        es_arbol = np.array([FUENTES_VEG[t].startswith(("Frondoso", "Pino", "Abedul", "Arbol")) for t in range(NV)])
+        arbol = es_arbol[base]
+        if o.get("categoria") == "hierba":
+            det = np.full(n, L["hierba"]["detalle"])
+            sim = np.full(n, L["hierba"]["simple"])
+        else:
+            det = np.where(arbol, L["arboles"]["detalle"], L["vegetacion"]["detalle"])
+            sim = np.where(arbol, L["arboles"]["simple"], L["vegetacion"]["simple"])
         dist = np.linalg.norm(co - cam_p[None, :], axis=1)
         vis = sobre_horizonte(cam_p, co, np.full(n, 30.0))
-        lejos = dist > cfg["detalle"]
-        oculto = (dist > cfg["simple"]) | ~vis
+        lejos = dist > det
+        oculto = (dist > sim) | ~vis
         tipo = base + NV * lejos
         me.attributes["tipo"].data.foreach_set("value", tipo.astype(np.int32))
         me.attributes["oculto"].data.foreach_set("value", oculto)

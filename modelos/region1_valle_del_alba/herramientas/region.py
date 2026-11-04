@@ -166,9 +166,13 @@ def material_color_vertice(nombre):
 # ==============================================================================================================
 
 
-def _rejilla_trozo(P, uv, nombre, col, mat, faldon):
+def _rejilla_trozo(P, uv, nombre, col, mat, faldon, normales):
     """Malla de un trozo de terreno: la rejilla P (n+1, n+1, 3) y un faldón que baja `faldon` studs por los cuatro
-    bordes (tapa las grietas con los trozos vecinos cuando tienen otro nivel de detalle)."""
+    bordes (tapa las grietas con los trozos vecinos cuando tienen otro nivel de detalle).
+
+    Las normales de la superficie son las EXACTAS del relieve (`normales`, calculadas sobre la rejilla de toda la
+    cara): así dos trozos vecinos tienen la misma normal en su borde y no se ve la junta. El faldón tiene sus propios
+    vértices (no toca el sombreado de la superficie)."""
     n1 = P.shape[0]
     idx = np.arange(n1 * n1).reshape(n1, n1)
     a, b, c_, d = idx[1:, :-1], idx[1:, 1:], idx[:-1, 1:], idx[:-1, :-1]
@@ -178,12 +182,14 @@ def _rejilla_trozo(P, uv, nombre, col, mat, faldon):
     borde = np.concatenate([idx[0, :], idx[1:, -1], idx[-1, -2::-1], idx[-2:0:-1, 0]])  # vuelta al trozo
     Pb = P.reshape(-1, 3)[borde]
     abajo = Pb - Pb / np.linalg.norm(Pb, axis=1, keepdims=True) * faldon
-    base = n1 * n1
-    verts.append(abajo)
-    uvs.append(uv.reshape(-1, 2)[borde])
-    k = np.arange(len(borde))
-    k2 = (k + 1) % len(borde)
-    faldones = np.stack([borde[k2], borde[k], base + k, base + k2], -1)
+    nb = len(borde)
+    arriba = n1 * n1  # copia de los vértices del borde, solo para el faldón
+    base = arriba + nb
+    verts += [Pb, abajo]
+    uvs += [uv.reshape(-1, 2)[borde], uv.reshape(-1, 2)[borde]]
+    k = np.arange(nb)
+    k2 = (k + 1) % nb
+    faldones = np.stack([arriba + k2, arriba + k, base + k, base + k2], -1)
     V = np.concatenate(verts)
     # el faldón mira hacia fuera del trozo (Roblox no dibuja el dorso de las caras)
     q = V[faldones[0]]
@@ -204,6 +210,18 @@ def _rejilla_trozo(P, uv, nombre, col, mat, faldon):
     capa = me.uv_layers.new(name="UVMap")
     capa.data.foreach_set("uv", np.concatenate(uvs)[Q.ravel()].astype(np.float32).ravel())
     me.update(calc_edges=True)
+    # normales exactas en la superficie; en el faldón, la normal hacia fuera
+    nv = np.concatenate([normales.reshape(-1, 3), np.zeros((2 * nb, 3))])
+    for kk in range(nb):
+        q = V[faldones[kk]]
+        nf = np.cross(q[1] - q[0], q[2] - q[0])
+        nf /= max(np.linalg.norm(nf), 1e-9)
+        nv[arriba + kk] += nf
+        nv[arriba + (kk + 1) % nb] += nf
+        nv[base + kk] += nf
+        nv[base + (kk + 1) % nb] += nf
+    nv[arriba:] /= np.maximum(np.linalg.norm(nv[arriba:], axis=1, keepdims=True), 1e-9)
+    me.normals_split_custom_set_from_vertices(nv.tolist())
     me.materials.append(mat)
     ob = bpy.data.objects.new(nombre, me)
     col.objects.link(ob)
@@ -248,6 +266,13 @@ def terreno(V, rutas_tex, col, rapido=False):
         alturas[nivel] = (X, Y, H)
         d = geo.direccion(X, Y)
         P = d * (R + H)[..., None]
+        # normales exactas: producto vectorial de las tangentes de la rejilla de TODA la cara (diferencias
+        # centradas; en los bordes de la cara, laterales). Iguales a los dos lados de cada junta entre trozos.
+        tx = np.gradient(P, axis=1)
+        ty = np.gradient(P, axis=0)
+        Nrm = np.cross(tx, -ty)
+        Nrm /= np.linalg.norm(Nrm, axis=-1, keepdims=True)
+        Nrm *= np.sign(np.sum(Nrm * d, axis=-1))[..., None]
         for i in range(k):  # fila
             for j in range(k):  # columna
                 sl = (slice(i * n, (i + 1) * n + 1), slice(j * n, (j + 1) * n + 1))
@@ -264,7 +289,7 @@ def terreno(V, rutas_tex, col, rapido=False):
                     uv = np.stack([(Xs + geo.L) / (2 * geo.L), (Ys + geo.L) / (2 * geo.L)], -1)
                     mat = mats_d["lejos"]
                     nombre = f"Terreno_{i}_{j}__lejos"
-                ob = _rejilla_trozo(P[sl], uv, nombre, col, mat, cfg["faldon"])
+                ob = _rejilla_trozo(P[sl], uv, nombre, col, mat, cfg["faldon"], Nrm[sl])
                 c = P[sl].reshape(-1, 3)
                 centro = c.mean(axis=0)
                 ob["lod"] = "terreno"
