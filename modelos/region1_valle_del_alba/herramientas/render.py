@@ -173,7 +173,8 @@ def preparar(blend):
     bpy.ops.wm.open_mainfile(filepath=blend)
 
 
-def renderizar(nombre, salida, ancho, muestras):
+def situar(nombre, ancho, muestras, aplicar_lod=True):
+    """Coloca cámara, luz y niebla de una vista (y el LOD por distancia, si la escena lo tiene) sin renderizar."""
     cam_f, obj_f, ilum, lente, niebla = VISTAS[nombre]
     cam = cam_f()
     obj = obj_f()
@@ -194,6 +195,15 @@ def renderizar(nombre, salida, ancho, muestras):
         ini, dist, mx = niebla
         col = E.ILUMINACIONES[ilum]["niebla"][3]
         MAT.ajustar_niebla(ini, dist, mx, MAT.srgb_a_lineal(col))
+    if aplicar_lod and "LOD" in bpy.data.texts:
+        import lod
+
+        lod.aplicar(np.array(cam))
+    return cam
+
+
+def renderizar(nombre, salida, ancho, muestras):
+    situar(nombre, ancho, muestras)
     ruta = os.path.abspath(os.path.join(salida, nombre + ".png"))
     t = time.time()
     E.render(ruta)

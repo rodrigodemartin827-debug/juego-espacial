@@ -1,10 +1,11 @@
 """
-Construye kit_valle_del_alba.blend (todas las piezas del kit, ordenadas por categorías, más unos edificios de ejemplo
-montados con ellas) y renderiza la hoja del kit: una miniatura por pieza con su nombre.
+Construye kit_valle_del_alba.blend (todas las piezas del kit, detalladas y simples, ordenadas por categorías, y
+unos edificios de ejemplo montados con COPIAS de las piezas) y renderiza la hoja del kit: en cada miniatura, la
+versión detallada a la izquierda y la simple a la derecha, con sus triángulos.
 
 Uso:
     python modelos/region1_valle_del_alba/herramientas/kit_blend.py --salida modelos/region1_valle_del_alba
-        [--sin-miniaturas] [--muestras 24]
+        [--sin-miniaturas] [--muestras 24] [--solo Pared_Ventana,Farola]
 """
 
 import argparse
@@ -16,19 +17,21 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import bpy  # noqa: E402
 import numpy as np  # noqa: E402
+from mathutils import Matrix, Vector  # noqa: E402
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
+import atlas as AT  # noqa: E402
 import edificios as ED  # noqa: E402
 import escena as E  # noqa: E402
 import kit as K  # noqa: E402
 import materiales as MAT  # noqa: E402
 
 EJEMPLOS = [
-    ("Ejemplo_Casa_3x2", lambda: ED.edificio(3, 2, 2, 11, "casa").malla),
-    ("Ejemplo_Rustica_2x2", lambda: ED.edificio(2, 2, 2, 12, "rustica").malla),
-    ("Ejemplo_Tienda_3x2", lambda: ED.edificio(3, 2, 2, 13, "tienda", emblema="espada").malla),
-    ("Ejemplo_Casa_Alta_2x2", lambda: ED.edificio(2, 2, 3, 14, "casa").malla),
-    ("Ejemplo_Ayuntamiento", lambda: ED.ayuntamiento().malla),
+    ("Ejemplo_Casa_3x2", lambda: ED.edificio(3, 2, 2, 11, "casa")),
+    ("Ejemplo_Rustica_2x2", lambda: ED.edificio(2, 2, 2, 12, "rustica")),
+    ("Ejemplo_Tienda_3x2", lambda: ED.edificio(3, 2, 2, 13, "tienda", emblema="espada")),
+    ("Ejemplo_Casa_Alta_2x3", lambda: ED.edificio(2, 3, 3, 14, "casa")),
+    ("Ejemplo_Ayuntamiento", lambda: ED.ayuntamiento()),
 ]
 
 
@@ -39,44 +42,94 @@ def fuente_texto(tam):
     return ImageFont.load_default()
 
 
-def construir(mats):
+def _caja(obs):
+    pts = []
+    for o in obs:
+        for c in o.bound_box:
+            pts.append(np.array(o.matrix_world @ Vector(c)))
+    pts = np.array(pts)
+    return pts.min(axis=0), pts.max(axis=0)
+
+
+def construir(mats, solo=None):
+    """Una entrada por pieza: (nombre, categoría, [objetos detallados], [objetos simples], tris det, tris simple)."""
     raiz = bpy.data.collections.new("Kit_Valle_del_Alba")
     bpy.context.scene.collection.children.link(raiz)
     cats = {}
-    objetos = []
-    x = 0.0
+    entradas = []
     fila = {}
-    for nombre, cat, f in CATALOGO_COMPLETO():
+    K.losa_nombre(3, 2)
+    K.registrar_puente(64.0, 8.0, 3)
+    from region import Biblioteca
+
+    for nombre, (det, sim, color, cat) in K.PIEZAS.items():
+        if solo and nombre not in solo:
+            continue
         if cat not in cats:
             c = bpy.data.collections.new(cat)
             raiz.children.link(c)
             cats[cat] = c
             fila[cat] = 0.0
-        malla = f()
-        ob = malla.a_blender(nombre, mats, cats[cat])
-        lo, hi = malla.limites()
-        ob["categoria"] = cat
-        ob["tamano_studs"] = [round(float(v), 2) for v in (hi - lo)]
-        # en fila por categoría (solo para ordenar la escena)
+        md = det()
+        ms = sim() if sim is not None else None
+        obd = md.a_blender(nombre, mats, cats[cat])
+        obd.color = (*MAT.srgb_a_lineal(color), 1)
+        lo, hi = md.limites()
         iy = list(cats).index(cat)
-        ob.location = (fila[cat] - lo[0], iy * 120.0, 0)
-        fila[cat] += (hi[0] - lo[0]) + 12.0
-        objetos.append((ob, malla, cat))
-    return objetos
+        obd.location = (fila[cat] - lo[0], iy * 150.0, 0)
+        obd["categoria"] = cat
+        obd["tamano_studs"] = [round(float(v), 2) for v in (hi - lo)]
+        sep = (hi[0] - lo[0]) + 3.0
+        obs_s = []
+        if ms is not None:
+            obs = ms.a_blender(nombre + "__lejos", mats, cats[cat])
+            obs.color = obd.color
+            obs.location = (obd.location.x + sep, obd.location.y, 0)
+            obs_s = [obs]
+            ts = ms.n_triangulos
+        else:
+            ts = 0 if sim is K.SIN_LEJOS else md.n_triangulos
+        fila[cat] += 2 * sep + 12.0
+        entradas.append((nombre, cat, [obd], obs_s, md.n_triangulos, ts, sim))
+    if solo:
+        return entradas
+    # edificios de ejemplo: grupos de copias de las piezas (como en la región)
+    c = bpy.data.collections.new("Ejemplos")
+    raiz.children.link(c)
+    cbib = bpy.data.collections.new("Kit_Mallas_Ejemplos")
+    raiz.children.link(cbib)
+    bib = Biblioteca(mats, cbib)
+    x = 0.0
+    for nombre, f in EJEMPLOS:
+        ed = f()
+        grupos = []
+        for lejos in (False, True):
+            e = bpy.data.objects.new(nombre + ("__lejos" if lejos else ""), None)
+            c.objects.link(e)
+            e.matrix_world = Matrix.Translation((x + (ed.ancho + 8) * lejos, -400.0, 0))
+            hijos = []
+            for k, (p, ml, col) in enumerate(ed.piezas):
+                me = bib.malla(p, lejos)
+                if me is None:
+                    continue
+                ob = bib.copia(p, ml, col, padre=e, col=c, nombre_obj=f"{e.name}.{k:03d}")
+                ob.data = me
+                hijos.append(ob)
+            grupos.append(hijos)
+        tris = [sum(sum(len(p.vertices) - 2 for p in h.data.polygons) for h in g) for g in grupos]
+        entradas.append((nombre, "Ejemplos", grupos[0], grupos[1], tris[0], tris[1], True))
+        x += 2 * ed.ancho + 40
+    bpy.data.collections["Kit_Mallas_Ejemplos"].hide_render = True
+    return entradas
 
 
-def CATALOGO_COMPLETO():
-    return [(n, c, f) for n, c, f in K.CATALOGO] + [(n, "Ejemplos", f) for n, f in EJEMPLOS]
-
-
-def miniaturas(objetos, carpeta, muestras):
-    """Renderiza cada pieza sola, encuadrada en vista de 3/4, y monta la hoja con los nombres."""
-    E.configurar_render(420, 420, muestras)
+def miniaturas(entradas, carpeta, muestras):
+    """Renderiza cada pieza (detallada a la izquierda, simple a la derecha) en vista de 3/4 y monta la hoja."""
+    E.configurar_render(520, 360, muestras)
     s = bpy.context.scene
-    s.view_settings.look = "AgX - Medium High Contrast"
     E.iluminar("dia")
+    s.view_settings.exposure = -0.9
     MAT.ajustar_niebla(1e6, 1e6, 0.0, (1, 1, 1))
-    # suelo neutro
     sm = bpy.data.meshes.new("Suelo")
     sm.from_pydata([(-1e4, -1e4, 0), (1e4, -1e4, 0), (1e4, 1e4, 0), (-1e4, 1e4, 0)], [], [(0, 1, 2, 3)])
     suelo = bpy.data.objects.new("Suelo_Estudio", sm)
@@ -87,40 +140,44 @@ def miniaturas(objetos, carpeta, muestras):
     sm.materials.append(ms)
     tmp = os.path.join(carpeta, "_miniaturas")
     os.makedirs(tmp, exist_ok=True)
+    todos = [o for e in entradas for o in e[2] + e[3]]
+    for o in todos:
+        o.hide_render = True
     rutas = []
-    for ob in [o for o, _, _ in objetos]:
-        ob.hide_render = True
-    for ob, malla, cat in objetos:
-        ob.hide_render = False
-        lo, hi = malla.limites()
-        c = (lo + hi) / 2 + np.array(ob.location)
+    for (nombre, cat, det, sim, td, ts, simple) in entradas:
+        obs = det + sim
+        for o in obs:
+            o.hide_render = False
+        lo, hi = _caja(obs)
+        c = (lo + hi) / 2
         r = float(np.linalg.norm(hi - lo)) / 2
-        suelo.location = (0, 0, max(float(lo[2]), -0.6) + float(ob.location.z))  # las losas bajan a -4: se entierran
-        d = np.array([-0.55, -1.0, 0.62])
+        suelo.location = (0, 0, max(float(lo[2]), -0.6))
+        d = np.array([-0.45, -1.0, 0.55])
         d /= np.linalg.norm(d)
-        dist = r / math.tan(math.radians(17)) * 1.02
+        dist = r / math.tan(math.radians(15)) * 1.0
         E.camara(tuple(c + d * dist), tuple(c), lente=50, recorte=(0.1, 5000))
-        ruta = os.path.join(tmp, f"{ob.name}.png")
+        ruta = os.path.join(tmp, f"{nombre}.png")
         E.render(ruta)
-        rutas.append((ruta, ob.name, cat, ob["triangulos"]))
-        ob.hide_render = True
-    for ob in [o for o, _, _ in objetos]:
-        ob.hide_render = False
+        etiqueta = f"{nombre}  {td} / " + ("—" if simple is K.SIN_LEJOS else str(ts))
+        rutas.append((ruta, etiqueta))
+        for o in obs:
+            o.hide_render = True
     s.collection.objects.unlink(suelo)
-    # hoja
-    col = 8
-    t = 300
+    col, tw, th = 6, 390, 270
     filas = math.ceil(len(rutas) / col)
-    cab = 90
-    hoja = Image.new("RGB", (col * t, cab + filas * (t + 34)), (24, 26, 30))
+    cab = 110
+    hoja = Image.new("RGB", (col * tw, cab + filas * (th + 30)), (24, 26, 30))
     dr = ImageDraw.Draw(hoja)
-    dr.text((20, 22), "Kit de construcción · Valle del Alba", font=fuente_texto(38), fill=(245, 236, 214))
-    f = fuente_texto(17)
-    for i, (ruta, nombre, cat, tris) in enumerate(rutas):
-        im = Image.open(ruta).resize((t, t), Image.LANCZOS)
-        x, y = (i % col) * t, cab + (i // col) * (t + 34)
+    dr.text((20, 18), "Kit de construcción · Valle del Alba (optimizado)", font=fuente_texto(36), fill=(245, 236, 214))
+    dr.text((20, 66), "En cada pieza: detallada (izquierda) y simple, para lejos (derecha). "
+                      "Números: triángulos detallada / simple (— = de lejos no se dibuja).", font=fuente_texto(17),
+            fill=(200, 200, 200))
+    f = fuente_texto(15)
+    for i, (ruta, etiqueta) in enumerate(rutas):
+        im = Image.open(ruta).resize((tw, th), Image.LANCZOS)
+        x, y = (i % col) * tw, cab + (i // col) * (th + 30)
         hoja.paste(im, (x, y))
-        dr.text((x + 8, y + t + 6), f"{nombre}  ({tris} tri)", font=f, fill=(230, 230, 230))
+        dr.text((x + 6, y + th + 6), etiqueta, font=f, fill=(230, 230, 230))
     ruta_hoja = os.path.join(carpeta, "renders", "kit_hoja_piezas.png")
     os.makedirs(os.path.dirname(ruta_hoja), exist_ok=True)
     hoja.save(ruta_hoja, optimize=True)
@@ -136,21 +193,22 @@ def main():
     a = ap.parse_args(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:])
     E.limpiar()
     mats = MAT.todos()
-    objetos = construir(mats)
-    if a.solo:
-        quedan = set(a.solo.split(","))
-        objetos = [o for o in objetos if o[0].name in quedan]
-    total = sum(o["triangulos"] for o, _, _ in objetos)
-    print(f"{len(objetos)} piezas, {total} triángulos")
-    for o, _, _ in objetos:
-        print(f"  {o.name:28s} {o['triangulos']:6d} tri  {o['tamano_studs']}")
+    ra, rd = AT.generar(os.path.abspath(os.path.join(a.salida, "texturas")))
+    mats["Atlas_Kit"] = MAT.material_atlas(ra, rd)
+    entradas = construir(mats, set(a.solo.split(",")) if a.solo else None)
+    print(f"{len(entradas)} entradas")
+    for (n, cat, det, sim, td, ts, simple) in entradas:
+        print(f"  {n:26s} {td:6d} / {ts:5d}")
     if not a.sin_miniaturas:
-        print("hoja:", miniaturas(objetos, a.salida, a.muestras))
+        print("hoja:", miniaturas(entradas, a.salida, a.muestras))
     if not a.solo:
         bpy.context.scene.camera = None
+        ruta = os.path.abspath(os.path.join(a.salida, "kit_valle_del_alba.blend"))
+        for img in bpy.data.images:
+            if img.filepath:
+                img.filepath = bpy.path.relpath(img.filepath, start=os.path.dirname(ruta))
         bpy.context.preferences.filepaths.save_version = 0
-        bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(os.path.join(a.salida, "kit_valle_del_alba.blend")),
-                                    compress=True)
+        bpy.ops.wm.save_as_mainfile(filepath=ruta, compress=True)
 
 
 if __name__ == "__main__":

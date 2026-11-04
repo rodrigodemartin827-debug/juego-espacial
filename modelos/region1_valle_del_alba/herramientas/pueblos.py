@@ -20,17 +20,18 @@ import numpy as np
 
 import edificios as ED
 import kit as K
+from malla import Ry, S, T, compone
 
 
 @dataclass
 class Colocacion:
     nombre: str
-    tipo: str  # "edificio" (malla propia), "pieza" (pieza del kit reutilizable, se instancia)
+    tipo: str  # "edificio" (lista de piezas del kit) o "pieza" (un grupo de GRUPOS)
     u: float
     v: float
     giro: float  # grados: giro del eje X local respecto al este
-    pieza: str = ""  # para tipo "pieza": nombre en PIEZAS
-    malla: object = None  # para tipo "edificio"
+    pieza: str = ""  # para tipo "pieza": nombre en GRUPOS
+    edificio: object = None  # para tipo "edificio": edificios.Edificio
     dz: float = 0.0
     escala: float = 1.0
     caja: tuple = None  # huella (u0, v0, u1, v1) para comprobar solapes
@@ -45,37 +46,31 @@ class Trazado:
     ocupado: list = field(default_factory=list)
 
 
-# Piezas reutilizables (una malla, muchas copias): nombre -> función
-PIEZAS = {
-    "Farola": lambda: K.farola(),
-    "Banco": lambda: K.banco(),
-    "Barril": lambda: K.barril(),
-    "Caja": lambda: K.caja_madera(),
-    "Maceta": lambda: K.maceta(3),
-    "Maceta_B": lambda: K.maceta(8),
-    "Valla_Madera": lambda: K.valla_madera(),
-    "Valla_Piedra": lambda: K.valla_piedra(),
-    "Puesto_A": lambda: K.puesto(1),
-    "Puesto_B": lambda: K.puesto(2),
-    "Puesto_C": lambda: K.puesto(3),
-    "Tablon_Misiones": lambda: K.tablon_misiones(),
-    "Pozo": lambda: K.pozo(),
-    "Carro": lambda: K.carro(),
-    "Pajar": lambda: K.pajar(1),
-    "Espantapajaros": lambda: K.espantapajaros(),
-    "Fuente": lambda: K.fuente(),
-    "Torre_Reloj": lambda: K.torre_reloj(),
-    "Molino": lambda: K.molino(1, 20.0),
-    "Molino_B": lambda: K.molino(2, 52.0),
-    "Molino_C": lambda: K.molino(3, 5.0),
-    "Portal_Ciudad": lambda: K.portal(),
-    "Poste_Indicador": lambda: K.poste_indicador(),
-    "Arbol_Flor": lambda: K.arbol_flor(5),
-    "Arbol_Flor_B": lambda: K.arbol_flor(9),
-    "Arbol_Frondoso": lambda: K.arbol_frondoso(21),
-    "Arbol_Grande": lambda: K.arbol_frondoso(33, alto=34.0),
-    "Arbusto": lambda: K.arbusto(4),
-    "Arbusto_B": lambda: K.arbusto(7),
+# Objetos que se colocan en los trazados: nombre -> lista de (pieza del kit, matriz local, color o None = el de la
+# pieza). La mayoría son una sola pieza; la torre del reloj y los molinos son varias (cada una con su color).
+_I = np.eye(4)
+
+
+def _uno(pieza, color=None):
+    return [(pieza, _I, color)]
+
+
+GRUPOS = {
+    "Farola": _uno("Farola"), "Banco": _uno("Banco"), "Barril": _uno("Barril"), "Caja": _uno("Caja"),
+    "Maceta": _uno("Maceta"), "Maceta_B": _uno("Maceta"), "Valla_Madera": _uno("Valla_Madera"),
+    "Valla_Piedra": _uno("Valla_Piedra"), "Puesto_A": _uno("Puesto", "#C2413A"), "Puesto_B": _uno("Puesto", "#3F6FA8"),
+    "Puesto_C": _uno("Puesto", "#E8B840"), "Tablon_Misiones": _uno("Tablon_Misiones"), "Pozo": _uno("Pozo"),
+    "Carro": _uno("Carro"), "Pajar": _uno("Pajar"), "Espantapajaros": _uno("Espantapajaros"), "Fuente": _uno("Fuente"),
+    "Torre_Reloj": [("Torre_Reloj", _I, None), ("Chapitel", T(0, 0, 67.1), None)],
+    **{n: [("Molino_Torre", _I, None), ("Molino_Caperuza", _I, None),
+           ("Molino_Aspas", compone(T(0, -9.7, 30.0), Ry(a)), None)]
+       for n, a in (("Molino", 20.0), ("Molino_B", 52.0), ("Molino_C", 5.0))},
+    "Portal_Ciudad": [("Portal_Ciudad", _I, None), ("Farola", T(-9.8, 0, 12.4) @ S(0.4), None),
+                      ("Farola", T(9.8, 0, 12.4) @ S(0.4), None), ("Valla_Piedra", T(-21.6, -0.2, 0) @ S(1.25, 1, 1), None),
+                      ("Valla_Piedra", T(11.6, -0.2, 0) @ S(1.25, 1, 1), None)],
+    "Poste_Indicador": _uno("Poste_Indicador"), "Arbol_Flor": _uno("Arbol_Flor"), "Arbol_Flor_B": _uno("Arbol_Flor_B"),
+    "Arbol_Frondoso": _uno("Frondoso_b"), "Arbol_Grande": _uno("Arbol_Grande"), "Arbusto": _uno("Arbusto_a"),
+    "Arbusto_B": _uno("Arbusto_b"),
 }
 
 
@@ -118,7 +113,7 @@ def poner_edificio(t, nombre, ed, fu, fv, frente, comprobar=True, margen=1.0):
     if comprobar and _solapa(caja, t.ocupado, margen):
         return False
     t.ocupado.append(caja)
-    t.colocaciones.append(Colocacion(nombre, "edificio", ou, ov, giro, malla=ed.malla, caja=caja))
+    t.colocaciones.append(Colocacion(nombre, "edificio", ou, ov, giro, edificio=ed, caja=caja))
     return True
 
 

@@ -1,11 +1,15 @@
 """
 Construye la escena de la región 1 (Valle del Alba) en Blender y la guarda en region1_valle_del_alba.blend:
 
-  * Terreno de la cara YP (malla de ángulos iguales, como el planeta de prueba) con su textura pintada.
+  * Terreno de la cara YP partido en 8 × 8 TROZOS, cada uno en versión detallada y simple (con un faldón que tapa
+    las grietas entre trozos de distinto detalle) y con su textura (16 de 1024 para los detallados, una para los
+    simples).
   * El resto del planeta (5 caras, baja resolución, con el relieve del planeta de prueba) y el mar: SOLO DE REFERENCIA
     para los renders, no son parte de la región.
   * Río, charca del manantial, puente, caminos (en la textura), mirador de la colina del atardecer.
-  * Aurora, Pradoverde y Los Molinos con sus edificios (montados con el kit) y su mobiliario.
+  * Aurora, Pradoverde y Los Molinos: cada edificio es un grupo de COPIAS de las piezas del kit (colección
+    Kit_Piezas, oculta), con su color de instancia; igual el mobiliario. Aurora tiene además su silueta (una malla).
+  * Todo lo que tiene LOD lleva propiedades («lod», «pieza», «centro», «radio») que usa lod.py en cada render.
   * Campos de cultivo de Los Molinos.
   * Vegetación instanciada con Geometry Nodes (árboles, arbustos, rocas, matas de hierba y flores).
 
@@ -35,7 +39,8 @@ import materiales as MAT  # noqa: E402
 import pueblos as PB  # noqa: E402
 import relieve as RV  # noqa: E402
 import textura as TX  # noqa: E402
-from malla import Malla  # noqa: E402
+from malla import Malla, T  # noqa: E402
+import atlas as AT  # noqa: E402
 
 R = geo.RADIO
 
@@ -102,8 +107,8 @@ def matriz_local(d, este, giro_grados, alto):
     return Matrix(m.tolist())
 
 
-def material_terreno(ruta_imagen):
-    mat = bpy.data.materials.new("Terreno_Valle")
+def material_terreno(ruta_imagen, nombre="Terreno_Valle"):
+    mat = bpy.data.materials.new(nombre)
     mat.use_nodes = True
     nt = mat.node_tree
     nt.nodes.clear()
@@ -161,18 +166,115 @@ def material_color_vertice(nombre):
 # ==============================================================================================================
 
 
-def terreno(V, n, ruta_tex, col):
+def _rejilla_trozo(P, uv, nombre, col, mat, faldon):
+    """Malla de un trozo de terreno: la rejilla P (n+1, n+1, 3) y un faldón que baja `faldon` studs por los cuatro
+    bordes (tapa las grietas con los trozos vecinos cuando tienen otro nivel de detalle)."""
+    n1 = P.shape[0]
+    idx = np.arange(n1 * n1).reshape(n1, n1)
+    a, b, c_, d = idx[1:, :-1], idx[1:, 1:], idx[:-1, 1:], idx[:-1, :-1]
+    quads = [np.stack([a, b, c_, d], -1).reshape(-1, 4)]
+    verts = [P.reshape(-1, 3)]
+    uvs = [uv.reshape(-1, 2)]
+    borde = np.concatenate([idx[0, :], idx[1:, -1], idx[-1, -2::-1], idx[-2:0:-1, 0]])  # vuelta al trozo
+    Pb = P.reshape(-1, 3)[borde]
+    abajo = Pb - Pb / np.linalg.norm(Pb, axis=1, keepdims=True) * faldon
+    base = n1 * n1
+    verts.append(abajo)
+    uvs.append(uv.reshape(-1, 2)[borde])
+    k = np.arange(len(borde))
+    k2 = (k + 1) % len(borde)
+    faldones = np.stack([borde[k2], borde[k], base + k, base + k2], -1)
+    V = np.concatenate(verts)
+    # el faldón mira hacia fuera del trozo (Roblox no dibuja el dorso de las caras)
+    q = V[faldones[0]]
+    nrm = np.cross(q[1] - q[0], q[2] - q[0])
+    fuera = q[:2].mean(axis=0) - P.reshape(-1, 3).mean(axis=0)
+    if np.dot(nrm, fuera) < 0:
+        faldones = faldones[:, ::-1]
+    quads.append(faldones)
+    Q = np.concatenate(quads)
+    me = bpy.data.meshes.new(nombre)
+    me.vertices.add(len(V))
+    me.vertices.foreach_set("co", V.astype(np.float32).ravel())
+    me.loops.add(Q.size)
+    me.loops.foreach_set("vertex_index", Q.ravel().astype(np.int32))
+    me.polygons.add(len(Q))
+    me.polygons.foreach_set("loop_start", np.arange(0, Q.size, 4, dtype=np.int32))
+    me.polygons.foreach_set("use_smooth", np.full(len(Q), True))
+    capa = me.uv_layers.new(name="UVMap")
+    capa.data.foreach_set("uv", np.concatenate(uvs)[Q.ravel()].astype(np.float32).ravel())
+    me.update(calc_edges=True)
+    me.materials.append(mat)
+    ob = bpy.data.objects.new(nombre, me)
+    col.objects.link(ob)
+    return ob
+
+
+def texturas_terreno(ruta_4096, carpeta, k_tex=4):
+    """Parte la textura de 4096 en k_tex × k_tex de 1024 (para los trozos detallados) y hace una de 1024 para toda la
+    cara (para los simples). Devuelve las rutas."""
+    os.makedirs(carpeta, exist_ok=True)
+    img = Image.open(ruta_4096).convert("RGB")
+    n = img.width // k_tex
+    rutas = {}
+    for i in range(k_tex):  # fila (norte -> sur)
+        for j in range(k_tex):
+            r = os.path.join(carpeta, f"terreno_{i}_{j}.png")
+            img.crop((j * n, i * n, (j + 1) * n, (i + 1) * n)).save(r, optimize=True)
+            rutas[(i, j)] = r
+    r = os.path.join(carpeta, "terreno_lejos.png")
+    img.resize((1024, 1024), Image.LANCZOS).save(r, optimize=True)
+    rutas["lejos"] = r
+    return rutas
+
+
+def terreno(V, rutas_tex, col, rapido=False):
+    """Los 64 trozos de terreno, detallados y simples."""
     t0 = time.time()
-    g = np.linspace(-geo.L, geo.L, n + 1)
-    X, Y = np.meshgrid(g, g[::-1])
-    H = V.altura(X, Y)
-    d = geo.direccion(X, Y)
-    P = d * (R + H)[..., None]
-    uv = np.stack([(X + geo.L) / (2 * geo.L), (Y + geo.L) / (2 * geo.L)], -1)
-    ob = malla_rejilla("Terreno_Valle_del_Alba", P, uv, col, material_terreno(ruta_tex))
-    ob["region"] = "Valle del Alba (cara YP)"
-    print(f"terreno: {n}x{n} cuadros, {2 * n * n} triángulos, {time.time() - t0:.1f} s")
-    return ob, H
+    cfg = D.TERRENO_TROZOS
+    k = cfg["trozos"]
+    nd = cfg["cuadros_detalle"] if not rapido else 24
+    ns = cfg["cuadros_simple"]
+    mats_d = {}
+    k_tex = 4
+    for key, ruta in rutas_tex.items():
+        mats_d[key] = material_terreno(ruta, f"Terreno_{key[0]}_{key[1]}" if key != "lejos" else "Terreno_Lejos")
+    alturas = {}
+    for nivel, n in (("detalle", nd), ("lejos", ns)):
+        N = k * n
+        g = np.linspace(-geo.L, geo.L, N + 1)
+        X, Y = np.meshgrid(g, g[::-1])  # fila 0 = norte
+        H = V.altura(X, Y)
+        alturas[nivel] = (X, Y, H)
+        d = geo.direccion(X, Y)
+        P = d * (R + H)[..., None]
+        for i in range(k):  # fila
+            for j in range(k):  # columna
+                sl = (slice(i * n, (i + 1) * n + 1), slice(j * n, (j + 1) * n + 1))
+                Xs, Ys = X[sl], Y[sl]
+                if nivel == "detalle":
+                    ti, tj = i * k_tex // k, j * k_tex // k
+                    lado = 2 * geo.L / k_tex
+                    x0 = -geo.L + tj * lado
+                    y0 = geo.L - (ti + 1) * lado
+                    uv = np.stack([(Xs - x0) / lado, (Ys - y0) / lado], -1)
+                    mat = mats_d[(ti, tj)]
+                    nombre = f"Terreno_{i}_{j}"
+                else:
+                    uv = np.stack([(Xs + geo.L) / (2 * geo.L), (Ys + geo.L) / (2 * geo.L)], -1)
+                    mat = mats_d["lejos"]
+                    nombre = f"Terreno_{i}_{j}__lejos"
+                ob = _rejilla_trozo(P[sl], uv, nombre, col, mat, cfg["faldon"])
+                c = P[sl].reshape(-1, 3)
+                centro = c.mean(axis=0)
+                ob["lod"] = "terreno"
+                ob["nivel"] = nivel
+                ob["trozo"] = f"{i}_{j}"
+                ob["centro"] = [float(v) for v in centro]
+                ob["radio"] = float(np.linalg.norm(c - centro, axis=1).max())
+                ob["triangulos"] = len(ob.data.polygons) * 2
+    print(f"terreno: {k}x{k} trozos de {nd}² (detalle) y {ns}² (lejos) cuadros, {time.time() - t0:.1f} s")
+    return alturas
 
 
 def resto_planeta(V, col, n=96):
@@ -255,52 +357,200 @@ def rio(V, col):
     col.objects.link(ob)
 
 
+class Biblioteca:
+    """Las mallas del kit en Blender (detallada y simple de cada pieza), una vez cada una, y sus copias."""
+
+    def __init__(self, mats, col):
+        self.mats = mats
+        self.col = col  # colección Kit_Piezas (oculta en el render): un objeto por malla, para tenerlas a mano
+        self.mallas = {}
+
+    def malla(self, nombre, lejos=False):
+        k = (nombre, lejos)
+        if k not in self.mallas:
+            _, sim, _, _ = K.PIEZAS[nombre]
+            if lejos and sim is None:
+                self.mallas[k] = self.malla(nombre, False)
+            elif lejos and sim is K.SIN_LEJOS:
+                self.mallas[k] = None
+            else:
+                m = K.malla(nombre, lejos)
+                ob = m.a_blender(f"K_{nombre}" + ("__lejos" if lejos else ""), self.mats, self.col)
+                ob.data.name = ob.name
+                ob["pieza"] = nombre
+                self.mallas[k] = ob.data
+        return self.mallas[k]
+
+    def copia(self, nombre, matriz, color=None, padre=None, col=None, nombre_obj=None):
+        """Una copia de la pieza: objeto que usa la malla compartida, con su color de instancia."""
+        me = self.malla(nombre)
+        self.malla(nombre, True)
+        ob = bpy.data.objects.new(nombre_obj or nombre, me)
+        c = MAT.srgb_a_lineal(color or K.color_defecto(nombre))
+        ob.color = (*c, 1.0)
+        ob["color"] = (color or K.color_defecto(nombre)).upper()  # el color exacto (sRGB), para exportar
+        ob["pieza"] = nombre
+        if K.PIEZAS[nombre][1] is K.SIN_LEJOS:
+            ob["sin_lejos"] = True  # de lejos no se dibuja
+        (col or self.col).objects.link(ob)
+        if padre is not None:
+            ob.parent = padre
+            ob.matrix_parent_inverse = Matrix.Identity(4)
+            ob.matrix_basis = Matrix(np.asarray(matriz).tolist())
+        else:
+            ob.matrix_world = Matrix(np.asarray(matriz).tolist())
+        return ob
+
+
+def _vacio(nombre, matriz, col, lod, centro_local, radio):
+    e = bpy.data.objects.new(nombre, None)
+    e.empty_display_size = 2.0
+    e.matrix_world = matriz
+    col.objects.link(e)
+    e["lod"] = lod
+    c = np.array(matriz) @ np.array([*centro_local, 1.0])
+    e["centro"] = [float(v) for v in c[:3]]
+    e["radio"] = float(radio)
+    return e
+
+
+def categoria_grupo(nombre):
+    if nombre in ("Torre_Reloj", "Molino", "Molino_B", "Molino_C", "Fuente", "Portal_Ciudad"):
+        return "edificios"
+    if nombre.startswith(("Arbol", "Arbusto", "Frondoso")):
+        return "vegetacion"
+    return "mobiliario"
+
+
 class Constructor:
-    """Coloca las cosas de los sitios (edificios y piezas compartidas)."""
+    """Coloca las cosas de los sitios: edificios (grupos de piezas) y objetos de GRUPOS."""
 
-    def __init__(self, V, mats, col_raiz):
-        self.V, self.mats = V, mats
-        self.mallas_piezas = {}
+    def __init__(self, V, bib, col_raiz):
+        self.V, self.bib = V, bib
         self.col_raiz = col_raiz
-
-    def malla_pieza(self, nombre):
-        if nombre not in self.mallas_piezas:
-            fn = PB.PIEZAS.get(nombre)
-            m = fn() if fn else getattr(K, nombre)()
-            tmp = m.a_blender("tmp_" + nombre, self.mats)
-            me = tmp.data
-            me.name = "Pieza_" + nombre
-            bpy.data.objects.remove(tmp)
-            self.mallas_piezas[nombre] = me
-        return self.mallas_piezas[nombre]
 
     def altura(self, d):
         x, y = geo.diseno(d)
         return float(self.V.altura(np.array([x]), np.array([y]))[0])
 
-    def pieza(self, nombre, d, este, giro, dz=0.0, escala=1.0, col=None, nombre_obj=None, alto=None):
-        ob = bpy.data.objects.new(nombre_obj or nombre, self.malla_pieza(nombre))
+    def grupo(self, nombre, d, este, giro, dz=0.0, escala=1.0, col=None, nombre_obj=None, alto=None, sitio=""):
+        """Un objeto de GRUPOS (una o varias piezas) apoyado en el terreno en la dirección d."""
         h = self.altura(d) if alto is None else alto
-        ob.matrix_world = matriz_local(d, este, giro, h + dz) @ Matrix.Scale(escala, 4)
-        (col or self.col_raiz).objects.link(ob)
-        return ob
+        mw = matriz_local(d, este, giro, h + dz) @ Matrix.Scale(escala, 4)
+        piezas = PB.GRUPOS[nombre]
+        col = col or self.col_raiz
+        lod = categoria_grupo(nombre)
+        if len(piezas) == 1:
+            p, ml, c = piezas[0]
+            ob = self.bib.copia(p, np.array(mw) @ ml, c, col=col, nombre_obj=nombre_obj or nombre)
+            ob["lod"] = lod
+            me = self.bib.malla(p)
+            cl = _centro_malla(me)
+            c3 = np.array(ob.matrix_world) @ np.array([*cl[0], 1.0])
+            ob["centro"] = [float(v) for v in c3[:3]]
+            ob["radio"] = float(cl[1] * escala)
+            ob["sitio"] = sitio
+            return ob
+        radio = 40.0 * escala if nombre.startswith(("Molino", "Torre")) else 15.0 * escala
+        centro = (0, 0, 30.0) if nombre.startswith(("Molino", "Torre")) else (0, 0, 5.0)
+        e = _vacio(nombre_obj or nombre, mw, col, lod, centro, radio)
+        e["sitio"] = sitio
+        for k, (p, ml, c) in enumerate(piezas):
+            self.bib.copia(p, ml, c, padre=e, col=col, nombre_obj=f"{e.name}.{p}")
+        return e
+
+    def edificio(self, nombre, ed, mw, col, sitio):
+        centro = (ed.ancho / 2, ed.fondo / 2, ed.alto / 2)
+        radio = 0.5 * math.sqrt(ed.ancho ** 2 + ed.fondo ** 2 + ed.alto ** 2)
+        e = _vacio(nombre, mw, col, "edificios", centro, radio)
+        e["sitio"] = sitio
+        e["ancho"], e["fondo"], e["alto"] = ed.ancho, ed.fondo, ed.alto
+        for k, (p, ml, c) in enumerate(ed.piezas):
+            self.bib.copia(p, ml, c, padre=e, col=col, nombre_obj=f"{nombre}.{k:03d}")
+        return e
 
     def sitio(self, nombre, t, col):
         s = self.V.sitios[nombre]
         h_sitio = self.V.alturas_sitio[nombre]
         col_ed = coleccion(f"{nombre}_Edificios", col)
         col_pz = coleccion(f"{nombre}_Mobiliario", col)
-        n_ed = 0
+        n_ed = n_p = 0
         for cl in t.colocaciones:
             d = s.direccion(np.array(cl.u), np.array(cl.v))
             if cl.tipo == "edificio":
-                ob = cl.malla.a_blender(cl.nombre, self.mats, col_ed)
-                ob.matrix_world = matriz_local(d, s.este, cl.giro, h_sitio + 0.35)
+                self.edificio(cl.nombre, cl.edificio, matriz_local(d, s.este, cl.giro, h_sitio + 0.35), col_ed,
+                              nombre)
                 n_ed += 1
             else:
-                self.pieza(cl.pieza, d, s.este, cl.giro, cl.dz - (0.4 if cl.pieza.startswith("Arb") else 0.0),
-                           cl.escala, col_pz, nombre_obj=f"{nombre}_{cl.nombre}")
-        print(f"{nombre}: {n_ed} edificios, {len(t.colocaciones) - n_ed} piezas")
+                dz = cl.dz - (0.4 if cl.pieza.startswith("Arb") else 0.0)
+                self.grupo(cl.pieza, d, s.este, cl.giro, dz, cl.escala, col_pz, nombre_obj=f"{nombre}_{cl.nombre}",
+                           sitio=nombre)
+                n_p += 1
+        print(f"{nombre}: {n_ed} edificios, {n_p} objetos sueltos")
+
+
+_CENTROS = {}
+
+
+def _centro_malla(me):
+    """(centro, radio) de la caja de una malla, en sus coordenadas locales."""
+    if me.name not in _CENTROS:
+        co = np.zeros(len(me.vertices) * 3)
+        me.vertices.foreach_get("co", co)
+        co = co.reshape(-1, 3)
+        lo, hi = co.min(axis=0), co.max(axis=0)
+        _CENTROS[me.name] = ((lo + hi) / 2, float(np.linalg.norm(hi - lo) / 2))
+    return _CENTROS[me.name]
+
+
+def silueta_aurora(V, t, col, mats):
+    """Silueta de Aurora para verla de lejos: cada edificio es una caja con fachada pintada y su tejado a dos aguas,
+    y la torre del reloj una caja con chapitel. Una sola malla, con casillas opacas del atlas."""
+    s = V.sitios["Aurora"]
+    h = V.alturas_sitio["Aurora"]
+    m_obj = np.array(matriz_local(s.centro, s.este, 0.0, h))
+    inv = np.linalg.inv(m_obj)
+    m = Malla()
+    from kit import cara
+
+    for cl in t.colocaciones:
+        d = s.direccion(np.array(cl.u), np.array(cl.v))
+        if cl.tipo == "edificio":
+            ed = cl.edificio
+            W, Dp = ed.ancho, ed.fondo
+            zt = ed.ztop
+            mw = inv @ np.array(matriz_local(d, s.este, cl.giro, h + 0.35))
+            b = Malla()
+            for (p0, p1, n) in (((0, 0), (W, 0), (0, -1, 0)), ((W, 0), (W, Dp), (1, 0, 0)), ((W, Dp), (0, Dp), (0, 1, 0)),
+                                ((0, Dp), (0, 0), (-1, 0, 0))):
+                cara(b, [(*p0, -1.0), (*p1, -1.0), (*p1, zt), (*p0, zt)], n, "silueta_fachada")
+            sube = Dp / 2 * K.PEND
+            for lado in (-1, 1):
+                y0 = -1.0 if lado < 0 else Dp + 1.0
+                cara(b, [(-0.8, y0, zt - 0.6), (W + 0.8, y0, zt - 0.6), (W + 0.8, Dp / 2, zt + sube),
+                         (-0.8, Dp / 2, zt + sube)], (0, lado, 1), "silueta_teja")
+            for x, nx in ((0.0, -1), (W, 1)):
+                cara(b, [(x, 0, zt), (x, Dp, zt), (x, Dp / 2, zt + sube)], (nx, 0, 0), "silueta_fachada")
+            m.anadir(b, mw)
+        elif cl.pieza == "Torre_Reloj":
+            mw = inv @ np.array(matriz_local(d, s.este, cl.giro, h))
+            b = Malla()
+            for r in (0, 90, 180, 270):
+                f = Malla()
+                cara(f, [(-7, -7, 0), (7, -7, 0), (7, -7, 67), (-7, -7, 67)], (0, -1, 0), "silueta_fachada")
+                cara(f, [(-8.4, -8.4, 67), (8.4, -8.4, 67), (0, 0, 92)], (0, -1, 0.5), "silueta_teja")
+                b.anadir(f, np.array(Matrix.Rotation(math.radians(r), 4, "Z")))
+            m.anadir(b, mw)
+    ob = m.a_blender("Aurora_Silueta", mats, col)
+    ob.matrix_world = Matrix(m_obj.tolist())
+    ob.color = (1, 1, 1, 1)
+    ob["lod"] = "silueta"
+    ob["sitio"] = "Aurora"
+    c = s.centro * (R + h)
+    ob["centro"] = [float(v) for v in c]
+    ob["radio"] = 300.0
+    print(f"silueta de Aurora: {ob['triangulos']} triángulos")
+    return ob
 
 
 def filtrar_parcelas(V, nombre, parcelas):
@@ -331,12 +581,12 @@ def filtrar_parcelas(V, nombre, parcelas):
 
 
 def cultivos(V, nombre, parcelas, col, mats):
-    """Hileras de cultivo apoyadas en el terreno (una malla para todo el campo)."""
+    """Hileras de cultivo apoyadas en el terreno (una malla para todo el campo; el surco fino está en la textura)."""
     s = V.sitios[nombre]
     rng = np.random.default_rng(5)
     m = Malla()
-    altos = {"trigo": (2.4, 2.6, "Trigo"), "col": (1.4, 2.2, "Col"), "lavanda": (1.9, 2.0, "Flor_Lila"),
-             "calabaza": (0.9, 2.4, "Col"), "arado": (0.6, 2.4, "Tierra_Arada")}
+    altos = {"trigo": (2.4, 2.6, "trigo"), "col": (1.4, 2.2, "col"), "lavanda": (1.9, 2.0, "flores"),
+             "calabaza": (0.9, 2.4, "col"), "arado": (0.6, 2.4, "tierra_arada")}
     for p in parcelas:
         cult = p["cultivo"]
         if cult not in altos:
@@ -347,11 +597,10 @@ def cultivos(V, nombre, parcelas, col, mats):
         ea = np.array([math.cos(g), math.sin(g)])
         eb = np.array([-math.sin(g), math.cos(g)])
         filas = np.arange(-p["ancho"] / 2 + 1.6, p["ancho"] / 2 - 1.0, 3.2)
-        bs = np.linspace(-p["largo"] / 2 + 1.5, p["largo"] / 2 - 1.5, 11)
+        bs = np.linspace(-p["largo"] / 2 + 1.5, p["largo"] / 2 - 1.5, 6)
         for a in filas:
-            uvs = [(cu + a * ea[0] + b * eb[0], cv + a * ea[1] + b * eb[1]) for b in bs]
-            u = np.array([q[0] for q in uvs])
-            v = np.array([q[1] for q in uvs])
+            u = cu + a * ea[0] + bs * eb[0]
+            v = cv + a * ea[1] + bs * eb[1]
             dc = s.direccion(u, v)
             x, y = geo.diseno(dc)
             h = V.altura(x, y)
@@ -362,15 +611,19 @@ def cultivos(V, nombre, parcelas, col, mats):
             izq = P0 - ua * base / 2
             der = P0 + ua * base / 2
             for k in range(len(bs) - 1):
-                ti = float(rng.uniform(0.9, 1.08))
-                m.poligono([izq[k], izq[k + 1], top[k + 1], top[k]], mat, tinte=ti)
-                m.poligono([der[k + 1], der[k], top[k], top[k + 1]], mat, tinte=ti * 0.92)
+                m.poligono([izq[k], izq[k + 1], top[k + 1], top[k]], mat)
+                m.poligono([der[k + 1], der[k], top[k], top[k + 1]], mat)
             if cult == "calabaza":
-                for k in range(0, len(bs), 2):
+                for k in range(len(bs)):
                     if rng.uniform() < 0.6:
-                        c3 = top[k] + ua[k] * rng.uniform(-0.8, 0.8)
-                        m.esfera(c3, 0.95, "Calabaza", sub=1)
+                        m.esfera(top[k] + ua[k] * rng.uniform(-0.8, 0.8), 0.95, "calabaza", sub=0)
     ob = m.a_blender(f"{nombre}_Cultivos", mats, col)
+    ob.color = (1, 1, 1, 1)
+    ob["lod"] = "campos"
+    co = np.array([v.co for v in ob.data.vertices])
+    c = co.mean(axis=0)
+    ob["centro"] = [float(v) for v in c]
+    ob["radio"] = float(np.linalg.norm(co - c, axis=1).max())
     print(f"cultivos: {len(parcelas)} parcelas, {ob['triangulos']} triángulos")
 
 
@@ -378,19 +631,13 @@ def cultivos(V, nombre, parcelas, col, mats):
 # Vegetación instanciada
 # ==============================================================================================================
 
-FUENTES_VEG = [  # (nombre, función) — el orden fija el índice «tipo»
-    ("V00_Frondoso_a", lambda: K.arbol_frondoso(101)), ("V01_Frondoso_b", lambda: K.arbol_frondoso(102)),
-    ("V02_Frondoso_c", lambda: K.arbol_frondoso(103)), ("V03_Frondoso_d", lambda: K.arbol_frondoso(104)),
-    ("V04_Pino_a", lambda: K.pino(201)), ("V05_Pino_b", lambda: K.pino(202)), ("V06_Pino_c", lambda: K.pino(203)),
-    ("V07_Abedul_a", lambda: K.abedul(301)), ("V08_Abedul_b", lambda: K.abedul(302)),
-    ("V09_Arbusto_a", lambda: K.arbusto(401)), ("V10_Arbusto_b", lambda: K.arbusto(402)),
-    ("V11_Arbusto_c", lambda: K.arbusto(403)),
-    ("V12_Roca_a", lambda: K.roca(501)), ("V13_Roca_b", lambda: K.roca(502)), ("V14_Roca_c", lambda: K.roca(503)),
-    ("V15_Hierba_a", lambda: K.mata_hierba(601)), ("V16_Hierba_b", lambda: K.mata_hierba(602)),
-    ("V17_Flores_a", lambda: K.mata_flores(701)), ("V18_Flores_b", lambda: K.mata_flores(702)),
-    ("V19_Flores_c", lambda: K.mata_flores(703)), ("V20_Flor_Arbol", lambda: K.arbol_flor(801)),
-]
-TIPO = {n.split("_", 1)[1]: i for i, (n, _) in enumerate(FUENTES_VEG)}
+# Piezas de vegetación instanciadas con Geometry Nodes (el orden fija el índice «tipo»). En la colección de fuentes
+# van primero las detalladas (índices 0..n-1) y luego las simples (n..2n-1): el LOD cambia el índice.
+FUENTES_VEG = ["Frondoso_a", "Frondoso_b", "Frondoso_c", "Frondoso_d", "Pino_a", "Pino_b", "Pino_c", "Abedul_a",
+               "Abedul_b", "Arbusto_a", "Arbusto_b", "Arbusto_c", "Roca_a", "Roca_b", "Roca_c", "Hierba_a",
+               "Hierba_b", "Flores_a", "Flores_b", "Flores_c", "Arbol_Flor"]
+TIPO = {n: i for i, n in enumerate(FUENTES_VEG)}
+NV = len(FUENTES_VEG)
 
 
 def grupo_instancias(col_fuentes):
@@ -403,9 +650,17 @@ def grupo_instancias(col_fuentes):
     ci.inputs["Collection"].default_value = col_fuentes
     ci.inputs["Separate Children"].default_value = True
     ci.inputs["Reset Children"].default_value = True
+    # se borran los puntos marcados como «oculto» (los que el LOD no dibuja)
+    borrar = n.new("GeometryNodeDeleteGeometry")
+    borrar.domain = "POINT"
+    oc = n.new("GeometryNodeInputNamedAttribute")
+    oc.data_type = "BOOLEAN"
+    oc.inputs["Name"].default_value = "oculto"
+    l.new(gi.outputs[0], borrar.inputs["Geometry"])
+    l.new(oc.outputs[0], borrar.inputs["Selection"])
     iop = n.new("GeometryNodeInstanceOnPoints")
     iop.inputs["Pick Instance"].default_value = True
-    l.new(gi.outputs[0], iop.inputs["Points"])
+    l.new(borrar.outputs[0], iop.inputs["Points"])
     l.new(ci.outputs[0], iop.inputs["Instance"])
     for nombre, tipo, entrada in (("tipo", "INT", "Instance Index"), ("rot", "QUATERNION", "Rotation"),
                                   ("escala", "FLOAT_VECTOR", "Scale")):
@@ -423,6 +678,10 @@ def nube(nombre, P, tipo, quat, escala, col, ng):
     me.vertices.foreach_set("co", P.astype(np.float32).ravel())
     a = me.attributes.new("tipo", "INT", "POINT")
     a.data.foreach_set("value", tipo.astype(np.int32))
+    a = me.attributes.new("tipo_base", "INT", "POINT")
+    a.data.foreach_set("value", tipo.astype(np.int32))
+    a = me.attributes.new("oculto", "BOOLEAN", "POINT")
+    a.data.foreach_set("value", np.zeros(len(P), bool))
     a = me.attributes.new("rot", "QUATERNION", "POINT")
     a.data.foreach_set("value", quat.astype(np.float32).ravel())
     a = me.attributes.new("escala", "FLOAT_VECTOR", "POINT")
@@ -431,6 +690,7 @@ def nube(nombre, P, tipo, quat, escala, col, ng):
     col.objects.link(ob)
     mod = ob.modifiers.new("Instancias", "NODES")
     mod.node_group = ng
+    ob["lod"] = "nube"
     return ob
 
 
@@ -446,11 +706,15 @@ def cuaterniones(d, giro, inclinacion, rng):
     return out
 
 
-def vegetacion(V, col, mats, rapido=False):
+def vegetacion(V, col, bib, rapido=False):
     t0 = time.time()
     col_f = coleccion("Fuentes_Vegetacion", col)
-    for nombre, fn in FUENTES_VEG:
-        ob = fn().a_blender(nombre, mats, col_f)
+    vacia = bpy.data.meshes.new("Vacia")
+    for lejos in (False, True):
+        for i, nombre in enumerate(FUENTES_VEG):
+            me = bib.malla(nombre, lejos) or vacia
+            ob = bpy.data.objects.new(f"V{i + NV * lejos:02d}_{nombre}" + ("__lejos" if lejos else ""), me)
+            col_f.objects.link(ob)
     capa_coleccion(col_f.name).exclude = True  # las fuentes no se ven: solo sus instancias
     ng = grupo_instancias(col_f)
     rng = np.random.default_rng(99)
@@ -505,7 +769,8 @@ def vegetacion(V, col, mats, rapido=False):
     m = tipo >= 0
     esc = rng.uniform(0.78, 1.28, x.size)
     esc[sel_r] = rng.uniform(0.5, 1.6, sel_r.sum())
-    _colocar_nube("Vegetacion_Arboles", x[m], y[m], H[m] - 0.3, tipo[m], esc[m], col, ng, rng)
+    ob = _colocar_nube("Vegetacion_Arboles", x[m], y[m], H[m] - 0.3, tipo[m], esc[m], col, ng, rng)
+    ob["categoria"] = "vegetacion"
     print(f"vegetación: {int(sel_a.sum())} árboles, {int(sel_b.sum())} arbustos, {int(sel_r.sum())} rocas "
           f"({time.time() - t0:.1f} s)")
     return ng
@@ -549,7 +814,8 @@ def hierba(V, col, ng, centros, rapido=False):
     k = rng.integers(0, 3, x.size)
     tipo = np.where(flores & (rng.uniform(size=x.size) < 0.5), TIPO["Flores_a"] + k, TIPO["Hierba_a"] + (k % 2))
     esc = rng.uniform(0.7, 1.3, x.size)
-    _colocar_nube("Vegetacion_Hierba", x, y, H - 0.15, tipo, esc, col, ng, rng, inclinacion=0.12)
+    ob = _colocar_nube("Vegetacion_Hierba", x, y, H - 0.15, tipo, esc, col, ng, rng, inclinacion=0.12)
+    ob["categoria"] = "hierba"
     print(f"hierba: {x.size} matas")
 
 
@@ -558,7 +824,7 @@ def hierba(V, col, ng, centros, rapido=False):
 # ==============================================================================================================
 
 
-def puente_y_detalles(V, C, col, mats):
+def puente_y_detalles(V, C, col):
     nombre = "Aurora_Pradoverde"
     pl = V.caminos[nombre]
     _, i = pl.arbol.query([D.PUENTE["x"], D.PUENTE["y"]])
@@ -576,12 +842,14 @@ def puente_y_detalles(V, C, col, mats):
     nivel = float(V.rio.m[V.rio.arbol.query([cx, cy])[1], 2])
     alto_arco = alto_tablero - nivel + 1.5
     arcos = 3 if largo > 50 else 2
-    m = K.puente(largo, 13.0, alto_arco, arcos)
-    ob = m.a_blender("Puente_del_Alba", mats, col)
+    K.registrar_puente(largo, alto_arco, arcos)
+    PB.GRUPOS["Puente"] = [("Puente", np.eye(4), None)] + [
+        ("Farola", T(sx * (largo / 2 + 1.5), sy * (13.0 / 2 - 0.7), 4.2) @ np.diag([10 / 12] * 3 + [1]), None)
+        for sx in (-1, 1) for sy in (-1, 1)]
     d = geo.direccion(cx, cy)
     e, n, _ = geo.marco(d)
     giro = math.degrees(math.atan2(tdir[1], tdir[0]))
-    ob.matrix_world = matriz_local(d, e, giro, alto_tablero)
+    C.grupo("Puente", d, e, giro, alto=alto_tablero, col=col, nombre_obj="Puente_del_Alba")
     print(f"puente: {largo:.0f} studs, {arcos} ojos, tablero a {alto_tablero:.1f}, agua a {nivel:.1f}")
 
     # mirador de la colina del atardecer
@@ -593,19 +861,18 @@ def puente_y_detalles(V, C, col, mats):
         p = dm * R + u * em + v * nm
         return p / np.linalg.norm(p)
 
-    C.pieza("Arbol_Grande", en(-6.0, 19.0), em, 40.0, -0.5, col=col, nombre_obj="Mirador_Arbol")
-    C.pieza("Banco", en(-6.0, 2.0), em, -90.0, col=col, nombre_obj="Mirador_Banco")  # mira al oeste
-    C.pieza("Banco", en(-6.0, -6.0), em, -90.0, col=col, nombre_obj="Mirador_Banco_2")
+    C.grupo("Arbol_Grande", en(-6.0, 19.0), em, 40.0, -0.5, col=col, nombre_obj="Mirador_Arbol")
+    C.grupo("Banco", en(-6.0, 2.0), em, -90.0, col=col, nombre_obj="Mirador_Banco")  # mira al oeste
+    C.grupo("Banco", en(-6.0, -6.0), em, -90.0, col=col, nombre_obj="Mirador_Banco_2")
     for k in range(5):  # murete a la espalda (este): el oeste queda abierto para ver el atardecer
         a = math.radians(-40 + k * 20)
-        C.pieza("Valla_Piedra", en(16 * math.cos(a), 16 * math.sin(a)), em, math.degrees(a) + 90, col=col,
+        C.grupo("Valla_Piedra", en(16 * math.cos(a), 16 * math.sin(a)), em, math.degrees(a) + 90, col=col,
                 nombre_obj=f"Mirador_Muro_{k}")
-    C.pieza("Poste_Indicador", en(8.0, -15.0), em, 0.0, col=col, nombre_obj="Mirador_Poste")
-    C.pieza("Farola", en(4.0, -10.0), em, 0.0, col=col, nombre_obj="Mirador_Farola")
-    # cruce de caminos
+    C.grupo("Poste_Indicador", en(8.0, -15.0), em, 0.0, col=col, nombre_obj="Mirador_Poste")
+    C.grupo("Farola", en(4.0, -10.0), em, 0.0, col=col, nombre_obj="Mirador_Farola")
     cx, cy = D.CRUCE
     dcr = geo.direccion(cx + 9, cy + 9)
-    C.pieza("Poste_Indicador", dcr, geo.marco(dcr)[0], 20.0, col=col, nombre_obj="Cruce_Poste")
+    C.grupo("Poste_Indicador", dcr, geo.marco(dcr)[0], 20.0, col=col, nombre_obj="Cruce_Poste")
 
 
 # ==============================================================================================================
@@ -614,47 +881,56 @@ def puente_y_detalles(V, C, col, mats):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--salida", required=True)
-    ap.add_argument("--cuadros", type=int, default=1024)
     ap.add_argument("--textura", type=int, default=4096)
     ap.add_argument("--rapido", action="store_true")
     ap.add_argument("--reusar-textura", action="store_true")
     a = ap.parse_args(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:])
     if a.rapido:
-        a.cuadros, a.textura = 256, 1024
+        a.textura = 1024
     t0 = time.time()
     E.limpiar()
     mats = MAT.todos()
+    carpeta_tex = os.path.abspath(os.path.join(a.salida, "texturas"))
+    ruta_atlas, ruta_datos = AT.generar(carpeta_tex)
+    mats["Atlas_Kit"] = MAT.material_atlas(ruta_atlas, ruta_datos)
     V = RV.Valle()
     print(f"alturas de los sitios: { {k: round(v, 1) for k, v in V.alturas_sitio.items()} }")
     T = PB.todos()
     T["LosMolinos"].parcelas = filtrar_parcelas(V, "LosMolinos", T["LosMolinos"].parcelas)
     print(f"trazados listos ({time.time() - t0:.0f} s)")
 
-    ruta_tex = os.path.abspath(os.path.join(a.salida, "textura_terreno.png"))
+    ruta_tex = os.path.join(carpeta_tex, "textura_terreno_4096.png")
     if not (a.reusar_textura and os.path.exists(ruta_tex)):
         img, _ = TX.pintar(V, T, a.textura)
         Image.fromarray((img * 255 + 0.5).astype(np.uint8)).save(ruta_tex, optimize=True)
-        print(f"textura: {a.textura}² ({os.path.getsize(ruta_tex) / 1e6:.1f} MB, {time.time() - t0:.0f} s)")
+        print(f"textura: {a.textura}² ({time.time() - t0:.0f} s)")
+    rutas_tex = texturas_terreno(ruta_tex, carpeta_tex)
 
     raiz = coleccion("Region1_Valle_del_Alba")
+    c_kit = coleccion("Kit_Piezas", raiz)
+    capa_coleccion(c_kit.name).exclude = True
+    bib = Biblioteca(mats, c_kit)
     c_ter = coleccion("Terreno", raiz)
     c_agua = coleccion("Agua", raiz)
     c_ref = coleccion("Referencia_no_exportar")
-    terreno(V, a.cuadros, ruta_tex, c_ter)
+    terreno(V, rutas_tex, c_ter, a.rapido)
     rio(V, c_agua)
     resto_planeta(V, c_ref, 48 if a.rapido else 96)
     mar(c_ref)
-    C = Constructor(V, mats, raiz)
+    C = Constructor(V, bib, raiz)
     for nombre, t in T.items():
         C.sitio(nombre, t, coleccion(nombre, raiz))
+    silueta_aurora(V, T["Aurora"], coleccion("Aurora_Silueta", raiz), mats)
     cultivos(V, "LosMolinos", T["LosMolinos"].parcelas, coleccion("Campos", raiz), mats)
     c_det = coleccion("Caminos_Puente_Mirador", raiz)
-    puente_y_detalles(V, C, c_det, mats)
+    puente_y_detalles(V, C, c_det)
     c_veg = coleccion("Vegetacion", raiz)
-    ng = vegetacion(V, c_veg, mats, a.rapido)
+    ng = vegetacion(V, c_veg, bib, a.rapido)
     centros = [(s["x"], s["y"], 260.0 if n != "Aurora" else 330.0) for n, s in D.SITIOS.items()]
     centros += [(D.MIRADOR[0], D.MIRADOR[1], 160.0), (D.PUENTE["x"], D.PUENTE["y"], 120.0)]
     hierba(V, c_veg, ng, centros, a.rapido)
+    txt = bpy.data.texts.new("LOD")  # marca: esta escena tiene niveles de detalle (render.py aplica lod.py)
+    txt.write("Niveles de detalle: ver herramientas/lod.py y diseno.LOD")
     ruta = os.path.abspath(os.path.join(a.salida, "region1_valle_del_alba.blend"))
     for img in bpy.data.images:  # rutas relativas al .blend: la carpeta se puede mover o clonar
         if img.filepath:
