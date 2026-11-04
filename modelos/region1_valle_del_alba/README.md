@@ -208,8 +208,16 @@ Montada sobre el planeta redondo del experimento (Nueva Tierra, centro en (-3500
   (`ColorMap` = atlas, `AlphaMode = Overlay`) sí: tejados rojos y yeso liso del color de cada copia.
   Se hace una vez en Studio con `EjemploArranque.prepararPiezasEnStudio(idAtlas)`. Coste: unos 80 MB más (8.224
   instancias de `SurfaceAppearance`).
-- **Los trozos de terreno entran girados 180° sobre su eje vertical** (las piezas y la silueta no). Sin girarlos quedan
-  huecos de decenas de studs entre trozos y el terreno no casa con caminos y edificios. `MontarRegion.GIRO_TERRENO`.
+- **Todas las mallas entran giradas 180° sobre su eje vertical** (terreno y piezas; la silueta está por revisar). Sin
+  girarlas quedan huecos de decenas de studs entre trozos de terreno, y cada pared mira hacia DENTRO: desde fuera se
+  ve su cara trasera (nada: «láminas transparentes») y el interior de la pared de enfrente.
+  `MontarRegion.GIRO_IMPORTACION`.
+- **Paredes y hastiales con grosor** (0,6 studs, cara interior; jambas de todo el grosor), puerta y contraventanas
+  cerradas, cumbreras con tapas y panza en los tejados de lejos (`herramientas/kit.py`). Antes eran una sola cara y
+  desde dentro de los edificios o de canto no se veían. `DoubleSided` solo en el toldo (`kit.DOBLE_CARA`). Coste:
+  edificios y mobiliario +30 % si todo se dibujara en detalle (unos 9.000 triángulos más en la vista de la plaza).
+  Se rehízo solo lo afectado con `herramientas/rehacer_piezas.py` (23 FBX) y se comprueba con `revisar_caras.py`.
+  `kit_valle_del_alba.blend` (la hoja del kit) no se ha regenerado.
 - Con el giro, la **colisión precisa** de los trozos es buena: en la base de 84 edificios el rayo choca a menos de
   0,4 studs de la altura real.
 - Los **trozos lejanos** no tenían textura (`LodRegion` no se la ponía): ahora sí (`iniciarCliente` recibe los IDs).
