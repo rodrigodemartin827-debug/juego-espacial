@@ -103,17 +103,70 @@ VISTAS = {
                             lambda: punto_sitio("Pradoverde", 30, 6, 8), "manana", 24, None),
     "08_molinos_aerea": (lambda: punto_sitio("LosMolinos", -250, -250, 140),
                          lambda: punto_sitio("LosMolinos", 0, 0, 10), "dia", 35, (300.0, 4000.0, 0.45)),
-    "09_molinos_suelo": (lambda: punto_sitio("LosMolinos", -70, 4, 5.5),
-                         lambda: punto_sitio("LosMolinos", -30, 34, 30), "dia", 26, None),
-    "10_colina_atardecer": (lambda: mirador(6, 0, 6.5), hacia(lambda: mirador(6, 0, 6.5), 266.0, -8.0),
+    "09_molinos_suelo": (lambda: punto_sitio("LosMolinos", -125, -30, 5.5),
+                         lambda: punto_sitio("LosMolinos", -20, 30, 24), "dia", 26, None),
+    "10_colina_atardecer": (lambda: mirador(-15, -1, 6.5), hacia(lambda: mirador(-15, -1, 6.5), 266.0, -11.0),
                             "atardecer", 24, None),
     "11_colina_desde_el_prado_atardecer": (lambda: punto_diseno(360, -125, 5.5),
                                            hacia(lambda: punto_diseno(360, -125, 5.5), 70.0, 5.0),
                                            "atardecer", 30, None),
-    "12_puente_suelo": (lambda: puente(-34, -58, 4.5), lambda: puente(0, 0, 2), "dia", 26, None),
-    "13_valle_desde_colina": (lambda: mirador(-12, 0, 7), hacia(lambda: mirador(-12, 0, 7), 280.0, -11.0),
+    "12_puente_suelo": (lambda: puente(-20, -62, 4.5), lambda: puente(0, 0, 2), "dia", 28, None),
+    "13_valle_desde_colina": (lambda: mirador(-15, 4, 6), hacia(lambda: mirador(-15, 4, 6), 296.0, -15.0),
                               "manana", 28, None),
 }
+
+
+# El planeta de los monstruos, visto en el cielo (CLAUDE.md: «desde tu planeta se ve el otro mundo a lo lejos»).
+# Solo de referencia para los renders: (rumbo, elevación) en grados en el marco del sitio, tamaño aparente en grados.
+OTRO_MUNDO = dict(rumbo=250.0, elevacion=5.0, tamano=5.5, distancia=45000.0, color="#2A1838", halo="#9B5CFF")
+
+
+def otro_mundo(visible):
+    ob = bpy.data.objects.get("Planeta_Monstruos_referencia")
+    if ob is None:
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=96, ring_count=48, radius=1.0)
+        ob = bpy.context.active_object
+        ob.name = "Planeta_Monstruos_referencia"
+        for p in ob.data.polygons:
+            p.use_smooth = True
+        mat = bpy.data.materials.new("Planeta_Monstruos")
+        nt = mat.node_tree
+        nt.nodes.clear()
+        bsdf = nt.nodes.new("ShaderNodeBsdfPrincipled")
+        bsdf.inputs["Base Color"].default_value = (*MAT.srgb_a_lineal(OTRO_MUNDO["color"]), 1)
+        bsdf.inputs["Roughness"].default_value = 0.8
+        # halo violeta en el borde (atmósfera)
+        lw = nt.nodes.new("ShaderNodeLayerWeight")
+        lw.inputs["Blend"].default_value = 0.35
+        em = nt.nodes.new("ShaderNodeEmission")
+        em.inputs["Color"].default_value = (*MAT.srgb_a_lineal(OTRO_MUNDO["halo"]), 1)
+        pw = nt.nodes.new("ShaderNodeMath")
+        pw.operation = "POWER"
+        pw.inputs[1].default_value = 2.5
+        nt.links.new(lw.outputs["Facing"], pw.inputs[0])
+        mul = nt.nodes.new("ShaderNodeMath")
+        mul.operation = "MULTIPLY"
+        mul.inputs[1].default_value = 3.0
+        nt.links.new(pw.outputs[0], mul.inputs[0])
+        nt.links.new(mul.outputs[0], em.inputs["Strength"])
+        add = nt.nodes.new("ShaderNodeAddShader")
+        nt.links.new(bsdf.outputs[0], add.inputs[0])
+        nt.links.new(em.outputs[0], add.inputs[1])
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        nt.links.new(add.outputs[0], out.inputs["Surface"])
+        ob.data.materials.append(mat)
+    ob.hide_render = not visible
+    return ob
+
+
+def colocar_otro_mundo(cam):
+    o = OTRO_MUNDO
+    r, e = math.radians(o["rumbo"]), math.radians(o["elevacion"])
+    d = np.array([math.cos(e) * math.sin(r), math.cos(e) * math.cos(r), math.sin(e)])  # marco del mundo = sitio
+    ob = otro_mundo(True)
+    ob.location = tuple(cam + d * o["distancia"])
+    radio = o["distancia"] * math.tan(math.radians(o["tamano"] / 2))
+    ob.scale = (radio, radio, radio)
 
 
 def preparar(blend):
@@ -131,8 +184,12 @@ def renderizar(nombre, salida, ancho, muestras):
     cam, obj = rot @ cam, rot @ obj
     arriba_cam = cam / np.linalg.norm(cam)
     E.configurar_render(ancho, int(ancho * 9 / 16), muestras)
-    E.camara(tuple(cam), tuple(obj), tuple(arriba_cam), lente, recorte=(0.3, 30000.0))
+    E.camara(tuple(cam), tuple(obj), tuple(arriba_cam), lente, recorte=(0.3, 60000.0))
     E.iluminar(ilum)
+    if ilum == "atardecer":
+        colocar_otro_mundo(cam)
+    else:
+        otro_mundo(False)
     if niebla:
         ini, dist, mx = niebla
         col = E.ILUMINACIONES[ilum]["niebla"][3]

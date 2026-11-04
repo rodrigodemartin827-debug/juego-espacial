@@ -375,7 +375,7 @@ def pradoverde():
         poner(t, "Valla_Madera", -58.0 + 8 * k, -44.0, 0.0)
         poner(t, "Valla_Madera", 8.0 + 8 * k, -54.0, 0.0)
     poner(t, "Pajar", -52.0, -48.0, 0.0)
-    for (u, v, s) in ((-14.0, 18.0, 1.0), (16.0, -18.0, 0.9), (-36.0, 8.0, 1.0), (50.0, 26.0, 1.1), (-8.0, 50.0, 0.9)):
+    for (u, v, s) in ((-14.0, 18.0, 1.0), (16.0, -18.0, 0.9), (-38.0, 20.0, 0.85), (50.0, 26.0, 1.1), (-8.0, 50.0, 0.9)):
         poner(t, "Arbol_Flor" if u < 0 else "Arbol_Flor_B", u, v, float(rng.uniform(0, 360)), escala=s)
     for (u, v) in ((-24.0, -14.0), (16.0, 20.0), (22.0, -6.0), (-12.0, -22.0)):
         poner(t, "Farola", u, v)
@@ -401,7 +401,7 @@ def los_molinos(valle=None, sitio=None):
     for (u, v, nombre, giro) in ((-34.0, 34.0, "Molino", 225.0), (24.0, 42.0, "Molino_B", 225.0),
                                  (44.0, -22.0, "Molino_C", 225.0)):
         # las aspas miran al suroeste, de donde viene el viento; escala 1,5: el molino manda sobre las casas
-        poner(t, nombre, u, v, giro - 180.0, escala=1.5)
+        poner(t, nombre, u, v, _yaw(giro), escala=1.5)
         t.suelos.append(("tierra", ("circulo", u, v, 18.0)))
         t.ocupado.append((u - 16, v - 16, u + 16, v + 16))
     casas = [((-34.0, -8.0), 0.0, 3, 2, 2, "rustica"), ((-4.0, -36.0), 90.0, 4, 3, 1, "rustica"),

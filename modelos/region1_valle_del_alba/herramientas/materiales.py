@@ -81,6 +81,7 @@ PALETA = {
     # Agua
     "Agua": ("#2B5A64", 0.035, {"agua": True}),
     "Agua_Fuente": ("#4E8E99", 0.03, {"agua": True}),
+    "Mar": ("#3C7E92", 0.06, {"agua": True, "alfa": 1.0}),
     "Agua_Chorro": ("#DDF2F4", 0.05, {"agua": True, "alfa": 0.5}),
 }
 

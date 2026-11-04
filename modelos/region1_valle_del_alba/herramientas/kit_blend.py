@@ -148,6 +148,7 @@ def main():
         print("hoja:", miniaturas(objetos, a.salida, a.muestras))
     if not a.solo:
         bpy.context.scene.camera = None
+        bpy.context.preferences.filepaths.save_version = 0
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(os.path.join(a.salida, "kit_valle_del_alba.blend")),
                                     compress=True)
 

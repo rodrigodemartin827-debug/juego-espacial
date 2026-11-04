@@ -78,7 +78,25 @@ def mundo_cielo(sol_dir_mundo, ilum):
     fondo.inputs["Strength"].default_value = ilum["cielo"] * 0.22
     out = nt.nodes.new("ShaderNodeOutputWorld")
     nt.links.new(cielo.outputs[0], fondo.inputs[0])
-    nt.links.new(fondo.outputs[0], out.inputs[0])
+    # Por debajo del horizonte el cielo físico es negro (un «suelo» infinito). En un planeta pequeño la cámara ve
+    # direcciones por debajo del horizonte (el limbo del planeta, los reflejos del mar): ahí se pone el color del
+    # horizonte, con una transición suave.
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["Generated"], sep.inputs[0])
+    mr = nt.nodes.new("ShaderNodeMapRange")
+    mr.inputs["From Min"].default_value = 0.0
+    mr.inputs["From Max"].default_value = -0.12
+    nt.links.new(sep.outputs["Z"], mr.inputs["Value"])
+    hz = nt.nodes.new("ShaderNodeBackground")
+    ini, dist, mx, col = ilum["niebla"]
+    hz.inputs["Color"].default_value = (*MAT.srgb_a_lineal(col), 1)
+    hz.inputs["Strength"].default_value = ilum.get("brillo_niebla", 3.0) * 0.7
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(mr.outputs[0], mix.inputs[0])
+    nt.links.new(fondo.outputs[0], mix.inputs[1])
+    nt.links.new(hz.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs[0])
     return cielo
 
 

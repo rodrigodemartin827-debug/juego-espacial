@@ -55,7 +55,12 @@ COLINAS = [
 
 # La colina del atardecer (sale en la cinemática): cima ancha y casi llana para el mirador.
 COLINA_ATARDECER = dict(x=780.0, y=20.0, altura=88.0, radio_x=340.0, radio_y=290.0, giro=12.0, meseta=0.16)
-MIRADOR = (780.0, 20.0)  # punto de la cima desde donde se mira al oeste (al sol que se pone)
+# Mirador: un balcón natural (terraza llana) a media ladera, en la cara oeste. Con un planeta de radio 2400 la
+# curvatura es tan fuerte que desde la cima el propio lomo de la colina tapa el valle; desde la ladera se ve la
+# bajada hasta Pradoverde, el río y el valle hasta el horizonte, con el sol poniéndose enfrente.
+MIRADOR = (650.0, 2.0)
+TERRAZA_MIRADOR = dict(radio=17.0, transicion=16.0)
+MIRADOR_LIBRE = 45.0  # radio sin rocas ni árboles sueltos alrededor del mirador
 
 # --------------------------------------------------------------------------------------------------------------
 # Río
@@ -99,7 +104,9 @@ CAMPOS = dict(x=380.0, y=-600.0, radio_x=300.0, radio_y=250.0, suavizado=0.75)
 # Caminos: lista de puntos (x, y) en diseño; se suavizan con una curva. Ancho en studs.
 # --------------------------------------------------------------------------------------------------------------
 
-PUENTE = dict(x=88.0, y=118.0)  # centro del puente (el camino Aurora - cruce pasa por él)
+# Centro del puente (el camino Aurora - cruce pasa por él). El camino sube en «lomo de asno» al cruzar el río:
+# joroba = studs que sube en el centro, ancho_joroba = a qué distancia se nota (gaussiana).
+PUENTE = dict(x=88.0, y=118.0, joroba=4.5, ancho_joroba=42.0)
 CRUCE = (240.0, 80.0)
 
 CAMINOS = {
@@ -114,7 +121,7 @@ CAMINOS = {
     ),
     "Sendero_Mirador": dict(
         ancho=6.0,
-        puntos=[(450.0, -5.0), (530.0, 30.0), (610.0, 70.0), (680.0, 40.0), (740.0, 15.0), (780.0, 20.0)],
+        puntos=[(450.0, -5.0), (520.0, 28.0), (585.0, 40.0), (630.0, 24.0), (650.0, 2.0)],
     ),
     "Aurora_Oeste": dict(  # sale hacia la región del oeste, por donde el planeta sigue siendo tierra
         ancho=10.0,
@@ -142,4 +149,9 @@ BOSQUES = [
     (720.0, 270.0, 130.0, 0.8),  # bosquete en la ladera norte de la colina del atardecer
     (-60.0, -900.0, 160.0, 0.6),
 ]
+# Bosques sobre la sierra que rodea el valle: dónde (fracción de la elipse) y cuánto.
+BOSQUE_SIERRA = dict(desde=0.62, hasta=1.12, densidad=0.85, umbral=0.05)
+ROCAS_LADERA = 0.012  # probabilidad de roca en laderas de más de ~20° (por punto de la rejilla)
+ARBOLES_SUELTOS = 0.0025  # probabilidad de árbol suelto en pradera (por punto de la rejilla de 8 studs)
+
 DISTANCIAS_LIBRES = dict(sitio=40.0, camino=14.0, rio=20.0)  # sin árboles a menos de esto

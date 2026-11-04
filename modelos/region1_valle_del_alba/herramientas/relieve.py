@@ -103,6 +103,8 @@ class Valle:
         self.alturas_sitio = {}
         self.caminos = {n: Polilinea(curva_suave(c["puntos"])) for n, c in D.CAMINOS.items()}
         self.perfiles = {}
+        self.altura_terraza = None
+        self.altura_terraza = float(self.capa_fondo(np.array([D.MIRADOR[0]]), np.array([D.MIRADOR[1]]))[0])
         self._preparar()
 
     # ----------------------------------------------------------------------------------------------------------
@@ -167,6 +169,13 @@ class Valle:
         t = self._dist_elipse(x, y, c["x"], c["y"], c["radio_x"], c["radio_y"], c["giro"])
         t = t + 0.05 * self.fbm2(x, y, 200.0, 2, capa=7) * suavizar(t, 0.2, 0.5)
         h = h + c["altura"] * suavizar(t, 1.0, c["meseta"])
+
+        # Terraza del mirador: un rellano llano a media ladera (a la altura que tenía el terreno en su centro).
+        if self.altura_terraza is not None:
+            t = D.TERRAZA_MIRADOR
+            dm = np.hypot(x - D.MIRADOR[0], y - D.MIRADOR[1])
+            f = suavizar(dm, t["radio"] + t["transicion"], t["radio"])
+            h = h + f * (self.altura_terraza - h)
 
         # Vega: el terreno baja un poco alrededor del río.
         d, _ = self.rio.cercano(x, y)
@@ -256,7 +265,14 @@ class Valle:
             w = np.exp(-0.5 * (k / sig) ** 2)
             w /= w.sum()
             hp = np.pad(h, len(k) // 2, mode="edge")
-            self.perfiles[nombre] = np.convolve(hp, w, mode="valid")
+            perfil = np.convolve(hp, w, mode="valid")
+            # «lomo de asno» del camino que cruza el puente
+            dp = np.hypot(pl.xy[:, 0] - D.PUENTE["x"], pl.xy[:, 1] - D.PUENTE["y"])
+            if dp.min() < 10:
+                i0 = int(np.argmin(dp))
+                ds = pl.s - pl.s[i0]
+                perfil = perfil + D.PUENTE["joroba"] * np.exp(-((ds / D.PUENTE["ancho_joroba"]) ** 2))
+            self.perfiles[nombre] = perfil
 
     # ----------------------------------------------------------------------------------------------------------
     # API
@@ -284,9 +300,21 @@ class Valle:
     def densidad_bosque(self, x, y):
         """0 = pradera, 1 = bosque cerrado. Respeta las distancias libres a sitios, caminos y río."""
         dens = np.zeros(x.shape)
+        # forma orgánica: la distancia al centro se deforma con dos ruidos (lóbulos grandes y bordes rotos)
+        deform = 0.55 * self.fbm2(x, y, 260.0, 3, capa=10) + 0.22 * self.fbm2(x, y, 70.0, 2, capa=24)
         for (cx, cy, r, k) in D.BOSQUES:
-            q = np.hypot(x - cx, y - cy) / r + 0.32 * self.fbm2(x, y, 220.0, 3, capa=10)
-            dens = np.maximum(dens, k * suavizar(q, 1.0, 0.55))
+            q = np.hypot(x - cx, y - cy) / r + deform
+            dens = np.maximum(dens, k * suavizar(q, 1.0, 0.5))
+        # bosques a manchas sobre la sierra del valle
+        b = D.BOSQUE_SIERRA
+        rx, ry = D.ANILLO_RADIOS
+        qa = np.hypot(x / rx, y / ry)
+        banda = suavizar(qa, b["desde"], b["desde"] + 0.12) * suavizar(qa, b["hasta"], b["hasta"] - 0.12)
+        manchas = suavizar(self.fbm2(x, y, 330.0, 3, capa=25) + 0.3 * self.fbm2(x, y, 90.0, 2, capa=26),
+                           b["umbral"], b["umbral"] + 0.2)
+        dens = np.maximum(dens, b["densidad"] * banda * manchas)
+        # claros dentro de los bosques
+        dens *= 1.0 - 0.8 * suavizar(self.fbm2(x, y, 60.0, 2, capa=27), 0.35, 0.5)
         return dens * self.libre(x, y)
 
     def libre(self, x, y):

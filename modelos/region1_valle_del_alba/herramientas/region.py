@@ -483,7 +483,9 @@ def vegetacion(V, col, mats, rapido=False):
     p_arbol *= (1 - 0.9 * campos)
     p_arbusto = 0.10 * geo.suavizar(dens, 0.08, 0.3) * geo.suavizar(dens, 0.7, 0.4) + 0.006 + 0.03 * ((orilla > 4) & (
         orilla < 30))
-    p_roca = 0.035 * geo.suavizar(pend, 14, 24) + 0.0015 + 0.02 * ((orilla > 1) & (orilla < 10))
+    p_roca = D.ROCAS_LADERA * geo.suavizar(pend, 16, 26) + 0.001 + 0.02 * ((orilla > 1) & (orilla < 10))
+    lejos_mirador = np.hypot(x - D.MIRADOR[0], y - D.MIRADOR[1]) > D.MIRADOR_LIBRE
+    lib = lib * lejos_mirador
     sel_a = ok & (u < p_arbol)
     sel_b = ok & ~sel_a & (u < p_arbol + p_arbusto)
     sel_r = (H > 1.0) & (pend < 45) & (lib > 0.3) & ~sel_a & ~sel_b & (u < p_arbol + p_arbusto + p_roca)
@@ -539,6 +541,7 @@ def hierba(V, col, ng, centros, rapido=False):
         _, _, _, sd = V.peso_sitio(nombre, x, y)
         lib *= geo.suavizar(sd, 1.0, 6.0)
     campos = V.mascara_campos(x, y)
+    lib *= np.hypot(x - D.MIRADOR[0], y - D.MIRADOR[1]) > D.TERRAZA_MIRADOR["radio"] + 6  # la terraza, despejada
     mancha = V.fbm2(x, y, 30.0, 2, capa=22)
     ok = (H > 2.5) & (lib > 0.6) & (campos < 0.3) & (rng.uniform(size=x.size) < 0.55 + 0.45 * mancha)
     x, y, H = x[ok], y[ok], H[ok]
@@ -590,14 +593,14 @@ def puente_y_detalles(V, C, col, mats):
         p = dm * R + u * em + v * nm
         return p / np.linalg.norm(p)
 
-    C.pieza("Arbol_Grande", en(6.0, 10.0), em, 40.0, -0.5, col=col, nombre_obj="Mirador_Arbol")
+    C.pieza("Arbol_Grande", en(-6.0, 19.0), em, 40.0, -0.5, col=col, nombre_obj="Mirador_Arbol")
     C.pieza("Banco", en(-6.0, 2.0), em, -90.0, col=col, nombre_obj="Mirador_Banco")  # mira al oeste
     C.pieza("Banco", en(-6.0, -6.0), em, -90.0, col=col, nombre_obj="Mirador_Banco_2")
     for k in range(5):  # murete a la espalda (este): el oeste queda abierto para ver el atardecer
         a = math.radians(-40 + k * 20)
         C.pieza("Valla_Piedra", en(16 * math.cos(a), 16 * math.sin(a)), em, math.degrees(a) + 90, col=col,
                 nombre_obj=f"Mirador_Muro_{k}")
-    C.pieza("Poste_Indicador", en(10.0, -6.0), em, 0.0, col=col, nombre_obj="Mirador_Poste")
+    C.pieza("Poste_Indicador", en(8.0, -15.0), em, 0.0, col=col, nombre_obj="Mirador_Poste")
     C.pieza("Farola", en(4.0, -10.0), em, 0.0, col=col, nombre_obj="Mirador_Farola")
     # cruce de caminos
     cx, cy = D.CRUCE
@@ -653,6 +656,10 @@ def main():
     centros += [(D.MIRADOR[0], D.MIRADOR[1], 160.0), (D.PUENTE["x"], D.PUENTE["y"], 120.0)]
     hierba(V, c_veg, ng, centros, a.rapido)
     ruta = os.path.abspath(os.path.join(a.salida, "region1_valle_del_alba.blend"))
+    for img in bpy.data.images:  # rutas relativas al .blend: la carpeta se puede mover o clonar
+        if img.filepath:
+            img.filepath = bpy.path.relpath(img.filepath, start=os.path.dirname(ruta))
+    bpy.context.preferences.filepaths.save_version = 0  # sin copia .blend1
     bpy.ops.wm.save_as_mainfile(filepath=ruta, compress=True)
     print(f"guardado {ruta} ({os.path.getsize(ruta) / 1e6:.1f} MB) en {time.time() - t0:.0f} s")
 
