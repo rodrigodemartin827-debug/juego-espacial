@@ -67,6 +67,16 @@ local function materialEn(n: Vector3, radio: number): Enum.Material
 	return mat(m.Base)
 end
 
+-- ¿Cae la dirección `n` en la cara del cubo inflado reservada para una región de mallas (Terreno.CaraReservada)?
+-- Ahí no se ponen colinas ni rocas: asomarían a través de las mallas de la región.
+local function enCaraReservada(n: Vector3): boolean
+	local cara = Experimento.Terreno.CaraReservada
+	if cara ~= "YP" then
+		return false
+	end
+	return n.Y > math.max(math.abs(n.X), math.abs(n.Z)) - 0.08
+end
+
 -- ¿Está la dirección `n` cerca del puerto? (ahí no se ponen colinas ni rocas)
 local function cercaDelPuerto(n: Vector3, normalPuerto: Vector3, radio: number, distancia: number): boolean
 	return math.acos(math.clamp(n:Dot(normalPuerto), -1, 1)) * radio < distancia
@@ -99,6 +109,9 @@ local function generar(centro: Vector3, radio: number, normalPuerto: Vector3): {
 		local n = direccionAleatoria(azar)
 		local rmin, rmax = t.RadioColina[1], t.RadioColina[2]
 		local r = rmin + (rmax - rmin) * azar:NextNumber() ^ 2
+		if enCaraReservada(n) then
+			continue
+		end
 		if cercaDelPuerto(n, normalPuerto, radio, 260 + r) then
 			continue
 		end
@@ -136,6 +149,9 @@ local function generar(centro: Vector3, radio: number, normalPuerto: Vector3): {
 	local rocas = math.floor(t.RocasPorMillon * area / 1e6)
 	for _ = 1, rocas do
 		local n = direccionAleatoria(azar)
+		if enCaraReservada(n) then
+			continue
+		end
 		if cercaDelPuerto(n, normalPuerto, radio, 120) then
 			continue
 		end
@@ -281,7 +297,8 @@ function PlanetaRedondo.Iniciar()
 		return
 	end
 	local centro = Experimento.Centro()
-	local radio = Experimento.Radio
+	-- La esfera de Terrain puede ir hundida (Terreno.Hundimiento) para dejar sitio a una región hecha con mallas.
+	local radio = Experimento.Radio - (Experimento.Terreno.Hundimiento or 0)
 	local Datos = require(ReplicatedStorage.Shared.Planetas.Datos) :: any
 	local n = Datos.Planetas[Experimento.Planeta].NormalAterrizaje
 	local normal = Vector3.new(n.X, n.Y, n.Z).Unit

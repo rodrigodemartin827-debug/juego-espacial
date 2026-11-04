@@ -51,6 +51,10 @@ PlanetaRedondo.Terreno = {
 	EscalaRuido = 0.0016, -- por stud
 	Semilla = 7,
 	SegundosPorTanda = 0.03, -- se cede el hilo tras tanto tiempo de trabajo seguido (no congelar el servidor)
+	-- PRUEBA de la región 1 (Valle del Alba, mallas de Blender): la esfera de Terrain se hunde por debajo de las mallas,
+	-- y en su cara del cubo inflado (+Y) no se ponen colinas ni rocas.
+	Hundimiento = 130,
+	CaraReservada = "YP",
 	-- Nombres de Enum.Material.
 	Materiales = {
 		Base = "Grass",
