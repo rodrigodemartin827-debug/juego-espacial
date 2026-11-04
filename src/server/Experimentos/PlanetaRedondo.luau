@@ -23,6 +23,8 @@ local Modelo = require(Servicios.ServicioNaves.Modelo)
 local PlanetaRedondo = {}
 
 local listo = false
+-- Donde aparece el jugador si se ha montado la región 1 (delante de su casa de Pradoverde). nil = el puerto.
+local marcoAparicion: CFrame? = nil
 local carpeta: Folder? = nil
 local marcoPuerto: CFrame? = nil
 
@@ -186,6 +188,60 @@ local function generar(centro: Vector3, radio: number, normalPuerto: Vector3): {
 	}
 end
 
+--[[
+	PRUEBA (rama prueba/region1-valle-alba): si en ReplicatedStorage están la región 1 y sus piezas importadas
+	(Region1, ver modelos/region1_valle_del_alba/roblox), se monta sobre este planeta y el jugador aparece en
+	Experimento.Region1.Aparicion (delante de su casa de Pradoverde). Los datos están en coordenadas del planeta.
+]]
+local function montarRegion1()
+	local ajustes = Experimento.Region1
+	local raiz = ReplicatedStorage:FindFirstChild("Region1")
+	if not ajustes.Activa or raiz == nil then
+		return
+	end
+	local piezas = raiz:FindFirstChild("Piezas")
+	if piezas == nil or #piezas:GetChildren() == 0 then
+		warn("[PlanetaRedondo] La región 1 no tiene piezas importadas: no se monta")
+		return
+	end
+	local ok, err = pcall(function()
+		local datos = raiz:WaitForChild("Datos")
+		local ids = require(datos:WaitForChild("ids_texturas") :: ModuleScript) :: any
+		local origen = CFrame.new(Experimento.Centro())
+		local inicio = os.clock()
+		local region = (require(raiz:WaitForChild("EjemploArranque") :: ModuleScript) :: any).montarEnStudio(
+			ids[ajustes.Atlas],
+			ids,
+			origen
+		)
+		-- Toda la región llega siempre al cliente: su LOD (LodRegion) necesita tener todos los modelos.
+		region.ModelStreamingMode = Enum.ModelStreamingMode.Persistent
+		-- Aparición: delante de la casa elegida, en su vertical, a la altura del suelo (la colisión del terreno es fiable).
+		for _, g in require(datos:WaitForChild(ajustes.Grupo) :: ModuleScript) :: any do
+			if g.nombre == ajustes.Edificio then
+				local c = g.cframe
+				local marcoEdificio = origen
+					* CFrame.new(c[1], c[2], c[3], c[4], c[5], c[6], c[7], c[8], c[9], c[10], c[11], c[12])
+				local d = ajustes.Delante
+				local punto = marcoEdificio * CFrame.new(d[1], d[2], d[3])
+				local arriba = (punto.Position - origen.Position).Unit
+				local parametros = RaycastParams.new()
+				parametros.FilterType = Enum.RaycastFilterType.Include
+				parametros.FilterDescendantsInstances = { region:FindFirstChild("Terreno") :: Instance }
+				local suelo = workspace:Raycast(punto.Position + arriba * 50, -arriba * 150, parametros)
+				local base = if suelo then suelo.Position else punto.Position
+				-- Mirando hacia la casa (su fachada con la puerta mira a +Z del edificio).
+				local haciaCasa = marcoEdificio.Position + marcoEdificio.RightVector * d[1] - base
+				marcoAparicion = Experimento.Marco(base + arriba * 3.2, arriba, haciaCasa)
+			end
+		end
+		print(string.format("[PlanetaRedondo] Región 1 montada en %.1f s", os.clock() - inicio))
+	end)
+	if not ok then
+		warn(`[PlanetaRedondo] No se pudo montar la región 1: {err}`)
+	end
+end
+
 -- Monta el hangar del puerto girado sobre la esfera. Devuelve el marco del suelo del puerto.
 local function montarPuerto(padre: Instance, centro: Vector3, radio: number, normal: Vector3): CFrame
 	local suelo = Experimento.Marco(centro + normal * radio, normal, Vector3.zAxis)
@@ -203,12 +259,17 @@ end
 -- ===== Personaje =====
 
 local function llevarAlPuerto(jugador: Player, personaje: Model)
-	local marco = marcoPuerto
-	if marco == nil then
-		return
+	local destino: CFrame
+	if marcoAparicion then
+		destino = marcoAparicion :: CFrame
+	else
+		local marco = marcoPuerto
+		if marco == nil then
+			return
+		end
+		-- Delante de la boca del hangar (que se abre hacia -Z), mirando hacia fuera (de espaldas al hangar).
+		destino = marco * CFrame.new(0, 3.2, -40)
 	end
-	-- Delante de la boca del hangar (que se abre hacia -Z), mirando hacia fuera (de espaldas al hangar).
-	local destino = marco * CFrame.new(0, 3.2, -40)
 	pcall(function()
 		jugador:RequestStreamAroundAsync(destino.Position, 10)
 	end)
@@ -353,6 +414,7 @@ function PlanetaRedondo.Iniciar()
 		local memoriaAntes = Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels)
 		local resumen = generar(centro, radio, normal)
 		marcoPuerto = montarPuerto(nueva, centro, radio, normal)
+		montarRegion1()
 		task.wait(1)
 		local memoria = Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels)
 		nueva:SetAttribute("MemoriaTerrenoAntes", memoriaAntes)

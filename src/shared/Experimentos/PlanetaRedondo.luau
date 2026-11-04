@@ -67,6 +67,16 @@ PlanetaRedondo.Terreno = {
 	LatitudNieve = 66, -- grados: casquetes polares
 }
 
+-- ===== PRUEBA: región 1 (Valle del Alba) =====
+-- Si están importadas (ReplicatedStorage.Region1), se monta sola sobre el planeta y se aparece delante de una casa.
+PlanetaRedondo.Region1 = {
+	Activa = true,
+	Atlas = "atlas_kit.png", -- clave del atlas en Region1.Datos.ids_texturas
+	Grupo = "edificios_Pradoverde",
+	Edificio = "Pradoverde_Casa_Jugador",
+	Delante = { 8, 0, 10 }, -- en el marco del edificio: la puerta está en (8, 0, 0) y la fachada mira a +Z
+}
+
 -- ===== Personaje =====
 PlanetaRedondo.Personaje = {
 	-- La gravedad actúa hasta esta altura sobre la superficie; más arriba, el personaje vuelve a la normal.

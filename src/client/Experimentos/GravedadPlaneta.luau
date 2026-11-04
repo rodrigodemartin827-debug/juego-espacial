@@ -465,12 +465,35 @@ local function pasoCamara(_dt: number)
 	camara.Focus = CFrame.new(foco)
 end
 
+--[[
+	PRUEBA (rama prueba/region1-valle-alba): en cuanto el servidor monta la región 1, se arranca su LOD en este
+	cliente (versiones detallada y simple, silueta de Aurora y vegetación). Ver server/Experimentos/PlanetaRedondo.
+]]
+local function iniciarRegion1()
+	local carpeta = ReplicatedStorage:FindFirstChild("Region1")
+	if not Experimento.Region1.Activa or carpeta == nil then
+		return
+	end
+	task.spawn(function()
+		workspace:WaitForChild("Region1_ValleDelAlba", math.huge) -- sin límite: el servidor la monta al terminar el planeta
+		local ok, err = pcall(function()
+			local ids = require(carpeta:WaitForChild("Datos"):WaitForChild("ids_texturas") :: ModuleScript) :: any
+			local ejemplo = require(carpeta:WaitForChild("EjemploArranque") :: ModuleScript) :: any
+			ejemplo.iniciarCliente(ids[Experimento.Region1.Atlas], CFrame.new(Experimento.Centro()), ids)
+		end)
+		if not ok then
+			warn(`[PlanetaRedondo] No se pudo arrancar el LOD de la región 1: {err}`)
+		end
+	end)
+end
+
 -- ===== API =====
 
 function GravedadPlaneta.Iniciar()
 	if not Experimento.Activado() then
 		return
 	end
+	iniciarRegion1()
 	local UserInputService = game:GetService("UserInputService")
 
 	UserInputService.InputBegan:Connect(function(entrada, procesada)
