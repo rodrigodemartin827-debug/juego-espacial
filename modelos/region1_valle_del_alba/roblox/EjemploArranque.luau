@@ -70,6 +70,34 @@ local function opcionesMontaje(
 	}
 end
 
+--[[
+	En Studio, UNA vez después de importar (y antes de montar): pone en cada pieza del kit y en la silueta un
+	SurfaceAppearance con el atlas y AlphaMode = Overlay. PROBADO EN STUDIO: con solo TextureID, Roblox NO deja ver
+	MeshPart.Color a través de las zonas transparentes del atlas (se ve el ruido de color escondido detrás de la
+	transparencia: paredes moteadas y tejados grises). Con Overlay sí: tejados rojos y yeso liso del color de cada copia.
+	SurfaceAppearance no se puede configurar durante el juego, por eso va en las plantillas: las copias lo heredan.
+]]
+function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
+	local carpeta = ReplicatedStorage:WaitForChild("Region1")
+	local n = 0
+	for _, nombre in { "Piezas", "Silueta" } do
+		local c = carpeta:FindFirstChild(nombre)
+		if c == nil then
+			continue
+		end
+		for _, p in c:GetDescendants() do
+			if p:IsA("MeshPart") then
+				local sa = p:FindFirstChildOfClass("SurfaceAppearance") or Instance.new("SurfaceAppearance")
+				sa.ColorMap = idAtlas
+				sa.AlphaMode = Enum.AlphaMode.Overlay
+				sa.Parent = p
+				n += 1
+			end
+		end
+	end
+	return n
+end
+
 -- En Studio: monta la región en Workspace (con el atlas y las texturas de terreno ya subidas). `origen` es el marco del
 -- centro del planeta (nil = el origen del mundo, como en Blender).
 function EjemploArranque.montarEnStudio(idAtlas: string, idsTerreno: { [string]: string }, origen: CFrame?): Model
@@ -77,10 +105,11 @@ function EjemploArranque.montarEnStudio(idAtlas: string, idsTerreno: { [string]:
 end
 
 -- En el cliente: niveles de detalle y vegetación. Devuelve una función para pararlo.
-function EjemploArranque.iniciarCliente(idAtlas: string?, origen: CFrame?): () -> ()
+function EjemploArranque.iniciarCliente(idAtlas: string?, origen: CFrame?, idsTerreno: { [string]: string }?): () -> ()
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
 	local region = workspace:WaitForChild("Region1_ValleDelAlba") :: Model
-	local montaje = opcionesMontaje(idAtlas, nil, workspace, origen)
+	-- idsTerreno: hace falta para poner la textura a los trozos lejanos, que se crean aquí.
+	local montaje = opcionesMontaje(idAtlas, idsTerreno, workspace, origen)
 	local d = carpeta:WaitForChild("Datos")
 	local vegetacion: { [string]: { { any } } } = {}
 	local carpetaVeg = d:FindFirstChild("vegetacion")

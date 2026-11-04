@@ -198,6 +198,32 @@ los puede sincronizar Rojo, que convierte cada uno en un ModuleScript); ejecutar
 `EjemploArranque.montarEnStudio(idAtlas, idsTerreno)` y guardar el lugar; arrancar `EjemploArranque.iniciarCliente()`
 desde un LocalScript.
 
+## Probado en Studio (director, 4-11-2026)
+
+Montada sobre el planeta redondo del experimento (Nueva Tierra, centro en (-35000, 0, 0)), rama local
+`prueba/region1-valle-alba`. Lo que se encontró y se arregló:
+
+- **El color de las piezas NO se ve a través del atlas con `TextureID`**: Roblox pinta el ruido de color que hay detrás
+  de las zonas transparentes (paredes moteadas, tejados grises). Con un `SurfaceAppearance` en cada plantilla
+  (`ColorMap` = atlas, `AlphaMode = Overlay`) sí: tejados rojos y yeso liso del color de cada copia.
+  Se hace una vez en Studio con `EjemploArranque.prepararPiezasEnStudio(idAtlas)`. Coste: unos 80 MB más (8.224
+  instancias de `SurfaceAppearance`).
+- **Los trozos de terreno entran girados 180° sobre su eje vertical** (las piezas y la silueta no). Sin girarlos quedan
+  huecos de decenas de studs entre trozos y el terreno no casa con caminos y edificios. `MontarRegion.GIRO_TERRENO`.
+- Con el giro, la **colisión precisa** de los trozos es buena: en la base de 84 edificios el rayo choca a menos de
+  0,4 studs de la altura real.
+- Los **trozos lejanos** no tenían textura (`LodRegion` no se la ponía): ahora sí (`iniciarCliente` recibe los IDs).
+- Los scripts suponían el planeta en el origen: opción `Origen` (marco del centro del planeta).
+- Dos errores de tipos en `LodRegion` (luau-lsp): arreglados; los tres scripts pasan `luau-lsp analyze` y selene.
+- El importador respeta la escala en studs y los ejes de las piezas (los tamaños coinciden con los datos).
+- El LOD funciona: desde la plaza ~7.200 piezas detalladas; a 420 studs de Aurora ~5.300 simples y sin silueta; a
+  1.150 studs, la silueta de Aurora (y encaja con los edificios).
+
+Coste medido (Studio en PC, limitado a 15 FPS en este equipo, así que se mide el tiempo de render en CPU): de 8 a 9 ms
+por fotograma en las tres vistas, frente a 3,6 ms mirando al espacio vacío; la lógica (LOD y vegetación), de 1,0 a
+1,3 ms frente a 0,4. Montar la región: 0,5 s, unas 9.300 instancias más (+156 MB con los `SurfaceAppearance`). La
+vegetación local suma de 12.000 a 16.000 instancias más según la vista: es lo que más pesa.
+
 ## Qué se ha comprobado y qué no
 
 **Comprobado aquí:**

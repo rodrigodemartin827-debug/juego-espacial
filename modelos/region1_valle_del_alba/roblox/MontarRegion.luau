@@ -19,8 +19,9 @@
 	Las versiones LEJANAS no se guardan en el lugar: las crea LodRegion en el cliente, solo cuando hacen falta
 	(con MontarRegion.copiarPieza). La vegetación tampoco: LodRegion la crea por trozos, solo cerca de la cámara.
 
-	NO SE HA PROBADO EN STUDIO (se escribió sin Studio). Puntos a comprobar: que el importador respete los ejes
-	(-Z delante, Y arriba) y la escala en studs, y que Color se vea a través de la transparencia del atlas.
+	PROBADO EN STUDIO: el importador respeta los ejes y la escala en studs (los tamaños coinciden con los datos). El
+	Color solo se ve a través de la transparencia del atlas si cada plantilla lleva un SurfaceAppearance con
+	AlphaMode = Overlay (EjemploArranque.prepararPiezasEnStudio); con solo TextureID se ve el ruido del atlas.
 ]]
 
 local MontarRegion = {}
@@ -79,6 +80,13 @@ local SIN_SOMBRA = {
 	Cumbrera_Remate_16 = true,
 	Cumbrera_Remate_24 = true,
 }
+
+--[[
+	PROBADO EN STUDIO: el importador 3D deja los TROZOS DE TERRENO girados 180° sobre su eje vertical respecto a los
+	datos (las piezas del kit no). Sin este giro quedan huecos de decenas de studs entre trozos, los caminos no casan y
+	los edificios flotan o se hunden. Se aplica a los trozos detallados (aquí) y a los lejanos (LodRegion).
+]]
+MontarRegion.GIRO_TERRENO = CFrame.Angles(0, math.pi, 0)
 
 -- Marco del centro del planeta (ver Opciones.Origen).
 function MontarRegion.origen(opciones: Opciones): CFrame
@@ -242,13 +250,18 @@ function MontarRegion.montar(opciones: Opciones): Model
 		if plantilla and plantilla:IsA("MeshPart") then
 			local p = plantilla:Clone()
 			p.Name = "Detalle"
-			p.CFrame = MontarRegion.origen(opciones) * CFrame.new(v3(t.posicion))
+			p.CFrame = MontarRegion.origen(opciones) * CFrame.new(v3(t.posicion)) * MontarRegion.GIRO_TERRENO
 			local ids = opciones.IdsTerreno
 			if ids and ids[t.textura] then
 				p.TextureID = ids[t.textura]
 			end
 			prepararParte(p, true)
-			p.CollisionFidelity = Enum.CollisionFidelity.PreciseConvexDecomposition
+			-- CollisionFidelity solo se puede cambiar en Studio (no durante el juego): si la plantilla ya la trae, no se toca.
+			if p.CollisionFidelity ~= Enum.CollisionFidelity.PreciseConvexDecomposition then
+				pcall(function()
+					p.CollisionFidelity = Enum.CollisionFidelity.PreciseConvexDecomposition
+				end)
+			end
 			p.RenderFidelity = Enum.RenderFidelity.Precise -- evita grietas entre trozos
 			p.Parent = m
 		else

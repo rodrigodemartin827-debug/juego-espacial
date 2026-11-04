@@ -98,7 +98,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 			gruposPorNombre[g.nombre] = g
 		end
 	end
-	local terrenoLejos: { [string]: { plantilla: MeshPart, posicion: Vector3 } } = {}
+	local terrenoLejos: { [string]: { plantilla: MeshPart, posicion: Vector3, textura: string } } = {}
 	for _, t in opciones.Montaje.Datos.terreno do
 		if t.nivel ~= "detalle" then
 			local plantilla = opciones.Montaje.Terreno:FindFirstChild(t.nombre)
@@ -106,6 +106,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 				terrenoLejos[t.trozo] = {
 					plantilla = plantilla :: MeshPart,
 					posicion = Vector3.new(t.posicion[1], t.posicion[2], t.posicion[3]),
+					textura = t.textura,
 				}
 			end
 		end
@@ -125,7 +126,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		end
 		table.insert(entradas, {
 			modelo = d,
-			tipo = lod,
+			tipo = lod :: string,
 			sitio = (d:GetAttribute("Sitio") or "") :: string,
 			centro = d:GetAttribute("Centro") :: Vector3,
 			radio = d:GetAttribute("Radio") :: number,
@@ -154,7 +155,12 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 			p.CanQuery = false
 			p.CanTouch = false
 			p.CastShadow = false
-			p.CFrame = MontarRegion.origen(opciones.Montaje) * CFrame.new(info.posicion)
+			p.CFrame = MontarRegion.origen(opciones.Montaje) * CFrame.new(info.posicion) * MontarRegion.GIRO_TERRENO
+			-- La textura del trozo lejano (terreno_lejos.png). Sin ella sale del color por defecto (probado en Studio).
+			local ids = opciones.Montaje.IdsTerreno
+			if ids and ids[info.textura] then
+				p.TextureID = ids[info.textura]
+			end
 			e.lejos = p
 			return p
 		end
@@ -261,7 +267,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		if nivel == "oculto" then
 			return
 		end
-		local entrada = { a.tipo, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, a.escala, a.escala, a.escala, "#FFFFFF" }
+		local entrada: { any } = { a.tipo, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, a.escala, a.escala, a.escala, "#FFFFFF" }
 		a.parte = MontarRegion.copiarPieza(opciones.Montaje, a.tipo, nivel == "simple", a.cf, entrada, carpetaVeg)
 	end
 
