@@ -60,6 +60,9 @@ export type Opciones = {
 	IdsTerreno: { [string]: string }?, -- textura de cada trozo: «terreno_1_2.png» -> rbxassetid
 	Destino: Instance,
 	Datos: Datos,
+	-- Marco del CENTRO DEL PLANETA en el mundo. Los datos están en coordenadas del planeta (centrado en el origen, como en
+	-- Blender); Nueva Tierra está en otro sitio, así que todo se coloca con Origen * (lo de los datos). nil = el origen.
+	Origen: CFrame?,
 }
 
 -- Las piezas pequeñas no proyectan sombra (en móvil las sombras cuestan mucho y aquí no se notan).
@@ -76,6 +79,11 @@ local SIN_SOMBRA = {
 	Cumbrera_Remate_16 = true,
 	Cumbrera_Remate_24 = true,
 }
+
+-- Marco del centro del planeta (ver Opciones.Origen).
+function MontarRegion.origen(opciones: Opciones): CFrame
+	return opciones.Origen or CFrame.identity
+end
 
 local function v3(t: { number }): Vector3
 	return Vector3.new(t[1], t[2], t[3])
@@ -158,7 +166,7 @@ function MontarRegion.copiarPieza(
 	local parte = (plantilla :: MeshPart):Clone()
 	-- Roblox centra cada malla en su caja: se compensa con el centro guardado (escalado)
 	parte.Size = parte.MeshSize * escala
-	parte.CFrame = cfGrupo * aCFrame(entrada, 2) * CFrame.new(v3(nivel.centro) * escala)
+	parte.CFrame = MontarRegion.origen(opciones) * cfGrupo * aCFrame(entrada, 2) * CFrame.new(v3(nivel.centro) * escala)
 	parte.Color = Color3.fromHex(entrada[17] :: string)
 	if opciones.IdAtlas then
 		parte.TextureID = opciones.IdAtlas :: string
@@ -191,7 +199,7 @@ local function montarGrupo(opciones: Opciones, g: Grupo, sitio: string, destino:
 		c.Transparency = 1
 		c.Size = Vector3.new(ancho, alto, fondo)
 		-- en el edificio, x ∈ [0, ancho], el fondo hacia -Z (en Blender era +Y) y la altura hacia +Y
-		c.CFrame = cf * CFrame.new(ancho / 2, alto / 2, -fondo / 2)
+		c.CFrame = MontarRegion.origen(opciones) * cf * CFrame.new(ancho / 2, alto / 2, -fondo / 2)
 		prepararParte(c, true)
 		c.CanQuery = true
 		c.Parent = m
@@ -208,7 +216,8 @@ function MontarRegion.montar(opciones: Opciones): Model
 	local nGrupos, nPiezas = 0, 0
 	for clave, lista in datos.grupos do
 		local tipo, sitio = string.match(clave, "^(%a+)_(.+)$")
-		local destino = carpeta(carpeta(region, if tipo == "edificios" then "Edificios" else "Objetos"), sitio or "Region")
+		local destino =
+			carpeta(carpeta(region, if tipo == "edificios" then "Edificios" else "Objetos"), sitio or "Region")
 		for _, g in lista do
 			montarGrupo(opciones, g, sitio or "Region", destino)
 			nGrupos += 1
@@ -233,7 +242,7 @@ function MontarRegion.montar(opciones: Opciones): Model
 		if plantilla and plantilla:IsA("MeshPart") then
 			local p = plantilla:Clone()
 			p.Name = "Detalle"
-			p.CFrame = CFrame.new(v3(t.posicion))
+			p.CFrame = MontarRegion.origen(opciones) * CFrame.new(v3(t.posicion))
 			local ids = opciones.IdsTerreno
 			if ids and ids[t.textura] then
 				p.TextureID = ids[t.textura]
@@ -250,7 +259,7 @@ function MontarRegion.montar(opciones: Opciones): Model
 		local s = (opciones.Silueta :: MeshPart):Clone()
 		local info = datos.silueta :: Silueta
 		s.Name = "Silueta_Aurora"
-		s.CFrame = aCFrame(info.cframe, 1) * CFrame.new(v3(info.centro))
+		s.CFrame = MontarRegion.origen(opciones) * aCFrame(info.cframe, 1) * CFrame.new(v3(info.centro))
 		if opciones.IdAtlas then
 			s.TextureID = opciones.IdAtlas :: string
 		end

@@ -52,7 +52,7 @@ type Entrada = {
 type Arbol = { tipo: string, categoria: string, cf: CFrame, escala: number, parte: MeshPart?, nivel: string }
 type TrozoVeg = { centro: Vector3, radio: number, arboles: { Arbol }, activo: boolean }
 
--- ¿Queda algo (centro, radio) por encima del horizonte visto desde `camara`? (planeta centrado en el origen)
+-- ¿Queda algo (centro, radio) por encima del horizonte visto desde `camara`? (todo en coordenadas del planeta)
 local function sobreHorizonte(camara: Vector3, centro: Vector3, radio: number, margen: number): boolean
 	local rh = RADIO_PLANETA - margen
 	local rc = camara.Magnitude
@@ -154,7 +154,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 			p.CanQuery = false
 			p.CanTouch = false
 			p.CastShadow = false
-			p.CFrame = CFrame.new(info.posicion)
+			p.CFrame = MontarRegion.origen(opciones.Montaje) * CFrame.new(info.posicion)
 			e.lejos = p
 			return p
 		end
@@ -165,8 +165,18 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		local m = Instance.new("Model")
 		m.Name = "Lejos"
 		local cf = CFrame.new(
-			g.cframe[1], g.cframe[2], g.cframe[3], g.cframe[4], g.cframe[5], g.cframe[6],
-			g.cframe[7], g.cframe[8], g.cframe[9], g.cframe[10], g.cframe[11], g.cframe[12]
+			g.cframe[1],
+			g.cframe[2],
+			g.cframe[3],
+			g.cframe[4],
+			g.cframe[5],
+			g.cframe[6],
+			g.cframe[7],
+			g.cframe[8],
+			g.cframe[9],
+			g.cframe[10],
+			g.cframe[11],
+			g.cframe[12]
 		)
 		for _, entrada in g.piezas do
 			MontarRegion.copiarPieza(opciones.Montaje, entrada[1] :: string, true, cf, entrada, m)
@@ -214,9 +224,18 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 					tipo = a[1] :: string,
 					categoria = a[2] :: string,
 					cf = CFrame.new(
-						a[3] :: number, a[4] :: number, a[5] :: number, a[6] :: number, a[7] :: number,
-						a[8] :: number, a[9] :: number, a[10] :: number, a[11] :: number, a[12] :: number,
-						a[13] :: number, a[14] :: number
+						a[3] :: number,
+						a[4] :: number,
+						a[5] :: number,
+						a[6] :: number,
+						a[7] :: number,
+						a[8] :: number,
+						a[9] :: number,
+						a[10] :: number,
+						a[11] :: number,
+						a[12] :: number,
+						a[13] :: number,
+						a[14] :: number
 					),
 					escala = a[15] :: number,
 					parte = nil,
@@ -257,14 +276,15 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		if camara == nil then
 			return
 		end
-		local p = camara.CFrame.Position
+		-- La cámara, en coordenadas del planeta (las de los datos y los atributos Centro).
+		local p = MontarRegion.origen(opciones.Montaje):PointToObjectSpace(camara.CFrame.Position)
 		local margen = cfg.horizonte_margen
 		local auroraLejos = false
 		if silueta then
 			local c = (silueta :: BasePart):GetAttribute("Centro") :: Vector3
 			auroraLejos = (p - c).Magnitude > cfg.silueta_aurora
-			local visible = auroraLejos and sobreHorizonte(p, c, 300, margen)
-			;(silueta :: BasePart).LocalTransparencyModifier = if visible then 0 else 1
+			local visible = auroraLejos and sobreHorizonte(p, c, 300, margen);
+			(silueta :: BasePart).LocalTransparencyModifier = if visible then 0 else 1
 		end
 		for _, e in entradas do
 			local d = math.max((p - e.centro).Magnitude - e.radio, 0)
@@ -290,7 +310,10 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 			end
 			t.activo = activo
 			for _, a in t.arboles do
-				local c = if a.categoria == "hierba" then cfg.hierba elseif esArbol(a.tipo) then cfg.arboles else cfg.vegetacion
+				local c = if a.categoria == "hierba"
+					then cfg.hierba
+					elseif esArbol(a.tipo) then cfg.arboles
+					else cfg.vegetacion
 				local pos = a.cf.Position
 				local nivel = "oculto"
 				if activo and sobreHorizonte(p, pos, 30, margen) then

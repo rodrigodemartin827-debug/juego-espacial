@@ -44,7 +44,8 @@ end
 local function opcionesMontaje(
 	idAtlas: string?,
 	idsTerreno: { [string]: string }?,
-	destino: Instance
+	destino: Instance,
+	origen: CFrame?
 ): MontarRegion.Opciones
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
 	local silueta = carpeta:FindFirstChild("Silueta")
@@ -65,19 +66,21 @@ local function opcionesMontaje(
 		IdsTerreno = idsTerreno,
 		Destino = destino,
 		Datos = datosDe(carpeta),
+		Origen = origen,
 	}
 end
 
--- En Studio: monta la región en Workspace (con el atlas y las texturas de terreno ya subidas).
-function EjemploArranque.montarEnStudio(idAtlas: string, idsTerreno: { [string]: string }): Model
-	return MontarRegion.montar(opcionesMontaje(idAtlas, idsTerreno, workspace))
+-- En Studio: monta la región en Workspace (con el atlas y las texturas de terreno ya subidas). `origen` es el marco del
+-- centro del planeta (nil = el origen del mundo, como en Blender).
+function EjemploArranque.montarEnStudio(idAtlas: string, idsTerreno: { [string]: string }, origen: CFrame?): Model
+	return MontarRegion.montar(opcionesMontaje(idAtlas, idsTerreno, workspace, origen))
 end
 
 -- En el cliente: niveles de detalle y vegetación. Devuelve una función para pararlo.
-function EjemploArranque.iniciarCliente(idAtlas: string?): () -> ()
+function EjemploArranque.iniciarCliente(idAtlas: string?, origen: CFrame?): () -> ()
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
 	local region = workspace:WaitForChild("Region1_ValleDelAlba") :: Model
-	local montaje = opcionesMontaje(idAtlas, nil, workspace)
+	local montaje = opcionesMontaje(idAtlas, nil, workspace, origen)
 	local d = carpeta:WaitForChild("Datos")
 	local vegetacion: { [string]: { { any } } } = {}
 	local carpetaVeg = d:FindFirstChild("vegetacion")
@@ -91,7 +94,8 @@ function EjemploArranque.iniciarCliente(idAtlas: string?): () -> ()
 	local trozos: { [string]: { centro: Vector3, radio: number } } = {}
 	for _, t in montaje.Datos.terreno do
 		if t.nivel == "detalle" then
-			trozos[t.trozo] = { centro = Vector3.new(t.centro_lod[1], t.centro_lod[2], t.centro_lod[3]), radio = t.radio }
+			trozos[t.trozo] =
+				{ centro = Vector3.new(t.centro_lod[1], t.centro_lod[2], t.centro_lod[3]), radio = t.radio }
 		end
 	end
 	return LodRegion.iniciar({
