@@ -82,6 +82,8 @@ end
 function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
 	local n = 0
+	-- Piezas de doble cara (lonas de una capa: datos/piezas.json, «doble_cara»). DoubleSided solo se puede poner en Studio.
+	local infoPiezas = require(carpeta:WaitForChild("Datos"):WaitForChild("piezas") :: ModuleScript) :: any
 	for _, nombre in { "Piezas", "Silueta" } do
 		local c = carpeta:FindFirstChild(nombre)
 		if c == nil then
@@ -94,6 +96,9 @@ function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 				sa.AlphaMode = Enum.AlphaMode.Overlay
 				sa.Parent = p
 				p.RenderFidelity = Enum.RenderFidelity.Performance
+				local base = string.gsub(p.Name, "__lejos$", "")
+				local info = infoPiezas[base]
+				p.DoubleSided = info ~= nil and info.doble_cara == true
 				n += 1
 			end
 		end

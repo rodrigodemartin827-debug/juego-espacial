@@ -82,11 +82,17 @@ local SIN_SOMBRA = {
 }
 
 --[[
-	PROBADO EN STUDIO: el importador 3D deja los TROZOS DE TERRENO girados 180° sobre su eje vertical respecto a los
-	datos (las piezas del kit no). Sin este giro quedan huecos de decenas de studs entre trozos, los caminos no casan y
-	los edificios flotan o se hunden. Se aplica a los trozos detallados (aquí) y a los lejanos (LodRegion).
+	PROBADO EN STUDIO: el importador 3D deja TODAS las mallas de estos FBX (exportados con delante -Z y arriba Y) giradas
+	180° sobre su eje vertical respecto a los datos. Sin este giro:
+	  * los trozos de terreno dejan huecos de decenas de studs entre ellos y no casan con caminos ni edificios;
+	  * las piezas de los edificios quedan del revés: cada pared mira hacia DENTRO, y desde fuera se ve su cara trasera
+	    (es decir, nada: «láminas transparentes») y a través de ella el interior de la pared de enfrente.
+	Se aplica alrededor del centro de cada malla: a las piezas (copiarPieza), al terreno detallado (aquí) y al lejano
+	(LodRegion). La silueta de Aurora NO lo lleva: está por revisar (su textura sale mal puesta y no se ha podido
+	comprobar si encaja girada o sin girar).
 ]]
-MontarRegion.GIRO_TERRENO = CFrame.Angles(0, math.pi, 0)
+MontarRegion.GIRO_IMPORTACION = CFrame.Angles(0, math.pi, 0)
+MontarRegion.GIRO_TERRENO = MontarRegion.GIRO_IMPORTACION
 
 -- Marco del centro del planeta (ver Opciones.Origen).
 function MontarRegion.origen(opciones: Opciones): CFrame
@@ -187,7 +193,11 @@ function MontarRegion.copiarPieza(
 	local parte = (plantilla :: MeshPart):Clone()
 	-- Roblox centra cada malla en su caja: se compensa con el centro guardado (escalado)
 	parte.Size = parte.MeshSize * escala
-	parte.CFrame = MontarRegion.origen(opciones) * cfGrupo * aCFrame(entrada, 2) * CFrame.new(v3(nivel.centro) * escala)
+	parte.CFrame = MontarRegion.origen(opciones)
+		* cfGrupo
+		* aCFrame(entrada, 2)
+		* CFrame.new(v3(nivel.centro) * escala)
+		* MontarRegion.GIRO_IMPORTACION
 	parte.Color = Color3.fromHex(entrada[17] :: string)
 	if opciones.IdAtlas then
 		parte.TextureID = opciones.IdAtlas :: string

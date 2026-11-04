@@ -13,7 +13,12 @@ Reglas para que en Roblox se reutilicen:
   * Ninguna colocación usa espejo (un CFrame de Roblox no puede reflejar): el lado derecho de un tejado o de un
     hastial es la misma pieza girada 180°.
   * Cada pieza tiene una versión DETALLADA y una SIMPLE para lejos (ver PIEZAS al final).
-  * Las caras que nunca se ven (dorso de las paredes, bases enterradas) no se crean.
+  * Las caras que nunca se ven (bases enterradas, la cara de una pieza pegada a la pared) no se crean.
+  * Las paredes y los hastiales TIENEN GROSOR (MEDIDAS["grosor_pared"]): cara interior y cantos. Probado en Roblox:
+    una pared de una sola cara desaparece desde dentro del edificio y de canto (Roblox solo dibuja la cara delantera
+    de cada triángulo). La puerta y las contraventanas también son cerradas. Las lonas (toldo) son de una sola capa y
+    se marcan DOBLE_CARA (en Roblox, MeshPart.DoubleSided). Las versiones de lejos siguen siendo una cara: de lejos
+    solo se ven desde fuera.
 
 Convención de las paredes: x ∈ [0, 8] a lo largo de la pared, cara exterior en y = 0 mirando a -Y (+Y es hacia
 dentro del edificio), z ∈ [0, 10]. Escala: un R6 mide 5 studs; una puerta, 4 × 7,4.
@@ -34,6 +39,7 @@ MEDIDAS = dict(
     vuelo=0.9,  # lo que sale el tejado por el hastial
     hondo_ventana=0.55,  # profundidad del hueco de la ventana
     hondo_puerta=0.6,
+    grosor_pared=0.6,  # grosor de paredes y hastiales (hacia dentro: +Y). Igual que el hueco de la puerta
 )
 M = MEDIDAS["modulo"]
 H = MEDIDAS["piso"]
@@ -75,31 +81,55 @@ def _cuadro(m, mat, uv=UV_FACHADA):
 # ==============================================================================================================
 
 
-def _fachada_con_hueco(m, mat, x0, z0, x1, z1, hondo, fondo_mat, mat_jambas="piedra_clara"):
-    """Frente de un módulo de pared con un hueco: tres o cuatro paños, las caras del hueco y el fondo."""
-    Y = np.array([0, -1.0, 0])
+G = MEDIDAS["grosor_pared"]
+MAT_INTERIOR = "pared_lisa"  # el interior de todas las paredes: yeso liso (teñible, toma el color de la copia)
+
+
+def _paños(x0, z0, x1, z1):
+    """Los paños de un módulo de pared alrededor de un hueco (x0, z0, x1, z1); sin hueco, el módulo entero."""
+    if x0 is None:
+        return [(0, 0, M, H)]
     trozos = [(0, 0, x0, H), (x1, 0, M, H), (x0, z1, x1, H)]
     if z0 > 0:
         trozos.append((x0, 0, x1, z0))
-    for (a, b, c, d) in trozos:
+    return trozos
+
+
+def _dorso_pared(m, hueco=(None, None, None, None)):
+    """Grosor de un módulo de pared: cara interior en y = G (mirando a +Y, con el mismo hueco) y canto de arriba.
+    Sin cantos de los lados: los módulos siempre se juntan con otro o con la pared perpendicular de la esquina (en la
+    esquina, ese canto quedaría en el mismo plano que la fachada de al lado y parpadearía). Sin canto de abajo: la
+    pared apoya en el suelo o en el muro de debajo."""
+    for (a, b, c, d) in _paños(*hueco):
+        cara(m, [(a, G, b), (c, G, b), (c, G, d), (a, G, d)], (0, 1, 0), MAT_INTERIOR, UV_FACHADA)
+    cara(m, [(0, 0, H), (M, 0, H), (M, G, H), (0, G, H)], (0, 0, 1), MAT_INTERIOR)
+    return m
+
+
+def _fachada_con_hueco(m, mat, x0, z0, x1, z1, hondo, fondo_mat, mat_jambas="piedra_clara"):
+    """Módulo de pared con un hueco: paños del frente, caras del hueco (de todo el grosor de la pared), el fondo (el
+    cristal, a `hondo`) y el dorso."""
+    Y = np.array([0, -1.0, 0])
+    for (a, b, c, d) in _paños(x0, z0, x1, z1):
         cara(m, [(a, 0, b), (c, 0, b), (c, 0, d), (a, 0, d)], Y, mat, UV_FACHADA)
-    hd = hondo
+    hd = G  # las jambas atraviesan la pared entera (si no, quedaría una rendija hasta la cara interior)
     if z0 > 0:
         cara(m, [(x0, 0, z0), (x1, 0, z0), (x1, hd, z0), (x0, hd, z0)], (0, 0, 1), mat_jambas)
     cara(m, [(x0, 0, z1), (x1, 0, z1), (x1, hd, z1), (x0, hd, z1)], (0, 0, -1), mat_jambas)
     cara(m, [(x0, 0, z0), (x0, hd, z0), (x0, hd, z1), (x0, 0, z1)], (1, 0, 0), mat_jambas)
     cara(m, [(x1, 0, z0), (x1, hd, z0), (x1, hd, z1), (x1, 0, z1)], (-1, 0, 0), mat_jambas)
     if fondo_mat:
-        cara(m, [(x0, hd, z0), (x1, hd, z0), (x1, hd, z1), (x0, hd, z1)], Y, fondo_mat)
-    return m
+        # El cristal solo por fuera: desde dentro de la casa se ve el exterior por la ventana.
+        cara(m, [(x0, hondo, z0), (x1, hondo, z0), (x1, hondo, z1), (x0, hondo, z1)], Y, fondo_mat)
+    return _dorso_pared(m, (x0, z0, x1, z1))
 
 
 def _alfeizar(m, x0, x1, z, salida=0.45, alto=0.35):
     return m.caja((x0 - 0.5, -salida, z - alto), (x1 + 0.5, 0.0, z), "piedra_clara", sin=("+y",))
 
 
-def pared_lisa(baja=False):
-    return _cuadro(Malla(), "pared_lisa_baja" if baja else "pared_lisa")
+def pared_lisa(baja=False, mat=None):
+    return _dorso_pared(_cuadro(Malla(), mat or ("pared_lisa_baja" if baja else "pared_lisa")))
 
 
 def pared_ventana(baja=False, entramado=False):
@@ -122,10 +152,12 @@ def pared_puerta():
 
 
 def puerta():
-    """La hoja de la puerta (teñible), al fondo del hueco de pared_puerta."""
+    """La hoja de la puerta (teñible), al fondo del hueco de pared_puerta: una tabla cerrada (se ve también desde
+    dentro de la casa). Sin canto de abajo: apoya en el suelo."""
     x0, z0, x1, z1 = PUERTA
-    y = MEDIDAS["hondo_puerta"] - 0.05
-    return cara(Malla(), [(x0, y, 0), (x1, y, 0), (x1, y, z1), (x0, y, z1)], (0, -1, 0), "puerta")
+    y0 = MEDIDAS["hondo_puerta"] - 0.05  # la cara de fuera, donde estaba
+    y1 = G - 0.02  # la de dentro, casi a ras de la cara interior de la pared
+    return Malla().caja((x0, y0, 0.0), (x1, y1, z1), "puerta", sin=("-z",))
 
 
 def pared_escaparate():
@@ -143,10 +175,13 @@ def contraventanas():
     for a in (x0 - 0.5 - w, x1 + 0.5):
         cara(m, [(a, y, z0 + 0.1), (a + w, y, z0 + 0.1), (a + w, y, z1 - 0.1), (a, y, z1 - 0.1)], (0, -1, 0),
              "contraventana")
-        izq = a < x0
-        borde = a if izq else a + w  # canto exterior: da grosor
-        cara(m, [(borde, y, z0 + 0.1), (borde, 0, z0 + 0.1), (borde, 0, z1 - 0.1), (borde, y, z1 - 0.1)],
-             (-1 if izq else 1, 0, 0), "contraventana")
+        za, zb = z0 + 0.1, z1 - 0.1
+        # Cantos: los dos de los lados y el de arriba y el de abajo (sin ellos, de lado o desde abajo es una lámina).
+        # La cara de atrás no hace falta: está pegada a la fachada.
+        for xc, nx in ((a, -1), (a + w, 1)):
+            cara(m, [(xc, y, za), (xc, 0, za), (xc, 0, zb), (xc, y, zb)], (nx, 0, 0), "contraventana")
+        for zc, nz in ((za, -1), (zb, 1)):
+            cara(m, [(a, y, zc), (a + w, y, zc), (a + w, 0, zc), (a, 0, zc)], (0, 0, nz), "contraventana")
     return m
 
 
@@ -272,6 +307,8 @@ def _faldones(m, x0, x1, fondo, mat, detalle=True, uv_x0=None, uv_ancho=None):
         Am = np.stack([eu / su, ev / largo])
         b = np.array([-(eu @ u_cero) / su, -(ev @ A) / largo])
         cara(m, [A + up, B + up, C + up, Dd + up], n, mat, ("plano", Am, b))
+        if not detalle:
+            cara(m, [A, B, C, Dd], -n, "madera_oscura")  # panza: desde abajo el vuelo del tejado no es transparente
         if detalle:
             cara(m, [A, B, B + up, A + up], -ev, "teja_lejos")  # canto del alero
             cara(m, [A, B, C, Dd], -n, "madera_oscura")  # panza (se ve desde abajo)
@@ -309,7 +346,12 @@ def tejado_remate(fondo, lejos=False):
 def hastial(fondo):
     """Muro triangular del hastial izquierdo (cara exterior en x = 0, mirando a -X). Teñible, con óculo pintado."""
     medio = fondo / 2
-    return cara(Malla(), [(0, 0, 0), (0, fondo, 0), (0, medio, medio * PEND)], (-1, 0, 0), "hastial")
+    top = medio * PEND
+    m = cara(Malla(), [(0, 0, 0), (0, fondo, 0), (0, medio, top)], (-1, 0, 0), "hastial")
+    # Grosor (hacia dentro, +X): cara interior. Los cantos inclinados quedan bajo el vuelo del tejado y el de abajo
+    # apoya en el muro: no se ven.
+    cara(m, [(G, 0, 0), (G, fondo, 0), (G, medio, top)], (1, 0, 0), MAT_INTERIOR)
+    return m
 
 
 def cumbrera(fondo, largo=M):
@@ -321,6 +363,9 @@ def cumbrera(fondo, largo=M):
     for lado in (-1, 1):
         cara(m, [(0, medio + lado * w, z), (largo, medio + lado * w, z), (largo, medio, z + h), (0, medio, z + h)],
              (0, lado, 1), "cumbrera")
+    # Tapas de los extremos (mirando a lo largo de la cumbre se veía el hueco).
+    for x, nx in ((0, -1), (largo, 1)):
+        cara(m, [(x, medio - w, z), (x, medio + w, z), (x, medio, z + h)], (nx, 0, 0), "cumbrera")
     return m
 
 
@@ -912,14 +957,21 @@ def SIN_LEJOS():
     return None
 
 
+# Piezas que en Roblox se dibujan por las dos caras (MeshPart.DoubleSided): solo las lonas y telas de una capa, que se
+# ven desde los dos lados y a las que dar grosor no aporta nada. Todo lo demás es cerrado (o tiene la cara oculta
+# pegada a otra pieza). DoubleSided dobla lo que cuesta dibujar esas piezas: usarlo lo menos posible.
+DOBLE_CARA = {"Toldo"}
+
+
 PIEZAS = {
-    "Pared_Lisa": (lambda: pared_lisa(), None, YESO, "Paredes"),
-    "Pared_Lisa_Baja": (lambda: pared_lisa(True), None, YESO, "Paredes"),
+    "Pared_Lisa": (lambda: pared_lisa(), lambda: _cuadro(Malla(), "pared_lisa"), YESO, "Paredes"),
+    "Pared_Lisa_Baja": (lambda: pared_lisa(True), lambda: _cuadro(Malla(), "pared_lisa_baja"), YESO, "Paredes"),
     "Pared_Ventana": (lambda: pared_ventana(), lambda: pared_ventana_simple(), YESO, "Paredes"),
     "Pared_Ventana_Baja": (lambda: pared_ventana(True), lambda: pared_ventana_simple(True), YESO, "Paredes"),
     "Pared_Puerta": (pared_puerta, lambda: _cuadro(Malla(), "pared_puerta_lejos"), YESO, "Paredes"),
     "Pared_Escaparate": (pared_escaparate, lambda: _cuadro(Malla(), "pared_escaparate_lejos"), YESO, "Paredes"),
-    "Entramado_Lisa": (lambda: _cuadro(Malla(), "entramado_lisa"), None, YESO, "Paredes"),
+    "Entramado_Lisa": (lambda: pared_lisa(mat="entramado_lisa"), lambda: _cuadro(Malla(), "entramado_lisa"), YESO,
+                       "Paredes"),
     "Entramado_Ventana": (lambda: pared_ventana(entramado=True), lambda: pared_ventana_simple(entramado=True), YESO,
                           "Paredes"),
     "Esquina": (lambda: esquina(), lambda: esquina(True), YESO, "Paredes"),
