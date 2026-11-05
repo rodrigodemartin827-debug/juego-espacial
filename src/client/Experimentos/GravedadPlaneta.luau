@@ -23,7 +23,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
-local Experimento = require(Shared:WaitForChild("Experimentos"):WaitForChild("PlanetaRedondo") :: ModuleScript)
+local Experimento = require(Shared.Experimentos.PlanetaRedondo)
 local NavesConfig = require(Shared.Naves.Config)
 
 type Estado = {
@@ -106,7 +106,7 @@ end
 
 -- ===== Animaciones (las del Animate del personaje, para que sean las mismas que fuera del planeta) =====
 
-local ANIMACIONES = { idle = true, walk = true, run = true, jump = false, fall = true }
+local ANIMACIONES: { [string]: boolean } = { idle = true, walk = true, run = true, jump = false, fall = true }
 
 local function cargarPistas(personaje: Model, humanoid: Humanoid): { [string]: AnimationTrack }
 	local pistas = {}
@@ -547,7 +547,7 @@ function GravedadPlaneta.Iniciar()
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 		end
 	end)
-	UserInputService.InputChanged:Connect(function(entrada, procesada)
+	UserInputService.InputChanged:Connect(function(entrada: InputObject, procesada: boolean)
 		if estado == nil then
 			return
 		end
