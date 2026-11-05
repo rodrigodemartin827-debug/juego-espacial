@@ -29,14 +29,15 @@ import kit as K  # noqa: E402
 
 def registrar_puente_desde_blend():
     """El puente se registra en kit.PIEZAS al construir la región (su largo y su alto salen del terreno). Aquí se
-    recuperan de la malla K_Puente que ya hay en el .blend: el largo de su caja (los pilares de los extremos sobresalen
-    2,7 studs por cada lado) y el alto del arranque de los arcos (hay vértices a -alto y la punta de los tajamares a
-    -0,45·alto)."""
+    recuperan de la malla K_Puente que ya hay en el .blend: el largo, de los vértices a la altura del tablero (z = 0;
+    los pilares de los extremos sobresalen 2,7 studs por cada lado; las rampas bajan desde ahí, así que no cuentan) y
+    el alto del arranque de los arcos (hay vértices a -alto y la punta de los tajamares a -0,45·alto)."""
     me = bpy.data.meshes.get("K_Puente")
     if me is None:
         raise RuntimeError("no está K_Puente en el .blend")
     co = np.array([v.co[:] for v in me.vertices])
-    largo = float(co[:, 0].max() - co[:, 0].min()) - 5.4
+    tablero = co[np.abs(co[:, 2]) < 0.01]
+    largo = 2 * float(np.abs(tablero[:, 0]).max()) - 5.4
     zs = np.unique(np.round(co[:, 2], 3))
     alto = None
     for z in zs:

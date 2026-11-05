@@ -1885,11 +1885,11 @@
     0.0
    ],
    "tamano": [
-    88.2803,
+    116.8803,
     16.2,
     29.9905
    ],
-   "triangulos": 220
+   "triangulos": 248
   },
   "lejos": {
    "centro": [
@@ -1898,11 +1898,11 @@
     0.0
    ],
    "tamano": [
-    86.8803,
+    116.8803,
     15.2,
     13.0
    ],
-   "triangulos": 96
+   "triangulos": 124
   },
   "color": "#FFFFFF",
   "colision": true

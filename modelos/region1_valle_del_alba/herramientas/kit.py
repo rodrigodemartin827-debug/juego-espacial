@@ -736,6 +736,10 @@ def molino_aspas(lejos=False):
     return m
 
 
+RAMPA_LARGO = 15.0  # rampas de acceso del puente (studs): unos 22° de pendiente
+RAMPA_ALTO = 6.0
+
+
 def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, lejos=False):
     """Puente de piedra de `arcos` ojos a lo largo de X, centrado en el origen, con el tablero en z = 0."""
     m = Malla()
@@ -751,8 +755,13 @@ def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, lejos=False):
     r = luz / 2
     kz = alto * 0.85 / r
     nseg = 4 if lejos else 8
-    xs, zs = [-L / 2 - 2.0], [-12.0]
-    for c in centros:  # contorno del paramento: abajo sigue los arcos; arriba, el tablero
+    # Rampas de acceso: el tablero queda 3,5-5,5 studs por encima de las orillas, más que el paso del personaje
+    # (PROBADO EN STUDIO: sin rampa se metía por debajo del tablero). Cada rampa baja RAMPA_ALTO en RAMPA_LARGO y
+    # acaba enterrada en la orilla.
+    xe = L / 2 + 2.0  # extremo del tablero
+    xr = xe + RAMPA_LARGO  # extremo de la rampa
+    xs, zs = [-xr], [-12.0]
+    for c in centros:  # contorno del paramento: abajo sigue los arcos; arriba, el tablero y las rampas
         xs.append(c - r)
         zs.append(-12.0)
         for k in range(nseg + 1):
@@ -761,11 +770,24 @@ def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, lejos=False):
             zs.append(-alto + r * math.sin(ang) * kz)
         xs.append(c + r)
         zs.append(-12.0)
-    xs += [L / 2 + 2.0, L / 2 + 2.0, -L / 2 - 2.0]
-    zs += [-12.0, 0.0, 0.0]
+    xs += [xr, xr, xe, -xe, -xr]
+    zs += [-12.0, -RAMPA_ALTO, 0.0, 0.0, -RAMPA_ALTO]
     for yy, nn in ((-w + 0.3, -1), (w - 0.3, 1)):
         cara(m, [(x_, yy, z_) for x_, z_ in zip(xs, zs)], (0, nn, 0), "sillar_muro",
              uv_plano((-L / 2, yy, -12), (1, 0, 0), (0, 0, 1), 12, 12))
+    # Malla cerrada (la colisión precisa de una malla abierta sale con formas raras y el personaje se colaba por
+    # debajo): suelo de estribos y pilas en z = -12 y piso de las rampas.
+    bordes = [-xr] + [v for c in centros for v in (c - r, c + r)] + [xr]
+    for x0, x1 in zip(bordes[0::2], bordes[1::2]):
+        cara(m, [(x0, -w + 0.3, -12.0), (x1, -w + 0.3, -12.0), (x1, w - 0.3, -12.0), (x0, w - 0.3, -12.0)],
+             (0, 0, -1), "sillar_muro")
+    for c in centros:  # caras de las pilas dentro de cada ojo, del fondo al arranque del arco (faltaban: hueco)
+        for xp, nx in ((c - r, 1), (c + r, -1)):
+            cara(m, [(xp, -w + 0.3, -12.0), (xp, w - 0.3, -12.0), (xp, w - 0.3, -alto), (xp, -w + 0.3, -alto)],
+                 (nx, 0, 0), "sillar_muro")
+    for s in (-1, 1):
+        cara(m, [(s * xe, -w + 0.3, 0.0), (s * xr, -w + 0.3, -RAMPA_ALTO), (s * xr, w - 0.3, -RAMPA_ALTO),
+                 (s * xe, w - 0.3, 0.0)], (s * RAMPA_ALTO, 0, RAMPA_LARGO), "piedra_oscura")
     for c in centros:  # intradós
         for k in range(nseg):
             a0, a1 = math.pi - math.pi * k / nseg, math.pi - math.pi * (k + 1) / nseg
@@ -775,10 +797,11 @@ def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, lejos=False):
                      (p0[0], w - 0.3, p0[1])], (c - (p0[0] + p1[0]) / 2, 0, -1), "piedra_media")
     cara(m, [(-L / 2 - 2, -w + 0.3, 0.0), (L / 2 + 2, -w + 0.3, 0.0), (L / 2 + 2, w - 0.3, 0.0),
              (-L / 2 - 2, w - 0.3, 0.0)], (0, 0, 1), "piedra_oscura")
-    # Testeros: los extremos del puente cerrados (por ahí se veía el interior, sin caras, al llegar al puente).
-    for xe, nx in ((-L / 2 - 2.0, -1), (L / 2 + 2.0, 1)):
-        cara(m, [(xe, -w + 0.3, -12.0), (xe, w - 0.3, -12.0), (xe, w - 0.3, 0.0), (xe, -w + 0.3, 0.0)], (nx, 0, 0),
-             "sillar_muro")
+    # Testeros: los extremos cerrados (por ahí se veía el interior, sin caras, al llegar al puente). Ahora van al
+    # final de cada rampa, enterrados en la orilla.
+    for s in (-1, 1):
+        cara(m, [(s * xr, -w + 0.3, -12.0), (s * xr, w - 0.3, -12.0), (s * xr, w - 0.3, -RAMPA_ALTO),
+                 (s * xr, -w + 0.3, -RAMPA_ALTO)], (s, 0, 0), "sillar_muro")
     for lado in (-1, 1):
         y0 = -w if lado < 0 else w - 1.4
         m.caja((-L / 2 - 2.0, y0, 0.0), (L / 2 + 2.0, y0 + 1.4, 3.2), "sillar_muro", sin=("-z",))  # pretil cerrado
