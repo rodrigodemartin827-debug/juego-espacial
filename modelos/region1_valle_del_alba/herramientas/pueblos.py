@@ -254,8 +254,10 @@ def aurora():
     for k, (nombre, emb, (fu, fv), fr) in enumerate(tiendas_plaza):
         ed = ED.edificio(4, 3, 3, 500 + k, "tienda", emblema=emb)
         poner_edificio(t, nombre, ed, fu, fv, fr, comprobar=False)
-    # casas de tres pisos que cierran las esquinas de la plaza junto al ayuntamiento
-    poner_edificio(t, "Aurora_Plaza_NO", ED.edificio(2, 3, 3, 520, "casa"), -P - ac, P - 8.0, 0.0, comprobar=False)
+    # La esquina noroeste de la plaza ya la cierra Aurora_Materiales (32 studs de fachada, de v = 10 a v = 42).
+    # Antes había aquí una casa «Aurora_Plaza_NO» (v = 24 a 40) metida dentro de la tienda: dos edificios fundidos,
+    # con las paredes de los dos colores asomando. Se quitó; su caja estaba dentro de la de la tienda, así que
+    # quitarla no cambia nada más del trazado.
 
     # ---------------------------------------------------------------- frentes de calle
     # Cada calle tiene dos frentes (uno por lado); se parten en los cruces con las calles perpendiculares.
