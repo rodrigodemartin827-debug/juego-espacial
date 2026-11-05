@@ -23,6 +23,9 @@
         "EjemploArranque": {
           "$path": "modelos/region1_valle_del_alba/roblox/EjemploArranque.luau"
         },
+        "AlturasRegion": {
+          "$path": "modelos/region1_valle_del_alba/roblox/AlturasRegion.luau"
+        },
         "Piezas": {
           "$className": "Folder",
           "$ignoreUnknownInstances": true
