@@ -112,18 +112,29 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		end
 	end
 	local silueta: BasePart? = nil
-	for _, d in opciones.Region:GetDescendants() do
+	local registrados: { [Instance]: boolean } = {}
+	--[[
+		Registra un modelo con LOD (o la silueta). PROBADO EN STUDIO: la región llega al cliente POCO A POCO (aunque sea
+		Persistent), así que lo que no estaba al arrancar se registra cuando llega (DescendantAdded). Antes se recogía
+		todo una sola vez y los edificios que llegaban tarde se quedaban siempre en detalle.
+	]]
+	local function registrar(d: Instance)
+		if registrados[d] then
+			return
+		end
 		local lod = d:GetAttribute("Lod")
 		if typeof(lod) ~= "string" then
-			continue
+			return
 		end
 		if lod == "silueta" and d:IsA("BasePart") then
+			registrados[d] = true
 			silueta = d
-			continue
+			return
 		end
 		if not d:IsA("Model") then
-			continue
+			return
 		end
+		registrados[d] = true
 		table.insert(entradas, {
 			modelo = d,
 			tipo = lod :: string,
@@ -136,6 +147,10 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 			nivel = "detalle",
 		})
 	end
+	for _, d in opciones.Region:GetDescendants() do
+		registrar(d)
+	end
+	local llegada = opciones.Region.DescendantAdded:Connect(registrar)
 
 	-- crea (una vez) la versión lejana de una entrada
 	local function lejosDe(e: Entrada): Instance?
@@ -192,6 +207,13 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 	end
 
 	local function poner(e: Entrada, nivel: string)
+		-- El Detalle puede llegar al cliente después que su modelo: si llega ya con otro nivel puesto, se vuelve a aplicar.
+		if e.detalle == nil then
+			e.detalle = e.modelo:FindFirstChild("Detalle")
+			if e.detalle ~= nil and e.nivel ~= "detalle" then
+				e.nivel = "detalle"
+			end
+		end
 		if nivel == e.nivel then
 			return
 		end
@@ -331,6 +353,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 	end)
 	return function()
 		conexion:Disconnect()
+		llegada:Disconnect()
 	end
 end
 

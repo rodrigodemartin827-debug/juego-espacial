@@ -88,8 +88,8 @@ local SIN_SOMBRA = {
 	  * las piezas de los edificios quedan del revés: cada pared mira hacia DENTRO, y desde fuera se ve su cara trasera
 	    (es decir, nada: «láminas transparentes») y a través de ella el interior de la pared de enfrente.
 	Se aplica alrededor del centro de cada malla: a las piezas (copiarPieza), al terreno detallado (aquí) y al lejano
-	(LodRegion). La silueta de Aurora NO lo lleva: está por revisar (su textura sale mal puesta y no se ha podido
-	comprobar si encaja girada o sin girar).
+	(LodRegion) y a la silueta de Aurora (probado: girada, su torre cae sobre la torre de verdad; sin girar quedaban dos torres
+	y la silueta se mezclaba con los edificios, lo que parecía «textura mal puesta»).
 ]]
 MontarRegion.GIRO_IMPORTACION = CFrame.Angles(0, math.pi, 0)
 MontarRegion.GIRO_TERRENO = MontarRegion.GIRO_IMPORTACION
@@ -295,7 +295,10 @@ function MontarRegion.montar(opciones: Opciones): Model
 		local s = (opciones.Silueta :: MeshPart):Clone()
 		local info = datos.silueta :: Silueta
 		s.Name = "Silueta_Aurora"
-		s.CFrame = MontarRegion.origen(opciones) * aCFrame(info.cframe, 1) * CFrame.new(v3(info.centro))
+		s.CFrame = MontarRegion.origen(opciones)
+			* aCFrame(info.cframe, 1)
+			* CFrame.new(v3(info.centro))
+			* MontarRegion.GIRO_IMPORTACION
 		if opciones.IdAtlas then
 			s.TextureID = opciones.IdAtlas :: string
 		end
