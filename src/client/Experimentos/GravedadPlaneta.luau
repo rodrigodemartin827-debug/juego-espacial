@@ -38,6 +38,7 @@ type Estado = {
 	PistaActual: string?,
 	Animate: LocalScript?,
 	UltimoSalto: number,
+	SaltoSoltado: boolean, -- el botón de saltar se ha soltado desde el último salto
 	EnSuelo: boolean,
 	Colisiones: { [BasePart]: string }, -- grupo de colisión de cada parte antes de activar (se devuelve al desactivar)
 }
@@ -213,6 +214,7 @@ local function activar(personaje: Model, humanoid: Humanoid, raiz: BasePart)
 		PistaActual = nil,
 		Animate = if animate and animate:IsA("LocalScript") then animate else nil,
 		UltimoSalto = 0,
+		SaltoSoltado = false,
 		EnSuelo = false,
 		Colisiones = colisiones,
 	}
@@ -338,7 +340,8 @@ local function pasoFisica(dt: number)
 	-- Capa de colisión fija de la región 1 (su mapa de alturas): el suelo de verdad aunque la colisión de la malla
 	-- tenga agujeros. Se usa la más alta de las dos (el rayo también ve edificios, puentes y piedras).
 	local relativa = raiz.Position - Experimento.Centro()
-	local mapa = mapaRegion
+	-- Solo para comparar en Studio (antes/después): con el atributo PruebaSinMapaAlturas en el jugador no se usa el mapa.
+	local mapa = if jugador:GetAttribute("PruebaSinMapaAlturas") then nil else mapaRegion
 	local sueloMapa = if mapa then mapa:radio(relativa) else nil
 	if sueloMapa then
 		distancia = math.min(distancia, relativa.Magnitude - sueloMapa)
@@ -395,9 +398,16 @@ local function pasoFisica(dt: number)
 		end
 	end
 
+	-- Salto: UNA vez por pulsación. Los controles de Roblox ponen Humanoid.Jump a true en cada fotograma mientras el botón
+	-- está pulsado; si se saltara cada vez que vale true, al tocar el suelo con el botón aún pulsado se volvería a
+	-- saltar (el «doble salto»). Solo cuenta el paso de suelto a pulsado.
+	local pulsado = humanoid.Jump
+	if not pulsado then
+		e.SaltoSoltado = true
+	end
 	if enSuelo then
-		if humanoid.Jump then
-			humanoid.Jump = false
+		if pulsado and e.SaltoSoltado then
+			e.SaltoSoltado = false
 			radial = p.Salto
 			e.UltimoSalto = ahora
 			e.EnSuelo = false
