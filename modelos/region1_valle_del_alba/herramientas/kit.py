@@ -775,9 +775,13 @@ def puente(largo=64.0, ancho=13.0, alto=8.0, arcos=3, lejos=False):
                      (p0[0], w - 0.3, p0[1])], (c - (p0[0] + p1[0]) / 2, 0, -1), "piedra_media")
     cara(m, [(-L / 2 - 2, -w + 0.3, 0.0), (L / 2 + 2, -w + 0.3, 0.0), (L / 2 + 2, w - 0.3, 0.0),
              (-L / 2 - 2, w - 0.3, 0.0)], (0, 0, 1), "piedra_oscura")
+    # Testeros: los extremos del puente cerrados (por ahí se veía el interior, sin caras, al llegar al puente).
+    for xe, nx in ((-L / 2 - 2.0, -1), (L / 2 + 2.0, 1)):
+        cara(m, [(xe, -w + 0.3, -12.0), (xe, w - 0.3, -12.0), (xe, w - 0.3, 0.0), (xe, -w + 0.3, 0.0)], (nx, 0, 0),
+             "sillar_muro")
     for lado in (-1, 1):
         y0 = -w if lado < 0 else w - 1.4
-        m.caja((-L / 2 - 2.0, y0, 0.0), (L / 2 + 2.0, y0 + 1.4, 3.2), "sillar_muro", sin=("-z", "-x", "+x"))
+        m.caja((-L / 2 - 2.0, y0, 0.0), (L / 2 + 2.0, y0 + 1.4, 3.2), "sillar_muro", sin=("-z",))  # pretil cerrado
         if not lejos:
             for xe in (-L / 2 - 1.5, L / 2 + 1.5):
                 m.caja((xe - 1.2, y0 - 0.3, 0.0), (xe + 1.2, y0 + 1.7, 4.2), "piedra_clara", sin=("-z",))
@@ -961,6 +965,10 @@ def SIN_LEJOS():
 # ven desde los dos lados y a las que dar grosor no aporta nada. Todo lo demás es cerrado (o tiene la cara oculta
 # pegada a otra pieza). DoubleSided dobla lo que cuesta dibujar esas piezas: usarlo lo menos posible.
 DOBLE_CARA = {"Toldo"}
+
+# Piezas con colisión de verdad en Roblox (CanCollide y CanQuery, con PreciseConvexDecomposition en la plantilla): las
+# que se pisan y no son terreno. El resto de piezas no choca (cada edificio lleva una caja de colisión aparte).
+COLISION = {"Puente"}
 
 
 PIEZAS = {

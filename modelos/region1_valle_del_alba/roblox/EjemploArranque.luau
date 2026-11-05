@@ -99,6 +99,14 @@ function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 				local base = string.gsub(p.Name, "__lejos$", "")
 				local info = infoPiezas[base]
 				p.DoubleSided = info ~= nil and info.doble_cara == true
+				if
+					info ~= nil
+					and info.colision == true
+					and not string.find(p.Name, "__lejos")
+					and p.CollisionFidelity ~= Enum.CollisionFidelity.PreciseConvexDecomposition
+				then
+					p.CollisionFidelity = Enum.CollisionFidelity.PreciseConvexDecomposition
+				end
 				n += 1
 			end
 		end

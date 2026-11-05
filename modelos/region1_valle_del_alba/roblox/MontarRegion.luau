@@ -27,7 +27,14 @@
 local MontarRegion = {}
 
 export type Nivel = { centro: { number }, tamano: { number }, triangulos: number }
-export type InfoPieza = { detalle: Nivel, lejos: Nivel?, sin_lejos: boolean, color: string }
+export type InfoPieza = {
+	detalle: Nivel,
+	lejos: Nivel?,
+	sin_lejos: boolean,
+	color: string,
+	doble_cara: boolean?, -- lona de una capa: DoubleSided en la plantilla
+	colision: boolean?, -- se pisa (el puente): la versión detallada choca, con colisión precisa en la plantilla
+}
 export type Grupo = {
 	nombre: string,
 	lod: string,
@@ -204,7 +211,8 @@ function MontarRegion.copiarPieza(
 	end
 	parte.CastShadow = not (SIN_SOMBRA[nombre] == true) and not lejos
 	ponerRenderFidelity(parte, Enum.RenderFidelity.Performance)
-	prepararParte(parte, false)
+	-- Solo chocan las piezas marcadas «colision» (el puente), y solo en su versión detallada.
+	prepararParte(parte, info.colision == true and not lejos)
 	parte.Parent = destino
 	return parte
 end
