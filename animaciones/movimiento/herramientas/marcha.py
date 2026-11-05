@@ -11,7 +11,7 @@ Cómo se calcula cada fotograma:
      que la bota rueda talón -> planta -> punta sin deslizar ni hundirse. El sube y baja del cuerpo no está dibujado:
      es la consecuencia física de pasar por encima de una pierna rígida.
   3. La pierna en el aire va del despegue al siguiente apoyo con una curva de Hermite que empalma con la velocidad
-     del pie al despegar y al aterrizar (sin tirones), y se abre un poco hacia fuera para no rozar el suelo.
+     del pie al despegar y al aterrizar (sin tirones); el ladeo del torso levanta su cadera para que no roce el suelo.
   4. Si hay fase en el aire (correr), el cuerpo sigue una parábola entre el despegue y el aterrizaje.
   5. Brazos y cabeza encima, con su propio retraso respecto al torso.
 

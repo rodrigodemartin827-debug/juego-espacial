@@ -25,13 +25,13 @@ DATOS = dict(
     flecha=0.04,  # la suela "redondeada" queda como mucho 0,04 studs por encima del suelo en mitad de la pisada
     ancho_pisada=0.0,
     alfa_despegue=None,
-    abrir_aire=6.0,
+    abrir_aire=0.0,  # abrirla hacia fuera baja la arista interior de la bota: mejor recta
     alcance_aire=0.0,
     # Torso: el peso va sobre la pierna de apoyo (balanceo lateral y ladeo) y la cadera gira con la pierna que avanza.
     torso_x=espejo([(0.0, 0.0), (0.25, 0.12)]),
     torso_y=espejo([(0.0, -0.04), (0.25, 0.04)], +1),  # el cuerpo frena un poco al pasar sobre el pie
     inclinacion=espejo([(0.0, 7.0), (0.15, 5.0), (0.4, 9.0)], +1),
-    ladeo=espejo([(0.0, 0.0), (0.22, 7.0)]),
+    ladeo=espejo([(0.0, 0.0), (0.22, 4.5)]),
     giro=espejo([(0.0, -7.0), (0.25, 0.0)]),
     # Brazo DERECHO (el izquierdo es el mismo medio ciclo después): (adelante, separado, giro sobre su eje).
     brazo=[(0.0, (32.0, 5.0, 10.0)), (0.25, (3.0, 4.0, 0.0)), (0.5, (-30.0, 11.0, -8.0)), (0.75, (3.0, 4.0, 0.0))],

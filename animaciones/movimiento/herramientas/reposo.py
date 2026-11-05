@@ -50,7 +50,7 @@ CABEZA = [
     (0.9, (0.5, 2.0, -4.0)),
 ]
 # Brazos (adelante, separado, giro sobre su eje) para el DERECHO; el izquierdo, espejo con su propio retraso.
-BRAZO = [(0.0, (5.0, 7.0, 12.0)), (0.25, (7.0, 9.0, 15.0)), (0.5, (4.0, 7.5, 12.0)), (0.75, (6.0, 6.0, 9.0))]
+BRAZO = [(0.0, (2.5, 7.0, 14.0)), (0.25, (4.0, 8.5, 17.0)), (0.5, (2.0, 7.5, 14.0)), (0.75, (3.5, 6.5, 11.0))]
 
 
 def _torso(fase, ladeo):
