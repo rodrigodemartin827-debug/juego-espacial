@@ -83,7 +83,9 @@ function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
 	local n = 0
 	-- Piezas de doble cara (lonas de una capa: datos/piezas.json, «doble_cara»). DoubleSided solo se puede poner en Studio.
-	local infoPiezas = require(carpeta:WaitForChild("Datos"):WaitForChild("piezas") :: ModuleScript) :: any
+	-- Se lee una copia del módulo: PROBADO EN STUDIO, en modo edición require() devuelve la versión que cargó la
+	-- primera vez aunque Rojo haya cambiado el módulo después (salía el puente sin la marca «colision»).
+	local infoPiezas = require((carpeta:WaitForChild("Datos"):WaitForChild("piezas") :: ModuleScript):Clone()) :: any
 	for _, nombre in { "Piezas", "Silueta" } do
 		local c = carpeta:FindFirstChild(nombre)
 		if c == nil then
@@ -129,6 +131,31 @@ end
 
 -- En Studio: monta la región en Workspace (con el atlas y las texturas de terreno ya subidas). `origen` es el marco del
 -- centro del planeta (nil = el origen del mundo, como en Blender).
+--[[
+	En Studio, en vez de importar a mano: inserta por su ID los modelos subidos con herramientas/subir_modelos
+	(datos/ids_modelos.json) y sustituye las plantillas de Piezas, Terreno y Silueta con el mismo nombre que el
+	archivo. Después las prepara (prepararPiezasEnStudio). `solo`: rutas concretas («piezas/Puente.fbx»); sin ella,
+	todas las del registro. Devuelve el MeshId anterior y el nuevo de cada una.
+]]
+function EjemploArranque.sustituirDesdeNube(solo: { string }?): { any }
+	local carpeta = ReplicatedStorage:WaitForChild("Region1")
+	local ModelosNube = require(ReplicatedStorage.Shared.Herramientas.ModelosNube)
+	local datos = carpeta:WaitForChild("Datos")
+	local registro = datos:FindFirstChild("ids_modelos")
+	assert(registro, "no hay datos/ids_modelos: sube antes los modelos con herramientas/subir_modelos")
+	-- Copia del módulo: en modo edición require() guarda la primera versión aunque Rojo la cambie después.
+	local ids = require((registro :: ModuleScript):Clone()) :: any
+	local CARPETAS = { piezas = "Piezas", terreno = "Terreno", silueta = "Silueta" }
+	local resultados = ModelosNube.insertar(ids, function(ruta: string): (Instance?, string?)
+		local sub, archivo = string.match(ruta, "^([^/]+)/([^/]+)%.%w+$")
+		local destino = if sub then carpeta:FindFirstChild(CARPETAS[sub] or "") else nil
+		return destino, archivo
+	end, solo)
+	local idAtlas = (require((datos:WaitForChild("ids_texturas") :: ModuleScript):Clone()) :: any)["atlas_kit.png"]
+	EjemploArranque.prepararPiezasEnStudio(idAtlas)
+	return resultados
+end
+
 function EjemploArranque.montarEnStudio(idAtlas: string, idsTerreno: { [string]: string }, origen: CFrame?): Model
 	return MontarRegion.montar(opcionesMontaje(idAtlas, idsTerreno, workspace, origen))
 end
