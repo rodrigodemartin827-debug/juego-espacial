@@ -195,6 +195,35 @@ local function pedir(metodo: string, url: string, cuerpo: string?, tipo: string?
 	return 0, "sin respuesta tras 5 intentos"
 end
 
+-- Si Roblox rechaza la clave (401/403), se le pregunta qué ve en ella (api-keys/v1/introspect) y se explica el
+-- motivo. Solo se enseñan campos que no son secretos.
+local function explicarRechazo()
+	local ok, r = pcall(net.request, {
+		url = "https://apis.roblox.com/api-keys/v1/introspect",
+		method = "POST",
+		headers = { ["content-type"] = "application/json" },
+		body = serde.encode("json", { apiKey = clave }),
+	})
+	if not ok or r.statusCode ~= 200 then
+		print(
+			"  La clave no es válida (Roblox no la reconoce). Vuelve a copiarla y repite el paso 2 de docs/open_cloud.md."
+		)
+		return
+	end
+	local d = serde.decode("json", r.body)
+	if d.enabled ~= true then
+		print("  La clave está DESACTIVADA: activa «Enable Key» en el panel de claves.")
+	elseif d.expired == true then
+		print("  La clave ha CADUCADO: cambia su fecha de caducidad en el panel de claves.")
+	else
+		local permisos = string.lower(serde.encode("json", d.scopes or {}))
+		if not (string.find(permisos, "asset") and string.find(permisos, "write")) then
+			print("  La clave no tiene el permiso «Assets» con Write (permisos: " .. permisos .. ").")
+			print("  Añádelo en el panel de claves (paso 1 de docs/open_cloud.md) y guarda.")
+		end
+	end
+end
+
 local function fronteraPara(contenido: string): string
 	while true do
 		local f = "----juego-espacial-"
@@ -222,7 +251,7 @@ end
 
 -- ===== Subida =====
 
-local fallos = 0
+local fallos, subidos = 0, 0
 for _, p in lista do
 	local contenido = fs.readFile(raiz .. "/" .. p.ruta)
 	local nombre = OpenCloud.nombreBase(p.ruta)
@@ -246,6 +275,10 @@ for _, p in lista do
 	if idOp == nil then
 		fallos += 1
 		print(string.format("✗ %s: HTTP %d %s", p.ruta, codigo, serde.encode("json", respuesta)))
+		if codigo == 401 or codigo == 403 then
+			explicarRechazo()
+			break -- con la clave rechazada fallarían todos los demás
+		end
 		continue
 	end
 	local id, moderacion = esperarOperacion(idOp)
@@ -254,6 +287,7 @@ for _, p in lista do
 		print("✗ " .. p.ruta .. ": " .. tostring(moderacion))
 		continue
 	end
+	subidos += 1
 	registro[p.ruta] = { id = id, sha256 = p.sha256, subido = os.date("!%Y-%m-%dT%H:%M:%SZ") :: string }
 	guardarRegistro() -- después de cada uno: si algo falla a medias, lo subido queda apuntado
 	print(
@@ -266,5 +300,13 @@ for _, p in lista do
 		)
 	)
 end
-print(string.format("%d subidos, %d con error. IDs en %s", #lista - fallos, fallos, rutaRegistro))
+print(
+	string.format(
+		"%d subidos, %d con error, %d sin intentar. IDs en %s",
+		subidos,
+		fallos,
+		#lista - subidos - fallos,
+		rutaRegistro
+	)
+)
 process.exit(if fallos > 0 then 1 else 0)
