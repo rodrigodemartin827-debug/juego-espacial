@@ -59,8 +59,16 @@ Para comprobar que la clave está guardada **sin enseñarla**:
 if ([Environment]::GetEnvironmentVariable("ROBLOX_API_KEY", "User")) { "Clave guardada" } else { "No hay clave" }
 ```
 
-Para subir a un grupo en vez de a tu cuenta, añade también `ROBLOX_GROUP_ID`. Para eso conviene usar una clave de
-una cuenta dedicada del grupo; ver la documentación de Roblox sobre claves de grupo.
+**El juego es de un grupo (ID 34725222), así que los modelos tienen que subirse a ese grupo.** Probado: si se
+suben a tu cuenta personal, Studio no deja cargarlos en el lugar («User is not authorized to access Asset»).
+Guarda también el ID del grupo, que no es secreto:
+
+```powershell
+[Environment]::SetEnvironmentVariable("ROBLOX_GROUP_ID", "34725222", "User")
+```
+
+La clave es tuya, pero sirve para el grupo porque tu cuenta tiene permiso para crear recursos en él. Si algún día
+lo lleva otra persona, Roblox recomienda una cuenta dedicada con solo los permisos de grupo necesarios.
 
 ### Si la clave se filtra
 

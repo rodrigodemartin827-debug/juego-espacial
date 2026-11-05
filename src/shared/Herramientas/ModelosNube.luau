@@ -25,8 +25,21 @@ function ModelosNube.cargarMalla(id: number): MeshPart
 		raiz = modelo
 	else
 		-- En algunos contextos de Studio LoadAsset no deja; GetObjects sí carga lo que es de la cuenta.
-		local objetos = (game :: any):GetObjects("rbxassetid://" .. tostring(id))
-		assert(objetos and objetos[1], "no se ha podido cargar el recurso " .. id .. ": " .. tostring(modelo))
+		local okObjetos, objetos = pcall(function()
+			return (game :: any):GetObjects("rbxassetid://" .. tostring(id))
+		end)
+		if not okObjetos or not objetos or not objetos[1] then
+			local motivo = tostring(if okObjetos then modelo else objetos)
+			-- PROBADO EN STUDIO: un modelo de la cuenta personal no se puede usar en un lugar de grupo («User is not
+			-- authorized to access Asset»). Hay que subirlo al grupo dueño del juego (ROBLOX_GROUP_ID).
+			if string.find(motivo, "not authorized") then
+				motivo ..= " (¿se subió a la cuenta personal? Este lugar es de " .. (if game.CreatorType
+						== Enum.CreatorType.Group
+					then "un grupo"
+					else "una cuenta") .. ": súbelo con ROBLOX_GROUP_ID = " .. tostring(game.CreatorId) .. ")"
+			end
+			error("no se ha podido cargar el recurso " .. id .. ": " .. motivo)
+		end
 		raiz = objetos[1]
 	end
 	local malla = if raiz:IsA("MeshPart") then raiz else raiz:FindFirstChildWhichIsA("MeshPart", true)
