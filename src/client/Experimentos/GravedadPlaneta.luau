@@ -46,6 +46,8 @@ local GravedadPlaneta = {}
 
 local jugador = Players.LocalPlayer
 local estado: Estado? = nil
+-- Capa de colisión fija de la región 1 (AlturasRegion), si está en el lugar. Ver iniciarRegion1.
+local mapaRegion: any = nil
 local controles: any = nil
 local parametros = RaycastParams.new()
 parametros.FilterType = Enum.RaycastFilterType.Exclude
@@ -328,10 +330,19 @@ local function pasoFisica(dt: number)
 		elseif corriendo then p.Correr
 		else p.Andar
 	local objetivo = deseo * rapidezPedida
-	-- Suelo: rayo hacia el centro del planeta.
-	local alcanceRayo = p.AlturaRaiz + p.MargenSuelo + 4
+	-- Suelo: rayo hacia el centro del planeta. Se alarga con la velocidad de caída: a pocos FPS, en un fotograma se
+	-- puede bajar más que el alcance normal del rayo y colarse a través del suelo.
+	local alcanceRayo = p.AlturaRaiz + p.MargenSuelo + 4 + math.max(0, -radial) * dt
 	local golpe = workspace:Raycast(raiz.Position, -arriba * alcanceRayo, parametros)
 	local distancia = if golpe then golpe.Distance else math.huge
+	-- Capa de colisión fija de la región 1 (su mapa de alturas): el suelo de verdad aunque la colisión de la malla
+	-- tenga agujeros. Se usa la más alta de las dos (el rayo también ve edificios, puentes y piedras).
+	local relativa = raiz.Position - Experimento.Centro()
+	local mapa = mapaRegion
+	local sueloMapa = if mapa then mapa:radio(relativa) else nil
+	if sueloMapa then
+		distancia = math.min(distancia, relativa.Magnitude - sueloMapa)
+	end
 	-- Sonda por delante, hacia donde el jugador QUIERE ir (no hacia donde se mueve: si una piedra le frena, la sonda
 	-- tiene que seguir viéndola). Si allí el suelo está más alto, el muelle sube ANTES de que el torso choque, así que
 	-- las piedras y escalones de hasta AlturaPaso studs se pasan sin saltar. Cuanto más rápido, más lejos mira.
@@ -343,6 +354,12 @@ local function pasoFisica(dt: number)
 		local delante = workspace:Raycast(origen, -arriba * (alcanceRayo + elevacion), parametros)
 		if delante then
 			distancia = math.min(distancia, delante.Distance - elevacion)
+		end
+		if mapa and sueloMapa then
+			local sueloDelante = mapa:radio(relativa + deseo.Unit * sonda)
+			if sueloDelante and sueloDelante - sueloMapa <= p.AlturaPaso then
+				distancia = math.min(distancia, relativa.Magnitude - sueloDelante)
+			end
 		end
 	end
 	local ahora = os.clock()
@@ -386,7 +403,9 @@ local function pasoFisica(dt: number)
 			e.EnSuelo = false
 		else
 			-- Muelle: la raíz vuelve a su altura sobre el suelo (sube las cuestas y baja los escalones).
-			radial = math.clamp((p.AlturaRaiz - distancia) * p.RigidezSuelo, -60, p.SubidaMaxima)
+			-- Si se ha quedado por debajo del suelo (llegó cayendo muy deprisa), sube sin el tope: no se hunde.
+			local subida = if distancia < p.AlturaRaiz - p.AlturaPaso then 80 else p.SubidaMaxima
+			radial = math.clamp((p.AlturaRaiz - distancia) * p.RigidezSuelo, -60, subida)
 		end
 	else
 		radial -= p.Gravedad * dt
@@ -394,7 +413,7 @@ local function pasoFisica(dt: number)
 
 	-- Terreno sin cargar (StreamingEnabled): cerca de la superficie pero sin nada debajo, no se cae a través del
 	-- planeta; se queda quieto hasta que el motor traiga el suelo.
-	if golpe == nil and not enSuelo then
+	if golpe == nil and sueloMapa == nil and not enSuelo then
 		if altura < p.AlturaEsperaTerreno then
 			local abajo = workspace:Raycast(raiz.Position, -arriba * (altura + p.AlturaEsperaTerreno), parametros)
 			if abajo == nil then
@@ -478,6 +497,13 @@ local function iniciarRegion1()
 		workspace:WaitForChild("Region1_ValleDelAlba", math.huge) -- sin límite: el servidor la monta al terminar el planeta
 		local ok, err = pcall(function()
 			local ids = require(carpeta:WaitForChild("Datos"):WaitForChild("ids_texturas") :: ModuleScript) :: any
+			local alturas = carpeta:FindFirstChild("AlturasRegion")
+			local datosAlturas = carpeta:WaitForChild("Datos"):FindFirstChild("alturas")
+			if alturas and datosAlturas then
+				mapaRegion = (require(alturas :: ModuleScript) :: any).cargar(
+					require(datosAlturas :: ModuleScript) :: any
+				)
+			end
 			local ejemplo = require(carpeta:WaitForChild("EjemploArranque") :: ModuleScript) :: any
 			ejemplo.iniciarCliente(ids[Experimento.Region1.Atlas], CFrame.new(Experimento.Centro()), ids)
 		end)
