@@ -1,0 +1,18 @@
+{
+  "nota": "studs, ejes de Roblox, respecto al centro de la base del modelo",
+  "Persiana": {
+    "CentroCerrada": [
+      -0.0,
+      3.5,
+      -4.48
+    ],
+    "Alto": 6.0,
+    "AltoAbierta": 0.3,
+    "como_abrir": "Size.Y -> AltoAbierta y subir el CFrame (Alto - AltoAbierta) / 2 en Y, a la vez"
+  },
+  "LuzToldo": [
+    -0.0,
+    6.4,
+    -8.2
+  ]
+}

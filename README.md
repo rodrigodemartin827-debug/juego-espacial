@@ -138,6 +138,7 @@ src/
 pruebas/                     Pruebas con Lune (ver más abajo)
 docs/                        Listas de comprobación para revisar en Studio
 animaciones/                 Animaciones de combate (.fbx para R6) y los scripts de Blender que las generan
+modelos/                     Modelos 3D (.fbx para Studio): nave humana, monstruo R6, rocas y minerales, y sus scripts de Blender
 ```
 
 Convenciones: todo el código de `src/` va en módulos con `--!strict` y comentarios en español; los nombres de módulos,
