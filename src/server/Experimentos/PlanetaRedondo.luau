@@ -2,9 +2,10 @@
 --[[
 	EXPERIMENTO (servidor): Nueva Tierra como esfera de Terrain. Ver shared/Experimentos/PlanetaRedondo.
 
-	  - Genera la esfera: una corteza de losas (FillBlock tangentes; FillBall no acepta radios tan grandes),
-	    manchas de materiales, colinas (bolas medio enterradas) y rocas. Mide el tiempo y la memoria.
-	  - Monta un puerto (un hangar normal, girado para que su suelo sea tangente a la esfera).
+	  - Al arrancar, primero monta el puerto (un hangar normal, girado para que su suelo sea tangente a la esfera) y
+	    la región 1: así se puede aparecer en menos de un segundo.
+	  - Después, el Terrain esférico (TerrenoPlaneta): normalmente ya viene horneado en el lugar; si no, se genera
+	    (casi un minuto) y se avisa.
 	  - En Studio, cada vez que aparece el personaje lo lleva al puerto.
 	  - Aterrizar (F) cerca del suelo deja la nave aparcada ahí mismo, posada sobre la esfera, y baja al piloto a su
 	    lado. Al usarla ("Despegar") se despega desde ese punto.
@@ -19,174 +20,17 @@ local Hangar = require(Servicios.Hangar)
 local ServicioDatos = require(Servicios.ServicioDatos)
 local ServicioNaves = require(Servicios.ServicioNaves)
 local Modelo = require(Servicios.ServicioNaves.Modelo)
+local TerrenoPlaneta = require(script.Parent.TerrenoPlaneta)
 
 local PlanetaRedondo = {}
 
-local listo = false
+-- Se puede aparecer en cuanto están el puerto y la región 1. El Terrain puede llegar después (si no estaba horneado
+-- en el lugar): el personaje pisa mientras tanto la capa de colisión fija de la región (su mapa de alturas).
+local listoAparicion = false
 -- Donde aparece el jugador si se ha montado la región 1 (delante de su casa de Pradoverde). nil = el puerto.
 local marcoAparicion: CFrame? = nil
 local carpeta: Folder? = nil
 local marcoPuerto: CFrame? = nil
-
-local ANGULO_AUREO = math.pi * (3 - math.sqrt(5))
-
--- Punto i de n repartidos de forma uniforme sobre la esfera unidad (espiral de Fibonacci).
-local function puntoFibonacci(i: number, n: number): Vector3
-	local y = 1 - (i + 0.5) * 2 / n
-	local r = math.sqrt(math.max(0, 1 - y * y))
-	local fi = i * ANGULO_AUREO
-	return Vector3.new(math.cos(fi) * r, y, math.sin(fi) * r)
-end
-
-local function direccionAleatoria(azar: Random): Vector3
-	local y = azar:NextNumber(-1, 1)
-	local fi = azar:NextNumber(0, 2 * math.pi)
-	local r = math.sqrt(1 - y * y)
-	return Vector3.new(math.cos(fi) * r, y, math.sin(fi) * r)
-end
-
--- Material de la superficie en una dirección: casquetes de nieve, y manchas según un ruido 3D.
-local function mat(nombre: string): Enum.Material
-	return (Enum.Material :: any)[nombre]
-end
-
-local function materialEn(n: Vector3, radio: number): Enum.Material
-	local t = Experimento.Terreno
-	local m = t.Materiales
-	local latitud = math.deg(math.asin(math.clamp(n.Y, -1, 1)))
-	if math.abs(latitud) > t.LatitudNieve then
-		return mat(m.Nieve)
-	end
-	local p = n * radio * t.EscalaRuido
-	local ruido = math.noise(p.X, p.Y + t.Semilla, p.Z)
-	if ruido > 0.3 then
-		return mat(m.Alta)
-	elseif ruido < -0.38 then
-		return mat(m.Arena)
-	elseif ruido < -0.25 then
-		return mat(m.Tierra)
-	end
-	return mat(m.Base)
-end
-
--- ¿Cae la dirección `n` en la cara del cubo inflado reservada para una región de mallas (Terreno.CaraReservada)?
--- Ahí no se ponen colinas ni rocas: asomarían a través de las mallas de la región.
-local function enCaraReservada(n: Vector3): boolean
-	local cara = Experimento.Terreno.CaraReservada
-	if cara ~= "YP" then
-		return false
-	end
-	return n.Y > math.max(math.abs(n.X), math.abs(n.Z)) - 0.08
-end
-
--- ¿Está la dirección `n` cerca del puerto? (ahí no se ponen colinas ni rocas)
-local function cercaDelPuerto(n: Vector3, normalPuerto: Vector3, radio: number, distancia: number): boolean
-	return math.acos(math.clamp(n:Dot(normalPuerto), -1, 1)) * radio < distancia
-end
-
---[[
-	Genera la esfera de terreno. Devuelve un resumen con tiempos y cantidades.
-]]
-local function generar(centro: Vector3, radio: number, normalPuerto: Vector3): { [string]: any }
-	local t = Experimento.Terreno
-	local terreno = workspace.Terrain
-	local azar = Random.new(t.Semilla)
-	local inicio = os.clock()
-	-- Se cede el hilo en cuanto se lleva un rato trabajando (si no, Roblox corta el script por tiempo).
-	local ultimaPausa = os.clock()
-	local function pausa()
-		if os.clock() - ultimaPausa > t.SegundosPorTanda then
-			task.wait()
-			ultimaPausa = os.clock()
-		end
-	end
-
-	-- 1. Colinas: bolas medio enterradas (cúpulas), más pequeñas que grandes. Se VACÍAN por dentro (una bola de aire
-	-- algo menor en el mismo centro): Roblox guarda cada celda llena, y macizas ocupaban cientos de MB. La corteza,
-	-- que va después, vuelve a rellenar lo que el vaciado quita entre su cara de abajo y la superficie.
-	local area = 4 * math.pi * radio * radio
-	local colinas = math.floor(t.ColinasPorMillon * area / 1e6)
-	local hechas = 0
-	for _ = 1, colinas do
-		local n = direccionAleatoria(azar)
-		local rmin, rmax = t.RadioColina[1], t.RadioColina[2]
-		local r = rmin + (rmax - rmin) * azar:NextNumber() ^ 2
-		if enCaraReservada(n) then
-			continue
-		end
-		if cercaDelPuerto(n, normalPuerto, radio, 260 + r) then
-			continue
-		end
-		local material = materialEn(n, radio)
-		if material == mat(t.Materiales.Arena) then
-			material = mat(t.Materiales.Base)
-		end
-		local centroColina = centro + n * (radio - r * t.Enterrado)
-		terreno:FillBall(centroColina, r, material)
-		if t.GrosorColina > 0 and r > t.GrosorColina + 8 then
-			terreno:FillBall(centroColina, r - t.GrosorColina, Enum.Material.Air)
-		end
-		-- Las más grandes asoman una cima de roca.
-		if r > 250 then
-			local cima = centro + n * (radio + r * (1 - t.Enterrado) - r * 0.15)
-			terreno:FillBall(cima, r * 0.25, mat(t.Materiales.Roca))
-		end
-		hechas += 1
-		pausa()
-	end
-	local tiempoColinas = os.clock() - inicio
-
-	-- 2. Corteza: losas tangentes.
-	local losas = math.ceil(area / (t.SeparacionLosas * t.SeparacionLosas))
-	local tamano = Vector3.new(t.AnchoLosa, t.Grosor, t.AnchoLosa)
-	for i = 0, losas - 1 do
-		local n = puntoFibonacci(i, losas)
-		local marco = Experimento.Marco(centro + n * (radio - t.Grosor / 2), n, Vector3.zAxis)
-		terreno:FillBlock(marco, tamano, materialEn(n, radio))
-		pausa()
-	end
-	local tiempoCorteza = os.clock() - inicio - tiempoColinas
-
-	-- 3. Rocas sueltas.
-	local rocas = math.floor(t.RocasPorMillon * area / 1e6)
-	for _ = 1, rocas do
-		local n = direccionAleatoria(azar)
-		if enCaraReservada(n) then
-			continue
-		end
-		if cercaDelPuerto(n, normalPuerto, radio, 120) then
-			continue
-		end
-		local r = azar:NextNumber(t.RadioRoca[1], t.RadioRoca[2])
-		terreno:FillBall(centro + n * (radio + r * 0.15), r, mat(t.Materiales.Roca))
-		pausa()
-	end
-
-	-- 3b. Piedras pequeñas alrededor del puerto (prueba de pasar por encima sin saltar).
-	local referencia = Experimento.Marco(Vector3.zero, normalPuerto, Vector3.zAxis)
-	for _ = 1, t.PiedrasPuerto do
-		local angulo = azar:NextNumber(0, 2 * math.pi)
-		local d = azar:NextNumber(t.ZonaPiedras[1], t.ZonaPiedras[2])
-		local tangente = referencia.RightVector * math.cos(angulo) + referencia.LookVector * math.sin(angulo)
-		local n = (normalPuerto + tangente * (d / radio)).Unit
-		local r = azar:NextNumber(t.RadioPiedra[1], t.RadioPiedra[2])
-		terreno:FillBall(centro + n * (radio + r * 0.2), r, mat(t.Materiales.Roca))
-		pausa()
-	end
-
-	-- 4. Explanada del puerto (pavimento, a ras del suelo).
-	local marcoPlano = Experimento.Marco(centro + normalPuerto * (radio - 4), normalPuerto, Vector3.zAxis)
-	terreno:FillBlock(marcoPlano, Vector3.new(220, 8, 220), Enum.Material.Pavement)
-
-	return {
-		Losas = losas,
-		Colinas = hechas,
-		Rocas = rocas,
-		SegundosCorteza = tiempoCorteza,
-		SegundosColinas = tiempoColinas,
-		SegundosTotal = os.clock() - inicio,
-	}
-end
 
 --[[
 	PRUEBA (rama prueba/region1-valle-alba): si en ReplicatedStorage están la región 1 y sus piezas importadas
@@ -290,7 +134,7 @@ local function alAparecer(jugador: Player, personaje: Model)
 		task.wait()
 	end
 	task.wait(0.5)
-	while not listo do
+	while not listoAparicion do
 		task.wait(0.2)
 	end
 	if jugador.Character == personaje then
@@ -357,12 +201,8 @@ function PlanetaRedondo.Iniciar()
 	if not Experimento.Activado() then
 		return
 	end
-	local centro = Experimento.Centro()
-	-- La esfera de Terrain puede ir hundida (Terreno.Hundimiento) para dejar sitio a una región hecha con mallas.
-	local radio = Experimento.Radio - (Experimento.Terreno.Hundimiento or 0)
-	local Datos = require(ReplicatedStorage.Shared.Planetas.Datos) :: any
-	local n = Datos.Planetas[Experimento.Planeta].NormalAterrizaje
-	local normal = Vector3.new(n.X, n.Y, n.Z).Unit
+	local parametros = TerrenoPlaneta.parametros()
+	local centro, radio, normal = parametros.centro, parametros.radio, parametros.normalPuerto
 
 	-- Grupo de colisión del personaje en el planeta (lo usa client/Experimentos/GravedadPlaneta): no choca con nada.
 	local PhysicsService = game:GetService("PhysicsService")
@@ -410,31 +250,43 @@ function PlanetaRedondo.Iniciar()
 	end
 
 	task.spawn(function()
-		local Stats = game:GetService("Stats") -- aquí y no arriba: la simulación de las pruebas no lo tiene
-		local memoriaAntes = Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels)
-		local resumen = generar(centro, radio, normal)
+		local inicio = os.clock()
+		-- Primero lo que hace falta para aparecer (menos de un segundo): el puerto y la región 1.
 		marcoPuerto = montarPuerto(nueva, centro, radio, normal)
 		montarRegion1()
-		task.wait(1)
-		local memoria = Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels)
-		nueva:SetAttribute("MemoriaTerrenoAntes", memoriaAntes)
-		nueva:SetAttribute("MemoriaTerreno", memoria)
-		nueva:SetAttribute("Listo", true)
-		listo = true
-		print(
-			string.format(
-				"[PlanetaRedondo] Radio %d: %d losas, %d colinas, %d rocas. Colinas %.1f s, corteza %.1f s, total %.1f s. Memoria de terreno: %.0f MB (antes %.0f MB)",
-				radio,
-				resumen.Losas,
-				resumen.Colinas,
-				resumen.Rocas,
-				resumen.SegundosColinas,
-				resumen.SegundosCorteza,
-				resumen.SegundosTotal,
-				memoria,
-				memoriaAntes
+		listoAparicion = true
+		nueva:SetAttribute("ListoAparicion", true)
+		print(string.format("[PlanetaRedondo] Listo para aparecer en %.1f s", os.clock() - inicio))
+
+		-- Después, el Terrain: normalmente ya viene horneado en el lugar (TerrenoPlaneta.hornearEnStudio).
+		local Stats = game:GetService("Stats") -- aquí y no arriba: la simulación de las pruebas no lo tiene
+		if TerrenoPlaneta.yaGenerado(parametros) then
+			print("[PlanetaRedondo] Terreno ya horneado en el lugar: no se genera")
+		else
+			warn(
+				"[PlanetaRedondo] El terreno no está horneado en el lugar (o sus ajustes han cambiado): se genera ahora y "
+					.. "tarda casi un minuto. En Studio: require(game.ServerScriptService.Server.Experimentos.TerrenoPlaneta)"
+					.. ".hornearEnStudio(true) y guardar el lugar."
 			)
-		)
+			local memoriaAntes = Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels)
+			local resumen = TerrenoPlaneta.generar(parametros)
+			print(
+				string.format(
+					"[PlanetaRedondo] Radio %d: %d losas, %d colinas, %d rocas. Colinas %.1f s, corteza %.1f s, total %.1f s. Memoria de terreno: %.0f MB (antes %.0f MB)",
+					radio,
+					resumen.Losas,
+					resumen.Colinas,
+					resumen.Rocas,
+					resumen.SegundosColinas,
+					resumen.SegundosCorteza,
+					resumen.SegundosTotal,
+					Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels),
+					memoriaAntes
+				)
+			)
+		end
+		nueva:SetAttribute("MemoriaTerreno", Stats:GetMemoryUsageMbForTag(Enum.DeveloperMemoryTag.TerrainVoxels))
+		nueva:SetAttribute("Listo", true)
 	end)
 end
 
