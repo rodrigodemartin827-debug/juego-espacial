@@ -101,6 +101,10 @@ local function guardarRegistro()
 			)
 		)
 	end
+	-- La carpeta «datos» puede no existir todavía (por ejemplo, en una carpeta de modelos sueltos).
+	if not fs.isDir(raiz .. "/datos") then
+		fs.writeDir(raiz .. "/datos")
+	end
 	fs.writeFile(rutaRegistro, "{\n" .. table.concat(lineas, ",\n") .. "\n}\n")
 end
 
@@ -288,8 +292,7 @@ for _, p in lista do
 		continue
 	end
 	subidos += 1
-	registro[p.ruta] = { id = id, sha256 = p.sha256, subido = os.date("!%Y-%m-%dT%H:%M:%SZ") :: string }
-	guardarRegistro() -- después de cada uno: si algo falla a medias, lo subido queda apuntado
+	-- Primero se escribe en pantalla: si guardar el registro fallara, el ID no se pierde.
 	print(
 		string.format(
 			"✓ %s -> %d (%s%s)",
@@ -299,6 +302,8 @@ for _, p in lista do
 			if moderacion then ", " .. moderacion else ""
 		)
 	)
+	registro[p.ruta] = { id = id, sha256 = p.sha256, subido = os.date("!%Y-%m-%dT%H:%M:%SZ") :: string }
+	guardarRegistro() -- después de cada uno: si algo falla a medias, lo subido queda apuntado
 end
 print(
 	string.format(
