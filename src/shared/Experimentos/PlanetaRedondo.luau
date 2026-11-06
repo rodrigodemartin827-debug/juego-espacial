@@ -151,8 +151,9 @@ function PlanetaRedondo.Aplicar()
 	planeta.Radio = PlanetaRedondo.Radio
 	planeta.Atmosfera = -1
 	planeta.RadioZonaSeguraEspacio *= escala
-	-- Nadie aparece en las superficies planas (en el experimento no se generan): se aparece en el planeta redondo.
-	Datos.AparecerEnPlanetaDelBando = false
+	-- La superficie plana de este planeta no se genera: a sus jugadores los coloca el experimento (en el planeta
+	-- redondo). Los del otro bando siguen apareciendo en su superficie plana, que sí se genera (ServicioPlanetas).
+	Datos.AparicionPropia[PlanetaRedondo.Planeta] = true
 end
 
 -- Centro y radio del planeta redondo (después de Aplicar).

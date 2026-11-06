@@ -31,6 +31,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Datos = require(ReplicatedStorage.Shared.Planetas.Datos)
 local ExperimentoPlanetaRedondo = require(game:GetService("ReplicatedStorage").Shared.Experimentos.PlanetaRedondo)
 local Espacio = require(ReplicatedStorage.Shared.Planetas.Espacio)
+local ServicioBandos = require(script.Parent.ServicioBandos)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioNaves = require(script.Parent.ServicioNaves)
 local ServicioRed = require(script.Parent.ServicioRed)
@@ -158,7 +159,7 @@ local function alAparecer(jugador: Player, personaje: Model)
 		datos = ServicioDatos.ObtenerDatos(jugador)
 	end
 	local planeta = if datos then Espacio.PlanetaDeBando(datos.Bando) else nil
-	if planeta == nil or enTransicion[jugador] then
+	if planeta == nil or enTransicion[jugador] or Datos.AparicionPropia[planeta] then
 		return
 	end
 	esperarPuerto(planeta)
@@ -229,9 +230,10 @@ function ServicioPlanetas.Iniciar()
 		Puertos.Crear(carpeta, id, function(jugador)
 			ServicioPlanetas.LlevarAEstacion(jugador)
 		end)
-		-- EXPERIMENTO planeta redondo (solo Studio): las superficies planas no se usan y falsearían las medidas de
-		-- memoria y rendimiento de la esfera, así que no se generan.
-		if ExperimentoPlanetaRedondo.Activado() then
+		-- EXPERIMENTO planeta redondo (solo Studio): la superficie plana del planeta que sustituye no se usa (y
+		-- falsearía las medidas de memoria de la esfera), así que no se genera. La del otro planeta sí: ahí aparecen
+		-- los jugadores de ese bando.
+		if ExperimentoPlanetaRedondo.Activado() and id == ExperimentoPlanetaRedondo.Planeta then
 			continue
 		end
 		-- Los dos terrenos se generan a la vez, cada uno empezando por su puerto.
@@ -259,6 +261,19 @@ function ServicioPlanetas.Iniciar()
 	for _, jugador in Players:GetPlayers() do
 		conectar(jugador)
 	end
+
+	-- Al elegir bando (pantalla de elección), el jugador viaja a pie al puerto de su planeta, salvo que de ese planeta
+	-- se encargue otro sistema (Datos.AparicionPropia).
+	ServicioBandos.BandoElegido:Conectar(function(jugador: Player, bando: string)
+		local planeta = Espacio.PlanetaDeBando(bando)
+		if not Datos.AparecerEnPlanetaDelBando or planeta == nil or Datos.AparicionPropia[planeta] then
+			return
+		end
+		task.spawn(function()
+			esperarPuerto(planeta)
+			ServicioPlanetas.LlevarAPie(jugador, planeta)
+		end)
+	end)
 	Players.PlayerRemoving:Connect(function(jugador)
 		enTransicion[jugador] = nil
 	end)

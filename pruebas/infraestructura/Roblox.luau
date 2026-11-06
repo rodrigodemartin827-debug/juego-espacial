@@ -33,6 +33,7 @@ local SERVICIOS = {
 	HttpService = true,
 	RunService = true,
 	CollectionService = true,
+	TextChatService = true,
 }
 
 -- Clases que cuentan como "padres" de otras para Instance:IsA.
@@ -40,6 +41,8 @@ local PADRES = {
 	Script = { "LuaSourceContainer" },
 	LocalScript = { "LuaSourceContainer" },
 	ModuleScript = { "LuaSourceContainer" },
+	Part = { "BasePart", "PVInstance" },
+	Model = { "PVInstance" },
 }
 
 -- ===== Señales =====
@@ -288,6 +291,23 @@ function Roblox.nuevoMundo(opciones)
 		self.Parent = nil
 	end
 
+	-- Atributos: como en Roblox, poner nil borra el atributo. Solo se aceptan valores simples.
+	function Instancia.SetAttribute(self, nombre, valor)
+		assert(type(nombre) == "string", "SetAttribute necesita un nombre")
+		assert(type(valor) ~= "table" and type(valor) ~= "function", "valor de atributo no admitido")
+		local atributos = rawget(self, "_atributos")
+		if atributos == nil then
+			atributos = {}
+			rawset(self, "_atributos", atributos)
+		end
+		atributos[nombre] = valor
+	end
+
+	function Instancia.GetAttribute(self, nombre)
+		local atributos = rawget(self, "_atributos")
+		return if atributos then atributos[nombre] else nil
+	end
+
 	function Instancia.GetFullName(self)
 		local nombre = rawget(self, "Name")
 		local padre = rawget(self, "_padre")
@@ -389,7 +409,22 @@ function Roblox.nuevoMundo(opciones)
 				end
 				return lista
 			end,
+			GetPlayerByUserId = function(self, id)
+				for _, hijo in rawget(self, "_hijos") do
+					if rawget(hijo, "ClassName") == "Player" and hijo.UserId == id then
+						return hijo
+					end
+				end
+				return nil
+			end,
 		},
+	}
+
+	-- Comando de chat: la prueba dispara Triggered a mano, como si alguien lo hubiera escrito.
+	PorClase.TextChatCommand = {
+		iniciar = function(self)
+			rawset(self, "Triggered", nuevaSenal(mundo.task))
+		end,
 	}
 
 	PorClase.DataStoreService = {

@@ -20,6 +20,10 @@
       "Shared": {
         "$path": "src/shared"
       },
+      "Modelos": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true
+      },
       "Region1": {
         "$className": "Folder",
         "$ignoreUnknownInstances": true,

@@ -27,6 +27,7 @@
 ]]
 
 local Lighting = game:GetService("Lighting")
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
@@ -37,6 +38,7 @@ local Espacio = require(Shared.Planetas.Espacio)
 local Luz = require(Shared.Planetas.Luz)
 local V = require(Shared.Planetas.Vectores)
 local Experimento = require(Shared.Experimentos.PlanetaRedondo)
+local ConfigEleccion = require(Shared.Eleccion.Config)
 
 -- EXPERIMENTO planeta redondo: por debajo de esta altura sobre su superficie se usa la luz de superficie.
 local ALTURA_LUZ_SUPERFICIE = 1200
@@ -172,6 +174,19 @@ end
 local function paso(dt: number)
 	local camara = workspace.CurrentCamera
 	if camara == nil then
+		return
+	end
+	-- Mientras el jugador elige bando, la luz la pone la pantalla de elección (su escena está lejos de todo y aquí
+	-- tocaría la luz de día del espacio humano). Al volver se salta directamente al preset que toque.
+	local jugador = Players.LocalPlayer
+	if
+		jugador
+		and (
+			jugador:GetAttribute(ConfigEleccion.AtributoEligiendo)
+			or jugador:GetAttribute(ConfigEleccion.AtributoEnPantalla)
+		)
+	then
+		zonaAnterior = nil
 		return
 	end
 	acumulado += dt
