@@ -274,6 +274,17 @@ export type Figura = {
 	Inclinacion: number?, -- grados de inclinación de la cabeza
 	Luz: { Desplazamiento: { number }, Color: string, Brillo: number, Rango: number },
 	Espasmos: { Intervalo: { number }, Fuerza: number }?, -- tirones bruscos de la cabeza (los monstruos)
+	-- Modelo de verdad en lugar de la figura de piezas: nombre de una plantilla en ReplicatedStorage.Modelos (un
+	-- personaje R6 montado). Si no está en el lugar, se usa la figura de piezas.
+	Modelo: {
+		Nombre: string,
+		Alto: number, -- studs que mide en la escena (se escala la plantilla)
+		Suelo: number, -- altura del suelo de la figura respecto a Posicion
+		GiroCabeza: number, -- grados que ladea la cabeza (quieto)
+		Encorvar: number, -- grados que inclina el torso hacia delante
+		LuzAbajo: { Desplazamiento: { number }, Color: string, Brillo: number, Rango: number },
+		LuzOjos: { Color: string, Brillo: number, Rango: number, Pulso: number },
+	}?,
 }
 
 Config.FiguraHumanos = {
@@ -321,6 +332,17 @@ Config.FiguraMonstruos = {
 	Ojos = { Color = "#FF1E2E", Tamano = 0.16 },
 	Inclinacion = 14,
 	Espasmos = { Intervalo = { 1.4, 3.6 }, Fuerza = 22 },
+	-- «El Hueco» (modelos/monstruo, #14), quieto en reposo: luz roja desde abajo y los ojos brillando.
+	Modelo = {
+		Nombre = "Monstruo_R6",
+		Alto = 15,
+		Suelo = -8.5,
+		GiroCabeza = 12,
+		Encorvar = 10,
+		-- Delante y por debajo de la figura (-Z es hacia la cámara): la luz le sube por la cara.
+		LuzAbajo = { Desplazamiento = { 0, -6, -6 }, Color = "#FF2A3A", Brillo = 6, Rango = 22 },
+		LuzOjos = { Color = "#FF2B2B", Brillo = 3, Rango = 6, Pulso = 1.7 },
+	},
 } :: Figura
 
 -- ===== Interfaz y entrada =====

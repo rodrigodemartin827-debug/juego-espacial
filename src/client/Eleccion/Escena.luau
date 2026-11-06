@@ -91,6 +91,9 @@ type Figura = {
 	Espasmo: number, -- ángulo extra de la cabeza ahora mismo (decae)
 	ProximoEspasmo: number,
 	Luz: PointLight?,
+	-- Figura hecha con un modelo de verdad (Config.Figura.Modelo): quieta, solo cambian sus luces.
+	Modelo: Model?,
+	LuzOjos: PointLight?,
 }
 
 -- ===== Estado =====
@@ -663,7 +666,105 @@ local PIEZAS_R6: { [string]: Vector3 } = {
 	["Right Leg"] = Vector3.new(1, 2, 1),
 }
 
+-- Plantilla del modelo de una figura (ReplicatedStorage.Modelos.<Nombre>), o nil si no está en el lugar.
+local function plantillaFigura(datos: Config.Figura): Model?
+	if datos.Modelo == nil then
+		return nil
+	end
+	local carpetaModelos = ReplicatedStorage:FindFirstChild("Modelos")
+	local plantilla = carpetaModelos and carpetaModelos:FindFirstChild(datos.Modelo.Nombre)
+	if plantilla and plantilla:IsA("Model") then
+		return plantilla
+	end
+	warn(`[Eleccion] No está ReplicatedStorage.Modelos.{datos.Modelo.Nombre}: se usa la figura de piezas`)
+	return nil
+end
+
+--[[
+	Figura con un modelo R6 de verdad (el monstruo del #14): quieta en reposo, encorvada y con la cabeza ladeada,
+	iluminada desde abajo y con los ojos brillando. Sin Humanoid (no hace falta y no debe moverse solo); la raíz
+	anclada y el resto colgando de sus Motor6D, que es lo que da la pose.
+]]
+local function construirFiguraModelo(bando: string, datos: Config.Figura, plantilla: Model, padre: Instance): Figura
+	local m = datos.Modelo :: any
+	local modelo = plantilla:Clone()
+	modelo.Name = `Figura_{bando}`
+	for _, d in modelo:GetDescendants() do
+		if d:IsA("Humanoid") or d:IsA("Script") or d:IsA("LocalScript") then
+			d:Destroy()
+		elseif d:IsA("BasePart") then
+			d.CanCollide = false
+			d.CanTouch = false
+			d.CanQuery = false
+			d.CastShadow = false
+			d.Anchored = d.Name == "HumanoidRootPart"
+		end
+	end
+	-- Pose quieta: torso encorvado hacia delante y cabeza ladeada.
+	for _, motor in modelo:GetDescendants() do
+		if motor:IsA("Motor6D") then
+			if motor.Name == "RootJoint" then
+				motor.C0 *= CFrame.Angles(math.rad(m.Encorvar), 0, 0)
+			elseif motor.Name == "Neck" then
+				motor.C0 *= CFrame.Angles(0, math.rad(m.GiroCabeza), 0)
+			end
+		end
+	end
+	local _, tamano = modelo:GetBoundingBox()
+	if tamano.Y > 0 then
+		modelo:ScaleTo(modelo:GetScale() * m.Alto / tamano.Y)
+	end
+
+	-- Mira hacia la cámara (+Z), girada GiroY grados, con los pies en Posicion + Suelo.
+	local raiz = CFrame.new(mundo(datos.Posicion)) * CFrame.Angles(0, math.pi + math.rad(datos.GiroY), 0)
+	modelo.Parent = padre
+	modelo:PivotTo(raiz)
+	local caja, medida = modelo:GetBoundingBox()
+	local pies = raiz.UpVector:Dot(caja.Position - raiz.Position) - medida.Y / 2
+	modelo:PivotTo(raiz + raiz.UpVector * (m.Suelo - pies))
+
+	-- Ojos de neón con su propia luz.
+	local ojos: { BasePart } = {}
+	local luzOjos: PointLight? = nil
+	local pieza = modelo:FindFirstChild("Ojos", true)
+	if pieza and pieza:IsA("BasePart") then
+		pieza.Material = Enum.Material.Neon
+		pieza.Color = color(m.LuzOjos.Color)
+		local luz = Instance.new("PointLight")
+		luz.Color = color(m.LuzOjos.Color)
+		luz.Brightness = m.LuzOjos.Brillo
+		luz.Range = m.LuzOjos.Rango
+		luz.Shadows = false
+		luz.Parent = pieza
+		luzOjos = luz
+		table.insert(ojos, pieza)
+	end
+	-- Luz desde abajo y por delante: le sube por la cara (el truco de la linterna bajo la barbilla).
+	local _, luzAbajo = nuevaLuz(modelo, raiz:PointToWorldSpace(v3(m.LuzAbajo.Desplazamiento)), m.LuzAbajo)
+
+	return {
+		Bando = bando,
+		Datos = datos,
+		Raiz = raiz,
+		Piezas = {},
+		Extras = {},
+		Hombro = 0,
+		AltoBrazo = 0,
+		AltoCabeza = 0,
+		Ojos = ojos,
+		Espasmo = 0,
+		ProximoEspasmo = math.huge,
+		Luz = luzAbajo,
+		Modelo = modelo,
+		LuzOjos = luzOjos,
+	}
+end
+
 local function construirFigura(bando: string, datos: Config.Figura, padre: Instance): Figura
+	local plantilla = plantillaFigura(datos)
+	if plantilla then
+		return construirFiguraModelo(bando, datos, plantilla, padre)
+	end
 	local modelo = Instance.new("Model")
 	modelo.Name = `Figura_{bando}`
 	modelo.Parent = padre
@@ -759,6 +860,21 @@ end
 local function moverFigura(figura: Figura, dt: number, partes: { BasePart }, marcos: { CFrame })
 	local datos = figura.Datos
 	local f = foco[figura.Bando] or 0
+	if figura.Modelo then
+		-- Quieta: solo laten los ojos y la luz de abajo, y se encienden más al resaltar su lado.
+		local m = datos.Modelo :: any
+		local latido = 0.75 + 0.25 * math.sin(tiempo * m.LuzOjos.Pulso * 2 * math.pi)
+		if figura.LuzOjos then
+			figura.LuzOjos.Brightness = m.LuzOjos.Brillo * latido * (0.7 + 0.8 * f)
+		end
+		for _, ojo in figura.Ojos do
+			ojo.Transparency = 0.15 * (1 - f) * (1 - latido)
+		end
+		if figura.Luz then
+			figura.Luz.Brightness = m.LuzAbajo.Brillo * (0.6 + 0.6 * f)
+		end
+		return
+	end
 	local respiracion = math.sin(tiempo * 1.6) * 0.04 * datos.Escala
 	local inclinacionCuerpo = math.rad(6) * f -- se inclina hacia la cámara al resaltarlo
 	local raiz = figura.Raiz * CFrame.new(0, respiracion, 0) * CFrame.Angles(-inclinacionCuerpo, 0, 0)
