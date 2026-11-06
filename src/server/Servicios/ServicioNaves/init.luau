@@ -796,6 +796,11 @@ function ServicioNaves.PonerEntorno(nuevo: Entorno)
 	entorno = nuevo
 end
 
+-- El entorno conectado ahora (para quien quiera ampliarlo sin perder lo que ya hacía).
+function ServicioNaves.ObtenerEntorno(): Entorno
+	return entorno
+end
+
 -- ¿Está la nave del jugador en mitad de una transición (aterrizando o despegando)?
 function ServicioNaves.EnTransicion(jugador: Player): boolean
 	local nave = naves[jugador]

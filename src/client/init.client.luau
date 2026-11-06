@@ -9,12 +9,21 @@
 	Aquí solo se arrancan los servicios; la lógica vive en los módulos de `Servicios/`.
 ]]
 
+-- EXPERIMENTO planeta redondo (solo en Studio): ajusta los datos de los planetas ANTES de que nadie los lea.
+require(
+	game:GetService("ReplicatedStorage")
+		:WaitForChild("Shared")
+		:WaitForChild("Experimentos")
+		:WaitForChild("PlanetaRedondo") :: any
+).Aplicar()
+
 local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
 local ServicioNaves = require(script.Naves.ServicioNaves)
 local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
+local GravedadPlaneta = require(script.Experimentos.GravedadPlaneta)
 local ServicioTiendas = require(script.Tiendas.ServicioTiendas)
 
 -- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa.
@@ -25,6 +34,7 @@ ServicioNaves.Iniciar()
 ServicioExploracion.Iniciar()
 ServicioPlanetas.Iniciar()
 ServicioTiendas.Iniciar()
+GravedadPlaneta.Iniciar() -- EXPERIMENTO: solo hace algo en Studio, con el experimento activo
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
 ServicioDatos.Actualizados:Conectar(function(datos)

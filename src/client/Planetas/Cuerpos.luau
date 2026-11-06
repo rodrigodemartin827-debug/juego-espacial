@@ -26,6 +26,7 @@ local RunService = game:GetService("RunService")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Datos = require(Shared.Planetas.Datos)
 local Espacio = require(Shared.Planetas.Espacio)
+local Experimento = require(Shared.Experimentos.PlanetaRedondo)
 local Construccion = require(script.Parent.Construccion)
 
 type Cuerpo = Construccion.Cuerpo
@@ -41,6 +42,11 @@ type Estado = {
 local Cuerpos = {}
 
 local DESVIO_ESCALA = 0.04
+-- EXPERIMENTO planeta redondo: su esfera decorativa se encoge un poco para quedar DENTRO de la corteza de Terrain.
+-- Así, de cerca se ve el terreno (que tapa la decorativa) y, donde el terreno aún no ha llegado (StreamingEnabled) o
+-- desde lejos, se ve la decorativa.
+local ESCALA_DENTRO_DEL_TERRENO = 0.97
+local ALTURA_OCULTAR_DECORADO = 700
 local NOMBRE_PASO = "PlanetasCuerpos"
 
 local carpeta: Folder? = nil
@@ -127,6 +133,12 @@ local function paso(dt: number)
 	local intervalo = 1 / espacio.HzLejanos
 
 	for _, estado in estados do
+		-- EXPERIMENTO planeta redondo: cerca de su superficie no se dibuja la esfera decorativa (sus capas de
+		-- atmósfera se verían desde dentro); ahí manda el terreno, y el horizonte está cerca.
+		if modo == "Espacio" and Experimento.Activado() and estado.Cuerpo.Nombre == Experimento.Planeta then
+			local altura = (ojo - estado.Cuerpo.Centro).Magnitude - Experimento.Radio
+			ponerVisible(estado, altura > ALTURA_OCULTAR_DECORADO)
+		end
 		if not estado.Visible then
 			continue
 		end
@@ -150,6 +162,9 @@ local function paso(dt: number)
 			continue
 		end
 
+		local factor = if Experimento.Activado() and cuerpo.Nombre == Experimento.Planeta
+			then ESCALA_DENTRO_DEL_TERRENO
+			else 1
 		-- En el espacio.
 		local hacia = cuerpo.Centro - ojo
 		local distancia = hacia.Magnitude
@@ -161,11 +176,11 @@ local function paso(dt: number)
 		animar(estado, t, if cerca then dt else intervalo, distancia - cuerpo.Radio < espacio.DistanciaDetalle)
 
 		if distancia <= espacio.DistanciaReal then
-			colocar(estado, cuerpo.Centro, 1, CFrame.identity)
+			colocar(estado, cuerpo.Centro, factor, CFrame.identity)
 		else
-			local objetivo = espacio.DistanciaReal / distancia
+			local objetivo = espacio.DistanciaReal / distancia * factor
 			local escala = estado.Escala
-			if escala <= 0 or escala >= 1 or math.abs(escala / objetivo - 1) > DESVIO_ESCALA then
+			if escala <= 0 or escala >= factor or math.abs(escala / objetivo - 1) > DESVIO_ESCALA then
 				escala = objetivo
 			end
 			colocar(estado, ojo + hacia * escala, escala, CFrame.identity)

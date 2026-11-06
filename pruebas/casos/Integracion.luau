@@ -32,6 +32,9 @@ local function arrancarScriptServidor(entorno)
 	do
 		entorno.servidor.buscar(`{RUTA_SERVIDOR}.Servicios.{nombre}`).Source = "return { Iniciar = function() end }"
 	end
+	-- El experimento del planeta redondo (solo Studio) genera terreno: fuera de la simulación.
+	entorno.servidor.buscar(`{RUTA_SERVIDOR}.Experimentos.PlanetaRedondo`).Source =
+		"return { Iniciar = function() end }"
 	entorno.servidor.ejecutarScript(RUTA_SERVIDOR)
 end
 
@@ -63,6 +66,7 @@ local function arrancarCliente(entorno, jugador)
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Planetas.ServicioPlanetas`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Exploracion.ServicioExploracion`).Source =
 		"return { Iniciar = function() end }"
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Experimentos.GravedadPlaneta`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Tiendas.ServicioTiendas`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
