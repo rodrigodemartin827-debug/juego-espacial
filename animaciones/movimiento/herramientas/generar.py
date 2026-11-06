@@ -92,7 +92,8 @@ def main():
     ap.add_argument("--render-dir", default="/tmp/renders_movimiento")
     ap.add_argument("--muestras", type=int, default=16)
     ap.add_argument("--solo-lateral", action="store_true", help="GIF solo con la vista lateral (más rápido)")
-    a = ap.parse_args()
+    # Con «blender -b --python generar.py -- correr ...» los argumentos propios van detrás de «--».
+    a = ap.parse_args(sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else None)
 
     anim = importlib.import_module(a.animacion)
     base = os.path.join(CARPETA, a.animacion)
