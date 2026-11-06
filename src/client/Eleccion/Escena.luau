@@ -26,10 +26,13 @@
 		Escena.Destruir()
 ]]
 
+local Lighting = game:GetService("Lighting")
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
+local AmbienteJuego = require(Shared.Juego.Ambiente)
 local Config = require(Shared.Eleccion.Config)
 local Encuadre = require(Shared.Eleccion.Encuadre)
 local FormaGrieta = require(Shared.Eleccion.Grieta)
@@ -970,8 +973,24 @@ end
 
 -- ===== Bucle por fotograma =====
 
+--[[
+	La luz de la escena: la noche cerrada del espacio de siempre (Juego/Ambiente). PROBADO EN STUDIO: el ambiente de
+	los planetas (client/Planetas/Ambiente) calcula la luz según dónde está la cámara, y aquí, lejos de todo, ponía la
+	luz de día del espacio humano (fondo azulado y todo más claro). Ese ambiente se pausa mientras se elige bando
+	(atributo EligiendoBando); por si acaso, la escena la vuelve a poner en cada fotograma (solo si ha cambiado).
+]]
+local LUZ_ESCENA = AmbienteJuego.Iluminacion
+local function ponerLuzEscena()
+	for propiedad, valor in LUZ_ESCENA :: any do
+		if (Lighting :: any)[propiedad] ~= valor then
+			(Lighting :: any)[propiedad] = valor
+		end
+	end
+end
+
 local function paso(dt: number)
 	dt = math.min(dt, 0.1)
+	ponerLuzEscena()
 	local ahora = os.clock()
 	local congelada = ahora < congeladaHasta
 	if not congelada then
@@ -1019,7 +1038,10 @@ local function paso(dt: number)
 			planeta.Luz.Brightness = brillo
 		end
 		local datos = planeta.Datos
-		planeta.Atmosfera.Transparency = math.clamp(datos.Atmosfera.Transparencia - 0.08 * f + 0.4 * apagado, 0, 1)
+		-- Transparencia 1 = sin atmósfera (no se enciende al resaltar).
+		if datos.Atmosfera.Transparencia < 1 then
+			planeta.Atmosfera.Transparency = math.clamp(datos.Atmosfera.Transparencia - 0.08 * f + 0.4 * apagado, 0, 1)
+		end
 		planeta.Halo.Transparency = math.clamp(datos.Halo.Transparencia - 0.05 * f + 0.06 * apagado, 0, 1)
 	end
 	if not congelada then
@@ -1077,6 +1099,8 @@ function Escena.Construir()
 	local raiz = Instance.new("Folder")
 	raiz.Name = "EscenaEleccion"
 	carpeta = raiz
+	-- Mientras la escena está montada, la cámara y la luz son suyas (ver Config.AtributoEnPantalla).
+	Players.LocalPlayer:SetAttribute(Config.AtributoEnPantalla, true)
 
 	planetas.Humanos = construirPlaneta("Humanos", Config.PlanetaHumanos, raiz)
 	planetas.Monstruos = construirPlaneta("Monstruos", Config.PlanetaMonstruos, raiz)
@@ -1211,6 +1235,7 @@ function Escena.Destruir()
 	end
 	if carpeta then
 		carpeta:Destroy()
+		Players.LocalPlayer:SetAttribute(Config.AtributoEnPantalla, nil)
 		carpeta = nil
 	end
 	table.clear(planetas)

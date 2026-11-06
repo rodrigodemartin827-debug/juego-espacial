@@ -25,6 +25,7 @@ local RunService = game:GetService("RunService")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Experimento = require(Shared.Experimentos.PlanetaRedondo)
 local NavesConfig = require(Shared.Naves.Config)
+local ConfigEleccion = require(Shared.Eleccion.Config)
 
 type Estado = {
 	Personaje: Model,
@@ -464,6 +465,14 @@ local function pasoCamara(_dt: number)
 	local e = estado
 	local camara = workspace.CurrentCamera
 	if e == nil or camara == nil or e.Personaje:GetAttribute(NavesConfig.AtributoPilotando) then
+		return
+	end
+	-- Mientras elige bando, la cámara es de la pantalla de elección (PROBADO EN STUDIO: esta, que va justo después,
+	-- la pisaba y se veía al personaje delante de su casa en lugar de la escena).
+	if
+		jugador:GetAttribute(ConfigEleccion.AtributoEligiendo)
+		or jugador:GetAttribute(ConfigEleccion.AtributoEnPantalla)
+	then
 		return
 	end
 	if camara.CameraType ~= Enum.CameraType.Scriptable then

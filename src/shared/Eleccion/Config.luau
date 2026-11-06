@@ -24,6 +24,11 @@ Config.Orden = { "Humanos", "Monstruos" }
 -- tiene, su personaje está quieto (anclado) y protegido (ForceField invisible), y no puede usar habilidades.
 Config.AtributoEligiendo = "EligiendoBando"
 
+-- Atributo (en el Player, solo en su cliente) que pone la escena mientras está montada: desde que aparece hasta que
+-- termina el fundido final, también después de que el servidor confirme. Mientras está, la cámara y la luz son de la
+-- escena (la cámara del planeta redondo y el ambiente de los planetas se apartan).
+Config.AtributoEnPantalla = "PantallaEleccion"
+
 -- Nombre del ForceField invisible que protege al personaje mientras elige.
 Config.NombreProteccion = "ProteccionEleccion"
 
@@ -119,7 +124,8 @@ export type Planeta = {
 }
 
 -- ----- Planeta de los Humanos: como la Tierra -----
-local AZUL, VERDE, VERDE_OSCURO, TIERRA, HIELO = "#1D63C9", "#3E9B45", "#2C7034", "#A88B57", "#F2F7FF"
+-- Océano azul profundo: PROBADO EN STUDIO, con la luz nocturna de la escena el azul de antes (#1D63C9) se leía celeste.
+local AZUL, VERDE, VERDE_OSCURO, TIERRA, HIELO = "#0B2F6E", "#3E9B45", "#2C7034", "#A88B57", "#F2F7FF"
 
 Config.PlanetaHumanos = {
 	Posicion = { -33, 3, -78 },
@@ -154,8 +160,10 @@ Config.PlanetaHumanos = {
 		{ Direccion = { 0.1, 0.85, 0.5 }, Tamano = 0.2, Elevacion = 0.05, Color = "#FFFFFF", Transparencia = 0.35 },
 	},
 	NubesVuelta = 70,
-	Atmosfera = { Color = "#7FC8FF", Escala = 1.09, Transparencia = 0.1 },
-	Halo = { Color = "#5FB2FF", Escala = 1.22, Transparencia = 0.93 },
+	-- Sin atmósfera (Transparencia 1): PROBADO EN STUDIO, la esfera de ForceField lavaba el planeta entero de celeste
+	-- (el ForceField casi no hace caso a la transparencia). El halo, muy tenue, basta para el borde.
+	Atmosfera = { Color = "#7FC8FF", Escala = 1.09, Transparencia = 1 },
+	Halo = { Color = "#5FB2FF", Escala = 1.22, Transparencia = 0.97 },
 } :: Planeta
 
 -- ----- Planeta de los Monstruos: oscuro, con venas de lava y niebla púrpura -----
@@ -207,7 +215,7 @@ Config.Sol = {
 	Corona = { Color = "#FFC86B", Escala = 1.6, Transparencia = 0.75 },
 	Resplandor = { Color = "#FFB347", Escala = 2.6, Transparencia = 0.92 },
 	-- Luz que ilumina el planeta humano (una PointLight no llega más de 60 studs, por eso va cerca del planeta).
-	Luz = { Posicion = { -58, 26, -60 }, Color = "#FFF1D8", Brillo = 2.6, Rango = 60 },
+	Luz = { Posicion = { -58, 26, -60 }, Color = "#FFF1D8", Brillo = 1.3, Rango = 60 }, -- más, y el océano se quema
 }
 
 -- ----- El "sol" de los Monstruos: un agujero negro con disco de acreción -----
@@ -288,7 +296,9 @@ export type Figura = {
 }
 
 Config.FiguraHumanos = {
-	Posicion = { -27, -15, -44 },
+	-- De pie con los pies sobre la franja de abajo, junto a su panel (PROBADO EN STUDIO: más abajo, en pantallas
+	-- anchas como la de Studio o un móvil apaisado, el encuadre las dejaba fuera).
+	Posicion = { -30, -6, -44 },
 	Escala = 2.2,
 	GiroY = -18,
 	-- Luz de relleno que ilumina la figura (posición relativa a la figura).
@@ -306,7 +316,7 @@ Config.FiguraHumanos = {
 } :: Figura
 
 Config.FiguraMonstruos = {
-	Posicion = { 27, -14.5, -44 },
+	Posicion = { 27.5, -5.5, -44 },
 	Escala = 2.3,
 	GiroY = 18,
 	-- Contraluz rojo detrás: la figura se ve como una silueta negra recortada.
@@ -336,11 +346,11 @@ Config.FiguraMonstruos = {
 	Modelo = {
 		Nombre = "Monstruo_R6",
 		Alto = 15,
-		Suelo = -8.5,
+		Suelo = -5.5,
 		GiroCabeza = 12,
 		Encorvar = 10,
 		-- Delante y por debajo de la figura (-Z es hacia la cámara): la luz le sube por la cara.
-		LuzAbajo = { Desplazamiento = { 0, -6, -6 }, Color = "#FF2A3A", Brillo = 6, Rango = 22 },
+		LuzAbajo = { Desplazamiento = { 0, -4.5, -5 }, Color = "#FF2A3A", Brillo = 14, Rango = 18 },
 		LuzOjos = { Color = "#FF2B2B", Brillo = 3, Rango = 6, Pulso = 1.7 },
 	},
 } :: Figura
