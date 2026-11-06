@@ -35,6 +35,8 @@ local CASOS = {
 	require("./casos/NavesVFX"),
 	require("./casos/NavesRed"),
 	require("./casos/Planetas"),
+	require("./casos/Tiendas"),
+	require("./casos/TiendasRed"),
 }
 
 Marco.verificarAlTerminar(Entorno.verificarSinErrores)

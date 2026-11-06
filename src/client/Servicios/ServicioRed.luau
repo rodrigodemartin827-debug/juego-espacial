@@ -15,7 +15,7 @@
 
 	Uso:
 	  ServicioRed.Iniciar()                                  -- una sola vez, al arrancar el cliente
-	  ServicioRed.Enviar("ElegirBando", "Heroes")
+	  ServicioRed.Enviar("ElegirBando", "Humanos")
 	  ServicioRed.Conectar("DatosJugador", function(datos) ... end)
 ]]
 

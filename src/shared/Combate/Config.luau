@@ -31,7 +31,7 @@ local Config = {
 	-- ===== Etiquetas =====
 	-- CollectionService: todo personaje o muñeco que puede recibir daño lleva esta etiqueta.
 	EtiquetaObjetivo = "ObjetivoCombate",
-	-- Atributo de un muñeco con el bando al que pertenece ("Heroes", "Villanos" o "Ninguno").
+	-- Atributo de un muñeco con el bando al que pertenece ("Humanos", "Monstruos" o "Ninguno").
 	AtributoBando = "BandoCombate",
 
 	-- ===== Muñecos de entrenamiento =====

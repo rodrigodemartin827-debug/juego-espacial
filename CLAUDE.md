@@ -45,7 +45,7 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 
 ### Lista de la v1 (lo que entra en el lanzamiento)
 - Los 2 planetas de bando y 4 planetas pequeños.
-- 1 nave con mejoras: Casco, Escudo, Motor, Armas, Escaner, Carga. ("Escaner" va sin tilde a propósito: es la clave del código).
+- 1 nave construida por piezas en el hangar (ver «Naves y armas»). Sus mejoras actuales son Casco, Escudo, Motor, Armas, Escaner y Carga. ("Escaner" va sin tilde a propósito: es la clave del código).
 - 1 campo de asteroides y los eventos del primer viaje.
 - Niveles.
 - 8-10 poderes, 3-4 armas, escáner, crafteo básico.
@@ -55,11 +55,60 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 - Persianas: las tiendas humanas no venden a los monstruos.
 - Andar terrorífico de los monstruos.
 - Un recurso exclusivo del planeta de los monstruos (uno solo y sencillo).
+- NPCs y misiones (ver «Progresión y misiones»).
+- Forja básica de armas.
+- Poderes humanos desbloqueables.
+- Maestría de armas y poderes.
+- Algún jefe.
 
-Lo que no esté en esta lista no se hace hasta después del lanzamiento. Por ejemplo, el motor de salto queda para después.
+Lo que no esté en esta lista no se hace hasta después del lanzamiento. Para después quedan, por ejemplo: el motor de salto, la pistola de portales, los planetas invadidos y terraformar.
+
+### Progresión y misiones
+- **NPCs** con animación de reposo en pueblos y ciudades. Dan misiones (picar X minerales, cazar X criaturas...) a cambio de XP y monedas. Al principio son sencillas y luego más difíciles.
+- **Nivel máximo: 3.000.**
+- **Maestría:** cada arma y cada poder sube de nivel con el uso. Hacen falta desde 1 enemigo para desbloquear el primer ataque hasta 300 para el último. Vale para los dos bandos.
+- **Poderes por bando:** los humanos no nacen con poderes; los desbloquean con nivel, dinero y yendo a un sitio especial. Los monstruos ya los tienen.
+
+### Naves y armas
+- **Naves por piezas** en el hangar: cabina, casco, motores, alas, armas y escudos. Cada pieza cambia cómo vuela la nave. Sustituyen a la nave predeterminada actual, que parece un avión y no es original.
+- **Forja de armas** (espadas, etc.) con los minerales.
+
+### Jefes
+- Difíciles y épicos: gigantes, con fases que cambian sus ataques. Algunos son para ir en grupo, y sueltan materiales raros.
+- **Leviatán:** jefe gigante que custodia un sector exterior. Hay que derrotarlo para poder entrar en ese sector.
+
+### Llave Maestra
+- Es el generador procedural de planetas por semilla. Una semilla da un planeta entero: bioma, relieve, mar, flora, minerales y nombre.
+- Rodrigo lo tiene hecho aparte y se meterá en el repositorio más adelante.
+- De ella salen los planetas de los sectores lejanos y los que se invaden.
+
+### Descubrimiento y portales
+- **«Descubierto por...»:** el primer jugador que descubre un planeta queda registrado para todo el juego. Quizá puede ponerle nombre.
+- **Pistola de portales** (después de la v1):
+  - **Normal:** se fabrica con materiales muy difíciles, gasta combustible en cada portal y solo lleva a planetas que TÚ has visitado.
+  - **VIP** (gamepass de 500 Robux): no gasta combustible, es infinita y lleva a cualquier planeta que ALGÚN jugador haya descubierto.
+  - Ninguna lleva a planetas que nadie ha descubierto ni a planetas invadidos.
+  - Ninguna lleva a sectores cuyo requisito no hayas cumplido (el de radiación sin el escudo, el del Leviatán sin haberlo derrotado).
+  - Hay un tiempo de espera corto entre portales, para que no sirvan para huir en mitad de un PvP.
+
+### Planetas invadidos (final de juego, después de la v1)
+- **Requisitos:** desde el nivel 2.000, cada jugador puede invadir UN planeta, que tiene que ser uno que nadie haya descubierto todavía. La Llave Maestra genera planetas infinitos, así que siempre habrá.
+- **Fábricas:** en su planeta pone fábricas para sacar casi todo tipo de materiales y fabricar mejores armas. Producen mientras no está, pero mucho más despacio y con un tope.
+- **Ataques:**
+  - Otros jugadores se lo pueden invadir, así que puede poner escudos y defensas.
+  - Solo se puede invadir el planeta de jugadores de nivel parecido.
+  - Tras sufrir una invasión hay un escudo automático de unas horas.
+  - Cuando el dueño sale del juego, su planeta desaparece y nadie puede atacarlo sin él.
+- **Visualizador del planeta:** un mapa visto desde arriba para colocar defensas, fábricas y edificios sin dar la vuelta andando.
+- **Terraformar:** plantar árboles, quitar montañas, poner ríos. Solo se guardan los cambios sobre la semilla de la Llave Maestra.
+  - Ojo: quitar montañas o abrir ríos es difícil con planetas hechos de mallas. Más adelante habrá que buscar una técnica para esto.
 
 ### Monetización (sin pay-to-win)
 Gamepasses (x2 monedas, VIP, almacén extra), skins de nave y de poderes, pase de temporada. Nada que haga ganar peleas comprando.
+- **Pistola de portales VIP** (gamepass de 500 Robux, después de la v1). Es comodidad, no poder: no da daño, ni vida, ni armas. Límites (ver «Descubrimiento y portales»):
+  - No lleva a sectores cuyo requisito no hayas cumplido: el de radiación sin el escudo, el del Leviatán sin haberlo derrotado.
+  - No lleva a planetas que nadie ha descubierto ni a planetas invadidos.
+  - Tiene un tiempo de espera corto entre portales, para que no sirva para huir en mitad de un PvP.
 
 ## Reglas técnicas
 - **Solo R6.** Nunca uses partes de R15. La prueba `SoloR6` lo comprueba.
