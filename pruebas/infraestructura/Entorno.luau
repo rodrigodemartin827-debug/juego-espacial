@@ -95,7 +95,16 @@ local function montarProyecto(mundo, rutaProyecto)
 	local function construirNodo(nombre, nodo, padre)
 		local instancia
 		if nodo["$path"] then
-			instancia = construirEntrada(mundo, nodo["$path"], nombre)
+			local ruta = nodo["$path"]
+			if fs.isDir(ruta) then
+				instancia = construirEntrada(mundo, ruta, nombre)
+			else
+				-- Un archivo suelto ("X.luau"): la clase sale de su extensión y el nombre, del nodo (como en Rojo).
+				instancia = construirEntrada(mundo, ruta, string.match(ruta, "[^/\\]+$") or ruta)
+				if instancia then
+					instancia.Name = nombre
+				end
+			end
 		else
 			instancia = mundo.Instance.new(nodo["$className"] or "Folder")
 			instancia.Name = nombre
