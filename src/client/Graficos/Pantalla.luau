@@ -53,6 +53,9 @@ end
 
 -- ===== Cámara =====
 
+local parametros = RaycastParams.new()
+parametros.FilterType = Enum.RaycastFilterType.Exclude
+
 local function empezarCamara()
 	jugador:SetAttribute(Config.AtributoCamara, true)
 	local c = Config.Pantalla.Camara
@@ -67,12 +70,18 @@ local function empezarCamara()
 		camara.CameraType = Enum.CameraType.Scriptable
 		-- «Arriba» del sitio donde está (en el planeta redondo no es el eje Y).
 		local arriba = (raiz.CFrame.UpVector).Unit
+		-- Delante de su cara, balanceándose: se ve al personaje y el pueblo detrás de él.
 		local base = raiz.CFrame.LookVector
 		base = (base - arriba * base:Dot(arriba)).Unit
-		local angulo = (os.clock() - inicio) / c.VueltaSegundos * 2 * math.pi
+		local angulo = math.rad(c.Arco) * math.sin((os.clock() - inicio) / c.PeriodoSegundos * 2 * math.pi)
 		local fuera = CFrame.fromAxisAngle(arriba, angulo):VectorToWorldSpace(base)
 		local foco = raiz.Position + arriba * c.Mira
-		camara.CFrame = CFrame.lookAt(foco + fuera * c.Distancia + arriba * c.Altura, foco, arriba)
+		local deseada = fuera * c.Distancia + arriba * c.Altura
+		-- Si algo se interpone (una pared, un árbol), la cámara se acerca para no atravesarlo.
+		parametros.FilterDescendantsInstances = { personaje :: Model }
+		local golpe = workspace:Raycast(foco, deseada, parametros)
+		local desde = if golpe then foco + deseada.Unit * math.max(golpe.Distance - 1, 4) else foco + deseada
+		camara.CFrame = CFrame.lookAt(desde, foco, arriba)
 	end)
 end
 
