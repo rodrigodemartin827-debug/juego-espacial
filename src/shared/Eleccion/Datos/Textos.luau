@@ -28,7 +28,8 @@ Textos.AyudaTactil = "Mantén el dedo en un lado para resaltarlo · Suelta para 
 Textos.AyudaMando = "◀ ▶ para mirar · Ⓐ para elegir"
 Textos.Esperando = "Sellando tu destino..."
 Textos.ErrorConfirmacion = "No se pudo confirmar tu elección. Inténtalo de nuevo."
-Textos.Aviso = "Solo podrás cambiar de bando pagando muchas monedas, y como mucho una vez cada 7 días."
+Textos.Aviso =
+	"La elección es permanente. Cambiar de bando cuesta muchas monedas, y solo se puede una vez cada 7 días."
 Textos.Elegir = "ELEGIR"
 
 Textos.Bandos = {

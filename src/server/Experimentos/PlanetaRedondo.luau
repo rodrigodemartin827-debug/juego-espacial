@@ -15,6 +15,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Experimento = require(ReplicatedStorage.Shared.Experimentos.PlanetaRedondo)
+local Espacio = require(ReplicatedStorage.Shared.Planetas.Espacio)
 local Servicios = script.Parent.Parent.Servicios
 local Hangar = require(Servicios.Hangar)
 local ServicioDatos = require(Servicios.ServicioDatos)
@@ -136,6 +137,18 @@ local function alAparecer(jugador: Player, personaje: Model)
 	task.wait(0.5)
 	while not listoAparicion do
 		task.wait(0.2)
+	end
+	-- Solo los de este planeta (y quien aún no ha elegido bando: elige aquí, quieto, y si elige este planeta ya está
+	-- en su sitio). Los del otro bando aparecen en su superficie plana: los coloca ServicioPlanetas.
+	local datos = ServicioDatos.ObtenerDatos(jugador)
+	local limiteDatos = os.clock() + 15
+	while datos == nil and os.clock() < limiteDatos and jugador.Parent ~= nil do
+		task.wait(0.25)
+		datos = ServicioDatos.ObtenerDatos(jugador)
+	end
+	local planeta = if datos then Espacio.PlanetaDeBando(datos.Bando) else nil
+	if planeta ~= nil and planeta ~= Experimento.Planeta then
+		return
 	end
 	if jugador.Character == personaje then
 		llevarAlPuerto(jugador, personaje)

@@ -445,6 +445,10 @@ Datos.AliasBandos = {
 -- Los jugadores con bando aparecen en el puerto de su planeta (false = en la zona de pruebas, como antes).
 Datos.AparecerEnPlanetaDelBando = true
 
+-- Planetas cuya aparición la lleva otro sistema (por ejemplo, el experimento del planeta redondo, que pone a los
+-- Humanos delante de su casa en el Valle del Alba): ServicioPlanetas no coloca ahí a nadie. Vacío = todos los lleva él.
+Datos.AparicionPropia = {} :: { [string]: boolean }
+
 -- La estación de pruebas del centro (ZonaPruebas): cada puerto tiene una plataforma para volver a ella a pie.
 Datos.Estacion = {
 	Nombre = "Estación de pruebas",
