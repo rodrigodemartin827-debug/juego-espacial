@@ -16,6 +16,8 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
   campos de asteroides generados por código y mejoras leídas de los datos del jugador; ver [Naves](#naves)),
 - la **exploración**: escáner de mano con ficha en pantalla, minerales que se pican a pie y desde la nave, inventario con
   límite según la mejora Carga y crafteo validado en el servidor; ver [Exploración](#exploración),
+- los **planetas de bando** con su terreno, el sol y el agujero negro, la luz por zonas y el aterrizaje con
+  transición; ver [Planetas, sol y agujero negro](#planetas-sol-y-agujero-negro),
 - las **tiendas del planeta humano**: materiales y mejoras de la nave a cambio de monedas, validado en el servidor, y una
   persiana animada que baja cuando se acerca un Monstruo y no le vende nada; ver [Tiendas](#tiendas), y
 - pruebas automáticas que se ejecutan fuera de Studio.
@@ -537,6 +539,52 @@ falta recolectar y refinar materiales; las monedas se ganan escaneando.
 - Los sonidos están vacíos (`Recursos.Sonidos`); pega un ID y suenan sin tocar código.
 - El pico no tiene animación propia ni herramienta en la mano; los golpes se ven por los efectos del mineral.
 - El XP se acumula pero todavía no hay sistema de niveles del jugador (el pico mejora con `datos.Nivel` cuando exista).
+
+## Planetas, sol y agujero negro
+
+Los dos **planetas de bando** (Humanos: *Nueva Tierra*; Monstruos: *Umbra*), el **sol** de la zona humana y el
+**agujero negro** de la de los monstruos. Todo en el mismo lugar (sin TeleportService). Los datos están en
+`src/shared/Planetas/Datos` y las cuentas, en módulos puros probados con Lune (`Espacio`, `Gravedad`, `Calor`, `Luz`,
+`Ruido`, `GeneradorTerreno`, `Apariencia`).
+
+### El mapa
+
+- Los planetas están a ±35 000 studs del origen: unos **10 minutos** de crucero con la nave sin mejorar (la prueba
+  `el viaje entre planetas dura unos 10 minutos` lo vigila). En el centro sigue la estación de pruebas con el campo
+  de asteroides. Todo lo jugable cabe en 48 000 studs (`Naves/Config.RadioMundo`), donde la coma flotante de Roblox
+  todavía tiene unos 4 milésimos de stud de precisión, así que no hace falta escalar velocidades.
+- Las **superficies** (terreno de 4096 × 4096 studs) están a 30 000 studs de altura, lejos de todo. Entrar en la
+  atmósfera de un planeta = fundido a negro y la nave aparece volando sobre el puerto de su superficie. Subir por
+  encima del techo de la superficie = vuelta al espacio, en órbita sobre ese planeta.
+- Cada puerto tiene tres hangares para despegar y una **zona segura** sin PvP (anillo de neón en el suelo). Alrededor
+  de cada planeta de bando también hay zona segura de naves en el espacio.
+- Con bando, se aparece en el puerto del planeta propio (`Datos.AparecerEnPlanetaDelBando`).
+
+### El sol y el agujero negro
+
+- **Sol**: cerca de él la nave se recalienta (lo decide el servidor, `Planetas/Calor`) y por encima del umbral el
+  casco se daña sin que el escudo lo pare. Tocarlo la funde.
+- **Agujero negro**: atrae a la nave como una corriente que crece al acercarse (`Planetas/Gravedad`). El servidor
+  acepta que caiga, pero no que escape más deprisa de lo que permite su motor. Dentro del horizonte se destruye.
+
+### La luz por zonas
+
+Lighting es global en Roblox, así que cada cliente lo ajusta según dónde está su cámara (`client/Planetas/Ambiente`):
+mezcla los presets de `Planetas/Datos/Iluminacion` y apunta la luz direccional hacia el sol o el agujero negro. La
+dirección sale de `ClockTime` y `GeographicLatitude`: al arrancar se mide una tabla con `Lighting:GetSunDirection()` y
+`GetMoonDirection()` y `Planetas/Luz.Resolver` busca la combinación que apunta donde toca. En el espacio la luz es la
+luna (cielo negro con estrellas); en la superficie humana, el sol.
+
+### Cuerpos lejanos
+
+A más de 9000 studs un cuerpo se dibuja con un "doble" más cercano y encogido en la misma proporción: mismo tamaño
+aparente y misma luz, pero siempre a una distancia que el motor dibuja bien (`client/Planetas/Cuerpos`). En las
+superficies, el otro planeta y el agujero negro se dibujan en el cielo en su dirección real.
+
+### Pruebas rápidas
+
+En la estación de pruebas hay dos plataformas *Viajar a Nueva Tierra / Umbra* que llevan a pie al puerto de cada
+planeta, y en cada puerto otra para volver.
 
 ## Tiendas
 

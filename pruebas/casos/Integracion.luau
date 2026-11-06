@@ -12,10 +12,10 @@ local RUTA_CLIENTE = "StarterPlayer.StarterPlayerScripts.Client"
 local ALMACEN = "DatosJugador"
 
 -- Ejecuta init.server.luau. La zona de pruebas, los asteroides, las naves, la exploración (minería, escáner,
--- crafteo) y las tiendas construyen un escenario con Part,
+-- crafteo), los planetas (terreno y puertos) y las tiendas construyen un escenario con Part, Terrain,
 -- CFrame, etc. y usan la física y la iluminación, que la simulación no tiene, así que se sustituyen por módulos
--- vacíos (la lógica de las naves, de la exploración y de las tiendas tiene sus propias pruebas: Naves, NavesVFX,
--- Exploracion y Tiendas).
+-- vacíos (la lógica de las naves, de la exploración, de los planetas y de las tiendas tiene sus propias pruebas:
+-- Naves, NavesVFX, Exploracion, Planetas y Tiendas).
 local function arrancarScriptServidor(entorno)
 	for _, nombre in
 		{
@@ -26,6 +26,7 @@ local function arrancarScriptServidor(entorno)
 			"ServicioMinado",
 			"ServicioEscaner",
 			"ServicioCrafteo",
+			"ServicioPlanetas",
 			"ServicioTiendas",
 		}
 	do
@@ -59,6 +60,7 @@ local function arrancarCliente(entorno, jugador)
 	-- El combate del cliente usa cámara, interfaz y efectos que la simulación no tiene: se sustituye por un módulo vacío.
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Combate.ServicioCombate`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Naves.ServicioNaves`).Source = "return { Iniciar = function() end }"
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Planetas.ServicioPlanetas`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Exploracion.ServicioExploracion`).Source =
 		"return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Tiendas.ServicioTiendas`).Source = "return { Iniciar = function() end }"

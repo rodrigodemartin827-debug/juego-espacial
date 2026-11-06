@@ -18,6 +18,14 @@
 	  VIGILANCIA    cada 0,2 s se comprueba que la nave no va más deprisa de lo que permite su motor, ni se sale
 	                del mundo. Si se salta los límites varias veces seguidas, se la devuelve a su última posición buena.
 	  TURBO         el servidor lleva el depósito de energía y el límite de velocidad con o sin turbo.
+	  ENTORNO       cerca del sol la nave se recalienta (Planetas/Calor) y el casco se daña por encima del umbral;
+	                el agujero negro la atrae (Planetas/Gravedad) y su horizonte la destruye. La vigilancia cuenta
+	                con esa atracción: caer es válido, escapar más deprisa de lo que permite el motor, no.
+	  ZONAS         una nave está en el Espacio o en la Superficie de un planeta (Planetas/Espacio). Entrar en la
+	                atmósfera de un planeta o subir por encima del techo de su superficie avisa a ServicioPlanetas
+	                (ver PonerEntorno), que hace la transición y la coloca con Teletransportar. Cambiar de zona por
+	                su cuenta, o meterse dentro de un planeta o del sol, es trampa: se la devuelve a su sitio.
+	                En las zonas seguras (alrededor de los planetas de bando y en sus puertos) no hay PvP de naves.
 
 	Los clientes reciben los avisos para los efectos (NaveDisparo, NaveImpacto, NaveChoque, NaveDestruida...);
 	el piloto, además, su estado (EstadoNave) para el panel de mandos.
@@ -35,6 +43,10 @@ local CombateReglas = require(Shared.Combate.Reglas)
 local Config = require(Shared.Naves.Config)
 local Estadisticas = require(Shared.Naves.Estadisticas)
 local Reglas = require(Shared.Naves.Reglas)
+local Calor = require(Shared.Planetas.Calor)
+local DatosPlanetas = require(Shared.Planetas.Datos)
+local Espacio = require(Shared.Planetas.Espacio)
+local Gravedad = require(Shared.Planetas.Gravedad)
 local ServicioAsteroides = require(script.Parent.ServicioAsteroides)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioMinado = require(script.Parent.ServicioMinado)
@@ -52,6 +64,19 @@ export type Plataforma = {
 	Marco: CFrame,
 	Ocupada: boolean,
 	AlCambiar: ((ocupada: boolean) -> ())?,
+}
+
+--[[
+	Lo que ServicioPlanetas quiere saber de las naves (ver PonerEntorno). Las funciones se llaman en un hilo aparte
+	y pueden esperar (fundidos, carga del terreno).
+	  AlEntrarEnAtmosfera  la nave ha entrado en la atmósfera de un planeta y puede aterrizar
+	  AlSuperarTecho       la nave ha subido por encima del techo de la superficie de un planeta
+	  DestinoAterrizaje    dónde se baja el piloto al aterrizar con F (nil = junto a su plataforma, como siempre)
+]]
+export type Entorno = {
+	AlEntrarEnAtmosfera: ((jugador: Player, planeta: string) -> ())?,
+	AlSuperarTecho: ((jugador: Player, planeta: string) -> ())?,
+	DestinoAterrizaje: ((jugador: Player, posicion: Vector3) -> CFrame?)?,
 }
 
 type Nave = {
@@ -85,6 +110,13 @@ type Nave = {
 	UltimoDanoChoque: number,
 
 	ProximoEstado: number,
+
+	-- Entorno (planetas, sol y agujero negro).
+	Zona: Espacio.Zona, -- dónde está: el espacio o la superficie de un planeta
+	EnTransicion: boolean, -- aterrizando o despegando (fundido a negro): no se vigila ni se daña
+	Calor: number, -- recalentamiento junto al sol (Planetas/Calor)
+	ProximoEntorno: number,
+	ProximoAvisoAtmosfera: number,
 }
 
 local ServicioNaves = {}
@@ -94,15 +126,36 @@ local naves: { [Player]: Nave } = {}
 local navePorModelo: { [Model]: Nave } = setmetatable({}, { __mode = "k" }) :: any
 local proximoDespegue: { [Player]: number } = {}
 local bucle: RBXScriptConnection? = nil
+local entorno: Entorno = {}
 
 -- Cada cuántos segundos se reenvía el estado al piloto aunque no haya pasado nada (mantiene sincronizado el escudo).
 local INTERVALO_ESTADO = 0.5
 -- Entre dos choques con el MISMO asteroide hay que esperar esto (el rebote tarda un poco en sacarla de la roca).
 local ENFRIAMIENTO_MISMO_ASTEROIDE = 0.3
+-- Un cliente que se mete más de esto dentro de un planeta o del sol (el suyo le hace resbalar por fuera) hace trampa.
+local MARGEN_CUERPO_SOLIDO = 40
+
+local SOL = DatosPlanetas.Sol
+local AGUJERO = DatosPlanetas.AgujeroNegro
+local CENTRO_SOL = Vector3.new(SOL.Centro.X, SOL.Centro.Y, SOL.Centro.Z)
+local CENTRO_AGUJERO = Vector3.new(AGUJERO.Centro.X, AGUJERO.Centro.Y, AGUJERO.Centro.Z)
+
+-- Los módulos de Planetas trabajan con tablas { X, Y, Z } (son puros); esto convierte un Vector3.
+local function aVec(v: Vector3): Espacio.Vec
+	return { X = v.X, Y = v.Y, Z = v.Z }
+end
 
 -- ===== Utilidades =====
 
 local function destinoAterrizaje(nave: Nave): CFrame
+	-- En la superficie de un planeta, ServicioPlanetas decide (junto al puerto de ese planeta).
+	local alternativo = entorno.DestinoAterrizaje
+	if alternativo and nave.Raiz.Parent ~= nil then
+		local destino = alternativo(nave.Jugador, nave.Raiz.Position)
+		if destino then
+			return destino
+		end
+	end
 	-- Junto a la plataforma, un poco a un lado, para no aparecer dentro de la nave de exhibición.
 	return nave.Plataforma.Marco * CFrame.new(10, 3.5, 4)
 end
@@ -138,6 +191,15 @@ local function instantanea(nave: Nave, ahora: number): { [string]: any }
 		Capacidad = stats.Capacidad,
 		Niveles = stats.Niveles,
 		Correccion = nave.Correccion,
+		-- Entorno: para el panel (calor) y para la física del cliente (zona).
+		Calor = nave.Calor,
+		CalorMax = SOL.Calor.CalorMax,
+		CalorAviso = SOL.Calor.UmbralAviso,
+		CalorDano = SOL.Calor.UmbralDano,
+		NivelCalor = Calor.Nivel(nave.Calor, SOL.Calor),
+		Zona = nave.Zona.Tipo,
+		Planeta = nave.Zona.Planeta,
+		EnTransicion = nave.EnTransicion,
 	}
 end
 
@@ -201,9 +263,9 @@ end
 	Aplica daño a una nave (escudo primero, luego casco). Si la destruye, la retira. Devuelve el resultado de
 	Naves/Reglas.AplicarDano.
 ]]
-local function danar(nave: Nave, dano: number, causa: string): Reglas.ResultadoDano
+local function danar(nave: Nave, dano: number, causa: string, ignorarEscudo: boolean?): Reglas.ResultadoDano
 	local ahora = os.clock()
-	local resultado = Reglas.AplicarDano(nave.Estado, nave.Stats, dano, ahora)
+	local resultado = Reglas.AplicarDano(nave.Estado, nave.Stats, dano, ahora, ignorarEscudo)
 	if resultado.Aplicado then
 		nave.UltimoDanoRecibido = ahora
 		if resultado.Destruida then
@@ -242,6 +304,11 @@ local function aplicarImpacto(nave: Nave, punto: Vector3, direccion: Vector3, go
 	local objetivo = if contenedor then navePorModelo[contenedor] else nil
 	if objetivo then
 		if objetivo == nave or not objetivo.Activa or not CombateReglas.SonEnemigos(nave.Bando, objetivo.Bando) then
+			return
+		end
+		-- Zonas seguras: ni se daña a quien está dentro ni se dispara desde dentro. El escudo "para" el disparo.
+		if Espacio.EnZonaSegura(aVec(nave.Raiz.Position)) or Espacio.EnZonaSegura(aVec(objetivo.Raiz.Position)) then
+			ServicioRed.EnviarATodos("NaveImpacto", nave.Modelo, punto, direccion, "Escudo")
 			return
 		end
 		local resultado = danar(objetivo, nave.Stats.Dano, "Nave")
@@ -392,12 +459,25 @@ local function vigilar(nave: Nave, ahora: number)
 	end
 	local posicion = nave.Raiz.Position
 	local tope = Reglas.VelocidadTope(nave.Stats, Reglas.TurboActivo(nave.Turbo, nave.Stats, ahora))
-	local distancia = (posicion - nave.PosValida).Magnitude
 
-	if
-		Reglas.MovimientoValido(distancia, transcurrido, tope)
-		and Reglas.DentroDelMundo({ X = posicion.X, Y = posicion.Y, Z = posicion.Z })
-	then
+	-- Velocidad: la del motor más la atracción del agujero negro (Planetas/Gravedad; fuera de su alcance es la
+	-- comprobación de siempre). El tiempo se limita igual que en Naves/Reglas.MovimientoValido.
+	local movimientoValido = Gravedad.MovimientoValido(
+		aVec(nave.PosValida),
+		aVec(posicion),
+		math.clamp(transcurrido, 0, Config.DtMaximo),
+		tope,
+		AGUJERO.Centro,
+		AGUJERO.Atraccion,
+		Config.HolguraVelocidad,
+		Config.MargenPosicion
+	)
+	-- Zona: sigue donde estaba (el espacio o la misma superficie) y no está metida dentro de un cuerpo sólido.
+	local zona = Espacio.ZonaDe(aVec(posicion))
+	local zonaValida = zona.Tipo ~= "Fuera" and Espacio.MismaZona(zona, nave.Zona)
+	local fueraDeCuerpos = Espacio.CuerpoSolido(aVec(posicion), -MARGEN_CUERPO_SOLIDO) == nil
+
+	if movimientoValido and zonaValida and fueraDeCuerpos then
 		nave.Avisos = 0
 		nave.PosValida = posicion
 		nave.TiempoValido = ahora
@@ -411,10 +491,91 @@ local function vigilar(nave: Nave, ahora: number)
 	end
 end
 
+-- ===== Entorno: sol, agujero negro, atmósferas y techo de las superficies =====
+
+local function avisarAtmosfera(nave: Nave, ahora: number, texto: string)
+	if ahora >= nave.ProximoAvisoAtmosfera then
+		nave.ProximoAvisoAtmosfera = ahora + DatosPlanetas.Transicion.SegundosEntreAvisos
+		enviarEstado(nave, texto)
+	end
+end
+
+-- Pasa el control a ServicioPlanetas (en otro hilo: hará un fundido y moverá la nave con Teletransportar).
+local function empezarTransicion(nave: Nave, funcion: (Player, string) -> (), planeta: string)
+	nave.EnTransicion = true
+	enviarEstado(nave)
+	task.spawn(function()
+		local ok, err = pcall(funcion :: any, nave.Jugador, planeta)
+		if not ok then
+			warn(`[ServicioNaves] Falló la transición a {planeta}: {err}`)
+		end
+		-- Si nadie la ha colocado (fallo o la nave ya no está), se reanuda la vigilancia donde esté.
+		if nave.Activa and nave.EnTransicion then
+			nave.EnTransicion = false
+			nave.PosValida = nave.Raiz.Position
+			nave.PosPrevia = nave.Raiz.Position
+			nave.TiempoValido = os.clock()
+		end
+	end)
+end
+
+local function revisarEntorno(nave: Nave, ahora: number, dt: number)
+	local posicion = nave.Raiz.Position
+	local zona = nave.Zona
+
+	if zona.Tipo == "Superficie" then
+		local planeta = zona.Planeta :: string
+		local alSubir = entorno.AlSuperarTecho
+		if alSubir and Espacio.SuperaTecho(planeta, aVec(posicion)) then
+			empezarTransicion(nave, alSubir, planeta)
+		end
+		return
+	end
+
+	-- Agujero negro: dentro del horizonte no hay vuelta atrás.
+	if (posicion - CENTRO_AGUJERO).Magnitude <= AGUJERO.RadioHorizonte then
+		destruir(nave, "AgujeroNegro")
+		return
+	end
+
+	-- Sol: el calor se acerca al de esta distancia y, por encima del umbral, daña el casco. Tocarlo la funde.
+	local distanciaSol = (posicion - CENTRO_SOL).Magnitude
+	if distanciaSol <= SOL.Radio then
+		destruir(nave, "Sol")
+		return
+	end
+	local antes = Calor.Nivel(nave.Calor, SOL.Calor)
+	nave.Calor = Calor.Paso(nave.Calor, distanciaSol, dt, SOL.Calor)
+	local danoPorSegundo = Calor.DanoPorSegundo(nave.Calor, SOL.Calor)
+	if danoPorSegundo > 0 then
+		danar(nave, danoPorSegundo * dt, "Sol", SOL.Calor.IgnoraEscudo)
+		if not nave.Activa then
+			return
+		end
+	end
+	if Calor.Nivel(nave.Calor, SOL.Calor) ~= antes then
+		local aviso = if Calor.Nivel(nave.Calor, SOL.Calor) == "Peligro"
+			then "¡Recalentamiento! Aléjate del sol"
+			else nil
+		enviarEstado(nave, aviso)
+	end
+
+	-- Atmósfera de un planeta: se aterriza (si no está en pleno combate).
+	local planeta = Espacio.EnAtmosfera(aVec(posicion))
+	local alEntrar = entorno.AlEntrarEnAtmosfera
+	if planeta and alEntrar then
+		if Reglas.PuedeAterrizar(nave.UltimoDanoRecibido, ahora) then
+			empezarTransicion(nave, alEntrar, planeta)
+		else
+			avisarAtmosfera(nave, ahora, "No puedes aterrizar en pleno combate")
+		end
+	end
+end
+
 local function paso(dt: number)
 	local ahora = os.clock()
 	for _, nave in naves do
-		if not nave.Lista or not nave.Activa then
+		if not nave.Lista or not nave.Activa or nave.EnTransicion then
 			continue
 		end
 		revisarChoque(nave, ahora, dt)
@@ -422,6 +583,14 @@ local function paso(dt: number)
 			continue -- el choque la ha destruido
 		end
 		vigilar(nave, ahora)
+		if ahora >= nave.ProximoEntorno then
+			local intervalo = Config.IntervaloVigilancia
+			nave.ProximoEntorno = ahora + intervalo
+			revisarEntorno(nave, ahora, intervalo)
+			if not nave.Activa or nave.EnTransicion then
+				continue
+			end
+		end
 
 		-- El turbo se agota solo: se apaga el efecto y se avisa al piloto.
 		if nave.Turbo.Activo and not Reglas.TurboActivo(nave.Turbo, nave.Stats, ahora) then
@@ -485,6 +654,8 @@ function ServicioNaves.Despegar(jugador: Player, plataforma: Plataforma): boolea
 	modelo:PivotTo(plataforma.Marco * CFrame.new(0, Modelo.ALTURA_POSADA, 0))
 	modelo:SetAttribute(Config.AtributoPiloto, jugador.UserId)
 	modelo:SetAttribute("Turbo", false)
+	-- Con StreamingEnabled, la nave llega entera a cada cliente o no llega (nunca a medias).
+	modelo.ModelStreamingMode = Enum.ModelStreamingMode.Atomic
 	modelo.Parent = workspace
 	CollectionService:AddTag(modelo, Config.EtiquetaNave)
 
@@ -520,6 +691,11 @@ function ServicioNaves.Despegar(jugador: Player, plataforma: Plataforma): boolea
 		UltimoChoque = setmetatable({}, { __mode = "k" }) :: any,
 		UltimoDanoChoque = 0,
 		ProximoEstado = ahora,
+		Zona = Espacio.ZonaDe(aVec(plataforma.Marco.Position)),
+		EnTransicion = false,
+		Calor = 0,
+		ProximoEntorno = ahora,
+		ProximoAvisoAtmosfera = 0,
 	}
 	naves[jugador] = nave
 	navePorModelo[modelo] = nave
@@ -570,6 +746,60 @@ function ServicioNaves.Despegar(jugador: Player, plataforma: Plataforma): boolea
 		asegurarBucle()
 	end)
 	return true
+end
+
+--[[
+	Coloca la nave de un jugador en `marco` (de un sitio a otro del mapa: la superficie de un planeta o su órbita).
+	La vigilancia la acepta allí: se actualizan su zona y su última posición buena, se le quita la velocidad y el
+	cliente del piloto se reorienta (como en una corrección). Termina la transición. Devuelve false si no vuela.
+]]
+function ServicioNaves.Teletransportar(jugador: Player, marco: CFrame): boolean
+	local nave = naves[jugador]
+	if nave == nil or not nave.Activa then
+		return false
+	end
+	local raiz = nave.Raiz
+	pcall(function()
+		raiz:SetNetworkOwner(nil)
+	end)
+	nave.Modelo:PivotTo(marco)
+	raiz.AssemblyLinearVelocity = Vector3.zero
+	raiz.AssemblyAngularVelocity = Vector3.zero
+
+	local ahora = os.clock()
+	nave.Zona = Espacio.ZonaDe(aVec(marco.Position))
+	nave.PosValida = marco.Position
+	nave.PosPrevia = marco.Position
+	nave.TiempoValido = ahora
+	nave.VelocidadReciente = 0
+	nave.Avisos = 0
+	nave.Correccion += 1
+	nave.EnTransicion = false
+	nave.ProximoEntorno = ahora + 0.5
+	enviarEstado(nave)
+	-- El cliente del piloto vuelve a mandar en cuanto la nueva posición le ha llegado.
+	task.delay(0.25, function()
+		if nave.Activa then
+			pcall(function()
+				raiz:SetNetworkOwner(nave.Jugador)
+			end)
+		end
+	end)
+	return true
+end
+
+--[[
+	Conecta las funciones de ServicioPlanetas (ver el tipo Entorno). Sin ellas las naves vuelan como antes:
+	ni se aterriza en los planetas ni se despega de sus superficies.
+]]
+function ServicioNaves.PonerEntorno(nuevo: Entorno)
+	entorno = nuevo
+end
+
+-- ¿Está la nave del jugador en mitad de una transición (aterrizando o despegando)?
+function ServicioNaves.EnTransicion(jugador: Player): boolean
+	local nave = naves[jugador]
+	return nave ~= nil and nave.EnTransicion
 end
 
 -- El jugador deja la nave y vuelve a la plataforma (la misma comprobación de combate que el remoto AterrizarNave).

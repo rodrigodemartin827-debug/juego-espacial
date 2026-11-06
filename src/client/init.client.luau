@@ -13,6 +13,7 @@ local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
 local ServicioNaves = require(script.Naves.ServicioNaves)
+local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
 local ServicioTiendas = require(script.Tiendas.ServicioTiendas)
 
@@ -22,6 +23,7 @@ ServicioDatos.Iniciar()
 ServicioCombate.Iniciar()
 ServicioNaves.Iniciar()
 ServicioExploracion.Iniciar()
+ServicioPlanetas.Iniciar()
 ServicioTiendas.Iniciar()
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.

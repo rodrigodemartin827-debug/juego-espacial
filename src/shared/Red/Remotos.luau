@@ -178,6 +178,13 @@ local definiciones: { [string]: Definicion } = {
 		Direccion = "ServidorACliente",
 	},
 
+	-- ===== Planetas =====
+
+	-- El servidor lleva al jugador a otra zona (aterrizar, despegar o viajar): fundido a negro y vuelta.
+	TransicionPlaneta = {
+		Direccion = "ServidorACliente",
+	},
+
 	-- ===== Exploración: escáner de mano, minería y crafteo =====
 
 	-- El jugador apunta con el escáner a algo escaneable. Solo dice QUÉ: el servidor comprueba que se pueda analizar,
