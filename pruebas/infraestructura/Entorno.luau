@@ -95,7 +95,16 @@ local function montarProyecto(mundo, rutaProyecto)
 	local function construirNodo(nombre, nodo, padre)
 		local instancia
 		if nodo["$path"] then
-			instancia = construirEntrada(mundo, nodo["$path"], nombre)
+			local ruta = nodo["$path"]
+			if fs.isDir(ruta) then
+				instancia = construirEntrada(mundo, ruta, nombre)
+			else
+				-- Un archivo suelto ("X.luau"): la clase sale de su extensión y el nombre, del nodo (como en Rojo).
+				instancia = construirEntrada(mundo, ruta, string.match(ruta, "[^/\\]+$") or ruta)
+				if instancia then
+					instancia.Name = nombre
+				end
+			end
 		else
 			instancia = mundo.Instance.new(nodo["$className"] or "Folder")
 			instancia.Name = nombre
@@ -109,12 +118,19 @@ local function montarProyecto(mundo, rutaProyecto)
 		end
 	end
 
-	-- Los hijos directos de la raíz son servicios: ya existen, solo hay que rellenarlos.
+	-- Los hijos directos de la raíz son servicios: ya existen, solo hay que rellenarlos. Los que solo fijan
+	-- propiedades ("$properties", como el StreamingEnabled de Workspace) no tienen nada que montar.
 	for nombre, nodo in proyecto.tree do
 		if string.sub(nombre, 1, 1) ~= "$" then
-			local servicio = mundo.game:GetService(nombre)
+			local hijos = {}
 			for clave, hijo in nodo do
 				if string.sub(clave, 1, 1) ~= "$" then
+					hijos[clave] = hijo
+				end
+			end
+			if next(hijos) ~= nil then
+				local servicio = mundo.game:GetService(nombre)
+				for clave, hijo in hijos do
 					construirNodo(clave, hijo, servicio)
 				end
 			end

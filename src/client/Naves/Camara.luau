@@ -35,6 +35,8 @@ local turbo = false
 local marco: CFrame? = nil -- la cámara suavizada
 local fovAnterior = FOV_BASE
 local tipoAnterior: Enum.CameraType = Enum.CameraType.Custom
+-- EXPERIMENTO planeta redondo: el sistema de referencia del vuelo (ver Naves/Vuelo). Lejos del planeta, el del mundo.
+local referencia = CFrame.identity
 
 local function paso(dt: number)
 	local camara = workspace.CurrentCamera
@@ -48,14 +50,16 @@ local function paso(dt: number)
 	local rapidez = math.clamp(velocidad / math.max(velocidadMaxima, 1), 0, 1.6)
 
 	-- Orientación deseada: la de la nave sin el alabeo (la cámara no debe rodar con ella).
-	local rx, ry = nave.CFrame:ToOrientation()
-	local orientacion = CFrame.fromEulerAnglesYXZ(rx, ry, 0)
+	-- Cabeceo y guiñada de la nave medidos en la referencia del vuelo (sin alabeo: la cámara no se tumba).
+	local relativo = referencia:Inverse() * (nave.CFrame - nave.Position)
+	local rx, ry = relativo:ToOrientation()
+	local orientacion = referencia * CFrame.fromEulerAnglesYXZ(rx, ry, 0)
 	local distancia = (DISTANCIA_BASE + (DISTANCIA_MAXIMA - DISTANCIA_BASE) * math.min(rapidez, 1))
 		* (if movil then 1.15 else 1)
 
 	local deseada = CFrame.new(nave.Position) * orientacion * CFrame.new(0, ALTURA, distancia)
 	local mirada = nave.Position + orientacion.LookVector * 40 + orientacion.UpVector * 2
-	local objetivo = CFrame.lookAt(deseada.Position, mirada)
+	local objetivo = CFrame.lookAt(deseada.Position, mirada, orientacion.UpVector)
 
 	if marco == nil then
 		marco = objetivo
@@ -90,6 +94,11 @@ function Camara.Iniciar(parteNave: BasePart, velocidadMax: number)
 	RunService:BindToRenderStep(NOMBRE_PASO, Enum.RenderPriority.Camera.Value, paso)
 end
 
+-- EXPERIMENTO planeta redondo: el vuelo avisa cada fotograma de su sistema de referencia.
+function Camara.PonerReferencia(nueva: CFrame)
+	referencia = nueva
+end
+
 function Camara.PonerTurbo(activo: boolean)
 	turbo = activo
 end
@@ -101,6 +110,7 @@ end
 -- Devuelve la cámara al personaje.
 function Camara.Detener()
 	RunService:UnbindFromRenderStep(NOMBRE_PASO)
+	referencia = CFrame.identity
 	raiz = nil
 	marco = nil
 	turbo = false

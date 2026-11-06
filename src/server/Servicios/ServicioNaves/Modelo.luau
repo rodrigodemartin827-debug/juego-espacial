@@ -31,12 +31,12 @@ local Modelo = {}
 
 -- Colores por bando: casco, detalles y neón.
 local COLORES: { [string]: { Casco: Color3, Oscuro: Color3, Neon: Color3 } } = {
-	Heroes = {
+	Humanos = {
 		Casco = Color3.fromRGB(226, 233, 246),
 		Oscuro = Color3.fromRGB(86, 100, 130),
 		Neon = Color3.fromRGB(77, 240, 255),
 	},
-	Villanos = {
+	Monstruos = {
 		Casco = Color3.fromRGB(58, 56, 68),
 		Oscuro = Color3.fromRGB(30, 28, 38),
 		Neon = Color3.fromRGB(255, 77, 94),

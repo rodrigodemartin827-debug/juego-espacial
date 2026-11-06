@@ -106,7 +106,7 @@ return function(Marco)
 			Marco.igual(cargados[1], jugador)
 
 			local registro = leerRegistro(nube, 1)
-			Marco.igual(registro.Version, 1)
+			Marco.igual(registro.Version, servidor.Esquema.VERSION)
 			Marco.igual(registro.Bloqueo.IdServidor, servidor.JobId, "el bloqueo identifica al servidor")
 			Marco.igualProfundo(registro.Datos, datos)
 		end)
@@ -115,7 +115,7 @@ return function(Marco)
 			local nube = NubeDatos.nueva()
 			nube:Escribir(ALMACEN, "Jugador_7", {
 				Version = 1,
-				Datos = { Bando = "Heroes", Nivel = 3, XP = 40, Monedas = 500, Inventario = { hierro = 9 } },
+				Datos = { Bando = "Humanos", Nivel = 3, XP = 40, Monedas = 500, Inventario = { hierro = 9 } },
 				Meta = { Creado = 1, UltimoGuardado = 2 },
 			})
 			local servidor = crearServidor(nube)
@@ -123,7 +123,7 @@ return function(Marco)
 			local jugador = entrar(servidor, 7)
 			local datos = servidor.Servicio.ObtenerDatos(jugador)
 
-			Marco.igual(datos.Bando, "Heroes")
+			Marco.igual(datos.Bando, "Humanos")
 			Marco.igual(datos.Nivel, 3)
 			Marco.igual(datos.XP, 40)
 			Marco.igual(datos.Monedas, 500)
@@ -210,7 +210,7 @@ return function(Marco)
 			Marco.igual(registro.Datos.Monedas, 123)
 			Marco.igual(registro.Datos.Inventario.hierro, 4)
 			Marco.igual(registro.Datos.MejorasNave.Escudo, 2)
-			Marco.igual(registro.Version, 1)
+			Marco.igual(registro.Version, servidor.Esquema.VERSION)
 			Marco.esNil(servidor.Servicio.ObtenerDatos(jugador), "ya no hay datos tras salir")
 		end)
 
@@ -859,6 +859,26 @@ return function(Marco)
 			Marco.igual(registro.Version, 2)
 			Marco.igual(registro.Datos.Monedas, 40)
 			Marco.esNil(registro.Datos.Oro)
+		end)
+
+		Marco.prueba("un jugador guardado como Villanos entra como Monstruos y se guarda así", function()
+			local nube = NubeDatos.nueva()
+			nube:Escribir(ALMACEN, "Jugador_1", {
+				Version = 1,
+				Datos = { Bando = "Villanos", Monedas = 12 },
+				Meta = { Creado = 1, UltimoGuardado = 2 },
+			})
+			local servidor = crearServidor(nube) -- con el esquema real, sin migraciones de prueba
+
+			local jugador = entrar(servidor, 1)
+			Marco.igual(servidor.Servicio.ObtenerDatos(jugador).Bando, "Monstruos")
+			Marco.igual(servidor.Servicio.ObtenerDatos(jugador).Monedas, 12)
+
+			servidor.Mundo.salirJugador(jugador)
+			esperarLiberacion(nube, 1)
+			local registro = leerRegistro(nube, 1)
+			Marco.igual(registro.Version, servidor.Esquema.VERSION)
+			Marco.igual(registro.Datos.Bando, "Monstruos")
 		end)
 
 		Marco.prueba(

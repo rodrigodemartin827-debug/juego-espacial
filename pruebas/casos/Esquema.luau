@@ -77,7 +77,7 @@ return function(Marco)
 		Marco.prueba("conserva datos válidos y los campos que no conoce", function()
 			local Esquema = cargarEsquema()
 			local entrada = {
-				Bando = "Villanos",
+				Bando = "Monstruos",
 				Nivel = 12,
 				XP = 340,
 				Monedas = 1500,
@@ -88,7 +88,7 @@ return function(Marco)
 			local datos, reparaciones = Esquema.Conciliar(Esquema.Migrar(entrada, 1))
 
 			Marco.igual(reparaciones, 0)
-			Marco.igual(datos.Bando, "Villanos")
+			Marco.igual(datos.Bando, "Monstruos")
 			Marco.igual(datos.Inventario.hierro, 30)
 			Marco.igual(datos.MejorasNave.Armas, 5)
 			Marco.igual(datos.MejorasNave.Carga, 4)
@@ -160,8 +160,8 @@ return function(Marco)
 			local Esquema = cargarEsquema()
 			Marco.igual(Esquema.Conciliar({ Bando = "Piratas" }).Bando, "Ninguno")
 			Marco.igual(Esquema.Conciliar({ Bando = 5 }).Bando, "Ninguno")
-			Marco.igual(Esquema.Conciliar({ Bando = "Heroes" }).Bando, "Heroes")
-			Marco.igual(Esquema.Conciliar({ Bando = "Villanos" }).Bando, "Villanos")
+			Marco.igual(Esquema.Conciliar({ Bando = "Humanos" }).Bando, "Humanos")
+			Marco.igual(Esquema.Conciliar({ Bando = "Monstruos" }).Bando, "Monstruos")
 			Marco.igual(Esquema.Conciliar({ Bando = "Ninguno" }).Bando, "Ninguno")
 		end)
 
@@ -253,6 +253,32 @@ return function(Marco)
 
 			local datos = Esquema.Migrar({}, 1)
 			Marco.igual(datos.Marca, true)
+		end)
+	end)
+
+	Marco.grupo("Esquema: migración a la versión 2 (Humanos y Monstruos)", function()
+		Marco.prueba("los bandos antiguos pasan a Humanos y Monstruos", function()
+			local Esquema = cargarEsquema()
+			Marco.igual(Esquema.Migrar({ Bando = "Heroes" }, 1).Bando, "Humanos")
+			Marco.igual(Esquema.Migrar({ Bando = "Villanos" }, 1).Bando, "Monstruos")
+		end)
+
+		Marco.prueba("sin bando o con Ninguno, no cambia nada", function()
+			local Esquema = cargarEsquema()
+			Marco.igual(Esquema.Migrar({ Bando = "Ninguno" }, 1).Bando, "Ninguno")
+			Marco.esNil(Esquema.Migrar({}, 1).Bando)
+		end)
+
+		Marco.prueba("tras migrar y conciliar, el jugador conserva su bando", function()
+			local Esquema = cargarEsquema()
+			local datos = Esquema.Conciliar(Esquema.Migrar({ Bando = "Villanos", Monedas = 7 }, 1))
+			Marco.igual(datos.Bando, "Monstruos", "sin la migración, Conciliar lo dejaría en Ninguno")
+			Marco.igual(datos.Monedas, 7)
+		end)
+
+		Marco.prueba("los datos ya en la versión 2 no se tocan", function()
+			local Esquema = cargarEsquema()
+			Marco.igual(Esquema.Migrar({ Bando = "Humanos" }, 2).Bando, "Humanos")
 		end)
 	end)
 end

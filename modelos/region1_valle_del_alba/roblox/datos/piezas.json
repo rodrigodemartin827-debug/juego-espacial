@@ -1,0 +1,2333 @@
+{
+ "Abedul_a": {
+  "fbx": "piezas/Abedul_a.fbx",
+  "fbx_lejos": "piezas/Abedul_a__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.3426,
+    10.4632,
+    -0.2586
+   ],
+   "tamano": [
+    8.5931,
+    22.9264,
+    9.1668
+   ],
+   "triangulos": 70
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    9.6323,
+    0.0
+   ],
+   "tamano": [
+    8.6586,
+    21.2646,
+    8.6586
+   ],
+   "triangulos": 28
+  },
+  "color": "#FFFFFF"
+ },
+ "Abedul_b": {
+  "fbx": "piezas/Abedul_b.fbx",
+  "fbx_lejos": "piezas/Abedul_b__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.1936,
+    11.8619,
+    -0.6486
+   ],
+   "tamano": [
+    10.5431,
+    25.7238,
+    8.7229
+   ],
+   "triangulos": 70
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    11.0046,
+    0.0
+   ],
+   "tamano": [
+    9.8313,
+    24.0092,
+    9.8313
+   ],
+   "triangulos": 28
+  },
+  "color": "#FFFFFF"
+ },
+ "Arbol_Flor": {
+  "fbx": "piezas/Arbol_Flor.fbx",
+  "fbx_lejos": "piezas/Arbol_Flor__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.5624,
+    5.8362,
+    -0.2834
+   ],
+   "tamano": [
+    9.3874,
+    13.6723,
+    7.9054
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    5.7598,
+    0.0
+   ],
+   "tamano": [
+    7.822,
+    13.5197,
+    7.822
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Arbol_Flor_B": {
+  "fbx": "piezas/Arbol_Flor_B.fbx",
+  "fbx_lejos": "piezas/Arbol_Flor_B__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.3863,
+    7.6191,
+    0.558
+   ],
+   "tamano": [
+    11.332,
+    17.2381,
+    10.567
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    7.2416,
+    0.0
+   ],
+   "tamano": [
+    9.6735,
+    16.4831,
+    9.6735
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Arbol_Grande": {
+  "fbx": "piezas/Arbol_Grande.fbx",
+  "fbx_lejos": "piezas/Arbol_Grande__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.6934,
+    15.5178,
+    0.9773
+   ],
+   "tamano": [
+    23.9415,
+    33.0357,
+    21.0076
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    15.4707,
+    0.0
+   ],
+   "tamano": [
+    19.9563,
+    32.9414,
+    19.9563
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Arbusto_a": {
+  "fbx": "piezas/Arbusto_a.fbx",
+  "fbx_lejos": "piezas/Arbusto_a__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.2354,
+    1.3007,
+    0.9292
+   ],
+   "tamano": [
+    4.3153,
+    3.1908,
+    5.0249
+   ],
+   "triangulos": 40
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    1.2,
+    0.0
+   ],
+   "tamano": [
+    5.3081,
+    3.0964,
+    5.3081
+   ],
+   "triangulos": 20
+  },
+  "color": "#FFFFFF"
+ },
+ "Arbusto_b": {
+  "fbx": "piezas/Arbusto_b.fbx",
+  "fbx_lejos": "piezas/Arbusto_b__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.4946,
+    1.4687,
+    0.9866
+   ],
+   "tamano": [
+    4.8147,
+    2.994,
+    4.356
+   ],
+   "triangulos": 40
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    1.2,
+    0.0
+   ],
+   "tamano": [
+    5.3081,
+    3.0964,
+    5.3081
+   ],
+   "triangulos": 20
+  },
+  "color": "#FFFFFF"
+ },
+ "Arbusto_c": {
+  "fbx": "piezas/Arbusto_c.fbx",
+  "fbx_lejos": "piezas/Arbusto_c__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.2822,
+    1.3033,
+    0.3492
+   ],
+   "tamano": [
+    6.2572,
+    3.038,
+    5.1866
+   ],
+   "triangulos": 40
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    1.2,
+    0.0
+   ],
+   "tamano": [
+    5.3081,
+    3.0964,
+    5.3081
+   ],
+   "triangulos": 20
+  },
+  "color": "#FFFFFF"
+ },
+ "Banco": {
+  "fbx": "piezas/Banco.fbx",
+  "fbx_lejos": "piezas/Banco__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    2.5,
+    1.7,
+    -0.025
+   ],
+   "tamano": [
+    5.0,
+    3.4,
+    1.85
+   ],
+   "triangulos": 38
+  },
+  "lejos": {
+   "centro": [
+    2.5,
+    2.5,
+    -0.025
+   ],
+   "tamano": [
+    5.0,
+    1.8,
+    1.85
+   ],
+   "triangulos": 20
+  },
+  "color": "#FFFFFF"
+ },
+ "Barril": {
+  "fbx": "piezas/Barril.fbx",
+  "fbx_lejos": "piezas/Barril__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.5,
+    0.0
+   ],
+   "tamano": [
+    2.44,
+    3.0,
+    2.44
+   ],
+   "triangulos": 76
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    1.5,
+    0.0
+   ],
+   "tamano": [
+    2.4,
+    3.0,
+    2.0785
+   ],
+   "triangulos": 32
+  },
+  "color": "#FFFFFF"
+ },
+ "Caja": {
+  "fbx": "piezas/Caja.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    1.2,
+    1.2,
+    -1.2
+   ],
+   "tamano": [
+    2.4,
+    2.4,
+    2.4
+   ],
+   "triangulos": 10
+  },
+  "color": "#FFFFFF"
+ },
+ "Carro": {
+  "fbx": "piezas/Carro.fbx",
+  "fbx_lejos": "piezas/Carro__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    2.0182,
+    1.7,
+    0.0
+   ],
+   "tamano": [
+    10.0364,
+    3.4,
+    4.6
+   ],
+   "triangulos": 84
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    2.6,
+    0.0
+   ],
+   "tamano": [
+    6.0,
+    1.6,
+    3.6
+   ],
+   "triangulos": 12
+  },
+  "color": "#FFFFFF"
+ },
+ "Cartel_Bolsa": {
+  "fbx": "piezas/Cartel_Bolsa.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.375,
+    1.5
+   ],
+   "tamano": [
+    0.3,
+    2.95,
+    3.0
+   ],
+   "triangulos": 22
+  },
+  "color": "#FFFFFF"
+ },
+ "Cartel_Espada": {
+  "fbx": "piezas/Cartel_Espada.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.375,
+    1.5
+   ],
+   "tamano": [
+    0.3,
+    2.95,
+    3.0
+   ],
+   "triangulos": 22
+  },
+  "color": "#FFFFFF"
+ },
+ "Cartel_Gema": {
+  "fbx": "piezas/Cartel_Gema.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.375,
+    1.5
+   ],
+   "tamano": [
+    0.3,
+    2.95,
+    3.0
+   ],
+   "triangulos": 22
+  },
+  "color": "#FFFFFF"
+ },
+ "Cartel_Pan": {
+  "fbx": "piezas/Cartel_Pan.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.375,
+    1.5
+   ],
+   "tamano": [
+    0.3,
+    2.95,
+    3.0
+   ],
+   "triangulos": 22
+  },
+  "color": "#FFFFFF"
+ },
+ "Cartel_Pocion": {
+  "fbx": "piezas/Cartel_Pocion.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.375,
+    1.5
+   ],
+   "tamano": [
+    0.3,
+    2.95,
+    3.0
+   ],
+   "triangulos": 22
+  },
+  "color": "#FFFFFF"
+ },
+ "Cartel_Yunque": {
+  "fbx": "piezas/Cartel_Yunque.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.375,
+    1.5
+   ],
+   "tamano": [
+    0.3,
+    2.95,
+    3.0
+   ],
+   "triangulos": 22
+  },
+  "color": "#FFFFFF"
+ },
+ "Chapitel": {
+  "fbx": "piezas/Chapitel.fbx",
+  "fbx_lejos": "piezas/Chapitel__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    10.78,
+    0.0
+   ],
+   "tamano": [
+    16.8,
+    29.84,
+    16.8
+   ],
+   "triangulos": 56
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    7.28,
+    0.0
+   ],
+   "tamano": [
+    16.8,
+    21.84,
+    16.8
+   ],
+   "triangulos": 4
+  },
+  "color": "#B4452C"
+ },
+ "Chimenea": {
+  "fbx": "piezas/Chimenea.fbx",
+  "fbx_lejos": "piezas/Chimenea__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    3.225,
+    0.0
+   ],
+   "tamano": [
+    2.9,
+    6.45,
+    2.9
+   ],
+   "triangulos": 20
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    3.0,
+    0.0
+   ],
+   "tamano": [
+    2.2,
+    6.0,
+    2.2
+   ],
+   "triangulos": 10
+  },
+  "color": "#FFFFFF"
+ },
+ "Contraventanas": {
+  "fbx": "piezas/Contraventanas.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.3,
+    0.07
+   ],
+   "tamano": [
+    7.1,
+    4.0,
+    0.14
+   ],
+   "triangulos": 20
+  },
+  "color": "#4F7F5E"
+ },
+ "Cornisa": {
+  "fbx": "piezas/Cornisa.fbx",
+  "fbx_lejos": "piezas/Cornisa__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    0.425,
+    0.3
+   ],
+   "tamano": [
+    8.0,
+    0.85,
+    0.6
+   ],
+   "triangulos": 10
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    0.425,
+    0.45
+   ],
+   "tamano": [
+    8.0,
+    0.85,
+    0.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#FFFFFF"
+ },
+ "Cornisa_Esquina": {
+  "fbx": "piezas/Cornisa_Esquina.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    -0.3,
+    0.425,
+    0.3
+   ],
+   "tamano": [
+    0.6,
+    0.85,
+    0.6
+   ],
+   "triangulos": 14
+  },
+  "color": "#FFFFFF"
+ },
+ "Cumbrera_16": {
+  "fbx": "piezas/Cumbrera_16.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.535,
+    -8.0
+   ],
+   "tamano": [
+    8.0,
+    0.45,
+    1.1
+   ],
+   "triangulos": 6
+  },
+  "color": "#B4452C"
+ },
+ "Cumbrera_24": {
+  "fbx": "piezas/Cumbrera_24.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    8.015,
+    -12.0
+   ],
+   "tamano": [
+    8.0,
+    0.45,
+    1.1
+   ],
+   "triangulos": 6
+  },
+  "color": "#B4452C"
+ },
+ "Cumbrera_Remate_16": {
+  "fbx": "piezas/Cumbrera_Remate_16.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.45,
+    5.535,
+    -8.0
+   ],
+   "tamano": [
+    0.9,
+    0.45,
+    1.1
+   ],
+   "triangulos": 6
+  },
+  "color": "#B4452C"
+ },
+ "Cumbrera_Remate_24": {
+  "fbx": "piezas/Cumbrera_Remate_24.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.45,
+    8.015,
+    -12.0
+   ],
+   "tamano": [
+    0.9,
+    0.45,
+    1.1
+   ],
+   "triangulos": 6
+  },
+  "color": "#B4452C"
+ },
+ "Entramado_Lisa": {
+  "fbx": "piezas/Entramado_Lisa.fbx",
+  "fbx_lejos": "piezas/Entramado_Lisa__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.3
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.6
+   ],
+   "triangulos": 6
+  },
+  "color": "#EFE2C6",
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  }
+ },
+ "Entramado_Ventana": {
+  "fbx": "piezas/Entramado_Ventana.fbx",
+  "fbx_lejos": "piezas/Entramado_Ventana__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.075
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    1.05
+   ],
+   "triangulos": 38
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Espantapajaros": {
+  "fbx": "piezas/Espantapajaros.fbx",
+  "fbx_lejos": "piezas/Espantapajaros__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    4.45,
+    0.0
+   ],
+   "tamano": [
+    5.2,
+    8.9,
+    3.2
+   ],
+   "triangulos": 86
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    3.75,
+    0.0
+   ],
+   "tamano": [
+    5.2,
+    7.5,
+    3.0
+   ],
+   "triangulos": 26
+  },
+  "color": "#4C6F94"
+ },
+ "Esquina": {
+  "fbx": "piezas/Esquina.fbx",
+  "fbx_lejos": "piezas/Esquina__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.85,
+    5.0,
+    -0.85
+   ],
+   "tamano": [
+    2.1,
+    10.0,
+    2.1
+   ],
+   "triangulos": 8
+  },
+  "lejos": {
+   "centro": [
+    0.85,
+    5.0,
+    -0.85
+   ],
+   "tamano": [
+    2.1,
+    10.0,
+    2.1
+   ],
+   "triangulos": 4
+  },
+  "color": "#EFE2C6"
+ },
+ "Farola": {
+  "fbx": "piezas/Farola.fbx",
+  "fbx_lejos": "piezas/Farola__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    6.175,
+    0.0
+   ],
+   "tamano": [
+    1.9,
+    12.35,
+    1.6454
+   ],
+   "triangulos": 52
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    5.7,
+    0.0
+   ],
+   "tamano": [
+    1.2,
+    11.4,
+    1.2
+   ],
+   "triangulos": 18
+  },
+  "color": "#FFFFFF"
+ },
+ "Farolillo": {
+  "fbx": "piezas/Farolillo.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    0.0,
+    0.3,
+    0.7942
+   ],
+   "tamano": [
+    0.8768,
+    2.6,
+    1.5884
+   ],
+   "triangulos": 38
+  },
+  "color": "#FFFFFF"
+ },
+ "Flores_a": {
+  "fbx": "piezas/Flores_a.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.0178,
+    1.277,
+    0.0842
+   ],
+   "tamano": [
+    2.1263,
+    2.554,
+    1.7423
+   ],
+   "triangulos": 24
+  },
+  "color": "#FFFFFF"
+ },
+ "Flores_b": {
+  "fbx": "piezas/Flores_b.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.1434,
+    1.2647,
+    -0.1503
+   ],
+   "tamano": [
+    1.7055,
+    2.5294,
+    1.4968
+   ],
+   "triangulos": 24
+  },
+  "color": "#FFFFFF"
+ },
+ "Flores_c": {
+  "fbx": "piezas/Flores_c.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.0245,
+    1.2496,
+    0.0333
+   ],
+   "tamano": [
+    2.0047,
+    2.4991,
+    2.1918
+   ],
+   "triangulos": 24
+  },
+  "color": "#FFFFFF"
+ },
+ "Frondoso_a": {
+  "fbx": "piezas/Frondoso_a.fbx",
+  "fbx_lejos": "piezas/Frondoso_a__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.7516,
+    11.7131,
+    0.0572
+   ],
+   "tamano": [
+    15.8822,
+    25.4262,
+    15.9673
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    11.4742,
+    0.0
+   ],
+   "tamano": [
+    14.9624,
+    24.9483,
+    14.9624
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Frondoso_b": {
+  "fbx": "piezas/Frondoso_b.fbx",
+  "fbx_lejos": "piezas/Frondoso_b__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0322,
+    8.1879,
+    -0.2664
+   ],
+   "tamano": [
+    10.1067,
+    18.3758,
+    13.5516
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    8.1617,
+    0.0
+   ],
+   "tamano": [
+    10.8233,
+    18.3234,
+    10.8233
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Frondoso_c": {
+  "fbx": "piezas/Frondoso_c.fbx",
+  "fbx_lejos": "piezas/Frondoso_c__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.5215,
+    8.751,
+    -0.7245
+   ],
+   "tamano": [
+    13.4097,
+    19.502,
+    12.71
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    8.8072,
+    0.0
+   ],
+   "tamano": [
+    11.6299,
+    19.6145,
+    11.6299
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Frondoso_d": {
+  "fbx": "piezas/Frondoso_d.fbx",
+  "fbx_lejos": "piezas/Frondoso_d__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.588,
+    11.2541,
+    -1.3851
+   ],
+   "tamano": [
+    17.2973,
+    24.5082,
+    16.1246
+   ],
+   "triangulos": 130
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    11.0304,
+    0.0
+   ],
+   "tamano": [
+    14.4079,
+    24.0608,
+    14.4079
+   ],
+   "triangulos": 26
+  },
+  "color": "#FFFFFF"
+ },
+ "Fuente": {
+  "fbx": "piezas/Fuente.fbx",
+  "fbx_lejos": "piezas/Fuente__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    6.9,
+    0.0
+   ],
+   "tamano": [
+    18.8471,
+    15.0,
+    18.8471
+   ],
+   "triangulos": 530
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    6.8,
+    0.0
+   ],
+   "tamano": [
+    16.6298,
+    13.6,
+    16.6298
+   ],
+   "triangulos": 86
+  },
+  "color": "#FFFFFF"
+ },
+ "Hastial_16": {
+  "fbx": "piezas/Hastial_16.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.3,
+    2.48,
+    -8.0
+   ],
+   "tamano": [
+    0.6,
+    4.96,
+    16.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Hastial_24": {
+  "fbx": "piezas/Hastial_24.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.3,
+    3.72,
+    -12.0
+   ],
+   "tamano": [
+    0.6,
+    7.44,
+    24.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Hierba_a": {
+  "fbx": "piezas/Hierba_a.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.3005,
+    1.2925,
+    -0.0766
+   ],
+   "tamano": [
+    1.1657,
+    2.5851,
+    2.0659
+   ],
+   "triangulos": 6
+  },
+  "color": "#FFFFFF"
+ },
+ "Hierba_b": {
+  "fbx": "piezas/Hierba_b.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.1621,
+    1.2437,
+    -0.4752
+   ],
+   "tamano": [
+    0.9508,
+    2.4873,
+    0.9156
+   ],
+   "triangulos": 6
+  },
+  "color": "#FFFFFF"
+ },
+ "Jardinera": {
+  "fbx": "piezas/Jardinera.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    4.0,
+    2.75,
+    0.775
+   ],
+   "tamano": [
+    3.0,
+    1.6,
+    0.65
+   ],
+   "triangulos": 12
+  },
+  "color": "#FFFFFF"
+ },
+ "Losa_2x2": {
+  "fbx": "piezas/Losa_2x2.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    8.0,
+    -2.0,
+    -8.0
+   ],
+   "tamano": [
+    18.0,
+    4.0,
+    18.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Losa_2x3": {
+  "fbx": "piezas/Losa_2x3.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    8.0,
+    -2.0,
+    -12.0
+   ],
+   "tamano": [
+    18.0,
+    4.0,
+    26.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Losa_3x2": {
+  "fbx": "piezas/Losa_3x2.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    12.0,
+    -2.0,
+    -8.0
+   ],
+   "tamano": [
+    26.0,
+    4.0,
+    18.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Losa_3x3": {
+  "fbx": "piezas/Losa_3x3.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    12.0,
+    -2.0,
+    -12.0
+   ],
+   "tamano": [
+    26.0,
+    4.0,
+    26.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Losa_4x2": {
+  "fbx": "piezas/Losa_4x2.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    16.0,
+    -2.0,
+    -8.0
+   ],
+   "tamano": [
+    34.0,
+    4.0,
+    18.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Losa_4x3": {
+  "fbx": "piezas/Losa_4x3.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    16.0,
+    -2.0,
+    -12.0
+   ],
+   "tamano": [
+    34.0,
+    4.0,
+    26.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Losa_7x3": {
+  "fbx": "piezas/Losa_7x3.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    28.0,
+    -2.0,
+    -12.0
+   ],
+   "tamano": [
+    58.0,
+    4.0,
+    26.0
+   ],
+   "triangulos": 10
+  }
+ },
+ "Maceta": {
+  "fbx": "piezas/Maceta.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    1.8357,
+    0.0153
+   ],
+   "tamano": [
+    3.3,
+    3.6714,
+    2.8884
+   ],
+   "triangulos": 36
+  },
+  "color": "#FFFFFF"
+ },
+ "Molino_Aspas": {
+  "fbx": "piezas/Molino_Aspas.fbx",
+  "fbx_lejos": "piezas/Molino_Aspas__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    0.0,
+    -1.525
+   ],
+   "tamano": [
+    50.0,
+    50.0,
+    3.95
+   ],
+   "triangulos": 64
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tamano": [
+    50.0,
+    50.0,
+    0.2
+   ],
+   "triangulos": 16
+  },
+  "color": "#FFFFFF"
+ },
+ "Molino_Caperuza": {
+  "fbx": "piezas/Molino_Caperuza.fbx",
+  "fbx_lejos": "piezas/Molino_Caperuza__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    31.3,
+    0.0
+   ],
+   "tamano": [
+    13.8,
+    10.2,
+    13.8
+   ],
+   "triangulos": 70
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    31.3,
+    0.0
+   ],
+   "tamano": [
+    13.8,
+    10.2,
+    11.9512
+   ],
+   "triangulos": 28
+  },
+  "color": "#B4452C"
+ },
+ "Molino_Torre": {
+  "fbx": "piezas/Molino_Torre.fbx",
+  "fbx_lejos": "piezas/Molino_Torre__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    12.8,
+    0.0
+   ],
+   "tamano": [
+    17.4,
+    27.6,
+    17.4
+   ],
+   "triangulos": 60
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    12.8,
+    0.0
+   ],
+   "tamano": [
+    15.0688,
+    27.6,
+    17.4
+   ],
+   "triangulos": 40
+  },
+  "color": "#F4F1EA"
+ },
+ "Pajar": {
+  "fbx": "piezas/Pajar.fbx",
+  "fbx_lejos": "piezas/Pajar__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0965,
+    3.0,
+    0.0
+   ],
+   "tamano": [
+    6.207,
+    6.0,
+    6.3028
+   ],
+   "triangulos": 90
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    3.0,
+    0.0
+   ],
+   "tamano": [
+    6.0,
+    6.0,
+    5.1962
+   ],
+   "triangulos": 24
+  },
+  "color": "#FFFFFF"
+ },
+ "Pared_Escaparate": {
+  "fbx": "piezas/Pared_Escaparate.fbx",
+  "fbx_lejos": "piezas/Pared_Escaparate__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.125
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.95
+   ],
+   "triangulos": 38
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Pared_Lisa": {
+  "fbx": "piezas/Pared_Lisa.fbx",
+  "fbx_lejos": "piezas/Pared_Lisa__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.3
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.6
+   ],
+   "triangulos": 6
+  },
+  "color": "#EFE2C6",
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  }
+ },
+ "Pared_Lisa_Baja": {
+  "fbx": "piezas/Pared_Lisa_Baja.fbx",
+  "fbx_lejos": "piezas/Pared_Lisa_Baja__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.3
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.6
+   ],
+   "triangulos": 6
+  },
+  "color": "#EFE2C6",
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  }
+ },
+ "Pared_Puerta": {
+  "fbx": "piezas/Pared_Puerta.fbx",
+  "fbx_lejos": "piezas/Pared_Puerta__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    4.7,
+    0.45
+   ],
+   "tamano": [
+    8.0,
+    10.6,
+    2.1
+   ],
+   "triangulos": 28
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Pared_Ventana": {
+  "fbx": "piezas/Pared_Ventana.fbx",
+  "fbx_lejos": "piezas/Pared_Ventana__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.075
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    1.05
+   ],
+   "triangulos": 38
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Pared_Ventana_Baja": {
+  "fbx": "piezas/Pared_Ventana_Baja.fbx",
+  "fbx_lejos": "piezas/Pared_Ventana_Baja__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    5.0,
+    -0.075
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    1.05
+   ],
+   "triangulos": 38
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    5.0,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    10.0,
+    0.0
+   ],
+   "triangulos": 2
+  },
+  "color": "#EFE2C6"
+ },
+ "Pino_a": {
+  "fbx": "piezas/Pino_a.fbx",
+  "fbx_lejos": "piezas/Pino_a__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    17.4611,
+    0.0
+   ],
+   "tamano": [
+    16.787,
+    36.9221,
+    18.9638
+   ],
+   "triangulos": 30
+  },
+  "lejos": {
+   "centro": [
+    0.9708,
+    16.4444,
+    0.0
+   ],
+   "tamano": [
+    18.3916,
+    34.8888,
+    19.3381
+   ],
+   "triangulos": 16
+  },
+  "color": "#FFFFFF"
+ },
+ "Pino_b": {
+  "fbx": "piezas/Pino_b.fbx",
+  "fbx_lejos": "piezas/Pino_b__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    13.3624,
+    0.0
+   ],
+   "tamano": [
+    13.0945,
+    28.7248,
+    14.6216
+   ],
+   "triangulos": 30
+  },
+  "lejos": {
+   "centro": [
+    0.7493,
+    12.5777,
+    0.0
+   ],
+   "tamano": [
+    14.1947,
+    27.1555,
+    14.9252
+   ],
+   "triangulos": 16
+  },
+  "color": "#FFFFFF"
+ },
+ "Pino_c": {
+  "fbx": "piezas/Pino_c.fbx",
+  "fbx_lejos": "piezas/Pino_c__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    16.1268,
+    0.0
+   ],
+   "tamano": [
+    16.4383,
+    34.2536,
+    17.335
+   ],
+   "triangulos": 30
+  },
+  "lejos": {
+   "centro": [
+    0.8987,
+    15.1857,
+    0.0
+   ],
+   "tamano": [
+    17.0254,
+    32.3713,
+    17.9015
+   ],
+   "triangulos": 16
+  },
+  "color": "#FFFFFF"
+ },
+ "Portada_Ayuntamiento": {
+  "fbx": "piezas/Portada_Ayuntamiento.fbx",
+  "fbx_lejos": "piezas/Portada_Ayuntamiento__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    28.0,
+    17.0,
+    3.5
+   ],
+   "tamano": [
+    32.25,
+    42.0,
+    7.0
+   ],
+   "triangulos": 333
+  },
+  "lejos": {
+   "centro": [
+    28.0,
+    17.0,
+    3.5
+   ],
+   "tamano": [
+    24.8,
+    42.0,
+    7.0
+   ],
+   "triangulos": 73
+  },
+  "color": "#3F6FA8"
+ },
+ "Portal_Ciudad": {
+  "fbx": "piezas/Portal_Ciudad.fbx",
+  "fbx_lejos": "piezas/Portal_Ciudad__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    6.0,
+    0.0
+   ],
+   "tamano": [
+    23.6,
+    14.0,
+    4.0
+   ],
+   "triangulos": 80
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    5.4,
+    0.0
+   ],
+   "tamano": [
+    23.6,
+    12.8,
+    4.0
+   ],
+   "triangulos": 40
+  },
+  "color": "#FFFFFF"
+ },
+ "Poste_Indicador": {
+  "fbx": "piezas/Poste_Indicador.fbx",
+  "fbx_lejos": "piezas/Poste_Indicador__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.708,
+    4.35,
+    -0.2875
+   ],
+   "tamano": [
+    7.5841,
+    10.7,
+    7.4693
+   ],
+   "triangulos": 60
+  },
+  "lejos": {
+   "centro": [
+    2.0555,
+    4.35,
+    0.0
+   ],
+   "tamano": [
+    4.8889,
+    10.7,
+    0.7778
+   ],
+   "triangulos": 28
+  },
+  "color": "#FFFFFF"
+ },
+ "Pozo": {
+  "fbx": "piezas/Pozo.fbx",
+  "fbx_lejos": "piezas/Pozo__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    4.8,
+    0.0
+   ],
+   "tamano": [
+    7.0,
+    9.6,
+    6.4
+   ],
+   "triangulos": 66
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    4.8,
+    0.0
+   ],
+   "tamano": [
+    7.0,
+    9.6,
+    6.4
+   ],
+   "triangulos": 32
+  },
+  "color": "#B4452C"
+ },
+ "Puente": {
+  "fbx": "piezas/Puente.fbx",
+  "fbx_lejos": "piezas/Puente__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    -3.9,
+    0.0
+   ],
+   "tamano": [
+    116.8803,
+    16.2,
+    29.9905
+   ],
+   "triangulos": 248
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    -4.4,
+    0.0
+   ],
+   "tamano": [
+    116.8803,
+    15.2,
+    13.0
+   ],
+   "triangulos": 124
+  },
+  "color": "#FFFFFF",
+  "colision": true
+ },
+ "Puerta": {
+  "fbx": "piezas/Puerta.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": true,
+  "detalle": {
+   "centro": [
+    4.0,
+    3.7,
+    -0.565
+   ],
+   "tamano": [
+    4.0,
+    7.4,
+    0.03
+   ],
+   "triangulos": 10
+  },
+  "color": "#8A6340"
+ },
+ "Puesto": {
+  "fbx": "piezas/Puesto.fbx",
+  "fbx_lejos": "piezas/Puesto__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    4.45,
+    -1.85
+   ],
+   "tamano": [
+    8.8,
+    8.9,
+    6.9
+   ],
+   "triangulos": 76
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    4.45,
+    -1.85
+   ],
+   "tamano": [
+    8.8,
+    8.9,
+    6.9
+   ],
+   "triangulos": 14
+  },
+  "color": "#C2413A"
+ },
+ "Roca_a": {
+  "fbx": "piezas/Roca_a.fbx",
+  "fbx_lejos": "piezas/Roca_a__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.122,
+    1.7934,
+    0.2725
+   ],
+   "tamano": [
+    11.9923,
+    5.682,
+    7.8797
+   ],
+   "triangulos": 16
+  },
+  "lejos": {
+   "centro": [
+    0.6716,
+    2.3466,
+    0.8627
+   ],
+   "tamano": [
+    7.0188,
+    6.7883,
+    6.009
+   ],
+   "triangulos": 8
+  },
+  "color": "#FFFFFF"
+ },
+ "Roca_b": {
+  "fbx": "piezas/Roca_b.fbx",
+  "fbx_lejos": "piezas/Roca_b__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0862,
+    1.0711,
+    0.3876
+   ],
+   "tamano": [
+    6.7108,
+    3.0807,
+    3.1904
+   ],
+   "triangulos": 18
+  },
+  "lejos": {
+   "centro": [
+    -0.4251,
+    0.7268,
+    1.1425
+   ],
+   "tamano": [
+    5.8398,
+    2.3921,
+    3.3281
+   ],
+   "triangulos": 8
+  },
+  "color": "#FFFFFF"
+ },
+ "Roca_c": {
+  "fbx": "piezas/Roca_c.fbx",
+  "fbx_lejos": "piezas/Roca_c__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.5213,
+    0.9958,
+    0.4992
+   ],
+   "tamano": [
+    7.23,
+    3.2973,
+    5.5663
+   ],
+   "triangulos": 16
+  },
+  "lejos": {
+   "centro": [
+    -0.1241,
+    1.1417,
+    -0.103
+   ],
+   "tamano": [
+    6.6868,
+    3.5891,
+    3.3849
+   ],
+   "triangulos": 8
+  },
+  "color": "#FFFFFF"
+ },
+ "Tablon_Misiones": {
+  "fbx": "piezas/Tablon_Misiones.fbx",
+  "fbx_lejos": "piezas/Tablon_Misiones__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    7.8,
+    0.0
+   ],
+   "tamano": [
+    10.4,
+    15.6,
+    4.4
+   ],
+   "triangulos": 72
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    7.8,
+    0.0
+   ],
+   "tamano": [
+    10.4,
+    15.6,
+    4.4
+   ],
+   "triangulos": 36
+  },
+  "color": "#B4452C"
+ },
+ "Tejado_Remate_16": {
+  "fbx": "piezas/Tejado_Remate_16.fbx",
+  "fbx_lejos": "piezas/Tejado_Remate_16__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.45,
+    2.152,
+    -8.0
+   ],
+   "tamano": [
+    0.9,
+    6.916,
+    18.9689
+   ],
+   "triangulos": 24
+  },
+  "lejos": {
+   "centro": [
+    -0.45,
+    2.252,
+    -8.0
+   ],
+   "tamano": [
+    0.9,
+    6.716,
+    18.9689
+   ],
+   "triangulos": 12
+  },
+  "color": "#B4452C"
+ },
+ "Tejado_Remate_24": {
+  "fbx": "piezas/Tejado_Remate_24.fbx",
+  "fbx_lejos": "piezas/Tejado_Remate_24__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    -0.45,
+    3.392,
+    -12.0
+   ],
+   "tamano": [
+    0.9,
+    9.396,
+    26.9689
+   ],
+   "triangulos": 24
+  },
+  "lejos": {
+   "centro": [
+    -0.45,
+    3.492,
+    -12.0
+   ],
+   "tamano": [
+    0.9,
+    9.196,
+    26.9689
+   ],
+   "triangulos": 12
+  },
+  "color": "#B4452C"
+ },
+ "Tejado_Tramo_16": {
+  "fbx": "piezas/Tejado_Tramo_16.fbx",
+  "fbx_lejos": "piezas/Tejado_Tramo_16__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    1.9757,
+    -8.0
+   ],
+   "tamano": [
+    8.0,
+    6.5635,
+    18.9689
+   ],
+   "triangulos": 16
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    2.2257,
+    -8.0
+   ],
+   "tamano": [
+    8.0,
+    6.0635,
+    18.9689
+   ],
+   "triangulos": 8
+  },
+  "color": "#B4452C"
+ },
+ "Tejado_Tramo_24": {
+  "fbx": "piezas/Tejado_Tramo_24.fbx",
+  "fbx_lejos": "piezas/Tejado_Tramo_24__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    3.2157,
+    -12.0
+   ],
+   "tamano": [
+    8.0,
+    9.0435,
+    26.9689
+   ],
+   "triangulos": 16
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    3.4657,
+    -12.0
+   ],
+   "tamano": [
+    8.0,
+    8.5435,
+    26.9689
+   ],
+   "triangulos": 8
+  },
+  "color": "#B4452C"
+ },
+ "Toldo": {
+  "fbx": "piezas/Toldo.fbx",
+  "fbx_lejos": null,
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    7.75,
+    1.5
+   ],
+   "tamano": [
+    7.2,
+    2.3,
+    3.0
+   ],
+   "triangulos": 21
+  },
+  "color": "#C2413A",
+  "doble_cara": true
+ },
+ "Torre_Reloj": {
+  "fbx": "piezas/Torre_Reloj.fbx",
+  "fbx_lejos": "piezas/Torre_Reloj__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    0.0,
+    33.05,
+    0.0
+   ],
+   "tamano": [
+    16.4,
+    68.1,
+    16.4
+   ],
+   "triangulos": 618
+  },
+  "lejos": {
+   "centro": [
+    0.0,
+    33.0,
+    0.0
+   ],
+   "tamano": [
+    16.0,
+    68.0,
+    16.0
+   ],
+   "triangulos": 42
+  },
+  "color": "#F4F1EA"
+ },
+ "Valla_Madera": {
+  "fbx": "piezas/Valla_Madera.fbx",
+  "fbx_lejos": "piezas/Valla_Madera__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    1.7,
+    0.07
+   ],
+   "tamano": [
+    8.56,
+    4.6,
+    0.7
+   ],
+   "triangulos": 42
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    2.25,
+    0.35
+   ],
+   "tamano": [
+    8.0,
+    1.94,
+    0.14
+   ],
+   "triangulos": 12
+  },
+  "color": "#FFFFFF"
+ },
+ "Valla_Piedra": {
+  "fbx": "piezas/Valla_Piedra.fbx",
+  "fbx_lejos": "piezas/Valla_Piedra__lejos.fbx",
+  "sin_lejos": false,
+  "detalle": {
+   "centro": [
+    4.0,
+    1.075,
+    0.0
+   ],
+   "tamano": [
+    8.2,
+    2.95,
+    1.9
+   ],
+   "triangulos": 18
+  },
+  "lejos": {
+   "centro": [
+    4.0,
+    0.85,
+    0.0
+   ],
+   "tamano": [
+    8.0,
+    2.5,
+    1.6
+   ],
+   "triangulos": 10
+  },
+  "color": "#FFFFFF"
+ }
+}

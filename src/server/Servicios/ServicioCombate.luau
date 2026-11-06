@@ -20,6 +20,9 @@
 	Los del mismo bando no se hacen daño (Reglas.SonEnemigos). Un jugador sin bando puede dañar y ser
 	dañado por cualquiera.
 
+	En las zonas seguras de los puertos de los planetas (Planetas/Espacio) no hay PvP: el golpe no hace nada si
+	el lanzador o el objetivo están dentro (Reglas.ZonaSeguraImpide).
+
 	Tipos de luchador: los jugadores (se registran solos al aparecer su personaje) y los muñecos de
 	entrenamiento (ServicioCombate.RegistrarMunieco).
 ]]
@@ -34,6 +37,7 @@ local Config = require(Shared.Combate.Config)
 local NavesConfig = require(Shared.Naves.Config)
 local Poderes = require(Shared.Combate.Datos.Poderes)
 local Reglas = require(Shared.Combate.Reglas)
+local Espacio = require(Shared.Planetas.Espacio)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioRed = require(script.Parent.ServicioRed)
 
@@ -228,6 +232,10 @@ local function aplicarImpacto(
 	local bandoLanzador = bandoDe(lanzador)
 	local alcanceMaximo = hab.Rango + hab.Radio + Config.RadioCuerpo + Config.HolguraMovimiento
 
+	-- Zonas seguras de los puertos de los planetas: ni se golpea a quien está dentro ni se golpea desde dentro.
+	local zonasSeguras = Espacio.ZonasSegurasCombate()
+	local posicionLanzador = punto(lanzador.Raiz.Position)
+
 	local golpeados = {}
 	for _, objetivo in luchadores do
 		if objetivo == lanzador or objetivo.Modelo:GetAttribute(NavesConfig.AtributoPilotando) then
@@ -245,6 +253,9 @@ local function aplicarImpacto(
 			continue
 		end
 		if not Reglas.EnForma(golpe, punto(posicion)) then
+			continue
+		end
+		if Reglas.ZonaSeguraImpide(posicionLanzador, punto(posicion), zonasSeguras) then
 			continue
 		end
 

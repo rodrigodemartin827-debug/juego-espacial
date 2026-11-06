@@ -23,6 +23,8 @@ local Bandos = require(script.Parent.Parent.Juego.Bandos)
 local Poderes = require(script.Parent.Parent.Combate.Datos.Poderes)
 local ConfigExploracion = require(script.Parent.Parent.Exploracion.Config)
 local Recetas = require(script.Parent.Parent.Exploracion.Datos.Recetas)
+local Catalogo = require(script.Parent.Parent.Tiendas.Datos.Catalogo)
+local ConfigTiendas = require(script.Parent.Parent.Tiendas.Config)
 local Validador = require(script.Parent.Validador)
 
 export type Direccion = "ClienteAServidor" | "ServidorACliente"
@@ -176,6 +178,13 @@ local definiciones: { [string]: Definicion } = {
 		Direccion = "ServidorACliente",
 	},
 
+	-- ===== Planetas =====
+
+	-- El servidor lleva al jugador a otra zona (aterrizar, despegar o viajar): fundido a negro y vuelta.
+	TransicionPlaneta = {
+		Direccion = "ServidorACliente",
+	},
+
 	-- ===== Exploración: escáner de mano, minería y crafteo =====
 
 	-- El jugador apunta con el escáner a algo escaneable. Solo dice QUÉ: el servidor comprueba que se pueda analizar,
@@ -257,6 +266,32 @@ local definiciones: { [string]: Definicion } = {
 
 	-- El jugador ha usado una mesa de crafteo: el cliente abre el panel de recetas.
 	AbrirMesaCrafteo = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- ===== Tiendas del planeta humano =====
+
+	-- El jugador pide comprar un artículo (una vez o varias, si es un material) en una tienda. Solo dice EN QUÉ tienda
+	-- (el modelo), QUÉ y cuántos: el servidor comprueba que sea una tienda, que esté junto al mostrador, su bando (a los
+	-- Monstruos no se les vende), la persiana, las monedas, el nivel de la mejora y el espacio en la bodega.
+	ComprarArticulo = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 4,
+		Rafaga = 3,
+		Argumentos = {
+			Validador.Instancia("Model"),
+			Validador.Enumeracion(Catalogo.Orden),
+			Validador.Opcional(Validador.Entero(1, ConfigTiendas.CantidadMaximaPorPeticion)),
+		},
+	},
+
+	-- Resultado de un intento de compra: artículo, si salió bien y el motivo en texto si no.
+	ResultadoCompra = {
+		Direccion = "ServidorACliente",
+	},
+
+	-- El jugador ha usado el mostrador de una tienda y se le puede atender: el cliente abre el panel (con el modelo).
+	AbrirTienda = {
 		Direccion = "ServidorACliente",
 	},
 }
