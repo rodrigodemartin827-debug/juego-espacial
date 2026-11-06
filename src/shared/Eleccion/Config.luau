@@ -24,6 +24,11 @@ Config.Orden = { "Humanos", "Monstruos" }
 -- tiene, su personaje está quieto (anclado) y protegido (ForceField invisible), y no puede usar habilidades.
 Config.AtributoEligiendo = "EligiendoBando"
 
+-- MODO DE PRUEBAS: en Studio (RunService:IsStudio()), la pantalla de elección sale CADA VEZ que se entra, aunque ya
+-- se tenga bando (al cargar los datos, el bando vuelve a «Ninguno», como con el comando /reiniciarbando). En el juego
+-- publicado no hace nada: allí sale solo la primera vez. Ponlo a false para probar en Studio con el bando guardado.
+Config.ElegirBandoSiempreEnStudio = true
+
 -- Atributo (en el Player, solo en su cliente) que pone la escena mientras está montada: desde que aparece hasta que
 -- termina el fundido final, también después de que el servidor confirme. Mientras está, la cámara y la luz son de la
 -- escena (la cámara del planeta redondo y el ambiente de los planetas se apartan).

@@ -195,8 +195,21 @@ function ServicioBandos.Iniciar()
 		ServicioBandos.Elegir(jugador, bando)
 	end)
 
-	-- Al cargar sus datos se sabe si tiene bando: si no, se le protege mientras elige.
-	ServicioDatos.DatosCargados:Conectar(actualizarProteccion)
+	-- Al cargar sus datos se sabe si tiene bando: si no, se le protege mientras elige. En Studio, con el modo de
+	-- pruebas (ConfigEleccion.ElegirBandoSiempreEnStudio), el bando vuelve a «Ninguno» para elegir cada vez.
+	ServicioDatos.DatosCargados:Conectar(function(jugador: Player)
+		local datos = ServicioDatos.ObtenerDatos(jugador)
+		if
+			RunService:IsStudio()
+			and ConfigEleccion.ElegirBandoSiempreEnStudio
+			and datos ~= nil
+			and datos.Bando ~= Bandos.Ninguno
+		then
+			ServicioBandos.ReiniciarParaPruebas(jugador)
+			return
+		end
+		actualizarProteccion(jugador)
+	end)
 
 	Players.PlayerAdded:Connect(alEntrarJugador)
 	for _, jugador in Players:GetPlayers() do

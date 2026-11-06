@@ -471,6 +471,44 @@ return function(Marco)
 			-- Y puede volver a elegir.
 			Marco.verdadero(ServicioBandos.Elegir(jugador, "Humanos"))
 		end)
+
+		-- Entra, elige `bando`, sale y vuelve a entrar en Studio. Devuelve el ServicioDatos y el jugador de la vuelta.
+		local function volverAEntrarEnStudio(bando: string, modoPruebas: boolean)
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube, true)
+			local ConfigEleccion = entorno.servidor.requerir("ReplicatedStorage.Shared.Eleccion.Config")
+			ConfigEleccion.ElegirBandoSiempreEnStudio = modoPruebas
+			local ServicioBandos = entorno.servidor.requerir(`{RUTA_SERVIDOR}.Servicios.ServicioBandos`)
+			local primera = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(primera) ~= nil
+			end)
+			Marco.verdadero(ServicioBandos.Elegir(primera, bando))
+			entorno.mundo.salirJugador(primera)
+			local almacen = ServicioDatos.Configuracion.NombreAlmacen .. "_Studio"
+			Marco.esperarHasta(function()
+				local registro = nube:Leer(almacen, "Jugador_1")
+				return registro ~= nil and registro.Bloqueo == nil
+			end)
+			local segunda = entorno.mundo.unirJugador(1, "Ana")
+			Marco.esperarHasta(function()
+				return ServicioDatos.ObtenerDatos(segunda) ~= nil
+			end)
+			Marco.dejarCorrer(5)
+			return ServicioDatos, segunda
+		end
+
+		Marco.prueba("en Studio, con ElegirBandoSiempreEnStudio, al volver a entrar se elige bando otra vez", function()
+			local ServicioDatos, jugador = volverAEntrarEnStudio("Monstruos", true)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Ninguno")
+			Marco.igual(jugador:GetAttribute(ATRIBUTO), true, "vuelve a estar en la pantalla de elección")
+		end)
+
+		Marco.prueba("en Studio, con el modo de pruebas apagado, se conserva el bando", function()
+			local ServicioDatos, jugador = volverAEntrarEnStudio("Humanos", false)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Humanos")
+			Marco.esNil(jugador:GetAttribute(ATRIBUTO))
+		end)
 	end)
 
 	Marco.grupo("Integración: salida del jugador", function()
