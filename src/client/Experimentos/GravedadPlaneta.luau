@@ -504,7 +504,7 @@ local function iniciarRegion1()
 		return
 	end
 	task.spawn(function()
-		workspace:WaitForChild("Region1_ValleDelAlba", math.huge) -- sin límite: el servidor la monta al terminar el planeta
+		workspace:WaitForChild("Region1_ValleDelAlba", math.huge) -- sin límite: el servidor la monta al arrancar (antes que el terreno)
 		local ok, err = pcall(function()
 			local ids = require(carpeta:WaitForChild("Datos"):WaitForChild("ids_texturas") :: ModuleScript) :: any
 			local alturas = carpeta:FindFirstChild("AlturasRegion")
