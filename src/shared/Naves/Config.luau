@@ -27,7 +27,9 @@ local Config = {
 	HolguraVelocidad = 1.35, -- se acepta moverse hasta velocidad máxima * esto (latencia, física del cliente)
 	MargenPosicion = 10, -- studs extra por revisión antes de considerar un salto de posición
 	AvisosParaCorregir = 3, -- revisiones seguidas fuera de rango antes de devolver la nave a su sitio
-	RadioMundo = 1800, -- distancia máxima al centro del mundo antes de devolverla
+	-- Distancia máxima al centro del mundo antes de devolverla. Abarca los planetas de bando, el sol y el agujero
+	-- negro (Planetas/Datos); a esta distancia la coma flotante de Roblox aún tiene precisión de sobra.
+	RadioMundo = 48000,
 	DtMaximo = 1.5, -- una revisión nunca da más margen que el de este tiempo
 
 	-- ===== Nave =====

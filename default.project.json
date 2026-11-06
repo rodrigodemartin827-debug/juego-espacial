@@ -3,6 +3,18 @@
   "tree": {
     "$className": "DataModel",
 
+    "Workspace": {
+      "$className": "Workspace",
+      "$properties": {
+        "StreamingEnabled": true,
+        "StreamingTargetRadius": 1024,
+        "StreamingMinRadius": 256,
+        "StreamingIntegrityMode": "MinimumRadiusPause",
+        "StreamOutBehavior": "Opportunistic",
+        "FallenPartsDestroyHeight": -50000
+      }
+    },
+
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "Shared": {

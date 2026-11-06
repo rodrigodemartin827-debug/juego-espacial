@@ -34,6 +34,9 @@ local CASOS = {
 	require("./casos/Naves"),
 	require("./casos/NavesVFX"),
 	require("./casos/NavesRed"),
+	require("./casos/Planetas"),
+	require("./casos/Tiendas"),
+	require("./casos/TiendasRed"),
 	require("./casos/OpenCloud"),
 }
 

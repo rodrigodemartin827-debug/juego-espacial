@@ -30,7 +30,7 @@ type Datos = Tipos.Datos
 local Esquema = {}
 
 -- Versión actual del esquema. Se guarda junto a los datos de cada jugador.
-Esquema.VERSION = 1
+Esquema.VERSION = 2
 
 -- Valores de un jugador nuevo.
 local PLANTILLA: Datos = {
@@ -61,6 +61,16 @@ local PLANTILLA: Datos = {
 		end
 ]]
 Esquema.Migraciones = {} :: { [number]: (datos: any) -> () }
+
+-- Versión 2: los bandos pasan de Héroes y Villanos a Humanos y Monstruos. Sin esto, Validar vería un bando
+-- desconocido y lo pondría en "Ninguno": el jugador perdería su bando sin aviso.
+local BANDOS_V1_A_V2 = { Heroes = "Humanos", Villanos = "Monstruos" }
+Esquema.Migraciones[2] = function(datos)
+	local nuevo = BANDOS_V1_A_V2[datos.Bando]
+	if nuevo ~= nil then
+		datos.Bando = nuevo
+	end
+end
 
 -- Devuelve los datos de un jugador nuevo (una copia: la plantilla nunca se entrega).
 function Esquema.Nuevo(): Datos
