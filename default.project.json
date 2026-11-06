@@ -20,6 +20,16 @@
       "Shared": {
         "$path": "src/shared"
       },
+      "Animaciones": {
+        "$className": "Folder",
+        "Movimiento": {
+          "$className": "Folder",
+          "Reposo": { "$path": "animaciones/movimiento/reposo.rbxmx" },
+          "Andar": { "$path": "animaciones/movimiento/andar.rbxmx" },
+          "Trotar": { "$path": "animaciones/movimiento/trotar.rbxmx" },
+          "Correr": { "$path": "animaciones/movimiento/correr.rbxmx" }
+        }
+      },
       "Region1": {
         "$className": "Folder",
         "$ignoreUnknownInstances": true,

@@ -109,6 +109,9 @@ local function montarProyecto(mundo, rutaProyecto)
 			instancia = mundo.Instance.new(nodo["$className"] or "Folder")
 			instancia.Name = nombre
 		end
+		if instancia == nil then
+			return -- un archivo que la simulación no convierte (por ejemplo un .rbxmx de animación)
+		end
 		instancia.Parent = padre
 
 		for clave, hijo in nodo do

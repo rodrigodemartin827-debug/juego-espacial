@@ -20,11 +20,13 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local KeyframeSequenceProvider = game:GetService("KeyframeSequenceProvider")
 local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Experimento = require(Shared.Experimentos.PlanetaRedondo)
 local NavesConfig = require(Shared.Naves.Config)
+local Movimiento = require(Shared.Juego.Movimiento)
 
 type Estado = {
 	Personaje: Model,
@@ -125,24 +127,77 @@ local function cargarPistas(personaje: Model, humanoid: Humanoid): { [string]: A
 			pistas[nombre] = pista
 		end
 	end
+	-- Las animaciones propias de movimiento (Juego/Movimiento): Reposo, Andar, Trotar y Correr.
+	local carpeta = ReplicatedStorage:FindFirstChild("Animaciones")
+	carpeta = carpeta and carpeta:FindFirstChild("Movimiento")
+	for nombre, datos in Movimiento.Animaciones do
+		local id = datos.Id
+		if id == nil and carpeta and RunService:IsStudio() then
+			local secuencia = carpeta:FindFirstChild(datos.Archivo)
+			if secuencia and secuencia:IsA("KeyframeSequence") then
+				local ok, temporal = pcall(function()
+					return KeyframeSequenceProvider:RegisterKeyframeSequence(secuencia)
+				end)
+				id = if ok then temporal else nil
+			end
+		end
+		if id then
+			local animacion = Instance.new("Animation")
+			animacion.AnimationId = id
+			local pista = (animator :: Animator):LoadAnimation(animacion)
+			pista.Priority = if nombre == "Reposo" then Enum.AnimationPriority.Idle else Enum.AnimationPriority.Movement
+			pista.Looped = true
+			pistas[nombre] = pista
+		end
+	end
 	return pistas
 end
+
+local PASOS = { Andar = true, Trotar = true, Correr = true }
 
 local function reproducir(e: Estado, nombre: string, velocidad: number?)
 	local pista = e.Pistas[nombre]
 	if e.PistaActual ~= nombre then
 		local anterior = e.PistaActual and e.Pistas[e.PistaActual]
+		local entreRitmos = PASOS[nombre] and e.PistaActual and PASOS[e.PistaActual]
+		local fundido = if entreRitmos
+			then Movimiento.FundidoPaso
+			elseif nombre == "Reposo" or e.PistaActual == "Reposo" then Movimiento.FundidoReposo
+			else 0.15
 		if anterior then
-			anterior:Stop(0.15)
+			anterior:Stop(fundido)
 		end
 		if pista then
-			pista:Play(0.15)
+			pista:Play(fundido)
+			-- Entre andar, trotar y correr se conserva el punto del paso: el pie que estaba apoyado sigue apoyado.
+			if entreRitmos and anterior and anterior.Length > 0 and pista.Length > 0 then
+				pista.TimePosition = (anterior.TimePosition / anterior.Length) * pista.Length
+			end
 		end
 		e.PistaActual = nombre
 	end
 	if pista and velocidad then
 		pista:AdjustSpeed(velocidad)
 	end
+end
+
+-- Qué animación de paso toca a esta rapidez (con histéresis respecto a la actual).
+local function ritmoPara(e: Estado, rapidez: number): string
+	local m = Movimiento
+	local h = if e.PistaActual == "Andar"
+			or e.PistaActual == "Trotar"
+			or e.PistaActual == "Correr"
+		then m.Histeresis
+		else 0
+	local actual = e.PistaActual
+	local hastaAndar = m.HastaAndar + (if actual == "Andar" then h elseif actual == "Trotar" then -h else 0)
+	local hastaTrotar = m.HastaTrotar + (if actual == "Trotar" then h elseif actual == "Correr" then -h else 0)
+	if rapidez < hastaAndar then
+		return "Andar"
+	elseif rapidez < hastaTrotar then
+		return "Trotar"
+	end
+	return "Correr"
 end
 
 -- ===== Activar y desactivar =====
@@ -447,6 +502,14 @@ local function pasoFisica(dt: number)
 	rapidez = tangente.Magnitude
 	if not e.EnSuelo then
 		reproducir(e, if radial > 0 then "jump" else "fall")
+	elseif e.Pistas.Reposo and e.Pistas.Andar and e.Pistas.Trotar and e.Pistas.Correr then
+		-- Animaciones propias: cada una a la velocidad a la que está hecha (los pies no patinan).
+		if rapidez > Movimiento.Quieto then
+			local ritmo = ritmoPara(e, rapidez)
+			reproducir(e, ritmo, rapidez / (Movimiento.Animaciones[ritmo].Velocidad :: number))
+		else
+			reproducir(e, "Reposo")
+		end
 	elseif rapidez > 0.6 then
 		if rapidez > (p.Andar + p.Correr) / 2 and e.Pistas.run then
 			reproducir(e, "run", rapidez / p.Correr)
