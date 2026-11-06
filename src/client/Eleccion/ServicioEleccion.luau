@@ -33,6 +33,7 @@ local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 local Bloqueo = require(script.Parent.Bloqueo)
 local Escena = require(script.Parent.Escena)
 local Interfaz = require(script.Parent.Interfaz)
+local ServicioGraficos = require(script.Parent.Parent.Graficos.ServicioGraficos)
 
 local ServicioEleccion = {}
 
@@ -235,12 +236,16 @@ function ServicioEleccion.Iniciar()
 	iniciado = true
 
 	Interfaz.CrearCortina() -- por si no se llamó a Preparar
-	ServicioDatos.Actualizados:Conectar(alRecibirDatos)
-	-- Puede que los datos ya hubieran llegado antes de que este servicio escuchara.
-	local datos = ServicioDatos.Obtener()
-	if datos ~= nil then
-		alRecibirDatos(datos)
-	end
+	-- La entrada va en orden: gráficos → bando → editor. Hasta que no termina el paso de gráficos no se mira el bando.
+	task.spawn(function()
+		ServicioGraficos.EsperarListo()
+		ServicioDatos.Actualizados:Conectar(alRecibirDatos)
+		-- Puede que los datos ya hubieran llegado antes de que este servicio escuchara.
+		local datos = ServicioDatos.Obtener()
+		if datos ~= nil then
+			alRecibirDatos(datos)
+		end
+	end)
 
 	-- La cortina nunca se queda puesta: si los datos no llegan (el servidor expulsa al jugador si no pudo cargarlos),
 	-- se quita igualmente.

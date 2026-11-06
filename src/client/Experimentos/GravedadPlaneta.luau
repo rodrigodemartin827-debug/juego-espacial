@@ -26,6 +26,7 @@ local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Experimento = require(Shared.Experimentos.PlanetaRedondo)
 local NavesConfig = require(Shared.Naves.Config)
 local ConfigEleccion = require(Shared.Eleccion.Config)
+local ConfigGraficos = require(Shared.Graficos.Config)
 
 type Estado = {
 	Personaje: Model,
@@ -472,6 +473,7 @@ local function pasoCamara(_dt: number)
 	if
 		jugador:GetAttribute(ConfigEleccion.AtributoEligiendo)
 		or jugador:GetAttribute(ConfigEleccion.AtributoEnPantalla)
+		or jugador:GetAttribute(ConfigGraficos.AtributoCamara)
 	then
 		return
 	end

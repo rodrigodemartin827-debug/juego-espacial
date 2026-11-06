@@ -21,6 +21,7 @@ local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
 local ServicioEleccion = require(script.Eleccion.ServicioEleccion)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
+local ServicioGraficos = require(script.Graficos.ServicioGraficos)
 local ServicioNaves = require(script.Naves.ServicioNaves)
 local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
@@ -38,6 +39,7 @@ ServicioExploracion.Iniciar()
 ServicioPlanetas.Iniciar()
 ServicioTiendas.Iniciar()
 GravedadPlaneta.Iniciar() -- EXPERIMENTO: solo hace algo en Studio, con el experimento activo
+ServicioGraficos.Iniciar() -- entrada: gráficos → bando (la de bando espera a que termine esta)
 ServicioEleccion.Iniciar()
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.

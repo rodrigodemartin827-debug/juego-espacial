@@ -25,6 +25,7 @@ local ConfigExploracion = require(script.Parent.Parent.Exploracion.Config)
 local Recetas = require(script.Parent.Parent.Exploracion.Datos.Recetas)
 local Catalogo = require(script.Parent.Parent.Tiendas.Datos.Catalogo)
 local ConfigTiendas = require(script.Parent.Parent.Tiendas.Config)
+local ConfigGraficos = require(script.Parent.Parent.Graficos.Config)
 local Validador = require(script.Parent.Validador)
 
 export type Direccion = "ClienteAServidor" | "ServidorACliente"
@@ -50,6 +51,13 @@ local definiciones: { [string]: Definicion } = {
 		Direccion = "ClienteAServidor",
 		LimitePorSegundo = 1,
 		Argumentos = { Validador.Enumeracion(Bandos.Elegibles) },
+	},
+
+	-- El jugador elige su nivel de gráficos (pantalla de gráficos o botón de ajustes). Se guarda con sus datos.
+	ElegirGraficos = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 2,
+		Argumentos = { Validador.Enumeracion(ConfigGraficos.Orden) },
 	},
 
 	-- El servidor envía al cliente una copia de sus datos al cargarlos y cuando cambian.

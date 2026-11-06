@@ -23,6 +23,21 @@ local MontarRegion = require(script.Parent:WaitForChild("MontarRegion"))
 
 local LodRegion = {}
 
+--[[
+	Ajustes del nivel de gráficos (client/Graficos los cambia; se aplican en la siguiente actualización):
+	  · Distancia: multiplica las distancias de detalle de edificios, mobiliario y terreno.
+	  · Vegetacion: multiplica las distancias de árboles, matas y hierba.
+	  · Densidad: fracción (0..1) de matas y hierba que se dibujan; los árboles se dibujan siempre.
+]]
+LodRegion.Ajustes = { Distancia = 1, Vegetacion = 1, Densidad = 1 }
+
+local function escalar(cfg: { detalle: number, simple: number }, k: number): { detalle: number, simple: number }
+	if k == 1 then
+		return cfg
+	end
+	return { detalle = cfg.detalle * k, simple = cfg.simple * k }
+end
+
 local RADIO_PLANETA = 2400
 local INTERVALO = 0.25 -- segundos entre actualizaciones
 
@@ -49,7 +64,15 @@ type Entrada = {
 	nivel: string,
 }
 
-type Arbol = { tipo: string, categoria: string, cf: CFrame, escala: number, parte: MeshPart?, nivel: string }
+type Arbol = {
+	tipo: string,
+	categoria: string,
+	cf: CFrame,
+	escala: number,
+	parte: MeshPart?,
+	nivel: string,
+	sorteo: number, -- 0..1 fijo por planta: se dibuja si es menor que Ajustes.Densidad
+}
 type TrozoVeg = { centro: Vector3, radio: number, arboles: { Arbol }, activo: boolean }
 
 -- ¿Queda algo (centro, radio) por encima del horizonte visto desde `camara`? (todo en coordenadas del planeta)
@@ -268,6 +291,7 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 					escala = a[15] :: number,
 					parte = nil,
 					nivel = "oculto",
+					sorteo = (#arboles * 0.6180339887) % 1,
 				})
 			end
 			trozosVeg[clave] = { centro = info.centro, radio = info.radio, arboles = arboles, activo = false }
@@ -320,10 +344,10 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 			if not sobreHorizonte(p, e.centro, e.radio, margen) then
 				nivel = if e.tipo == "terreno" then "simple" else "oculto"
 			elseif e.tipo == "terreno" then
-				nivel = if d <= cfg.terreno.detalle then "detalle" else "simple"
+				nivel = if d <= cfg.terreno.detalle * LodRegion.Ajustes.Distancia then "detalle" else "simple"
 			else
 				local c = (cfg :: any)[if e.tipo == "vegetacion" then "vegetacion" else e.tipo]
-				nivel = nivelPor(d, c or cfg.mobiliario)
+				nivel = nivelPor(d, escalar(c or cfg.mobiliario, LodRegion.Ajustes.Distancia))
 				if e.sitio == "Aurora" and e.tipo == "edificios" and auroraLejos then
 					nivel = "oculto"
 				end
@@ -332,7 +356,8 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		end
 		for _, t in trozosVeg do
 			local d = math.max((p - t.centro).Magnitude - t.radio, 0)
-			local activo = d <= math.max(cfg.vegetacion.simple, cfg.arboles.simple)
+			local kVeg = LodRegion.Ajustes.Vegetacion
+			local activo = d <= math.max(cfg.vegetacion.simple, cfg.arboles.simple) * kVeg
 			if not activo and not t.activo then
 				continue
 			end
@@ -344,8 +369,9 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 					else cfg.vegetacion
 				local pos = a.cf.Position
 				local nivel = "oculto"
-				if activo and sobreHorizonte(p, pos, 30, margen) then
-					nivel = nivelPor((p - pos).Magnitude, c)
+				local dibujar = esArbol(a.tipo) or a.sorteo < LodRegion.Ajustes.Densidad
+				if activo and dibujar and sobreHorizonte(p, pos, 30, margen) then
+					nivel = nivelPor((p - pos).Magnitude, escalar(c, kVeg))
 				end
 				ponerArbol(a, nivel)
 			end

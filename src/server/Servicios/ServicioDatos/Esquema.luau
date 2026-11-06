@@ -49,6 +49,7 @@ local PLANTILLA: Datos = {
 		Carga = 0,
 	},
 	Descubrimientos = {}, -- { idEspecie = veces escaneada } (escáner de mano)
+	Graficos = "", -- nivel de gráficos ("" = todavía no lo ha elegido: sale la pantalla de gráficos)
 }
 
 --[[
