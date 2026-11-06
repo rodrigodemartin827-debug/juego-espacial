@@ -33,13 +33,13 @@ local Paleta = {
 
 	-- ===== Naves (Naves/Datos/EfectosNave) =====
 	-- Láseres: un color por bando, para distinguir de quién es cada disparo a primera vista.
-	NaveLaserHeroes = {
+	NaveLaserHumanos = {
 		Nucleo = "#FFFFFF",
 		Principal = "#4DF0FF",
 		Secundario = "#2F7BFF",
 		Oscuro = "#0B1B3A",
 	},
-	NaveLaserVillanos = {
+	NaveLaserMonstruos = {
 		Nucleo = "#FFF1E8",
 		Principal = "#FF4D5E",
 		Secundario = "#FF9A3D",

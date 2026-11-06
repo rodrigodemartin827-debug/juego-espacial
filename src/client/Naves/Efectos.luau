@@ -57,10 +57,10 @@ local function esVector(valor: any): boolean
 end
 
 local function recetaDeLaser(bando: any): string
-	if bando == "Heroes" then
-		return "Nave_Laser_Heroes"
-	elseif bando == "Villanos" then
-		return "Nave_Laser_Villanos"
+	if bando == "Humanos" then
+		return "Nave_Laser_Humanos"
+	elseif bando == "Monstruos" then
+		return "Nave_Laser_Monstruos"
 	end
 	return "Nave_Laser_Neutral"
 end

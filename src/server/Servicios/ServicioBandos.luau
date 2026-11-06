@@ -1,11 +1,11 @@
 --!strict
 --[[
-	ServicioBandos: atiende la elección de bando del jugador (Héroes o Villanos).
+	ServicioBandos: atiende la elección de bando del jugador (Humanos o Monstruos).
 
 	Es el primer consumidor real de los sistemas de red y de datos, y sirve de ejemplo de cómo escribir
 	un servicio:
 	  - Recibe la petición por ServicioRed.Conectar. Cuando el manejador se ejecuta, el remoto ya ha pasado
-	    el límite por segundo y la validación (el bando es "Heroes" o "Villanos"), pero la lógica de la
+	    el límite por segundo y la validación (el bando es "Humanos" o "Monstruos"), pero la lógica de la
 	    partida sigue siendo cosa del manejador: ¿tiene ya bando? ¿han cargado sus datos?
 	  - Modifica directamente los datos que devuelve ServicioDatos.ObtenerDatos.
 	  - Avisa al cliente con ServicioReplicacion y guarda de inmediato, porque elegir bando es una decisión

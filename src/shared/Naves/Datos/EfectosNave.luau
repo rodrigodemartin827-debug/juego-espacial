@@ -95,8 +95,8 @@ local function laser(paleta: string)
 	}
 end
 
-Recetas.Nave_Laser_Heroes = laser("NaveLaserHeroes")
-Recetas.Nave_Laser_Villanos = laser("NaveLaserVillanos")
+Recetas.Nave_Laser_Humanos = laser("NaveLaserHumanos")
+Recetas.Nave_Laser_Monstruos = laser("NaveLaserMonstruos")
 Recetas.Nave_Laser_Neutral = laser("NaveLaserNeutral")
 
 -- ===========================================================================================================

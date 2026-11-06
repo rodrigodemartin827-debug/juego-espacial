@@ -178,19 +178,19 @@ return function(Marco)
 				return DatosCliente.Obtener() ~= nil
 			end)
 
-			Marco.verdadero(RedCliente.Enviar("ElegirBando", "Heroes"))
+			Marco.verdadero(RedCliente.Enviar("ElegirBando", "Humanos"))
 
 			Marco.esperarHasta(function()
-				return ServicioDatos.ObtenerDatos(jugador).Bando == "Heroes"
+				return ServicioDatos.ObtenerDatos(jugador).Bando == "Humanos"
 			end, "el servidor debería aplicar la elección")
 			Marco.esperarHasta(function()
-				return DatosCliente.Obtener().Bando == "Heroes"
+				return DatosCliente.Obtener().Bando == "Humanos"
 			end, "el cliente debería recibir los datos actualizados")
 			Marco.esperarHasta(function()
-				return leerRegistro(nube, 1).Datos.Bando == "Heroes"
+				return leerRegistro(nube, 1).Datos.Bando == "Humanos"
 			end, "la elección debería guardarse sin esperar a que el jugador salga")
 			Marco.distinto(leerRegistro(nube, 1).Bloqueo, nil, "el jugador sigue dentro: el bloqueo se mantiene")
-			Marco.algunoContiene(entorno.mundo.Impresiones, "bando Heroes")
+			Marco.algunoContiene(entorno.mundo.Impresiones, "bando Humanos")
 		end)
 
 		Marco.prueba("una vez elegido, el bando no se puede cambiar", function()
@@ -201,16 +201,19 @@ return function(Marco)
 			Marco.esperarHasta(function()
 				return DatosCliente.Obtener() ~= nil
 			end)
-			RedCliente.Enviar("ElegirBando", "Heroes")
+			RedCliente.Enviar("ElegirBando", "Humanos")
 			Marco.esperarHasta(function()
-				return ServicioDatos.ObtenerDatos(jugador).Bando == "Heroes"
+				return ServicioDatos.ObtenerDatos(jugador).Bando == "Humanos"
 			end)
 
 			entorno.mundo.avanzarReloj(1) -- pasa el límite de una elección por segundo
-			Marco.verdadero(RedCliente.Enviar("ElegirBando", "Villanos"), "la petición es válida y llega al servidor")
+			Marco.verdadero(
+				RedCliente.Enviar("ElegirBando", "Monstruos"),
+				"la petición es válida y llega al servidor"
+			)
 			Marco.dejarCorrer(5)
 
-			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Heroes")
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Humanos")
 			Marco.igual(#entorno.mundo.Expulsiones, 0)
 		end)
 
@@ -223,7 +226,7 @@ return function(Marco)
 			local jugador = entorno.mundo.unirJugador(1, "Ana")
 			local _, RedCliente = arrancarCliente(entorno, jugador)
 
-			RedCliente.Enviar("ElegirBando", "Villanos") -- llega mientras la carga sigue en curso
+			RedCliente.Enviar("ElegirBando", "Monstruos") -- llega mientras la carga sigue en curso
 			Marco.dejarCorrer(5)
 			Marco.esNil(ServicioDatos.ObtenerDatos(jugador), "los datos aún no han cargado")
 			nube.Pausada = false
@@ -251,7 +254,7 @@ return function(Marco)
 			remoto:FireServer("Ninguno") -- existe, pero no es elegible
 			Marco.dejarCorrer(5)
 			entorno.mundo.avanzarReloj(1)
-			remoto:FireServer({ Bando = "Heroes" }) -- tipo equivocado
+			remoto:FireServer({ Bando = "Humanos" }) -- tipo equivocado
 			Marco.dejarCorrer(5)
 
 			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Ninguno")
@@ -268,9 +271,9 @@ return function(Marco)
 			Marco.esperarHasta(function()
 				return DatosCliente.Obtener() ~= nil
 			end)
-			RedCliente.Enviar("ElegirBando", "Villanos")
+			RedCliente.Enviar("ElegirBando", "Monstruos")
 			Marco.esperarHasta(function()
-				return ServicioDatos.ObtenerDatos(jugador).Bando == "Villanos"
+				return ServicioDatos.ObtenerDatos(jugador).Bando == "Monstruos"
 			end)
 			ServicioDatos.ObtenerDatos(jugador).Monedas = 250
 
@@ -279,7 +282,7 @@ return function(Marco)
 			Marco.esperarHasta(function()
 				return leerRegistro(nube, 1).Bloqueo == nil
 			end, "el registro debería quedar liberado")
-			Marco.igual(leerRegistro(nube, 1).Datos.Bando, "Villanos")
+			Marco.igual(leerRegistro(nube, 1).Datos.Bando, "Monstruos")
 			Marco.igual(leerRegistro(nube, 1).Datos.Monedas, 250)
 		end)
 
@@ -291,9 +294,9 @@ return function(Marco)
 			Marco.esperarHasta(function()
 				return DatosCliente.Obtener() ~= nil
 			end)
-			RedCliente.Enviar("ElegirBando", "Heroes")
+			RedCliente.Enviar("ElegirBando", "Humanos")
 			Marco.esperarHasta(function()
-				return ServicioDatos.ObtenerDatos(primera).Bando == "Heroes"
+				return ServicioDatos.ObtenerDatos(primera).Bando == "Humanos"
 			end)
 			ServicioDatos.ObtenerDatos(primera).Nivel = 4
 			entorno.mundo.salirJugador(primera)
@@ -306,7 +309,7 @@ return function(Marco)
 				return ServicioDatos.ObtenerDatos(segunda) ~= nil
 			end)
 
-			Marco.igual(ServicioDatos.ObtenerDatos(segunda).Bando, "Heroes")
+			Marco.igual(ServicioDatos.ObtenerDatos(segunda).Bando, "Humanos")
 			Marco.igual(ServicioDatos.ObtenerDatos(segunda).Nivel, 4)
 		end)
 	end)

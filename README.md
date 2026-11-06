@@ -1,6 +1,6 @@
 # Juego Espacial
 
-Juego de exploración espacial con PvP para Roblox: dos bandos (Héroes y Villanos), naves, poderes, escáner y
+Juego de exploración espacial con PvP para Roblox: dos bandos (Humanos y Monstruos), naves, poderes, escáner y
 crafteo. Proyecto de [Rojo](https://rojo.space) escrito en Luau.
 
 Por ahora el repositorio contiene la **base técnica** sobre la que se construirá el juego:
@@ -88,7 +88,7 @@ stylua.toml, selene.toml     Formato y análisis estático del código
 src/
 ├── shared/                  → ReplicatedStorage.Shared (servidor y cliente)
 │   ├── Datos/Tipos          Tipos de los datos del jugador
-│   ├── Juego/Bandos         Héroes, Villanos y "Ninguno"
+│   ├── Juego/Bandos         Humanos, Monstruos y "Ninguno"
 │   ├── Combate/             Datos y reglas del combate (ver más abajo)
 │   ├── Naves/               Datos y reglas puras de las naves (ver Naves)
 │   ├── Exploracion/         Escáner, minerales, inventario y crafteo: datos y reglas puras (ver Exploración)
@@ -176,12 +176,12 @@ Para **añadir un remoto**: declararlo en `Red/Remotos`, registrar su manejador 
 ```lua
 -- servidor
 ServicioRed.Conectar("ElegirBando", function(jugador, bando)
-    -- aquí `bando` ya es "Heroes" o "Villanos"
+    -- aquí `bando` ya es "Humanos" o "Monstruos"
 end)
 ServicioRed.EnviarACliente(jugador, "DatosJugador", datos)
 
 -- cliente
-ServicioRed.Enviar("ElegirBando", "Heroes")        -- devuelve false si no pasa la validación o va demasiado deprisa
+ServicioRed.Enviar("ElegirBando", "Humanos")        -- devuelve false si no pasa la validación o va demasiado deprisa
 ServicioRed.Conectar("DatosJugador", function(datos) end)
 ```
 
@@ -235,8 +235,9 @@ Modifica los datos solo desde el servidor. El cliente recibe una copia (`Servici
 - **Renombrar, mover o borrar un campo**: subir `Esquema.VERSION` y añadir la función correspondiente en
   `Esquema.Migraciones`. Se aplican en orden al cargar y los datos se guardan ya con la versión nueva.
 
-Los identificadores que se guardan (`"Heroes"`, `"Villanos"`, los ids de objetos y mejoras) no deben cambiarse una vez
-publicado el juego.
+Los identificadores que se guardan (`"Humanos"`, `"Monstruos"`, los ids de objetos y mejoras) no deben cambiarse una vez
+publicado el juego. Si hace falta, se hace con una migración: la versión 2 del esquema, por ejemplo, convierte los bandos
+antiguos `"Heroes"` y `"Villanos"` en `"Humanos"` y `"Monstruos"`.
 
 ## Combate
 
@@ -274,9 +275,9 @@ cámara. Hay barra de vida y de energía, y cada botón muestra su cooldown y se
 
 ### Zona de pruebas
 
-Al arrancar el servidor se crea (`ZonaPruebas`) una plataforma con tres muñecos de entrenamiento: uno de los **Héroes**,
-uno de los **Villanos** y uno **sin bando**; renacen solos. Dos pedestales (`ProximityPrompt`) permiten elegir bando sin
-interfaz: si eliges Héroes, el muñeco Héroe ya no recibe tu daño. El bando se elige una sola vez (regla de `ServicioBandos`).
+Al arrancar el servidor se crea (`ZonaPruebas`) una plataforma con tres muñecos de entrenamiento: uno de los **Humanos**,
+uno de los **Monstruos** y uno **sin bando**; renacen solos. Dos pedestales (`ProximityPrompt`) permiten elegir bando sin
+interfaz: si eliges Humanos, el muñeco Humano ya no recibe tu daño. El bando se elige una sola vez (regla de `ServicioBandos`).
 La zona también tiene el hangar y el campo de asteroides de las [Naves](#naves) y un ambiente nocturno con resplandor
 (`AMBIENTE_ESPACIAL` en `ZonaPruebas`).
 

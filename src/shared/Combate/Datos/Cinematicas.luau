@@ -20,7 +20,7 @@ local Cinematicas = {}
 Cinematicas.Rayo_Definitiva = {
 	Barras = true,
 	Planos = {
-		-- 1. Contrapicado desde atrás: el héroe empieza a cargar.
+		-- 1. Contrapicado desde atrás: el personaje empieza a cargar.
 		{
 			Duracion = 0.8,
 			Easing = "Cubic",
