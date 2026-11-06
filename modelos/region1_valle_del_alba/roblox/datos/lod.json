@@ -1,0 +1,28 @@
+{
+ "edificios": {
+  "detalle": 220.0,
+  "simple": 2600.0
+ },
+ "mobiliario": {
+  "detalle": 140.0,
+  "simple": 500.0
+ },
+ "vegetacion": {
+  "detalle": 160.0,
+  "simple": 1100.0
+ },
+ "arboles": {
+  "detalle": 160.0,
+  "simple": 3000.0
+ },
+ "hierba": {
+  "detalle": 110.0,
+  "simple": 110.0
+ },
+ "terreno": {
+  "detalle": 650.0,
+  "simple": 1000000000.0
+ },
+ "silueta_aurora": 700.0,
+ "horizonte_margen": 40.0
+}

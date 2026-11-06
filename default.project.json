@@ -3,10 +3,53 @@
   "tree": {
     "$className": "DataModel",
 
+    "Workspace": {
+      "$className": "Workspace",
+      "$properties": {
+        "StreamingEnabled": true,
+        "StreamingTargetRadius": 1024,
+        "StreamingMinRadius": 256,
+        "StreamingIntegrityMode": "MinimumRadiusPause",
+        "StreamOutBehavior": "Opportunistic",
+        "FallenPartsDestroyHeight": -50000
+      }
+    },
+
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "Shared": {
         "$path": "src/shared"
+      },
+      "Region1": {
+        "$className": "Folder",
+        "$ignoreUnknownInstances": true,
+        "Datos": {
+          "$path": "modelos/region1_valle_del_alba/roblox/datos"
+        },
+        "MontarRegion": {
+          "$path": "modelos/region1_valle_del_alba/roblox/MontarRegion.luau"
+        },
+        "LodRegion": {
+          "$path": "modelos/region1_valle_del_alba/roblox/LodRegion.luau"
+        },
+        "EjemploArranque": {
+          "$path": "modelos/region1_valle_del_alba/roblox/EjemploArranque.luau"
+        },
+        "AlturasRegion": {
+          "$path": "modelos/region1_valle_del_alba/roblox/AlturasRegion.luau"
+        },
+        "Piezas": {
+          "$className": "Folder",
+          "$ignoreUnknownInstances": true
+        },
+        "Terreno": {
+          "$className": "Folder",
+          "$ignoreUnknownInstances": true
+        },
+        "Silueta": {
+          "$className": "Folder",
+          "$ignoreUnknownInstances": true
+        }
       }
     },
 

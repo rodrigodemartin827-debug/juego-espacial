@@ -8,8 +8,10 @@
 	  1. lee la intención del piloto (Entrada),
 	  2. gira la orientación (guiñada y cabeceo) y calcula la velocidad que piden los mandos (Naves/Fisica),
 	  3. acerca la velocidad real a esa con la aceleración de SU motor (inercia),
-	  4. predice choques con los asteroides y rebota al momento, sin esperar el aviso del servidor,
-	  5. y lo escribe en las dos fuerzas del modelo: LinearVelocity (velocidad) y AlignOrientation (orientación).
+	  4. suma el arrastre del agujero negro (Planetas/Gravedad: una corriente hacia su centro que crece al
+	     acercarse; si el motor no da más que ella, no se escapa) y no deja meterse dentro de un planeta o del sol,
+	  5. predice choques con los asteroides y rebota al momento, sin esperar el aviso del servidor,
+	  6. y lo escribe en las dos fuerzas del modelo: LinearVelocity (velocidad) y AlignOrientation (orientación).
 
 	Todos los límites (velocidad máxima, aceleración, turbo, cadencia...) vienen de las estadísticas que el
 	servidor calculó a partir de las mejoras guardadas del jugador. Si un tramposo se los salta, el servidor lo
@@ -23,6 +25,10 @@ local RunService = game:GetService("RunService")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Config = require(Shared.Naves.Config)
 local Fisica = require(Shared.Naves.Fisica)
+local DatosPlanetas = require(Shared.Planetas.Datos)
+local Espacio = require(Shared.Planetas.Espacio)
+local Gravedad = require(Shared.Planetas.Gravedad)
+local Experimento = require(Shared.Experimentos.PlanetaRedondo)
 local Camara = require(script.Parent.Camara)
 local Entrada = require(script.Parent.Entrada)
 local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
@@ -47,6 +53,9 @@ type Sesion = {
 	UltimoRebote: number,
 	Correccion: number,
 	Acelerando: boolean,
+	-- EXPERIMENTO planeta redondo: el sistema de referencia de los mandos (solo giro). Lejos del planeta es el del
+	-- mundo; cerca, su "arriba" es el del planeta, así el horizonte de la nave sigue a la esfera.
+	Referencia: CFrame,
 }
 
 local Vuelo = {}
@@ -55,6 +64,10 @@ local NOMBRE_PASO = "NaveVuelo"
 local DT_MAXIMO = 0.1 -- un tirón de fotogramas no debe disparar la nave hacia delante
 
 local sesion: Sesion? = nil
+
+-- Cuerpos sólidos (planetas y sol) y agujero negro: no cambian, se leen una vez.
+local SOLIDOS = Espacio.CuerposSolidos()
+local AGUJERO = DatosPlanetas.AgujeroNegro
 
 -- ===== Controles de Roblox =====
 
@@ -150,6 +163,32 @@ local function disparar(s: Sesion, ahora: number)
 	ServicioRed.Enviar("DispararNave", direccion)
 end
 
+-- ===== Referencia (EXPERIMENTO planeta redondo) =====
+
+-- "Arriba" que debe tener la referencia en una posición: el del planeta redondo si está cerca, si no el del mundo.
+local function arribaDeseado(posicion: Vector3): Vector3
+	if not Experimento.Activado() then
+		return Vector3.yAxis
+	end
+	local desde = posicion - Experimento.Centro()
+	if desde.Magnitude - Experimento.Radio > Experimento.Nave.AlcanceReferencia then
+		return Vector3.yAxis
+	end
+	return desde.Unit
+end
+
+-- Referencia ya girada del todo para una posición (al empezar a pilotar o tras una corrección).
+local function referenciaEn(posicion: Vector3): CFrame
+	return Experimento.GirarArriba(CFrame.identity, Vector3.yAxis, arribaDeseado(posicion))
+end
+
+-- Cabeceo y guiñada de la nave medidos en una referencia.
+local function angulosEn(referencia: CFrame, marco: CFrame): (number, number)
+	local relativo = referencia:Inverse() * (marco - marco.Position)
+	local rx, ry = relativo:ToOrientation()
+	return rx, ry
+end
+
 -- ===== Fotograma =====
 
 local function paso(dt: number)
@@ -165,6 +204,15 @@ local function paso(dt: number)
 	local datos = s.Datos
 	local lectura = Entrada.Leer(dt)
 
+	-- La referencia gira poco a poco hacia el "arriba" del lugar (transporte paralelo: el rumbo se conserva).
+	s.Referencia = Experimento.GirarArriba(
+		s.Referencia,
+		s.Referencia.UpVector,
+		arribaDeseado(s.Raiz.Position),
+		Experimento.Nave.VelocidadGiroReferencia * dt
+	)
+	Camara.PonerReferencia(s.Referencia)
+
 	-- Orientación.
 	s.Guinada, s.Cabeceo = Fisica.Girar(s.Guinada, s.Cabeceo, lectura.DGuinada, lectura.DCabeceo, dt)
 	local giro = math.clamp(lectura.DGuinada / dt, -Config.GiroMaximo, Config.GiroMaximo)
@@ -172,7 +220,7 @@ local function paso(dt: number)
 
 	-- Velocidad que piden los mandos, en el sistema de la nave (sin alabeo) llevada al mundo.
 	gestionarTurbo(s, lectura.Turbo, dt)
-	local sinAlabeo = CFrame.fromEulerAnglesYXZ(s.Cabeceo, s.Guinada, 0)
+	local sinAlabeo = s.Referencia * CFrame.fromEulerAnglesYXZ(s.Cabeceo, s.Guinada, 0)
 	local lx, ly, lz = Fisica.VelocidadObjetivo({
 		Adelante = lectura.Adelante,
 		Lateral = lectura.Lateral,
@@ -181,11 +229,32 @@ local function paso(dt: number)
 	}, datos.VelocidadMax, datos.TurboMult)
 	local objetivo = sinAlabeo:VectorToWorldSpace(Vector3.new(lx, ly, lz))
 
+	-- Atracción del agujero negro: una corriente que se suma a lo que piden los mandos (el servidor la cuenta).
+	local posicion = s.Raiz.Position
+	local ax, ay, az = Gravedad.VectorArrastre(posicion :: any, AGUJERO.Centro, AGUJERO.Atraccion)
+	if ax ~= 0 or ay ~= 0 or az ~= 0 then
+		objetivo += Vector3.new(ax, ay, az)
+	end
+
 	-- Inercia: la velocidad real se acerca a la pedida con la aceleración del motor (el doble con turbo).
 	local hayOrden = lectura.Adelante ~= 0 or lectura.Lateral ~= 0 or lectura.Vertical ~= 0 or s.TurboActivo
 	s.Acelerando = hayOrden
 	local aceleracion = Fisica.Aceleracion(datos.Aceleracion * (if s.TurboActivo then 2 else 1), hayOrden)
 	s.Vx, s.Vy, s.Vz = Fisica.AcercarVelocidad(s.Vx, s.Vy, s.Vz, objetivo.X, objetivo.Y, objetivo.Z, aceleracion * dt)
+
+	-- Planetas y sol son sólidos: la nave resbala por fuera en lugar de atravesarlos.
+	for _, cuerpo in SOLIDOS do
+		s.Vx, s.Vy, s.Vz = Gravedad.ContenerFuera(
+			posicion.X,
+			posicion.Y,
+			posicion.Z,
+			s.Vx,
+			s.Vy,
+			s.Vz,
+			cuerpo.Centro,
+			cuerpo.Radio + Config.RadioNave
+		)
+	end
 
 	-- Choque previsto con un asteroide en este fotograma: rebota ya (el servidor aplica el daño).
 	local avance = Vector3.new(s.Vx, s.Vy, s.Vz) * dt
@@ -200,7 +269,7 @@ local function paso(dt: number)
 	end
 
 	s.Fuerza.VectorVelocity = Vector3.new(s.Vx, s.Vy, s.Vz)
-	s.Giro.CFrame = CFrame.fromEulerAnglesYXZ(s.Cabeceo, s.Guinada, s.Alabeo)
+	s.Giro.CFrame = s.Referencia * CFrame.fromEulerAnglesYXZ(s.Cabeceo, s.Guinada, s.Alabeo)
 
 	if lectura.Disparar then
 		disparar(s, ahora)
@@ -228,7 +297,8 @@ function Vuelo.Iniciar(datos: any, alAterrizar: () -> ()): boolean
 		return false
 	end
 
-	local rx, ry = raiz.CFrame:ToOrientation()
+	local referencia = referenciaEn(raiz.Position)
+	local rx, ry = angulosEn(referencia, raiz.CFrame)
 	sesion = {
 		Modelo = modelo,
 		Raiz = raiz,
@@ -249,6 +319,7 @@ function Vuelo.Iniciar(datos: any, alAterrizar: () -> ()): boolean
 		UltimoRebote = 0,
 		Correccion = datos.Correccion,
 		Acelerando = false,
+		Referencia = referencia,
 	}
 
 	controlesDeRoblox(false)
@@ -275,8 +346,8 @@ function Vuelo.Actualizar(datos: any)
 	if datos.Correccion ~= s.Correccion then
 		s.Correccion = datos.Correccion
 		s.Vx, s.Vy, s.Vz = 0, 0, 0
-		local rx, ry = s.Raiz.CFrame:ToOrientation()
-		s.Cabeceo, s.Guinada = rx, ry
+		s.Referencia = referenciaEn(s.Raiz.Position)
+		s.Cabeceo, s.Guinada = angulosEn(s.Referencia, s.Raiz.CFrame)
 	end
 end
 

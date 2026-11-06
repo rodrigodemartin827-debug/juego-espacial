@@ -14,7 +14,12 @@
 	  - una ZONA DE EXPLORACIÓN: rocas de mineral para picar (R), una criatura (medusa del vacío) y dos plantas para
 	    escanear (Q), y una mesa de crafteo (E) donde fabricar componentes y mejoras de la nave. Los asteroides del campo
 	    llevan además vetas de mineral que los láseres de la nave pueden picar.
+	  - una TIENDA HUMANA de ejemplo (Mercado de la Colonia, E en el mostrador) con su persiana: baja cuando se acerca un
+	    jugador Monstruo y vuelve a subir cuando se va. Al lado, solo en Studio, un cofre que da monedas de prueba.
+	  - solo en Studio, un pedestal "Olvidar bando" para volver a elegir y probar los dos bandos con un solo jugador.
 	  - un ambiente nocturno con resplandor (bloom) para que se vean bien los efectos luminosos.
+	  - dos plataformas de VIAJE A LOS PLANETAS (ProximityPrompt) que llevan a pie al puerto de Nueva Tierra o de Umbra,
+	    para probar las superficies sin volar diez minutos.
 
 	Se desactiva quitando la llamada a ZonaPruebas.Iniciar() en init.server. Todo se crea por código, no hay
 	nada que montar a mano en Studio.
@@ -22,6 +27,7 @@
 
 local Lighting = game:GetService("Lighting")
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Shared = ReplicatedStorage.Shared
@@ -34,7 +40,12 @@ local ServicioBandos = require(script.Parent.ServicioBandos)
 local ServicioCombate = require(script.Parent.ServicioCombate)
 local ServicioCrafteo = require(script.Parent.ServicioCrafteo)
 local ServicioEscaner = require(script.Parent.ServicioEscaner)
+local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioMinado = require(script.Parent.ServicioMinado)
+local ServicioPlanetas = require(script.Parent.ServicioPlanetas)
+local DatosPlanetas = require(Shared.Planetas.Datos)
+local ServicioReplicacion = require(script.Parent.ServicioReplicacion)
+local ServicioTiendas = require(script.Parent.ServicioTiendas)
 
 local ZonaPruebas = {}
 
@@ -51,6 +62,16 @@ local RADIO_CAMPO = 140
 local POSICION_MINAS = Vector3.new(-72, 0, 38)
 local POSICION_CRIATURA = Vector3.new(-50, 0, -44)
 local POSICION_MESA = Vector3.new(-38, 0, 68)
+-- Plataformas de viaje a los planetas (relativas al centro de la plataforma).
+local POSICION_VIAJES = Vector3.new(40, 0, 90)
+
+-- Tienda humana de ejemplo: en el rincón oeste, mirando hacia el este (+X), con el interior hacia el muro.
+local POSICION_TIENDA = Vector3.new(-90, 0, -60)
+local TIENDA_EJEMPLO = "MercadoColonia"
+-- Ayudas para probar en Studio (no existen en un servidor publicado).
+local POSICION_COFRE = Vector3.new(-72, 0, -78)
+local MONEDAS_COFRE = 500
+local POSICION_OLVIDAR_BANDO = Vector3.new(0, 0.5, 44)
 
 -- true = ambiente nocturno con bloom, que hace destacar láseres, explosiones y propulsores.
 local AMBIENTE_ESPACIAL = true
@@ -378,10 +399,99 @@ local function crearPlanta(
 	ServicioEscaner.Marcar(planta, especie)
 end
 
+-- Plataformas para viajar a pie al puerto de cada planeta de bando (atajo de pruebas: el viaje en nave dura ~10 min).
+local function crearViajes(zona: Folder)
+	local colores = { Humanos = Color3.fromRGB(80, 200, 120), Monstruos = Color3.fromRGB(150, 70, 220) }
+	for indice, id in DatosPlanetas.OrdenPlanetas do
+		local posicion = CENTRO + POSICION_VIAJES + Vector3.new((indice - 1.5) * 18, 0.5, 0)
+		local base = crearParte(`Viaje{id}`, Vector3.new(8, 1, 8), posicion, colores[id], Enum.Material.Neon)
+		base.Parent = zona
+		local prompt = Instance.new("ProximityPrompt")
+		prompt.ActionText = `Viajar a {DatosPlanetas.Planetas[id].Nombre}`
+		prompt.ObjectText = "Pruebas"
+		prompt.HoldDuration = 0.4
+		prompt.MaxActivationDistance = 12
+		prompt.Parent = base
+		prompt.Triggered:Connect(function(jugador)
+			ServicioPlanetas.LlevarAPie(jugador, id)
+		end)
+		crearCartel(zona, `Viajar a {DatosPlanetas.Planetas[id].Nombre}`, posicion + Vector3.new(0, 6, 0), 220, 40)
+	end
+end
+
 -- La mesa de crafteo y su cartel.
 local function crearMesa(zona: Folder)
 	ServicioCrafteo.CrearMesa(zona, POSICION_MESA)
 	crearCartel(zona, "MESA DE CRAFTEO · acércate y pulsa E", POSICION_MESA + Vector3.new(0, 9, 0), 380, 36)
+end
+
+-- Pedestal con un ProximityPrompt que solo existe en Studio (ayudas para probar). `alUsar` recibe al jugador y sus datos.
+local function crearAyudaStudio(
+	padre: Instance,
+	nombre: string,
+	accion: string,
+	posicion: Vector3,
+	color: Color3,
+	alUsar: (jugador: Player, datos: any) -> ()
+)
+	local base =
+		crearParte(nombre, Vector3.new(5, 1.5, 5), posicion + Vector3.new(0, 0.75, 0), color, Enum.Material.Neon)
+	base.Parent = padre
+
+	local prompt = Instance.new("ProximityPrompt")
+	prompt.ActionText = accion
+	prompt.ObjectText = "Solo en Studio"
+	prompt.HoldDuration = 0.3
+	prompt.MaxActivationDistance = 10
+	prompt.RequiresLineOfSight = false
+	prompt.Parent = base
+	prompt.Triggered:Connect(function(jugador: Player)
+		local datos = ServicioDatos.ObtenerDatos(jugador)
+		if datos ~= nil then
+			alUsar(jugador, datos)
+			ServicioReplicacion.EnviarDatos(jugador)
+		end
+	end)
+end
+
+-- La tienda humana de ejemplo, su cartel y (solo en Studio) el cofre de monedas y el pedestal para olvidar el bando.
+local function crearTienda(zona: Folder)
+	local origen = CFrame.lookAt(POSICION_TIENDA, POSICION_TIENDA + Vector3.new(1, 0, 0))
+	ServicioTiendas.CrearTienda(zona, TIENDA_EJEMPLO, origen)
+	crearCartel(
+		zona,
+		"TIENDA HUMANA · E en el mostrador · si se acerca un Monstruo, baja la persiana",
+		POSICION_TIENDA + Vector3.new(14, 18, 0),
+		520,
+		40
+	)
+
+	if not RunService:IsStudio() then
+		return
+	end
+	crearAyudaStudio(
+		zona,
+		"CofreMonedas",
+		`+{MONEDAS_COFRE} monedas`,
+		POSICION_COFRE,
+		Color3.fromRGB(255, 205, 80),
+		function(_jugador, datos)
+			datos.Monedas += MONEDAS_COFRE
+		end
+	)
+	crearCartel(zona, "MONEDAS DE PRUEBA (solo Studio)", POSICION_COFRE + Vector3.new(0, 6, 0), 300, 32)
+
+	crearAyudaStudio(
+		zona,
+		"OlvidarBando",
+		"Olvidar bando",
+		POSICION_OLVIDAR_BANDO,
+		Color3.fromRGB(190, 190, 200),
+		function(_jugador, datos)
+			datos.Bando = Bandos.Ninguno -- vuelve a poder elegir en los pedestales
+		end
+	)
+	crearCartel(zona, "OLVIDAR BANDO (solo Studio)", POSICION_OLVIDAR_BANDO + Vector3.new(0, 6, 0), 280, 32)
 end
 
 -- Todo lo de la exploración: minerales, criatura, plantas y mesa de crafteo.
@@ -407,7 +517,7 @@ local function crearZonaExploracion(zona: Folder)
 	crearMesa(zona)
 end
 
--- Crea la zona de pruebas. Debe llamarse una sola vez, después de ServicioCombate.Iniciar().
+-- Crea la zona de pruebas. Debe llamarse una sola vez, después de ServicioCombate.Iniciar() y de ServicioTiendas.Iniciar().
 function ZonaPruebas.Iniciar()
 	assert(carpeta == nil, "ZonaPruebas.Iniciar() solo debe llamarse una vez")
 	local zona = Instance.new("Folder")
@@ -462,6 +572,8 @@ function ZonaPruebas.Iniciar()
 	Hangar.Crear(zona, CENTRO + POSICION_HANGAR)
 	crearCampoDePruebas(zona)
 	crearZonaExploracion(zona)
+	crearViajes(zona)
+	crearTienda(zona)
 	if AMBIENTE_ESPACIAL then
 		ambientarEspacio()
 	end

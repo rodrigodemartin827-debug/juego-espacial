@@ -150,6 +150,36 @@ local Paleta = {
 		Secundario = "#6A2BFF",
 		Oscuro = "#0A0214",
 	},
+
+	-- ===== Planetas y espacio (Planetas/Datos/Efectos) =====
+	-- Entrada en la atmósfera: plasma incandescente alrededor de la nave.
+	PlanetaAtmosfera = {
+		Nucleo = "#FFF4E0",
+		Principal = "#FF9A3D",
+		Secundario = "#FF4A1F",
+		Oscuro = "#3A1408",
+	},
+	-- Salida al espacio: estela fría y limpia.
+	PlanetaDespegue = {
+		Nucleo = "#FFFFFF",
+		Principal = "#8FE3FF",
+		Secundario = "#4D8BFF",
+		Oscuro = "#0B1B3A",
+	},
+	-- Recalentamiento junto al sol.
+	EspacioCalor = {
+		Nucleo = "#FFF1C2",
+		Principal = "#FFB23D",
+		Secundario = "#FF5A1F",
+		Oscuro = "#3A1A08",
+	},
+	-- Agujero negro: atracción y absorción.
+	EspacioAgujero = {
+		Nucleo = "#F6E6FF",
+		Principal = "#B05CFF",
+		Secundario = "#FF7A3D",
+		Oscuro = "#0A0010",
+	},
 }
 
 return Paleta

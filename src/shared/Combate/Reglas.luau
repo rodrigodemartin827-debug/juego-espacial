@@ -100,6 +100,30 @@ function Reglas.SonEnemigos(bandoA: string, bandoB: string): boolean
 	return bandoA ~= bandoB
 end
 
+-- ===== Zonas seguras =====
+
+-- Zona sin PvP: un cilindro vertical (centro, radio y alturas mínima y máxima del mundo).
+export type ZonaSegura = { Centro: Punto, Radio: number, AltoMin: number, AltoMax: number }
+
+-- ¿Está el punto dentro de alguna de las zonas seguras?
+function Reglas.EnZonaSegura(p: Punto, zonas: { ZonaSegura }): boolean
+	for _, zona in zonas do
+		local dx, dz = p.X - zona.Centro.X, p.Z - zona.Centro.Z
+		if dx * dx + dz * dz <= zona.Radio * zona.Radio and p.Y >= zona.AltoMin and p.Y <= zona.AltoMax then
+			return true
+		end
+	end
+	return false
+end
+
+--[[
+	¿Impide una zona segura este golpe? Sí si el lanzador O el objetivo están dentro: ni se puede atacar a quien
+	está a salvo, ni atacar desde dentro de la zona a quien está fuera.
+]]
+function Reglas.ZonaSeguraImpide(lanzador: Punto, objetivo: Punto, zonas: { ZonaSegura }): boolean
+	return Reglas.EnZonaSegura(lanzador, zonas) or Reglas.EnZonaSegura(objetivo, zonas)
+end
+
 -- ===== Combo =====
 
 --[[

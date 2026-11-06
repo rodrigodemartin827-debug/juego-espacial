@@ -1,0 +1,35 @@
+{
+  "nota": "studs, ejes de Roblox, respecto al centro de la base del modelo",
+  "Plataforma": [
+    -0.0,
+    1.1,
+    1.1
+  ],
+  "Consola": [
+    -12.0,
+    3.6,
+    -6.1
+  ],
+  "Forja": [
+    -0.0,
+    10.5,
+    18.1
+  ],
+  "PuntasBrazos": [
+    [
+      3.784,
+      7.222,
+      0.264
+    ],
+    [
+      -3.784,
+      7.222,
+      0.264
+    ]
+  ],
+  "Gancho": [
+    3.0,
+    12.6,
+    10.1
+  ]
+}

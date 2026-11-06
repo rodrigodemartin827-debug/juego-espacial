@@ -1,0 +1,73 @@
+{
+  "nota": "studs, ejes de Roblox (X derecha del monstruo, Y arriba, -Z delante), origen en el suelo",
+  "Articulaciones": {
+    "RootJoint": [
+      -0.0,
+      3.75,
+      0.0
+    ],
+    "Neck": [
+      -0.0,
+      4.55,
+      -0.75
+    ],
+    "Left Shoulder": [
+      -1.15,
+      4.3,
+      0.0
+    ],
+    "Right Shoulder": [
+      1.15,
+      4.3,
+      0.0
+    ],
+    "Left Hip": [
+      -0.5,
+      2.75,
+      0.0
+    ],
+    "Right Hip": [
+      0.5,
+      2.75,
+      0.0
+    ]
+  },
+  "CentrosPiezas": {
+    "Torso": [
+      -0.001,
+      3.7879,
+      0.1307
+    ],
+    "Head": [
+      0.0038,
+      5.4225,
+      -0.6565
+    ],
+    "Right Arm": [
+      1.3424,
+      2.0982,
+      -0.3607
+    ],
+    "Left Arm": [
+      -1.3524,
+      2.2357,
+      -0.3583
+    ],
+    "Right Leg": [
+      0.5009,
+      1.4471,
+      -0.3049
+    ],
+    "Left Leg": [
+      -0.5014,
+      1.4444,
+      -0.3023
+    ],
+    "Ojos": [
+      0.0021,
+      5.6613,
+      -0.9213
+    ]
+  },
+  "AlturaCadera": 2.75
+}

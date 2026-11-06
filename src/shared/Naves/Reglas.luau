@@ -66,15 +66,22 @@ end
 
 --[[
 	Aplica `dano` a la nave (MODIFICA `estado`). El escudo absorbe primero; lo que sobra va al casco.
+	Con `ignorarEscudo` todo va al casco (el calor del sol, por ejemplo), pero el escudo deja de recargarse igual.
 	Un daño que no es un número positivo, o recibido durante la inmunidad, no hace nada.
 ]]
-function Reglas.AplicarDano(estado: Estado, stats: Estadisticas, dano: number, ahora: number): ResultadoDano
+function Reglas.AplicarDano(
+	estado: Estado,
+	stats: Estadisticas,
+	dano: number,
+	ahora: number,
+	ignorarEscudo: boolean?
+): ResultadoDano
 	if dano ~= dano or dano <= 0 or ahora < estado.InmuneHasta or estado.Vida <= 0 then
 		return { Aplicado = false, DanoEscudo = 0, DanoCasco = 0, Destruida = estado.Vida <= 0 }
 	end
 
 	local escudo = Reglas.EscudoActual(estado, stats, ahora)
-	local alEscudo = math.min(escudo, dano)
+	local alEscudo = if ignorarEscudo then 0 else math.min(escudo, dano)
 	local alCasco = dano - alEscudo
 
 	estado.Escudo = escudo - alEscudo
