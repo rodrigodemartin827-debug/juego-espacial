@@ -22,6 +22,25 @@ Estilo.MORADO = Color3.fromRGB(181, 140, 255)
 
 Estilo.EsMovil = Calidad.EsMovil
 
+-- Nombre en pantalla de cada estadística que cambian las mejoras (paneles de crafteo y de tiendas).
+Estilo.NombresEstadisticas = table.freeze({
+	VidaMax = "Vida del casco",
+	EscudoMax = "Escudo",
+	RegenEscudo = "Recarga del escudo",
+	RetrasoEscudo = "Espera del escudo",
+	VelocidadMax = "Velocidad",
+	Aceleracion = "Aceleración",
+	TurboMult = "Turbo",
+	EnergiaTurbo = "Energía de turbo",
+	Dano = "Daño",
+	Cadencia = "Cadencia",
+	Alcance = "Alcance de armas",
+	RadioEscaner = "Radar",
+	AlcanceEscaner = "Alcance del escáner",
+	VelocidadEscaner = "Velocidad del escáner",
+	Capacidad = "Espacio de la bodega",
+} :: { [string]: string })
+
 -- Tamaño de texto: +2 en móvil.
 function Estilo.Texto(tamano: number): number
 	return if Estilo.EsMovil then tamano + 2 else tamano

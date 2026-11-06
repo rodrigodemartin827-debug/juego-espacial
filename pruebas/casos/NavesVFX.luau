@@ -76,8 +76,8 @@ return function(Marco)
 
 	-- Recetas que el código del juego pide por nombre (ver Naves/Efectos).
 	local NECESARIAS = {
-		"Nave_Laser_Heroes",
-		"Nave_Laser_Villanos",
+		"Nave_Laser_Humanos",
+		"Nave_Laser_Monstruos",
 		"Nave_Laser_Neutral",
 		"Nave_Impacto_Escudo",
 		"Nave_Impacto_Casco",
@@ -203,7 +203,7 @@ return function(Marco)
 	Marco.grupo("Naves VFX: calidad de cada efecto", function()
 		Marco.prueba("un disparo tiene fogonazo, proyectil, haz, luz y chispas, y cada bando su color", function()
 			local colores = {}
-			for _, bando in { "Heroes", "Villanos", "Neutral" } do
+			for _, bando in { "Humanos", "Monstruos", "Neutral" } do
 				local receta = Recetas[`Nave_Laser_{bando}`]
 				local tipos = tiposDe(receta.Fases.Lanzamiento)
 				for _, requerido in { "Esfera", "Luz", "Onda", "Particulas", "Proyectil", "Haz" } do
@@ -219,7 +219,7 @@ return function(Marco)
 		end)
 
 		Marco.prueba("el proyectil dura lo que tarda el disparo en llegar (usa el tiempo de viaje)", function()
-			for _, bando in { "Heroes", "Villanos", "Neutral" } do
+			for _, bando in { "Humanos", "Monstruos", "Neutral" } do
 				for _, capa in Recetas[`Nave_Laser_{bando}`].Fases.Lanzamiento do
 					if capa.Tipo == "Proyectil" then
 						Marco.igual(capa.Duracion, "Viaje")

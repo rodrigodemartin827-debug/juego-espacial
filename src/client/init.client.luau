@@ -24,6 +24,7 @@ local ServicioNaves = require(script.Naves.ServicioNaves)
 local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
 local GravedadPlaneta = require(script.Experimentos.GravedadPlaneta)
+local ServicioTiendas = require(script.Tiendas.ServicioTiendas)
 
 -- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa.
 ServicioRed.Iniciar()
@@ -32,6 +33,7 @@ ServicioCombate.Iniciar()
 ServicioNaves.Iniciar()
 ServicioExploracion.Iniciar()
 ServicioPlanetas.Iniciar()
+ServicioTiendas.Iniciar()
 GravedadPlaneta.Iniciar() -- EXPERIMENTO: solo hace algo en Studio, con el experimento activo
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
