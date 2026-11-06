@@ -29,24 +29,7 @@ local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 
 local PanelCrafteo = {}
 
--- Nombre en pantalla de cada estadística que cambian las mejoras.
-local NOMBRES_ESTADISTICAS: { [string]: string } = {
-	VidaMax = "Vida del casco",
-	EscudoMax = "Escudo",
-	RegenEscudo = "Recarga del escudo",
-	RetrasoEscudo = "Espera del escudo",
-	VelocidadMax = "Velocidad",
-	Aceleracion = "Aceleración",
-	TurboMult = "Turbo",
-	EnergiaTurbo = "Energía de turbo",
-	Dano = "Daño",
-	Cadencia = "Cadencia",
-	Alcance = "Alcance de armas",
-	RadioEscaner = "Radar",
-	AlcanceEscaner = "Alcance del escáner",
-	VelocidadEscaner = "Velocidad del escáner",
-	Capacidad = "Espacio de la bodega",
-}
+local NOMBRES_ESTADISTICAS = Estilo.NombresEstadisticas
 
 local pantalla: ScreenGui? = nil
 local panel: Frame? = nil

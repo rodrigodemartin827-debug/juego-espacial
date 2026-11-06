@@ -15,7 +15,9 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
 - el **sistema de naves** (vuelo en el espacio para PC, móvil y mando, vida y escudo, armas validadas en el servidor,
   campos de asteroides generados por código y mejoras leídas de los datos del jugador; ver [Naves](#naves)),
 - la **exploración**: escáner de mano con ficha en pantalla, minerales que se pican a pie y desde la nave, inventario con
-  límite según la mejora Carga y crafteo validado en el servidor; ver [Exploración](#exploración), y
+  límite según la mejora Carga y crafteo validado en el servidor; ver [Exploración](#exploración),
+- las **tiendas del planeta humano**: materiales y mejoras de la nave a cambio de monedas, validado en el servidor, y una
+  persiana animada que baja cuando se acerca un Monstruo y no le vende nada; ver [Tiendas](#tiendas), y
 - pruebas automáticas que se ejecutan fuera de Studio.
 
 ## Puesta en marcha
@@ -92,6 +94,7 @@ src/
 │   ├── Combate/             Datos y reglas del combate (ver más abajo)
 │   ├── Naves/               Datos y reglas puras de las naves (ver Naves)
 │   ├── Exploracion/         Escáner, minerales, inventario y crafteo: datos y reglas puras (ver Exploración)
+│   ├── Tiendas/             Catálogo, reglas de compra y de la persiana, datos de su animación (ver Tiendas)
 │   ├── Red/
 │   │   ├── Remotos          Lista central de RemoteEvents
 │   │   ├── Validador        Validadores de argumentos
@@ -116,8 +119,9 @@ src/
 │       ├── ServicioMinado       Minerales: pico a pie y láseres de la nave
 │       ├── ServicioEscaner      Escáner de mano: alcance, velocidad, ficha y recompensa
 │       ├── ServicioCrafteo      Mesa de crafteo: comprobación y cobro atómicos
+│       ├── ServicioTiendas/     Tiendas humanas: compra atómica, persiana decidida en el servidor y el local (Modelo)
 │       ├── Hangar               Hangar con plataforma de despegue
-│       └── ZonaPruebas          Plataforma con muñecos, hangar, asteroides, minerales, criatura y mesa de crafteo
+│       └── ZonaPruebas          Plataforma con muñecos, hangar, asteroides, minerales, criatura, mesa y tienda
 └── client/                  → StarterPlayer.StarterPlayerScripts.Client (un LocalScript)
     ├── init.client.luau     Arranque del cliente
     ├── Servicios/
@@ -126,9 +130,11 @@ src/
     ├── Combate/             Entrada, interfaz (vida, energía, cooldowns), números de daño
     ├── Naves/               Vuelo, cámara, panel de mandos, controles y efectos de las naves
     ├── Exploracion/         Escáner (Q), pico (R), ficha, bodega (I), mesa de crafteo y efectos de escaneo
+    ├── Tiendas/             Panel de compra y animación de las persianas
     └── VFX/                 Motor de efectos visuales (lo usan el combate y las naves)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
+docs/                        Listas de comprobación para revisar en Studio
 animaciones/                 Animaciones de combate (.fbx para R6) y los scripts de Blender que las generan
 ```
 
@@ -532,6 +538,56 @@ falta recolectar y refinar materiales; las monedas se ganan escaneando.
 - El pico no tiene animación propia ni herramienta en la mano; los golpes se ven por los efectos del mineral.
 - El XP se acumula pero todavía no hay sistema de niveles del jugador (el pico mejora con `datos.Nivel` cuando exista).
 
+## Tiendas
+
+Las tiendas son la ventaja de los **Humanos**: venden materiales y mejoras de la nave a cambio de monedas del juego (nada
+por Robux, nada que haga ganar peleas comprando). A los **Monstruos** no les venden nada: cuando uno se acerca, la tienda
+**baja la persiana** con animación y sonido, y cuando se va, la vuelve a subir.
+
+### Comprar
+
+Acércate al mostrador y pulsa **E**: se abre el panel con lo que vende esa tienda, el precio y tus monedas. El cliente solo
+envía `ComprarArticulo(tienda, idArticulo, cantidad)`; el servidor (`ServicioTiendas`) comprueba que sea una tienda
+registrada, que estés vivo, a pie y **junto al mostrador**, y evalúa con `Tiendas/Compras.Planificar`: que no seas de un
+bando vetado, que la persiana no esté bajada, que la tienda venda eso, las monedas, el nivel máximo de la mejora y el
+espacio en la bodega. Si todo vale, **cobra y entrega en el mismo instante** (`Aplicar`, que lo vuelve a comprobar todo, sin
+esperas entre medias), reenvía los datos, recalcula la nave si subió una mejora y guarda.
+
+### La persiana
+
+El servidor mira cada 0,2 s a qué distancia está el monstruo vivo más cercano de cada tienda (`Tiendas/Persiana.Evaluar`):
+baja a **40 studs** o menos y sube cuando lleva **2,5 s** sin ninguno a **55 studs** o menos (los dos radios distintos evitan
+que suba y baje sin parar si alguien ronda el borde). Publica el estado en el atributo `PersianaBajada` del modelo y desactiva
+el aviso del mostrador. Con la persiana bajada la tienda no vende a nadie (`Config.CerradaParaTodosConPersianaBajada`).
+
+Cada cliente anima la persiana (`Cliente/Tiendas/Persianas`) con las reglas de animación del proyecto: alarma y baliza roja,
+**anticipación** (asoma y se recoge), **caída** acelerada, **impacto** con hitstop, polvo, chispas, golpe y temblor de cámara,
+**rebote**, y el cartel pasa a «CERRADO»; al subir, cerrojo, temblor, subida suave y asentado. Las lamas se mueven de golpe con
+`BulkMoveTo` y solo mientras hay animación; los emisores y sonidos se crean una vez por tienda y se reutilizan.
+
+### Cambiar cosas sin tocar código
+
+| Quiero... | Edito |
+| --- | --- |
+| añadir o equilibrar un **artículo**, o crear una **tienda** con su lista | `Tiendas/Datos/Catalogo` |
+| cambiar los **radios** de la persiana, el alcance del mostrador o los **bandos vetados** | `Tiendas/Config` |
+| cambiar **tiempos, colores, sonidos, polvo, chispas, temblor** o medidas de la persiana | `Tiendas/Datos/Persiana` |
+
+Para poner una tienda en un mapa: `ServicioTiendas.CrearTienda(padre, "Astillero", origen)`, donde `origen` es un CFrame en
+el suelo mirando a la calle.
+
+### Zona de pruebas
+
+El **Mercado de la Colonia** está en el rincón oeste de la plataforma. Solo en Studio hay además un **cofre de monedas** (+500)
+a su lado y un pedestal **Olvidar bando** junto al punto de aparición, para probar los dos bandos con un solo jugador.
+
+### Limitaciones conocidas
+
+- **No se ha probado en Studio.** La lista para revisarlo, con las capturas que hay que hacer, está en
+  [docs/comprobacion-tiendas.md](docs/comprobacion-tiendas.md).
+- Los **sonidos son provisionales** (sonidos que trae Roblox); hay que sustituirlos por sonidos de persiana de verdad.
+- Las tiendas no compran (no se puede vender lo que llevas); no estaba en el encargo.
+
 ## Pruebas
 
 Las pruebas ejecutan los módulos reales de `src/` fuera de Studio con [Lune](https://lune-org.github.io/docs), sobre una
@@ -556,7 +612,9 @@ cliente de las naves usan la API 3D de Roblox, que la simulación no tiene, así
 sustituyen por módulos vacíos (como ya se hace con `ZonaPruebas`). Para la exploración comprueban los catálogos y las recetas
 (todo ingrediente se puede conseguir, hay una receta por mejora), el inventario con límite, la elección del objetivo del
 escáner, la recompensa, el crafteo (materiales, monedas, nivel máximo, bodega llena, plan que ya no vale), los datos de los
-efectos (calidad máxima del escaneo) y el cableado de red y las reglas de seguridad de los servicios.
+efectos (calidad máxima del escaneo) y el cableado de red y las reglas de seguridad de los servicios. Para las tiendas
+comprueban el catálogo, las compras (bando vetado, persiana, monedas justas, bodega llena, dos compras a la vez, precio que
+cambió), cuándo sube y baja la persiana, las curvas de su animación y el cableado de red y de las piezas del modelo.
 
 La simulación es una aproximación: sirve para comprobar la lógica, no sustituye a probar en Studio y en un servidor real.
 
