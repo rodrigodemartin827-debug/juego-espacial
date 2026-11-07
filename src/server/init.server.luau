@@ -34,6 +34,8 @@ local ExperimentoPlanetaRedondo = require(script.Experimentos.PlanetaRedondo)
 	  1. La red, para crear los RemoteEvents antes de que los clientes los busquen.
 	  2. Los servicios que escuchan remotos o señales (replicación, personaje R6, bandos, combate y naves).
 	     El del personaje va antes que el combate para que sustituya cualquier R15 antes de que se registre.
+	     Los bandos van antes que la replicación: en Studio, con el modo de pruebas, reinician el bando al cargar los
+	     datos, y así el cliente recibe ya «Ninguno» (si no, recibía primero el bando viejo y la entrada se liaba).
 	     Los asteroides van antes que las naves, porque preparan los grupos de colisión que ellas usan.
 	     Exploración (inventario, minería, escáner y crafteo) va después de las naves, que le piden golpear minerales.
 	     Los planetas van después de las naves (conectan con ellas el aterrizaje y el despegue) y antes de la zona de
@@ -43,10 +45,10 @@ local ExperimentoPlanetaRedondo = require(script.Experimentos.PlanetaRedondo)
 	     todos los demás servicios ya deben estar escuchando.
 ]]
 ServicioRed.Iniciar()
-ServicioReplicacion.Iniciar()
 ServicioPersonaje.Iniciar()
 ServicioBandos.Iniciar()
 ServicioAjustes.Iniciar()
+ServicioReplicacion.Iniciar()
 ServicioCombate.Iniciar()
 ServicioAsteroides.Iniciar()
 ServicioNaves.Iniciar()
