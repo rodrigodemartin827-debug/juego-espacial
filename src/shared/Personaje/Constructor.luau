@@ -187,6 +187,13 @@ end
 -- Quita lo que puso Aplicar (accesorios del juego, detalles de ropa y rasgos de la cara), para dejar paso al avatar de
 -- Roblox. El avatar trae lo suyo: ApplyDescription pone su cabeza, su cara, su ropa y sus colores.
 function Constructor.Limpiar(modelo: Model)
+	-- El HumanoidDescription que ya tiene el Humanoid se quita: si es igual al que se va a aplicar, ApplyDescription
+	-- cree que el personaje ya lo lleva y no hace nada (PROBADO EN STUDIO).
+	local humanoide = modelo:FindFirstChildOfClass("Humanoid")
+	local anterior = humanoide and humanoide:FindFirstChildOfClass("HumanoidDescription")
+	if anterior then
+		anterior:Destroy()
+	end
 	for _, d in modelo:GetChildren() do
 		if d:IsA("Accessory") or d.Name == Constructor.CARPETA then
 			d:Destroy()
