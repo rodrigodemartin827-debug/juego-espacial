@@ -24,7 +24,10 @@ local AvatarR6 = require(ReplicatedStorage.Shared.Personaje.AvatarR6)
 local ConfigEditor = require(ReplicatedStorage.Shared.Personaje.ConfigEditor)
 local Bandos = require(ReplicatedStorage.Shared.Juego.Bandos)
 local Constructor = require(ReplicatedStorage.Shared.Personaje.Constructor)
+local AparienciaMonstruo = require(ReplicatedStorage.Shared.Personaje.AparienciaMonstruo)
+local ConstructorMonstruo = require(ReplicatedStorage.Shared.Personaje.ConstructorMonstruo)
 local Recursos = require(ReplicatedStorage.Shared.Personaje.RecursosHumanos)
+local RecursosMonstruo = require(ReplicatedStorage.Shared.Personaje.RecursosMonstruo)
 local ServicioBandos = require(script.Parent.ServicioBandos)
 local ServicioDatos = require(script.Parent.ServicioDatos)
 local ServicioRed = require(script.Parent.ServicioRed)
@@ -102,10 +105,21 @@ end
 function ServicioApariencia.Vestir(jugador: Player)
 	local datos = ServicioDatos.ObtenerDatos(jugador)
 	local personaje = jugador.Character
-	if datos == nil or personaje == nil or datos.Bando ~= Bandos.Humanos then
+	if datos == nil or personaje == nil then
 		return
 	end
 	local numero = (vestidos[jugador] or 0) + 1
+	if datos.Bando == Bandos.Monstruos then
+		vestidos[jugador] = numero
+		local ok, err = pcall(ConstructorMonstruo.Aplicar, personaje, datos.Apariencia.Monstruo)
+		if not ok then
+			warn(`[Apariencia] No se pudo vestir al monstruo {jugador.Name}: {err}`)
+		end
+		return
+	end
+	if datos.Bando ~= Bandos.Humanos then
+		return
+	end
 	vestidos[jugador] = numero
 	if datos.Apariencia.UsarAvatar then
 		task.spawn(function()
@@ -135,6 +149,24 @@ function ServicioApariencia.GuardarHumano(jugador: Player, valores: { [string]: 
 	end
 	datos.Apariencia.Humano = Apariencia.Validar(valores) :: any
 	datos.Apariencia.UsarAvatar = usarAvatar == true
+	ServicioReplicacion.EnviarDatos(jugador)
+	ServicioDatos.GuardarAhora(jugador)
+	ServicioApariencia.Vestir(jugador)
+	return true
+end
+
+-- Guarda el monstruo del jugador (Personaje/AparienciaMonstruo.Campos). Mismas reglas que GuardarHumano.
+function ServicioApariencia.GuardarMonstruo(jugador: Player, valores: { [string]: any }): boolean
+	local datos = ServicioDatos.ObtenerDatos(jugador)
+	if datos == nil or datos.Bando ~= Bandos.Monstruos then
+		return false
+	end
+	for _, campo in AparienciaMonstruo.Campos do
+		if not AparienciaMonstruo.ValorValido(campo, valores[campo]) then
+			return false
+		end
+	end
+	datos.Apariencia.Monstruo = AparienciaMonstruo.Validar(valores)
 	ServicioReplicacion.EnviarDatos(jugador)
 	ServicioDatos.GuardarAhora(jugador)
 	ServicioApariencia.Vestir(jugador)
@@ -173,13 +205,15 @@ local function crearPlantillas()
 	-- Varias piezas comparten malla (por ejemplo la hebilla del cinturón): cada malla se pide una sola vez.
 	local porMalla: { [string]: { Recursos.Pieza } } = {}
 	local mallas: { string } = {}
-	for _, piezas in Recursos.Piezas do
-		for _, pieza in piezas do
-			if porMalla[pieza.Malla] == nil then
-				porMalla[pieza.Malla] = {}
-				table.insert(mallas, pieza.Malla)
+	for _, recursos in { Recursos, RecursosMonstruo } do
+		for _, piezas in recursos.Piezas do
+			for _, pieza in piezas do
+				if porMalla[pieza.Malla] == nil then
+					porMalla[pieza.Malla] = {}
+					table.insert(mallas, pieza.Malla)
+				end
+				table.insert(porMalla[pieza.Malla], pieza)
 			end
-			table.insert(porMalla[pieza.Malla], pieza)
 		end
 	end
 
@@ -254,6 +288,14 @@ function ServicioApariencia.Iniciar()
 			valores[campo] = select(i, ...)
 		end
 		ServicioApariencia.GuardarHumano(jugador, valores, select(#Apariencia.Campos + 1, ...) == true)
+	end)
+
+	ServicioRed.Conectar("GuardarAparienciaMonstruo", function(jugador: Player, ...: any)
+		local valores = {}
+		for i, campo in AparienciaMonstruo.Campos do
+			valores[campo] = select(i, ...)
+		end
+		ServicioApariencia.GuardarMonstruo(jugador, valores)
 	end)
 
 	local function conectar(jugador: Player)

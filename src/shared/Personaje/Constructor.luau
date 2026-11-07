@@ -72,14 +72,20 @@ function Constructor.Plantillas(): Instance?
 end
 
 -- Clona la plantilla de la pieza y la deja lista (color, material, sin física). nil si la plantilla no está.
-local function crearPieza(pieza: Recursos.Pieza, colores: { [string]: string }, plantillas: Instance?): MeshPart?
+local function crearPieza(
+	pieza: Recursos.Pieza,
+	colores: { [string]: string },
+	plantillas: Instance?,
+	roles: any?
+): MeshPart?
 	local plantilla = plantillas and plantillas:FindFirstChild(pieza.Nombre)
 	if plantilla == nil or not plantilla:IsA("MeshPart") then
 		return nil
 	end
 	local p = plantilla:Clone()
 	p.Size = Vector3.new(pieza.Tamano[1], pieza.Tamano[2], pieza.Tamano[3])
-	local rol = Datos.Roles[pieza.Rol] or Datos.Roles.Detalle
+	local tabla = roles or Datos.Roles
+	local rol = tabla[pieza.Rol] or tabla.Detalle or { Material = "SmoothPlastic" }
 	p.Color = color(colores[pieza.Rol] or "#FF00FF")
 	p.Material = material(rol.Material)
 	p.Transparency = rol.Transparencia or 0
@@ -111,9 +117,11 @@ local function ponerAccesorio(
 	clave: string,
 	anclaje: string,
 	colores: { [string]: string },
-	plantillas: Instance?
+	plantillas: Instance?,
+	recursos: any?,
+	roles: any?
 ): number
-	local piezas = Recursos.Piezas[clave]
+	local piezas = (recursos or Recursos).Piezas[clave]
 	if piezas == nil then
 		return 0
 	end
@@ -122,7 +130,7 @@ local function ponerAccesorio(
 	local faltan = 0
 	local asa: BasePart? = nil
 	for _, pieza in piezas do
-		local p = crearPieza(pieza, colores, plantillas)
+		local p = crearPieza(pieza, colores, plantillas, roles)
 		if p == nil then
 			faltan += 1
 			continue
@@ -583,5 +591,13 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 	carpeta.Parent = modelo
 	return faltan
 end
+
+-- Piezas que comparte con el constructor del monstruo (Personaje/ConstructorMonstruo).
+Constructor.CrearPieza = crearPieza
+Constructor.PonerAccesorio = ponerAccesorio
+Constructor.Centro = centro
+Constructor.Soldar = soldar
+Constructor.Estiramiento = estiramiento
+Constructor.QuitarTatuajes = quitarTatuajes
 
 return Constructor

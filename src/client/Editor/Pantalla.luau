@@ -25,23 +25,26 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
-local Apariencia = require(Shared.Personaje.Apariencia)
 local Config = require(Shared.Personaje.ConfigEditor)
-local Datos = require(Shared.Personaje.DatosHumanos)
-local Recursos = require(Shared.Personaje.RecursosHumanos)
+
+-- Lo propio del bando (Personaje/PerfilEditor): se pone al abrir.
+local Apariencia: any = nil
+local Datos: any = nil
+local perfilActual: any = nil
 
 local Pantalla = {}
 
 export type Disposicion = "Ancha" | "Estrecha"
 export type Opciones = {
-	Inicial: Apariencia.Apariencia,
-	AlCambiar: (Apariencia.Apariencia, string) -> (),
+	Perfil: any, -- Personaje/PerfilEditor del bando
+	Inicial: any,
+	AlCambiar: (any, string) -> (),
 	AlDisponer: (Disposicion) -> (),
 	AlAtras: () -> (),
-	AlAleatorio: () -> Apariencia.Apariencia,
-	UsarAvatar: boolean, -- si empieza usando su avatar de Roblox
+	AlAleatorio: () -> any,
+	UsarAvatar: boolean, -- si empieza usando su avatar de Roblox (solo Humanos)
 	AlAvatar: (boolean) -> (), -- pide pasar al avatar (true) o a las piezas del juego (false)
-	AlTerminar: (Apariencia.Apariencia, boolean) -> (),
+	AlTerminar: (any, boolean) -> (),
 }
 
 local NOMBRE_GUI = "EditorPersonaje"
@@ -323,9 +326,10 @@ local function refrescarCategorias()
 		local opcion = Apariencia.Buscar(campo, actual[campo])
 		fila.Numero.Text = tostring(i)
 		local texto = if opcion then opcion.Nombre else ""
-		-- Un tatuaje solo se ve con los brazos al aire: con una chaqueta de manga larga queda tapado.
-		if campo == "Tatuaje" and actual.Tatuaje ~= "Ninguno" and not Apariencia.TatuajeVisible(actual :: any) then
-			texto ..= " (tapado)"
+		-- Nota propia del bando (por ejemplo, un tatuaje tapado por la manga).
+		local nota = if perfilActual and perfilActual.Nota then perfilActual.Nota(actual, campo) else nil
+		if nota then
+			texto ..= " " .. nota
 		end
 		fila.Opcion.Text = texto
 	end
@@ -485,6 +489,7 @@ local function crearColor(raiz: Instance)
 		Size = UDim2.new(1, 0, 0, 46),
 	})
 	ui.Avatar = avatarBoton
+	avatarBoton.Visible = perfilActual.Avatar -- «Usar mi avatar de Roblox» es solo de los Humanos
 	ui.Informe = etiqueta(raiz, {
 		Name = "Informe",
 		LayoutOrder = 6,
@@ -555,7 +560,7 @@ local function crearColor(raiz: Instance)
 	local rueda = crear("ImageButton", {
 		Name = "Rueda",
 		LayoutOrder = 2,
-		Image = Recursos.Imagenes.RuedaColor,
+		Image = perfilActual.ImagenRueda,
 		BackgroundTransparency = 1,
 		AutoButtonColor = false,
 		Size = UDim2.fromOffset(I.TamRueda, I.TamRueda),
@@ -843,7 +848,7 @@ function Pantalla.Informe(lineas: { string })
 end
 
 -- Pone otra apariencia en todos los controles (por ejemplo tras ALEATORIO).
-function Pantalla.Poner(a: Apariencia.Apariencia)
+function Pantalla.Poner(a: any)
 	actual = table.clone(a :: any)
 	refrescarPiel()
 	refrescarCategorias()
@@ -854,6 +859,9 @@ end
 function Pantalla.Abrir(opciones: Opciones)
 	Pantalla.Cerrar()
 	op = opciones
+	perfilActual = opciones.Perfil
+	Apariencia = perfilActual.Apariencia
+	Datos = perfilActual.Datos
 	actual = table.clone(opciones.Inicial :: any)
 	objetivo = 1
 	modoAvatar = false
@@ -890,7 +898,7 @@ function Pantalla.Abrir(opciones: Opciones)
 	ui.Cabecera = cabecera
 	ui.Titulo = etiqueta(cabecera, {
 		Name = "Titulo",
-		Text = Config.Textos.Titulo,
+		Text = perfilActual.Titulo or Config.Textos.Titulo,
 		FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
 		TextSize = 30,
 		Size = UDim2.new(1, 0, 0, 36),

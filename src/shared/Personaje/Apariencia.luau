@@ -1,26 +1,18 @@
 --!strict
 --[[
-	Apariencia (Humanos): reglas sin Roblox (se prueban con Lune).
+	Apariencia (Humanos): reglas sin Roblox (se prueban con Lune). Las comunes a los dos bandos están en
+	Personaje/FabricaApariencia (la lista de funciones, ahí); aquí solo lo propio de los Humanos.
 
 	Una apariencia es una tabla:
 	  · De opciones (un id de su lista en Personaje/DatosHumanos): Piel, Cabello, Cejas, Ojos, Nariz, Boca, Chaqueta,
-	    Pantalon y Accesorio.
+	    Pantalon, Accesorio, Barba, Cicatriz, Tatuaje y Complexion.
 	  · De colores libres ("#RRGGBB", rueda de color): ColorPelo, ColorChaqueta, ColorPantalon y ColorDetalle.
-
-	  · Campos: el orden de todos los campos (es también el orden de los argumentos del remoto GuardarAparienciaHumano).
-	  · Categorias: las categorías de la lista del editor (con sus flechas ‹ ›), en orden.
-	  · Opciones(campo) / Ids(campo) / Buscar(campo, id): las opciones de un campo de opciones.
-	  · EsColor(valor) / NormalizarColor(valor): un color "#RRGGBB" válido.
-	  · Validar(tabla): una apariencia completa y válida (lo que falte o no exista, por defecto).
-	  · Hecha(tabla): si el jugador ya guardó una apariencia de este editor.
-	  · Mover(campo, id, paso): la opción anterior o siguiente (las flechas), dando la vuelta.
-	  · Aleatoria(azar): una apariencia al azar.
-	  · Colores(a): el color de cada rol de las piezas (Pelo, Chaqueta, Pantalon, Detalle, Piel y los fijos).
+	  · TatuajeVisible(a): ¿se ve el tatuaje? Solo con los brazos al aire.
+	Colores(a): Pelo, Chaqueta, Pantalon, Detalle, Piel y los roles de color fijo.
 ]]
 
 local Datos = require(script.Parent.DatosHumanos)
-
-local Apariencia = {}
+local Fabrica = require(script.Parent.FabricaApariencia)
 
 export type Apariencia = {
 	Piel: string,
@@ -42,201 +34,91 @@ export type Apariencia = {
 	ColorDetalle: string,
 }
 
-export type Categoria = { Campo: string, Nombre: string }
+export type Categoria = Fabrica.Categoria
 
-Apariencia.CamposOpcion = {
-	"Piel",
-	"Cabello",
-	"Cejas",
-	"Ojos",
-	"Nariz",
-	"Boca",
-	"Chaqueta",
-	"Pantalon",
-	"Accesorio",
-	"Barba",
-	"Cicatriz",
-	"Tatuaje",
-	"Complexion",
-}
-Apariencia.CamposColor = { "ColorPelo", "ColorChaqueta", "ColorPantalon", "ColorDetalle" }
-
-Apariencia.Campos = table.clone(Apariencia.CamposOpcion)
-for _, campo in Apariencia.CamposColor do
-	table.insert(Apariencia.Campos, campo)
-end
-
-Apariencia.Categorias = {
-	{ Campo = "Complexion", Nombre = "Complexión" },
-	{ Campo = "Cabello", Nombre = "Cabello" },
-	{ Campo = "Barba", Nombre = "Vello facial" },
-	{ Campo = "Cejas", Nombre = "Cejas" },
-	{ Campo = "Ojos", Nombre = "Ojos" },
-	{ Campo = "Nariz", Nombre = "Nariz" },
-	{ Campo = "Boca", Nombre = "Boca" },
-	{ Campo = "Cicatriz", Nombre = "Cicatriz" },
-	{ Campo = "Chaqueta", Nombre = "Chaqueta" },
-	{ Campo = "Pantalon", Nombre = "Pantalón" },
-	{ Campo = "Tatuaje", Nombre = "Tatuaje" },
-	{ Campo = "Accesorio", Nombre = "Accesorio" },
-} :: { Categoria }
-
-local LISTAS: { [string]: { any } } = {
-	Piel = Datos.Pieles,
-	Cabello = Datos.Cabellos,
-	Cejas = Datos.Cejas,
-	Ojos = Datos.Ojos,
-	Nariz = Datos.Narices,
-	Boca = Datos.Bocas,
-	Chaqueta = Datos.Chaquetas,
-	Pantalon = Datos.Pantalones,
-	Accesorio = Datos.Accesorios,
-	Barba = Datos.Barbas,
-	Cicatriz = Datos.Cicatrices,
-	Tatuaje = Datos.Tatuajes,
-	Complexion = Datos.Complexiones,
-}
-
--- Estos campos, al azar, suelen quedarse en «nada» (si no, casi todos los personajes aleatorios llevarían cicatriz,
--- tatuaje y barba).
-local RAROS: { [string]: boolean } = { Barba = true, Cicatriz = true, Tatuaje = true }
-
-local ES_COLOR: { [string]: boolean } = {}
-for _, campo in Apariencia.CamposColor do
-	ES_COLOR[campo] = true
-end
-
--- Patrón de un color: "#" y seis cifras hexadecimales.
-Apariencia.PatronColor = "^#%x%x%x%x%x%x$"
-
-function Apariencia.EsCampoColor(campo: string): boolean
-	return ES_COLOR[campo] == true
-end
-
-function Apariencia.Opciones(campo: string): { any }
-	return LISTAS[campo] or {}
-end
-
-function Apariencia.Ids(campo: string): { string }
-	local ids = {}
-	for _, opcion in Apariencia.Opciones(campo) do
-		table.insert(ids, opcion.Id)
-	end
-	return ids
-end
-
--- La opción con ese id en ese campo, o nil.
-function Apariencia.Buscar(campo: string, id: any): any
-	for _, opcion in Apariencia.Opciones(campo) do
-		if opcion.Id == id then
-			return opcion
+local Apariencia: any
+Apariencia = Fabrica.Crear({
+	Datos = Datos,
+	CamposOpcion = {
+		"Piel",
+		"Cabello",
+		"Cejas",
+		"Ojos",
+		"Nariz",
+		"Boca",
+		"Chaqueta",
+		"Pantalon",
+		"Accesorio",
+		"Barba",
+		"Cicatriz",
+		"Tatuaje",
+		"Complexion",
+	},
+	CamposColor = { "ColorPelo", "ColorChaqueta", "ColorPantalon", "ColorDetalle" },
+	Categorias = {
+		{ Campo = "Complexion", Nombre = "Complexión" },
+		{ Campo = "Cabello", Nombre = "Cabello" },
+		{ Campo = "Barba", Nombre = "Vello facial" },
+		{ Campo = "Cejas", Nombre = "Cejas" },
+		{ Campo = "Ojos", Nombre = "Ojos" },
+		{ Campo = "Nariz", Nombre = "Nariz" },
+		{ Campo = "Boca", Nombre = "Boca" },
+		{ Campo = "Cicatriz", Nombre = "Cicatriz" },
+		{ Campo = "Chaqueta", Nombre = "Chaqueta" },
+		{ Campo = "Pantalon", Nombre = "Pantalón" },
+		{ Campo = "Tatuaje", Nombre = "Tatuaje" },
+		{ Campo = "Accesorio", Nombre = "Accesorio" },
+	},
+	Listas = {
+		Piel = Datos.Pieles,
+		Cabello = Datos.Cabellos,
+		Cejas = Datos.Cejas,
+		Ojos = Datos.Ojos,
+		Nariz = Datos.Narices,
+		Boca = Datos.Bocas,
+		Chaqueta = Datos.Chaquetas,
+		Pantalon = Datos.Pantalones,
+		Accesorio = Datos.Accesorios,
+		Barba = Datos.Barbas,
+		Cicatriz = Datos.Cicatrices,
+		Tatuaje = Datos.Tatuajes,
+		Complexion = Datos.Complexiones,
+	},
+	-- Estos campos, al azar, suelen quedarse en «nada» (si no, casi todos los personajes aleatorios llevarían cicatriz,
+	-- tatuaje y barba).
+	Raros = { Barba = true, Cicatriz = true, Tatuaje = true },
+	-- Un jugador con el editor anterior (sin Chaqueta) vuelve a pasar por él.
+	CamposHecha = { "Piel", "Chaqueta" },
+	Colores = function(a: any): { [string]: string }
+		local colores: { [string]: string } = {
+			Piel = Apariencia.Buscar("Piel", a.Piel).Hex,
+			Pelo = a.ColorPelo,
+			Chaqueta = a.ColorChaqueta,
+			Pantalon = a.ColorPantalon,
+			Detalle = a.ColorDetalle,
+		}
+		for rol, datos in Datos.Roles do
+			if datos.Color then
+				colores[rol] = datos.Color
+			end
 		end
-	end
-	return nil
-end
-
--- Posición (1..n) de la opción en su lista, o nil.
-function Apariencia.Indice(campo: string, id: any): number?
-	for i, opcion in Apariencia.Opciones(campo) do
-		if opcion.Id == id then
-			return i
-		end
-	end
-	return nil
-end
-
-function Apariencia.EsColor(valor: any): boolean
-	return type(valor) == "string" and string.match(valor, Apariencia.PatronColor) ~= nil
-end
-
--- "#a1b2c3" -> "#A1B2C3" (así dos colores iguales se guardan igual). nil si no es un color.
-function Apariencia.NormalizarColor(valor: any): string?
-	if not Apariencia.EsColor(valor) then
-		return nil
-	end
-	return string.upper(valor)
-end
-
--- ¿Es `valor` válido para `campo`?
-function Apariencia.ValorValido(campo: string, valor: any): boolean
-	if ES_COLOR[campo] then
-		return Apariencia.EsColor(valor)
-	end
-	return Apariencia.Buscar(campo, valor) ~= nil
-end
-
-function Apariencia.Validar(tabla: any): Apariencia
-	local fuente = if type(tabla) == "table" then tabla else {}
-	local resultado: { [string]: string } = {}
-	for _, campo in Apariencia.Campos do
-		local valor = fuente[campo]
-		if ES_COLOR[campo] then
-			resultado[campo] = Apariencia.NormalizarColor(valor) or (Datos.Defecto :: any)[campo]
-		else
-			resultado[campo] = if Apariencia.Buscar(campo, valor) ~= nil then valor else (Datos.Defecto :: any)[campo]
-		end
-	end
-	return resultado :: any
-end
-
--- ¿Ha guardado ya una apariencia de este editor? (los datos de un jugador nuevo la tienen vacía; las de la versión
--- anterior del editor no tenían Chaqueta y se vuelven a pedir)
-function Apariencia.Hecha(tabla: any): boolean
-	return type(tabla) == "table"
-		and Apariencia.Buscar("Piel", tabla.Piel) ~= nil
-		and Apariencia.Buscar("Chaqueta", tabla.Chaqueta) ~= nil
-end
+		return colores
+	end,
+	AzarColores = function(azar: any, resultado: { [string]: string })
+		local muestras = Datos.Muestras
+		-- El pelo casi siempre de un color natural (las seis primeras muestras); a veces, de fantasía.
+		local natural = azar:NextInteger(1, 5) <= 4
+		resultado.ColorPelo = muestras[if natural then azar:NextInteger(1, 6) else azar:NextInteger(7, #muestras)]
+		resultado.ColorChaqueta = muestras[azar:NextInteger(7, #muestras)]
+		resultado.ColorPantalon = muestras[azar:NextInteger(7, #muestras)]
+		resultado.ColorDetalle = muestras[azar:NextInteger(7, #muestras)]
+	end,
+})
 
 -- ¿Se ve el tatuaje? Solo con los brazos al aire (la chaqueta elegida es de manga corta o sin mangas).
 function Apariencia.TatuajeVisible(a: Apariencia): boolean
 	local chaqueta = Apariencia.Buscar("Chaqueta", a.Chaqueta)
 	return chaqueta ~= nil and chaqueta.Brazos == "Piel"
-end
-
--- La opción `paso` posiciones más allá (1 = siguiente, -1 = anterior), dando la vuelta al final de la lista.
-function Apariencia.Mover(campo: string, id: any, paso: number): string
-	local lista = Apariencia.Opciones(campo)
-	assert(#lista > 0, "campo sin opciones: " .. campo)
-	local i = Apariencia.Indice(campo, id) or 1
-	local nuevo = ((i - 1 + paso) % #lista) + 1
-	return lista[nuevo].Id
-end
-
-function Apariencia.Aleatoria(azar: Random): Apariencia
-	local resultado: { [string]: string } = {}
-	for _, campo in Apariencia.CamposOpcion do
-		local lista = Apariencia.Opciones(campo)
-		if RAROS[campo] and azar:NextInteger(1, 10) <= 7 then
-			resultado[campo] = (Datos.Defecto :: any)[campo]
-		else
-			resultado[campo] = lista[azar:NextInteger(1, #lista)].Id
-		end
-	end
-	local muestras = Datos.Muestras
-	-- El pelo casi siempre de un color natural (las seis primeras muestras); a veces, de fantasía.
-	local natural = azar:NextInteger(1, 5) <= 4
-	resultado.ColorPelo = muestras[if natural then azar:NextInteger(1, 6) else azar:NextInteger(7, #muestras)]
-	resultado.ColorChaqueta = muestras[azar:NextInteger(7, #muestras)]
-	resultado.ColorPantalon = muestras[azar:NextInteger(7, #muestras)]
-	resultado.ColorDetalle = muestras[azar:NextInteger(7, #muestras)]
-	return resultado :: any
-end
-
--- El color ("#RRGGBB") de cada rol de las piezas en una apariencia válida.
-function Apariencia.Colores(a: Apariencia): { [string]: string }
-	local colores: { [string]: string } = {
-		Piel = Apariencia.Buscar("Piel", a.Piel).Hex,
-		Pelo = a.ColorPelo,
-		Chaqueta = a.ColorChaqueta,
-		Pantalon = a.ColorPantalon,
-		Detalle = a.ColorDetalle,
-	}
-	for rol, datos in Datos.Roles do
-		if datos.Color then
-			colores[rol] = datos.Color
-		end
-	end
-	return colores
 end
 
 return Apariencia

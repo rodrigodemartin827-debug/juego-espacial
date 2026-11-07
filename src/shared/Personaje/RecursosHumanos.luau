@@ -3,7 +3,7 @@
 	GENERADO por herramientas/generar_recursos_humanos.luau: no lo edites a mano.
 
 	Recursos subidos del personaje humano:
-	  · Piezas[elemento]: las piezas 3D de cada peinado, accesorio, chaqueta y pantalón (modelos/personaje_humano).
+	  · Piezas[elemento]: las piezas 3D de cada elemento (modelos/personaje_humano).
 	    Malla: la malla subida. Parte: la parte del R6 a la que va. Rol: de qué color se pinta (ver DatosHumanos.Roles).
 	    Centro: dónde va su centro respecto al centro de la parte (studs). Tamano: su tamaño en studs (las mallas
 	    llegan de Roblox a otra escala: se les pone este tamaño al crearlas).

@@ -7,16 +7,21 @@
 	    como las da Studio al cargar lo que subió herramientas/subir_modelos.luau.
 
 	Uso, desde la raíz del repositorio:
-		lune run herramientas/generar_recursos_humanos
+		lune run herramientas/generar_recursos_humanos             -- el personaje humano
+		lune run herramientas/generar_recursos_humanos monstruo    -- el monstruo (modelos/personaje_monstruo → RecursosMonstruo)
 
 	Falla (y no escribe nada) si a alguna pieza le falta su malla: así no se cuela una pieza invisible en el juego.
 ]]
 
 local fs = require("@lune/fs")
+local process = require("@lune/process")
 local serde = require("@lune/serde")
 
-local RAIZ = "modelos/personaje_humano"
-local SALIDA = "src/shared/Personaje/RecursosHumanos.luau"
+local monstruo = process.args[1] == "monstruo"
+local RAIZ = if monstruo then "modelos/personaje_monstruo" else "modelos/personaje_humano"
+local SALIDA = if monstruo
+	then "src/shared/Personaje/RecursosMonstruo.luau"
+	else "src/shared/Personaje/RecursosHumanos.luau"
 
 local piezas = serde.decode("json", fs.readFile(RAIZ .. "/piezas.json")).Piezas
 local ids = serde.decode("json", fs.readFile(RAIZ .. "/roblox/datos/ids_studio.json"))
@@ -59,10 +64,12 @@ table.sort(elementos)
 local lineas = {
 	"--!strict",
 	"--[[",
-	"\tGENERADO por herramientas/generar_recursos_humanos.luau: no lo edites a mano.",
+	"\tGENERADO por herramientas/generar_recursos_humanos.luau"
+		.. (if monstruo then " monstruo" else "")
+		.. ": no lo edites a mano.",
 	"",
-	"\tRecursos subidos del personaje humano:",
-	"\t  · Piezas[elemento]: las piezas 3D de cada peinado, accesorio, chaqueta y pantalón (modelos/personaje_humano).",
+	"\tRecursos subidos " .. (if monstruo then "del monstruo (cuernos y deformaciones):" else "del personaje humano:"),
+	"\t  · Piezas[elemento]: las piezas 3D de cada elemento (" .. RAIZ .. ").",
 	"\t    Malla: la malla subida. Parte: la parte del R6 a la que va. Rol: de qué color se pinta (ver DatosHumanos.Roles).",
 	"\t    Centro: dónde va su centro respecto al centro de la parte (studs). Tamano: su tamaño en studs (las mallas",
 	"\t    llegan de Roblox a otra escala: se les pone este tamaño al crearlas).",
