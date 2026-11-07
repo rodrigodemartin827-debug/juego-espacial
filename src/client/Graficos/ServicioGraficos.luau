@@ -77,6 +77,8 @@ function ServicioGraficos.Aplicar(nombre: string)
 		region.Distancia = nivel.Distancia
 		region.Vegetacion = nivel.Vegetacion
 		region.Densidad = nivel.Densidad
+		region.Arboles = nivel.Arboles
+		region.ArbolesLejos = nivel.ArbolesLejos
 	end
 	ServicioGraficos.Cambio:Disparar(nombre)
 end

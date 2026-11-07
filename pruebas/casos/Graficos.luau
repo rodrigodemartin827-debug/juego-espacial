@@ -20,7 +20,8 @@ return function(Marco)
 				Marco.distinto(n, nil, nombre)
 				Marco.verdadero(table.find({ "Bajo", "Medio", "Alto" }, n.Calidad) ~= nil, nombre .. ": Calidad")
 				Marco.verdadero(n.Densidad > 0 and n.Densidad <= 1, nombre .. ": Densidad")
-				Marco.verdadero(n.Distancia > 0 and n.Vegetacion > 0, nombre .. ": distancias")
+				Marco.verdadero(n.Distancia > 0 and n.Vegetacion > 0 and n.Arboles > 0, nombre .. ": distancias")
+				Marco.verdadero(n.ArbolesLejos > 0 and n.ArbolesLejos <= 1, nombre .. ": ArbolesLejos")
 			end
 		end)
 
@@ -29,7 +30,11 @@ return function(Marco)
 			for i = 2, #Config.Orden do
 				local a, b = Config.Niveles[Config.Orden[i - 1]], Config.Niveles[Config.Orden[i]]
 				Marco.verdadero(
-					b.Distancia >= a.Distancia and b.Vegetacion >= a.Vegetacion and b.Densidad >= a.Densidad
+					b.Distancia >= a.Distancia
+						and b.Vegetacion >= a.Vegetacion
+						and b.Densidad >= a.Densidad
+						and b.Arboles >= a.Arboles
+						and b.ArbolesLejos >= a.ArbolesLejos
 				)
 				Marco.verdadero(#b.Postefectos >= #a.Postefectos)
 			end

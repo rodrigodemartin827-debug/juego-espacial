@@ -13,8 +13,10 @@
 	    profundidad de campo). Los de los VFX (nombre que empieza por "VFX_") no se tocan: los lleva cada efecto.
 	  · Distancia: multiplica las distancias de detalle de la región (LodRegion): más bajo, las casas y el
 	    mobiliario pasan antes a la versión simple o desaparecen.
-	  · Vegetacion: multiplica las distancias de árboles, matas y hierba.
-	  · Densidad: fracción de matas y hierba que se dibujan (los árboles siempre).
+	  · Vegetacion: multiplica las distancias de matas y hierba.
+	  · Densidad: fracción de matas y hierba que se dibujan.
+	  · Arboles: multiplica las distancias de los árboles.
+	  · ArbolesLejos: fracción de los árboles lejanos que se dibujan (los cercanos, siempre: el pueblo no se ve pelado).
 ]]
 
 export type Nivel = {
@@ -26,6 +28,8 @@ export type Nivel = {
 	Distancia: number,
 	Vegetacion: number,
 	Densidad: number,
+	Arboles: number,
+	ArbolesLejos: number,
 }
 
 local Config = {}
@@ -42,6 +46,8 @@ Config.Niveles = {
 		Distancia = 0.6,
 		Vegetacion = 0.6,
 		Densidad = 0.25,
+		Arboles = 0.6,
+		ArbolesLejos = 0.3,
 	},
 	Media = {
 		Nombre = "MEDIA",
@@ -52,6 +58,8 @@ Config.Niveles = {
 		Distancia = 0.8,
 		Vegetacion = 0.8,
 		Densidad = 0.5,
+		Arboles = 0.8,
+		ArbolesLejos = 0.55,
 	},
 	Alta = {
 		Nombre = "ALTA",
@@ -62,6 +70,8 @@ Config.Niveles = {
 		Distancia = 1,
 		Vegetacion = 1,
 		Densidad = 1,
+		Arboles = 1,
+		ArbolesLejos = 0.75,
 	},
 	Ultra = {
 		Nombre = "ULTRA",
@@ -78,6 +88,8 @@ Config.Niveles = {
 		Distancia = 1.4,
 		Vegetacion = 1.5,
 		Densidad = 1,
+		Arboles = 1.5,
+		ArbolesLejos = 1,
 	},
 } :: { [string]: Nivel }
 

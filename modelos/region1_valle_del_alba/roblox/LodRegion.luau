@@ -26,10 +26,14 @@ local LodRegion = {}
 --[[
 	Ajustes del nivel de gráficos (client/Graficos los cambia; se aplican en la siguiente actualización):
 	  · Distancia: multiplica las distancias de detalle de edificios, mobiliario y terreno.
-	  · Vegetacion: multiplica las distancias de árboles, matas y hierba.
-	  · Densidad: fracción (0..1) de matas y hierba que se dibujan; los árboles se dibujan siempre.
+	  · Vegetacion: multiplica las distancias de matas y hierba.
+	  · Densidad: fracción (0..1) de matas y hierba que se dibujan.
+	  · Arboles: multiplica las distancias de los árboles.
+	  · ArbolesLejos: fracción (0..1) de los árboles lejanos (versión simple) que se dibujan. Los cercanos, en detalle,
+	    se dibujan siempre: así el pueblo no se ve pelado y se ahorra en los bosques de lejos, que es casi todo lo que
+	    se dibuja (PROBADO EN STUDIO: en Baja, 8.250 de 8.319 plantas eran árboles lejanos).
 ]]
-LodRegion.Ajustes = { Distancia = 1, Vegetacion = 1, Densidad = 1 }
+LodRegion.Ajustes = { Distancia = 1, Vegetacion = 1, Densidad = 1, Arboles = 1, ArbolesLejos = 1 }
 
 local function escalar(cfg: { detalle: number, simple: number }, k: number): { detalle: number, simple: number }
 	if k == 1 then
@@ -356,8 +360,9 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 		end
 		for _, t in trozosVeg do
 			local d = math.max((p - t.centro).Magnitude - t.radio, 0)
-			local kVeg = LodRegion.Ajustes.Vegetacion
-			local activo = d <= math.max(cfg.vegetacion.simple, cfg.arboles.simple) * kVeg
+			local ajustes = LodRegion.Ajustes
+			local kVeg, kArb = ajustes.Vegetacion, ajustes.Arboles
+			local activo = d <= math.max(cfg.vegetacion.simple * kVeg, cfg.arboles.simple * kArb)
 			if not activo and not t.activo then
 				continue
 			end
@@ -369,9 +374,14 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 					else cfg.vegetacion
 				local pos = a.cf.Position
 				local nivel = "oculto"
-				local dibujar = esArbol(a.tipo) or a.sorteo < LodRegion.Ajustes.Densidad
+				local arbol = esArbol(a.tipo)
+				local dibujar = arbol or a.sorteo < ajustes.Densidad
 				if activo and dibujar and sobreHorizonte(p, pos, 30, margen) then
-					nivel = nivelPor((p - pos).Magnitude, escalar(c, kVeg))
+					nivel = nivelPor((p - pos).Magnitude, escalar(c, if arbol then kArb else kVeg))
+					-- De lejos solo una parte de los árboles (los de cerca, siempre).
+					if arbol and nivel == "simple" and a.sorteo >= ajustes.ArbolesLejos then
+						nivel = "oculto"
+					end
 				end
 				ponerArbol(a, nivel)
 			end
