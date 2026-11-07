@@ -4,7 +4,7 @@
 
 	La primera vez que entra, el jugador elige nivel (viene marcado el recomendado para su dispositivo, ver
 	Graficos/Niveles.Recomendado). Se guarda con sus datos (campo Graficos) y se puede cambiar cuando quiera con el
-	botón de ajustes. Es el primer paso de la entrada: gráficos → bando → editor.
+	botón de ajustes. Es el tercer paso de la entrada: bando → editor → gráficos → cinemática.
 
 	Qué toca cada nivel (todo en el cliente, no se replica):
 	  · Calidad: nivel de los efectos visuales (VFX/Calidad: partículas, escombros, luces de efecto, desenfoque).
@@ -108,7 +108,7 @@ Config.Pantalla = {
 	BotonAjustes = "Gráficos",
 	-- La cámara se balancea despacio delante del personaje (± Arco grados respecto a su frente), para ver los
 	-- cambios en el mundo de verdad. PROBADO EN STUDIO: dando la vuelta entera atravesaba su casa (aparece mirándola).
-	Camara = { Distancia = 30, Altura = 11, Arco = 55, PeriodoSegundos = 24, Mira = 3 },
+	Camara = { Distancia = 30, Altura = 11, Arco = 55, PeriodoSegundos = 24, Mira = 3, BajarMira = 10 },
 	Colores = {
 		Fondo = "#0B0E16",
 		Tarjeta = "#141A26",

@@ -5,8 +5,6 @@
 
 	Mientras está abierta: el personaje no se mueve (controles desactivados), la interfaz del juego está oculta y la
 	cámara es suya (atributo Config.AtributoCamara: la del planeta redondo se aparta). Al cerrar, todo vuelve.
-	En la entrada, la cortina negra de la pantalla de bando se quita para ver el mundo y se vuelve a poner al
-	terminar, para que el paso siguiente empiece desde negro como siempre.
 ]]
 
 local Players = game:GetService("Players")
@@ -15,7 +13,6 @@ local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
 
 local Config = require(ReplicatedStorage:WaitForChild("Shared").Graficos.Config)
-local InterfazEleccion = require(script.Parent.Parent.Eleccion.Interfaz)
 
 local Pantalla = {}
 
@@ -76,12 +73,14 @@ local function empezarCamara()
 		local angulo = math.rad(c.Arco) * math.sin((os.clock() - inicio) / c.PeriodoSegundos * 2 * math.pi)
 		local fuera = CFrame.fromAxisAngle(arriba, angulo):VectorToWorldSpace(base)
 		local foco = raiz.Position + arriba * c.Mira
+		-- Se apunta por debajo del personaje: así queda en la mitad de arriba, por encima del título y las tarjetas.
+		local mira = foco - arriba * c.BajarMira
 		local deseada = fuera * c.Distancia + arriba * c.Altura
 		-- Si algo se interpone (una pared, un árbol), la cámara se acerca para no atravesarlo.
 		parametros.FilterDescendantsInstances = { personaje :: Model }
 		local golpe = workspace:Raycast(foco, deseada, parametros)
 		local desde = if golpe then foco + deseada.Unit * math.max(golpe.Distance - 1, 4) else foco + deseada
-		camara.CFrame = CFrame.lookAt(desde, foco, arriba)
+		camara.CFrame = CFrame.lookAt(desde, mira, arriba)
 	end)
 end
 
@@ -292,22 +291,10 @@ function Pantalla.Abrir(op: Opciones)
 	empezarCamara()
 	nueva.Parent = jugador:WaitForChild("PlayerGui")
 	op.AlProbar(elegido)
-	-- Se quita la cortina de la entrada para ver el mundo de verdad.
-	InterfazEleccion.Fundir(0, p.FundidoSegundos)
-	task.delay(p.FundidoSegundos, function()
-		if gui == nueva then
-			InterfazEleccion.QuitarCortina()
-		end
-	end)
 
 	boton.Activated:Connect(function()
 		if gui ~= nueva then
 			return
-		end
-		if op.PrimeraVez then
-			-- A negro, como empieza el paso siguiente.
-			InterfazEleccion.Fundir(1, p.FundidoSegundos)
-			task.wait(p.FundidoSegundos)
 		end
 		gui = nil
 		nueva:Destroy()

@@ -33,12 +33,22 @@ local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 local Bloqueo = require(script.Parent.Bloqueo)
 local Escena = require(script.Parent.Escena)
 local Interfaz = require(script.Parent.Interfaz)
-local ServicioGraficos = require(script.Parent.Parent.Graficos.ServicioGraficos)
 
 local ServicioEleccion = {}
 
 -- Se dispara (con el bando) cuando el jugador, tras elegir, ya está de vuelta en el juego.
 ServicioEleccion.Terminada = Senal.nueva()
+
+-- Fin del paso de bando en la entrada (bando → editor → gráficos → cinemática), pase lo que pase: eligió, ya tenía
+-- bando, hubo un error o los datos no llegaron. El paso siguiente espera con ServicioEleccion.EsperarFin().
+local fin = false
+local senalFin = Senal.nueva()
+local function terminarPaso()
+	if not fin then
+		fin = true
+		senalFin:Disparar()
+	end
+end
 
 local flujo: Flujo.Flujo = Flujo.nuevo(Config.Tiempos.EsperaConfirmacion)
 local iniciado = false
@@ -148,6 +158,7 @@ local function mostrar()
 		Flujo.Terminar(flujo)
 		Interfaz.Fundir(0, Config.Tiempos.FundidoEntrada)
 		Interfaz.QuitarCortina()
+		terminarPaso()
 		return
 	end
 	if Config.Interfaz.BarrasCine then
@@ -179,11 +190,13 @@ local function confirmar(bando: string)
 	Interfaz.Fundir(0, t.FundidoVuelta)
 	Interfaz.QuitarCortina()
 	ServicioEleccion.Terminada:Disparar(bando)
+	terminarPaso()
 end
 
 local function omitir()
 	Interfaz.Fundir(0, Config.Tiempos.FundidoEntrada)
 	Interfaz.QuitarCortina()
+	terminarPaso()
 end
 
 -- Llega una copia de los datos del servidor: el flujo decide qué hacer.
@@ -195,6 +208,7 @@ local function alRecibirDatos(datos: any)
 				desmontar()
 				Flujo.Terminar(flujo)
 				Interfaz.QuitarCortina()
+				terminarPaso()
 			end
 		end)
 	elseif accion == "Omitir" then
@@ -207,12 +221,20 @@ local function alRecibirDatos(datos: any)
 				desmontar()
 				Flujo.Terminar(flujo)
 				Interfaz.QuitarCortina()
+				terminarPaso()
 			end
 		end)
 	end
 end
 
 -- ===== Arranque =====
+
+-- Bloquea hasta que termina el paso de bando de la entrada (ver terminarPaso).
+function ServicioEleccion.EsperarFin()
+	if not fin then
+		senalFin:Esperar()
+	end
+end
 
 -- ¿Se está mostrando la pantalla de elección?
 function ServicioEleccion.Activa(): boolean
@@ -236,16 +258,12 @@ function ServicioEleccion.Iniciar()
 	iniciado = true
 
 	Interfaz.CrearCortina() -- por si no se llamó a Preparar
-	-- La entrada va en orden: gráficos → bando → editor. Hasta que no termina el paso de gráficos no se mira el bando.
-	task.spawn(function()
-		ServicioGraficos.EsperarListo()
-		ServicioDatos.Actualizados:Conectar(alRecibirDatos)
-		-- Puede que los datos ya hubieran llegado antes de que este servicio escuchara.
-		local datos = ServicioDatos.Obtener()
-		if datos ~= nil then
-			alRecibirDatos(datos)
-		end
-	end)
+	ServicioDatos.Actualizados:Conectar(alRecibirDatos)
+	-- Puede que los datos ya hubieran llegado antes de que este servicio escuchara.
+	local datos = ServicioDatos.Obtener()
+	if datos ~= nil then
+		alRecibirDatos(datos)
+	end
 
 	-- La cortina nunca se queda puesta: si los datos no llegan (el servidor expulsa al jugador si no pudo cargarlos),
 	-- se quita igualmente.
@@ -253,6 +271,7 @@ function ServicioEleccion.Iniciar()
 		if flujo.Estado == "Esperando" then
 			warn("[Elección] Los datos del jugador no han llegado: se quita la cortina")
 			Interfaz.QuitarCortina()
+			terminarPaso()
 		end
 	end)
 end

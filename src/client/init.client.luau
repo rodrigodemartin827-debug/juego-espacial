@@ -39,7 +39,8 @@ ServicioExploracion.Iniciar()
 ServicioPlanetas.Iniciar()
 ServicioTiendas.Iniciar()
 GravedadPlaneta.Iniciar() -- EXPERIMENTO: solo hace algo en Studio, con el experimento activo
-ServicioGraficos.Iniciar() -- entrada: gráficos → bando (la de bando espera a que termine esta)
+-- Entrada: bando → editor → gráficos → cinemática. Cada paso espera al anterior (la de gráficos, al bando).
+ServicioGraficos.Iniciar()
 ServicioEleccion.Iniciar()
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.

@@ -2,11 +2,12 @@
 --[[
 	ServicioGraficos (cliente): aplica el nivel de gráficos y monta la pantalla para elegirlo.
 
-	Es el primer paso de la entrada (gráficos → bando → editor). Al llegar los datos del jugador:
+	Es el tercer paso de la entrada (bando → editor → gráficos → cinemática). Al llegar los datos se aplica el nivel
+	guardado (o el recomendado); cuando termina el paso anterior:
 	  · si hay que mostrar la pantalla (nunca ha elegido, o Studio con el modo de pruebas), se muestra con el nivel
 	    guardado o el recomendado marcado, y al pulsar CONTINUAR se guarda y se pasa al siguiente paso;
 	  · si no, se aplica el nivel guardado sin enseñar nada.
-	`ServicioGraficos.EsperarListo()` bloquea hasta que este paso ha terminado (la pantalla de bando lo usa).
+	`ServicioGraficos.EsperarListo()` bloquea hasta que este paso ha terminado (para el paso siguiente).
 	El botón de ajustes vuelve a abrir la pantalla en cualquier momento (sin pasar al bando después).
 
 	Aplicar un nivel solo toca cosas del cliente: VFX/Calidad, sombras, postefectos de Lighting y las distancias y
@@ -26,6 +27,7 @@ local Calidad = require(script.Parent.Parent.VFX.Calidad)
 local ServicioDatos = require(script.Parent.Parent.Servicios.ServicioDatos)
 local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 local Pantalla = require(script.Parent.Pantalla)
+local ServicioEleccion = require(script.Parent.Parent.Eleccion.ServicioEleccion)
 
 local ServicioGraficos = {}
 
@@ -150,13 +152,17 @@ local function alRecibirDatos(datos: any)
 	local guardado = if Niveles.Valido(datos.Graficos) then datos.Graficos else nil
 	ServicioGraficos.Aplicar(guardado or ServicioGraficos.Recomendado())
 	if Niveles.HayQueMostrar(datos.Graficos, RunService:IsStudio()) then
-		task.spawn(abrir, true)
+		-- Después del paso anterior de la entrada (de momento, el bando; el editor irá entre los dos).
+		task.spawn(function()
+			ServicioEleccion.EsperarFin()
+			abrir(true)
+		end)
 	else
 		terminarPaso()
 	end
 end
 
--- Arranca. Una vez, después de ServicioDatos.Iniciar() y antes de la pantalla de bando.
+-- Arranca. Una vez, después de ServicioDatos.Iniciar().
 function ServicioGraficos.Iniciar()
 	if iniciado then
 		return
