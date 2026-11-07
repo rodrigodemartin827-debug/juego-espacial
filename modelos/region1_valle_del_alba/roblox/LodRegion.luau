@@ -32,8 +32,11 @@ local LodRegion = {}
 	  · ArbolesLejos: fracción (0..1) de los árboles lejanos (versión simple) que se dibujan. Los cercanos, en detalle,
 	    se dibujan siempre: así el pueblo no se ve pelado y se ahorra en los bosques de lejos, que es casi todo lo que
 	    se dibuja (PROBADO EN STUDIO: en Baja, 8.250 de 8.319 plantas eran árboles lejanos).
+	  · ArbolesCompletos: radio (studs) alrededor de la cámara en el que se dibujan TODOS los árboles, aunque sean la
+	    versión simple: el recorte de ArbolesLejos es solo para los bosques del fondo.
 ]]
-LodRegion.Ajustes = { Distancia = 1, Vegetacion = 1, Densidad = 1, Arboles = 1, ArbolesLejos = 1 }
+LodRegion.Ajustes =
+	{ Distancia = 1, Vegetacion = 1, Densidad = 1, Arboles = 1, ArbolesLejos = 1, ArbolesCompletos = 350 }
 
 local function escalar(cfg: { detalle: number, simple: number }, k: number): { detalle: number, simple: number }
 	if k == 1 then
@@ -379,7 +382,12 @@ function LodRegion.iniciar(opciones: Opciones): () -> ()
 				if activo and dibujar and sobreHorizonte(p, pos, 30, margen) then
 					nivel = nivelPor((p - pos).Magnitude, escalar(c, if arbol then kArb else kVeg))
 					-- De lejos solo una parte de los árboles (los de cerca, siempre).
-					if arbol and nivel == "simple" and a.sorteo >= ajustes.ArbolesLejos then
+					if
+						arbol
+						and nivel == "simple"
+						and a.sorteo >= ajustes.ArbolesLejos
+						and (p - pos).Magnitude > ajustes.ArbolesCompletos
+					then
 						nivel = "oculto"
 					end
 				end
