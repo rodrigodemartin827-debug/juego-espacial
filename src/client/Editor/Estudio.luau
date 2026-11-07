@@ -436,13 +436,11 @@ function Estudio.AplicarAvatar(descripcion: HumanoidDescription, alTerminar: ((b
 		return
 	end
 	task.spawn(function()
-		Constructor.Limpiar(m)
-		local humanoide = m:FindFirstChildOfClass("Humanoid")
-		local ok, err = pcall(function()
-			(humanoide :: Humanoid):ApplyDescriptionAsync(descripcion)
+		local ok = Constructor.PonerAvatar(m, descripcion, function()
+			return mio == numeroAvatar and copia == m
 		end)
 		if not ok then
-			warn(`[Editor] No se pudo poner el avatar: {err}`)
+			warn("[Editor] No se pudo poner el avatar")
 		end
 		if mio ~= numeroAvatar or copia ~= m then
 			return -- mientras tanto se cambió de aspecto o se cerró el editor

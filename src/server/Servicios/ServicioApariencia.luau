@@ -79,15 +79,15 @@ local function vestirAvatar(jugador: Player, personaje: Model, numero: number): 
 	if vestidos[jugador] ~= numero or jugador.Character ~= personaje then
 		return true -- ya hay otro vestido más nuevo en marcha
 	end
-	Constructor.Limpiar(personaje)
-	local ok, err = pcall(function()
-		humanoide:ApplyDescriptionAsync(d)
+	-- (PonerAvatar espera a Roblox: si mientras tanto se viste otra cosa, el resultado se descarta en la comprobación
+	-- de después.)
+	local ok = Constructor.PonerAvatar(personaje, d, function()
+		return vestidos[jugador] == numero and jugador.Character == personaje
 	end)
 	if not ok then
-		warn(`[Apariencia] No se pudo poner el avatar de {jugador.Name}: {err}`)
-		return false
+		warn(`[Apariencia] No se pudo poner el avatar de {jugador.Name}`)
 	end
-	return true
+	return ok
 end
 
 local function vestirPiezas(jugador: Player, personaje: Model, datos: any)
