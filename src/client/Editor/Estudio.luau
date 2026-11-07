@@ -15,7 +15,6 @@
 	apariencia al guardar.
 ]]
 
-local KeyframeSequenceProvider = game:GetService("KeyframeSequenceProvider")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
@@ -299,23 +298,7 @@ end
 -- ===== Copia del personaje =====
 
 local function idReposo(): string
-	local r = Config.Reposo
-	if RunService:IsStudio() then
-		local carpeta: Instance? = ReplicatedStorage
-		for _, nombre in r.Carpeta do
-			carpeta = carpeta and carpeta:FindFirstChild(nombre)
-		end
-		local secuencia = carpeta and carpeta:FindFirstChild(r.Nombre)
-		if secuencia and secuencia:IsA("KeyframeSequence") then
-			local ok, id = pcall(function()
-				return KeyframeSequenceProvider:RegisterKeyframeSequence(secuencia)
-			end)
-			if ok then
-				return id
-			end
-		end
-	end
-	return r.Id
+	return Config.Reposo.Id
 end
 
 local function crearCopia(origen: Model): Model?

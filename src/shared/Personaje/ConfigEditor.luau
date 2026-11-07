@@ -93,12 +93,9 @@ Config.Giro = {
 	Inercia = 6, -- cuánto tarda en pararse al soltar (más = antes)
 }
 
--- Animación de reposo del personaje en el editor. En Studio se usa la KeyframeSequence de las animaciones de
--- movimiento (PR #17) si está; si no (y en el juego publicado, hasta que se suba la nuestra), la de R6 de Roblox.
+-- Animación de reposo del personaje en el editor: nuestro reposo (animaciones/movimiento del #17), subido al grupo.
 Config.Reposo = {
-	Carpeta = { "Animaciones", "Movimiento" }, -- dentro de ReplicatedStorage
-	Nombre = "Reposo",
-	Id = "rbxassetid://180435571",
+	Id = "rbxassetid://120420854493370",
 }
 
 -- Interfaz. Por debajo de estas medidas (píxeles) se usa la disposición estrecha (móvil): categorías abajo en
