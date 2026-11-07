@@ -139,6 +139,16 @@ local function construirSala(): Folder
 			Material = Enum.Material.Metal,
 			CastShadow = false,
 		})
+		-- Línea de luz baja en cada panel. PROBADO EN STUDIO: hecha con un cilindro, el neón llenaba todo el suelo.
+		pieza(carpeta, {
+			Name = "LineaBaja",
+			Size = Vector3.new(ancho * 0.96, 0.1, 0.1),
+			CFrame = mira * CFrame.new(0, 0.9, -0.45),
+			Color = color(e.ColorLuz),
+			Material = Enum.Material.Neon,
+			Transparency = 0.4,
+			CastShadow = false,
+		})
 		local b = i / n * 2 * math.pi
 		local dirB = Vector3.new(math.sin(b), 0, math.cos(b))
 		pieza(carpeta, {
@@ -151,16 +161,6 @@ local function construirSala(): Folder
 			CastShadow = false,
 		})
 	end
-	pieza(carpeta, {
-		Name = "LineaBaja",
-		Shape = Enum.PartType.Cylinder,
-		Size = Vector3.new(0.12, (e.RadioSala - 0.6) * 2, (e.RadioSala - 0.6) * 2),
-		CFrame = CFrame.new(c + Vector3.new(0, 0.9, 0)) * CFrame.Angles(0, 0, math.pi / 2),
-		Color = color(e.ColorLuz),
-		Material = Enum.Material.Neon,
-		Transparency = 0.55,
-		CastShadow = false,
-	})
 
 	-- Plataforma: hexágono de metal con anillo de neón y un disco de luz bajo los pies.
 	local r = e.RadioPlataforma
@@ -197,7 +197,13 @@ local function construirSala(): Folder
 	})
 
 	-- Luces: clave cálida delante a la izquierda, contraluz cian detrás y relleno azulado.
-	local function foco(nombre: string, pos: Vector3, datos: { Brillo: number, Color: string }, angulo: number)
+	local function foco(
+		nombre: string,
+		pos: Vector3,
+		datos: { Brillo: number, Color: string },
+		angulo: number,
+		sombras: boolean
+	)
 		local soporte = pieza(carpeta, {
 			Name = nombre,
 			Size = Vector3.new(0.2, 0.2, 0.2),
@@ -210,13 +216,14 @@ local function construirSala(): Folder
 		luz.Color = color(datos.Color)
 		luz.Range = 26
 		luz.Angle = angulo
-		luz.Shadows = true
+		luz.Shadows = sombras
 		luz.Face = Enum.NormalId.Front
 		luz.Parent = soporte
 	end
-	foco("LuzClave", c + Vector3.new(5, 9, -9), e.LuzClave, 55)
-	foco("LuzContra", c + Vector3.new(-3, 8, 8), e.LuzContra, 60)
-	foco("LuzRelleno", c + Vector3.new(-7, 4, -6), e.LuzRelleno, 70)
+	-- La clave sin sombras: con ellas, el pelo dejaba la cara a oscuras (PROBADO EN STUDIO).
+	foco("LuzClave", c + Vector3.new(4, 6.5, -9), e.LuzClave, 55, false)
+	foco("LuzContra", c + Vector3.new(-3, 8, 8), e.LuzContra, 60, true)
+	foco("LuzRelleno", c + Vector3.new(-7, 4, -6), e.LuzRelleno, 70, false)
 	local cara = pieza(carpeta, {
 		Name = "LuzCara",
 		Size = Vector3.new(0.2, 0.2, 0.2),

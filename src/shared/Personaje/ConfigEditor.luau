@@ -55,8 +55,8 @@ Config.Escena = {
 	ColorSuelo = "#0D1118",
 	ColorPlataforma = "#2A3242",
 	ColorLuz = "#4DE8FF",
-	LuzClave = { Brillo = 5, Color = "#FFF4E8" },
-	LuzContra = { Brillo = 4, Color = "#4DE8FF" },
+	LuzClave = { Brillo = 3.2, Color = "#FFF4E8" },
+	LuzContra = { Brillo = 2.6, Color = "#4DE8FF" },
 	LuzRelleno = { Brillo = 1.6, Color = "#9DB8FF" },
 	LuzCara = { Brillo = 1.2, Color = "#FFF1E0" }, -- relleno suave desde delante: la cara siempre se lee
 	Motas = 6, -- partículas por segundo (motas de luz flotando)
