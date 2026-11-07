@@ -26,6 +26,7 @@ local Recetas = require(script.Parent.Parent.Exploracion.Datos.Recetas)
 local Catalogo = require(script.Parent.Parent.Tiendas.Datos.Catalogo)
 local ConfigTiendas = require(script.Parent.Parent.Tiendas.Config)
 local ConfigGraficos = require(script.Parent.Parent.Graficos.Config)
+local AparienciaHumanos = require(script.Parent.Parent.Personaje.Apariencia)
 local Validador = require(script.Parent.Validador)
 
 export type Direccion = "ClienteAServidor" | "ServidorACliente"
@@ -58,6 +59,20 @@ local definiciones: { [string]: Definicion } = {
 		Direccion = "ClienteAServidor",
 		LimitePorSegundo = 2,
 		Argumentos = { Validador.Enumeracion(ConfigGraficos.Orden) },
+	},
+
+	-- El jugador guarda su personaje humano (editor de personaje): un id de cada campo, en el orden de
+	-- Personaje/Apariencia.Campos. Cada uno tiene que ser una opción que exista.
+	GuardarAparienciaHumano = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 2,
+		Argumentos = (function()
+			local lista = {}
+			for _, campo in AparienciaHumanos.Campos do
+				table.insert(lista, Validador.Enumeracion(AparienciaHumanos.Ids(campo)))
+			end
+			return lista
+		end)(),
 	},
 
 	-- El servidor envía al cliente una copia de sus datos al cargarlos y cuando cambian.

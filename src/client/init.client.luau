@@ -21,6 +21,7 @@ local ServicioCombate = require(script.Combate.ServicioCombate)
 local ServicioDatos = require(script.Servicios.ServicioDatos)
 local ServicioEleccion = require(script.Eleccion.ServicioEleccion)
 local ServicioExploracion = require(script.Exploracion.ServicioExploracion)
+local ServicioEditor = require(script.Editor.ServicioEditor)
 local ServicioGraficos = require(script.Graficos.ServicioGraficos)
 local ServicioNaves = require(script.Naves.ServicioNaves)
 local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
@@ -39,9 +40,10 @@ ServicioExploracion.Iniciar()
 ServicioPlanetas.Iniciar()
 ServicioTiendas.Iniciar()
 GravedadPlaneta.Iniciar() -- EXPERIMENTO: solo hace algo en Studio, con el experimento activo
--- Entrada: bando → editor → gráficos → cinemática. Cada paso espera al anterior (la de gráficos, al bando).
+-- Entrada: bando → editor → gráficos → cinemática. Cada paso espera al anterior.
 ServicioGraficos.Iniciar()
 ServicioEleccion.Iniciar()
+ServicioEditor.Iniciar()
 
 -- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
 ServicioDatos.Actualizados:Conectar(function(datos)
