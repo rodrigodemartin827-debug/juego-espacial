@@ -79,8 +79,8 @@ Config.Escena = {
 -- Cámara: fija, de frente, encuadrando el cuerpo entero.
 Config.Camara = {
 	CampoVision = 36,
-	AltoVisible = 8.6, -- studs de alto que caben en pantalla (el personaje mide ~5,5 con pelo; deja sitio a los botones)
-	Mira = -0.75, -- altura del punto al que mira, respecto a la raíz
+	AltoVisible = 9.6, -- studs de alto que caben en pantalla (el personaje mide ~5,5 con pelo; deja sitio a los botones)
+	Mira = -0.45, -- altura del punto al que mira, respecto a la raíz
 	-- Dónde queda el personaje en la pantalla (-1 izquierda, 0 centro, 1 derecha) según la disposición.
 	PosicionX = { Ancha = 0.0, Estrecha = -0.32 },
 }

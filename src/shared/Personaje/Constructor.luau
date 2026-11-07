@@ -250,9 +250,11 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 		local existente = cabeza:FindFirstChildOfClass("SpecialMesh")
 		local m: SpecialMesh = if existente then existente else Instance.new("SpecialMesh")
 		m.Parent = cabeza
-		m.MeshType = Enum.MeshType.Head
+		-- Primero se vacían los ids y DESPUÉS se pone el tipo: al revés, un MeshId vacío cambia el tipo a FileMesh y la
+		-- cabeza desaparece (PROBADO EN STUDIO al volver del avatar de Roblox, cuya cabeza era una malla).
 		m.MeshId = ""
 		m.TextureId = ""
+		m.MeshType = Enum.MeshType.Head
 		m.Offset = Vector3.zero
 		m.Scale = Vector3.new(1.25, 1.25, 1.25)
 	end
