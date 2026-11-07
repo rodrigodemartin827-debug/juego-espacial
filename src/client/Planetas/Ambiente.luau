@@ -181,10 +181,9 @@ local function paso(dt: number)
 	local jugador = Players.LocalPlayer
 	if
 		jugador
-		and (
-			jugador:GetAttribute(ConfigEleccion.AtributoEligiendo)
-			or jugador:GetAttribute(ConfigEleccion.AtributoEnPantalla)
-		)
+		-- Solo mientras la escena de elección está montada (pone su propia luz). PROBADO EN STUDIO: con «eligiendo»
+		-- bastaba para pausarlo desde que se entra, y la pantalla de gráficos (que va antes) se veía de noche.
+		and jugador:GetAttribute(ConfigEleccion.AtributoEnPantalla)
 	then
 		zonaAnterior = nil
 		return

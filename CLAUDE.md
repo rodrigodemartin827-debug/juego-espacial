@@ -30,9 +30,11 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 - Se puede visitar el planeta del bando contrario y pelear allí, pero cada planeta tiene **zonas seguras para los visitantes** (por ejemplo, donde aterrizan).
 - Alrededor de cada planeta de bando hay una **zona segura** sin PvP de naves.
 
-**Primera entrada al juego**
-- Cámara fija, sin poder moverse, con la pantalla de elección: a un lado los Humanos con su planeta, en medio una grieta y al otro lado los Monstruos con su planeta.
-- Se elige con un clic y después empieza el tutorial. Esta pantalla solo sale la primera vez; luego el bando solo se cambia pagando (ver arriba).
+**Primera entrada al juego**, en este orden y solo la primera vez (en Studio salen siempre, con el modo de pruebas):
+1. **Elección de bando**: cámara fija, sin poder moverse; a un lado los Humanos con su planeta, en medio una grieta y al otro lado los Monstruos con su planeta. Se elige con un clic. Luego el bando solo se cambia pagando (ver arriba).
+2. **Editor de personaje** del bando elegido: cada bando tiene su propio editor completo, con piezas propias (no el avatar de Roblox).
+3. **Gráficos**: Baja, Media, Alta o Ultra, con el recomendado para el dispositivo marcado. Se puede cambiar después desde los ajustes.
+4. **Cinemática** del bando, de 45 a 60 s y que se puede saltar: «Esta es tu historia» → tu personaje mirando un atardecer → «5 años después» con escenas épicas → vuelta al atardecer → «Pero todo empieza aquí» → el jugador toma el control y empieza el tutorial.
 
 ### Bucle principal
 1. Empiezas en el planeta de tu bando, que te enseña a moverte, pelear, escanear y craftear.

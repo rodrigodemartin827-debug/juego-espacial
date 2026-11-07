@@ -69,6 +69,8 @@ local function arrancarCliente(entorno, jugador)
 	-- La pantalla de elección de bando monta una escena 3D e interfaz: tiene sus propias pruebas (EleccionBando).
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Eleccion.ServicioEleccion`).Source =
 		"return { Preparar = function() end, Iniciar = function() end }"
+	-- La pantalla de gráficos toca Lighting, la cámara y la interfaz: tiene sus propias pruebas (Graficos).
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Graficos.ServicioGraficos`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Experimentos.GravedadPlaneta`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Tiendas.ServicioTiendas`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
@@ -508,6 +510,30 @@ return function(Marco)
 			local ServicioDatos, jugador = volverAEntrarEnStudio("Humanos", false)
 			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Bando, "Humanos")
 			Marco.esNil(jugador:GetAttribute(ATRIBUTO))
+		end)
+	end)
+
+	Marco.grupo("Integración: nivel de gráficos", function()
+		Marco.prueba("ElegirGraficos guarda un nivel válido, lo envía al cliente y rechaza los demás", function()
+			local nube = NubeDatos.nueva()
+			local entorno, ServicioDatos = arrancarServidor(nube)
+			local jugador = entorno.mundo.unirJugador(1, "Ana")
+			local DatosCliente, RedCliente = arrancarCliente(entorno, jugador)
+			Marco.esperarHasta(function()
+				return DatosCliente.Obtener() ~= nil
+			end)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Graficos, "", "empieza sin elegir")
+			RedCliente.Enviar("ElegirGraficos", "Ultra")
+			Marco.esperarHasta(function()
+				return DatosCliente.Obtener().Graficos == "Ultra"
+			end, "el cliente debería recibir el nivel elegido")
+			Marco.esperarHasta(function()
+				return leerRegistro(nube, 1).Datos.Graficos == "Ultra"
+			end, "debería guardarse")
+			RedCliente.Enviar("ElegirGraficos", "Maxima")
+			RedCliente.Enviar("ElegirGraficos", 3)
+			Marco.dejarCorrer(5)
+			Marco.igual(ServicioDatos.ObtenerDatos(jugador).Graficos, "Ultra", "los valores no válidos se ignoran")
 		end)
 	end)
 

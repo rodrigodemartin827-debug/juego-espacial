@@ -11,6 +11,7 @@
 -- EXPERIMENTO planeta redondo (solo en Studio): ajusta los datos de los planetas ANTES de que nadie los lea.
 require(game:GetService("ReplicatedStorage").Shared.Experimentos.PlanetaRedondo).Aplicar()
 
+local ServicioAjustes = require(script.Servicios.ServicioAjustes)
 local ServicioAsteroides = require(script.Servicios.ServicioAsteroides)
 local ServicioBandos = require(script.Servicios.ServicioBandos)
 local ServicioCombate = require(script.Servicios.ServicioCombate)
@@ -46,6 +47,7 @@ local ExperimentoPlanetaRedondo = require(script.Experimentos.PlanetaRedondo)
 ServicioRed.Iniciar()
 ServicioPersonaje.Iniciar()
 ServicioBandos.Iniciar()
+ServicioAjustes.Iniciar()
 ServicioReplicacion.Iniciar()
 ServicioCombate.Iniciar()
 ServicioAsteroides.Iniciar()

@@ -28,6 +28,7 @@ export type Datos = {
 	Inventario: Inventario,
 	MejorasNave: MejorasNave,
 	Descubrimientos: Descubrimientos,
+	Graficos: string, -- nivel de gráficos elegido (Graficos/Config.Orden); "" hasta que lo elige
 }
 
 return {}
