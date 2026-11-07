@@ -10,9 +10,11 @@
 	  · más (con Mayús, 28)                        → Correr (hecha para 28)
 	`Histeresis`: margen para no saltar de una a otra si la velocidad ronda un límite.
 
-	Las animaciones se cargan de ReplicatedStorage.Animaciones.Movimiento (KeyframeSequences sincronizadas por Rojo
-	desde animaciones/movimiento/*.rbxmx). Para el juego publicado habrá que subirlas como Animation y poner aquí
-	sus IDs (`Id`): las KeyframeSequences solo se pueden reproducir en Studio.
+	Cada animación tiene su `Id`: son las de animaciones/movimiento/*.rbxmx subidas al grupo con
+	`herramientas/subir_modelos --animaciones` (los IDs también están en animaciones/movimiento/datos/ids_modelos.json).
+	Con `Id` se usa siempre esa (así se ven igual en Studio y en el juego publicado, y no salen las de Roblox por
+	defecto). Sin `Id` (una animación nueva aún sin subir), en Studio se carga la KeyframeSequence de
+	ReplicatedStorage.Animaciones.Movimiento (sincronizada por Rojo); fuera de Studio no hay nada que reproducir.
 ]]
 
 export type Animacion = {
@@ -24,10 +26,10 @@ export type Animacion = {
 local Movimiento = {}
 
 Movimiento.Animaciones = {
-	Reposo = { Archivo = "Reposo" },
-	Andar = { Archivo = "Andar", Velocidad = 7.5 },
-	Trotar = { Archivo = "Trotar", Velocidad = 16 },
-	Correr = { Archivo = "Correr", Velocidad = 28 },
+	Reposo = { Archivo = "Reposo", Id = "rbxassetid://120420854493370" },
+	Andar = { Archivo = "Andar", Velocidad = 7.5, Id = "rbxassetid://86902537014363" },
+	Trotar = { Archivo = "Trotar", Velocidad = 16, Id = "rbxassetid://87355423492577" },
+	Correr = { Archivo = "Correr", Velocidad = 28, Id = "rbxassetid://71475396715695" },
 } :: { [string]: Animacion }
 
 Movimiento.Quieto = 0.6 -- studs/s
