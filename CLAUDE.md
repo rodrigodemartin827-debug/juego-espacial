@@ -33,6 +33,12 @@ Inspiración: la exploración de No Man's Sky y lo adictivo de Blox Fruits (pode
 **Primera entrada al juego**, en este orden y solo la primera vez (en Studio salen siempre, con el modo de pruebas):
 1. **Elección de bando**: cámara fija, sin poder moverse; a un lado los Humanos con su planeta, en medio una grieta y al otro lado los Monstruos con su planeta. Se elige con un clic. Luego el bando solo se cambia pagando (ver arriba).
 2. **Editor de personaje** del bando elegido: cada bando tiene su propio editor completo, con piezas propias (no el avatar de Roblox).
+   - Interfaz de Roblox con el R6 real en medio, en reposo, que cambia al instante y se gira arrastrando. Estilo espacial: metal, luces cian y tipografía propia.
+   - Humanos: a la izquierda, la piel (de clara a oscura) y las categorías con flechas ‹ › y número (cabello, cejas, ojos, nariz, boca, chaqueta, pantalón y accesorio). A la derecha, una rueda de color con brillo para el pelo, la chaqueta, el pantalón y los detalles. Abajo, Atrás, Aleatorio y Continuar. En móvil, las categorías van abajo en horizontal.
+   - Peinados y accesorios: modelos de Blender de menos de 1.500 triángulos, puestos como Accessory. Cara: texturas (Decals). Ropa: el cuerpo se pinta y lleva detalles 3D que se pueden colorear.
+   - «Atrás» vuelve gratis a la elección de bando solo mientras no se haya terminado el primer personaje.
+   - El servidor valida todo: las opciones tienen que existir y los colores ser "#RRGGBB".
+   - Monstruos: tendrán su propio editor, con otras categorías (silueta, ojos, piel, cuernos...).
 3. **Gráficos**: Baja, Media, Alta o Ultra, con el recomendado para el dispositivo marcado. Se puede cambiar después desde los ajustes.
 4. **Cinemática** del bando, de 45 a 60 s y que se puede saltar: «Esta es tu historia» → tu personaje mirando un atardecer → «5 años después» con escenas épicas → vuelta al atardecer → «Pero todo empieza aquí» → el jugador toma el control y empieza el tutorial.
 
