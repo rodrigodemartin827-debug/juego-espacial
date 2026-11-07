@@ -1,0 +1,437 @@
+{
+ "nota": "studs, ejes de Roblox; Centro = respecto al centro de la parte del R6",
+ "Piezas": {
+  "Cuerno_Curvos__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Curvos",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    1.0993,
+    -0.0429
+   ],
+   "Tamano": [
+    1.4344,
+    1.2608,
+    0.3141
+   ],
+   "Triangulos": 140
+  },
+  "Cuerno_Rectos__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Rectos",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    1.0898,
+    0.0084
+   ],
+   "Tamano": [
+    1.3794,
+    1.1526,
+    0.3228
+   ],
+   "Triangulos": 24
+  },
+  "Cuerno_Carnero__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Carnero",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    0.4559,
+    0.2675
+   ],
+   "Tamano": [
+    1.6006,
+    1.0935,
+    1.2158
+   ],
+   "Triangulos": 476
+  },
+  "Cuerno_Astas__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Astas",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    1.1926,
+    0.1136
+   ],
+   "Tamano": [
+    1.7637,
+    1.3399,
+    0.2868
+   ],
+   "Triangulos": 144
+  },
+  "Cuerno_Corona__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Corona",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    0.8895,
+    -0.0
+   ],
+   "Tamano": [
+    1.3396,
+    0.7791,
+    1.3395
+   ],
+   "Triangulos": 274
+  },
+  "Cuerno_Unicornio__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Unicornio",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    1.0553,
+    -0.7096
+   ],
+   "Tamano": [
+    0.3,
+    1.2552,
+    0.782
+   ],
+   "Triangulos": 114
+  },
+  "Cuerno_Diablillo__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Diablillo",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    -0.0,
+    0.7153,
+    -0.1
+   ],
+   "Tamano": [
+    1.1067,
+    0.4362,
+    0.2556
+   ],
+   "Triangulos": 20
+  },
+  "Cuerno_Retorcidos__Cabeza__Cuerno": {
+   "Archivo": "Cuernos",
+   "Categoria": "Cuerno",
+   "Id": "Retorcidos",
+   "Parte": "Head",
+   "Rol": "Cuerno",
+   "Centro": [
+    0.0165,
+    1.2563,
+    0.1749
+   ],
+   "Tamano": [
+    1.3049,
+    1.6028,
+    0.7678
+   ],
+   "Triangulos": 396
+  },
+  "Deformacion_Espinas__Torso__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Espinas",
+   "Parte": "Torso",
+   "Rol": "Hueso",
+   "Centro": [
+    -0.0,
+    -0.033,
+    0.8226
+   ],
+   "Tamano": [
+    0.2425,
+    2.0056,
+    0.7131
+   ],
+   "Triangulos": 50
+  },
+  "Deformacion_Vertebras__Torso__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Vertebras",
+   "Parte": "Torso",
+   "Rol": "Hueso",
+   "Centro": [
+    -0.0,
+    0.15,
+    0.53
+   ],
+   "Tamano": [
+    0.3234,
+    2.2283,
+    0.34
+   ],
+   "Triangulos": 512
+  },
+  "Deformacion_Costillas__Torso__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Costillas",
+   "Parte": "Torso",
+   "Rol": "Hueso",
+   "Centro": [
+    -0.0,
+    0.0486,
+    -0.3456
+   ],
+   "Tamano": [
+    2.112,
+    1.9027,
+    0.6172
+   ],
+   "Triangulos": 444
+  },
+  "Deformacion_Hombros__BrazoI__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Hombros",
+   "Parte": "Left Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    -0.4305,
+    1.0539,
+    0.0
+   ],
+   "Tamano": [
+    0.5098,
+    0.9339,
+    1.5422
+   ],
+   "Triangulos": 32
+  },
+  "Deformacion_Hombros__BrazoD__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Hombros",
+   "Parte": "Right Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    0.4305,
+    1.0539,
+    0.0
+   ],
+   "Tamano": [
+    0.5098,
+    0.9339,
+    1.5422
+   ],
+   "Triangulos": 32
+  },
+  "Deformacion_BrazoHinchado__BrazoD__Piel": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "BrazoHinchado",
+   "Parte": "Right Arm",
+   "Rol": "Piel",
+   "Centro": [
+    0.15,
+    0.0,
+    0.0
+   ],
+   "Tamano": [
+    1.8524,
+    2.5,
+    1.9
+   ],
+   "Triangulos": 372
+  },
+  "Deformacion_BrazoHinchado__BrazoD__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "BrazoHinchado",
+   "Parte": "Right Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    0.5,
+    0.35,
+    -0.6
+   ],
+   "Tamano": [
+    0.2663,
+    0.2663,
+    0.2
+   ],
+   "Triangulos": 64
+  },
+  "Deformacion_Joroba__Torso__Piel": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Joroba",
+   "Parte": "Torso",
+   "Rol": "Piel",
+   "Centro": [
+    -0.0,
+    0.6,
+    0.75
+   ],
+   "Tamano": [
+    2.0162,
+    1.6742,
+    1.4
+   ],
+   "Triangulos": 304
+  },
+  "Deformacion_Garras__BrazoI__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Garras",
+   "Parte": "Left Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    0.0137,
+    -1.4625,
+    -0.1358
+   ],
+   "Tamano": [
+    0.9059,
+    0.9525,
+    0.31
+   ],
+   "Triangulos": 32
+  },
+  "Deformacion_Garras__BrazoD__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Garras",
+   "Parte": "Right Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    0.0137,
+    -1.4625,
+    -0.1358
+   ],
+   "Tamano": [
+    0.9059,
+    0.9525,
+    0.31
+   ],
+   "Triangulos": 32
+  },
+  "Deformacion_Placas__BrazoI__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Placas",
+   "Parte": "Left Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    0.0,
+    -0.35,
+    0.0
+   ],
+   "Tamano": [
+    0.75,
+    0.9,
+    1.12
+   ],
+   "Triangulos": 88
+  },
+  "Deformacion_Placas__BrazoD__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Placas",
+   "Parte": "Right Arm",
+   "Rol": "Hueso",
+   "Centro": [
+    0.0,
+    -0.35,
+    0.0
+   ],
+   "Tamano": [
+    0.75,
+    0.9,
+    1.12
+   ],
+   "Triangulos": 88
+  },
+  "Deformacion_Placas__PiernaI__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Placas",
+   "Parte": "Left Leg",
+   "Rol": "Hueso",
+   "Centro": [
+    0.0,
+    -0.0625,
+    -0.56
+   ],
+   "Tamano": [
+    0.9,
+    1.725,
+    0.16
+   ],
+   "Triangulos": 88
+  },
+  "Deformacion_Placas__PiernaD__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Placas",
+   "Parte": "Right Leg",
+   "Rol": "Hueso",
+   "Centro": [
+    0.0,
+    -0.0625,
+    -0.56
+   ],
+   "Tamano": [
+    0.9,
+    1.725,
+    0.16
+   ],
+   "Triangulos": 88
+  },
+  "Deformacion_Placas__Torso__Hueso": {
+   "Archivo": "Deformaciones",
+   "Categoria": "Deformacion",
+   "Id": "Placas",
+   "Parte": "Torso",
+   "Rol": "Hueso",
+   "Centro": [
+    -0.0,
+    0.3,
+    -0.56
+   ],
+   "Tamano": [
+    1.6,
+    1.0,
+    0.14
+   ],
+   "Triangulos": 44
+  }
+ },
+ "TriangulosPorElemento": {
+  "Cuerno_Curvos": 140,
+  "Cuerno_Rectos": 24,
+  "Cuerno_Carnero": 476,
+  "Cuerno_Astas": 144,
+  "Cuerno_Corona": 274,
+  "Cuerno_Unicornio": 114,
+  "Cuerno_Diablillo": 20,
+  "Cuerno_Retorcidos": 396,
+  "Deformacion_Espinas": 50,
+  "Deformacion_Vertebras": 512,
+  "Deformacion_Costillas": 444,
+  "Deformacion_Hombros": 64,
+  "Deformacion_BrazoHinchado": 436,
+  "Deformacion_Joroba": 304,
+  "Deformacion_Garras": 64,
+  "Deformacion_Placas": 396
+ }
+}

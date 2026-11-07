@@ -38,6 +38,7 @@ local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage.Shared
 local AparienciaHumanos = require(Shared.Personaje.Apariencia)
+local AparienciaMonstruo = require(Shared.Personaje.AparienciaMonstruo)
 local Bandos = require(Shared.Juego.Bandos)
 local ConfigEditor = require(Shared.Personaje.ConfigEditor)
 local ConfigEleccion = require(Shared.Eleccion.Config)
@@ -161,7 +162,9 @@ function ServicioBandos.VolverAElegir(jugador: Player): boolean
 	if datos == nil or datos.Bando == Bandos.Ninguno then
 		return false
 	end
-	local terminado = AparienciaHumanos.Hecha(datos.Apariencia and datos.Apariencia.Humano)
+	local terminado = if datos.Bando == Bandos.Monstruos
+		then AparienciaMonstruo.Hecha(datos.Apariencia and datos.Apariencia.Monstruo)
+		else AparienciaHumanos.Hecha(datos.Apariencia and datos.Apariencia.Humano)
 	local modoPruebas = RunService:IsStudio() and ConfigEditor.MostrarSiempreEnStudio
 	if terminado and not modoPruebas then
 		return false -- ya hizo su personaje: el bando solo se cambia pagando

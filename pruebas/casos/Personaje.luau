@@ -321,6 +321,156 @@ return function(Marco)
 		end)
 	end)
 
+	Marco.grupo("Monstruo: editor de personaje", function()
+		local function modulos()
+			local _, _, _, requerir = cargar()
+			local P = "ReplicatedStorage.Shared.Personaje."
+			return requerir(P .. "AparienciaMonstruo"),
+				requerir(P .. "DatosMonstruo"),
+				requerir(P .. "RecursosMonstruo"),
+				requerir
+		end
+
+		Marco.prueba(
+			"tiene silueta, piel, ojos, cuernos, boca, deformaciones y marcas, y el defecto es válido",
+			function()
+				local Apariencia, Datos = modulos()
+				for _, campo in { "Silueta", "Piel", "Ojos", "Cuernos", "Boca", "Deformacion", "Marcas" } do
+					Marco.verdadero(#Apariencia.Opciones(campo) >= 6, campo .. ": al menos 6 opciones")
+					local vistos = {}
+					for _, o in Apariencia.Opciones(campo) do
+						Marco.esNil(vistos[o.Id], campo .. ": id repetido " .. o.Id)
+						vistos[o.Id] = true
+					end
+				end
+				for _, campo in Apariencia.Campos do
+					Marco.verdadero(Apariencia.ValorValido(campo, Datos.Defecto[campo]), campo .. ": defecto")
+				end
+				Marco.verdadero(#Apariencia.Categorias >= 6)
+			end
+		)
+
+		Marco.prueba("cada cuerno y deformación tiene sus piezas 3D, y cada ojo, boca y marca su textura", function()
+			local Apariencia, Datos, Recursos = modulos()
+			for _, par in { { "Cuernos", "Cuerno" }, { "Deformacion", "Deformacion" } } do
+				for _, o in Apariencia.Opciones(par[1]) do
+					if o.Id ~= "Ninguno" and o.Id ~= "Ninguna" then
+						local piezas = Recursos.Piezas[`{par[2]}_{o.Id}`]
+						Marco.verdadero(piezas ~= nil and #piezas > 0, `{par[1]} {o.Id}: sin piezas 3D`)
+						for _, pieza in piezas do
+							Marco.verdadero(
+								pieza.Rol == "Cuerno" or pieza.Rol == "Hueso" or pieza.Rol == "Piel",
+								`{pieza.Nombre}: rol {pieza.Rol}`
+							)
+							Marco.distinto(Datos.Roles[pieza.Rol], nil)
+							Marco.verdadero(PARTES_R6[pieza.Parte], `{pieza.Nombre}: parte`)
+						end
+						if par[1] == "Cuernos" then
+							Marco.verdadero(ANCLAJES[o.Anclaje], `{o.Id}: anclaje`)
+						end
+					end
+				end
+			end
+			for _, par in { { "Ojos", "Ojos" }, { "Boca", "Boca" }, { "Marcas", "Marcas" } } do
+				for _, o in Apariencia.Opciones(par[1]) do
+					if o.Id ~= "Ninguna" then
+						Marco.distinto(Recursos.Imagenes[`{par[2]}_{o.Id}`], nil, `{par[1]} {o.Id}: textura`)
+					end
+				end
+			end
+		end)
+
+		Marco.prueba("las siluetas no deforman demasiado y «Base» no cambia nada", function()
+			local Apariencia = modulos()
+			Marco.esNil(Apariencia.Buscar("Silueta", "Normal").Escala)
+			for _, o in Apariencia.Opciones("Silueta") do
+				for _, grupo in { "Torso", "Brazos", "Piernas" } do
+					local e = o.Escala and o.Escala[grupo]
+					if e then
+						for k = 1, 3 do
+							Marco.verdadero(e[k] >= 0.55 and e[k] <= 1.5, `{o.Id} {grupo}: {e[k]}`)
+						end
+					end
+				end
+			end
+		end)
+
+		Marco.prueba("Validar, Hecha, Mover y Aleatoria", function()
+			local Apariencia, Datos = modulos()
+			local a = Apariencia.Validar({
+				Piel = "Piel3",
+				Cuernos = "NoExiste",
+				ColorOjos = "#4de8ff",
+				ColorCuernos = "rojo",
+			})
+			Marco.igual(a.Piel, "Piel3")
+			Marco.igual(a.Cuernos, Datos.Defecto.Cuernos)
+			Marco.igual(a.ColorOjos, "#4DE8FF")
+			Marco.igual(a.ColorCuernos, Datos.Defecto.ColorCuernos)
+			Marco.falso(Apariencia.Hecha({}))
+			Marco.falso(Apariencia.Hecha(nil))
+			Marco.verdadero(Apariencia.Hecha({ Piel = "Piel1", Silueta = "Bestia" }))
+			local ids = Apariencia.Ids("Cuernos")
+			Marco.igual(Apariencia.Mover("Cuernos", ids[#ids], 1), ids[1])
+			local azar = azarFalso(5)
+			for _ = 1, 60 do
+				local r = Apariencia.Aleatoria(azar)
+				Marco.igualProfundo(Apariencia.Validar(r), r)
+			end
+		end)
+
+		Marco.prueba(
+			"el remoto del monstruo rechaza ids inventados y colores mal escritos, y no lleva el booleano del avatar",
+			function()
+				local Apariencia, Datos, _, requerir = modulos()
+				local Remotos = requerir("ReplicatedStorage.Shared.Red.Remotos")
+				local Validador = requerir("ReplicatedStorage.Shared.Red.Validador")
+				local esquema = Remotos.Definiciones.GuardarAparienciaMonstruo.Argumentos
+				Marco.igual(#esquema, #Apariencia.Campos)
+				local function args(a)
+					local lista = {}
+					for k, campo in Apariencia.Campos do
+						lista[k] = a[campo]
+					end
+					return lista
+				end
+				Marco.verdadero(Validador.ValidarArgumentos(esquema, table.unpack(args(Datos.Defecto))))
+				for _, cambio in
+					{
+						{ "Cuernos", "CoronaVIP" },
+						{ "Silueta", "Dios" },
+						{ "ColorOjos", "rojo" },
+						{ "ColorDetalle", "#12345" },
+					}
+				do
+					local a = table.clone(Datos.Defecto)
+					a[cambio[1]] = cambio[2]
+					Marco.falso(
+						Validador.ValidarArgumentos(esquema, table.unpack(args(a))),
+						`{cambio[1]} = {cambio[2]}`
+					)
+				end
+			end
+		)
+
+		Marco.prueba("el perfil de cada bando tiene lo que usa el editor, y solo los humanos tienen avatar", function()
+			local _, _, _, requerir = modulos()
+			local Perfiles = requerir("ReplicatedStorage.Shared.Personaje.PerfilEditor")
+			for bando, perfil in Perfiles do
+				Marco.igual(perfil.Bando, bando)
+				Marco.distinto(perfil.Apariencia, nil, bando)
+				Marco.distinto(perfil.Datos.Pieles, nil, bando)
+				Marco.distinto(perfil.Datos.ObjetivosColor, nil, bando)
+				Marco.distinto(perfil.Datos.Muestras, nil, bando)
+				Marco.verdadero(type(perfil.Constructor.Aplicar) == "function", bando)
+				Marco.verdadero(type(perfil.Constructor.Colorear) == "function", bando)
+				Marco.distinto(perfil.ImagenRueda, nil, bando)
+			end
+			Marco.verdadero(Perfiles.Humanos.Avatar)
+			Marco.falso(Perfiles.Monstruos.Avatar)
+		end)
+	end)
+
 	Marco.grupo("Personaje: avatar de Roblox en R6", function()
 		-- Una descripción simulada con la forma de un HumanoidDescription.
 		local function descripcion(accesorios, extra)

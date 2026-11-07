@@ -26,6 +26,9 @@ local Config = require(Shared.Personaje.ConfigEditor)
 local ConfigGraficos = require(Shared.Graficos.Config)
 local Constructor = require(Shared.Personaje.Constructor)
 
+-- Quien pone el aspecto en la copia: el del bando (Personaje/PerfilEditor). Por defecto el de los Humanos.
+local constructorBando: any = Constructor
+
 local Estudio = {}
 
 local PASO_CAMARA = "EditorEstudioCamara"
@@ -416,7 +419,7 @@ function Estudio.Aplicar(a: any, conBarrido: boolean?)
 	if m == nil then
 		return
 	end
-	local ok, faltan = pcall(Constructor.Aplicar, m, a)
+	local ok, faltan = pcall(constructorBando.Aplicar, m, a)
 	if not ok then
 		warn(`[Editor] No se pudo poner la apariencia: {faltan}`)
 		return
@@ -463,7 +466,7 @@ function Estudio.Colorear(a: any)
 	local m = copia
 	if m then
 		local ok, err = pcall(function(): any
-			Constructor.Colorear(m, a)
+			constructorBando.Colorear(m, a)
 			return nil
 		end)
 		if not ok then
@@ -553,7 +556,8 @@ end
 -- ===== Abrir y cerrar =====
 
 -- Monta la escena con una copia de `origen` (el personaje del jugador) vestida con `a`. Devuelve true si se pudo.
-function Estudio.Abrir(origen: Model, a: any): boolean
+function Estudio.Abrir(origen: Model, a: any, perfil: any?): boolean
+	constructorBando = if perfil then perfil.Constructor else Constructor
 	Estudio.Cerrar()
 	sala = construirSala()
 	local m = crearCopia(origen)

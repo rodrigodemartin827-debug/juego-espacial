@@ -22,7 +22,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
-local Apariencia = require(Shared.Personaje.Apariencia)
+local Perfiles = require(Shared.Personaje.PerfilEditor)
 local AvatarR6 = require(Shared.Personaje.AvatarR6)
 local Bandos = require(Shared.Juego.Bandos)
 local Config = require(Shared.Personaje.ConfigEditor)
@@ -34,6 +34,10 @@ local Estudio = require(script.Parent.Estudio)
 local Pantalla = require(script.Parent.Pantalla)
 
 local ServicioEditor = {}
+
+-- El perfil del bando del jugador (Personaje/PerfilEditor) y sus reglas: se ponen al abrir el editor.
+local perfilActual: any = Perfiles.Humanos
+local Apariencia: any = Perfiles.Humanos.Apariencia
 
 -- Segundos que se espera a que el servidor confirme la vuelta a la elección de bando.
 local ESPERA_VOLVER = 6
@@ -56,13 +60,17 @@ function ServicioEditor.EsperarFin()
 	end
 end
 
-local function guardar(a: Apariencia.Apariencia, usarAvatar: boolean)
+local function guardar(a: any, usarAvatar: boolean)
 	local valores = {}
 	for i, campo in Apariencia.Campos do
-		valores[i] = (a :: any)[campo]
+		valores[i] = a[campo]
 	end
-	valores[#Apariencia.Campos + 1] = usarAvatar
-	ServicioRed.Enviar("GuardarAparienciaHumano", table.unpack(valores, 1, #Apariencia.Campos + 1))
+	local cuantos = #Apariencia.Campos
+	if perfilActual.Avatar then
+		valores[cuantos + 1] = usarAvatar
+		cuantos += 1
+	end
+	ServicioRed.Enviar(perfilActual.Remoto, table.unpack(valores, 1, cuantos))
 end
 
 -- El avatar de Roblox de este jugador (se pide una vez; el servidor lo vuelve a pedir con su UserId, esto es solo la
@@ -106,7 +114,9 @@ local function esperarA(condicion: () -> boolean, segundos: number): boolean
 	return true
 end
 
-local function abrir(guardada: any, usarAvatarInicial: boolean)
+local function abrir(guardada: any, usarAvatarInicial: boolean, perfil: any)
+	perfilActual = perfil
+	Apariencia = perfil.Apariencia
 	local jugador = Players.LocalPlayer
 	-- Espera al personaje (puede estar reapareciendo tras elegir bando).
 	esperarA(function()
@@ -120,7 +130,7 @@ local function abrir(guardada: any, usarAvatarInicial: boolean)
 		return
 	end
 	local inicial = Apariencia.Validar(guardada)
-	if not Estudio.Abrir(personaje, inicial) then
+	if not Estudio.Abrir(personaje, inicial, perfil) then
 		warn("[Editor] No se pudo montar la escena del editor: se salta")
 		terminarPaso()
 		return
@@ -160,9 +170,10 @@ local function abrir(guardada: any, usarAvatarInicial: boolean)
 	end
 
 	local opciones: Pantalla.Opciones = {
+		Perfil = perfil,
 		Inicial = inicial,
 		UsarAvatar = false, -- se pone en cuanto carga si estaba guardado (ver más abajo)
-		AlCambiar = function(a: Apariencia.Apariencia, tipo: string)
+		AlCambiar = function(a: any, tipo: string)
 			actual = a
 			if usarAvatar then
 				return -- el avatar no cambia con las piezas
@@ -187,7 +198,7 @@ local function abrir(guardada: any, usarAvatarInicial: boolean)
 		AlDisponer = function(disposicion: Pantalla.Disposicion)
 			Estudio.Encuadrar(Config.Camara.PosicionX[disposicion])
 		end,
-		AlAleatorio = function(): Apariencia.Apariencia
+		AlAleatorio = function(): any
 			return Apariencia.Aleatoria(azar)
 		end,
 		AlAtras = function()
@@ -203,10 +214,10 @@ local function abrir(guardada: any, usarAvatarInicial: boolean)
 				ServicioEleccion.Terminada:Esperar()
 				task.spawn(paso)
 			else
-				abrir(guardada, usarAvatar)
+				abrir(guardada, usarAvatar, perfil)
 			end
 		end,
-		AlTerminar = function(a: Apariencia.Apariencia, conAvatar: boolean)
+		AlTerminar = function(a: any, conAvatar: boolean)
 			guardar(a, conAvatar)
 			cerrar()
 			terminarPaso()
@@ -230,18 +241,19 @@ end
 paso = function()
 	ServicioEleccion.EsperarFin()
 	local datos = ServicioDatos.Obtener()
-	if datos == nil or datos.Bando ~= Bandos.Humanos then
+	local perfil = if datos then Perfiles[datos.Bando] else nil
+	if datos == nil or perfil == nil then
 		terminarPaso()
 		return
 	end
-	local guardada = datos.Apariencia and datos.Apariencia.Humano
-	local mostrar = not Apariencia.Hecha(guardada) or (RunService:IsStudio() and Config.MostrarSiempreEnStudio)
+	local guardada = datos.Apariencia and datos.Apariencia[perfil.CampoDatos]
+	local mostrar = not perfil.Apariencia.Hecha(guardada) or (RunService:IsStudio() and Config.MostrarSiempreEnStudio)
 	if not mostrar then
 		terminarPaso()
 		return
 	end
-	local usarAvatar = datos.Apariencia ~= nil and datos.Apariencia.UsarAvatar == true
-	abrir(guardada, usarAvatar)
+	local usarAvatar = perfil.Avatar and datos.Apariencia ~= nil and datos.Apariencia.UsarAvatar == true
+	abrir(guardada, usarAvatar, perfil)
 end
 
 -- Arranca. Una vez, después de ServicioDatos.Iniciar() y de ServicioEleccion.Iniciar().
