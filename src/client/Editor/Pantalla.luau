@@ -103,7 +103,7 @@ end
 
 -- Piezas que hay cerca del personaje (a menos de `radio`), visibles. PROBADO EN STUDIO: las piezas decorativas de la
 -- región no aceptan consultas (CanQuery desactivado, para que sean baratas), así que ni los rayos ni
--- GetPartsObscuringTarget las ven; se comprueba a mano.
+-- GetPartsObscuringTarget las ven; se comprueba a mano con su caja.
 local function piezasCerca(centro: Vector3, radio: number, excluir: Instance): { BasePart }
 	local lista = {}
 	for _, d in workspace:GetDescendants() do
@@ -116,54 +116,50 @@ local function piezasCerca(centro: Vector3, radio: number, excluir: Instance): {
 	return lista
 end
 
--- ¿Atraviesa el segmento de `a` a `b` alguna de las piezas? (muestras a lo largo del segmento dentro de su caja)
-local function tapado(a: Vector3, b: Vector3, piezas: { BasePart }): boolean
-	for _, p in piezas do
-		local medio = p.Size / 2
-		for k = 1, 12 do
-			local local_ = p.CFrame:PointToObjectSpace(a:Lerp(b, k / 13))
-			if math.abs(local_.X) < medio.X and math.abs(local_.Y) < medio.Y and math.abs(local_.Z) < medio.Z then
-				return true
-			end
+-- ¿Atraviesa el segmento de `a` a `b` la caja de la pieza?
+local function cruza(p: BasePart, a: Vector3, b: Vector3): boolean
+	local medio = p.Size / 2
+	for k = 1, 16 do
+		local l = p.CFrame:PointToObjectSpace(a:Lerp(b, k / 17))
+		if math.abs(l.X) < medio.X and math.abs(l.Y) < medio.Y and math.abs(l.Z) < medio.Z then
+			return true
 		end
 	end
 	return false
 end
 
--- Desde `a` (el personaje) hacia `b` (la cámara): la fracción del camino libre antes de la primera pieza.
-local function libreHasta(a: Vector3, b: Vector3, piezas: { BasePart }): number
-	for k = 1, 24 do
-		local punto = a:Lerp(b, k / 24)
-		for _, p in piezas do
-			local l = p.CFrame:PointToObjectSpace(punto)
-			local medio = p.Size / 2
-			if math.abs(l.X) < medio.X and math.abs(l.Y) < medio.Y and math.abs(l.Z) < medio.Z then
-				return (k - 1) / 24
+-- Lo que tapa al personaje se oculta solo en esta pantalla (LocalTransparencyModifier: los demás no lo notan) mientras
+-- el editor está abierto. PROBADO EN STUDIO: se aparece al lado de vallas, farolas y casas; esquivarlas girando la
+-- cámara dejaba al personaje de lado, y acercarla, demasiado cerca.
+local piezasOcultas: { [BasePart]: boolean } = {}
+
+local function ocultarLoQueTapa(piezas: { BasePart }, desde: Vector3, raiz: BasePart)
+	local arriba = raiz.CFrame.UpVector
+	for _, p in piezas do
+		local tapa = false
+		if p.Parent then
+			for _, alto in { 2, 0.5, -1.5, -2.8 } do
+				if cruza(p, desde, raiz.Position + arriba * alto) then
+					tapa = true
+					break
+				end
 			end
 		end
+		if tapa and not piezasOcultas[p] then
+			piezasOcultas[p] = true
+			p.LocalTransparencyModifier = 1
+		elseif not tapa and piezasOcultas[p] then
+			piezasOcultas[p] = nil
+			p.LocalTransparencyModifier = 0
+		end
 	end
-	return 1
 end
 
--- El giro inicial: el de delante de la cara, o el más cercano a él con la vista despejada hasta la cabeza, el pecho
--- y los pies (PROBADO EN STUDIO: un tronco o un poste se quedaban en medio).
-local function giroLibre(raiz: BasePart, personaje: Model): number
-	local piezas = piezasCerca(raiz.Position, Config.Camara.Distancia + 4, personaje)
-	local arriba = raiz.CFrame.UpVector
-	for _, angulo in { 0, 0.4, -0.4, 0.8, -0.8, 1.2, -1.2, 1.6, -1.6, 2.0, -2.0 } do
-		local desde = encuadre(raiz, angulo)
-		local libre = true
-		for _, alto in { 1.8, 0, -2.4 } do
-			if tapado(desde, raiz.Position + arriba * alto, piezas) then
-				libre = false
-				break
-			end
-		end
-		if libre then
-			return angulo
-		end
+local function mostrarOcultas()
+	for p in piezasOcultas do
+		p.LocalTransparencyModifier = 0
 	end
-	return 0
+	table.clear(piezasOcultas)
 end
 
 local function empezarCamara()
@@ -171,31 +167,35 @@ local function empezarCamara()
 	local c = Config.Camara
 	local campoAntes = workspace.CurrentCamera and workspace.CurrentCamera.FieldOfView or 70
 	local personajeInicial = jugador.Character
-	parametros.FilterDescendantsInstances = { personajeInicial :: Instance }
 	local raizInicial = personajeInicial and personajeInicial:FindFirstChild("HumanoidRootPart") :: BasePart?
-	giro = if raizInicial and personajeInicial then giroLibre(raizInicial, personajeInicial) else 0
+	giro = 0
 	local piezas: { BasePart } = if raizInicial and personajeInicial
-		then piezasCerca(raizInicial.Position, c.Distancia + 4, personajeInicial)
+		then piezasCerca(raizInicial.Position, c.Distancia + 6, personajeInicial)
 		else {}
+	-- Las piezas que se ocultan no deben frenar la cámara: los rayos (para el terreno y lo que sí acepta consultas)
+	-- las ignoran.
+	local ignorar: { Instance } = table.clone(piezas) :: { any }
+	local ultimoGiro = math.huge
 	RunService:BindToRenderStep(PASO_CAMARA, Enum.RenderPriority.Camera.Value + 2, function()
 		local camara = workspace.CurrentCamera
 		local personaje = jugador.Character
 		local raiz = personaje and personaje:FindFirstChild("HumanoidRootPart") :: BasePart?
-		if camara == nil or raiz == nil then
+		if camara == nil or personaje == nil or raiz == nil then
 			return
 		end
 		camara.CameraType = Enum.CameraType.Scriptable
 		camara.FieldOfView = c.CampoVision
-		parametros.FilterDescendantsInstances = { personaje :: Instance }
 		local desde, mira, foco, arriba = encuadre(raiz, giro)
-		-- Si al girar algo se interpone, la cámara se acerca (rayos para lo que acepta consultas; a mano para las
-		-- piezas decorativas de alrededor, que no).
-		local largo = (desde - foco).Magnitude
+		-- Lo que no se puede ocultar (el terreno) acerca la cámara.
+		ignorar[#piezas + 1] = personaje
+		parametros.FilterDescendantsInstances = ignorar
 		local golpe = workspace:Raycast(foco, desde - foco, parametros)
-		local libre =
-			math.min(if golpe then golpe.Distance - 0.5 else largo, libreHasta(foco, desde, piezas) * largo - 0.5)
-		if libre < largo - 0.01 then
-			desde = foco + (desde - foco).Unit * math.max(libre, 2)
+		if golpe then
+			desde = foco + (desde - foco).Unit * math.max(golpe.Distance - 0.5, 2)
+		end
+		if math.abs(giro - ultimoGiro) > 0.01 then
+			ultimoGiro = giro
+			ocultarLoQueTapa(piezas, desde, raiz)
 		end
 		camara.CFrame = CFrame.lookAt(desde, mira, arriba)
 	end)
@@ -236,6 +236,7 @@ end
 
 local function pararCamara(campoAntes: number)
 	RunService:UnbindFromRenderStep(PASO_CAMARA)
+	mostrarOcultas()
 	for _, conexion in conexiones do
 		conexion:Disconnect()
 	end

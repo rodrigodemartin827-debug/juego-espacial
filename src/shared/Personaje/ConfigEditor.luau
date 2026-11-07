@@ -31,7 +31,7 @@ Config.Textos = {
 
 -- Cámara: delante del personaje, a la altura del pecho, girando cuando se arrastra.
 Config.Camara = {
-	Distancia = 9,
+	Distancia = 11,
 	Altura = 1.2, -- sobre la raíz
 	Mira = 0.9, -- punto al que mira, sobre la raíz
 	Desplazar = 2.2, -- studs a la derecha de la cámara: el personaje queda a la izquierda de las opciones
