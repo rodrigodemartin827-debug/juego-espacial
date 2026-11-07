@@ -29,7 +29,7 @@ export type Datos = {
 	MejorasNave: MejorasNave,
 	Descubrimientos: Descubrimientos,
 	Graficos: string, -- nivel de gráficos elegido (Graficos/Config.Orden); "" hasta que lo elige
-	Apariencia: { Humano: { [string]: string }, Monstruo: { [string]: string } }, -- editor de personaje; vacía hasta elegir
+	Apariencia: { Humano: { [string]: string }, Monstruo: { [string]: string }, UsarAvatar: boolean }, -- editor de personaje; vacía hasta elegir
 }
 
 return {}

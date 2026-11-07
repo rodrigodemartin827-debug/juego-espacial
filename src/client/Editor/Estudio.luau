@@ -62,6 +62,7 @@ local posicionX = 0
 local campoAntes = 70
 local apariencia: any = nil
 local reaplicar = false
+local numeroAvatar = 0 -- sube con cada cambio de aspecto: un avatar que tarda en cargar se descarta si ya hay otro
 
 local function color(hex: string): Color3
 	return Color3.fromHex(hex)
@@ -405,6 +406,7 @@ end
 ]]
 function Estudio.Aplicar(a: any, conBarrido: boolean?)
 	apariencia = a
+	numeroAvatar += 1
 	local m = copia
 	if m == nil then
 		return
@@ -418,6 +420,38 @@ function Estudio.Aplicar(a: any, conBarrido: boolean?)
 	if conBarrido then
 		barrer()
 	end
+end
+
+--[[
+	Pone el avatar de Roblox del jugador en la copia (`descripcion`, ya preparada para R6 con Personaje/AvatarR6). Tarda
+	un poco (Roblox carga la ropa y los accesorios): `alTerminar(ok)` avisa cuando acaba.
+]]
+function Estudio.AplicarAvatar(descripcion: HumanoidDescription, alTerminar: ((boolean) -> ())?)
+	numeroAvatar += 1
+	local mio = numeroAvatar
+	local m = copia
+	if m == nil then
+		return
+	end
+	task.spawn(function()
+		Constructor.Limpiar(m)
+		local humanoide = m:FindFirstChildOfClass("Humanoid")
+		local ok, err = pcall(function()
+			(humanoide :: Humanoid):ApplyDescriptionAsync(descripcion)
+		end)
+		if not ok then
+			warn(`[Editor] No se pudo poner el avatar: {err}`)
+		end
+		if mio ~= numeroAvatar or copia ~= m then
+			return -- mientras tanto se cambió de aspecto o se cerró el editor
+		end
+		if ok then
+			barrer()
+		end
+		if alTerminar then
+			alTerminar(ok)
+		end
+	end)
 end
 
 -- Solo repinta los colores (mientras se arrastra por la rueda de color: rehacer las piezas sería demasiado).

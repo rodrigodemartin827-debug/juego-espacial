@@ -50,7 +50,8 @@ local PLANTILLA: Datos = {
 	},
 	Descubrimientos = {}, -- { idEspecie = veces escaneada } (escáner de mano)
 	Graficos = "", -- nivel de gráficos ("" = todavía no lo ha elegido: sale la pantalla de gráficos)
-	Apariencia = { Humano = {}, Monstruo = {} }, -- lo elegido en el editor de personaje de cada bando (ids)
+	-- Lo elegido en el editor de personaje de cada bando (ids), y si el Humano usa su avatar de Roblox en vez de las piezas.
+	Apariencia = { Humano = {}, Monstruo = {}, UsarAvatar = false },
 }
 
 --[[

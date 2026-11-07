@@ -23,6 +23,7 @@ local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Apariencia = require(Shared.Personaje.Apariencia)
+local AvatarR6 = require(Shared.Personaje.AvatarR6)
 local Bandos = require(Shared.Juego.Bandos)
 local Config = require(Shared.Personaje.ConfigEditor)
 local Senal = require(Shared.Utilidades.Senal)
@@ -55,12 +56,35 @@ function ServicioEditor.EsperarFin()
 	end
 end
 
-local function guardar(a: Apariencia.Apariencia)
+local function guardar(a: Apariencia.Apariencia, usarAvatar: boolean)
 	local valores = {}
 	for i, campo in Apariencia.Campos do
 		valores[i] = (a :: any)[campo]
 	end
-	ServicioRed.Enviar("GuardarAparienciaHumano", table.unpack(valores))
+	valores[#Apariencia.Campos + 1] = usarAvatar
+	ServicioRed.Enviar("GuardarAparienciaHumano", table.unpack(valores, 1, #Apariencia.Campos + 1))
+end
+
+-- El avatar de Roblox de este jugador (se pide una vez; el servidor lo vuelve a pedir con su UserId, esto es solo la
+-- vista previa). nil si Roblox no responde.
+local avatar: HumanoidDescription? = nil
+local function cargarAvatar(): HumanoidDescription?
+	if avatar then
+		return avatar
+	end
+	for intento = 1, Config.Avatar.Intentos do
+		local ok, d = pcall(function()
+			return Players:GetHumanoidDescriptionFromUserId(Players.LocalPlayer.UserId)
+		end)
+		if ok and d then
+			avatar = d
+			return d
+		end
+		if intento < Config.Avatar.Intentos then
+			task.wait(Config.Avatar.EsperaIntento)
+		end
+	end
+	return nil
 end
 
 local function cerrar()
@@ -82,7 +106,7 @@ local function esperarA(condicion: () -> boolean, segundos: number): boolean
 	return true
 end
 
-local function abrir(guardada: any)
+local function abrir(guardada: any, usarAvatarInicial: boolean)
 	local jugador = Players.LocalPlayer
 	-- Espera al personaje (puede estar reapareciendo tras elegir bando).
 	esperarA(function()
@@ -101,13 +125,63 @@ local function abrir(guardada: any)
 		terminarPaso()
 		return
 	end
+	local actual = inicial -- las piezas elegidas (se conservan mientras se usa el avatar)
+	local usarAvatar = false
+	local pedido = 0 -- número de la última petición de cambio de modo: una carga lenta no pisa a una más nueva
+
+	-- Pasa a ver el avatar de Roblox en la copia y avisa de lo que no se pudo convertir.
+	local function ponerAvatar()
+		pedido += 1
+		local mio = pedido
+		Pantalla.AvatarCargando(true)
+		Pantalla.Informe({})
+		task.spawn(function()
+			local d = cargarAvatar()
+			if mio ~= pedido or not Pantalla.Abierta() then
+				return
+			end
+			if d == nil then
+				Pantalla.AvatarCargando(false)
+				Pantalla.Informe({ Config.Textos.ErrorAvatar })
+				return
+			end
+			local copiaDescripcion = d:Clone()
+			local informe = AvatarR6.Preparar(copiaDescripcion, Config.Avatar.MaxAccesorios)
+			Estudio.AplicarAvatar(copiaDescripcion, function()
+				if mio ~= pedido or not Pantalla.Abierta() then
+					return
+				end
+				usarAvatar = true
+				Pantalla.PonerAvatar(true)
+				Pantalla.AvatarCargando(false)
+				Pantalla.Informe(AvatarR6.Textos(informe))
+			end)
+		end)
+	end
+
 	local opciones: Pantalla.Opciones = {
 		Inicial = inicial,
+		UsarAvatar = false, -- se pone en cuanto carga si estaba guardado (ver más abajo)
 		AlCambiar = function(a: Apariencia.Apariencia, tipo: string)
+			actual = a
+			if usarAvatar then
+				return -- el avatar no cambia con las piezas
+			end
 			if tipo == "Color" then
 				Estudio.Colorear(a)
 			else
 				Estudio.Aplicar(a, true)
+			end
+		end,
+		AlAvatar = function(activo: boolean)
+			if activo then
+				ponerAvatar()
+			else
+				pedido += 1
+				usarAvatar = false
+				Pantalla.PonerAvatar(false)
+				Pantalla.AvatarCargando(false)
+				Estudio.Aplicar(actual, true)
 			end
 		end,
 		AlDisponer = function(disposicion: Pantalla.Disposicion)
@@ -129,11 +203,11 @@ local function abrir(guardada: any)
 				ServicioEleccion.Terminada:Esperar()
 				task.spawn(paso)
 			else
-				abrir(guardada)
+				abrir(guardada, usarAvatar)
 			end
 		end,
-		AlTerminar = function(a: Apariencia.Apariencia)
-			guardar(a)
+		AlTerminar = function(a: Apariencia.Apariencia, conAvatar: boolean)
+			guardar(a, conAvatar)
 			cerrar()
 			terminarPaso()
 		end,
@@ -146,6 +220,10 @@ local function abrir(guardada: any)
 		warn(`[Editor] No se pudo abrir el editor: {err}`)
 		cerrar()
 		terminarPaso()
+		return
+	end
+	if usarAvatarInicial then
+		ponerAvatar()
 	end
 end
 
@@ -162,7 +240,8 @@ paso = function()
 		terminarPaso()
 		return
 	end
-	abrir(guardada)
+	local usarAvatar = datos.Apariencia ~= nil and datos.Apariencia.UsarAvatar == true
+	abrir(guardada, usarAvatar)
 end
 
 -- Arranca. Una vez, después de ServicioDatos.Iniciar() y de ServicioEleccion.Iniciar().

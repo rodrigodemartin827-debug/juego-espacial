@@ -21,6 +21,18 @@ Config.Textos = {
 	Atras = "ATRÁS",
 	Aleatorio = "ALEATORIO",
 	Continuar = "CONTINUAR",
+	UsarAvatar = "USAR MI AVATAR DE ROBLOX",
+	UsarPiezas = "USAR LAS PIEZAS DEL JUEGO",
+	CargandoAvatar = "CARGANDO TU AVATAR…",
+	ErrorAvatar = "No se pudo cargar tu avatar de Roblox. Prueba otra vez.",
+	AvatarActivo = "USANDO TU AVATAR",
+}
+
+-- Avatar de Roblox (solo Humanos). El máximo de accesorios es por rendimiento en móvil.
+Config.Avatar = {
+	MaxAccesorios = 6,
+	Intentos = 3, -- veces que el servidor pide el avatar si falla (los servicios de Roblox a veces fallan)
+	EsperaIntento = 1.5, -- segundos entre intentos
 }
 
 -- Tipografías (familias de Roblox): títulos anchos de estilo espacial y textos legibles.

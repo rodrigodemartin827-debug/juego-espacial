@@ -184,6 +184,24 @@ local function pintarCuerpo(modelo: Model, a: Apariencia.Apariencia, colores: { 
 	end
 end
 
+-- Quita lo que puso Aplicar (accesorios del juego, detalles de ropa y rasgos de la cara), para dejar paso al avatar de
+-- Roblox. El avatar trae lo suyo: ApplyDescription pone su cabeza, su cara, su ropa y sus colores.
+function Constructor.Limpiar(modelo: Model)
+	for _, d in modelo:GetChildren() do
+		if d:IsA("Accessory") or d.Name == Constructor.CARPETA then
+			d:Destroy()
+		end
+	end
+	local cabeza = modelo:FindFirstChild("Head")
+	if cabeza then
+		for _, d in cabeza:GetChildren() do
+			if d:IsA("Decal") and string.sub(d.Name, 1, 6) == "Rasgo_" then
+				d:Destroy()
+			end
+		end
+	end
+end
+
 --[[
 	Solo cambia los colores (piel, pelo, chaqueta, pantalón y detalles) de un personaje al que ya se le hizo Aplicar
 	con las mismas piezas. Es mucho más barato que Aplicar: lo usa el editor mientras se arrastra por la rueda.
