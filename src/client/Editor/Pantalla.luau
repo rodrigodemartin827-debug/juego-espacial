@@ -130,6 +130,21 @@ local function tapado(a: Vector3, b: Vector3, piezas: { BasePart }): boolean
 	return false
 end
 
+-- Desde `a` (el personaje) hacia `b` (la cámara): la fracción del camino libre antes de la primera pieza.
+local function libreHasta(a: Vector3, b: Vector3, piezas: { BasePart }): number
+	for k = 1, 24 do
+		local punto = a:Lerp(b, k / 24)
+		for _, p in piezas do
+			local l = p.CFrame:PointToObjectSpace(punto)
+			local medio = p.Size / 2
+			if math.abs(l.X) < medio.X and math.abs(l.Y) < medio.Y and math.abs(l.Z) < medio.Z then
+				return (k - 1) / 24
+			end
+		end
+	end
+	return 1
+end
+
 -- El giro inicial: el de delante de la cara, o el más cercano a él con la vista despejada hasta la cabeza, el pecho
 -- y los pies (PROBADO EN STUDIO: un tronco o un poste se quedaban en medio).
 local function giroLibre(raiz: BasePart, personaje: Model): number
@@ -159,6 +174,9 @@ local function empezarCamara()
 	parametros.FilterDescendantsInstances = { personajeInicial :: Instance }
 	local raizInicial = personajeInicial and personajeInicial:FindFirstChild("HumanoidRootPart") :: BasePart?
 	giro = if raizInicial and personajeInicial then giroLibre(raizInicial, personajeInicial) else 0
+	local piezas: { BasePart } = if raizInicial and personajeInicial
+		then piezasCerca(raizInicial.Position, c.Distancia + 4, personajeInicial)
+		else {}
 	RunService:BindToRenderStep(PASO_CAMARA, Enum.RenderPriority.Camera.Value + 2, function()
 		local camara = workspace.CurrentCamera
 		local personaje = jugador.Character
@@ -170,10 +188,14 @@ local function empezarCamara()
 		camara.FieldOfView = c.CampoVision
 		parametros.FilterDescendantsInstances = { personaje :: Instance }
 		local desde, mira, foco, arriba = encuadre(raiz, giro)
-		-- Si al girar algo se interpone, la cámara se acerca.
+		-- Si al girar algo se interpone, la cámara se acerca (rayos para lo que acepta consultas; a mano para las
+		-- piezas decorativas de alrededor, que no).
+		local largo = (desde - foco).Magnitude
 		local golpe = workspace:Raycast(foco, desde - foco, parametros)
-		if golpe then
-			desde = foco + (desde - foco).Unit * math.max(golpe.Distance - 0.5, 2)
+		local libre =
+			math.min(if golpe then golpe.Distance - 0.5 else largo, libreHasta(foco, desde, piezas) * largo - 0.5)
+		if libre < largo - 0.01 then
+			desde = foco + (desde - foco).Unit * math.max(libre, 2)
 		end
 		camara.CFrame = CFrame.lookAt(desde, mira, arriba)
 	end)
