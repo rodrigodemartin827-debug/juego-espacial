@@ -40,6 +40,7 @@ local REVISAR = {
 	{ carpeta = "src", extension = ".luau" },
 	{ carpeta = "animaciones/herramientas", extension = ".py" },
 	{ carpeta = "modelos/herramientas", extension = ".py" },
+	{ carpeta = "animaciones/movimiento/herramientas", extension = ".py" },
 }
 
 local function archivos(carpeta: string, extension: string, resultado: { string }): { string }
