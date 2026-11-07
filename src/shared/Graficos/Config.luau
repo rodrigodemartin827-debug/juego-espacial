@@ -108,7 +108,7 @@ Config.Pantalla = {
 	BotonAjustes = "Gráficos",
 	-- La cámara se balancea despacio delante del personaje (± Arco grados respecto a su frente), para ver los
 	-- cambios en el mundo de verdad. PROBADO EN STUDIO: dando la vuelta entera atravesaba su casa (aparece mirándola).
-	Camara = { Distancia = 30, Altura = 11, Arco = 55, PeriodoSegundos = 24, Mira = 3, BajarMira = 10 },
+	Camara = { Distancia = 30, Altura = 3, Arco = 55, PeriodoSegundos = 24, Mira = 3, BajarMira = 7 },
 	Colores = {
 		Fondo = "#0B0E16",
 		Tarjeta = "#141A26",
