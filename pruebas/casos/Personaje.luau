@@ -139,12 +139,16 @@ return function(Marco)
 			local piezas = serde.decode("json", fs.readFile("modelos/personaje_humano/piezas.json"))
 			local cuenta = 0
 			for elemento, tris in piezas.TriangulosPorElemento do
-				if string.match(elemento, "^Cabello_") or string.match(elemento, "^Accesorio_") then
+				if
+					string.match(elemento, "^Cabello_")
+					or string.match(elemento, "^Accesorio_")
+					or string.match(elemento, "^Barba_")
+				then
 					cuenta += 1
 					Marco.verdadero(tris < TRIANGULOS_MAXIMOS, `{elemento}: {tris} triángulos`)
 				end
 			end
-			Marco.verdadero(cuenta >= 16, "faltan piezas en piezas.json")
+			Marco.verdadero(cuenta >= 40, "faltan piezas en piezas.json")
 		end)
 
 		Marco.prueba("RecursosHumanos está al día con piezas.json (todas las piezas, mismos centros)", function()
@@ -222,6 +226,98 @@ return function(Marco)
 				Marco.verdadero(Apariencia.EsColor(colores[rol]), "rol sin color: " .. rol)
 			end
 			Marco.verdadero(Apariencia.EsColor(colores.Piel))
+		end)
+	end)
+
+	Marco.grupo("Personaje: variedad ampliada", function()
+		-- Cuántas opciones había antes de ampliar el editor (sin contar «ninguno»): ahora, mínimo el doble.
+		local ANTES =
+			{ Cabello = 12, Cejas = 6, Ojos = 7, Nariz = 4, Boca = 6, Chaqueta = 5, Pantalon = 4, Accesorio = 6 }
+
+		Marco.prueba("cada categoría tiene al menos el doble de opciones que antes", function()
+			local Apariencia = cargar()
+			for campo, antes in ANTES do
+				local n = 0
+				for _, o in Apariencia.Opciones(campo) do
+					if o.Id ~= "Ninguno" and o.Id ~= "Ninguna" then
+						n += 1
+					end
+				end
+				Marco.verdadero(n >= antes * 2 - 1, `{campo}: {n} opciones, antes {antes}`)
+			end
+		end)
+
+		Marco.prueba("existen las categorías nuevas: complexión, vello facial, cicatriz y tatuaje", function()
+			local Apariencia, Datos = cargar()
+			for _, campo in { "Complexion", "Barba", "Cicatriz", "Tatuaje" } do
+				Marco.verdadero(#Apariencia.Opciones(campo) >= 5, campo)
+				Marco.distinto(Datos.Defecto[campo], nil, campo)
+				local enLista = false
+				for _, cat in Apariencia.Categorias do
+					enLista = enLista or cat.Campo == campo
+				end
+				Marco.verdadero(enLista, campo .. " sale en el editor")
+			end
+			Marco.verdadero(#Apariencia.Opciones("Complexion") >= 4, "alto, bajo, fuerte y normal como mínimo")
+		end)
+
+		Marco.prueba("cada barba tiene sus piezas 3D, y cada cicatriz y tatuaje su textura", function()
+			local Apariencia, _, Recursos = cargar()
+			for _, o in Apariencia.Opciones("Barba") do
+				if o.Id ~= "Ninguna" then
+					local piezas = Recursos.Piezas["Barba_" .. o.Id]
+					Marco.verdadero(piezas ~= nil and #piezas > 0, "Barba " .. o.Id)
+					Marco.igual(o.Anclaje, "FaceFrontAttachment")
+				end
+			end
+			for _, campo in { "Cicatriz", "Tatuaje" } do
+				for _, o in Apariencia.Opciones(campo) do
+					if o.Id ~= "Ninguna" and o.Id ~= "Ninguno" then
+						local imagen = Recursos.Imagenes[`{campo}_{o.Id}`]
+						Marco.verdadero(imagen ~= nil, `{campo} {o.Id}: textura`)
+					end
+				end
+			end
+		end)
+
+		Marco.prueba("las complexiones no deforman demasiado y «Normal» no cambia nada", function()
+			local Apariencia = cargar()
+			Marco.esNil(Apariencia.Buscar("Complexion", "Normal").Escala)
+			for _, o in Apariencia.Opciones("Complexion") do
+				for _, grupo in { "Torso", "Brazos", "Piernas" } do
+					local e = o.Escala and o.Escala[grupo]
+					if e then
+						for k = 1, 3 do
+							Marco.verdadero(e[k] >= 0.7 and e[k] <= 1.35, `{o.Id} {grupo}: {e[k]}`)
+						end
+					end
+				end
+			end
+		end)
+
+		Marco.prueba(
+			"los pantalones que dejan la pierna al aire lo dicen, y los tatuajes solo se ven con los brazos al aire",
+			function()
+				local Apariencia = cargar()
+				Marco.igual(Apariencia.Buscar("Pantalon", "Shorts").Piernas, "Piel")
+				Marco.esNil(Apariencia.Buscar("Pantalon", "Cargo").Piernas)
+				local a = Apariencia.Validar({ Chaqueta = "Camiseta" })
+				Marco.verdadero(Apariencia.TatuajeVisible(a))
+				a = Apariencia.Validar({ Chaqueta = "Abrigo" })
+				Marco.falso(Apariencia.TatuajeVisible(a))
+			end
+		)
+
+		Marco.prueba("aleatorio casi nunca pone cicatriz, tatuaje o barba", function()
+			local Apariencia = cargar()
+			local azar = azarFalso(11)
+			local con = 0
+			for _ = 1, 200 do
+				if Apariencia.Aleatoria(azar).Cicatriz ~= "Ninguna" then
+					con += 1
+				end
+			end
+			Marco.verdadero(con > 10 and con < 100, `{con} de 200 con cicatriz`)
 		end)
 	end)
 

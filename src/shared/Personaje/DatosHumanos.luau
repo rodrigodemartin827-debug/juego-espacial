@@ -19,6 +19,10 @@ export type Opcion = {
 	Nombre: string,
 	-- Chaqueta: de qué color van los brazos ("Chaqueta" si tiene mangas largas, "Piel" si son cortas).
 	Brazos: string?,
+	-- Pantalón: de qué color van las piernas ("Pantalon" si son largos, "Piel" si dejan la pierna al aire).
+	Piernas: string?,
+	-- Complexión: cuánto se estira cada grupo de partes del R6 (ancho, alto, fondo). Lo que no se nombra va a 1.
+	Escala: { Torso: { number }?, Brazos: { number }?, Piernas: { number }? }?,
 	-- Cabello y Accesorio: el Attachment de la cabeza al que se sujeta el Accessory.
 	Anclaje: string?,
 }
@@ -58,6 +62,18 @@ Datos.Cabellos = {
 	{ Id = "Largo", Nombre = "Largo", Anclaje = "HairAttachment" },
 	{ Id = "Coleta", Nombre = "Coleta", Anclaje = "HairAttachment" },
 	{ Id = "Mono", Nombre = "Moño", Anclaje = "HairAttachment" },
+	{ Id = "Bob", Nombre = "Media melena", Anclaje = "HairAttachment" },
+	{ Id = "Afro", Nombre = "Afro", Anclaje = "HairAttachment" },
+	{ Id = "Trenzas", Nombre = "Trenzas", Anclaje = "HairAttachment" },
+	{ Id = "Rastas", Nombre = "Rastas", Anclaje = "HairAttachment" },
+	{ Id = "Hongo", Nombre = "Hongo", Anclaje = "HairAttachment" },
+	{ Id = "Mohicano", Nombre = "Mohicano", Anclaje = "HairAttachment" },
+	{ Id = "DosColetas", Nombre = "Dos coletas", Anclaje = "HairAttachment" },
+	{ Id = "ColetaAlta", Nombre = "Coleta alta", Anclaje = "HairAttachment" },
+	{ Id = "Trenza", Nombre = "Trenza", Anclaje = "HairAttachment" },
+	{ Id = "Engominado", Nombre = "Engominado", Anclaje = "HairAttachment" },
+	{ Id = "Ondulado", Nombre = "Ondulado", Anclaje = "HairAttachment" },
+	{ Id = "Entradas", Nombre = "Entradas", Anclaje = "HairAttachment" },
 } :: { Opcion }
 
 Datos.Cejas = {
@@ -67,6 +83,12 @@ Datos.Cejas = {
 	{ Id = "Finas", Nombre = "Finas" },
 	{ Id = "Enfadadas", Nombre = "Enfadadas" },
 	{ Id = "Preocupadas", Nombre = "Preocupadas" },
+	{ Id = "Alzada", Nombre = "Una alzada" },
+	{ Id = "Unidas", Nombre = "Unidas" },
+	{ Id = "Cortadas", Nombre = "Cortadas" },
+	{ Id = "Anchas", Nombre = "Anchas" },
+	{ Id = "Puntiagudas", Nombre = "Puntiagudas" },
+	{ Id = "Caidas", Nombre = "Caídas" },
 } :: { Opcion }
 
 Datos.Ojos = {
@@ -77,6 +99,13 @@ Datos.Ojos = {
 	{ Id = "Serios", Nombre = "Serios" },
 	{ Id = "Alegres", Nombre = "Alegres" },
 	{ Id = "Cansados", Nombre = "Cansados" },
+	{ Id = "Pequenos", Nombre = "Pequeños" },
+	{ Id = "Rasgados", Nombre = "Rasgados" },
+	{ Id = "Guino", Nombre = "Guiño" },
+	{ Id = "Estrellas", Nombre = "Estrellas" },
+	{ Id = "Gato", Nombre = "Gato" },
+	{ Id = "Ciber", Nombre = "Cibernéticos" },
+	{ Id = "Dormidos", Nombre = "Dormidos" },
 } :: { Opcion }
 
 Datos.Narices = {
@@ -84,6 +113,10 @@ Datos.Narices = {
 	{ Id = "Boton", Nombre = "Botón" },
 	{ Id = "Recta", Nombre = "Recta" },
 	{ Id = "Ancha", Nombre = "Ancha" },
+	{ Id = "Aguilena", Nombre = "Aguileña" },
+	{ Id = "Respingona", Nombre = "Respingona" },
+	{ Id = "Chata", Nombre = "Chata" },
+	{ Id = "Grande", Nombre = "Grande" },
 	{ Id = "Ninguna", Nombre = "Sin nariz" },
 } :: { Opcion }
 
@@ -94,6 +127,12 @@ Datos.Bocas = {
 	{ Id = "Neutra", Nombre = "Neutra" },
 	{ Id = "Seria", Nombre = "Seria" },
 	{ Id = "Sorpresa", Nombre = "Sorpresa" },
+	{ Id = "Dientes", Nombre = "Dientes" },
+	{ Id = "Gato", Nombre = "Gatuna" },
+	{ Id = "Lengua", Nombre = "Lengua fuera" },
+	{ Id = "Mueca", Nombre = "Mueca" },
+	{ Id = "Triste", Nombre = "Triste" },
+	{ Id = "Labios", Nombre = "Labios" },
 } :: { Opcion }
 
 Datos.Chaquetas = {
@@ -102,6 +141,11 @@ Datos.Chaquetas = {
 	{ Id = "Cazadora", Nombre = "Cazadora", Brazos = "Chaqueta" },
 	{ Id = "Mecanico", Nombre = "Mecánico", Brazos = "Piel" },
 	{ Id = "Camiseta", Nombre = "Camiseta", Brazos = "Piel" },
+	{ Id = "Chaleco", Nombre = "Chaleco", Brazos = "Piel" },
+	{ Id = "Abrigo", Nombre = "Abrigo largo", Brazos = "Chaqueta" },
+	{ Id = "Sudadera", Nombre = "Sudadera", Brazos = "Chaqueta" },
+	{ Id = "Armadura", Nombre = "Armadura ligera", Brazos = "Piel" },
+	{ Id = "Camisa", Nombre = "Camisa", Brazos = "Piel" },
 } :: { Opcion }
 
 Datos.Pantalones = {
@@ -109,6 +153,11 @@ Datos.Pantalones = {
 	{ Id = "Piloto", Nombre = "Piloto" },
 	{ Id = "Vaquero", Nombre = "Vaquero" },
 	{ Id = "Tactico", Nombre = "Táctico" },
+	{ Id = "Shorts", Nombre = "Shorts", Piernas = "Piel" },
+	{ Id = "Bermudas", Nombre = "Bermudas", Piernas = "Piel" },
+	{ Id = "Falda", Nombre = "Falda", Piernas = "Piel" },
+	{ Id = "Peto", Nombre = "Peto" },
+	{ Id = "Campana", Nombre = "Campana" },
 } :: { Opcion }
 
 Datos.Accesorios = {
@@ -119,6 +168,77 @@ Datos.Accesorios = {
 	{ Id = "Comunicador", Nombre = "Comunicador", Anclaje = "HatAttachment" },
 	{ Id = "Gorra", Nombre = "Gorra", Anclaje = "HatAttachment" },
 	{ Id = "Cinta", Nombre = "Cinta", Anclaje = "HatAttachment" },
+	{ Id = "Parche", Nombre = "Parche", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Gorro", Nombre = "Gorro de lana", Anclaje = "HatAttachment" },
+	{ Id = "Casco", Nombre = "Casco", Anclaje = "HatAttachment" },
+	{ Id = "Explorador", Nombre = "Sombrero explorador", Anclaje = "HatAttachment" },
+	{ Id = "Antenas", Nombre = "Antenas", Anclaje = "HatAttachment" },
+	{ Id = "Diadema", Nombre = "Diadema", Anclaje = "HatAttachment" },
+} :: { Opcion }
+
+Datos.Barbas = {
+	{ Id = "Ninguna", Nombre = "Sin vello" },
+	{ Id = "Perilla", Nombre = "Perilla", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Bigote", Nombre = "Bigote", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Corta", Nombre = "Barba corta", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Larga", Nombre = "Barba larga", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Patillas", Nombre = "Patillas", Anclaje = "FaceFrontAttachment" },
+} :: { Opcion }
+
+-- Cicatrices (textura sobre la cara).
+Datos.Cicatrices = {
+	{ Id = "Ninguna", Nombre = "Ninguna" },
+	{ Id = "Ceja", Nombre = "En la ceja" },
+	{ Id = "Mejilla", Nombre = "Zarpazo" },
+	{ Id = "Cruz", Nombre = "Cruz" },
+	{ Id = "Ojo", Nombre = "Garras" },
+	{ Id = "Labio", Nombre = "En el labio" },
+	{ Id = "Frente", Nombre = "En la frente" },
+	{ Id = "Quemadura", Nombre = "Quemadura" },
+	{ Id = "Sutura", Nombre = "Sutura" },
+} :: { Opcion }
+
+-- Tatuajes (textura sobre los brazos). Solo se ven con los brazos al aire (chaquetas de manga corta o sin mangas).
+Datos.Tatuajes = {
+	{ Id = "Ninguno", Nombre = "Ninguno" },
+	{ Id = "Tribal", Nombre = "Tribal" },
+	{ Id = "Banda", Nombre = "Bandas" },
+	{ Id = "Circuitos", Nombre = "Circuitos" },
+	{ Id = "Constelacion", Nombre = "Constelación" },
+	{ Id = "Serpiente", Nombre = "Serpiente" },
+	{ Id = "Espinas", Nombre = "Espinas" },
+	{ Id = "Runas", Nombre = "Runas" },
+	{ Id = "Rayas", Nombre = "Rayas" },
+} :: { Opcion }
+
+-- Complexión: cuánto se estiran el torso, los brazos y las piernas (ancho, alto, fondo). La cabeza no cambia.
+Datos.Complexiones = {
+	{ Id = "Normal", Nombre = "Normal" },
+	{
+		Id = "Alto",
+		Nombre = "Alto",
+		Escala = { Torso = { 1, 1.1, 1 }, Brazos = { 1, 1.15, 1 }, Piernas = { 1, 1.25, 1 } },
+	},
+	{
+		Id = "Bajo",
+		Nombre = "Bajo",
+		Escala = { Torso = { 1, 0.9, 1 }, Brazos = { 1, 0.85, 1 }, Piernas = { 1, 0.78, 1 } },
+	},
+	{
+		Id = "Fuerte",
+		Nombre = "Fuerte",
+		Escala = { Torso = { 1.2, 1, 1.15 }, Brazos = { 1.3, 1.05, 1.3 }, Piernas = { 1.1, 1, 1.1 } },
+	},
+	{
+		Id = "Delgado",
+		Nombre = "Delgado",
+		Escala = { Torso = { 0.85, 1, 0.85 }, Brazos = { 0.75, 1, 0.75 }, Piernas = { 0.85, 1, 0.85 } },
+	},
+	{
+		Id = "Corpulento",
+		Nombre = "Corpulento",
+		Escala = { Torso = { 1.3, 1, 1.3 }, Brazos = { 1.1, 1, 1.15 }, Piernas = { 1.2, 1, 1.2 } },
+	},
 } :: { Opcion }
 
 -- ===== Colores libres (rueda de color) =====
@@ -179,6 +299,10 @@ Datos.Defecto = {
 	Chaqueta = "Exploradora",
 	Pantalon = "Cargo",
 	Accesorio = "Ninguno",
+	Barba = "Ninguna",
+	Cicatriz = "Ninguna",
+	Tatuaje = "Ninguno",
+	Complexion = "Normal",
 	ColorPelo = "#4A2E1E",
 	ColorChaqueta = "#2F6FD6",
 	ColorPantalon = "#2C313A",

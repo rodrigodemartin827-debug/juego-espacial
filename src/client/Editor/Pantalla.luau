@@ -322,7 +322,12 @@ local function refrescarCategorias()
 		local i = Apariencia.Indice(campo, actual[campo]) or 1
 		local opcion = Apariencia.Buscar(campo, actual[campo])
 		fila.Numero.Text = tostring(i)
-		fila.Opcion.Text = if opcion then opcion.Nombre else ""
+		local texto = if opcion then opcion.Nombre else ""
+		-- Un tatuaje solo se ve con los brazos al aire: con una chaqueta de manga larga queda tapado.
+		if campo == "Tatuaje" and actual.Tatuaje ~= "Ninguno" and not Apariencia.TatuajeVisible(actual :: any) then
+			texto ..= " (tapado)"
+		end
+		fila.Opcion.Text = texto
 	end
 end
 
