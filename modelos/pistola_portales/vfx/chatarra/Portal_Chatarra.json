@@ -1,0 +1,140 @@
+{
+  "piezas": {
+    "PortalCh_Anillo": {
+      "centro": [
+        -0.0183,
+        0.1019,
+        0.0
+      ],
+      "tamano": [
+        4.782,
+        6.409,
+        0.466
+      ],
+      "triangulos": 1032,
+      "aristas_abiertas": 0,
+      "volumen": 0.9527,
+      "material": "Neon",
+      "color": "#7DFF3A",
+      "textura": "anillo_banda_chatarra.png"
+    },
+    "PortalCh_Borde": {
+      "centro": [
+        0.1707,
+        -0.0887,
+        0.0
+      ],
+      "tamano": [
+        5.898,
+        7.65,
+        0.05
+      ],
+      "triangulos": 180,
+      "aristas_abiertas": 0,
+      "volumen": 0.0596,
+      "material": "Neon",
+      "color": "#B6FF4A"
+    },
+    "PortalCh_Fondo": {
+      "centro": [
+        0.0205,
+        0.0091,
+        0.0
+      ],
+      "tamano": [
+        3.981,
+        5.812,
+        0.02
+      ],
+      "triangulos": 160,
+      "aristas_abiertas": 0,
+      "volumen": 0.3548,
+      "material": "Neon (o SurfaceAppearance)",
+      "color": "#FFFFFF",
+      "textura": "portal_fondo_chatarra.png"
+    },
+    "PortalCh_Remolino": {
+      "centro": [
+        0.0255,
+        0.0083,
+        0.0
+      ],
+      "tamano": [
+        3.947,
+        3.996,
+        0.06
+      ],
+      "triangulos": 160,
+      "aristas_abiertas": 0,
+      "volumen": 0.7205,
+      "material": "Neon (o SurfaceAppearance)",
+      "color": "#FFFFFF",
+      "textura": "portal_remolino_chatarra.png"
+    },
+    "PortalCh_Onda": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        4.4,
+        6.2,
+        0.05
+      ],
+      "triangulos": 320,
+      "aristas_abiertas": 0,
+      "volumen": 0.1461,
+      "material": "Neon",
+      "color": "#B6FF4A"
+    }
+  },
+  "anclajes": {
+    "Centro": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Borde_1": [
+      -2.0325,
+      1.1863,
+      0.0
+    ],
+    "Borde_2": [
+      -0.8419,
+      2.864,
+      0.0
+    ],
+    "Borde_3": [
+      0.8419,
+      2.864,
+      0.0
+    ],
+    "Borde_4": [
+      2.0325,
+      1.1863,
+      0.0
+    ],
+    "Borde_5": [
+      2.0325,
+      -1.1863,
+      0.0
+    ],
+    "Borde_6": [
+      0.8419,
+      -2.864,
+      0.0
+    ],
+    "Borde_7": [
+      -0.8419,
+      -2.864,
+      0.0
+    ],
+    "Borde_8": [
+      -2.0325,
+      -1.1863,
+      0.0
+    ]
+  },
+  "triangulos_total": 1852
+}

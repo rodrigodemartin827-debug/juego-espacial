@@ -1,0 +1,189 @@
+{
+  "cuerpo": "VIP_Cuerpo",
+  "piezas": {
+    "VIP_Cuerpo": {
+      "centro": [
+        0.0,
+        0.3682,
+        -0.3989
+      ],
+      "tamano": [
+        0.5,
+        1.413,
+        2.402
+      ],
+      "triangulos": 2068,
+      "aristas_abiertas": 0,
+      "volumen": 0.3001
+    },
+    "VIP_Nucleo": {
+      "centro": [
+        0.0,
+        0.755,
+        -0.09
+      ],
+      "tamano": [
+        0.247,
+        0.26,
+        0.26
+      ],
+      "triangulos": 80,
+      "aristas_abiertas": 0,
+      "volumen": 0.008
+    },
+    "VIP_Luces": {
+      "centro": [
+        0.0,
+        0.4421,
+        -0.425
+      ],
+      "tamano": [
+        0.444,
+        1.232,
+        2.37
+      ],
+      "triangulos": 450,
+      "aristas_abiertas": 0,
+      "volumen": 0.0021
+    },
+    "VIP_Anillo1": {
+      "centro": [
+        -0.02,
+        0.8,
+        -0.92
+      ],
+      "tamano": [
+        0.66,
+        0.626,
+        0.1
+      ],
+      "triangulos": 276,
+      "aristas_abiertas": 0,
+      "volumen": 0.0086
+    },
+    "VIP_Anillo1_Luz": {
+      "centro": [
+        0.0,
+        0.8,
+        -0.967
+      ],
+      "tamano": [
+        0.61,
+        0.61,
+        0.02
+      ],
+      "triangulos": 160,
+      "aristas_abiertas": 0,
+      "volumen": 0.0004
+    },
+    "VIP_Anillo2": {
+      "centro": [
+        0.0088,
+        0.7797,
+        -1.15
+      ],
+      "tamano": [
+        0.568,
+        0.591,
+        0.1
+      ],
+      "triangulos": 276,
+      "aristas_abiertas": 0,
+      "volumen": 0.0076
+    },
+    "VIP_Anillo2_Luz": {
+      "centro": [
+        0.0,
+        0.8,
+        -1.197
+      ],
+      "tamano": [
+        0.54,
+        0.54,
+        0.02
+      ],
+      "triangulos": 160,
+      "aristas_abiertas": 0,
+      "volumen": 0.0003
+    },
+    "VIP_Anillo3": {
+      "centro": [
+        0.0199,
+        0.8141,
+        -1.37
+      ],
+      "tamano": [
+        0.52,
+        0.508,
+        0.1
+      ],
+      "triangulos": 276,
+      "aristas_abiertas": 0,
+      "volumen": 0.0067
+    },
+    "VIP_Anillo3_Luz": {
+      "centro": [
+        0.0,
+        0.8,
+        -1.417
+      ],
+      "tamano": [
+        0.47,
+        0.47,
+        0.02
+      ],
+      "triangulos": 160,
+      "aristas_abiertas": 0,
+      "volumen": 0.0003
+    }
+  },
+  "anclajes": {
+    "Boca": [
+      0.0,
+      0.8,
+      -1.62
+    ],
+    "Agarre": [
+      0.0,
+      0.05,
+      0.16
+    ],
+    "Nucleo": [
+      0.0,
+      0.755,
+      -0.09
+    ]
+  },
+  "pivotes_giro": {
+    "VIP_Anillo1": [
+      0.0,
+      0.8,
+      -0.92
+    ],
+    "VIP_Anillo2": [
+      0.0,
+      0.8,
+      -1.15
+    ],
+    "VIP_Anillo3": [
+      0.0,
+      0.8,
+      -1.37
+    ]
+  },
+  "triangulos_total": 3906,
+  "texturas": {
+    "color": "texturas/VIP_color.png",
+    "normal": "texturas/VIP_normal.png",
+    "metal": "texturas/VIP_metal.png",
+    "rugosidad": "texturas/VIP_rugosidad.png"
+  },
+  "neon": {
+    "VIP_Nucleo": "#A64BFF",
+    "VIP_Luces": "#3FF0FF",
+    "VIP_Anillo1_Luz": "#3FF0FF",
+    "VIP_Anillo2_Luz": "#3FF0FF",
+    "VIP_Anillo3_Luz": "#3FF0FF"
+  },
+  "cristal": {}
+}

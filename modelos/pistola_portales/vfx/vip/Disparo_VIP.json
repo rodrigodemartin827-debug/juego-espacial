@@ -1,0 +1,63 @@
+{
+  "piezas": {
+    "Proyectil_VIP_Nucleo": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        0.38,
+        0.4,
+        0.56
+      ],
+      "triangulos": 80,
+      "aristas_abiertas": 0,
+      "volumen": 0.041,
+      "material": "Neon",
+      "color": "#C46BFF"
+    },
+    "Proyectil_VIP_Aro": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        0.65,
+        0.65,
+        0.043
+      ],
+      "triangulos": 240,
+      "aristas_abiertas": 0,
+      "volumen": 0.003,
+      "material": "Neon",
+      "color": "#3FF0FF"
+    },
+    "Fogonazo_VIP": {
+      "centro": [
+        0.0,
+        -0.0,
+        -0.9878
+      ],
+      "tamano": [
+        0.734,
+        0.734,
+        2.024
+      ],
+      "triangulos": 396,
+      "aristas_abiertas": 0,
+      "volumen": 0.0437,
+      "material": "Neon",
+      "color": "#E8FBFF"
+    }
+  },
+  "anclajes": {
+    "Origen": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "triangulos_total": 716
+}

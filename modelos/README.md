@@ -13,6 +13,8 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
+| `pistola_portales/` | Pistola de portales normal (de chatarra) y VIP, como Tool (después de la v1). Ver su README | 3.900 cada una |
+| `pistola_portales/vfx/` | Portal, proyectil y fogonazo de las pistolas, con texturas de efectos (≤512). Ver `vfx_portal.md` | 442–2.784 |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -226,6 +228,9 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 .venv/bin/python modelos/herramientas/planeta_monstruos.py --salida modelos/planeta_monstruos --ronda 5
 .venv/bin/python modelos/herramientas/cristal_abisal.py --salida modelos/cristal_abisal --ronda 5
 .venv/bin/python modelos/herramientas/criaturas.py --salida modelos/criaturas --ronda 5
+.venv/bin/python modelos/herramientas/pistola_portales.py --salida modelos/pistola_portales --ronda 5
+.venv/bin/python modelos/herramientas/portal_vfx.py --salida modelos/pistola_portales/vfx
+.venv/bin/python modelos/herramientas/texturas_vfx.py --salida modelos/pistola_portales/vfx/texturas
 .venv/bin/python modelos/herramientas/hoja_conjunto.py modelos/hoja_contactos_todo.png
 ```
 
@@ -246,6 +251,8 @@ Los renders tardan: con 4 núcleos, unos 3 minutos la nave, 4 el monstruo y 8 la
 | `planeta_monstruos.py` | Árboles (esqueleto de ramas + metabolas), rocas partidas y el arco de costillas |
 | `cristal_abisal.py` | El recurso exclusivo de los monstruos |
 | `criaturas.py` | Las dos criaturas por piezas; rellena `plantilla_montar_criatura.luau` con los pivotes |
+| `portal_vfx.py`, `texturas_vfx.py` | Mallas (portal, proyectil, fogonazo) y texturas (partículas, `Beam`, flipbooks) de los efectos de las pistolas |
+| `pistola_portales.py` | Las dos pistolas de portales en studs, con atlas compartido por pistola; rellena `plantilla_montar_pistola.luau` |
 | `hoja_conjunto.py` | Hoja con todos los modelos (recorta la vista 3/4 de cada hoja final) |
 | `verificar_fbx.py` | Reimporta un FBX y muestra mallas, triángulos, tamaño, UV, texturas y huesos |
 | `guardar_ronda.py` | Guarda una hoja de contactos en `rondas/` en JPG |

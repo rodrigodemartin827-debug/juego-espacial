@@ -3,6 +3,8 @@
 *.rbxlx
 *.rbxm
 *.rbxmx
+# ...salvo las animaciones, que se entregan como KeyframeSequence en .rbxmx
+!animaciones/**/*.rbxmx
 *.rbxl.lock
 
 # Mapa de fuentes generado por `rojo sourcemap` (lo usan luau-lsp y otras herramientas)

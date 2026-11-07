@@ -1,0 +1,157 @@
+{
+  "piezas": {
+    "PortalVIP_Anillo": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        4.7,
+        6.5,
+        0.285
+      ],
+      "triangulos": 1120,
+      "aristas_abiertas": 0,
+      "volumen": 1.1067,
+      "material": "Neon",
+      "color": "#A64BFF",
+      "textura": "anillo_banda_vip.png"
+    },
+    "PortalVIP_Interior": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        4.074,
+        5.7,
+        0.087
+      ],
+      "triangulos": 576,
+      "aristas_abiertas": 0,
+      "volumen": 0.0981,
+      "material": "Neon",
+      "color": "#3FF0FF"
+    },
+    "PortalVIP_Marcas": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        5.491,
+        7.231,
+        0.05
+      ],
+      "triangulos": 192,
+      "aristas_abiertas": 0,
+      "volumen": 0.0108,
+      "material": "Neon",
+      "color": "#3FF0FF"
+    },
+    "PortalVIP_Fondo": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        4.2,
+        6.0,
+        0.02
+      ],
+      "triangulos": 224,
+      "aristas_abiertas": 0,
+      "volumen": 0.395,
+      "material": "Neon (o SurfaceAppearance)",
+      "color": "#FFFFFF",
+      "textura": "portal_fondo_vip.png"
+    },
+    "PortalVIP_Remolino": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        4.1,
+        4.1,
+        0.06
+      ],
+      "triangulos": 224,
+      "aristas_abiertas": 0,
+      "volumen": 0.7905,
+      "material": "Neon (o SurfaceAppearance)",
+      "color": "#FFFFFF",
+      "textura": "portal_remolino_vip.png"
+    },
+    "PortalVIP_Onda": {
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tamano": [
+        4.4,
+        6.2,
+        0.04
+      ],
+      "triangulos": 448,
+      "aristas_abiertas": 0,
+      "volumen": 0.0649,
+      "material": "Neon",
+      "color": "#3FF0FF"
+    }
+  },
+  "anclajes": {
+    "Centro": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Borde_1": [
+      -2.0325,
+      1.1863,
+      0.0
+    ],
+    "Borde_2": [
+      -0.8419,
+      2.864,
+      0.0
+    ],
+    "Borde_3": [
+      0.8419,
+      2.864,
+      0.0
+    ],
+    "Borde_4": [
+      2.0325,
+      1.1863,
+      0.0
+    ],
+    "Borde_5": [
+      2.0325,
+      -1.1863,
+      0.0
+    ],
+    "Borde_6": [
+      0.8419,
+      -2.864,
+      0.0
+    ],
+    "Borde_7": [
+      -0.8419,
+      -2.864,
+      0.0
+    ],
+    "Borde_8": [
+      -2.0325,
+      -1.1863,
+      0.0
+    ]
+  },
+  "triangulos_total": 2784
+}
