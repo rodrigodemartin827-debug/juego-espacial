@@ -55,10 +55,17 @@ function OpenCloud.tipoContenido(ruta: string, conImagenes: boolean?): string?
 	return OpenCloud.TIPOS[ext] or (if conImagenes then OpenCloud.IMAGENES[ext] else nil)
 end
 
--- Tipo de recurso de Roblox según el archivo: «Decal» para imágenes y «Model» para modelos.
-function OpenCloud.tipoRecurso(ruta: string): string
+-- Tipo de recurso de Roblox según el archivo: «Decal» para imágenes, «Animation» para los .rbxm/.rbxmx cuando se
+-- sube con --animaciones (son KeyframeSequence) y «Model» para el resto de modelos.
+function OpenCloud.tipoRecurso(ruta: string, comoAnimacion: boolean?): string
 	local ext = OpenCloud.extension(ruta)
-	return if ext and OpenCloud.IMAGENES[ext] then "Decal" else "Model"
+	if ext and OpenCloud.IMAGENES[ext] then
+		return "Decal"
+	end
+	if comoAnimacion and (ext == "rbxm" or ext == "rbxmx") then
+		return "Animation"
+	end
+	return "Model"
 end
 
 -- Nombre del archivo sin carpeta ni extensión («piezas/Puente__lejos.fbx» -> «Puente__lejos»).
