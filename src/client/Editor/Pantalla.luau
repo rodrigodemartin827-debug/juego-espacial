@@ -47,6 +47,12 @@ local NOMBRE_GUI = "EditorPersonaje"
 local jugador = Players.LocalPlayer
 local gui: ScreenGui? = nil
 local ocultas: { [ScreenGui]: boolean } = {}
+-- Interfaz de Roblox que se quita mientras el editor está abierto. PROBADO EN STUDIO: la ventana del chat (aunque no
+-- se vea) se quedaba los clics de la esquina de arriba a la izquierda, donde están la piel y las primeras categorías.
+local CORE_OCULTOS =
+	{ Enum.CoreGuiType.Chat, Enum.CoreGuiType.Backpack, Enum.CoreGuiType.PlayerList, Enum.CoreGuiType.EmotesMenu }
+local coreAntes: { [Enum.CoreGuiType]: boolean } = {}
+local chatAntes: { Ventana: boolean?, Barra: boolean? } = {}
 local conexiones: { RBXScriptConnection } = {}
 
 local C = Config.Colores
@@ -82,8 +88,18 @@ local function bloquear()
 			g.Enabled = false
 		end
 	end
+	for _, tipo in CORE_OCULTOS do
+		pcall(function()
+			coreAntes[tipo] = StarterGui:GetCoreGuiEnabled(tipo)
+			StarterGui:SetCoreGuiEnabled(tipo, false)
+		end)
+	end
 	pcall(function()
-		StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+		local TextChatService = game:GetService("TextChatService")
+		chatAntes.Ventana = TextChatService.ChatWindowConfiguration.Enabled
+		chatAntes.Barra = TextChatService.ChatInputBarConfiguration.Enabled
+		TextChatService.ChatWindowConfiguration.Enabled = false
+		TextChatService.ChatInputBarConfiguration.Enabled = false
 	end)
 end
 
@@ -98,9 +114,22 @@ local function desbloquear()
 	if c then
 		c:Enable()
 	end
+	for tipo, antes in coreAntes do
+		pcall(function()
+			StarterGui:SetCoreGuiEnabled(tipo, antes)
+		end)
+	end
+	table.clear(coreAntes)
 	pcall(function()
-		StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+		local TextChatService = game:GetService("TextChatService")
+		if chatAntes.Ventana ~= nil then
+			TextChatService.ChatWindowConfiguration.Enabled = chatAntes.Ventana
+		end
+		if chatAntes.Barra ~= nil then
+			TextChatService.ChatInputBarConfiguration.Enabled = chatAntes.Barra
+		end
 	end)
+	table.clear(chatAntes)
 end
 
 -- ===== Piezas de interfaz (estilo: metal oscuro, bordes cian, esquinas redondeadas) =====
