@@ -41,9 +41,24 @@ function OpenCloud.extension(ruta: string): string?
 	return if ext then string.lower(ext) else nil
 end
 
-function OpenCloud.tipoContenido(ruta: string): string?
+-- Imágenes: solo se suben si se pide (--imagenes), porque las carpetas de modelos tienen texturas que van
+-- incrustadas en los .fbx y no deben subirse sueltas. Se suben como «Decal».
+OpenCloud.IMAGENES = {
+	png = "image/png",
+}
+
+function OpenCloud.tipoContenido(ruta: string, conImagenes: boolean?): string?
 	local ext = OpenCloud.extension(ruta)
-	return if ext then OpenCloud.TIPOS[ext] else nil
+	if ext == nil then
+		return nil
+	end
+	return OpenCloud.TIPOS[ext] or (if conImagenes then OpenCloud.IMAGENES[ext] else nil)
+end
+
+-- Tipo de recurso de Roblox según el archivo: «Decal» para imágenes y «Model» para modelos.
+function OpenCloud.tipoRecurso(ruta: string): string
+	local ext = OpenCloud.extension(ruta)
+	return if ext and OpenCloud.IMAGENES[ext] then "Decal" else "Model"
 end
 
 -- Nombre del archivo sin carpeta ni extensión («piezas/Puente__lejos.fbx» -> «Puente__lejos»).
@@ -81,10 +96,11 @@ function OpenCloud.peticion(
 	nombre: string,
 	descripcion: string,
 	creador: Creador,
-	idExistente: number?
+	idExistente: number?,
+	tipoRecurso: string?
 ): { [string]: any }
 	local p: { [string]: any } = {
-		assetType = "Model",
+		assetType = tipoRecurso or "Model",
 		displayName = nombre,
 		description = descripcion,
 		creationContext = { creator = creador },

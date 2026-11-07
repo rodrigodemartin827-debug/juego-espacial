@@ -26,6 +26,7 @@ local Recetas = require(script.Parent.Parent.Exploracion.Datos.Recetas)
 local Catalogo = require(script.Parent.Parent.Tiendas.Datos.Catalogo)
 local ConfigTiendas = require(script.Parent.Parent.Tiendas.Config)
 local ConfigGraficos = require(script.Parent.Parent.Graficos.Config)
+local AparienciaHumanos = require(script.Parent.Parent.Personaje.Apariencia)
 local Validador = require(script.Parent.Validador)
 
 export type Direccion = "ClienteAServidor" | "ServidorACliente"
@@ -58,6 +59,35 @@ local definiciones: { [string]: Definicion } = {
 		Direccion = "ClienteAServidor",
 		LimitePorSegundo = 2,
 		Argumentos = { Validador.Enumeracion(ConfigGraficos.Orden) },
+	},
+
+	-- El jugador vuelve del editor de personaje a la elección de bando (botón «Atrás»). Solo se acepta mientras no
+	-- haya terminado su primer personaje (lo comprueba ServicioBandos).
+	VolverEleccionBando = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 1,
+		Argumentos = {},
+	},
+
+	-- El jugador guarda su personaje humano (editor de personaje): un valor de cada campo, en el orden de
+	-- Personaje/Apariencia.Campos. Las opciones tienen que existir y los colores ser "#RRGGBB".
+	GuardarAparienciaHumano = {
+		Direccion = "ClienteAServidor",
+		LimitePorSegundo = 2,
+		Argumentos = (function()
+			local lista = {}
+			for _, campo in AparienciaHumanos.Campos do
+				if AparienciaHumanos.EsCampoColor(campo) then
+					table.insert(
+						lista,
+						Validador.Cadena({ MinLongitud = 7, MaxLongitud = 7, Patron = AparienciaHumanos.PatronColor })
+					)
+				else
+					table.insert(lista, Validador.Enumeracion(AparienciaHumanos.Ids(campo)))
+				end
+			end
+			return lista
+		end)(),
 	},
 
 	-- El servidor envía al cliente una copia de sus datos al cargarlos y cuando cambian.

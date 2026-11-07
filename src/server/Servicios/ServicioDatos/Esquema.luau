@@ -50,6 +50,7 @@ local PLANTILLA: Datos = {
 	},
 	Descubrimientos = {}, -- { idEspecie = veces escaneada } (escáner de mano)
 	Graficos = "", -- nivel de gráficos ("" = todavía no lo ha elegido: sale la pantalla de gráficos)
+	Apariencia = { Humano = {}, Monstruo = {} }, -- lo elegido en el editor de personaje de cada bando (ids)
 }
 
 --[[

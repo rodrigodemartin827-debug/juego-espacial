@@ -76,8 +76,8 @@ function Modulo.AlRecibirDatos(flujo: Flujo, datos: any): (Accion, string?)
 		return "Omitir", nil
 	end
 
-	-- La pantalla ya se cerró, pero el bando ha vuelto a ser "Ninguno" (solo pasa con el comando de pruebas de
-	-- Studio, ver Servicios/ServicioBandos): se vuelve a mostrar desde cero.
+	-- La pantalla ya se cerró, pero el bando ha vuelto a ser "Ninguno" (el botón «Atrás» del editor de personaje o
+	-- el comando de pruebas de Studio, ver Servicios/ServicioBandos): se vuelve a mostrar desde cero.
 	if flujo.Estado == "Terminado" and bando == Bandos.Ninguno then
 		flujo.Estado = "Eligiendo"
 		flujo.Resaltado = nil

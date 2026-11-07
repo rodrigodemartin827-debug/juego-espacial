@@ -71,6 +71,7 @@ local function arrancarCliente(entorno, jugador)
 		"return { Preparar = function() end, Iniciar = function() end }"
 	-- La pantalla de gráficos toca Lighting, la cámara y la interfaz: tiene sus propias pruebas (Graficos).
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Graficos.ServicioGraficos`).Source = "return { Iniciar = function() end }"
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.Editor.ServicioEditor`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Experimentos.GravedadPlaneta`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Tiendas.ServicioTiendas`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)

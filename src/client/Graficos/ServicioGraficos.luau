@@ -27,7 +27,7 @@ local Calidad = require(script.Parent.Parent.VFX.Calidad)
 local ServicioDatos = require(script.Parent.Parent.Servicios.ServicioDatos)
 local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 local Pantalla = require(script.Parent.Pantalla)
-local ServicioEleccion = require(script.Parent.Parent.Eleccion.ServicioEleccion)
+local ServicioEditor = require(script.Parent.Parent.Editor.ServicioEditor)
 
 local ServicioGraficos = {}
 
@@ -154,9 +154,9 @@ local function alRecibirDatos(datos: any)
 	local guardado = if Niveles.Valido(datos.Graficos) then datos.Graficos else nil
 	ServicioGraficos.Aplicar(guardado or ServicioGraficos.Recomendado())
 	if Niveles.HayQueMostrar(datos.Graficos, RunService:IsStudio()) then
-		-- Después del paso anterior de la entrada (de momento, el bando; el editor irá entre los dos).
+		-- Después del paso anterior de la entrada: el editor de personaje (que espera al bando).
 		task.spawn(function()
-			ServicioEleccion.EsperarFin()
+			ServicioEditor.EsperarFin()
 			abrir(true)
 		end)
 	else

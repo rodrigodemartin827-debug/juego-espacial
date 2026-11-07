@@ -12,7 +12,9 @@
 	    que no debe perderse si el servidor falla.
 
 	Regla actual: el bando se elige una sola vez y no se puede cambiar. (El cambio de pago, una vez cada 7 días,
-	irá en su propio servicio y no por este remoto.)
+	irá en su propio servicio y no por este remoto.) Excepción: mientras el jugador no haya terminado su primer
+	personaje en el editor, el botón «Atrás» del editor (remoto VolverEleccionBando) le devuelve gratis a la elección
+	(ServicioBandos.VolverAElegir).
 
 	PANTALLA DE ELECCIÓN. Mientras el jugador no tiene bando, su cliente le enseña la pantalla de elección
 	(client/Eleccion) con la cámara lejos de su personaje. Para que nadie se aproveche de ese rato, el servidor:
@@ -35,7 +37,9 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
 local Shared = ReplicatedStorage.Shared
+local AparienciaHumanos = require(Shared.Personaje.Apariencia)
 local Bandos = require(Shared.Juego.Bandos)
+local ConfigEditor = require(Shared.Personaje.ConfigEditor)
 local ConfigEleccion = require(Shared.Eleccion.Config)
 local Senal = require(Shared.Utilidades.Senal)
 local ServicioDatos = require(script.Parent.ServicioDatos)
@@ -147,6 +151,28 @@ function ServicioBandos.Elegir(jugador: Player, bando: Bandos.IdBando): boolean
 	return true
 end
 
+--[[
+	Botón «Atrás» del editor de personaje: el jugador vuelve a la elección de bando, gratis, SOLO si todavía no ha
+	terminado su primer personaje (en Studio, con el modo de pruebas del editor, siempre). Devuelve true si se
+	aplicó.
+]]
+function ServicioBandos.VolverAElegir(jugador: Player): boolean
+	local datos = ServicioDatos.ObtenerDatos(jugador)
+	if datos == nil or datos.Bando == Bandos.Ninguno then
+		return false
+	end
+	local terminado = AparienciaHumanos.Hecha(datos.Apariencia and datos.Apariencia.Humano)
+	local modoPruebas = RunService:IsStudio() and ConfigEditor.MostrarSiempreEnStudio
+	if terminado and not modoPruebas then
+		return false -- ya hizo su personaje: el bando solo se cambia pagando
+	end
+	datos.Bando = Bandos.Ninguno
+	actualizarProteccion(jugador) -- vuelve a quedar quieto y protegido mientras elige
+	ServicioReplicacion.EnviarDatos(jugador) -- su cliente ve "Ninguno" y vuelve a montar la pantalla
+	ServicioDatos.GuardarAhora(jugador)
+	return true
+end
+
 -- ===== Solo para pruebas en Studio =====
 
 --[[
@@ -193,6 +219,9 @@ function ServicioBandos.Iniciar()
 
 	ServicioRed.Conectar("ElegirBando", function(jugador: Player, bando: Bandos.IdBando)
 		ServicioBandos.Elegir(jugador, bando)
+	end)
+	ServicioRed.Conectar("VolverEleccionBando", function(jugador: Player)
+		ServicioBandos.VolverAElegir(jugador)
 	end)
 
 	-- Al cargar sus datos se sabe si tiene bando: si no, se le protege mientras elige. En Studio, con el modo de
