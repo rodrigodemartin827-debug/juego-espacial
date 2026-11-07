@@ -574,10 +574,10 @@ local function crearColor(padre: Instance)
 			aplicarHSV()
 		end
 	end
-	-- Las posiciones de la entrada no cuentan la barra de arriba de Roblox; la interfaz (IgnoreGuiInset) sí.
+	-- PROBADO EN STUDIO: la posición de la entrada y AbsolutePosition están en el mismo espacio (los dos sin la barra
+	-- de arriba de Roblox, aunque la interfaz la ignore), así que no hay que corregir nada.
 	local function posicionDe(entrada: InputObject): Vector2
-		local inset = game:GetService("GuiService"):GetGuiInset()
-		return Vector2.new(entrada.Position.X, entrada.Position.Y) + inset
+		return Vector2.new(entrada.Position.X, entrada.Position.Y)
 	end
 	local function empezar(cual: string)
 		return function(entrada: InputObject)
