@@ -34,7 +34,7 @@ Config.Camara = {
 	Distancia = 13,
 	Altura = 0.6, -- sobre la raíz
 	Mira = -0.3, -- punto al que mira, sobre la raíz (algo por debajo: que se vea de la cabeza a los pies)
-	Desplazar = 2.2, -- studs a la derecha de la cámara: el personaje queda a la izquierda de las opciones
+	Desplazar = 3.6, -- studs a la derecha de la cámara: el personaje queda a la izquierda de las opciones
 	Sensibilidad = 0.01, -- radianes por píxel arrastrado
 	CampoVision = 45,
 }
