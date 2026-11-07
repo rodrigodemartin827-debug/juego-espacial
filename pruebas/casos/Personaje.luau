@@ -1,25 +1,43 @@
 --[[
-	Pruebas del editor de personaje humano: el catálogo (DatosHumanos), las reglas de la apariencia y el guardado en
-	el servidor (ServicioApariencia).
+	Pruebas del editor de personaje humano: el catálogo (DatosHumanos), los recursos subidos (RecursosHumanos y
+	modelos/personaje_humano/piezas.json), las reglas de la apariencia (Apariencia) y la validación del remoto que la
+	guarda (nada de opciones ni colores inventados por el cliente).
 ]]
+
+local fs = require("@lune/fs")
+local serde = require("@lune/serde")
 
 local Entorno = require("../infraestructura/Entorno")
 
 local function cargar()
 	local entorno = Entorno.nuevo()
-	return entorno.servidor.requerir("ReplicatedStorage.Shared.Personaje.Apariencia"),
-		entorno.servidor.requerir("ReplicatedStorage.Shared.Personaje.DatosHumanos"),
-		entorno
+	local r = entorno.servidor.requerir
+	return r("ReplicatedStorage.Shared.Personaje.Apariencia"),
+		r("ReplicatedStorage.Shared.Personaje.DatosHumanos"),
+		r("ReplicatedStorage.Shared.Personaje.RecursosHumanos"),
+		r
 end
 
 local PARTES_R6 =
 	{ Head = true, Torso = true, ["Left Arm"] = true, ["Right Arm"] = true, ["Left Leg"] = true, ["Right Leg"] = true }
+local ANCLAJES = { HairAttachment = true, HatAttachment = true, FaceFrontAttachment = true }
+local TRIANGULOS_MAXIMOS = 1500
+
+-- Lune no tiene Random: un generador con la misma forma (NextInteger).
+local function azarFalso(semilla: number)
+	math.randomseed(semilla)
+	return {
+		NextInteger = function(_, a, b)
+			return math.random(a, b)
+		end,
+	}
+end
 
 return function(Marco)
 	Marco.grupo("Personaje: catálogo humano", function()
-		Marco.prueba("cada campo tiene opciones con ids únicos, y el aspecto por defecto existe", function()
+		Marco.prueba("cada campo tiene opciones con ids únicos, y el aspecto por defecto es válido", function()
 			local Apariencia, Datos = cargar()
-			for _, campo in Apariencia.Campos do
+			for _, campo in Apariencia.CamposOpcion do
 				local vistos = {}
 				local opciones = Apariencia.Opciones(campo)
 				Marco.verdadero(#opciones >= 4, campo .. ": al menos 4 opciones")
@@ -28,30 +46,123 @@ return function(Marco)
 					vistos[o.Id] = true
 					Marco.verdadero(type(o.Nombre) == "string" and o.Nombre ~= "", campo .. ": nombre")
 				end
-				Marco.distinto(Apariencia.Buscar(campo, Datos.Defecto[campo]), nil, campo .. ": defecto")
+			end
+			for _, campo in Apariencia.Campos do
+				Marco.verdadero(Apariencia.ValorValido(campo, Datos.Defecto[campo]), campo .. ": defecto")
 			end
 		end)
 
-		Marco.prueba("todas las piezas van a una parte del R6 y tienen forma, posición, tamaño y color", function()
-			local Apariencia = cargar()
-			for _, campo in { "Cara", "Pelo", "Ropa", "Complemento" } do
+		Marco.prueba("al menos 5 pieles, de clara a oscura", function()
+			local _, Datos = cargar()
+			Marco.verdadero(#Datos.Pieles >= 5)
+			local function luz(hex: string): number
+				local r, g, b = tonumber(hex:sub(2, 3), 16), tonumber(hex:sub(4, 5), 16), tonumber(hex:sub(6, 7), 16)
+				return 0.299 * r + 0.587 * g + 0.114 * b
+			end
+			for i = 2, #Datos.Pieles do
+				Marco.verdadero(luz(Datos.Pieles[i].Hex) < luz(Datos.Pieles[i - 1].Hex), Datos.Pieles[i].Id)
+			end
+		end)
+
+		Marco.prueba("al menos 10 peinados, y cada peinado y accesorio tiene sus piezas 3D y su anclaje", function()
+			local Apariencia, _, Recursos = cargar()
+			local peinados = 0
+			for _, campo in { "Cabello", "Accesorio" } do
 				for _, o in Apariencia.Opciones(campo) do
-					for _, p in o.Piezas do
-						Marco.verdadero(p.Parte == nil or PARTES_R6[p.Parte], `{o.Id}: parte {p.Parte}`)
-						Marco.verdadero(table.find({ "Bloque", "Bola", "Cilindro" }, p.Forma) ~= nil, o.Id .. ": forma")
-						Marco.igual(#p.Pos, 3, o.Id .. ": posición")
-						Marco.igual(#p.Tam, 3, o.Id .. ": tamaño")
-						Marco.verdadero(type(p.Color) == "string", o.Id .. ": color")
+					if o.Id == "Ninguno" then
+						Marco.esNil(o.Anclaje, campo .. ": «Ninguno» no lleva nada")
+						continue
+					end
+					Marco.verdadero(ANCLAJES[o.Anclaje], `{campo} {o.Id}: anclaje {o.Anclaje}`)
+					local piezas = Recursos.Piezas[`{campo}_{o.Id}`]
+					Marco.verdadero(piezas ~= nil and #piezas > 0, `{campo} {o.Id}: sin piezas 3D`)
+					for _, p in piezas do
+						Marco.igual(p.Parte, "Head", `{p.Nombre}: va en la cabeza`)
+					end
+					if campo == "Cabello" then
+						peinados += 1
+					end
+				end
+			end
+			Marco.verdadero(peinados >= 10, `solo hay {peinados} peinados`)
+		end)
+
+		Marco.prueba("cada chaqueta y pantalón tiene sus piezas 3D en partes del R6 y con roles conocidos", function()
+			local Apariencia, Datos, Recursos = cargar()
+			for _, campo in { "Chaqueta", "Pantalon" } do
+				for _, o in Apariencia.Opciones(campo) do
+					local piezas = Recursos.Piezas[`{campo}_{o.Id}`]
+					Marco.verdadero(piezas ~= nil and #piezas > 0, `{campo} {o.Id}: sin piezas 3D`)
+					for _, p in piezas do
+						Marco.verdadero(PARTES_R6[p.Parte], `{p.Nombre}: parte {p.Parte}`)
+					end
+				end
+				if campo == "Chaqueta" then
+					for _, o in Apariencia.Opciones(campo) do
+						Marco.verdadero(o.Brazos == "Chaqueta" or o.Brazos == "Piel", `{o.Id}: color de los brazos`)
+					end
+				end
+			end
+			for _, piezas in Recursos.Piezas do
+				for _, p in piezas do
+					Marco.distinto(Datos.Roles[p.Rol], nil, `{p.Nombre}: rol {p.Rol}`)
+					Marco.verdadero(string.match(p.Malla, "^rbxassetid://%d+$") ~= nil, `{p.Nombre}: malla`)
+					for k = 1, 3 do
+						Marco.verdadero(p.Tamano[k] > 0, `{p.Nombre}: tamaño`)
 					end
 				end
 			end
 		end)
 
-		Marco.prueba("la ropa colorea cada parte con un color conocido", function()
-			local Apariencia = cargar()
-			for _, r in Apariencia.Opciones("Ropa") do
-				for _, parte in { r.Torso, r.Brazos, r.Piernas } do
-					Marco.verdadero(table.find({ "Piel", "Principal", "Detalle", "Oscuro" }, parte) ~= nil, r.Id)
+		Marco.prueba(
+			"cada rasgo de la cara tiene su textura (salvo «Sin nariz») y la rueda de color existe",
+			function()
+				local Apariencia, _, Recursos = cargar()
+				for _, campo in { "Cejas", "Ojos", "Nariz", "Boca" } do
+					for _, o in Apariencia.Opciones(campo) do
+						local imagen = Recursos.Imagenes[`{campo}_{o.Id}`]
+						if campo == "Nariz" and o.Id == "Ninguna" then
+							Marco.esNil(imagen)
+						else
+							Marco.verdadero(
+								imagen ~= nil and string.match(imagen, "^rbxassetid://%d+$") ~= nil,
+								`{campo} {o.Id}: textura`
+							)
+						end
+					end
+				end
+				Marco.distinto(Recursos.Imagenes.RuedaColor, nil)
+			end
+		)
+
+		Marco.prueba("los peinados y accesorios de Blender tienen menos de 1.500 triángulos", function()
+			local piezas = serde.decode("json", fs.readFile("modelos/personaje_humano/piezas.json"))
+			local cuenta = 0
+			for elemento, tris in piezas.TriangulosPorElemento do
+				if string.match(elemento, "^Cabello_") or string.match(elemento, "^Accesorio_") then
+					cuenta += 1
+					Marco.verdadero(tris < TRIANGULOS_MAXIMOS, `{elemento}: {tris} triángulos`)
+				end
+			end
+			Marco.verdadero(cuenta >= 16, "faltan piezas en piezas.json")
+		end)
+
+		Marco.prueba("RecursosHumanos está al día con piezas.json (todas las piezas, mismos centros)", function()
+			local _, _, Recursos = cargar()
+			local piezas = serde.decode("json", fs.readFile("modelos/personaje_humano/piezas.json")).Piezas
+			local enRecursos = {}
+			for _, lista in Recursos.Piezas do
+				for _, p in lista do
+					enRecursos[p.Nombre] = p
+				end
+			end
+			for nombre, p in piezas do
+				local r = enRecursos[nombre]
+				Marco.distinto(r, nil, nombre .. ": regenera RecursosHumanos (herramientas/generar_recursos_humanos)")
+				if r then
+					for k = 1, 3 do
+						Marco.verdadero(math.abs(r.Centro[k] - p.Centro[k]) < 1e-3, nombre .. ": centro distinto")
+					end
 				end
 			end
 		end)
@@ -60,34 +171,108 @@ return function(Marco)
 	Marco.grupo("Personaje: apariencia", function()
 		Marco.prueba("Validar completa lo que falta y cambia lo que no existe por el defecto", function()
 			local Apariencia, Datos = cargar()
-			local a = Apariencia.Validar({ Piel = "Piel9", Pelo = "NoExiste", Ropa = 3 })
+			local a = Apariencia.Validar({
+				Piel = "Piel9",
+				Cabello = "NoExiste",
+				Chaqueta = 3,
+				ColorPelo = "#a1b2c3",
+				ColorChaqueta = "rojo",
+				ColorPantalon = "#12345",
+			})
 			Marco.igual(a.Piel, "Piel9")
-			Marco.igual(a.Pelo, Datos.Defecto.Pelo)
-			Marco.igual(a.Ropa, Datos.Defecto.Ropa)
-			Marco.igual(a.Cara, Datos.Defecto.Cara)
+			Marco.igual(a.Cabello, Datos.Defecto.Cabello)
+			Marco.igual(a.Chaqueta, Datos.Defecto.Chaqueta)
+			Marco.igual(a.Ojos, Datos.Defecto.Ojos)
+			Marco.igual(a.ColorPelo, "#A1B2C3", "los colores se guardan en mayúsculas")
+			Marco.igual(a.ColorChaqueta, Datos.Defecto.ColorChaqueta)
+			Marco.igual(a.ColorPantalon, Datos.Defecto.ColorPantalon)
 			Marco.igualProfundo(Apariencia.Validar(nil), Datos.Defecto)
 		end)
 
-		Marco.prueba("Hecha solo es verdadero con una apariencia guardada", function()
+		Marco.prueba("Hecha solo es verdadero con una apariencia de este editor guardada", function()
 			local Apariencia = cargar()
 			Marco.falso(Apariencia.Hecha({}))
 			Marco.falso(Apariencia.Hecha(nil))
-			Marco.verdadero(Apariencia.Hecha({ Piel = "Piel1" }))
+			Marco.falso(Apariencia.Hecha({ Piel = "Piel1", Ropa = "Explorador" }), "la del editor anterior no vale")
+			Marco.verdadero(Apariencia.Hecha({ Piel = "Piel1", Chaqueta = "Piloto" }))
+		end)
+
+		Marco.prueba("las flechas recorren las opciones y dan la vuelta", function()
+			local Apariencia = cargar()
+			local ids = Apariencia.Ids("Cabello")
+			Marco.igual(Apariencia.Mover("Cabello", ids[1], 1), ids[2])
+			Marco.igual(Apariencia.Mover("Cabello", ids[1], -1), ids[#ids])
+			Marco.igual(Apariencia.Mover("Cabello", ids[#ids], 1), ids[1])
+			Marco.igual(Apariencia.Mover("Cabello", "NoExiste", 1), ids[2], "lo que no existe cuenta como el primero")
 		end)
 
 		Marco.prueba("Aleatoria siempre da una apariencia válida", function()
 			local Apariencia = cargar()
-			-- Lune no tiene Random: un generador con la misma forma (NextInteger).
-			math.randomseed(7)
-			local azar = {
-				NextInteger = function(_, a, b)
-					return math.random(a, b)
-				end,
-			}
-			for _ = 1, 50 do
+			local azar = azarFalso(7)
+			for _ = 1, 60 do
 				local a = Apariencia.Aleatoria(azar)
 				Marco.igualProfundo(Apariencia.Validar(a), a)
 			end
+		end)
+
+		Marco.prueba("Colores da un color para cada rol de las piezas", function()
+			local Apariencia, Datos = cargar()
+			local colores = Apariencia.Colores(Apariencia.Validar(nil))
+			for rol in Datos.Roles do
+				Marco.verdadero(Apariencia.EsColor(colores[rol]), "rol sin color: " .. rol)
+			end
+			Marco.verdadero(Apariencia.EsColor(colores.Piel))
+		end)
+	end)
+
+	Marco.grupo("Personaje: remoto GuardarAparienciaHumano", function()
+		local function argumentos(Apariencia, a)
+			local lista = {}
+			for i, campo in Apariencia.Campos do
+				lista[i] = a[campo]
+			end
+			return lista
+		end
+
+		Marco.prueba("acepta una apariencia válida", function()
+			local Apariencia, Datos, _, requerir = cargar()
+			local Remotos = requerir("ReplicatedStorage.Shared.Red.Remotos")
+			local Validador = requerir("ReplicatedStorage.Shared.Red.Validador")
+			local esquema = Remotos.Definiciones.GuardarAparienciaHumano.Argumentos
+			local ok = Validador.ValidarArgumentos(esquema, table.unpack(argumentos(Apariencia, Datos.Defecto)))
+			Marco.verdadero(ok)
+		end)
+
+		Marco.prueba("rechaza ids inventados y colores mal escritos", function()
+			local Apariencia, Datos, _, requerir = cargar()
+			local Remotos = requerir("ReplicatedStorage.Shared.Red.Remotos")
+			local Validador = requerir("ReplicatedStorage.Shared.Red.Validador")
+			local esquema = Remotos.Definiciones.GuardarAparienciaHumano.Argumentos
+			for _, cambio in
+				{
+					{ "Cabello", "PeloDeOro" },
+					{ "Accesorio", "CoronaVIP" },
+					{ "Piel", "Piel99" },
+					{ "ColorPelo", "rojo" },
+					{ "ColorChaqueta", "#12345" },
+					{ "ColorDetalle", "#GGGGGG" },
+					{ "ColorPantalon", 123 },
+				}
+			do
+				local a = table.clone(Datos.Defecto)
+				a[cambio[1]] = cambio[2]
+				local ok = Validador.ValidarArgumentos(esquema, table.unpack(argumentos(Apariencia, a)))
+				Marco.falso(ok, `{cambio[1]} = {cambio[2]} no debería pasar`)
+			end
+		end)
+
+		Marco.prueba("VolverEleccionBando existe y no lleva argumentos", function()
+			local _, _, _, requerir = cargar()
+			local Remotos = requerir("ReplicatedStorage.Shared.Red.Remotos")
+			local def = Remotos.Definiciones.VolverEleccionBando
+			Marco.distinto(def, nil)
+			Marco.igual(def.Direccion, "ClienteAServidor")
+			Marco.igual(#def.Argumentos, 0)
 		end)
 	end)
 end

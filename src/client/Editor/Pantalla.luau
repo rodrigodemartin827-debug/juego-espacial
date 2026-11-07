@@ -1,44 +1,63 @@
 --!strict
 --[[
-	Pantalla del editor de personaje (cliente). El personaje de verdad a la izquierda (se gira arrastrando), y a la
-	derecha las pestañas (Personaje/ConfigEditor.Pestanas) con sus opciones. Abajo, ALEATORIO y CONTINUAR.
+	Pantalla del editor de personaje humano (cliente): la interfaz. El personaje 3D está detrás (Editor/Estudio).
 
-	Cada cambio se ve al momento en el personaje (AlCambiar; la vista previa la pone el cliente, solo para él). Al
-	pulsar CONTINUAR se llama AlTerminar con la apariencia elegida (el servicio la guarda en el servidor).
+	Disposición ancha (ordenador):
+	  · Izquierda: fila de colores de piel (de clara a oscura) y, debajo, las categorías (Personaje/Apariencia
+	    .Categorias), cada una con flechas ‹ › y su nombre con el número de la opción («CABELLO 3») y cuál es.
+	  · Centro: el personaje (se gira arrastrando).
+	  · Derecha: selector de color (rueda de tono y saturación + barra de brillo) con un botón que cambia lo que se
+	    colorea (pelo, chaqueta, pantalón o detalles) y unas muestras rápidas.
+	  · Abajo: ATRÁS, ALEATORIO y CONTINUAR.
+	Disposición estrecha (móvil o ventana pequeña): las categorías van abajo en horizontal (se desliza con el dedo),
+	la piel arriba y el color a la derecha en pequeño; el personaje queda a la izquierda. Botones de al menos 44 px.
 
-	Mientras está abierta: personaje quieto, interfaz del juego oculta y la cámara es suya (el atributo de cámara de
-	Graficos/Config: la del planeta redondo se aparta).
+	Cada cambio llama a AlCambiar(apariencia, tipo) al momento: tipo "Pieza" (cambia una pieza: se rehace) o "Color"
+	(solo colores: se repinta, que es más rápido mientras se arrastra por la rueda).
+
+	Mientras está abierta: personaje quieto (controles desactivados) y la interfaz del juego oculta.
 ]]
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
+local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Apariencia = require(Shared.Personaje.Apariencia)
 local Config = require(Shared.Personaje.ConfigEditor)
-local ConfigGraficos = require(Shared.Graficos.Config)
+local Datos = require(Shared.Personaje.DatosHumanos)
+local Recursos = require(Shared.Personaje.RecursosHumanos)
 
 local Pantalla = {}
 
+export type Disposicion = "Ancha" | "Estrecha"
 export type Opciones = {
 	Inicial: Apariencia.Apariencia,
-	AlCambiar: (Apariencia.Apariencia) -> (),
+	AlCambiar: (Apariencia.Apariencia, string) -> (),
+	AlDisponer: (Disposicion) -> (),
+	AlAtras: () -> (),
+	AlAleatorio: () -> Apariencia.Apariencia,
 	AlTerminar: (Apariencia.Apariencia) -> (),
 }
 
 local NOMBRE_GUI = "EditorPersonaje"
-local PASO_CAMARA = "EditorCamara"
 
 local jugador = Players.LocalPlayer
 local gui: ScreenGui? = nil
 local ocultas: { [ScreenGui]: boolean } = {}
 local conexiones: { RBXScriptConnection } = {}
 
+local C = Config.Colores
+local I = Config.Interfaz
+
 local function color(hex: string): Color3
 	return Color3.fromHex(hex)
+end
+
+local function fuente(familia: string, peso: Enum.FontWeight?): Font
+	return Font.new(familia, peso or Enum.FontWeight.Bold)
 end
 
 -- ===== Bloqueo (quieto y sin la interfaz del juego) =====
@@ -84,132 +103,470 @@ local function desbloquear()
 	end)
 end
 
--- ===== Cámara =====
+-- ===== Piezas de interfaz (estilo: metal oscuro, bordes cian, esquinas redondeadas) =====
 
-local giro = 0
-local parametros = RaycastParams.new()
-parametros.FilterType = Enum.RaycastFilterType.Exclude
-
--- Posición de la cámara para un giro dado: delante de la cara, desplazada a la derecha (el personaje queda a la
--- izquierda de la pantalla). Devuelve también el foco y el punto de mira.
-local function encuadre(raiz: BasePart, angulo: number): (Vector3, Vector3, Vector3, Vector3)
-	local c = Config.Camara
-	local marco = raiz.CFrame * CFrame.Angles(0, angulo, 0)
-	local foco = marco * Vector3.new(0, c.Mira, 0)
-	local desde = marco * Vector3.new(0, c.Altura, -c.Distancia)
-	local derecha = (foco - desde):Cross(marco.UpVector).Unit
-	return desde + derecha * c.Desplazar, foco + derecha * c.Desplazar, foco, marco.UpVector
-end
-
--- Piezas que hay cerca del personaje (a menos de `radio`), visibles. PROBADO EN STUDIO: las piezas decorativas de la
--- región no aceptan consultas (CanQuery desactivado, para que sean baratas), así que ni los rayos ni
--- GetPartsObscuringTarget las ven; se comprueba a mano con su caja.
-local function piezasCerca(centro: Vector3, radio: number, excluir: Instance): { BasePart }
-	local lista = {}
-	for _, d in workspace:GetDescendants() do
-		if d:IsA("BasePart") and d.Transparency < 0.9 and not d:IsDescendantOf(excluir) and d.Size.Magnitude < 60 then
-			if (d.Position - centro).Magnitude < radio + d.Size.Magnitude / 2 then
-				table.insert(lista, d)
-			end
-		end
+local function crear(clase: string, props: { [string]: any }, padre: Instance?): any
+	local o = Instance.new(clase)
+	for k, v in props do
+		(o :: any)[k] = v
 	end
-	return lista
-end
-
--- ¿Atraviesa el segmento de `a` a `b` la caja de la pieza?
-local function cruza(p: BasePart, a: Vector3, b: Vector3): boolean
-	local medio = p.Size / 2
-	for k = 1, 16 do
-		local l = p.CFrame:PointToObjectSpace(a:Lerp(b, k / 17))
-		if math.abs(l.X) < medio.X and math.abs(l.Y) < medio.Y and math.abs(l.Z) < medio.Z then
-			return true
-		end
+	if padre then
+		o.Parent = padre
 	end
-	return false
+	return o
 end
 
--- Lo que tapa al personaje se oculta solo en esta pantalla (LocalTransparencyModifier: los demás no lo notan) mientras
--- el editor está abierto. PROBADO EN STUDIO: se aparece al lado de vallas, farolas y casas; esquivarlas girando la
--- cámara dejaba al personaje de lado, y acercarla, demasiado cerca.
-local piezasOcultas: { [BasePart]: boolean } = {}
+local function esquina(o: GuiObject, radio: number)
+	crear("UICorner", { CornerRadius = UDim.new(0, radio) }, o)
+end
 
-local function ocultarLoQueTapa(piezas: { BasePart }, desde: Vector3, raiz: BasePart)
-	local arriba = raiz.CFrame.UpVector
-	for _, p in piezas do
-		local tapa = false
-		if p.Parent then
-			for _, alto in { 2, 0.5, -1.5, -2.8 } do
-				if cruza(p, desde, raiz.Position + arriba * alto) then
-					tapa = true
-					break
-				end
-			end
-		end
-		if tapa and not piezasOcultas[p] then
-			piezasOcultas[p] = true
-			p.LocalTransparencyModifier = 1
-		elseif not tapa and piezasOcultas[p] then
-			piezasOcultas[p] = nil
-			p.LocalTransparencyModifier = 0
-		end
+local function borde(o: GuiObject, hex: string, transparencia: number, grosor: number?): UIStroke
+	return crear("UIStroke", {
+		Color = color(hex),
+		Transparency = transparencia,
+		Thickness = grosor or 1,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+	}, o)
+end
+
+-- Panel de metal: degradado vertical, borde fino y una línea de luz cian arriba.
+local function panel(padre: Instance, nombre: string): Frame
+	local f = crear("Frame", {
+		Name = nombre,
+		BackgroundColor3 = Color3.new(1, 1, 1),
+		BorderSizePixel = 0,
+		BackgroundTransparency = 0.06,
+	}, padre)
+	esquina(f, 12)
+	borde(f, C.Borde, 0.2, 1)
+	crear("UIGradient", {
+		Rotation = 90,
+		Color = ColorSequence.new(color(C.PanelClaro), color(C.Panel)),
+	}, f)
+	local luz = crear("Frame", {
+		Name = "Luz",
+		AnchorPoint = Vector2.new(0.5, 0),
+		Position = UDim2.fromScale(0.5, 0),
+		Size = UDim2.new(0.55, 0, 0, 2),
+		BackgroundColor3 = color(C.Cian),
+		BorderSizePixel = 0,
+		ZIndex = 3,
+	}, f)
+	crear("UIGradient", {
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 1),
+			NumberSequenceKeypoint.new(0.5, 0),
+			NumberSequenceKeypoint.new(1, 1),
+		}),
+	}, luz)
+	return f
+end
+
+local function etiqueta(padre: Instance, props: { [string]: any }): TextLabel
+	local t = crear("TextLabel", {
+		BackgroundTransparency = 1,
+		TextColor3 = color(C.Texto),
+		FontFace = fuente(Config.Fuentes.Texto),
+		TextSize = 16,
+		TextXAlignment = Enum.TextXAlignment.Left,
+	}, padre)
+	for k, v in props do
+		(t :: any)[k] = v
 	end
+	return t
 end
 
-local function mostrarOcultas()
-	for p in piezasOcultas do
-		p.LocalTransparencyModifier = 0
+-- Botón con reacción: se ilumina el borde al pasar y se hunde un poco al pulsar.
+local function boton(padre: Instance, props: { [string]: any }, principal: boolean?): TextButton
+	local b = crear("TextButton", {
+		AutoButtonColor = false,
+		BackgroundColor3 = color(if principal then C.Cian else C.Metal),
+		TextColor3 = color(if principal then "#06121A" else C.Texto),
+		FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
+		TextSize = 18,
+		BorderSizePixel = 0,
+	}, padre)
+	for k, v in props do
+		(b :: any)[k] = v
 	end
-	table.clear(piezasOcultas)
-end
-
-local function empezarCamara()
-	jugador:SetAttribute(ConfigGraficos.AtributoCamara, true)
-	local c = Config.Camara
-	local campoAntes = workspace.CurrentCamera and workspace.CurrentCamera.FieldOfView or 70
-	local personajeInicial = jugador.Character
-	local raizInicial = personajeInicial and personajeInicial:FindFirstChild("HumanoidRootPart") :: BasePart?
-	giro = 0
-	local piezas: { BasePart } = if raizInicial and personajeInicial
-		then piezasCerca(raizInicial.Position, c.Distancia + 6, personajeInicial)
-		else {}
-	-- Las piezas que se ocultan no deben frenar la cámara: los rayos (para el terreno y lo que sí acepta consultas)
-	-- las ignoran.
-	local ignorar: { Instance } = table.clone(piezas) :: { any }
-	local ultimoGiro = math.huge
-	RunService:BindToRenderStep(PASO_CAMARA, Enum.RenderPriority.Camera.Value + 2, function()
-		local camara = workspace.CurrentCamera
-		local personaje = jugador.Character
-		local raiz = personaje and personaje:FindFirstChild("HumanoidRootPart") :: BasePart?
-		if camara == nil or personaje == nil or raiz == nil then
-			return
-		end
-		camara.CameraType = Enum.CameraType.Scriptable
-		camara.FieldOfView = c.CampoVision
-		local desde, mira, foco, arriba = encuadre(raiz, giro)
-		-- Lo que no se puede ocultar (el terreno) acerca la cámara.
-		ignorar[#piezas + 1] = personaje
-		parametros.FilterDescendantsInstances = ignorar
-		local golpe = workspace:Raycast(foco, desde - foco, parametros)
-		if golpe then
-			desde = foco + (desde - foco).Unit * math.max(golpe.Distance - 0.5, 2)
-		end
-		if math.abs(giro - ultimoGiro) > 0.01 then
-			ultimoGiro = giro
-			ocultarLoQueTapa(piezas, desde, raiz)
-		end
-		camara.CFrame = CFrame.lookAt(desde, mira, arriba)
+	esquina(b, 10)
+	local trazo = borde(b, if principal then "#B8F6FF" else C.Borde, if principal then 0.2 else 0.1, 1.5)
+	local escala = crear("UIScale", { Scale = 1 }, b)
+	local rapido = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	b.MouseEnter:Connect(function()
+		TweenService:Create(trazo, rapido, { Color = color(C.Cian), Transparency = 0 }):Play()
 	end)
-	-- Arrastrar (ratón o dedo) fuera de la interfaz gira al personaje.
-	local arrastrando = false
-	table.insert(
-		conexiones,
-		UserInputService.InputBegan:Connect(function(entrada: InputObject, procesada: boolean)
-			if procesada then
-				return
+	b.MouseLeave:Connect(function()
+		TweenService:Create(trazo, rapido, {
+			Color = color(if principal then "#B8F6FF" else C.Borde),
+			Transparency = if principal then 0.2 else 0.1,
+		}):Play()
+		TweenService:Create(escala, rapido, { Scale = 1 }):Play()
+	end)
+	b.MouseButton1Down:Connect(function()
+		TweenService:Create(escala, rapido, { Scale = 0.95 }):Play()
+	end)
+	b.MouseButton1Up:Connect(function()
+		TweenService:Create(escala, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+			Scale = 1,
+		}):Play()
+	end)
+	return b
+end
+
+-- ===== Estado =====
+
+local actual: { [string]: any } = {}
+local op: Opciones? = nil
+local objetivo = 1 -- índice en Datos.ObjetivosColor
+local hsv = { 0, 0, 1 }
+local disposicion: Disposicion = "Ancha"
+
+-- Referencias de la interfaz que se actualizan.
+local ui: { [string]: any } = {}
+
+local function cambiar(tipo: string)
+	local o = op
+	if o then
+		o.AlCambiar(table.clone(actual) :: any, tipo)
+	end
+end
+
+-- ===== Piel =====
+
+local function refrescarPiel()
+	for id, muestra in ui.Pieles or {} do
+		local sel = actual.Piel == id
+		muestra.Seleccion.Transparency = if sel then 0 else 1
+		muestra.Escala.Scale = if sel then 1.12 else 1
+	end
+end
+
+local function crearPieles(padre: Instance)
+	ui.Pieles = {}
+	local fila = crear("Frame", { Name = "Pieles", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, padre)
+	crear("UIListLayout", {
+		FillDirection = Enum.FillDirection.Horizontal,
+		HorizontalAlignment = Enum.HorizontalAlignment.Center,
+		VerticalAlignment = Enum.VerticalAlignment.Center,
+		Padding = UDim.new(0, 4),
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	}, fila)
+	for i, piel in Datos.Pieles do
+		local b = crear("TextButton", {
+			Name = piel.Id,
+			LayoutOrder = i,
+			Text = "",
+			AutoButtonColor = false,
+			BackgroundColor3 = color(piel.Hex),
+			Size = UDim2.fromOffset(26, 26),
+			BorderSizePixel = 0,
+		}, fila)
+		esquina(b, 13)
+		borde(b, "#000000", 0.6, 1)
+		local sel = crear("UIStroke", {
+			Color = color(C.Cian),
+			Thickness = 2.5,
+			Transparency = 1,
+			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		}, b)
+		local escala = crear("UIScale", { Scale = 1 }, b)
+		b.MouseButton1Click:Connect(function()
+			if actual.Piel ~= piel.Id then
+				actual.Piel = piel.Id
+				refrescarPiel()
+				cambiar("Color")
 			end
+		end)
+		ui.Pieles[piel.Id] = { Seleccion = sel, Escala = escala, Boton = b }
+	end
+	refrescarPiel()
+end
+
+-- ===== Categorías =====
+
+local function refrescarCategorias()
+	for campo, fila in ui.Categorias or {} do
+		local i = Apariencia.Indice(campo, actual[campo]) or 1
+		local opcion = Apariencia.Buscar(campo, actual[campo])
+		fila.Numero.Text = tostring(i)
+		fila.Opcion.Text = if opcion then opcion.Nombre else ""
+	end
+end
+
+local function crearCategorias(padre: Instance)
+	ui.Categorias = {}
+	local cont = crear("ScrollingFrame", {
+		Name = "Categorias",
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		ScrollBarThickness = 0,
+		CanvasSize = UDim2.new(),
+		AutomaticCanvasSize = Enum.AutomaticSize.XY,
+		ScrollingDirection = Enum.ScrollingDirection.Y,
+		Size = UDim2.fromScale(1, 1),
+	}, padre)
+	ui.ListaCategorias = crear("UIListLayout", {
+		Padding = UDim.new(0, 6),
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		HorizontalAlignment = Enum.HorizontalAlignment.Center,
+	}, cont)
+	ui.ContCategorias = cont
+	for orden, cat in Apariencia.Categorias do
+		local fila = crear("Frame", {
+			Name = cat.Campo,
+			LayoutOrder = orden,
+			BackgroundColor3 = color(C.Fondo),
+			BackgroundTransparency = 0.35,
+			BorderSizePixel = 0,
+		}, cont)
+		esquina(fila, 10)
+		borde(fila, C.Borde, 0.45, 1)
+		local function flecha(texto: string, lado: number, paso: number)
+			local b = boton(fila, {
+				Name = if paso < 0 then "Anterior" else "Siguiente",
+				Text = texto,
+				TextSize = 26,
+				FontFace = fuente(Config.Fuentes.Texto),
+				AnchorPoint = Vector2.new(lado, 0.5),
+				Position = UDim2.new(lado, if lado == 0 then 4 else -4, 0.5, 0),
+				Size = UDim2.new(0, 44, 1, -8),
+			})
+			b.MouseButton1Click:Connect(function()
+				actual[cat.Campo] = Apariencia.Mover(cat.Campo, actual[cat.Campo], paso)
+				refrescarCategorias()
+				cambiar("Pieza")
+			end)
+		end
+		flecha("‹", 0, -1)
+		flecha("›", 1, 1)
+		local nombre = etiqueta(fila, {
+			Name = "Nombre",
+			Text = string.upper(cat.Nombre),
+			FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
+			TextSize = 13,
+			TextXAlignment = Enum.TextXAlignment.Center,
+			AnchorPoint = Vector2.new(0.5, 0),
+			Position = UDim2.new(0.5, -9, 0, 5),
+			Size = UDim2.new(1, -120, 0, 18),
+		})
+		local numero = etiqueta(fila, {
+			Name = "Numero",
+			Text = "1",
+			FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
+			TextSize = 13,
+			TextColor3 = color(C.Cian),
+			Size = UDim2.fromOffset(24, 18),
+		})
+		-- El número va justo detrás del nombre («CABELLO 3»).
+		local function ponerNumero()
+			numero.Position = UDim2.new(0.5, nombre.TextBounds.X / 2 - 3, 0, 5)
+		end
+		nombre:GetPropertyChangedSignal("TextBounds"):Connect(ponerNumero)
+		ponerNumero()
+		local opcion = etiqueta(fila, {
+			Name = "Opcion",
+			Text = "",
+			TextSize = 15,
+			TextColor3 = color(C.TextoSuave),
+			TextXAlignment = Enum.TextXAlignment.Center,
+			AnchorPoint = Vector2.new(0.5, 1),
+			Position = UDim2.new(0.5, 0, 1, -5),
+			Size = UDim2.new(1, -110, 0, 18),
+			TextTruncate = Enum.TextTruncate.AtEnd,
+		})
+		ui.Categorias[cat.Campo] = { Fila = fila, Numero = numero, Opcion = opcion }
+	end
+	refrescarCategorias()
+end
+
+-- ===== Color =====
+
+local function campoObjetivo(): string
+	return Datos.ObjetivosColor[objetivo].Campo
+end
+
+local function leerColorObjetivo()
+	local h, s, v = color(actual[campoObjetivo()]):ToHSV()
+	hsv = { h, s, v }
+end
+
+local function refrescarColor()
+	local o = Datos.ObjetivosColor[objetivo]
+	ui.Objetivo.Text = `{Config.Textos.Colorea}: {string.upper(o.Nombre)}  ›`
+	ui.MuestraObjetivo.BackgroundColor3 = color(actual[o.Campo])
+	-- Marca en la rueda: ángulo = tono (0 arriba, en el sentido del reloj), distancia al centro = saturación.
+	local a = hsv[1] * 2 * math.pi
+	local r = hsv[2] * 0.5
+	ui.Marca.Position = UDim2.fromScale(0.5 + math.sin(a) * r, 0.5 - math.cos(a) * r)
+	ui.Marca.BackgroundColor3 = Color3.fromHSV(hsv[1], hsv[2], 1)
+	ui.Rueda.ImageColor3 = Color3.fromHSV(0, 0, math.max(hsv[3], 0.12))
+	ui.GradienteBrillo.Color = ColorSequence.new(Color3.new(0, 0, 0), Color3.fromHSV(hsv[1], hsv[2], 1))
+	ui.Pomo.Position = UDim2.fromScale(hsv[3], 0.5)
+end
+
+local function aplicarHSV()
+	local c = Color3.fromHSV(hsv[1], hsv[2], hsv[3])
+	actual[campoObjetivo()] = "#" .. string.upper(c:ToHex())
+	refrescarColor()
+	cambiar("Color")
+end
+
+local function crearColor(padre: Instance)
+	crear("UIListLayout", {
+		Padding = UDim.new(0, 10),
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		HorizontalAlignment = Enum.HorizontalAlignment.Center,
+	}, padre)
+
+	-- Botón que cambia lo que se colorea.
+	local objetivoBoton = boton(padre, {
+		Name = "Objetivo",
+		LayoutOrder = 1,
+		Text = "",
+		TextSize = 13,
+		Size = UDim2.new(1, 0, 0, 46),
+		TextXAlignment = Enum.TextXAlignment.Left,
+	})
+	crear("UIPadding", { PaddingLeft = UDim.new(0, 44) }, objetivoBoton)
+	local muestra = crear("Frame", {
+		Name = "Muestra",
+		AnchorPoint = Vector2.new(0, 0.5),
+		Position = UDim2.new(0, -34, 0.5, 0),
+		Size = UDim2.fromOffset(24, 24),
+		BorderSizePixel = 0,
+	}, objetivoBoton)
+	esquina(muestra, 12)
+	borde(muestra, "#FFFFFF", 0.4, 1.5)
+	objetivoBoton.MouseButton1Click:Connect(function()
+		objetivo = objetivo % #Datos.ObjetivosColor + 1
+		leerColorObjetivo()
+		refrescarColor()
+	end)
+	ui.Objetivo = objetivoBoton
+	ui.MuestraObjetivo = muestra
+
+	-- Rueda de tono y saturación.
+	local rueda = crear("ImageButton", {
+		Name = "Rueda",
+		LayoutOrder = 2,
+		Image = Recursos.Imagenes.RuedaColor,
+		BackgroundTransparency = 1,
+		AutoButtonColor = false,
+		Size = UDim2.fromOffset(I.TamRueda, I.TamRueda),
+	}, padre)
+	esquina(rueda, 999)
+	borde(rueda, C.Borde, 0, 3)
+	local marca = crear("Frame", {
+		Name = "Marca",
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Size = UDim2.fromOffset(20, 20),
+		BorderSizePixel = 0,
+		ZIndex = 3,
+	}, rueda)
+	esquina(marca, 10)
+	borde(marca, "#FFFFFF", 0, 3)
+	ui.Rueda = rueda
+	ui.Marca = marca
+
+	-- Barra de brillo.
+	local brillo = crear("TextButton", {
+		Name = "Brillo",
+		LayoutOrder = 3,
+		Text = "",
+		AutoButtonColor = false,
+		BackgroundColor3 = Color3.new(1, 1, 1),
+		Size = UDim2.new(1, -8, 0, 22),
+		BorderSizePixel = 0,
+	}, padre)
+	esquina(brillo, 11)
+	borde(brillo, C.Borde, 0, 2)
+	ui.GradienteBrillo = crear("UIGradient", {}, brillo)
+	local pomo = crear("Frame", {
+		Name = "Pomo",
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Size = UDim2.new(0, 14, 1, 10),
+		BackgroundColor3 = Color3.new(1, 1, 1),
+		BorderSizePixel = 0,
+		ZIndex = 3,
+	}, brillo)
+	esquina(pomo, 7)
+	borde(pomo, C.Cian, 0, 2)
+	ui.Brillo = brillo
+	ui.Pomo = pomo
+
+	-- Muestras rápidas.
+	local muestras = crear("Frame", {
+		Name = "Muestras",
+		LayoutOrder = 4,
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 0, 60),
+	}, padre)
+	ui.RejillaMuestras = crear("UIGridLayout", {
+		CellSize = UDim2.fromOffset(26, 26),
+		CellPadding = UDim2.fromOffset(6, 6),
+		HorizontalAlignment = Enum.HorizontalAlignment.Center,
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	}, muestras)
+	ui.Muestras = muestras
+	for i, hex in Datos.Muestras do
+		local b = crear("TextButton", {
+			LayoutOrder = i,
+			Text = "",
+			AutoButtonColor = false,
+			BackgroundColor3 = color(hex),
+			BorderSizePixel = 0,
+		}, muestras)
+		esquina(b, 6)
+		borde(b, "#000000", 0.5, 1)
+		b.MouseButton1Click:Connect(function()
+			actual[campoObjetivo()] = hex
+			leerColorObjetivo()
+			refrescarColor()
+			cambiar("Color")
+		end)
+	end
+
+	-- Arrastrar por la rueda o por la barra.
+	local arrastre: string? = nil
+	local function leer(posicion: Vector2)
+		if arrastre == "Rueda" then
+			local centro = rueda.AbsolutePosition + rueda.AbsoluteSize / 2
+			local d = posicion - centro
+			local radio = rueda.AbsoluteSize.X / 2
+			hsv[1] = (math.atan2(d.X, -d.Y) / (2 * math.pi)) % 1
+			hsv[2] = math.clamp(d.Magnitude / radio, 0, 1)
+			if hsv[3] < 0.15 then
+				hsv[3] = 1 -- si estaba casi negro, al tocar la rueda se ve el color
+			end
+			aplicarHSV()
+		elseif arrastre == "Brillo" then
+			hsv[3] = math.clamp((posicion.X - brillo.AbsolutePosition.X) / brillo.AbsoluteSize.X, 0, 1)
+			aplicarHSV()
+		end
+	end
+	-- Las posiciones de la entrada no cuentan la barra de arriba de Roblox; la interfaz (IgnoreGuiInset) sí.
+	local function posicionDe(entrada: InputObject): Vector2
+		local inset = game:GetService("GuiService"):GetGuiInset()
+		return Vector2.new(entrada.Position.X, entrada.Position.Y) + inset
+	end
+	local function empezar(cual: string)
+		return function(entrada: InputObject)
 			local t = entrada.UserInputType
 			if t == Enum.UserInputType.MouseButton1 or t == Enum.UserInputType.Touch then
-				arrastrando = true
+				arrastre = cual
+				leer(posicionDe(entrada))
+			end
+		end
+	end
+	rueda.InputBegan:Connect(empezar("Rueda"))
+	brillo.InputBegan:Connect(empezar("Brillo"))
+	table.insert(
+		conexiones,
+		UserInputService.InputChanged:Connect(function(entrada: InputObject)
+			local t = entrada.UserInputType
+			if arrastre and (t == Enum.UserInputType.MouseMovement or t == Enum.UserInputType.Touch) then
+				leer(posicionDe(entrada))
 			end
 		end)
 	)
@@ -218,244 +575,289 @@ local function empezarCamara()
 		UserInputService.InputEnded:Connect(function(entrada: InputObject)
 			local t = entrada.UserInputType
 			if t == Enum.UserInputType.MouseButton1 or t == Enum.UserInputType.Touch then
-				arrastrando = false
+				arrastre = nil
 			end
 		end)
 	)
-	table.insert(
-		conexiones,
-		UserInputService.InputChanged:Connect(function(entrada: InputObject)
-			local t = entrada.UserInputType
-			if arrastrando and (t == Enum.UserInputType.MouseMovement or t == Enum.UserInputType.Touch) then
-				giro -= entrada.Delta.X * c.Sensibilidad
-			end
-		end)
-	)
-	return campoAntes
+	leerColorObjetivo()
+	refrescarColor()
 end
 
-local function pararCamara(campoAntes: number)
-	RunService:UnbindFromRenderStep(PASO_CAMARA)
-	mostrarOcultas()
-	for _, conexion in conexiones do
-		conexion:Disconnect()
+-- ===== Disposición (ancha o estrecha) =====
+
+local function maquetar()
+	local g = gui
+	local cam = workspace.CurrentCamera
+	if g == nil or cam == nil then
+		return
 	end
-	table.clear(conexiones)
-	jugador:SetAttribute(ConfigGraficos.AtributoCamara, nil)
-	local camara = workspace.CurrentCamera
-	if camara then
-		camara.FieldOfView = campoAntes
-		local personaje = jugador.Character
-		local raiz = personaje and personaje:FindFirstChild("HumanoidRootPart")
-		if not (raiz and raiz:FindFirstChild("PlanetaRedondoAntigravedad")) then
-			camara.CameraType = Enum.CameraType.Custom
+	local v = cam.ViewportSize
+	local estrecha = v.X < I.AnchoMinimo or v.Y < I.AltoMinimo
+	disposicion = if estrecha then "Estrecha" else "Ancha"
+	local m = I.Margen
+
+	local cabecera, izq, der, abajo = ui.Cabecera, ui.Izquierda, ui.Derecha, ui.Abajo
+	local cats = ui.ContCategorias
+	local lista = ui.ListaCategorias
+
+	if not estrecha then
+		cabecera.Position = UDim2.fromOffset(m + 4, m)
+		ui.Titulo.TextSize = 30
+		ui.Subtitulo.TextSize = 15
+		izq.Visible = true
+		izq.Position = UDim2.fromOffset(m, m + 78)
+		izq.Size = UDim2.new(0, I.AnchoIzquierda, 1, -(m + 78) - I.AltoBoton - 2 * m)
+		ui.PielesCont.Parent = izq
+		ui.PielesCont.Position = UDim2.fromOffset(0, 28)
+		ui.PielesCont.Size = UDim2.new(1, 0, 0, 36)
+		ui.TituloPiel.Visible = true
+		ui.TituloAspecto.Visible = true
+		cats.Parent = izq
+		cats.Position = UDim2.fromOffset(12, 104)
+		cats.Size = UDim2.new(1, -24, 1, -116)
+		cats.ScrollingDirection = Enum.ScrollingDirection.Y
+		lista.FillDirection = Enum.FillDirection.Vertical
+		for _, fila in ui.Categorias do
+			fila.Fila.Size = UDim2.new(1, 0, 0, I.AltoFila)
+		end
+		der.Position = UDim2.new(1, -m - I.AnchoDerecha, 0, m + 78)
+		der.Size = UDim2.fromOffset(I.AnchoDerecha, 0)
+		ui.Rueda.Size = UDim2.fromOffset(I.TamRueda, I.TamRueda)
+		ui.RejillaMuestras.CellSize = UDim2.fromOffset(26, 26)
+		ui.Muestras.Size = UDim2.new(1, 0, 0, 60)
+		ui.BarraInferior.Visible = false
+		abajo.Position = UDim2.new(0, m, 1, -m - I.AltoBoton)
+		abajo.Size = UDim2.new(1, -2 * m, 0, I.AltoBoton)
+		for _, b in ui.Botones do
+			b.Size = UDim2.new(0, 220, 1, 0)
+			b.TextSize = 18
+		end
+	else
+		cabecera.Position = UDim2.fromOffset(m, 10)
+		ui.Titulo.TextSize = 20
+		ui.Subtitulo.TextSize = 12
+		izq.Visible = false
+		ui.PielesCont.Parent = g
+		ui.PielesCont.Position = UDim2.fromOffset(m - 4, 62)
+		ui.PielesCont.Size = UDim2.fromOffset(300, 36)
+		ui.TituloPiel.Visible = false
+		ui.TituloAspecto.Visible = false
+		local altoBarra = I.AltoCategoriaEstrecha + 12
+		ui.BarraInferior.Visible = true
+		ui.BarraInferior.Position = UDim2.new(0, 0, 1, -altoBarra - I.AltoBotonEstrecho - 16)
+		ui.BarraInferior.Size = UDim2.new(1, 0, 0, altoBarra)
+		cats.Parent = ui.BarraInferior
+		cats.Position = UDim2.fromOffset(m, 6)
+		cats.Size = UDim2.new(1, -2 * m, 1, -12)
+		cats.ScrollingDirection = Enum.ScrollingDirection.X
+		lista.FillDirection = Enum.FillDirection.Horizontal
+		for _, fila in ui.Categorias do
+			fila.Fila.Size = UDim2.fromOffset(I.AnchoCategoriaEstrecha, I.AltoCategoriaEstrecha)
+		end
+		der.Position = UDim2.new(1, -m - I.AnchoDerechaEstrecha, 0, 10)
+		der.Size = UDim2.fromOffset(I.AnchoDerechaEstrecha, 0)
+		ui.Rueda.Size = UDim2.fromOffset(I.TamRuedaEstrecha, I.TamRuedaEstrecha)
+		ui.RejillaMuestras.CellSize = UDim2.fromOffset(22, 22)
+		ui.Muestras.Size = UDim2.new(1, 0, 0, 50)
+		abajo.Position = UDim2.new(0, m, 1, -I.AltoBotonEstrecho - 8)
+		abajo.Size = UDim2.new(1, -2 * m, 0, I.AltoBotonEstrecho)
+		for _, b in ui.Botones do
+			b.Size = UDim2.fromScale(0.31, 1)
+			b.TextSize = 14
 		end
 	end
-end
-
--- ===== Interfaz =====
-
-local function esquina(objeto: GuiObject, radio: number)
-	local e = Instance.new("UICorner")
-	e.CornerRadius = UDim.new(0, radio)
-	e.Parent = objeto
-end
-
-local function texto(padre: Instance, props: { [string]: any }): TextLabel
-	local t = Instance.new("TextLabel")
-	t.BackgroundTransparency = 1
-	t.Font = Enum.Font.GothamBold
-	t.TextColor3 = color(Config.Colores.Texto)
-	t.TextScaled = true
-	for k, v in props do
-		(t :: any)[k] = v
+	local o = op
+	if o then
+		o.AlDisponer(disposicion)
 	end
-	t.Parent = padre
-	return t
 end
 
-local function boton(padre: Instance, props: { [string]: any }): TextButton
-	local b = Instance.new("TextButton")
-	b.AutoButtonColor = true
-	b.Font = Enum.Font.GothamBold
-	b.TextScaled = true
-	b.TextColor3 = color(Config.Colores.Texto)
-	b.BackgroundColor3 = color(Config.Colores.Panel)
-	for k, v in props do
-		(b :: any)[k] = v
-	end
-	b.Parent = padre
-	esquina(b, 10)
-	local relleno = Instance.new("UIPadding")
-	relleno.PaddingTop = UDim.new(0.14, 0)
-	relleno.PaddingBottom = UDim.new(0.14, 0)
-	relleno.PaddingLeft = UDim.new(0.06, 0)
-	relleno.PaddingRight = UDim.new(0.06, 0)
-	relleno.Parent = b
-	return b
-end
+-- ===== Abrir y cerrar =====
 
 function Pantalla.Abierta(): boolean
 	return gui ~= nil
 end
 
-function Pantalla.Abrir(op: Opciones)
-	if gui ~= nil then
-		return
-	end
-	local col = Config.Colores
-	local actual: { [string]: string } = table.clone(op.Inicial :: any)
-	local pestana = Config.Pestanas[1]
+-- Pone otra apariencia en todos los controles (por ejemplo tras ALEATORIO).
+function Pantalla.Poner(a: Apariencia.Apariencia)
+	actual = table.clone(a :: any)
+	refrescarPiel()
+	refrescarCategorias()
+	leerColorObjetivo()
+	refrescarColor()
+end
 
-	local nueva = Instance.new("ScreenGui")
-	nueva.Name = NOMBRE_GUI
-	nueva.IgnoreGuiInset = true
-	nueva.ResetOnSpawn = false
-	nueva.DisplayOrder = 120
-	gui = nueva
-
-	texto(nueva, {
-		Text = Config.Textos.Titulo,
-		Size = UDim2.fromScale(0.4, 0.07),
-		Position = UDim2.fromScale(0.03, 0.04),
-		TextXAlignment = Enum.TextXAlignment.Left,
-	})
-	texto(nueva, {
-		Text = Config.Textos.Subtitulo,
-		Font = Enum.Font.Gotham,
-		TextColor3 = color(col.Texto),
-		TextStrokeTransparency = 0.35, -- se lee sobre cualquier fondo
-		Size = UDim2.fromScale(0.4, 0.032),
-		Position = UDim2.fromScale(0.03, 0.115),
-		TextXAlignment = Enum.TextXAlignment.Left,
-	})
-
-	-- Panel de la derecha: pestañas arriba, opciones debajo.
-	local panel = Instance.new("Frame")
-	panel.BackgroundColor3 = color(col.Fondo)
-	panel.BackgroundTransparency = 0.15
-	panel.Size = UDim2.fromScale(0.4, 0.8)
-	panel.Position = UDim2.fromScale(0.575, 0.05)
-	panel.Parent = nueva
-	esquina(panel, 14)
-
-	local barra = Instance.new("Frame")
-	barra.BackgroundTransparency = 1
-	barra.Size = UDim2.fromScale(0.94, 0.2)
-	barra.Position = UDim2.fromScale(0.03, 0.025)
-	barra.Parent = panel
-	local rejillaPestanas = Instance.new("UIGridLayout")
-	rejillaPestanas.CellSize = UDim2.fromScale(0.235, 0.44)
-	rejillaPestanas.CellPadding = UDim2.fromScale(0.02, 0.08)
-	rejillaPestanas.SortOrder = Enum.SortOrder.LayoutOrder
-	rejillaPestanas.Parent = barra
-
-	local zona = Instance.new("ScrollingFrame")
-	zona.BackgroundTransparency = 1
-	zona.BorderSizePixel = 0
-	zona.ScrollBarThickness = 6
-	zona.Size = UDim2.fromScale(0.94, 0.72)
-	zona.Position = UDim2.fromScale(0.03, 0.25)
-	zona.AutomaticCanvasSize = Enum.AutomaticSize.Y
-	zona.CanvasSize = UDim2.new()
-	zona.Parent = panel
-	local rejilla = Instance.new("UIGridLayout")
-	rejilla.CellSize = UDim2.new(0.31, 0, 0, 74)
-	rejilla.CellPadding = UDim2.new(0.035, 0, 0, 10)
-	rejilla.SortOrder = Enum.SortOrder.LayoutOrder
-	rejilla.Parent = zona
-
-	local botonesPestana: { [string]: TextButton } = {}
-	local pintarOpciones: () -> ()
-
-	local function marcarPestanas()
-		for campo, b in botonesPestana do
-			b.BackgroundColor3 = if campo == pestana.Campo then color(col.Elegido) else color(col.Panel)
-			b.TextColor3 = if campo == pestana.Campo then color(col.Fondo) else color(col.Texto)
-		end
-	end
-
-	pintarOpciones = function()
-		for _, hijo in zona:GetChildren() do
-			if hijo:IsA("GuiButton") then
-				hijo:Destroy()
-			end
-		end
-		for indice, opcion in Apariencia.Opciones(pestana.Campo) do
-			local elegido = actual[pestana.Campo] == opcion.Id
-			local b = boton(zona, {
-				Name = opcion.Id,
-				LayoutOrder = indice,
-				Text = if pestana.Colores then "" else opcion.Nombre,
-				BackgroundColor3 = if pestana.Colores then color(opcion.Hex) else color(col.Panel),
-			})
-			local borde = Instance.new("UIStroke")
-			borde.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			borde.Color = if elegido then color(col.Elegido) else color(col.Borde)
-			borde.Thickness = if elegido then 3 else 1
-			borde.Parent = b
-			if pestana.Colores then
-				texto(b, {
-					Text = opcion.Nombre,
-					Size = UDim2.fromScale(1, 0.34),
-					Position = UDim2.fromScale(0, 0.66),
-					TextStrokeTransparency = 0.3,
-				})
-			end
-			b.Activated:Connect(function()
-				actual[pestana.Campo] = opcion.Id
-				op.AlCambiar(actual :: any)
-				pintarOpciones()
-			end)
-		end
-	end
-
-	for indice, p in Config.Pestanas do
-		local b = boton(barra, { Text = p.Nombre, LayoutOrder = indice })
-		botonesPestana[p.Campo] = b
-		b.Activated:Connect(function()
-			pestana = p
-			marcarPestanas()
-			pintarOpciones()
-		end)
-	end
-	marcarPestanas()
-	pintarOpciones()
-
-	local aleatorio = boton(nueva, {
-		Text = Config.Textos.Aleatorio,
-		Size = UDim2.fromScale(0.15, 0.065),
-		Position = UDim2.fromScale(0.6, 0.885),
-	})
-	local continuar = boton(nueva, {
-		Text = Config.Textos.Continuar,
-		TextColor3 = color(col.Fondo),
-		BackgroundColor3 = color(col.Elegido),
-		Size = UDim2.fromScale(0.2, 0.065),
-		Position = UDim2.fromScale(0.77, 0.885),
-	})
-	local azar = Random.new()
-	aleatorio.Activated:Connect(function()
-		actual = Apariencia.Aleatoria(azar) :: any
-		op.AlCambiar(actual :: any)
-		pintarOpciones()
-	end)
-
+function Pantalla.Abrir(opciones: Opciones)
+	Pantalla.Cerrar()
+	op = opciones
+	actual = table.clone(opciones.Inicial :: any)
+	objetivo = 1
 	bloquear()
-	local campoAntes = empezarCamara()
-	nueva.Parent = jugador:WaitForChild("PlayerGui")
-	op.AlCambiar(actual :: any)
 
-	continuar.Activated:Connect(function()
-		if gui ~= nueva then
+	local g = crear("ScreenGui", {
+		Name = NOMBRE_GUI,
+		ResetOnSpawn = false,
+		IgnoreGuiInset = true,
+		DisplayOrder = 120,
+		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+	}, nil)
+	gui = g
+
+	-- Viñeta oscura en los bordes: centra la mirada en el personaje.
+	local vineta = crear("Frame", {
+		Name = "Vineta",
+		Size = UDim2.fromScale(1, 1),
+		BackgroundColor3 = color(C.Fondo),
+		BorderSizePixel = 0,
+	}, g)
+	crear("UIGradient", {
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0.35),
+			NumberSequenceKeypoint.new(0.3, 1),
+			NumberSequenceKeypoint.new(0.7, 1),
+			NumberSequenceKeypoint.new(1, 0.35),
+		}),
+	}, vineta)
+
+	-- Cabecera.
+	local cabecera =
+		crear("Frame", { Name = "Cabecera", BackgroundTransparency = 1, Size = UDim2.fromOffset(560, 60) }, g)
+	ui.Cabecera = cabecera
+	ui.Titulo = etiqueta(cabecera, {
+		Name = "Titulo",
+		Text = Config.Textos.Titulo,
+		FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
+		TextSize = 30,
+		Size = UDim2.new(1, 0, 0, 36),
+		TextStrokeTransparency = 0.6,
+	})
+	ui.Subtitulo = etiqueta(cabecera, {
+		Name = "Subtitulo",
+		Text = Config.Textos.Subtitulo,
+		TextSize = 15,
+		TextColor3 = color(C.Cian),
+		Position = UDim2.fromOffset(2, 38),
+		Size = UDim2.new(1, 0, 0, 20),
+	})
+
+	-- Izquierda: piel y categorías.
+	local izq = panel(g, "Izquierda")
+	ui.Izquierda = izq
+	ui.TituloPiel = etiqueta(izq, {
+		Name = "TituloPiel",
+		Text = Config.Textos.Piel,
+		FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
+		TextSize = 13,
+		TextColor3 = color(C.TextoSuave),
+		Position = UDim2.fromOffset(16, 10),
+		Size = UDim2.new(1, -32, 0, 16),
+	})
+	local pieles = crear("Frame", { Name = "PielesCont", BackgroundTransparency = 1 }, izq)
+	ui.PielesCont = pieles
+	crearPieles(pieles)
+	ui.TituloAspecto = etiqueta(izq, {
+		Name = "TituloAspecto",
+		Text = Config.Textos.Aspecto,
+		FontFace = fuente(Config.Fuentes.Titulo, Enum.FontWeight.Regular),
+		TextSize = 13,
+		TextColor3 = color(C.TextoSuave),
+		Position = UDim2.fromOffset(16, 78),
+		Size = UDim2.new(1, -32, 0, 16),
+	})
+	crearCategorias(izq)
+
+	-- Barra de categorías de la disposición estrecha.
+	ui.BarraInferior = crear("Frame", {
+		Name = "BarraCategorias",
+		BackgroundColor3 = color(C.Fondo),
+		BackgroundTransparency = 0.3,
+		BorderSizePixel = 0,
+		Visible = false,
+	}, g)
+
+	-- Derecha: color.
+	local der = panel(g, "Derecha")
+	der.AutomaticSize = Enum.AutomaticSize.Y
+	crear("UIPadding", {
+		PaddingTop = UDim.new(0, 12),
+		PaddingBottom = UDim.new(0, 14),
+		PaddingLeft = UDim.new(0, 12),
+		PaddingRight = UDim.new(0, 12),
+	}, der)
+	ui.Derecha = der
+	crearColor(der)
+
+	-- Abajo: ATRÁS, ALEATORIO y CONTINUAR.
+	local abajo = crear("Frame", { Name = "Abajo", BackgroundTransparency = 1 }, g)
+	ui.Abajo = abajo
+	local atras = boton(abajo, { Name = "Atras", Text = Config.Textos.Atras })
+	local aleatorio = boton(abajo, {
+		Name = "Aleatorio",
+		Text = Config.Textos.Aleatorio,
+		AnchorPoint = Vector2.new(0.5, 0),
+		Position = UDim2.fromScale(0.5, 0),
+	})
+	local continuar = boton(abajo, {
+		Name = "Continuar",
+		Text = Config.Textos.Continuar,
+		AnchorPoint = Vector2.new(1, 0),
+		Position = UDim2.fromScale(1, 0),
+	}, true)
+	ui.Botones = { atras, aleatorio, continuar }
+
+	local terminado = false
+	atras.MouseButton1Click:Connect(function()
+		if terminado then
 			return
 		end
-		gui = nil
-		nueva:Destroy()
-		pararCamara(campoAntes)
-		desbloquear()
-		op.AlTerminar(actual :: any)
+		terminado = true
+		opciones.AlAtras()
 	end)
+	aleatorio.MouseButton1Click:Connect(function()
+		Pantalla.Poner(opciones.AlAleatorio())
+		cambiar("Pieza")
+	end)
+	continuar.MouseButton1Click:Connect(function()
+		if terminado then
+			return
+		end
+		terminado = true
+		opciones.AlTerminar(table.clone(actual) :: any)
+	end)
+
+	g.Parent = jugador:WaitForChild("PlayerGui")
+	maquetar()
+	local cam = workspace.CurrentCamera
+	if cam then
+		table.insert(conexiones, cam:GetPropertyChangedSignal("ViewportSize"):Connect(maquetar))
+	end
+
+	-- Entrada: los paneles llegan deslizándose desde los lados.
+	local function entrar(o: GuiObject, desde: UDim2)
+		local destino = o.Position
+		o.Position = destino + desde
+		TweenService:Create(o, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+			Position = destino,
+		}):Play()
+	end
+	entrar(izq, UDim2.fromOffset(-420, 0))
+	entrar(der, UDim2.fromOffset(420, 0))
+	entrar(abajo, UDim2.fromOffset(0, 120))
+	entrar(cabecera, UDim2.fromOffset(0, -90))
+end
+
+function Pantalla.Cerrar()
+	for _, c in conexiones do
+		c:Disconnect()
+	end
+	table.clear(conexiones)
+	if gui then
+		gui:Destroy()
+		gui = nil
+		desbloquear()
+	end
+	ui = {}
+	op = nil
 end
 
 return Pantalla

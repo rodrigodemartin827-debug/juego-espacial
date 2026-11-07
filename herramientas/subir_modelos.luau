@@ -11,6 +11,7 @@
 		--prueba   no se conecta: dice qué subiría
 		--forzar   sube aunque el archivo no haya cambiado
 		--nuevo    crea un recurso nuevo aunque ya tenga ID (por defecto se actualiza el mismo ID)
+		--imagenes sube también las imágenes (.png) como Decal (para texturas sueltas, como las caras del personaje)
 
 	<carpeta> es la carpeta «roblox» de una región (por ejemplo modelos/region1_valle_del_alba/roblox). Se miran
 	todos los modelos que haya dentro, salvo la carpeta «datos». Un archivo solo se sube si su contenido ha cambiado
@@ -34,7 +35,7 @@ local OpenCloud = require("./OpenCloud")
 
 local carpeta: string? = nil
 local pedidos: { string } = {}
-local opciones = { prueba = false, forzar = false, nuevo = false, todo = false }
+local opciones = { prueba = false, forzar = false, nuevo = false, todo = false, imagenes = false }
 for _, a in process.args do
 	if string.sub(a, 1, 2) == "--" then
 		local o = string.sub(a, 3)
@@ -66,7 +67,7 @@ local function listar(rel: string, salida: { [string]: string })
 			if r ~= "datos" then
 				listar(r, salida)
 			end
-		elseif OpenCloud.tipoContenido(r) then
+		elseif OpenCloud.tipoContenido(r, opciones.imagenes) then
 			salida[r] = serde.hash("sha256", fs.readFile(completa))
 		end
 	end
@@ -264,12 +265,13 @@ for _, p in lista do
 		nombre,
 		"juego-espacial: " .. p.ruta,
 		creador :: OpenCloud.Creador,
-		if actualizar then p.id else nil
+		if actualizar then p.id else nil,
+		OpenCloud.tipoRecurso(p.ruta)
 	)
 	local cuerpo, tipo = OpenCloud.multipart(
 		serde.encode("json", peticion),
 		string.match(p.ruta, "([^/]+)$") or p.ruta,
-		OpenCloud.tipoContenido(p.ruta) :: string,
+		OpenCloud.tipoContenido(p.ruta, true) :: string,
 		contenido,
 		fronteraPara(contenido)
 	)

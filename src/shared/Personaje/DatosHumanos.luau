@@ -1,40 +1,33 @@
 --!strict
 --[[
-	DatosHumanos: todo lo que se puede elegir en el editor de personaje de los Humanos. Son piezas propias (no el
-	avatar de Roblox): cada opción es una lista de piezas sencillas que se pegan al rig R6 (Personaje/Constructor).
+	DatosHumanos: todo lo que se puede elegir en el editor de personaje de los Humanos. Piezas propias, no el avatar
+	de Roblox:
+	  · Cabello y Accesorio: modelos 3D hechos en Blender (modelos/herramientas/personaje_humano.py) que se ponen como
+	    Accessory sobre la cabeza del R6.
+	  · Cejas, Ojos, Nariz y Boca: texturas (Decals) sobre la cara (modelos/herramientas/caras_humanas.py).
+	  · Chaqueta y Pantalon: el cuerpo se pinta con su color y se le pegan detalles 3D (cuello, bolsillos, botas...).
+	Las piezas y las imágenes de cada opción están en Personaje/RecursosHumanos (generado): se buscan por
+	«<Categoria>_<Id>» (por ejemplo «Cabello_Corto» u «Ojos_Grandes»).
 
-	Coordenadas de las piezas: en el espacio de la parte a la que se pegan (Head, Torso, "Left Arm"...), en studs:
-	X a la derecha del personaje, Y arriba, Z hacia atrás (la cara mira a -Z).
-	  · Forma: "Bloque", "Bola" (esfera, que se estira con el tamaño) o "Cilindro" (eje X de la pieza).
-	  · Color: "Piel", "Pelo", "Principal", "Detalle", "Oscuro", "Claro" o un color "#RRGGBB".
-	  · Giro (opcional): grados en X, Y, Z.
-	  · Neon (opcional): material de neón (visores).
-
-	La cabeza clásica de R6 (SpecialMesh Head a 1,25) mide por fuera unos 1,25 de ancho, 1,2 de alto y 1,2 de fondo:
-	la cara está en Z ≈ -0,6.
+	Colores: la piel se elige de una lista (de clara a oscura). El pelo, la chaqueta, el pantalón y los detalles se
+	eligen libres con la rueda de color del editor ("#RRGGBB"); `Muestras` son atajos de la paleta.
+	Cada pieza 3D tiene un rol que dice de qué color se pinta (`Roles`).
 ]]
 
-export type Pieza = {
-	Parte: string?, -- a qué parte del R6 se pega (por defecto, la de la sección)
-	Forma: string,
-	Pos: { number },
-	Tam: { number },
-	Color: string,
-	Giro: { number }?,
-	Neon: boolean?,
-}
-export type Opcion = { Id: string, Nombre: string, Piezas: { Pieza } }
-export type Ropa = Opcion & {
-	-- Color de cada parte del cuerpo: "Piel", "Principal", "Detalle" u "Oscuro".
-	Torso: string,
-	Brazos: string,
-	Piernas: string,
+export type Opcion = {
+	Id: string,
+	Nombre: string,
+	-- Chaqueta: de qué color van los brazos ("Chaqueta" si tiene mangas largas, "Piel" si son cortas).
+	Brazos: string?,
+	-- Cabello y Accesorio: el Attachment de la cabeza al que se sujeta el Accessory.
+	Anclaje: string?,
 }
 export type Color = { Id: string, Nombre: string, Hex: string }
+export type Rol = { Color: string?, Material: string, Transparencia: number? }
 
 local Datos = {}
 
--- ===== Colores =====
+-- ===== Piel (de clara a oscura) =====
 
 Datos.Pieles = {
 	{ Id = "Piel1", Nombre = "Porcelana", Hex = "#F6DCCB" },
@@ -49,474 +42,147 @@ Datos.Pieles = {
 	{ Id = "Piel10", Nombre = "Noche", Hex = "#3A2216" },
 } :: { Color }
 
-Datos.ColoresPelo = {
-	{ Id = "Negro", Nombre = "Negro", Hex = "#1C1714" },
-	{ Id = "Castano", Nombre = "Castaño", Hex = "#4A2E1E" },
-	{ Id = "Avellana", Nombre = "Avellana", Hex = "#7A4E2D" },
-	{ Id = "Rubio", Nombre = "Rubio", Hex = "#D8B467" },
-	{ Id = "Platino", Nombre = "Platino", Hex = "#ECE3C9" },
-	{ Id = "Pelirrojo", Nombre = "Pelirrojo", Hex = "#A8431E" },
-	{ Id = "Gris", Nombre = "Gris", Hex = "#8D8F93" },
-	{ Id = "Azul", Nombre = "Azul", Hex = "#2D5BD1" },
-	{ Id = "Rosa", Nombre = "Rosa", Hex = "#E65C9C" },
-	{ Id = "Verde", Nombre = "Verde", Hex = "#2E9E6A" },
-} :: { Color }
+-- ===== Categorías (la lista de la izquierda del editor, en este orden) =====
 
--- Colores del traje (principal y detalle salen de la misma paleta).
-Datos.ColoresRopa = {
-	{ Id = "Blanco", Nombre = "Blanco", Hex = "#E9EDF2" },
-	{ Id = "Gris", Nombre = "Gris", Hex = "#7C8592" },
-	{ Id = "Grafito", Nombre = "Grafito", Hex = "#2C313A" },
-	{ Id = "Azul", Nombre = "Azul", Hex = "#2F6FD6" },
-	{ Id = "Celeste", Nombre = "Celeste", Hex = "#5FC3F0" },
-	{ Id = "Marino", Nombre = "Marino", Hex = "#1E2E55" },
-	{ Id = "Verde", Nombre = "Verde", Hex = "#3E9B55" },
-	{ Id = "Oliva", Nombre = "Oliva", Hex = "#6B7440" },
-	{ Id = "Rojo", Nombre = "Rojo", Hex = "#C8373A" },
-	{ Id = "Naranja", Nombre = "Naranja", Hex = "#E57D2B" },
-	{ Id = "Amarillo", Nombre = "Amarillo", Hex = "#E8C23A" },
-	{ Id = "Morado", Nombre = "Morado", Hex = "#7246B8" },
-	{ Id = "Marron", Nombre = "Marrón", Hex = "#6A4A32" },
-	{ Id = "Arena", Nombre = "Arena", Hex = "#CDB48A" },
-} :: { Color }
-
-Datos.Oscuro = "#1A1D22" -- botas, pupilas, correas
-Datos.Claro = "#F4F6F8" -- blanco de los ojos, brillos
-
--- ===== Caras (en la cabeza) =====
--- Ojos: dos piezas a ±Separacion; Cejas encima; Boca debajo. Todo en Z = -0,6 (sobre la cara).
-
-local function cara(
-	id: string,
-	nombre: string,
-	ojo: { number },
-	separacion: number,
-	ceja: number,
-	boca: { Pieza }
-): Opcion
-	local piezas: { Pieza } = {}
-	for _, lado in { -1, 1 } do
-		table.insert(piezas, {
-			Forma = "Bola",
-			Pos = { lado * separacion, 0.08, -0.58 },
-			Tam = { ojo[1], ojo[2], 0.06 },
-			Color = "Oscuro",
-		})
-		table.insert(piezas, {
-			Forma = "Bloque",
-			Pos = { lado * separacion, 0.08 + ojo[2] / 2 + 0.07, -0.585 },
-			Tam = { ojo[1] * 1.25, 0.045, 0.04 },
-			Color = "Pelo",
-			Giro = { 0, 0, -lado * ceja },
-		})
-	end
-	for _, p in boca do
-		table.insert(piezas, p)
-	end
-	return { Id = id, Nombre = nombre, Piezas = piezas }
-end
-
-local function bocaRecta(ancho: number): { Pieza }
-	return { { Forma = "Bloque", Pos = { 0, -0.2, -0.59 }, Tam = { ancho, 0.045, 0.04 }, Color = "Oscuro" } }
-end
-
--- Sonrisa: tres trazos (centro y dos subiendo).
-local function bocaSonrisa(ancho: number, subida: number): { Pieza }
-	local lado = ancho / 3
-	return {
-		{ Forma = "Bloque", Pos = { 0, -0.22, -0.59 }, Tam = { lado, 0.045, 0.04 }, Color = "Oscuro" },
-		{
-			Forma = "Bloque",
-			Pos = { -lado, -0.2, -0.588 },
-			Tam = { lado, 0.045, 0.04 },
-			Color = "Oscuro",
-			Giro = { 0, 0, -subida },
-		},
-		{
-			Forma = "Bloque",
-			Pos = { lado, -0.2, -0.588 },
-			Tam = { lado, 0.045, 0.04 },
-			Color = "Oscuro",
-			Giro = { 0, 0, subida },
-		},
-	}
-end
-
-Datos.Caras = {
-	cara("Amable", "Amable", { 0.1, 0.13 }, 0.2, 6, bocaSonrisa(0.3, 18)),
-	cara("Decidida", "Decidida", { 0.11, 0.1 }, 0.21, -14, bocaRecta(0.24)),
-	cara("Tranquila", "Tranquila", { 0.1, 0.07 }, 0.2, 0, bocaRecta(0.2)),
-	cara("Alegre", "Alegre", { 0.12, 0.14 }, 0.22, 10, bocaSonrisa(0.38, 26)),
-	cara("Seria", "Seria", { 0.09, 0.09 }, 0.19, -6, bocaRecta(0.28)),
-	cara("Picara", "Pícara", { 0.11, 0.11 }, 0.21, 12, bocaSonrisa(0.26, 34)),
-	cara("Valiente", "Valiente", { 0.12, 0.11 }, 0.23, -20, bocaSonrisa(0.3, 8)),
-	cara("Soñadora", "Soñadora", { 0.13, 0.15 }, 0.21, 16, {
-		{ Forma = "Bola", Pos = { 0, -0.21, -0.59 }, Tam = { 0.1, 0.08, 0.04 }, Color = "Oscuro" },
-	}),
+Datos.Cabellos = {
+	{ Id = "Ninguno", Nombre = "Sin pelo" },
+	{ Id = "Corto", Nombre = "Corto", Anclaje = "HairAttachment" },
+	{ Id = "Rapado", Nombre = "Rapado", Anclaje = "HairAttachment" },
+	{ Id = "Flequillo", Nombre = "Flequillo", Anclaje = "HairAttachment" },
+	{ Id = "Tupe", Nombre = "Tupé", Anclaje = "HairAttachment" },
+	{ Id = "Despeinado", Nombre = "Despeinado", Anclaje = "HairAttachment" },
+	{ Id = "Puntas", Nombre = "Puntas", Anclaje = "HairAttachment" },
+	{ Id = "Cresta", Nombre = "Cresta", Anclaje = "HairAttachment" },
+	{ Id = "Rizado", Nombre = "Rizado", Anclaje = "HairAttachment" },
+	{ Id = "Melena", Nombre = "Melena", Anclaje = "HairAttachment" },
+	{ Id = "Largo", Nombre = "Largo", Anclaje = "HairAttachment" },
+	{ Id = "Coleta", Nombre = "Coleta", Anclaje = "HairAttachment" },
+	{ Id = "Mono", Nombre = "Moño", Anclaje = "HairAttachment" },
 } :: { Opcion }
 
--- ===== Peinados (en la cabeza) =====
-
-local function pelo(id: string, nombre: string, piezas: { any }): Opcion
-	for _, p in piezas do
-		p.Color = p.Color or "Pelo"
-	end
-	return { Id = id, Nombre = nombre, Piezas = piezas }
-end
-
--- Casquete: la parte de arriba y la nuca, común a casi todos.
-local function casquete(alto: number): { Pieza }
-	return {
-		{ Forma = "Bloque", Pos = { 0, 0.62 - alto / 2 + 0.06, 0.04 }, Tam = { 1.32, alto, 1.3 }, Color = "Pelo" },
-		{ Forma = "Bloque", Pos = { 0, 0.2, 0.6 }, Tam = { 1.3, 0.7, 0.16 }, Color = "Pelo" },
-	}
-end
-
-local function unir(...: { any }): { any }
-	local todo = {}
-	for _, lista in { ... } do
-		for _, p in lista do
-			table.insert(todo, p)
-		end
-	end
-	return todo
-end
-
-Datos.Peinados = {
-	pelo("Ninguno", "Sin pelo", {}),
-	pelo("Rapado", "Rapado", {
-		{ Forma = "Bloque", Pos = { 0, 0.6, 0.06 }, Tam = { 1.28, 0.1, 1.24 } },
-		{ Forma = "Bloque", Pos = { 0, 0.25, 0.6 }, Tam = { 1.26, 0.55, 0.08 } },
-	}),
-	pelo(
-		"Corto",
-		"Corto",
-		unir(casquete(0.26), {
-			{ Forma = "Bloque", Pos = { -0.63, 0.32, 0.12 }, Tam = { 0.1, 0.32, 0.9 } },
-			{ Forma = "Bloque", Pos = { 0.63, 0.32, 0.12 }, Tam = { 0.1, 0.32, 0.9 } },
-		})
-	),
-	pelo(
-		"Flequillo",
-		"Flequillo",
-		unir(casquete(0.3), {
-			{ Forma = "Bloque", Pos = { -0.2, 0.42, -0.62 }, Tam = { 0.75, 0.26, 0.12 }, Giro = { 0, 0, 8 } },
-			{ Forma = "Bloque", Pos = { 0.38, 0.47, -0.61 }, Tam = { 0.4, 0.16, 0.12 }, Giro = { 0, 0, -10 } },
-			{ Forma = "Bloque", Pos = { -0.63, 0.25, 0.1 }, Tam = { 0.1, 0.45, 0.95 } },
-			{ Forma = "Bloque", Pos = { 0.63, 0.25, 0.1 }, Tam = { 0.1, 0.45, 0.95 } },
-		})
-	),
-	pelo("Cresta", "Cresta", {
-		{ Forma = "Bloque", Pos = { 0, 0.7, 0.05 }, Tam = { 0.3, 0.32, 1.2 } },
-		{ Forma = "Bloque", Pos = { 0, 0.84, -0.32 }, Tam = { 0.26, 0.2, 0.4 }, Giro = { -18, 0, 0 } },
-		{ Forma = "Bloque", Pos = { 0, 0.6, 0.06 }, Tam = { 1.26, 0.08, 1.22 } },
-	}),
-	pelo(
-		"Despeinado",
-		"Despeinado",
-		unir(casquete(0.3), {
-			{ Forma = "Bloque", Pos = { -0.3, 0.78, -0.2 }, Tam = { 0.32, 0.22, 0.32 }, Giro = { 10, 20, 14 } },
-			{ Forma = "Bloque", Pos = { 0.25, 0.8, 0.1 }, Tam = { 0.34, 0.24, 0.34 }, Giro = { -12, -25, -10 } },
-			{ Forma = "Bloque", Pos = { 0.05, 0.76, 0.42 }, Tam = { 0.36, 0.2, 0.3 }, Giro = { 18, 8, 6 } },
-			{ Forma = "Bloque", Pos = { -0.3, 0.42, -0.62 }, Tam = { 0.45, 0.2, 0.12 }, Giro = { 0, 0, 14 } },
-		})
-	),
-	pelo(
-		"Coleta",
-		"Coleta",
-		unir(casquete(0.28), {
-			{ Forma = "Bloque", Pos = { -0.63, 0.25, 0.1 }, Tam = { 0.1, 0.45, 0.95 } },
-			{ Forma = "Bloque", Pos = { 0.63, 0.25, 0.1 }, Tam = { 0.1, 0.45, 0.95 } },
-			{ Forma = "Bola", Pos = { 0, 0.32, 0.78 }, Tam = { 0.3, 0.3, 0.3 } },
-			{ Forma = "Bloque", Pos = { 0, -0.12, 0.84 }, Tam = { 0.26, 0.8, 0.26 }, Giro = { -10, 0, 0 } },
-		})
-	),
-	pelo(
-		"Largo",
-		"Largo",
-		unir(casquete(0.32), {
-			{ Forma = "Bloque", Pos = { -0.65, -0.05, 0.12 }, Tam = { 0.14, 1.05, 1.0 } },
-			{ Forma = "Bloque", Pos = { 0.65, -0.05, 0.12 }, Tam = { 0.14, 1.05, 1.0 } },
-			{ Forma = "Bloque", Pos = { 0, -0.15, 0.64 }, Tam = { 1.34, 1.25, 0.16 } },
-			{ Forma = "Bloque", Pos = { -0.25, 0.43, -0.62 }, Tam = { 0.6, 0.2, 0.1 }, Giro = { 0, 0, 6 } },
-		})
-	),
-	pelo(
-		"Mono",
-		"Moño",
-		unir(casquete(0.26), {
-			{ Forma = "Bola", Pos = { 0, 0.92, 0.18 }, Tam = { 0.5, 0.46, 0.5 } },
-			{ Forma = "Bloque", Pos = { -0.63, 0.3, 0.1 }, Tam = { 0.1, 0.35, 0.9 } },
-			{ Forma = "Bloque", Pos = { 0.63, 0.3, 0.1 }, Tam = { 0.1, 0.35, 0.9 } },
-		})
-	),
+Datos.Cejas = {
+	{ Id = "Rectas", Nombre = "Rectas" },
+	{ Id = "Arqueadas", Nombre = "Arqueadas" },
+	{ Id = "Gruesas", Nombre = "Gruesas" },
+	{ Id = "Finas", Nombre = "Finas" },
+	{ Id = "Enfadadas", Nombre = "Enfadadas" },
+	{ Id = "Preocupadas", Nombre = "Preocupadas" },
 } :: { Opcion }
 
--- ===== Ropa =====
+Datos.Ojos = {
+	{ Id = "Redondos", Nombre = "Redondos" },
+	{ Id = "Grandes", Nombre = "Grandes" },
+	{ Id = "Almendrados", Nombre = "Almendrados" },
+	{ Id = "Brillantes", Nombre = "Brillantes" },
+	{ Id = "Serios", Nombre = "Serios" },
+	{ Id = "Alegres", Nombre = "Alegres" },
+	{ Id = "Cansados", Nombre = "Cansados" },
+} :: { Opcion }
 
-local function ropa(id: string, nombre: string, torso: string, brazos: string, piernas: string, piezas: { Pieza }): Ropa
-	return { Id = id, Nombre = nombre, Torso = torso, Brazos = brazos, Piernas = piernas, Piezas = piezas }
-end
+Datos.Narices = {
+	{ Id = "Punto", Nombre = "Punto" },
+	{ Id = "Boton", Nombre = "Botón" },
+	{ Id = "Recta", Nombre = "Recta" },
+	{ Id = "Ancha", Nombre = "Ancha" },
+	{ Id = "Ninguna", Nombre = "Sin nariz" },
+} :: { Opcion }
 
--- Botas, comunes a toda la ropa (en cada pierna).
-local BOTAS: { Pieza } = {
-	{ Parte = "Left Leg", Forma = "Bloque", Pos = { 0, -0.78, -0.03 }, Tam = { 1.06, 0.46, 1.1 }, Color = "Oscuro" },
-	{ Parte = "Right Leg", Forma = "Bloque", Pos = { 0, -0.78, -0.03 }, Tam = { 1.06, 0.46, 1.1 }, Color = "Oscuro" },
+Datos.Bocas = {
+	{ Id = "Sonrisa", Nombre = "Sonrisa" },
+	{ Id = "Amplia", Nombre = "Amplia" },
+	{ Id = "Ladeada", Nombre = "Ladeada" },
+	{ Id = "Neutra", Nombre = "Neutra" },
+	{ Id = "Seria", Nombre = "Seria" },
+	{ Id = "Sorpresa", Nombre = "Sorpresa" },
+} :: { Opcion }
+
+Datos.Chaquetas = {
+	{ Id = "Exploradora", Nombre = "Exploradora", Brazos = "Chaqueta" },
+	{ Id = "Piloto", Nombre = "Piloto", Brazos = "Chaqueta" },
+	{ Id = "Cazadora", Nombre = "Cazadora", Brazos = "Chaqueta" },
+	{ Id = "Mecanico", Nombre = "Mecánico", Brazos = "Piel" },
+	{ Id = "Camiseta", Nombre = "Camiseta", Brazos = "Piel" },
+} :: { Opcion }
+
+Datos.Pantalones = {
+	{ Id = "Cargo", Nombre = "Cargo" },
+	{ Id = "Piloto", Nombre = "Piloto" },
+	{ Id = "Vaquero", Nombre = "Vaquero" },
+	{ Id = "Tactico", Nombre = "Táctico" },
+} :: { Opcion }
+
+Datos.Accesorios = {
+	{ Id = "Ninguno", Nombre = "Ninguno" },
+	{ Id = "Visor", Nombre = "Visor", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Gafas", Nombre = "Gafas", Anclaje = "FaceFrontAttachment" },
+	{ Id = "Auriculares", Nombre = "Auriculares", Anclaje = "HatAttachment" },
+	{ Id = "Comunicador", Nombre = "Comunicador", Anclaje = "HatAttachment" },
+	{ Id = "Gorra", Nombre = "Gorra", Anclaje = "HatAttachment" },
+	{ Id = "Cinta", Nombre = "Cinta", Anclaje = "HatAttachment" },
+} :: { Opcion }
+
+-- ===== Colores libres (rueda de color) =====
+
+-- Lo que colorea la rueda, en el orden del botón que cambia de uno a otro.
+Datos.ObjetivosColor = {
+	{ Campo = "ColorPelo", Nombre = "Pelo" },
+	{ Campo = "ColorChaqueta", Nombre = "Chaqueta" },
+	{ Campo = "ColorPantalon", Nombre = "Pantalón" },
+	{ Campo = "ColorDetalle", Nombre = "Detalles" },
 }
 
-local function conBotas(piezas: { Pieza }): { Pieza }
-	return unir(piezas, BOTAS)
-end
+-- Atajos de la paleta debajo de la rueda (los mismos para todo; el primero de cada fila suele quedar bien de pelo).
+Datos.Muestras = {
+	"#1C1714",
+	"#4A2E1E",
+	"#7A4E2D",
+	"#D8B467",
+	"#ECE3C9",
+	"#A8431E",
+	"#E9EDF2",
+	"#7C8592",
+	"#2C313A",
+	"#2F6FD6",
+	"#5FC3F0",
+	"#1E2E55",
+	"#3E9B55",
+	"#C8373A",
+	"#E57D2B",
+	"#7246B8",
+}
 
-Datos.Ropas = {
-	ropa(
-		"Explorador",
-		"Explorador",
-		"Principal",
-		"Principal",
-		"Detalle",
-		conBotas({
-			{ Parte = "Torso", Forma = "Bloque", Pos = { 0, -0.82, 0 }, Tam = { 2.04, 0.24, 1.06 }, Color = "Oscuro" },
-			{ Parte = "Torso", Forma = "Bloque", Pos = { 0, -0.82, -0.54 }, Tam = { 0.3, 0.2, 0.04 }, Color = "Claro" },
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { -0.5, 0.35, -0.52 },
-				Tam = { 0.5, 0.4, 0.06 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0.5, 0.35, -0.52 },
-				Tam = { 0.5, 0.4, 0.06 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Left Arm",
-				Forma = "Bloque",
-				Pos = { 0, 0.78, 0 },
-				Tam = { 1.06, 0.36, 1.06 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Right Arm",
-				Forma = "Bloque",
-				Pos = { 0, 0.78, 0 },
-				Tam = { 1.06, 0.36, 1.06 },
-				Color = "Detalle",
-			},
-		})
-	),
-	ropa(
-		"Piloto",
-		"Mono de piloto",
-		"Principal",
-		"Principal",
-		"Principal",
-		conBotas({
-			{ Parte = "Torso", Forma = "Bloque", Pos = { 0, 0.88, 0 }, Tam = { 1.4, 0.26, 1.08 }, Color = "Detalle" },
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0.2, 0, -0.52 },
-				Tam = { 0.08, 1.7, 0.04 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { -0.55, 0.45, -0.52 },
-				Tam = { 0.42, 0.26, 0.04 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Left Arm",
-				Forma = "Bloque",
-				Pos = { 0, -0.15, -0.51 },
-				Tam = { 0.9, 0.1, 0.04 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Right Arm",
-				Forma = "Bloque",
-				Pos = { 0, -0.15, -0.51 },
-				Tam = { 0.9, 0.1, 0.04 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Left Arm",
-				Forma = "Bloque",
-				Pos = { 0, -0.86, 0 },
-				Tam = { 1.04, 0.28, 1.04 },
-				Color = "Oscuro",
-			},
-			{
-				Parte = "Right Arm",
-				Forma = "Bloque",
-				Pos = { 0, -0.86, 0 },
-				Tam = { 1.04, 0.28, 1.04 },
-				Color = "Oscuro",
-			},
-		})
-	),
-	ropa(
-		"Chaqueta",
-		"Chaqueta",
-		"Principal",
-		"Principal",
-		"Detalle",
-		conBotas({
-			{ Parte = "Torso", Forma = "Bloque", Pos = { 0, 0, -0.51 }, Tam = { 0.7, 1.96, 0.04 }, Color = "Claro" },
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { -0.42, 0.55, -0.53 },
-				Tam = { 0.22, 0.9, 0.04 },
-				Color = "Detalle",
-				Giro = { 0, 0, -14 },
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0.42, 0.55, -0.53 },
-				Tam = { 0.22, 0.9, 0.04 },
-				Color = "Detalle",
-				Giro = { 0, 0, 14 },
-			},
-			{ Parte = "Torso", Forma = "Bloque", Pos = { 0, 0.9, 0.1 }, Tam = { 1.5, 0.22, 0.9 }, Color = "Detalle" },
-		})
-	),
-	ropa(
-		"Camiseta",
-		"Camiseta",
-		"Principal",
-		"Piel",
-		"Detalle",
-		conBotas({
-			{
-				Parte = "Left Arm",
-				Forma = "Bloque",
-				Pos = { 0, 0.62, 0 },
-				Tam = { 1.04, 0.78, 1.04 },
-				Color = "Principal",
-			},
-			{
-				Parte = "Right Arm",
-				Forma = "Bloque",
-				Pos = { 0, 0.62, 0 },
-				Tam = { 1.04, 0.78, 1.04 },
-				Color = "Principal",
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0, 0.2, -0.52 },
-				Tam = { 0.9, 0.55, 0.04 },
-				Color = "Detalle",
-			},
-		})
-	),
-	ropa(
-		"Mecanico",
-		"Mecánico",
-		"Detalle",
-		"Principal",
-		"Principal",
-		conBotas({
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0, -0.15, -0.52 },
-				Tam = { 1.5, 1.4, 0.05 },
-				Color = "Principal",
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { -0.6, 0.55, -0.53 },
-				Tam = { 0.16, 0.9, 0.04 },
-				Color = "Principal",
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0.6, 0.55, -0.53 },
-				Tam = { 0.16, 0.9, 0.04 },
-				Color = "Principal",
-			},
-			{
-				Parte = "Torso",
-				Forma = "Bloque",
-				Pos = { 0, -0.25, -0.56 },
-				Tam = { 0.6, 0.35, 0.04 },
-				Color = "Oscuro",
-			},
-			{
-				Parte = "Left Arm",
-				Forma = "Bloque",
-				Pos = { 0, 0.55, 0 },
-				Tam = { 1.04, 0.9, 1.04 },
-				Color = "Detalle",
-			},
-			{
-				Parte = "Right Arm",
-				Forma = "Bloque",
-				Pos = { 0, 0.55, 0 },
-				Tam = { 1.04, 0.9, 1.04 },
-				Color = "Detalle",
-			},
-		})
-	),
-} :: { Ropa }
+-- ===== Roles de las piezas 3D =====
 
--- ===== Complementos (en la cabeza) =====
+-- Color fijo (o nil = el del jugador: Pelo, Chaqueta, Pantalon, Detalle, Piel) y material de cada rol.
+Datos.Roles = {
+	Pelo = { Material = "SmoothPlastic" },
+	Piel = { Material = "SmoothPlastic" },
+	Chaqueta = { Material = "Fabric" },
+	Pantalon = { Material = "Fabric" },
+	Detalle = { Material = "SmoothPlastic" },
+	Oscuro = { Color = "#1A1D22", Material = "SmoothPlastic" },
+	Claro = { Color = "#F4F6F8", Material = "SmoothPlastic" },
+	Metal = { Color = "#8C96A6", Material = "Metal" },
+	Neon = { Color = "#4DE8FF", Material = "Neon" },
+	Cristal = { Color = "#7FD8FF", Material = "Glass", Transparencia = 0.35 },
+} :: { [string]: Rol }
 
-Datos.Complementos = {
-	{ Id = "Ninguno", Nombre = "Nada", Piezas = {} },
-	{
-		Id = "Visor",
-		Nombre = "Visor",
-		Piezas = {
-			{ Forma = "Bloque", Pos = { 0, 0.1, -0.62 }, Tam = { 1.2, 0.2, 0.06 }, Color = "#5CE6FF", Neon = true },
-			{ Forma = "Bloque", Pos = { 0, 0.1, 0 }, Tam = { 1.3, 0.08, 1.26 }, Color = "Oscuro" },
-		},
-	},
-	{
-		Id = "Gafas",
-		Nombre = "Gafas",
-		Piezas = {
-			{ Forma = "Bloque", Pos = { -0.21, 0.08, -0.63 }, Tam = { 0.3, 0.2, 0.04 }, Color = "Oscuro" },
-			{ Forma = "Bloque", Pos = { 0.21, 0.08, -0.63 }, Tam = { 0.3, 0.2, 0.04 }, Color = "Oscuro" },
-			{ Forma = "Bloque", Pos = { 0, 0.12, -0.63 }, Tam = { 0.16, 0.04, 0.04 }, Color = "Oscuro" },
-		},
-	},
-	{
-		Id = "Auriculares",
-		Nombre = "Auriculares",
-		Piezas = {
-			{ Forma = "Cilindro", Pos = { -0.66, 0.05, 0.02 }, Tam = { 0.16, 0.42, 0.42 }, Color = "Oscuro" },
-			{ Forma = "Cilindro", Pos = { 0.66, 0.05, 0.02 }, Tam = { 0.16, 0.42, 0.42 }, Color = "Oscuro" },
-			{ Forma = "Bloque", Pos = { 0, 0.7, 0.02 }, Tam = { 1.4, 0.1, 0.16 }, Color = "Detalle" },
-		},
-	},
-	{
-		Id = "Cinta",
-		Nombre = "Cinta",
-		Piezas = { { Forma = "Bloque", Pos = { 0, 0.36, 0 }, Tam = { 1.3, 0.14, 1.26 }, Color = "Detalle" } },
-	},
-} :: { Opcion }
+-- ===== Por defecto =====
 
--- Lo que lleva un personaje nuevo antes de tocar nada.
 Datos.Defecto = {
 	Piel = "Piel4",
-	Cara = "Amable",
-	Pelo = "Corto",
-	ColorPelo = "Castano",
-	Ropa = "Explorador",
-	ColorRopa = "Azul",
-	ColorDetalle = "Blanco",
-	Complemento = "Ninguno",
+	Cabello = "Corto",
+	Cejas = "Rectas",
+	Ojos = "Redondos",
+	Nariz = "Punto",
+	Boca = "Sonrisa",
+	Chaqueta = "Exploradora",
+	Pantalon = "Cargo",
+	Accesorio = "Ninguno",
+	ColorPelo = "#4A2E1E",
+	ColorChaqueta = "#2F6FD6",
+	ColorPantalon = "#2C313A",
+	ColorDetalle = "#E9EDF2",
 }
 
 return Datos
