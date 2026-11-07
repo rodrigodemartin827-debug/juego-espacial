@@ -58,9 +58,9 @@ Config.Colores = {
 -- mapa para que nada se ponga delante.
 Config.Escena = {
 	Centro = { 0, 6000, 0 }, -- dónde se monta (studs)
-	RadioSala = 15,
-	AltoSala = 16,
-	Paneles = 18, -- paneles de la pared
+	RadioSala = 26, -- más que la distancia de la cámara (~15): si no, la cámara queda pegada a la pared
+	AltoSala = 20,
+	Paneles = 30, -- paneles de la pared
 	RadioPlataforma = 3.2,
 	AltoPlataforma = 0.7,
 	ColorPared = "#161C28",
