@@ -31,6 +31,8 @@ local Estudio = {}
 
 local PASO_CAMARA = "EditorEstudioCamara"
 local CLASES_FUERA = {
+	-- PROBADO EN STUDIO: con el HumanoidDescription del personaje original dentro, ApplyDescription no hace nada.
+	"HumanoidDescription",
 	"Script",
 	"LocalScript",
 	"ForceField",

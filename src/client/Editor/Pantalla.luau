@@ -446,33 +446,24 @@ local function aplicarHSV()
 	cambiar("Color")
 end
 
--- Cubierta translúcida que atenúa y bloquea desde `desde` hasta `hasta` (o solo `desde`).
-local function cubrir(g: ScreenGui, desde: GuiObject, hasta: GuiObject?): Frame
+-- Cubierta translúcida que atenúa y bloquea todo `padre` (un panel sin disposición automática).
+local function cubrir(padre: GuiObject): Frame
 	local f = crear("Frame", {
 		Name = "Cubierta",
+		Size = UDim2.fromScale(1, 1),
 		BackgroundColor3 = color(C.Fondo),
 		BackgroundTransparency = 0.2,
 		BorderSizePixel = 0,
 		Active = true,
 		ZIndex = 30,
 		Visible = false,
-	}, g)
+	}, padre)
 	esquina(f, 10)
-	local function ajustar()
-		local p0 = desde.AbsolutePosition
-		local fin = (hasta or desde).AbsolutePosition + (hasta or desde).AbsoluteSize
-		f.Position = UDim2.fromOffset(p0.X, p0.Y)
-		f.Size = UDim2.fromOffset(math.max(fin.X - p0.X, 0), math.max(fin.Y - p0.Y, 0))
-	end
-	for _, o in { desde, hasta or desde } do
-		table.insert(conexiones, o:GetPropertyChangedSignal("AbsolutePosition"):Connect(ajustar))
-		table.insert(conexiones, o:GetPropertyChangedSignal("AbsoluteSize"):Connect(ajustar))
-	end
-	ajustar()
 	return f
 end
 
-local function crearColor(padre: Instance)
+local function crearColor(raiz: Instance)
+	local padre: Instance = raiz
 	crear("UIListLayout", {
 		Padding = UDim.new(0, 10),
 		SortOrder = Enum.SortOrder.LayoutOrder,
@@ -480,7 +471,7 @@ local function crearColor(padre: Instance)
 	}, padre)
 
 	-- Botón para usar el avatar de Roblox (o volver a las piezas del juego) y el aviso de lo que no se pudo convertir.
-	local avatarBoton = boton(padre, {
+	local avatarBoton = boton(raiz, {
 		Name = "Avatar",
 		LayoutOrder = 0,
 		Text = Config.Textos.UsarAvatar,
@@ -489,7 +480,7 @@ local function crearColor(padre: Instance)
 		Size = UDim2.new(1, 0, 0, 46),
 	})
 	ui.Avatar = avatarBoton
-	ui.Informe = etiqueta(padre, {
+	ui.Informe = etiqueta(raiz, {
 		Name = "Informe",
 		LayoutOrder = 6,
 		Text = "",
@@ -500,6 +491,27 @@ local function crearColor(padre: Instance)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Visible = false,
 	})
+
+	-- Los controles de color van en su propio contenedor, para poder cubrirlos con el aviso de «usando tu avatar».
+	local contenedor = crear("Frame", {
+		Name = "ControlColor",
+		LayoutOrder = 1,
+		BackgroundTransparency = 1,
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+	}, raiz)
+	padre = crear("Frame", {
+		Name = "Lista",
+		BackgroundTransparency = 1,
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+	}, contenedor)
+	crear("UIListLayout", {
+		Padding = UDim.new(0, 10),
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		HorizontalAlignment = Enum.HorizontalAlignment.Center,
+	}, padre)
+	ui.CubiertaColor = cubrir(contenedor)
 
 	-- Botón que cambia lo que se colorea.
 	local objetivoBoton = boton(padre, {
@@ -934,8 +946,7 @@ function Pantalla.Abrir(opciones: Opciones)
 	}, der)
 	ui.Derecha = der
 	crearColor(der)
-	ui.CubiertaIzquierda = cubrir(g, izq)
-	ui.CubiertaColor = cubrir(g, ui.Objetivo, ui.Muestras)
+	ui.CubiertaIzquierda = cubrir(izq)
 
 	-- Abajo: ATRÁS, ALEATORIO y CONTINUAR.
 	local abajo = crear("Frame", { Name = "Abajo", BackgroundTransparency = 1 }, g)
