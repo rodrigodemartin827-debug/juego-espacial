@@ -1,0 +1,116 @@
+{
+  "cuerpo": "Chatarra_Cuerpo",
+  "piezas": {
+    "Chatarra_Cuerpo": {
+      "centro": [
+        -0.07,
+        0.3962,
+        -0.4068
+      ],
+      "tamano": [
+        0.76,
+        1.561,
+        2.674
+      ],
+      "triangulos": 3388,
+      "aristas_abiertas": 0,
+      "volumen": 0.5494
+    },
+    "Chatarra_Rueda": {
+      "centro": [
+        0.3451,
+        0.66,
+        0.1
+      ],
+      "tamano": [
+        0.08,
+        0.432,
+        0.421
+      ],
+      "triangulos": 252,
+      "aristas_abiertas": 0,
+      "volumen": 0.0027
+    },
+    "Chatarra_Deposito": {
+      "centro": [
+        0.0,
+        0.38,
+        -0.74
+      ],
+      "tamano": [
+        0.3,
+        0.292,
+        0.72
+      ],
+      "triangulos": 52,
+      "aristas_abiertas": 0,
+      "volumen": 0.0492
+    },
+    "Chatarra_Combustible": {
+      "centro": [
+        0.0,
+        0.3875,
+        -0.72
+      ],
+      "tamano": [
+        0.26,
+        0.275,
+        0.64
+      ],
+      "triangulos": 120,
+      "aristas_abiertas": 0,
+      "volumen": 0.027
+    },
+    "Chatarra_Luces": {
+      "centro": [
+        0.0374,
+        0.875,
+        -0.4287
+      ],
+      "tamano": [
+        0.275,
+        0.39,
+        1.903
+      ],
+      "triangulos": 64,
+      "aristas_abiertas": 0,
+      "volumen": 0.0009
+    }
+  },
+  "anclajes": {
+    "Boca": [
+      0.0,
+      0.78,
+      -1.66
+    ],
+    "Agarre": [
+      0.0,
+      0.05,
+      0.12
+    ]
+  },
+  "pivotes_giro": {
+    "Chatarra_Rueda": [
+      0.33,
+      0.66,
+      0.1
+    ]
+  },
+  "triangulos_total": 3876,
+  "texturas": {
+    "color": "texturas/Chatarra_color.png",
+    "normal": "texturas/Chatarra_normal.png",
+    "metal": "texturas/Chatarra_metal.png",
+    "rugosidad": "texturas/Chatarra_rugosidad.png"
+  },
+  "neon": {
+    "Chatarra_Combustible": "#7DFF3A",
+    "Chatarra_Luces": "#7DFF3A"
+  },
+  "cristal": {
+    "Chatarra_Deposito": {
+      "color": "#B9E6D2",
+      "transparencia": 0.55
+    }
+  }
+}
