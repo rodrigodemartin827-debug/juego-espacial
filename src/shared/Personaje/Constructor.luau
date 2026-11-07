@@ -213,6 +213,33 @@ end
 -- Lo que trae un personaje de Roblox con su aspecto (el avatar) y se copia de un R6 al otro.
 local COPIAR_DEL_AVATAR = { "Shirt", "Pants", "ShirtGraphic", "BodyColors", "CharacterMesh" }
 
+-- Un accesorio copiado de otro R6 viene soldado a la cabeza (o al torso) de ESE R6: se le vuelve a soldar al
+-- Attachment del mismo nombre del personaje. PROBADO EN STUDIO: sin esto, al borrar el R6 temporal los sombreros se
+-- quedaban sin soldadura (Part1 = nil) y flotando.
+local function reatar(accesorio: Accessory, modelo: Model)
+	local asa = accesorio:FindFirstChild("Handle")
+	local soldadura = asa and asa:FindFirstChildWhichIsA("Weld")
+	local propio = asa and asa:FindFirstChildOfClass("Attachment")
+	if asa == nil or soldadura == nil or propio == nil then
+		return
+	end
+	for _, d in modelo:GetDescendants() do
+		if
+			d:IsA("Attachment")
+			and d.Name == propio.Name
+			and d.Parent
+			and d.Parent:IsA("BasePart")
+			and d.Parent ~= asa
+		then
+			soldadura.Part0 = asa :: BasePart
+			soldadura.C0 = propio.CFrame
+			soldadura.Part1 = d.Parent
+			soldadura.C1 = d.CFrame
+			return
+		end
+	end
+end
+
 --[[
 	Pone el avatar de Roblox (`descripcion`, ya preparada con Personaje/AvatarR6) en el personaje R6 `modelo`. Tarda
 	un poco (Roblox carga los recursos): hay que llamarlo desde un hilo que pueda esperar. `sigueVigente` (opcional) se
@@ -264,7 +291,9 @@ function Constructor.PonerAvatar(
 		if table.find(COPIAR_DEL_AVATAR, d.ClassName) then
 			d:Clone().Parent = modelo
 		elseif d:IsA("Accessory") then
-			humanoide:AddAccessory(d:Clone())
+			local copia = d:Clone()
+			copia.Parent = modelo
+			reatar(copia, modelo)
 		end
 	end
 	-- Colores de las partes (el BodyColors ya los pone, pero así no dependen de él) y cara.
@@ -285,12 +314,9 @@ function Constructor.PonerAvatar(
 		-- La cabeza del avatar (clásica, o una malla como la tele de algunos paquetes).
 		local malla = cabezaOrigen:FindFirstChildOfClass("SpecialMesh")
 		if malla then
-			local propia = cabeza:FindFirstChildOfClass("SpecialMesh")
-			if propia == nil then
-				propia = Instance.new("SpecialMesh")
-				propia.Parent = cabeza
-			end
-			local m = propia :: SpecialMesh
+			local existente = cabeza:FindFirstChildOfClass("SpecialMesh")
+			local m: SpecialMesh = if existente then existente else Instance.new("SpecialMesh")
+			m.Parent = cabeza
 			m.MeshId = malla.MeshId
 			m.TextureId = malla.TextureId
 			m.MeshType = malla.MeshType
