@@ -216,6 +216,13 @@ function Constructor.Complexion(modelo: Model, opcion: any)
 			parte.Size = Vector3.new(std.X * f[nombre].X, std.Y * f[nombre].Y, std.Z * f[nombre].Z)
 		end
 	end
+	-- Lo que cambia la distancia de la raíz a los pies (la usa el controlador del planeta, y la escena del editor).
+	local raiz = modelo:FindFirstChild("HumanoidRootPart")
+	local torso = modelo:FindFirstChild("Torso")
+	local pierna = modelo:FindFirstChild("Left Leg")
+	if raiz and torso and pierna and torso:IsA("BasePart") and pierna:IsA("BasePart") then
+		raiz:SetAttribute("AlturaExtra", torso.Size.Y / 2 + pierna.Size.Y - 3)
+	end
 	for _, d in modelo:GetDescendants() do
 		if d:IsA("Motor6D") and d.Part0 and d.Part1 and (TAM_STD[d.Part1.Name] or d.Part1.Name == "Torso") then
 			local c0 = d:GetAttribute("C0Base") or d.C0
