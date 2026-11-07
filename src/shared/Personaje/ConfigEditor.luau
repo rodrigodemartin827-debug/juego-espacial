@@ -103,7 +103,7 @@ Config.Interfaz = {
 	AnchoDerechaEstrecha = 190,
 	TamRuedaEstrecha = 120,
 	AltoCategoriaEstrecha = 62,
-	AnchoCategoriaEstrecha = 156,
+	AnchoCategoriaEstrecha = 168,
 	AltoBotonEstrecho = 44,
 }
 

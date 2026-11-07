@@ -351,6 +351,7 @@ local function crearCategorias(padre: Instance)
 		}, cont)
 		esquina(fila, 10)
 		borde(fila, C.Borde, 0.45, 1)
+		local flechas = {}
 		local function flecha(texto: string, lado: number, paso: number)
 			local b = boton(fila, {
 				Name = if paso < 0 then "Anterior" else "Siguiente",
@@ -366,6 +367,7 @@ local function crearCategorias(padre: Instance)
 				refrescarCategorias()
 				cambiar("Pieza")
 			end)
+			table.insert(flechas, b)
 		end
 		flecha("‹", 0, -1)
 		flecha("›", 1, 1)
@@ -404,7 +406,7 @@ local function crearCategorias(padre: Instance)
 			Size = UDim2.new(1, -110, 0, 18),
 			TextTruncate = Enum.TextTruncate.AtEnd,
 		})
-		ui.Categorias[cat.Campo] = { Fila = fila, Numero = numero, Opcion = opcion }
+		ui.Categorias[cat.Campo] = { Fila = fila, Numero = numero, Opcion = opcion, Nombre = nombre, Flechas = flechas }
 	end
 	refrescarCategorias()
 end
@@ -614,6 +616,23 @@ end
 
 -- ===== Disposición (ancha o estrecha) =====
 
+-- Flechas y textos de las filas de categoría: más compactos en la tarjeta estrecha (móvil). PROBADO EN STUDIO: con
+-- las medidas de escritorio, el nombre tocaba las flechas y la opción salía cortada.
+local function ajustarFilas(estrecha: boolean)
+	local anchoFlecha = if estrecha then 32 else 44
+	for _, fila in ui.Categorias do
+		for _, b in fila.Flechas do
+			b.Size = UDim2.new(0, anchoFlecha, 1, -8)
+			b.TextSize = if estrecha then 22 else 26
+		end
+		fila.Nombre.TextSize = if estrecha then 11 else 13
+		fila.Nombre.Size = UDim2.new(1, -(2 * anchoFlecha + 26), 0, 18)
+		fila.Numero.TextSize = if estrecha then 11 else 13
+		fila.Opcion.TextSize = if estrecha then 13 else 15
+		fila.Opcion.Size = UDim2.new(1, -(2 * anchoFlecha + 12), 0, 18)
+	end
+end
+
 local function maquetar()
 	local g = gui
 	local cam = workspace.CurrentCamera
@@ -649,10 +668,12 @@ local function maquetar()
 		for _, fila in ui.Categorias do
 			fila.Fila.Size = UDim2.new(1, 0, 0, I.AltoFila)
 		end
+		ajustarFilas(false)
 		der.Position = UDim2.new(1, -m - I.AnchoDerecha, 0, m + 78)
 		der.Size = UDim2.fromOffset(I.AnchoDerecha, 0)
 		ui.Rueda.Size = UDim2.fromOffset(I.TamRueda, I.TamRueda)
 		ui.RejillaMuestras.CellSize = UDim2.fromOffset(26, 26)
+		ui.RejillaMuestras.CellPadding = UDim2.fromOffset(6, 6)
 		ui.Muestras.Size = UDim2.new(1, 0, 0, 60)
 		ui.BarraInferior.Visible = false
 		abajo.Position = UDim2.new(0, m, 1, -m - I.AltoBoton)
@@ -667,7 +688,7 @@ local function maquetar()
 		ui.Subtitulo.TextSize = 12
 		izq.Visible = false
 		ui.PielesCont.Parent = g
-		ui.PielesCont.Position = UDim2.fromOffset(m - 4, 62)
+		ui.PielesCont.Position = UDim2.fromOffset(m - 4, 66)
 		ui.PielesCont.Size = UDim2.fromOffset(300, 36)
 		ui.TituloPiel.Visible = false
 		ui.TituloAspecto.Visible = false
@@ -683,10 +704,13 @@ local function maquetar()
 		for _, fila in ui.Categorias do
 			fila.Fila.Size = UDim2.fromOffset(I.AnchoCategoriaEstrecha, I.AltoCategoriaEstrecha)
 		end
+		ajustarFilas(true)
 		der.Position = UDim2.new(1, -m - I.AnchoDerechaEstrecha, 0, 10)
 		der.Size = UDim2.fromOffset(I.AnchoDerechaEstrecha, 0)
 		ui.Rueda.Size = UDim2.fromOffset(I.TamRuedaEstrecha, I.TamRuedaEstrecha)
-		ui.RejillaMuestras.CellSize = UDim2.fromOffset(22, 22)
+		-- 8 por fila en el panel estrecho (dos filas iguales).
+		ui.RejillaMuestras.CellSize = UDim2.fromOffset(17, 17)
+		ui.RejillaMuestras.CellPadding = UDim2.fromOffset(4, 4)
 		ui.Muestras.Size = UDim2.new(1, 0, 0, 50)
 		abajo.Position = UDim2.new(0, m, 1, -I.AltoBotonEstrecho - 8)
 		abajo.Size = UDim2.new(1, -2 * m, 0, I.AltoBotonEstrecho)
