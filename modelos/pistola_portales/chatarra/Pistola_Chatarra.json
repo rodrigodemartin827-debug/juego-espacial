@@ -12,9 +12,9 @@
         1.561,
         2.674
       ],
-      "triangulos": 3388,
+      "triangulos": 2912,
       "aristas_abiertas": 0,
-      "volumen": 0.5494
+      "volumen": 0.5296
     },
     "Chatarra_Rueda": {
       "centro": [
@@ -30,6 +30,21 @@
       "triangulos": 252,
       "aristas_abiertas": 0,
       "volumen": 0.0027
+    },
+    "Chatarra_DepositoMarco": {
+      "centro": [
+        -0.0281,
+        0.373,
+        -0.755
+      ],
+      "tamano": [
+        0.404,
+        0.354,
+        0.93
+      ],
+      "triangulos": 476,
+      "aristas_abiertas": 0,
+      "volumen": 0.0204
     },
     "Chatarra_Deposito": {
       "centro": [
@@ -87,6 +102,21 @@
       0.0,
       0.05,
       0.12
+    ],
+    "Chispas_Bobina_1": [
+      0.0,
+      0.95,
+      -0.7
+    ],
+    "Chispas_Bobina_2": [
+      0.16,
+      0.82,
+      -0.84
+    ],
+    "Chispas_Bobina_3": [
+      -0.15,
+      0.86,
+      -0.96
     ]
   },
   "pivotes_giro": {
@@ -94,6 +124,11 @@
       0.33,
       0.66,
       0.1
+    ],
+    "Chatarra_DepositoMarco": [
+      0.0,
+      0.38,
+      -0.72
     ]
   },
   "triangulos_total": 3876,

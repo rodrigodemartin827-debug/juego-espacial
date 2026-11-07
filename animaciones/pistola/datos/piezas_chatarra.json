@@ -1,0 +1,625 @@
+{
+ "fps": 60,
+ "fotograma_disparo": 9,
+ "disparo": [
+  {
+   "f": 0,
+   "rueda": 0.0,
+   "deposito": 0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 1,
+   "rueda": 0.0186,
+   "deposito": 0.0001,
+   "chispas": 0.0
+  },
+  {
+   "f": 2,
+   "rueda": 0.8174,
+   "deposito": -0.0006,
+   "chispas": 0.0
+  },
+  {
+   "f": 3,
+   "rueda": 6.1667,
+   "deposito": 0.001,
+   "chispas": 0.35
+  },
+  {
+   "f": 4,
+   "rueda": 22.0305,
+   "deposito": 0.0007,
+   "chispas": 0.0
+  },
+  {
+   "f": 5,
+   "rueda": 50.958,
+   "deposito": -0.0042,
+   "chispas": 0.0
+  },
+  {
+   "f": 6,
+   "rueda": 87.4013,
+   "deposito": 0.006,
+   "chispas": 0.35
+  },
+  {
+   "f": 7,
+   "rueda": 119.4223,
+   "deposito": -0.003,
+   "chispas": 0.0
+  },
+  {
+   "f": 8,
+   "rueda": 136.7894,
+   "deposito": -0.0032,
+   "chispas": 0.35
+  },
+  {
+   "f": 9,
+   "rueda": 140.0,
+   "deposito": 0.0076,
+   "chispas": 1.0
+  },
+  {
+   "f": 10,
+   "rueda": 202.162,
+   "deposito": 0.011,
+   "chispas": 1.0
+  },
+  {
+   "f": 11,
+   "rueda": 259.5448,
+   "deposito": 0.0282,
+   "chispas": 1.0
+  },
+  {
+   "f": 12,
+   "rueda": 312.3396,
+   "deposito": 0.0388,
+   "chispas": 0.0
+  },
+  {
+   "f": 13,
+   "rueda": 360.7374,
+   "deposito": 0.0431,
+   "chispas": 0.0
+  },
+  {
+   "f": 14,
+   "rueda": 404.9294,
+   "deposito": 0.0422,
+   "chispas": 0.0
+  },
+  {
+   "f": 15,
+   "rueda": 445.107,
+   "deposito": 0.0372,
+   "chispas": 0.0
+  },
+  {
+   "f": 16,
+   "rueda": 481.4611,
+   "deposito": 0.0297,
+   "chispas": 0.0
+  },
+  {
+   "f": 17,
+   "rueda": 514.183,
+   "deposito": 0.0208,
+   "chispas": 0.0
+  },
+  {
+   "f": 18,
+   "rueda": 543.4638,
+   "deposito": 0.0118,
+   "chispas": 0.0
+  },
+  {
+   "f": 19,
+   "rueda": 569.4948,
+   "deposito": 0.0036,
+   "chispas": 0.0
+  },
+  {
+   "f": 20,
+   "rueda": 592.467,
+   "deposito": 0.0032,
+   "chispas": 0.0
+  },
+  {
+   "f": 21,
+   "rueda": 612.5717,
+   "deposito": 0.0081,
+   "chispas": 0.0
+  },
+  {
+   "f": 22,
+   "rueda": 630.0,
+   "deposito": 0.0111,
+   "chispas": 0.0
+  },
+  {
+   "f": 23,
+   "rueda": 644.9431,
+   "deposito": 0.0124,
+   "chispas": 0.0
+  },
+  {
+   "f": 24,
+   "rueda": 657.5922,
+   "deposito": 0.0121,
+   "chispas": 0.0
+  },
+  {
+   "f": 25,
+   "rueda": 668.1384,
+   "deposito": 0.0107,
+   "chispas": 0.0
+  },
+  {
+   "f": 26,
+   "rueda": 676.7729,
+   "deposito": 0.0085,
+   "chispas": 0.0
+  },
+  {
+   "f": 27,
+   "rueda": 683.6868,
+   "deposito": 0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 28,
+   "rueda": 689.0715,
+   "deposito": 0.0034,
+   "chispas": 0.0
+  },
+  {
+   "f": 29,
+   "rueda": 693.1179,
+   "deposito": 0.001,
+   "chispas": 0.0
+  },
+  {
+   "f": 30,
+   "rueda": 696.0173,
+   "deposito": 0.0009,
+   "chispas": 0.0
+  },
+  {
+   "f": 31,
+   "rueda": 697.9609,
+   "deposito": 0.0023,
+   "chispas": 0.0
+  },
+  {
+   "f": 32,
+   "rueda": 699.1397,
+   "deposito": 0.0032,
+   "chispas": 0.0
+  },
+  {
+   "f": 33,
+   "rueda": 699.7451,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 34,
+   "rueda": 699.9681,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 35,
+   "rueda": 700.0,
+   "deposito": 0.0031,
+   "chispas": 0.0
+  },
+  {
+   "f": 36,
+   "rueda": 700.0,
+   "deposito": 0.0024,
+   "chispas": 0.0
+  },
+  {
+   "f": 37,
+   "rueda": 700.0,
+   "deposito": 0.0017,
+   "chispas": 0.0
+  },
+  {
+   "f": 38,
+   "rueda": 700.0,
+   "deposito": 0.001,
+   "chispas": 0.0
+  },
+  {
+   "f": 39,
+   "rueda": 700.0,
+   "deposito": 0.0003,
+   "chispas": 0.0
+  },
+  {
+   "f": 40,
+   "rueda": 700.0,
+   "deposito": 0.0003,
+   "chispas": 0.0
+  }
+ ],
+ "apuntar": [
+  {
+   "f": 0,
+   "rueda": 0.0,
+   "deposito": 0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 2,
+   "rueda": 0.0,
+   "deposito": 0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 4,
+   "rueda": 0.0,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 6,
+   "rueda": 0.0,
+   "deposito": 0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 8,
+   "rueda": 0.0,
+   "deposito": 0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 10,
+   "rueda": 0.0,
+   "deposito": 0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 12,
+   "rueda": 0.0,
+   "deposito": 0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 14,
+   "rueda": 0.0,
+   "deposito": 0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 16,
+   "rueda": 0.0,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 18,
+   "rueda": 0.0,
+   "deposito": 0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 20,
+   "rueda": 0.0,
+   "deposito": 0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 22,
+   "rueda": 0.0,
+   "deposito": -0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 24,
+   "rueda": 0.0,
+   "deposito": -0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 26,
+   "rueda": 0.0,
+   "deposito": -0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 28,
+   "rueda": 0.0,
+   "deposito": -0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 30,
+   "rueda": 0.0,
+   "deposito": -0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 32,
+   "rueda": 0.0,
+   "deposito": -0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 34,
+   "rueda": 0.0,
+   "deposito": -0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 36,
+   "rueda": 0.0,
+   "deposito": -0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 38,
+   "rueda": 0.0,
+   "deposito": -0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 40,
+   "rueda": 0.0,
+   "deposito": -0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 42,
+   "rueda": 0.0,
+   "deposito": 0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 44,
+   "rueda": 0.0,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 46,
+   "rueda": 0.0,
+   "deposito": 0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 48,
+   "rueda": 0.0,
+   "deposito": 0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 50,
+   "rueda": 0.0,
+   "deposito": 0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 52,
+   "rueda": 0.0,
+   "deposito": 0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 54,
+   "rueda": 0.0,
+   "deposito": 0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 56,
+   "rueda": 0.0,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 58,
+   "rueda": 0.0,
+   "deposito": 0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 60,
+   "rueda": 0.0,
+   "deposito": 0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 62,
+   "rueda": 0.0,
+   "deposito": -0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 64,
+   "rueda": 0.0,
+   "deposito": -0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 66,
+   "rueda": 0.0,
+   "deposito": -0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 68,
+   "rueda": 0.0,
+   "deposito": -0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 70,
+   "rueda": 0.0,
+   "deposito": -0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 72,
+   "rueda": 0.0,
+   "deposito": -0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 74,
+   "rueda": 0.0,
+   "deposito": -0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 76,
+   "rueda": 0.0,
+   "deposito": -0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 78,
+   "rueda": 0.0,
+   "deposito": -0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 80,
+   "rueda": 0.0,
+   "deposito": -0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 82,
+   "rueda": 0.0,
+   "deposito": 0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 84,
+   "rueda": 0.0,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 86,
+   "rueda": 0.0,
+   "deposito": 0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 88,
+   "rueda": 0.0,
+   "deposito": 0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 90,
+   "rueda": 0.0,
+   "deposito": 0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 92,
+   "rueda": 0.0,
+   "deposito": 0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 94,
+   "rueda": 0.0,
+   "deposito": 0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 96,
+   "rueda": 0.0,
+   "deposito": 0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 98,
+   "rueda": 0.0,
+   "deposito": 0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 100,
+   "rueda": 0.0,
+   "deposito": 0.0,
+   "chispas": 0.0
+  },
+  {
+   "f": 102,
+   "rueda": 0.0,
+   "deposito": -0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 104,
+   "rueda": 0.0,
+   "deposito": -0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 106,
+   "rueda": 0.0,
+   "deposito": -0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 108,
+   "rueda": 0.0,
+   "deposito": -0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 110,
+   "rueda": 0.0,
+   "deposito": -0.006,
+   "chispas": 0.0
+  },
+  {
+   "f": 112,
+   "rueda": 0.0,
+   "deposito": -0.0057,
+   "chispas": 0.0
+  },
+  {
+   "f": 114,
+   "rueda": 0.0,
+   "deposito": -0.0049,
+   "chispas": 0.0
+  },
+  {
+   "f": 116,
+   "rueda": 0.0,
+   "deposito": -0.0035,
+   "chispas": 0.0
+  },
+  {
+   "f": 118,
+   "rueda": 0.0,
+   "deposito": -0.0019,
+   "chispas": 0.0
+  },
+  {
+   "f": 120,
+   "rueda": 0.0,
+   "deposito": -0.0,
+   "chispas": 0.0
+  }
+ ],
+ "unidades": {
+  "rueda": "grados sobre su eje (X)",
+  "deposito": "studs hacia arriba (Y de Roblox)",
+  "chispas": "0 nada, 0,35 chisporroteo, 1 ráfaga"
+ }
+}

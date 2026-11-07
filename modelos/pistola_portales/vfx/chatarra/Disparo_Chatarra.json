@@ -1,0 +1,46 @@
+{
+  "piezas": {
+    "Proyectil_Chatarra": {
+      "centro": [
+        -0.0292,
+        -0.0921,
+        0.4543
+      ],
+      "tamano": [
+        0.839,
+        0.78,
+        1.551
+      ],
+      "triangulos": 140,
+      "aristas_abiertas": 0,
+      "volumen": 0.0866,
+      "material": "Neon",
+      "color": "#7DFF3A"
+    },
+    "Fogonazo_Chatarra": {
+      "centro": [
+        0.0574,
+        -0.1127,
+        -0.6031
+      ],
+      "tamano": [
+        0.958,
+        1.008,
+        1.343
+      ],
+      "triangulos": 302,
+      "aristas_abiertas": 0,
+      "volumen": 0.0995,
+      "material": "Neon",
+      "color": "#C8FF8A"
+    }
+  },
+  "anclajes": {
+    "Origen": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "triangulos_total": 442
+}

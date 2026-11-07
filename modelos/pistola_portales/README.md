@@ -59,6 +59,7 @@ de cristal arriba ni de mango de pistola de juguete), y la VIP se reconoce por l
 | --- | --- | --- |
 | `Chatarra_Cuerpo` | Todo lo fijo (cajón, cañón, latas, cables, cinta, manómetro, empuñadura...) | **Handle**. SurfaceAppearance con el atlas |
 | `Chatarra_Rueda` | Rueda de válvula | SurfaceAppearance con el **mismo** atlas. Gira sobre X (Weld `Giro`) |
+| `Chatarra_DepositoMarco` | Tapones, abrazaderas y jaula del depósito (**sube y baja**: salta al disparar) | SurfaceAppearance con el **mismo** atlas. Weld `Giro`; el cristal y el combustible van soldados a él |
 | `Chatarra_Deposito` | Cristal del depósito (cilindro macizo) | Material **Glass**, `#B9E6D2`, Transparency 0,55 |
 | `Chatarra_Combustible` | Líquido y burbujas, dentro del cristal | Material **Neon**, `#7DFF3A` |
 | `Chatarra_Luces` | Bombilla de encima y fondo de la boca | Material **Neon**, `#7DFF3A` |
@@ -81,6 +82,10 @@ Los colores de neón y del cristal están en `NEON` y `CRISTAL`, arriba de `herr
 Las piezas con textura de cada pistola comparten **un solo atlas**: se sube una vez y se pone el mismo ID en todas.
 
 ### Anclajes
+
+Además de `Boca` y `Agarre`, cada pistola lleva los puntos que necesitan los efectos del disparo
+(`vfx/` y `vfx_portal.md`): **`Chispas_Bobina_1`, `_2` y `_3`** en la bobina de cobre de la normal (de donde salen las
+chispas) y **`Nucleo`** en el centro del núcleo de la VIP (fogonazo y luz).
 
 Cada FBX lleva dos Empty, y `Pistola_<nombre>.json` da su posición (studs, ejes de Roblox, en el marco del modelo):
 
@@ -166,3 +171,39 @@ con 4 núcleos. El script escribe los FBX, las texturas, los JSON, los dos `mont
 | 3 | Primera a calidad completa: la normal funciona (óxido, chapas desparejadas, cables, cinta). La VIP seguía casi negra y el núcleo salía rosa pálido | Varillas de jaula en el depósito, comparación sin recortes, VIP en gris metal menos oscuro |
 | 4 | El metal de la VIP solo reflejaba el estudio oscuro: negro. Las aletas de arriba parecían antenas | Caja de luz cenital (como el cielo en Roblox), metal y cromo más claros, núcleo morado más intenso, aletas bajas, placas blancas en la empuñadura |
 | 5 (final) | Al reimportar los FBX salieron dos fallos: el JSON tenía el cañón hacia +Z y los Empty de la VIP se llamaban `Agarre.001`. Y el muñeco sostenía la pistola con la mano izquierda (en Blender, mirando a -Y, la derecha es -X) | Placas de la empuñadura que asoman de verdad, marco del JSON con el cañón hacia -Z, Empty con su nombre, pistola en la mano derecha del R6 y lados de la hoja bien etiquetados |
+
+## Disparo y portal (`vfx/`, `vfx_portal.md` y `animaciones/pistola/`)
+
+Lo que pasa al disparar. **Roblox no importa efectos de Blender tal cual**, así que se entregan las piezas para montarlo con
+mallas, `ParticleEmitter` y `Beam`; `vfx_portal.md` dice cómo, fase por fase (partículas, colores, tamaños, tiempos y
+sonidos).
+
+| Carpeta o archivo | Qué es |
+| --- | --- |
+| `vfx/chatarra/`, `vfx/vip/` | `Portal_*.fbx` (anillo, borde, fondo, remolino, onda) y `Disparo_*.fbx` (proyectil y fogonazo), con `.json` |
+| `vfx/texturas/` | 13 PNG de 512 como mucho: partículas blancas, `Beam`, flipbooks 4 × 4 y remolinos con color |
+| `vfx/hoja_portal_4.png` | Fases del portal (disparo, apertura, abierto, cierre), normal frente a VIP |
+| `vfx_portal.md` | El documento de montaje en Studio |
+| `animaciones/pistola/` | Apuntar y disparar en R6 (`.rbxmx` y FBX), con la hoja del disparo |
+
+Portal normal: 1.852 triángulos en 5 mallas; VIP: 2.784 en 6; proyectil + fogonazo: 442 y 716. Todos son sólidos cerrados
+(sin aristas abiertas, normales hacia fuera). El remolino es un **círculo** que gira dentro de un fondo elíptico fijo (si
+girase la elipse entera, asomaría por el anillo).
+
+Regenerar (con `bpy`, Pillow y numpy):
+
+```bash
+python modelos/herramientas/portal_vfx.py --salida modelos/pistola_portales/vfx
+python modelos/herramientas/texturas_vfx.py --salida modelos/pistola_portales/vfx/texturas
+python animaciones/pistola/herramientas/generar_portal.py --salida modelos/pistola_portales/vfx --ronda 4
+```
+
+### Las rondas del portal
+
+| Ronda | Lo que se vio | Lo que se cambió |
+| --- | --- | --- |
+| 1 | Se lee bien: verde con espinas frente a morado y cian limpio. Pero el remolino elíptico, al girar, **se salía del anillo**; el remolino VIP salía lavado (blanco-lila); y las columnas del disparo salían casi vacías | — |
+| 2 | Ya no se sale. El R6 de escala tapaba el portal en la vista 3/4 y se perdía a contraluz; el proyectil en vuelo quedaba fuera de cuadro | El remolino pasa a ser un círculo con un fondo elíptico fijo; remolino con la mitad de intensidad; planos del disparo propios (fogonazo cerca y proyectil en vuelo) |
+| 3 | La onda expansiva se cortaba por arriba; el proyectil era un punto | R6 de escala a la derecha y más claro, cámara más abierta, estela (Trail) detrás del proyectil, el instante del vuelo a los 0,15 s |
+| 4 (final) | Calidad completa | — |
+

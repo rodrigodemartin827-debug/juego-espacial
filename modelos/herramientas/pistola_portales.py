@@ -492,6 +492,7 @@ def construir_chatarra():
     random.seed(7)
     cu = Pieza("Chatarra_Cuerpo", MAT_CHATARRA)
     ru = Pieza("Chatarra_Rueda", MAT_CHATARRA)
+    dm = Pieza("Chatarra_DepositoMarco", MAT_CHATARRA)  # tapones, abrazaderas y jaula: sube y baja con el depósito
     de = Pieza("Chatarra_Deposito", {"cristal": mat_cristal("ch_cristal", CRISTAL["Chatarra_Deposito"][0])})
     co = Pieza("Chatarra_Combustible", {"neon": mat_neon("ch_neon", NEON["Chatarra_Combustible"])})
     lu = Pieza("Chatarra_Luces", {"neon": mat_neon("ch_neon", NEON["Chatarra_Luces"])})
@@ -574,19 +575,19 @@ def construir_chatarra():
     for (y, x, z) in ((-0.55, 0.05, 0.46), (-0.78, -0.06, 0.43), (-0.92, 0.03, 0.47)):
         co.esfera((x, y, z + 0.035), 0.02, "neon", sub=1)
     # tapas: tapón trasero de latón y tapón delantero rojo con la manguera
-    cu.perfil((0, y0 + 0.07, zd), "-Y", [(0, 0.12), (0.03, 0.17), (0.09, 0.17), (0.11, 0.16)], "laton", lados=8)
-    cu.perfil((0, y1 + 0.02, zd), "-Y", [(0, 0.16), (0.02, 0.17), (0.08, 0.17), (0.10, 0.12), (0.14, 0.06),
+    dm.perfil((0, y0 + 0.07, zd), "-Y", [(0, 0.12), (0.03, 0.17), (0.09, 0.17), (0.11, 0.16)], "laton", lados=8)
+    dm.perfil((0, y1 + 0.02, zd), "-Y", [(0, 0.16), (0.02, 0.17), (0.08, 0.17), (0.10, 0.12), (0.14, 0.06),
                                          (0.16, 0.06)], "azul", lados=8)
     # dos abrazaderas de chapa con su tornillo, y las patas que las unen al cañón
     for y in (-0.52, -0.90):
-        cu.tubo_hueco((0, y + 0.03, zd), "-Y", rd + 0.022, rd + 0.004, 0.06, "acero", lados=14)
-        cu.caja((rd + 0.03, y, zd + 0.02), (0.05, 0.05, 0.07), "acero")
-        cu.tornillo((rd + 0.055, y, zd + 0.02), (1, 0, 0), "tornillo", r=0.022)
+        dm.tubo_hueco((0, y + 0.03, zd), "-Y", rd + 0.022, rd + 0.004, 0.06, "acero", lados=14)
+        dm.caja((rd + 0.03, y, zd + 0.02), (0.05, 0.05, 0.07), "acero")
+        dm.tornillo((rd + 0.055, y, zd + 0.02), (1, 0, 0), "tornillo", r=0.022)
         cu.caja((0, y, (zd + rd + zc - 0.12) / 2), (0.05, 0.06, (zc - 0.12) - (zd + rd) + 0.03), "verde")
     # tres varillas de jaula por fuera del cristal
     for a in (math.radians(200), math.radians(270), math.radians(340)):
         d = Vector((math.cos(a), 0, math.sin(a)))
-        cu.tubo([Vector((0, y0 - 0.02, zd)) + d * (rd + 0.02), Vector((0, y1 + 0.02, zd)) + d * (rd + 0.02)],
+        dm.tubo([Vector((0, y0 - 0.02, zd)) + d * (rd + 0.02), Vector((0, y1 + 0.02, zd)) + d * (rd + 0.02)],
                 0.014, "acero", lados=4)
     # manguera de goma desde la tapa delantera hasta el cañón (el combustible sube a la bobina)
     pts = [(0, y1 - 0.13, zd), (0, y1 - 0.20, zd + 0.05), (0, y1 - 0.20, zd + 0.22), (0, -1.06, zc - 0.10),
@@ -665,9 +666,14 @@ def construir_chatarra():
     lu.cilindro((0, -1.36, zc), 0.10, 0.02, "neon", lados=12, eje="-Y")
 
     boca_pos = Vector((0, -1.66, zc))
-    piezas = {"Chatarra_Cuerpo": cu, "Chatarra_Rueda": ru, "Chatarra_Deposito": de,
-              "Chatarra_Combustible": co, "Chatarra_Luces": lu}
-    return piezas, boca_pos, ["Chatarra_Cuerpo", "Chatarra_Rueda"], {"Chatarra_Rueda": eje_r + Vector((-0.04, 0, 0))}
+    piezas = {"Chatarra_Cuerpo": cu, "Chatarra_Rueda": ru, "Chatarra_DepositoMarco": dm,
+              "Chatarra_Deposito": de, "Chatarra_Combustible": co, "Chatarra_Luces": lu}
+    pivotes = {"Chatarra_Rueda": eje_r + Vector((-0.04, 0, 0)),
+               "Chatarra_DepositoMarco": Vector((0, (y0 + y1) / 2, zd))}
+    # Puntos para los efectos: chispas de la bobina (tres, en la parte alta y los costados)
+    puntos = {"Chispas_Bobina_1": Vector((0.0, -0.70, zc + 0.17)), "Chispas_Bobina_2": Vector((-0.16, -0.84, zc + 0.04)),
+              "Chispas_Bobina_3": Vector((0.15, -0.96, zc + 0.08))}
+    return piezas, boca_pos, ["Chatarra_Cuerpo", "Chatarra_Rueda", "Chatarra_DepositoMarco"], pivotes, puntos
 
 
 # --------------------------------------------------------------------------------------------------------------
@@ -859,7 +865,8 @@ def construir_vip():
     for i in range(3):
         piezas[piezas_anillo[i].nombre] = piezas_anillo[i]
         piezas[luces_an[i].nombre] = luces_an[i]
-    return piezas, boca_pos, ["VIP_Cuerpo", "VIP_Anillo1", "VIP_Anillo2", "VIP_Anillo3"], centros_anillos
+    puntos = {"Nucleo": cnu.copy()}  # centro del núcleo: aquí va el fogonazo y la luz
+    return piezas, boca_pos, ["VIP_Cuerpo", "VIP_Anillo1", "VIP_Anillo2", "VIP_Anillo3"], centros_anillos, puntos
 
 
 # --------------------------------------------------------------------------------------------------------------
@@ -1066,7 +1073,7 @@ def munieco_r6(desplazamiento=Vector((0, 0, 0))):
 
 
 def preparar(nombre, construir, carpeta, rapido):
-    piezas, boca, con_textura, pivotes = construir()
+    piezas, boca, con_textura, pivotes, puntos = construir()
     objetos = {n: p.objeto() for n, p in piezas.items()}
     for n in con_textura:
         c.sombreado_suave(objetos[n], angulo=38)
@@ -1081,7 +1088,7 @@ def preparar(nombre, construir, carpeta, rapido):
     mn, mx = c.caja_limite([cuerpo])
     agarre = Vector((0, 0.12, 0.05)) if nombre == "Chatarra" else Vector((0, 0.16, 0.05))
     vacios = {}
-    for n, p in (("Boca", boca), ("Agarre", agarre)):
+    for n, p in (("Boca", boca), ("Agarre", agarre), *puntos.items()):
         e = bpy.data.objects.new(n, None)
         e.empty_display_type = "ARROWS"
         e.empty_display_size = 0.3
@@ -1135,9 +1142,11 @@ def exportar(ruta, objetos, vacios):
 # --------------------------------------------------------------------------------------------------------------
 
 # Eje sobre el que gira cada pieza móvil, en coordenadas de Roblox: la rueda sobre X, los anillos sobre el cañón (Z).
-EJES_GIRO = {"Chatarra_Rueda": "X", "VIP_Anillo1": "Z", "VIP_Anillo2": "Z", "VIP_Anillo3": "Z"}
+EJES_GIRO = {"Chatarra_Rueda": "X", "Chatarra_DepositoMarco": "Y", "VIP_Anillo1": "Z", "VIP_Anillo2": "Z",
+             "VIP_Anillo3": "Z"}
 # Piezas que van soldadas a otra que gira (en lugar de al Handle)
-SOLDAR_A = {"VIP_Anillo1_Luz": "VIP_Anillo1", "VIP_Anillo2_Luz": "VIP_Anillo2", "VIP_Anillo3_Luz": "VIP_Anillo3"}
+SOLDAR_A = {"Chatarra_Deposito": "Chatarra_DepositoMarco", "Chatarra_Combustible": "Chatarra_DepositoMarco",
+            "VIP_Anillo1_Luz": "VIP_Anillo1", "VIP_Anillo2_Luz": "VIP_Anillo2", "VIP_Anillo3_Luz": "VIP_Anillo3"}
 
 
 def _v3(v):
@@ -1236,9 +1245,8 @@ def main():
             json.dump(datos, f, indent=2, ensure_ascii=False)
         generar_montaje(os.path.join(dest, f"montar_{carpeta}.luau"),
                         "PistolaPortales" if nombre == "Chatarra" else "PistolaPortalesVIP", datos,
-                        [n for n in objetos if os.path.exists(os.path.join(dest, "texturas")) and
-                         n in ("Chatarra_Cuerpo", "Chatarra_Rueda", "VIP_Cuerpo", "VIP_Anillo1", "VIP_Anillo2",
-                               "VIP_Anillo3")])
+                        [n for n in objetos if n in ("Chatarra_Cuerpo", "Chatarra_Rueda", "Chatarra_DepositoMarco",
+                                                     "VIP_Cuerpo", "VIP_Anillo1", "VIP_Anillo2", "VIP_Anillo3")])
         print(f"[info] {nombre}: {datos['triangulos_total']} triángulos")
         for n, p in datos["piezas"].items():
             print(f"   {n}: {p}")

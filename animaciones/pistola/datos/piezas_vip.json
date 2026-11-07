@@ -1,0 +1,1033 @@
+{
+ "fps": 60,
+ "fotograma_disparo": 9,
+ "disparo": [
+  {
+   "f": 0,
+   "anillos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "nucleo_escala": 1.0,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 1,
+   "anillos": [
+    1.0,
+    -1.5,
+    2.0
+   ],
+   "nucleo_escala": 1.004,
+   "nucleo_blanco": 0.0029
+  },
+  {
+   "f": 2,
+   "anillos": [
+    2.02,
+    -3.03,
+    4.05
+   ],
+   "nucleo_escala": 1.0267,
+   "nucleo_blanco": 0.0191
+  },
+  {
+   "f": 3,
+   "anillos": [
+    3.18,
+    -4.76,
+    6.35
+   ],
+   "nucleo_escala": 1.0735,
+   "nucleo_blanco": 0.0525
+  },
+  {
+   "f": 4,
+   "anillos": [
+    4.6,
+    -6.89,
+    9.19
+   ],
+   "nucleo_escala": 1.1388,
+   "nucleo_blanco": 0.0992
+  },
+  {
+   "f": 5,
+   "anillos": [
+    6.39,
+    -9.58,
+    12.78
+   ],
+   "nucleo_escala": 1.2112,
+   "nucleo_blanco": 0.1508
+  },
+  {
+   "f": 6,
+   "anillos": [
+    8.6,
+    -12.89,
+    17.19
+   ],
+   "nucleo_escala": 1.2765,
+   "nucleo_blanco": 0.1975
+  },
+  {
+   "f": 7,
+   "anillos": [
+    11.18,
+    -16.76,
+    22.35
+   ],
+   "nucleo_escala": 1.3233,
+   "nucleo_blanco": 0.2309
+  },
+  {
+   "f": 8,
+   "anillos": [
+    14.02,
+    -21.03,
+    28.05
+   ],
+   "nucleo_escala": 1.346,
+   "nucleo_blanco": 0.2471
+  },
+  {
+   "f": 9,
+   "anillos": [
+    17.0,
+    -25.5,
+    34.0
+   ],
+   "nucleo_escala": 2.45,
+   "nucleo_blanco": 1.0
+  },
+  {
+   "f": 10,
+   "anillos": [
+    32.0,
+    -48.0,
+    64.0
+   ],
+   "nucleo_escala": 1.9006,
+   "nucleo_blanco": 0.8187
+  },
+  {
+   "f": 11,
+   "anillos": [
+    46.03,
+    -69.05,
+    92.07
+   ],
+   "nucleo_escala": 1.7374,
+   "nucleo_blanco": 0.6703
+  },
+  {
+   "f": 12,
+   "anillos": [
+    59.17,
+    -88.76,
+    118.34
+   ],
+   "nucleo_escala": 1.6037,
+   "nucleo_blanco": 0.5488
+  },
+  {
+   "f": 13,
+   "anillos": [
+    71.47,
+    -107.21,
+    142.94
+   ],
+   "nucleo_escala": 1.4943,
+   "nucleo_blanco": 0.4493
+  },
+  {
+   "f": 14,
+   "anillos": [
+    82.99,
+    -124.49,
+    165.98
+   ],
+   "nucleo_escala": 1.4047,
+   "nucleo_blanco": 0.3679
+  },
+  {
+   "f": 15,
+   "anillos": [
+    93.79,
+    -140.68,
+    187.57
+   ],
+   "nucleo_escala": 1.3313,
+   "nucleo_blanco": 0.3012
+  },
+  {
+   "f": 16,
+   "anillos": [
+    103.91,
+    -155.86,
+    207.81
+   ],
+   "nucleo_escala": 1.2713,
+   "nucleo_blanco": 0.2466
+  },
+  {
+   "f": 17,
+   "anillos": [
+    113.4,
+    -170.1,
+    226.8
+   ],
+   "nucleo_escala": 1.2221,
+   "nucleo_blanco": 0.2019
+  },
+  {
+   "f": 18,
+   "anillos": [
+    122.3,
+    -183.46,
+    244.61
+   ],
+   "nucleo_escala": 1.1818,
+   "nucleo_blanco": 0.1653
+  },
+  {
+   "f": 19,
+   "anillos": [
+    130.67,
+    -196.0,
+    261.33
+   ],
+   "nucleo_escala": 1.1489,
+   "nucleo_blanco": 0.1353
+  },
+  {
+   "f": 20,
+   "anillos": [
+    138.52,
+    -207.78,
+    277.04
+   ],
+   "nucleo_escala": 1.1219,
+   "nucleo_blanco": 0.1108
+  },
+  {
+   "f": 21,
+   "anillos": [
+    145.9,
+    -218.85,
+    291.8
+   ],
+   "nucleo_escala": 1.0998,
+   "nucleo_blanco": 0.0907
+  },
+  {
+   "f": 22,
+   "anillos": [
+    152.84,
+    -229.26,
+    305.68
+   ],
+   "nucleo_escala": 1.0817,
+   "nucleo_blanco": 0.0743
+  },
+  {
+   "f": 23,
+   "anillos": [
+    159.37,
+    -239.06,
+    318.75
+   ],
+   "nucleo_escala": 1.0669,
+   "nucleo_blanco": 0.0608
+  },
+  {
+   "f": 24,
+   "anillos": [
+    165.52,
+    -248.29,
+    331.05
+   ],
+   "nucleo_escala": 1.0548,
+   "nucleo_blanco": 0.0498
+  },
+  {
+   "f": 25,
+   "anillos": [
+    171.32,
+    -256.98,
+    342.64
+   ],
+   "nucleo_escala": 1.0448,
+   "nucleo_blanco": 0.0408
+  },
+  {
+   "f": 26,
+   "anillos": [
+    176.78,
+    -265.18,
+    353.57
+   ],
+   "nucleo_escala": 1.0367,
+   "nucleo_blanco": 0.0334
+  },
+  {
+   "f": 27,
+   "anillos": [
+    181.94,
+    -272.91,
+    363.88
+   ],
+   "nucleo_escala": 1.0301,
+   "nucleo_blanco": 0.0273
+  },
+  {
+   "f": 28,
+   "anillos": [
+    186.81,
+    -280.22,
+    373.62
+   ],
+   "nucleo_escala": 1.0246,
+   "nucleo_blanco": 0.0224
+  },
+  {
+   "f": 29,
+   "anillos": [
+    191.41,
+    -287.12,
+    382.83
+   ],
+   "nucleo_escala": 1.0201,
+   "nucleo_blanco": 0.0183
+  },
+  {
+   "f": 30,
+   "anillos": [
+    195.77,
+    -293.65,
+    391.54
+   ],
+   "nucleo_escala": 1.0165,
+   "nucleo_blanco": 0.015
+  },
+  {
+   "f": 31,
+   "anillos": [
+    199.89,
+    -299.84,
+    399.79
+   ],
+   "nucleo_escala": 1.0135,
+   "nucleo_blanco": 0.0123
+  },
+  {
+   "f": 32,
+   "anillos": [
+    203.8,
+    -305.7,
+    407.6
+   ],
+   "nucleo_escala": 1.0111,
+   "nucleo_blanco": 0.0101
+  },
+  {
+   "f": 33,
+   "anillos": [
+    207.51,
+    -311.26,
+    415.02
+   ],
+   "nucleo_escala": 1.0091,
+   "nucleo_blanco": 0.0082
+  },
+  {
+   "f": 34,
+   "anillos": [
+    211.03,
+    -316.55,
+    422.06
+   ],
+   "nucleo_escala": 1.0074,
+   "nucleo_blanco": 0.0067
+  },
+  {
+   "f": 35,
+   "anillos": [
+    214.38,
+    -321.57,
+    428.76
+   ],
+   "nucleo_escala": 1.0061,
+   "nucleo_blanco": 0.0055
+  },
+  {
+   "f": 36,
+   "anillos": [
+    217.56,
+    -326.35,
+    435.13
+   ],
+   "nucleo_escala": 1.005,
+   "nucleo_blanco": 0.0045
+  },
+  {
+   "f": 37,
+   "anillos": [
+    220.6,
+    -330.9,
+    441.2
+   ],
+   "nucleo_escala": 1.0041,
+   "nucleo_blanco": 0.0037
+  },
+  {
+   "f": 38,
+   "anillos": [
+    223.49,
+    -335.24,
+    446.99
+   ],
+   "nucleo_escala": 1.0033,
+   "nucleo_blanco": 0.003
+  },
+  {
+   "f": 39,
+   "anillos": [
+    226.26,
+    -339.39,
+    452.52
+   ],
+   "nucleo_escala": 1.0027,
+   "nucleo_blanco": 0.0025
+  },
+  {
+   "f": 40,
+   "anillos": [
+    228.9,
+    -343.35,
+    457.8
+   ],
+   "nucleo_escala": 1.0022,
+   "nucleo_blanco": 0.002
+  }
+ ],
+ "apuntar": [
+  {
+   "f": 0,
+   "anillos": [
+    0.0,
+    -0.0,
+    0.0
+   ],
+   "nucleo_escala": 1.0,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 2,
+   "anillos": [
+    2.0,
+    -3.0,
+    4.0
+   ],
+   "nucleo_escala": 1.0031,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 4,
+   "anillos": [
+    4.0,
+    -6.0,
+    8.0
+   ],
+   "nucleo_escala": 1.0062,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 6,
+   "anillos": [
+    6.0,
+    -9.0,
+    12.0
+   ],
+   "nucleo_escala": 1.0093,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 8,
+   "anillos": [
+    8.0,
+    -12.0,
+    16.0
+   ],
+   "nucleo_escala": 1.0122,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 10,
+   "anillos": [
+    10.0,
+    -15.0,
+    20.0
+   ],
+   "nucleo_escala": 1.015,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 12,
+   "anillos": [
+    12.0,
+    -18.0,
+    24.0
+   ],
+   "nucleo_escala": 1.0176,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 14,
+   "anillos": [
+    14.0,
+    -21.0,
+    28.0
+   ],
+   "nucleo_escala": 1.0201,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 16,
+   "anillos": [
+    16.0,
+    -24.0,
+    32.0
+   ],
+   "nucleo_escala": 1.0223,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 18,
+   "anillos": [
+    18.0,
+    -27.0,
+    36.0
+   ],
+   "nucleo_escala": 1.0243,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 20,
+   "anillos": [
+    20.0,
+    -30.0,
+    40.0
+   ],
+   "nucleo_escala": 1.026,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 22,
+   "anillos": [
+    22.0,
+    -33.0,
+    44.0
+   ],
+   "nucleo_escala": 1.0274,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 24,
+   "anillos": [
+    24.0,
+    -36.0,
+    48.0
+   ],
+   "nucleo_escala": 1.0285,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 26,
+   "anillos": [
+    26.0,
+    -39.0,
+    52.0
+   ],
+   "nucleo_escala": 1.0293,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 28,
+   "anillos": [
+    28.0,
+    -42.0,
+    56.0
+   ],
+   "nucleo_escala": 1.0298,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 30,
+   "anillos": [
+    30.0,
+    -45.0,
+    60.0
+   ],
+   "nucleo_escala": 1.03,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 32,
+   "anillos": [
+    32.0,
+    -48.0,
+    64.0
+   ],
+   "nucleo_escala": 1.0298,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 34,
+   "anillos": [
+    34.0,
+    -51.0,
+    68.0
+   ],
+   "nucleo_escala": 1.0293,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 36,
+   "anillos": [
+    36.0,
+    -54.0,
+    72.0
+   ],
+   "nucleo_escala": 1.0285,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 38,
+   "anillos": [
+    38.0,
+    -57.0,
+    76.0
+   ],
+   "nucleo_escala": 1.0274,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 40,
+   "anillos": [
+    40.0,
+    -60.0,
+    80.0
+   ],
+   "nucleo_escala": 1.026,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 42,
+   "anillos": [
+    42.0,
+    -63.0,
+    84.0
+   ],
+   "nucleo_escala": 1.0243,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 44,
+   "anillos": [
+    44.0,
+    -66.0,
+    88.0
+   ],
+   "nucleo_escala": 1.0223,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 46,
+   "anillos": [
+    46.0,
+    -69.0,
+    92.0
+   ],
+   "nucleo_escala": 1.0201,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 48,
+   "anillos": [
+    48.0,
+    -72.0,
+    96.0
+   ],
+   "nucleo_escala": 1.0176,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 50,
+   "anillos": [
+    50.0,
+    -75.0,
+    100.0
+   ],
+   "nucleo_escala": 1.015,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 52,
+   "anillos": [
+    52.0,
+    -78.0,
+    104.0
+   ],
+   "nucleo_escala": 1.0122,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 54,
+   "anillos": [
+    54.0,
+    -81.0,
+    108.0
+   ],
+   "nucleo_escala": 1.0093,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 56,
+   "anillos": [
+    56.0,
+    -84.0,
+    112.0
+   ],
+   "nucleo_escala": 1.0062,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 58,
+   "anillos": [
+    58.0,
+    -87.0,
+    116.0
+   ],
+   "nucleo_escala": 1.0031,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 60,
+   "anillos": [
+    60.0,
+    -90.0,
+    120.0
+   ],
+   "nucleo_escala": 1.0,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 62,
+   "anillos": [
+    62.0,
+    -93.0,
+    124.0
+   ],
+   "nucleo_escala": 0.9969,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 64,
+   "anillos": [
+    64.0,
+    -96.0,
+    128.0
+   ],
+   "nucleo_escala": 0.9938,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 66,
+   "anillos": [
+    66.0,
+    -99.0,
+    132.0
+   ],
+   "nucleo_escala": 0.9907,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 68,
+   "anillos": [
+    68.0,
+    -102.0,
+    136.0
+   ],
+   "nucleo_escala": 0.9878,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 70,
+   "anillos": [
+    70.0,
+    -105.0,
+    140.0
+   ],
+   "nucleo_escala": 0.985,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 72,
+   "anillos": [
+    72.0,
+    -108.0,
+    144.0
+   ],
+   "nucleo_escala": 0.9824,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 74,
+   "anillos": [
+    74.0,
+    -111.0,
+    148.0
+   ],
+   "nucleo_escala": 0.9799,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 76,
+   "anillos": [
+    76.0,
+    -114.0,
+    152.0
+   ],
+   "nucleo_escala": 0.9777,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 78,
+   "anillos": [
+    78.0,
+    -117.0,
+    156.0
+   ],
+   "nucleo_escala": 0.9757,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 80,
+   "anillos": [
+    80.0,
+    -120.0,
+    160.0
+   ],
+   "nucleo_escala": 0.974,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 82,
+   "anillos": [
+    82.0,
+    -123.0,
+    164.0
+   ],
+   "nucleo_escala": 0.9726,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 84,
+   "anillos": [
+    84.0,
+    -126.0,
+    168.0
+   ],
+   "nucleo_escala": 0.9715,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 86,
+   "anillos": [
+    86.0,
+    -129.0,
+    172.0
+   ],
+   "nucleo_escala": 0.9707,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 88,
+   "anillos": [
+    88.0,
+    -132.0,
+    176.0
+   ],
+   "nucleo_escala": 0.9702,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 90,
+   "anillos": [
+    90.0,
+    -135.0,
+    180.0
+   ],
+   "nucleo_escala": 0.97,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 92,
+   "anillos": [
+    92.0,
+    -138.0,
+    184.0
+   ],
+   "nucleo_escala": 0.9702,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 94,
+   "anillos": [
+    94.0,
+    -141.0,
+    188.0
+   ],
+   "nucleo_escala": 0.9707,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 96,
+   "anillos": [
+    96.0,
+    -144.0,
+    192.0
+   ],
+   "nucleo_escala": 0.9715,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 98,
+   "anillos": [
+    98.0,
+    -147.0,
+    196.0
+   ],
+   "nucleo_escala": 0.9726,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 100,
+   "anillos": [
+    100.0,
+    -150.0,
+    200.0
+   ],
+   "nucleo_escala": 0.974,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 102,
+   "anillos": [
+    102.0,
+    -153.0,
+    204.0
+   ],
+   "nucleo_escala": 0.9757,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 104,
+   "anillos": [
+    104.0,
+    -156.0,
+    208.0
+   ],
+   "nucleo_escala": 0.9777,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 106,
+   "anillos": [
+    106.0,
+    -159.0,
+    212.0
+   ],
+   "nucleo_escala": 0.9799,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 108,
+   "anillos": [
+    108.0,
+    -162.0,
+    216.0
+   ],
+   "nucleo_escala": 0.9824,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 110,
+   "anillos": [
+    110.0,
+    -165.0,
+    220.0
+   ],
+   "nucleo_escala": 0.985,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 112,
+   "anillos": [
+    112.0,
+    -168.0,
+    224.0
+   ],
+   "nucleo_escala": 0.9878,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 114,
+   "anillos": [
+    114.0,
+    -171.0,
+    228.0
+   ],
+   "nucleo_escala": 0.9907,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 116,
+   "anillos": [
+    116.0,
+    -174.0,
+    232.0
+   ],
+   "nucleo_escala": 0.9938,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 118,
+   "anillos": [
+    118.0,
+    -177.0,
+    236.0
+   ],
+   "nucleo_escala": 0.9969,
+   "nucleo_blanco": 0.0
+  },
+  {
+   "f": 120,
+   "anillos": [
+    120.0,
+    -180.0,
+    240.0
+   ],
+   "nucleo_escala": 1.0,
+   "nucleo_blanco": 0.0
+  }
+ ],
+ "unidades": {
+  "anillos": "grados acumulados [anillo1, anillo2, anillo3] sobre el eje del cañón (Z de Roblox)",
+  "nucleo_escala": "factor sobre el tamaño del núcleo",
+  "nucleo_blanco": "0 = su color, 1 = blanco (mezcla del Color3)"
+ }
+}

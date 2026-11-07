@@ -9,8 +9,9 @@
 	  1. Busca las MeshPart de la pistola dentro de la selección.
 	  2. Corrige el giro de importación (GIRO_IMPORTACION) y coloca cada pieza en su sitio respecto al cuerpo.
 	  3. Crea la Tool «PistolaPortales»: el cuerpo pasa a llamarse Handle y el resto se suelda a él.
-	     Las piezas que giran (rueda o anillos) llevan un Weld llamado «Giro» con el atributo C0Base: el juego las
-	     hace girar con  weld.C0 = weld:GetAttribute("C0Base") * CFrame.Angles(0, 0, angulo).
+	     Las piezas que se mueven (la rueda, los anillos y el marco del depósito, que salta) llevan un Weld llamado
+	     «Giro» con el atributo C0Base: el juego las anima con  weld.C0 = weld:GetAttribute("C0Base") * CFrame...
+	     (ver modelos/pistola_portales/vfx_portal.md). Todo lo que va soldado a ellas se mueve con ellas.
 	  4. Pone Neon a lo que brilla, Glass al cristal y una SurfaceAppearance (si se dan los IDs) a lo que lleva textura.
 	  5. Crea los Attachment «Boca» (de ahí sale el portal, LookVector = hacia delante) y «Agarre» en el Handle, y
 	     pone Tool.Grip para que «Agarre» caiga en el RightGripAttachment del brazo derecho R6.
@@ -35,6 +36,7 @@ local CUERPO = "Chatarra_Cuerpo"
 local CENTROS: { [string]: Vector3 } = {
 	["Chatarra_Cuerpo"] = Vector3.new(-0.07, 0.3962, -0.4068),
 	["Chatarra_Rueda"] = Vector3.new(0.3451, 0.66, 0.1),
+	["Chatarra_DepositoMarco"] = Vector3.new(-0.0281, 0.373, -0.755),
 	["Chatarra_Deposito"] = Vector3.new(0.0, 0.38, -0.74),
 	["Chatarra_Combustible"] = Vector3.new(0.0, 0.3875, -0.72),
 	["Chatarra_Luces"] = Vector3.new(0.0374, 0.875, -0.4287),
@@ -42,9 +44,13 @@ local CENTROS: { [string]: Vector3 } = {
 local ANCLAJES: { [string]: Vector3 } = {
 	Boca = Vector3.new(0.0, 0.78, -1.66),
 	Agarre = Vector3.new(0.0, 0.05, 0.12),
+	Chispas_Bobina_1 = Vector3.new(0.0, 0.95, -0.7),
+	Chispas_Bobina_2 = Vector3.new(0.16, 0.82, -0.84),
+	Chispas_Bobina_3 = Vector3.new(-0.15, 0.86, -0.96),
 }
 local GIROS: { [string]: { pivote: Vector3, eje: string } } = {
 	["Chatarra_Rueda"] = { pivote = Vector3.new(0.33, 0.66, 0.1), eje = "X" },
+	["Chatarra_DepositoMarco"] = { pivote = Vector3.new(0.0, 0.38, -0.72), eje = "Y" },
 }
 local NEON: { [string]: Color3 } = {
 	["Chatarra_Combustible"] = Color3.fromHex("#7DFF3A"),
@@ -54,9 +60,10 @@ local CRISTAL: { [string]: { color: Color3, transparencia: number } } = {
 	["Chatarra_Deposito"] = { color = Color3.fromHex("#B9E6D2"), transparencia = 0.55 },
 }
 local SOLDAR_A: { [string]: string } = {
-
+	["Chatarra_Deposito"] = "Chatarra_DepositoMarco",
+	["Chatarra_Combustible"] = "Chatarra_DepositoMarco",
 }
-local TEXTURIZADAS = { "Chatarra_Cuerpo", "Chatarra_Rueda" }
+local TEXTURIZADAS = { "Chatarra_Cuerpo", "Chatarra_Rueda", "Chatarra_DepositoMarco" }
 
 local Selection = game:GetService("Selection")
 local seleccion = Selection:Get()[1]

@@ -9,8 +9,9 @@
 	  1. Busca las MeshPart de la pistola dentro de la selección.
 	  2. Corrige el giro de importación (GIRO_IMPORTACION) y coloca cada pieza en su sitio respecto al cuerpo.
 	  3. Crea la Tool «{{NOMBRE_TOOL}}»: el cuerpo pasa a llamarse Handle y el resto se suelda a él.
-	     Las piezas que giran (rueda o anillos) llevan un Weld llamado «Giro» con el atributo C0Base: el juego las
-	     hace girar con  weld.C0 = weld:GetAttribute("C0Base") * CFrame.Angles(0, 0, angulo).
+	     Las piezas que se mueven (la rueda, los anillos y el marco del depósito, que salta) llevan un Weld llamado
+	     «Giro» con el atributo C0Base: el juego las anima con  weld.C0 = weld:GetAttribute("C0Base") * CFrame...
+	     (ver modelos/pistola_portales/vfx_portal.md). Todo lo que va soldado a ellas se mueve con ellas.
 	  4. Pone Neon a lo que brilla, Glass al cristal y una SurfaceAppearance (si se dan los IDs) a lo que lleva textura.
 	  5. Crea los Attachment «Boca» (de ahí sale el portal, LookVector = hacia delante) y «Agarre» en el Handle, y
 	     pone Tool.Grip para que «Agarre» caiga en el RightGripAttachment del brazo derecho R6.
