@@ -32,6 +32,10 @@ export type Apariencia = {
 	Chaqueta: string,
 	Pantalon: string,
 	Accesorio: string,
+	Barba: string,
+	Cicatriz: string,
+	Tatuaje: string,
+	Complexion: string,
 	ColorPelo: string,
 	ColorChaqueta: string,
 	ColorPantalon: string,
@@ -40,7 +44,21 @@ export type Apariencia = {
 
 export type Categoria = { Campo: string, Nombre: string }
 
-Apariencia.CamposOpcion = { "Piel", "Cabello", "Cejas", "Ojos", "Nariz", "Boca", "Chaqueta", "Pantalon", "Accesorio" }
+Apariencia.CamposOpcion = {
+	"Piel",
+	"Cabello",
+	"Cejas",
+	"Ojos",
+	"Nariz",
+	"Boca",
+	"Chaqueta",
+	"Pantalon",
+	"Accesorio",
+	"Barba",
+	"Cicatriz",
+	"Tatuaje",
+	"Complexion",
+}
 Apariencia.CamposColor = { "ColorPelo", "ColorChaqueta", "ColorPantalon", "ColorDetalle" }
 
 Apariencia.Campos = table.clone(Apariencia.CamposOpcion)
@@ -49,13 +67,17 @@ for _, campo in Apariencia.CamposColor do
 end
 
 Apariencia.Categorias = {
+	{ Campo = "Complexion", Nombre = "Complexión" },
 	{ Campo = "Cabello", Nombre = "Cabello" },
+	{ Campo = "Barba", Nombre = "Vello facial" },
 	{ Campo = "Cejas", Nombre = "Cejas" },
 	{ Campo = "Ojos", Nombre = "Ojos" },
 	{ Campo = "Nariz", Nombre = "Nariz" },
 	{ Campo = "Boca", Nombre = "Boca" },
+	{ Campo = "Cicatriz", Nombre = "Cicatriz" },
 	{ Campo = "Chaqueta", Nombre = "Chaqueta" },
 	{ Campo = "Pantalon", Nombre = "Pantalón" },
+	{ Campo = "Tatuaje", Nombre = "Tatuaje" },
 	{ Campo = "Accesorio", Nombre = "Accesorio" },
 } :: { Categoria }
 
@@ -69,7 +91,15 @@ local LISTAS: { [string]: { any } } = {
 	Chaqueta = Datos.Chaquetas,
 	Pantalon = Datos.Pantalones,
 	Accesorio = Datos.Accesorios,
+	Barba = Datos.Barbas,
+	Cicatriz = Datos.Cicatrices,
+	Tatuaje = Datos.Tatuajes,
+	Complexion = Datos.Complexiones,
 }
+
+-- Estos campos, al azar, suelen quedarse en «nada» (si no, casi todos los personajes aleatorios llevarían cicatriz,
+-- tatuaje y barba).
+local RAROS: { [string]: boolean } = { Barba = true, Cicatriz = true, Tatuaje = true }
 
 local ES_COLOR: { [string]: boolean } = {}
 for _, campo in Apariencia.CamposColor do
@@ -157,6 +187,12 @@ function Apariencia.Hecha(tabla: any): boolean
 		and Apariencia.Buscar("Chaqueta", tabla.Chaqueta) ~= nil
 end
 
+-- ¿Se ve el tatuaje? Solo con los brazos al aire (la chaqueta elegida es de manga corta o sin mangas).
+function Apariencia.TatuajeVisible(a: Apariencia): boolean
+	local chaqueta = Apariencia.Buscar("Chaqueta", a.Chaqueta)
+	return chaqueta ~= nil and chaqueta.Brazos == "Piel"
+end
+
 -- La opción `paso` posiciones más allá (1 = siguiente, -1 = anterior), dando la vuelta al final de la lista.
 function Apariencia.Mover(campo: string, id: any, paso: number): string
 	local lista = Apariencia.Opciones(campo)
@@ -170,7 +206,11 @@ function Apariencia.Aleatoria(azar: Random): Apariencia
 	local resultado: { [string]: string } = {}
 	for _, campo in Apariencia.CamposOpcion do
 		local lista = Apariencia.Opciones(campo)
-		resultado[campo] = lista[azar:NextInteger(1, #lista)].Id
+		if RAROS[campo] and azar:NextInteger(1, 10) <= 7 then
+			resultado[campo] = (Datos.Defecto :: any)[campo]
+		else
+			resultado[campo] = lista[azar:NextInteger(1, #lista)].Id
+		end
 	end
 	local muestras = Datos.Muestras
 	-- El pelo casi siempre de un color natural (las seis primeras muestras); a veces, de fantasía.

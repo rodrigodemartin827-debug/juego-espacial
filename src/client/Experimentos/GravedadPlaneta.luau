@@ -336,7 +336,10 @@ local function pasoFisica(dt: number)
 	local objetivo = deseo * rapidezPedida
 	-- Suelo: rayo hacia el centro del planeta. Se alarga con la velocidad de caída: a pocos FPS, en un fotograma se
 	-- puede bajar más que el alcance normal del rayo y colarse a través del suelo.
-	local alcanceRayo = p.AlturaRaiz + p.MargenSuelo + 4 + math.max(0, -radial) * dt
+	-- La complexión del personaje (Personaje/Constructor.Complexion) cambia lo larga que es la pierna: la raíz tiene que
+	-- flotar más o menos sobre el suelo. Sin esto, un personaje alto se hunde en el suelo y uno bajo flota.
+	local alturaRaiz = p.AlturaRaiz + (tonumber(raiz:GetAttribute("AlturaExtra")) or 0)
+	local alcanceRayo = alturaRaiz + p.MargenSuelo + 4 + math.max(0, -radial) * dt
 	local golpe = workspace:Raycast(raiz.Position, -arriba * alcanceRayo, parametros)
 	local distancia = if golpe then golpe.Distance else math.huge
 	-- Capa de colisión fija de la región 1 (su mapa de alturas): el suelo de verdad aunque la colisión de la malla
@@ -354,7 +357,7 @@ local function pasoFisica(dt: number)
 	if deseo.Magnitude > 0.1 then
 		local sonda = p.SondaDelante + rapidezPedida * p.SondaPorVelocidad
 		-- El rayo sale a AlturaPaso sobre los pies: lo que sea más alto que eso no lo ve (hay que saltarlo).
-		local elevacion = p.AlturaPaso - p.AlturaRaiz
+		local elevacion = p.AlturaPaso - alturaRaiz
 		local origen = raiz.Position + deseo.Unit * sonda + arriba * elevacion
 		local delante = workspace:Raycast(origen, -arriba * (alcanceRayo + elevacion), parametros)
 		if delante then
@@ -368,7 +371,7 @@ local function pasoFisica(dt: number)
 		end
 	end
 	local ahora = os.clock()
-	local enSuelo = distancia <= p.AlturaRaiz + p.MargenSuelo and radial <= 2 and ahora - e.UltimoSalto > 0.2
+	local enSuelo = distancia <= alturaRaiz + p.MargenSuelo and radial <= 2 and ahora - e.UltimoSalto > 0.2
 	e.EnSuelo = enSuelo
 
 	tangente = acercar(tangente, objetivo, (if enSuelo then p.Aceleracion else p.AceleracionAire) * dt)
@@ -386,7 +389,7 @@ local function pasoFisica(dt: number)
 		-- Las caras que miran hacia abajo (la triangulación del Terrain las da a veces en las cuestas) no son pared.
 		local inclinacion = if barrido then barrido.Normal:Dot(arriba) else 1
 		if barrido and inclinacion < p.PendienteMaxima and inclinacion > -0.2 then
-			local alturaChoque = (barrido.Position - raiz.Position):Dot(arriba) + p.AlturaRaiz
+			local alturaChoque = (barrido.Position - raiz.Position):Dot(arriba) + alturaRaiz
 			if alturaChoque > p.AlturaPaso then
 				local normal = barrido.Normal - arriba * barrido.Normal:Dot(arriba)
 				if normal.Magnitude > 1e-3 then
@@ -416,8 +419,8 @@ local function pasoFisica(dt: number)
 		else
 			-- Muelle: la raíz vuelve a su altura sobre el suelo (sube las cuestas y baja los escalones).
 			-- Si se ha quedado por debajo del suelo (llegó cayendo muy deprisa), sube sin el tope: no se hunde.
-			local subida = if distancia < p.AlturaRaiz - p.AlturaPaso then 80 else p.SubidaMaxima
-			radial = math.clamp((p.AlturaRaiz - distancia) * p.RigidezSuelo, -60, subida)
+			local subida = if distancia < alturaRaiz - p.AlturaPaso then 80 else p.SubidaMaxima
+			radial = math.clamp((alturaRaiz - distancia) * p.RigidezSuelo, -60, subida)
 		end
 	else
 		radial -= p.Gravedad * dt

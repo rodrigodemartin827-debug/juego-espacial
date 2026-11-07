@@ -443,11 +443,137 @@ def cabello_puntas(m):
         cono(m, p, d, largo, 0.13, n=5)
 
 
+# ----- Peinados nuevos -----
+
+
+def cabello_bob(m):
+    def hasta(th):
+        lados = s_de_altura(-0.38)
+        kf = mezcla(th, 0.0, 1.0)
+        return lados * (1 - kf) + s_de_altura(0.27) * kf
+    casquete(m, hasta, lambda th, t: 0.1 + 0.08 * t * (1 - mezcla(th, 0, 0.9)), n_t=32, n_s=9)
+
+
+def cabello_afro(m):
+    casquete(m, linea_basica(0.4, 0.12, -0.08), lambda th, t: 0.12 + 0.42 * (1 - t) ** 0.6 + 0.05 * t, n_t=28, n_s=9)
+
+
+def cabello_trenzas(m):
+    casquete(m, linea_basica(0.38, 0.05, -0.15), lambda th, t: 0.075 + 0.025 * (1 - t), n_t=24, n_s=7)
+    cab = Vector(PARTES["Cabeza"][0])
+    for lado in (-1, 1):
+        for k in range(8):
+            y = 0.05 - 0.27 * k
+            m.esfera(cab + Vector((lado * (0.76 + 0.02 * (k % 2)), y, 0.12)), (0.13, 0.15, 0.13), u=6, v=5)
+
+
+def cabello_rastas(m):
+    casquete(m, linea_basica(0.36, 0.1, -0.1), lambda th, t: 0.08 + 0.03 * (1 - t), n_t=24, n_s=6)
+    rnd = random.Random(3)
+    for i in range(11):
+        th = -2.9 + i * (5.8 / 10)
+        base = punto_cabeza(th, 0.28, 0.04)
+        n = normal_cabeza(th, 0.28)
+        largo = rnd.uniform(0.7, 1.35) * (0.55 if abs(th) < 0.7 else 1.0)
+        p1 = base + n * 0.2 + Vector((0, -0.2, 0))
+        p2 = p1 + n * 0.12 + Vector((0, -largo * 0.5, 0))
+        p3 = p2 + Vector((rnd.uniform(-0.06, 0.06), -largo * 0.5, rnd.uniform(-0.05, 0.05)))
+        m.tubo([base, p1, p2, p3], [0.07, 0.075, 0.07, 0.04], n=5)
+
+
+def cabello_hongo(m):
+    def hasta(th):
+        lados = s_de_altura(0.02)
+        kf = mezcla(th, 0.0, 1.1)
+        return lados * (1 - kf) + s_de_altura(0.24) * kf
+    casquete(m, hasta, lambda th, t: 0.15 + 0.07 * t, n_t=30, n_s=8)
+
+
+def cabello_mohicano(m):
+    casquete(m, linea_basica(0.36, 0.14, -0.12), lambda th, t: 0.03, n_t=24, n_s=6)
+    cab = Vector(PARTES["Cabeza"][0])
+    for i in range(7):
+        a = -0.8 + 2.0 * i / 6
+        base = cab + Vector((0, 0.64 * math.cos(a) - 0.02, 0.64 * math.sin(a)))
+        normal = Vector((0, math.cos(a), math.sin(a)))
+        d = (normal + Vector((0, 0.25, 0.9))).normalized()
+        largo = 0.55 + 0.35 * math.cos((a - 0.3) * 1.2)
+        giro = d.to_track_quat("Z", "Y").to_matrix().to_4x4()
+        m.cilindro(base + d * (largo / 2 - 0.05), 0.2, largo, n=6, eje="Z", radio2=0.0, giro=giro, escala=(0.4, 1.0, 1.0))
+
+
+def cabello_dos_coletas(m):
+    casquete(m, linea_basica(0.37, 0.05, -0.18), lambda th, t: 0.07 + 0.025 * (1 - t), n_t=24, n_s=7)
+    cab = Vector(PARTES["Cabeza"][0])
+    for lado in (-1, 1):
+        pts = [cab + Vector(p) for p in ((lado * 0.55, 0.55, 0.18), (lado * 0.85, 0.6, 0.25), (lado * 1.0, 0.3, 0.3),
+                                          (lado * 0.98, -0.1, 0.32), (lado * 0.9, -0.5, 0.3), (lado * 0.85, -0.8, 0.28))]
+        m.tubo(pts, [0.14, 0.18, 0.18, 0.15, 0.1, 0.03], n=8)
+        m.tubo([pts[0] + Vector((0, 0.02, 0)), pts[1]], [0.19, 0.19], n=8)
+
+
+def cabello_coleta_alta(m):
+    casquete(m, linea_basica(0.38, 0.06, -0.15), lambda th, t: 0.075 + 0.02 * (1 - t), n_t=24, n_s=7)
+    cab = Vector(PARTES["Cabeza"][0])
+    pts = [cab + Vector(p) for p in ((0, 0.62, 0.3), (0, 0.95, 0.42), (0, 1.12, 0.62), (0, 0.9, 0.9), (0, 0.45, 1.0),
+                                      (0, 0.0, 1.0), (0, -0.4, 0.95))]
+    m.tubo(pts, [0.17, 0.2, 0.2, 0.19, 0.16, 0.12, 0.03], n=8)
+    m.tubo([cab + Vector((0, 0.7, 0.34)), cab + Vector((0, 0.9, 0.42))], [0.21, 0.21], n=8)
+
+
+def cabello_trenza(m):
+    casquete(m, linea_basica(0.36, 0.05, -0.2), lambda th, t: 0.08 + 0.025 * (1 - t), n_t=24, n_s=7)
+    cab = Vector(PARTES["Cabeza"][0])
+    for k in range(9):
+        y = 0.25 - 0.26 * k
+        x = 0.72 + 0.1 * math.sin(k * 0.8)
+        m.esfera(cab + Vector((x, y, -0.15 + 0.03 * (k % 2))), (0.14, 0.16, 0.14), u=6, v=5)
+    m.esfera(cab + Vector((0.8, -2.1, -0.15)), (0.1, 0.1, 0.1), u=6, v=5)
+
+
+def cabello_engominado(m):
+    def hasta(th):
+        lados = s_de_altura(0.0)
+        nuca = s_de_altura(-0.3)
+        k = mezcla(th, math.pi, 1.6)
+        kf = mezcla(th, 0.0, 1.2)
+        base = lados * (1 - k) + nuca * k
+        return base * (1 - kf) + s_de_altura(0.5) * kf
+    casquete(m, hasta, lambda th, t: 0.06 + 0.05 * (1 - t) + 0.05 * mezcla(th, 0, 0.7) * (1 - t), n_t=32, n_s=9)
+
+
+def cabello_ondulado(m):
+    def hasta(th):
+        lados = s_de_altura(-0.7)
+        kf = mezcla(th, 0.0, 1.05)
+        return lados * (1 - kf) + s_de_altura(0.3) * kf
+    casquete(m, puntas_en_linea(hasta, lambda th: 0.08, n_t=30),
+             lambda th, t: 0.1 + 0.06 * t * (1 - mezcla(th, 0, 1.0)) + 0.05 * math.sin(th * 6 + t * 9) * t,
+             n_t=30, n_s=10, espalda=True)
+
+
+def cabello_entradas(m):
+    def hasta(th):
+        base = linea_basica(0.5, 0.08, -0.25)(th)
+        # Entradas: la línea de delante sube en las sienes.
+        for c in (-0.75, 0.75):
+            base -= mezcla(th, c, 0.5) * (s_de_altura(0.5) - s_de_altura(0.28))
+        return base
+    casquete(m, hasta, lambda th, t: 0.07 + 0.04 * (1 - t), n_t=32, n_s=9)
+
+
 CABELLOS = [
     ("Corto", cabello_corto), ("Rapado", cabello_rapado), ("Flequillo", cabello_flequillo),
     ("Cresta", cabello_cresta), ("Despeinado", cabello_despeinado), ("Coleta", cabello_coleta),
     ("Largo", cabello_largo), ("Mono", cabello_mono), ("Rizado", cabello_rizado), ("Tupe", cabello_tupe),
     ("Melena", cabello_melena), ("Puntas", cabello_puntas),
+]
+
+CABELLOS += [
+    ("Bob", cabello_bob), ("Afro", cabello_afro), ("Trenzas", cabello_trenzas), ("Rastas", cabello_rastas),
+    ("Hongo", cabello_hongo), ("Mohicano", cabello_mohicano), ("DosColetas", cabello_dos_coletas),
+    ("ColetaAlta", cabello_coleta_alta), ("Trenza", cabello_trenza), ("Engominado", cabello_engominado),
+    ("Ondulado", cabello_ondulado), ("Entradas", cabello_entradas),
 ]
 
 
@@ -563,9 +689,126 @@ def accesorio_comunicador(mallas):
     mallas("Cabeza", "Metal").cilindro(cab + Vector((-0.7, 0.4, 0.06)), 0.015, 0.45, n=5, eje="Y")
 
 
+# ----- Accesorios nuevos -----
+
+
+def accesorio_parche(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    negro = mallas("Cabeza", "Oscuro")
+    negro.cilindro(cab + Vector((0.24, 0.08, -0.665)), 0.2, 0.05, n=14, eje="Z", escala=(1.0, 0.9, 1.0))
+    arco_cabeza(negro, -1.55, 1.55, 0.2, 0.26, 0.02, 0.03)
+    negro.caja(cab + Vector((0.46, 0.2, -0.5)), (0.3, 0.06, 0.04), giro=(0, 0, -0.7))
+
+
+def accesorio_gorro(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    gorro = mallas("Cabeza", "Detalle")
+    casquete(gorro, lambda th: s_de_altura(0.3), lambda th, t: 0.12 + 0.04 * (1 - t), n_t=24, n_s=7)
+    arco_cabeza(gorro, -math.pi, math.pi, 0.2, 0.46, 0.07, 0.06, n=28)
+    mallas("Cabeza", "Oscuro").esfera(cab + Vector((0, 0.86, 0)), (0.2, 0.18, 0.2), u=10, v=7)
+
+
+def accesorio_casco(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    casco = mallas("Cabeza", "Detalle")
+
+    def hasta(th):
+        lados = s_de_altura(-0.28)
+        kf = mezcla(th, 0.0, 1.0)
+        return lados * (1 - kf) + s_de_altura(0.34) * kf
+    casquete(casco, hasta, lambda th, t: 0.16 + 0.03 * (1 - t), n_t=28, n_s=8)
+    mallas("Cabeza", "Metal").tubo([cab + Vector(p) for p in ((0, 0.95, -0.55), (0, 1.05, -0.1), (0, 1.0, 0.5), (0, 0.55, 0.85))],
+                                   [0.07, 0.08, 0.08, 0.07], n=6)
+    arco_cabeza(mallas("Cabeza", "Cristal"), -1.2, 1.2, 0.0, 0.32, 0.13, 0.04)
+    for lado in (-1, 1):
+        mallas("Cabeza", "Neon").cilindro(cab + Vector((lado * 0.82, 0.1, 0.05)), 0.09, 0.06, n=10, eje="X")
+
+
+def accesorio_explorador(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    s = mallas("Cabeza", "Detalle")
+    casquete(s, lambda th: s_de_altura(0.3), lambda th, t: 0.12 + 0.05 * (1 - t), n_t=24, n_s=7)
+    s.cilindro(cab + Vector((0, 0.36, 0)), 1.18, 0.06, n=22, eje="Y")
+    arco_cabeza(mallas("Cabeza", "Oscuro"), -math.pi, math.pi, 0.3, 0.44, 0.09, 0.05, n=28)
+    mallas("Cabeza", "Metal").esfera(cab + Vector((0.5, 0.52, -0.62)), (0.07, 0.07, 0.04), u=8, v=5)
+
+
+def accesorio_antenas(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    for lado in (-1, 1):
+        mallas("Cabeza", "Metal").tubo([cab + Vector(p) for p in ((lado * 0.25, 0.6, 0.1), (lado * 0.38, 0.95, 0.12),
+                                                                  (lado * 0.5, 1.25, 0.08))], [0.035, 0.03, 0.025], n=5)
+        mallas("Cabeza", "Neon").esfera(cab + Vector((lado * 0.5, 1.3, 0.08)), (0.1, 0.1, 0.1), u=8, v=6)
+    arco_cabeza(mallas("Cabeza", "Oscuro"), -math.pi, math.pi, 0.4, 0.52, 0.05, 0.04, n=24)
+
+
+def accesorio_diadema(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    pts = [cab + Vector((0.68 * math.cos(a), 0.12 + 0.62 * math.sin(a) * 0.95, -0.05 - 0.22 * math.sin(a)))
+           for a in [math.radians(x) for x in range(0, 181, 15)]]
+    mallas("Cabeza", "Metal").tubo(pts, [0.045] * len(pts), n=6, aplastar=1.4)
+    mallas("Cabeza", "Neon").esfera(cab + Vector((0, 0.75, -0.3)), (0.11, 0.14, 0.07), u=8, v=6)
+    for lado in (-1, 1):
+        mallas("Cabeza", "Metal").cilindro(cab + Vector((lado * 0.5, 0.58, -0.22)), 0.04, 0.2, n=5, eje="Y")
+
+
+# ----- Barbas (vello facial) -----
+
+
+def barba_perilla(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    p = mallas("Cabeza", "Pelo")
+    p.caja(cab + Vector((0, -0.4, -0.63)), (0.2, 0.3, 0.1), bisel=0.04)
+    p.caja(cab + Vector((0, -0.62, -0.55)), (0.14, 0.14, 0.12), bisel=0.03)
+
+
+def barba_bigote(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    p = mallas("Cabeza", "Pelo")
+    p.caja(cab + Vector((0, -0.115, -0.64)), (0.5, 0.09, 0.07), bisel=0.03)
+    for lado in (-1, 1):
+        p.caja(cab + Vector((lado * 0.3, -0.19, -0.62)), (0.12, 0.2, 0.06), giro=(0, 0, lado * 0.25), bisel=0.02)
+
+
+def barba_corta(mallas):
+    p = mallas("Cabeza", "Pelo")
+    arco_cabeza(p, -1.5, 1.5, -0.6, -0.3, 0.0, 0.08, n=22)
+    arco_cabeza(p, -1.55, -1.1, -0.3, 0.2, 0.0, 0.07, n=6)
+    arco_cabeza(p, 1.1, 1.55, -0.3, 0.2, 0.0, 0.07, n=6)
+
+
+def barba_larga(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    p = mallas("Cabeza", "Pelo")
+    arco_cabeza(p, -1.55, 1.55, -0.6, -0.25, 0.0, 0.1, n=22)
+    arco_cabeza(p, -1.6, -1.05, -0.25, 0.25, 0.0, 0.08, n=6)
+    arco_cabeza(p, 1.05, 1.6, -0.25, 0.25, 0.0, 0.08, n=6)
+    p.caja(cab + Vector((0, -1.0, -0.5)), (0.7, 0.7, 0.3), bisel=0.1)
+    p.caja(cab + Vector((0, -1.5, -0.45)), (0.4, 0.5, 0.24), bisel=0.08)
+
+
+def barba_patillas(mallas):
+    cab = Vector(PARTES["Cabeza"][0])
+    p = mallas("Cabeza", "Pelo")
+    arco_cabeza(p, -1.7, -1.2, -0.45, 0.25, 0.0, 0.09, n=6)
+    arco_cabeza(p, 1.2, 1.7, -0.45, 0.25, 0.0, 0.09, n=6)
+    p.caja(cab + Vector((0, -0.115, -0.64)), (0.42, 0.07, 0.06), bisel=0.02)
+
+
+BARBAS = [
+    ("Perilla", barba_perilla), ("Bigote", barba_bigote), ("Corta", barba_corta), ("Larga", barba_larga),
+    ("Patillas", barba_patillas),
+]
+
+
 ACCESORIOS = [
     ("Visor", accesorio_visor), ("Gafas", accesorio_gafas), ("Auriculares", accesorio_auriculares),
     ("Gorra", accesorio_gorra), ("Cinta", accesorio_cinta), ("Comunicador", accesorio_comunicador),
+]
+
+ACCESORIOS += [
+    ("Parche", accesorio_parche), ("Gorro", accesorio_gorro), ("Casco", accesorio_casco),
+    ("Explorador", accesorio_explorador), ("Antenas", accesorio_antenas), ("Diadema", accesorio_diadema),
 ]
 
 
@@ -708,10 +951,139 @@ def pantalon_tactico(mallas):
     mallas("PiernaD", "Metal").caja(centro_parte("PiernaD", (0.68, 0.45, 0)), (0.04, 0.1, 0.3))
 
 
+# ----- Chaquetas nuevas -----
+
+
+def chaqueta_chaleco(mallas):
+    det = mallas("Torso", "Detalle")
+    det.banda(centro_parte("Torso", (0, 1.06, 0)), (0.5, 0.36), 0.16, 0.06, radio_esq=0.14, hueco=0.35)
+    for x in (-1.03, 1.03):
+        det.caja(centro_parte("Torso", (x, 0.0, 0)), (0.06, 2.0, 1.04), bisel=0.02)
+    mallas("Torso", "Metal").caja(centro_parte("Torso", (0, 0.0, -0.525)), (0.07, 1.85, 0.05), bisel=0.015)
+    for x in (-0.5, 0.5):
+        det.caja(centro_parte("Torso", (x, -0.45, -0.54)), (0.55, 0.4, 0.07), bisel=0.04)
+    mallas("Torso", "Neon").cilindro(centro_parte("Torso", (0.55, 0.65, -0.53)), 0.06, 0.05, n=10, eje="Z")
+
+
+def chaqueta_abrigo(mallas):
+    det = mallas("Torso", "Detalle")
+    det.banda(centro_parte("Torso", (0, 1.1, 0)), (0.62, 0.42), 0.34, 0.1, radio_esq=0.16)
+    mallas("Torso", "Chaqueta").caja(centro_parte("Torso", (0, -1.65, -0.56)), (2.04, 1.3, 0.1), bisel=0.04)
+    mallas("Torso", "Chaqueta").caja(centro_parte("Torso", (0, -1.65, 0.56)), (2.04, 1.3, 0.1), bisel=0.04)
+    for x in (-1.0, 1.0):
+        mallas("Torso", "Chaqueta").caja(centro_parte("Torso", (x * 1.02, -1.65, 0)), (0.1, 1.3, 1.04), bisel=0.04)
+    for y in (0.5, -0.15, -0.8):
+        mallas("Torso", "Metal").cilindro(centro_parte("Torso", (0.35, y, -0.56)), 0.07, 0.05, n=8, eje="Z")
+    det.caja(centro_parte("Torso", (0, -2.28, -0.56)), (2.06, 0.1, 0.12))
+    punos(mallas)
+
+
+def chaqueta_sudadera(mallas):
+    ch = mallas("Torso", "Chaqueta")
+    ch.esfera(centro_parte("Torso", (0, 1.25, 0.45)), (0.7, 0.55, 0.42), u=12, v=8)
+    ch.banda(centro_parte("Torso", (0, 1.05, -0.02)), (0.52, 0.38), 0.2, 0.08, radio_esq=0.16)
+    ch.caja(centro_parte("Torso", (0, -0.45, -0.55)), (1.3, 0.62, 0.1), bisel=0.05)
+    cord = mallas("Torso", "Detalle")
+    for x in (-0.2, 0.2):
+        cord.cilindro(centro_parte("Torso", (x, 0.55, -0.56)), 0.03, 0.55, n=5, eje="Y")
+    cord.banda(centro_parte("Torso", (0, -0.92, 0)), (1.0, 0.5), 0.14, 0.05, radio_esq=0.1)
+    punos(mallas, "Detalle", 0.28)
+
+
+def chaqueta_armadura(mallas):
+    metal = mallas("Torso", "Metal")
+    metal.caja(centro_parte("Torso", (0, 0.35, -0.58)), (1.7, 1.2, 0.2), bisel=0.1)
+    metal.caja(centro_parte("Torso", (0, 0.5, 0.56)), (1.7, 1.3, 0.14), bisel=0.08)
+    metal.banda(centro_parte("Torso", (0, 1.12, 0)), (0.55, 0.4), 0.22, 0.08, radio_esq=0.15)
+    mallas("Torso", "Neon").cilindro(centro_parte("Torso", (0, 0.45, -0.7)), 0.17, 0.05, n=12, eje="Z")
+    mallas("Torso", "Oscuro").banda(centro_parte("Torso", (0, -0.85, 0)), (1.0, 0.5), 0.24, 0.06, radio_esq=0.1)
+    for lado in ("BrazoI", "BrazoD"):
+        mallas(lado, "Metal").esfera(centro_parte(lado, (0, 0.85, 0)), (0.68, 0.46, 0.66), u=12, v=7)
+        mallas(lado, "Oscuro").banda(centro_parte(lado, (0, -0.1, 0)), (0.52, 0.52), 0.35, 0.05, radio_esq=0.08)
+
+
+def chaqueta_camisa(mallas):
+    det = mallas("Torso", "Detalle")
+    for lado in (-1, 1):
+        det.caja(centro_parte("Torso", (lado * 0.28, 1.05, -0.4)), (0.4, 0.3, 0.08), giro=(0, 0, lado * 0.6), bisel=0.02)
+    det.caja(centro_parte("Torso", (0, 0.1, -0.52)), (0.14, 1.9, 0.04))
+    for x in (-0.55, 0.55):
+        det.caja(centro_parte("Torso", (x, 0.45, -0.54)), (0.5, 0.45, 0.05), bisel=0.02)
+    mallas("Torso", "Metal").cilindro(centro_parte("Torso", (0, 0.5, -0.545)), 0.04, 0.03, n=6, eje="Z")
+    manga_corta(mallas)
+    for lado in ("BrazoI", "BrazoD"):
+        mallas(lado, "Detalle").banda(centro_parte(lado, (0, 0.2, 0)), (0.52, 0.52), 0.12, 0.04, radio_esq=0.08)
+
+
+CHAQUETAS_NUEVAS = [
+    ("Chaleco", chaqueta_chaleco), ("Abrigo", chaqueta_abrigo), ("Sudadera", chaqueta_sudadera),
+    ("Armadura", chaqueta_armadura), ("Camisa", chaqueta_camisa),
+]
+
+
+# ----- Pantalones nuevos -----
+
+
+def pantalon_shorts(mallas):
+    cinturon(mallas)
+    botas(mallas, alto=0.5)
+    for lado in ("PiernaI", "PiernaD"):
+        mallas(lado, "Pantalon").caja(centro_parte(lado, (0, 0.5, 0)), (1.1, 1.0, 1.1), bisel=0.08)
+        mallas(lado, "Detalle").banda(centro_parte(lado, (0, 0.02, 0)), (0.55, 0.55), 0.1, 0.03, radio_esq=0.1)
+    mallas("PiernaD", "Oscuro").caja(centro_parte("PiernaD", (0.0, 0.55, -0.58)), (0.6, 0.4, 0.07), bisel=0.03)
+
+
+def pantalon_bermudas(mallas):
+    cinturon(mallas)
+    botas(mallas, alto=0.4)
+    for lado, s in (("PiernaI", -1), ("PiernaD", 1)):
+        mallas(lado, "Pantalon").caja(centro_parte(lado, (0, 0.3, 0)), (1.1, 1.4, 1.1), bisel=0.08)
+        mallas(lado, "Oscuro").banda(centro_parte(lado, (0, -0.4, 0)), (0.55, 0.55), 0.12, 0.04, radio_esq=0.1)
+        mallas(lado, "Pantalon").caja(centro_parte(lado, (s * 0.58, 0.45, 0)), (0.1, 0.5, 0.7), bisel=0.04)
+
+
+def pantalon_falda(mallas):
+    cinturon(mallas)
+    botas(mallas, alto=0.7)
+    mallas("Torso", "Pantalon").cilindro(centro_parte("Torso", (0, -1.2, 0)), 1.05, 0.95, n=18, eje="Y", radio2=1.55,
+                                         escala=(1.0, 0.62, 1.0))
+    mallas("Torso", "Detalle").banda(centro_parte("Torso", (0, -1.62, 0)), (1.18, 0.78), 0.1, 0.04, radio_esq=0.3)
+
+
+def pantalon_peto(mallas):
+    cinturon(mallas)
+    botas(mallas)
+    p = mallas("Torso", "Pantalon")
+    p.caja(centro_parte("Torso", (0, 0.2, -0.53)), (1.3, 1.5, 0.07), bisel=0.04)
+    for x in (-0.5, 0.5):
+        p.caja(centro_parte("Torso", (x, 1.0, -0.2)), (0.22, 0.12, 1.0), bisel=0.03)
+        mallas("Torso", "Metal").cilindro(centro_parte("Torso", (x, 0.82, -0.56)), 0.07, 0.04, n=8, eje="Z")
+    mallas("Torso", "Detalle").caja(centro_parte("Torso", (0, 0.45, -0.58)), (0.55, 0.4, 0.05), bisel=0.02)
+    for lado in ("PiernaI", "PiernaD"):
+        mallas(lado, "Detalle").banda(centro_parte(lado, (0, -0.55, 0)), (0.55, 0.55), 0.14, 0.04, radio_esq=0.1)
+
+
+def pantalon_campana(mallas):
+    cinturon(mallas)
+    botas(mallas, alto=0.3)
+    for lado in ("PiernaI", "PiernaD"):
+        mallas(lado, "Pantalon").caja(centro_parte(lado, (0, -0.55, 0)), (1.4, 0.9, 1.4), bisel=0.12)
+        mallas(lado, "Detalle").banda(centro_parte(lado, (0, 0.35, 0)), (0.55, 0.55), 0.1, 0.03, radio_esq=0.1)
+
+
+PANTALONES_NUEVOS = [
+    ("Shorts", pantalon_shorts), ("Bermudas", pantalon_bermudas), ("Falda", pantalon_falda),
+    ("Peto", pantalon_peto), ("Campana", pantalon_campana),
+]
+
+
 PANTALONES = [
     ("Cargo", pantalon_cargo), ("Piloto", pantalon_piloto), ("Vaquero", pantalon_vaquero),
     ("Tactico", pantalon_tactico),
 ]
+
+CHAQUETAS += CHAQUETAS_NUEVAS
+PANTALONES += PANTALONES_NUEVOS
 
 
 # ==============================================================================================================
@@ -811,6 +1183,7 @@ def main():
         "Accesorios": construir_categoria("Accesorio", ACCESORIOS, materiales),
         "Chaquetas": construir_categoria("Chaqueta", CHAQUETAS, materiales),
         "Pantalones": construir_categoria("Pantalon", PANTALONES, materiales),
+        "Barbas": construir_categoria("Barba", BARBAS, materiales),
     }
 
     piezas = {}
@@ -852,7 +1225,8 @@ def main():
     for archivo, vistas in (("Cabellos", [("Frente", 0, 6), ("3-4", -40, 12), ("Detras", 160, 10)]),
                             ("Accesorios", [("Frente", 0, 6), ("3-4", -40, 12)]),
                             ("Chaquetas", [("Frente", 0, 6), ("Detras", 160, 10)]),
-                            ("Pantalones", [("Frente", 0, 6), ("3-4", -40, 4)])):
+                            ("Pantalones", [("Frente", 0, 6), ("3-4", -40, 4)]),
+                            ("Barbas", [("Frente", 0, 6), ("3-4", -40, 12)])):
         objetos = grupos[archivo]
         ids = []
         for o in objetos.values():
@@ -860,9 +1234,9 @@ def main():
                 ids.append(o["id"])
         for id_ in ids:
             propios = [o for o in objetos.values() if o["id"] == id_]
-            base = cabeza if archivo in ("Cabellos", "Accesorios") else cuerpo
+            base = cabeza if archivo in ("Cabellos", "Accesorios", "Barbas") else cuerpo
             rutas = c.renderizar_vistas(propios + base, tmp, vistas, tam=tam, muestras=muestras, con_malla=False,
-                                        margen=0.85 if archivo in ("Cabellos", "Accesorios") else 0.7,
+                                        margen=0.85 if archivo in ("Cabellos", "Accesorios", "Barbas") else 0.7,
                                         prefijo=f"{archivo}_{id_}_")
             n = por_elemento[f'{propios[0]["categoria"]}_{id_}']
             filas.append([(f"{id_} · {n} tri · {nv}", r) for nv, r in rutas])

@@ -354,12 +354,24 @@ local function crearCopia(origen: Model): Model?
 	return m
 end
 
+-- Distancia de la raíz del R6 a los pies: media altura del torso más el largo de la pierna (3 en un R6 normal; con
+-- la complexión cambia).
+local function alturaPies(): number
+	local m = copia
+	local torso = m and m:FindFirstChild("Torso")
+	local pierna = m and m:FindFirstChild("Left Leg")
+	if torso and pierna and torso:IsA("BasePart") and pierna:IsA("BasePart") then
+		return torso.Size.Y / 2 + pierna.Size.Y
+	end
+	return 3
+end
+
 local function colocar()
 	local r = raiz
 	if r == nil then
 		return
 	end
-	local altura = Config.Escena.AltoPlataforma + 3 -- la raíz del R6 está a 3 studs de los pies
+	local altura = Config.Escena.AltoPlataforma + alturaPies()
 	r.CFrame = CFrame.new(centro() + Vector3.new(0, altura, 0)) * CFrame.Angles(0, giro, 0)
 end
 
@@ -391,7 +403,7 @@ local function barrer()
 		return
 	end
 	local b = Config.Escena.Barrido
-	local pies = r.Position.Y - 3
+	local pies = r.Position.Y - alturaPies()
 	a.CFrame = CFrame.new(r.Position.X, pies + 0.1, r.Position.Z) * CFrame.Angles(0, 0, math.pi / 2)
 	a.Transparency = 0.15
 	d.Brightness = 3

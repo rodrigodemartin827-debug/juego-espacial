@@ -12,6 +12,7 @@
 		--forzar   sube aunque el archivo no haya cambiado
 		--nuevo    crea un recurso nuevo aunque ya tenga ID (por defecto se actualiza el mismo ID)
 		--imagenes sube también las imágenes (.png) como Decal (para texturas sueltas, como las caras del personaje)
+		--animaciones sube los .rbxm/.rbxmx como Animation (KeyframeSequence, p. ej. animaciones/movimiento)
 
 	<carpeta> es la carpeta «roblox» de una región (por ejemplo modelos/region1_valle_del_alba/roblox). Se miran
 	todos los modelos que haya dentro, salvo la carpeta «datos». Un archivo solo se sube si su contenido ha cambiado
@@ -35,7 +36,7 @@ local OpenCloud = require("./OpenCloud")
 
 local carpeta: string? = nil
 local pedidos: { string } = {}
-local opciones = { prueba = false, forzar = false, nuevo = false, todo = false, imagenes = false }
+local opciones = { prueba = false, forzar = false, nuevo = false, todo = false, imagenes = false, animaciones = false }
 for _, a in process.args do
 	if string.sub(a, 1, 2) == "--" then
 		local o = string.sub(a, 3)
@@ -266,7 +267,7 @@ for _, p in lista do
 		"juego-espacial: " .. p.ruta,
 		creador :: OpenCloud.Creador,
 		if actualizar then p.id else nil,
-		OpenCloud.tipoRecurso(p.ruta)
+		OpenCloud.tipoRecurso(p.ruta, opciones.animaciones)
 	)
 	local cuerpo, tipo = OpenCloud.multipart(
 		serde.encode("json", peticion),

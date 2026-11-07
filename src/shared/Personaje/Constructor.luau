@@ -163,16 +163,104 @@ local function ponerAccesorio(
 end
 
 -- Colores de las seis partes del R6.
+-- Tamaño de cada parte de un R6 estándar (la complexión lo estira desde aquí, nunca desde lo que haya).
+local TAM_STD: { [string]: Vector3 } = {
+	Head = Vector3.new(2, 1, 1),
+	Torso = Vector3.new(2, 2, 1),
+	["Left Arm"] = Vector3.new(1, 2, 1),
+	["Right Arm"] = Vector3.new(1, 2, 1),
+	["Left Leg"] = Vector3.new(1, 2, 1),
+	["Right Leg"] = Vector3.new(1, 2, 1),
+}
+local GRUPO_DE: { [string]: string } = {
+	Torso = "Torso",
+	["Left Arm"] = "Brazos",
+	["Right Arm"] = "Brazos",
+	["Left Leg"] = "Piernas",
+	["Right Leg"] = "Piernas",
+}
+
+local function vector(t: { number }?): Vector3
+	return if t then Vector3.new(t[1], t[2], t[3]) else Vector3.one
+end
+
+-- Cuánto está estirada una parte respecto a su tamaño estándar (para las piezas que lleva encima).
+local function estiramiento(parte: BasePart): Vector3
+	local std: Vector3? = TAM_STD[parte.Name]
+	if std then
+		return Vector3.new(parte.Size.X / std.X, parte.Size.Y / std.Y, parte.Size.Z / std.Z)
+	end
+	return Vector3.one
+end
+
+-- Una articulación con la posición estirada por `f` (la orientación no cambia).
+local function estirar(cf: CFrame, f: Vector3): CFrame
+	local p = cf.Position
+	return CFrame.new(p.X * f.X, p.Y * f.Y, p.Z * f.Z) * (cf - p)
+end
+
+--[[
+	Complexión: estira el torso, los brazos y las piernas del R6 (la cabeza no) según `opcion.Escala` (nil = normal) y
+	recoloca las articulaciones (Motor6D) para que sigan encajando. Las animaciones solo giran, así que valen igual.
+	Se puede llamar las veces que se quiera: parte siempre del tamaño estándar y de las articulaciones originales (que
+	se guardan en atributos la primera vez).
+]]
+function Constructor.Complexion(modelo: Model, opcion: any)
+	local escala = if opcion and opcion.Escala then opcion.Escala else {}
+	local f: { [string]: Vector3 } = {}
+	for nombre, std in TAM_STD do
+		local grupo = GRUPO_DE[nombre]
+		f[nombre] = if grupo then vector((escala :: any)[grupo]) else Vector3.one
+		local parte = modelo:FindFirstChild(nombre)
+		if parte and parte:IsA("BasePart") then
+			parte.Size = Vector3.new(std.X * f[nombre].X, std.Y * f[nombre].Y, std.Z * f[nombre].Z)
+		end
+	end
+	-- Lo que cambia la distancia de la raíz a los pies (la usa el controlador del planeta, y la escena del editor).
+	local raiz = modelo:FindFirstChild("HumanoidRootPart")
+	local torso = modelo:FindFirstChild("Torso")
+	local pierna = modelo:FindFirstChild("Left Leg")
+	if raiz and torso and pierna and torso:IsA("BasePart") and pierna:IsA("BasePart") then
+		raiz:SetAttribute("AlturaExtra", torso.Size.Y / 2 + pierna.Size.Y - 3)
+	end
+	for _, d in modelo:GetDescendants() do
+		if d:IsA("Motor6D") and d.Part0 and d.Part1 and (TAM_STD[d.Part1.Name] or d.Part1.Name == "Torso") then
+			local c0 = d:GetAttribute("C0Base") or d.C0
+			local c1 = d:GetAttribute("C1Base") or d.C1
+			d:SetAttribute("C0Base", c0)
+			d:SetAttribute("C1Base", c1)
+			d.C0 = estirar(c0 :: CFrame, f[d.Part0.Name] or Vector3.one)
+			d.C1 = estirar(c1 :: CFrame, f[d.Part1.Name] or Vector3.one)
+		end
+	end
+end
+
+-- Quita los tatuajes de los brazos.
+local function quitarTatuajes(modelo: Model)
+	for _, nombre in { "Left Arm", "Right Arm" } do
+		local brazo = modelo:FindFirstChild(nombre)
+		if brazo then
+			for _, d in brazo:GetChildren() do
+				if d:IsA("Decal") and d.Name == "Tatuaje" then
+					d:Destroy()
+				end
+			end
+		end
+	end
+end
+
 local function pintarCuerpo(modelo: Model, a: Apariencia.Apariencia, colores: { [string]: string })
 	local chaqueta = Apariencia.Buscar("Chaqueta", a.Chaqueta)
+	local pantalon = Apariencia.Buscar("Pantalon", a.Pantalon)
 	local rolBrazos = chaqueta.Brazos or "Chaqueta"
+	local rolPiernas = pantalon.Piernas or "Pantalon"
 	local rolParte = {
 		Head = "Piel",
 		Torso = "Chaqueta",
 		["Left Arm"] = rolBrazos,
 		["Right Arm"] = rolBrazos,
-		["Left Leg"] = "Pantalon",
-		["Right Leg"] = "Pantalon",
+		["Left Leg"] = rolPiernas,
+		["Right Leg"] = rolPiernas,
 	}
 	for _, nombre in PARTES_R6 do
 		local parte = modelo:FindFirstChild(nombre)
@@ -188,6 +276,8 @@ end
 -- Quita lo que puso Aplicar (accesorios del juego, detalles de ropa y rasgos de la cara), para dejar paso al avatar de
 -- Roblox. El avatar trae lo suyo: ApplyDescription pone su cabeza, su cara, su ropa y sus colores.
 function Constructor.Limpiar(modelo: Model)
+	quitarTatuajes(modelo)
+	Constructor.Complexion(modelo, nil)
 	-- El HumanoidDescription que ya tiene el Humanoid se quita: si es igual al que se va a aplicar, ApplyDescription
 	-- cree que el personaje ya lo lleva y no hace nada (PROBADO EN STUDIO).
 	local humanoide = modelo:FindFirstChildOfClass("Humanoid")
@@ -386,6 +476,29 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 	end
 
 	pintarCuerpo(modelo, a, colores)
+	quitarTatuajes(modelo)
+	Constructor.Complexion(modelo, Apariencia.Buscar("Complexion", a.Complexion))
+
+	-- Tatuajes: solo se ven (y solo se ponen) con los brazos al aire. Van por delante y por el lado de fuera.
+	local tatuaje = Recursos.Imagenes["Tatuaje_" .. a.Tatuaje]
+	if tatuaje and Apariencia.TatuajeVisible(a) then
+		local brazos: { { nombre: string, lado: Enum.NormalId } } = {
+			{ nombre = "Left Arm", lado = Enum.NormalId.Left },
+			{ nombre = "Right Arm", lado = Enum.NormalId.Right },
+		}
+		for _, par in brazos do
+			local brazo = modelo:FindFirstChild(par.nombre)
+			if brazo and brazo:IsA("BasePart") then
+				for _, cara in { Enum.NormalId.Front, par.lado } do
+					local d = Instance.new("Decal")
+					d.Name = "Tatuaje"
+					d.Face = cara
+					d.Texture = tatuaje
+					d.Parent = brazo
+				end
+			end
+		end
+	end
 
 	-- Cara.
 	if cabeza and cabeza:IsA("BasePart") then
@@ -404,6 +517,16 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 				d.Parent = cabeza
 			end
 		end
+		-- Cicatriz (por encima de los demás rasgos).
+		local cicatriz = Recursos.Imagenes["Cicatriz_" .. a.Cicatriz]
+		if cicatriz then
+			local d = Instance.new("Decal")
+			d.Name = "Rasgo_Cicatriz"
+			d.Face = Enum.NormalId.Front
+			d.Texture = cicatriz
+			d.ZIndex = 5
+			d.Parent = cabeza
+		end
 	end
 
 	local faltan = 0
@@ -414,6 +537,7 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 			{
 				{ Constructor.ACCESORIO_CABELLO, "Cabello", a.Cabello },
 				{ Constructor.ACCESORIO_COMPLEMENTO, "Accesorio", a.Accesorio },
+				{ "Barba", "Barba", a.Barba },
 			}
 		do
 			local opcion = Apariencia.Buscar(cosa[2], cosa[3])
@@ -447,7 +571,11 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 				continue
 			end
 			p.Name = pieza.Nombre
-			p.CFrame = base.CFrame * centro(pieza)
+			-- Las piezas siguen el estiramiento de su parte (la complexión).
+			local f = estiramiento(base)
+			p.Size = Vector3.new(p.Size.X * f.X, p.Size.Y * f.Y, p.Size.Z * f.Z)
+			local pos = centro(pieza).Position
+			p.CFrame = base.CFrame * CFrame.new(pos.X * f.X, pos.Y * f.Y, pos.Z * f.Z)
 			soldar(base, p)
 			p.Parent = carpeta
 		end

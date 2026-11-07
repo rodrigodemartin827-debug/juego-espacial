@@ -217,6 +217,222 @@
    ],
    "Triangulos": 1240
   },
+  "Cabello_Bob__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Bob",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.1689,
+    0.04
+   ],
+   "Tamano": [
+    1.6,
+    1.0978,
+    1.52
+   ],
+   "Triangulos": 1152
+  },
+  "Cabello_Afro__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Afro",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.53,
+    0.0905
+   ],
+   "Tamano": [
+    1.8961,
+    1.22,
+    1.8003
+   ],
+   "Triangulos": 1008
+  },
+  "Cabello_Trenzas__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Trenzas",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.6413,
+    0.0077
+   ],
+   "Tamano": [
+    1.7741,
+    2.6827,
+    1.3889
+   ],
+   "Triangulos": 1440
+  },
+  "Cabello_Rastas__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Rastas",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    0.0001,
+    -0.1888,
+    -0.0073
+   ],
+   "Tamano": [
+    2.0646,
+    1.7977,
+    2.0572
+   ],
+   "Triangulos": 1016
+  },
+  "Cabello_Hongo__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Hongo",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.3981,
+    0.0
+   ],
+   "Tamano": [
+    1.6708,
+    0.7562,
+    1.68
+   ],
+   "Triangulos": 960
+  },
+  "Cabello_Mohicano__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Mohicano",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.589,
+    0.2811
+   ],
+   "Tamano": [
+    1.3,
+    1.418,
+    1.8921
+   ],
+   "Triangulos": 646
+  },
+  "Cabello_DosColetas__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "DosColetas",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.0079,
+    0.0064
+   ],
+   "Tamano": [
+    2.354,
+    1.594,
+    1.3815
+   ],
+   "Triangulos": 928
+  },
+  "Cabello_ColetaAlta__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "ColetaAlta",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.4576,
+    0.2361
+   ],
+   "Tamano": [
+    1.3957,
+    1.7226,
+    1.8458
+   ],
+   "Triangulos": 816
+  },
+  "Cabello_Trenza__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Trenza",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    0.1151,
+    -0.7451,
+    0.0056
+   ],
+   "Tamano": [
+    1.6403,
+    2.9001,
+    1.4038
+   ],
+   "Triangulos": 1152
+  },
+  "Cabello_Engominado__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Engominado",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.2244,
+    0.042
+   ],
+   "Tamano": [
+    1.3835,
+    1.0489,
+    1.3204
+   ],
+   "Triangulos": 1152
+  },
+  "Cabello_Ondulado__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Ondulado",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.0296,
+    0.027
+   ],
+   "Tamano": [
+    1.5633,
+    1.5007,
+    1.5813
+   ],
+   "Triangulos": 1200
+  },
+  "Cabello_Entradas__Cabeza__Pelo": {
+   "Archivo": "Cabellos",
+   "Categoria": "Cabello",
+   "Id": "Entradas",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    0.23,
+    0.0367
+   ],
+   "Tamano": [
+    1.3978,
+    0.96,
+    1.338
+   ],
+   "Triangulos": 1152
+  },
   "Accesorio_Visor__Cabeza__Neon": {
    "Archivo": "Accesorios",
    "Categoria": "Accesorio",
@@ -450,6 +666,276 @@
     0.7566
    ],
    "Triangulos": 116
+  },
+  "Accesorio_Parche__Cabeza__Oscuro": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Parche",
+   "Parte": "Head",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    0.1098,
+    -0.3517
+   ],
+   "Tamano": [
+    1.3397,
+    0.4196,
+    0.6767
+   ],
+   "Triangulos": 196
+  },
+  "Accesorio_Gorro__Cabeza__Detalle": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Gorro",
+   "Parte": "Head",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    0.48,
+    0.0
+   ],
+   "Tamano": [
+    1.5,
+    0.56,
+    1.5
+   ],
+   "Triangulos": 898
+  },
+  "Accesorio_Gorro__Cabeza__Oscuro": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Gorro",
+   "Parte": "Head",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    0.86,
+    0.0
+   ],
+   "Tamano": [
+    0.3709,
+    0.351,
+    0.4
+   ],
+   "Triangulos": 120
+  },
+  "Accesorio_Casco__Cabeza__Detalle": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Casco",
+   "Parte": "Head",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    0.255,
+    0.0062
+   ],
+   "Tamano": [
+    1.5825,
+    1.07,
+    1.5701
+   ],
+   "Triangulos": 896
+  },
+  "Accesorio_Casco__Cabeza__Metal": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Casco",
+   "Parte": "Head",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    0.8185,
+    0.17
+   ],
+   "Tamano": [
+    0.1386,
+    0.6229,
+    1.4704
+   ],
+   "Triangulos": 48
+  },
+  "Accesorio_Casco__Cabeza__Cristal": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Casco",
+   "Parte": "Head",
+   "Rol": "Cristal",
+   "Centro": [
+    -0.0,
+    0.16,
+    -0.5309
+   ],
+   "Tamano": [
+    1.4726,
+    0.32,
+    0.5182
+   ],
+   "Triangulos": 132
+  },
+  "Accesorio_Casco__Cabeza__Neon": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Casco",
+   "Parte": "Head",
+   "Rol": "Neon",
+   "Centro": [
+    -0.0,
+    0.1,
+    0.05
+   ],
+   "Tamano": [
+    1.7,
+    0.18,
+    0.1712
+   ],
+   "Triangulos": 72
+  },
+  "Accesorio_Explorador__Cabeza__Detalle": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Explorador",
+   "Parte": "Head",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    0.535,
+    0.0
+   ],
+   "Tamano": [
+    2.336,
+    0.47,
+    2.36
+   ],
+   "Triangulos": 756
+  },
+  "Accesorio_Explorador__Cabeza__Oscuro": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Explorador",
+   "Parte": "Head",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    0.4,
+    0.0
+   ],
+   "Tamano": [
+    1.52,
+    0.2,
+    1.52
+   ],
+   "Triangulos": 226
+  },
+  "Accesorio_Explorador__Cabeza__Metal": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Explorador",
+   "Parte": "Head",
+   "Rol": "Metal",
+   "Centro": [
+    0.5,
+    0.52,
+    -0.62
+   ],
+   "Tamano": [
+    0.1331,
+    0.1331,
+    0.08
+   ],
+   "Triangulos": 64
+  },
+  "Accesorio_Antenas__Cabeza__Metal": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Antenas",
+   "Parte": "Head",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    0.9236,
+    0.0998
+   ],
+   "Tamano": [
+    1.0442,
+    0.669,
+    0.0892
+   ],
+   "Triangulos": 60
+  },
+  "Accesorio_Antenas__Cabeza__Neon": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Antenas",
+   "Parte": "Head",
+   "Rol": "Neon",
+   "Centro": [
+    0.0,
+    1.3,
+    0.08
+   ],
+   "Tamano": [
+    1.2,
+    0.2,
+    0.2
+   ],
+   "Triangulos": 160
+  },
+  "Accesorio_Antenas__Cabeza__Oscuro": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Antenas",
+   "Parte": "Head",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    0.4993,
+    0.0
+   ],
+   "Tamano": [
+    1.3892,
+    0.17,
+    1.3892
+   ],
+   "Triangulos": 194
+  },
+  "Accesorio_Diadema__Cabeza__Metal": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Diadema",
+   "Parte": "Head",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    0.4339,
+    -0.1614
+   ],
+   "Tamano": [
+    1.468,
+    0.6593,
+    0.3072
+   ],
+   "Triangulos": 188
+  },
+  "Accesorio_Diadema__Cabeza__Neon": {
+   "Archivo": "Accesorios",
+   "Categoria": "Accesorio",
+   "Id": "Diadema",
+   "Parte": "Head",
+   "Rol": "Neon",
+   "Centro": [
+    0.0,
+    0.75,
+    -0.3
+   ],
+   "Tamano": [
+    0.22,
+    0.28,
+    0.14
+   ],
+   "Triangulos": 80
   },
   "Chaqueta_Exploradora__Torso__Detalle": {
    "Archivo": "Chaquetas",
@@ -937,6 +1423,456 @@
    ],
    "Triangulos": 172
   },
+  "Chaqueta_Chaleco__Torso__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Chaleco",
+   "Parte": "Torso",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    0.07,
+    -0.0275
+   ],
+   "Tamano": [
+    2.12,
+    2.14,
+    1.095
+   ],
+   "Triangulos": 300
+  },
+  "Chaqueta_Chaleco__Torso__Metal": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Chaleco",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    0.0,
+    -0.525
+   ],
+   "Tamano": [
+    0.07,
+    1.85,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Chaqueta_Chaleco__Torso__Neon": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Chaleco",
+   "Parte": "Torso",
+   "Rol": "Neon",
+   "Centro": [
+    0.55,
+    0.65,
+    -0.53
+   ],
+   "Tamano": [
+    0.1141,
+    0.12,
+    0.05
+   ],
+   "Triangulos": 36
+  },
+  "Chaqueta_Abrigo__Torso__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Abrigo",
+   "Parte": "Torso",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    -0.53,
+    -0.05
+   ],
+   "Tamano": [
+    2.06,
+    3.6,
+    1.14
+   ],
+   "Triangulos": 140
+  },
+  "Chaqueta_Abrigo__Torso__Chaqueta": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Abrigo",
+   "Parte": "Torso",
+   "Rol": "Chaqueta",
+   "Centro": [
+    -0.0,
+    -1.65,
+    0.0
+   ],
+   "Tamano": [
+    2.14,
+    1.3,
+    1.22
+   ],
+   "Triangulos": 176
+  },
+  "Chaqueta_Abrigo__Torso__Metal": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Abrigo",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    0.35,
+    -0.15,
+    -0.56
+   ],
+   "Tamano": [
+    0.14,
+    1.44,
+    0.05
+   ],
+   "Triangulos": 84
+  },
+  "Chaqueta_Abrigo__BrazoI__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Abrigo",
+   "Parte": "Left Arm",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    -0.86,
+    0.0
+   ],
+   "Tamano": [
+    1.1,
+    0.22,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Abrigo__BrazoD__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Abrigo",
+   "Parte": "Right Arm",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    -0.86,
+    0.0
+   ],
+   "Tamano": [
+    1.1,
+    0.22,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Sudadera__Torso__Chaqueta": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Sudadera",
+   "Parte": "Torso",
+   "Rol": "Chaqueta",
+   "Centro": [
+    -0.0,
+    0.52,
+    0.135
+   ],
+   "Tamano": [
+    1.4,
+    2.56,
+    1.47
+   ],
+   "Triangulos": 340
+  },
+  "Chaqueta_Sudadera__Torso__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Sudadera",
+   "Parte": "Torso",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    -0.0825,
+    -0.02
+   ],
+   "Tamano": [
+    2.1,
+    1.815,
+    1.14
+   ],
+   "Triangulos": 160
+  },
+  "Chaqueta_Sudadera__BrazoI__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Sudadera",
+   "Parte": "Left Arm",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    -0.86,
+    0.0
+   ],
+   "Tamano": [
+    1.1,
+    0.28,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Sudadera__BrazoD__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Sudadera",
+   "Parte": "Right Arm",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    -0.86,
+    0.0
+   ],
+   "Tamano": [
+    1.1,
+    0.28,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Armadura__Torso__Metal": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    0.49,
+    -0.025
+   ],
+   "Tamano": [
+    1.7,
+    1.48,
+    1.31
+   ],
+   "Triangulos": 216
+  },
+  "Chaqueta_Armadura__Torso__Neon": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Torso",
+   "Rol": "Neon",
+   "Centro": [
+    -0.0,
+    0.45,
+    -0.7
+   ],
+   "Tamano": [
+    0.34,
+    0.34,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Chaqueta_Armadura__Torso__Oscuro": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Torso",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    -0.85,
+    0.0
+   ],
+   "Tamano": [
+    2.12,
+    0.24,
+    1.12
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Armadura__BrazoI__Metal": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Left Arm",
+   "Rol": "Metal",
+   "Centro": [
+    0.0,
+    0.85,
+    0.0
+   ],
+   "Tamano": [
+    1.3259,
+    0.8969,
+    1.32
+   ],
+   "Triangulos": 144
+  },
+  "Chaqueta_Armadura__BrazoI__Oscuro": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Left Arm",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.1,
+    0.0
+   ],
+   "Tamano": [
+    1.14,
+    0.35,
+    1.14
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Armadura__BrazoD__Metal": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Right Arm",
+   "Rol": "Metal",
+   "Centro": [
+    0.0,
+    0.85,
+    0.0
+   ],
+   "Tamano": [
+    1.3259,
+    0.8969,
+    1.32
+   ],
+   "Triangulos": 144
+  },
+  "Chaqueta_Armadura__BrazoD__Oscuro": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Armadura",
+   "Parte": "Right Arm",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.1,
+    0.0
+   ],
+   "Tamano": [
+    1.14,
+    0.35,
+    1.14
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Camisa__Torso__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Camisa",
+   "Parte": "Torso",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    0.2127,
+    -0.4625
+   ],
+   "Tamano": [
+    1.6,
+    2.1254,
+    0.205
+   ],
+   "Triangulos": 188
+  },
+  "Chaqueta_Camisa__Torso__Metal": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Camisa",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    0.5,
+    -0.545
+   ],
+   "Tamano": [
+    0.0693,
+    0.08,
+    0.03
+   ],
+   "Triangulos": 20
+  },
+  "Chaqueta_Camisa__BrazoI__Chaqueta": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Camisa",
+   "Parte": "Left Arm",
+   "Rol": "Chaqueta",
+   "Centro": [
+    0.0,
+    0.6,
+    0.0
+   ],
+   "Tamano": [
+    1.16,
+    0.82,
+    1.16
+   ],
+   "Triangulos": 172
+  },
+  "Chaqueta_Camisa__BrazoD__Chaqueta": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Camisa",
+   "Parte": "Right Arm",
+   "Rol": "Chaqueta",
+   "Centro": [
+    0.0,
+    0.6,
+    0.0
+   ],
+   "Tamano": [
+    1.16,
+    0.82,
+    1.16
+   ],
+   "Triangulos": 172
+  },
+  "Chaqueta_Camisa__BrazoI__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Camisa",
+   "Parte": "Left Arm",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    0.2,
+    0.0
+   ],
+   "Tamano": [
+    1.12,
+    0.12,
+    1.12
+   ],
+   "Triangulos": 128
+  },
+  "Chaqueta_Camisa__BrazoD__Detalle": {
+   "Archivo": "Chaquetas",
+   "Categoria": "Chaqueta",
+   "Id": "Camisa",
+   "Parte": "Right Arm",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    0.2,
+    0.0
+   ],
+   "Tamano": [
+    1.12,
+    0.12,
+    1.12
+   ],
+   "Triangulos": 128
+  },
   "Pantalon_Cargo__Torso__Oscuro": {
    "Archivo": "Pantalones",
    "Categoria": "Pantalon",
@@ -1404,6 +2340,744 @@
     0.3
    ],
    "Triangulos": 12
+  },
+  "Pantalon_Shorts__Torso__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Torso",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    -0.9,
+    0.0
+   ],
+   "Tamano": [
+    2.1,
+    0.2,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Shorts__Torso__Metal": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    -0.9,
+    -0.57
+   ],
+   "Tamano": [
+    0.26,
+    0.2,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Shorts__PiernaI__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Left Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.755,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.51,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Shorts__PiernaD__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Right Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.13,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    1.76,
+    1.3
+   ],
+   "Triangulos": 176
+  },
+  "Pantalon_Shorts__PiernaI__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Left Leg",
+   "Rol": "Pantalon",
+   "Centro": [
+    0.0,
+    0.5,
+    0.0
+   ],
+   "Tamano": [
+    1.1,
+    1.0,
+    1.1
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Shorts__PiernaI__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Left Leg",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    0.02,
+    0.0
+   ],
+   "Tamano": [
+    1.16,
+    0.1,
+    1.16
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Shorts__PiernaD__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Right Leg",
+   "Rol": "Pantalon",
+   "Centro": [
+    0.0,
+    0.5,
+    0.0
+   ],
+   "Tamano": [
+    1.1,
+    1.0,
+    1.1
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Shorts__PiernaD__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Shorts",
+   "Parte": "Right Leg",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    0.02,
+    0.0
+   ],
+   "Tamano": [
+    1.16,
+    0.1,
+    1.16
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Bermudas__Torso__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Bermudas",
+   "Parte": "Torso",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    -0.9,
+    0.0
+   ],
+   "Tamano": [
+    2.1,
+    0.2,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Bermudas__Torso__Metal": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Bermudas",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    -0.9,
+    -0.57
+   ],
+   "Tamano": [
+    0.26,
+    0.2,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Bermudas__PiernaI__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Bermudas",
+   "Parte": "Left Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.675,
+    -0.06
+   ],
+   "Tamano": [
+    1.18,
+    0.67,
+    1.3
+   ],
+   "Triangulos": 260
+  },
+  "Pantalon_Bermudas__PiernaD__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Bermudas",
+   "Parte": "Right Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.675,
+    -0.06
+   ],
+   "Tamano": [
+    1.18,
+    0.67,
+    1.3
+   ],
+   "Triangulos": 260
+  },
+  "Pantalon_Bermudas__PiernaI__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Bermudas",
+   "Parte": "Left Leg",
+   "Rol": "Pantalon",
+   "Centro": [
+    -0.04,
+    0.3,
+    0.0
+   ],
+   "Tamano": [
+    1.18,
+    1.4,
+    1.1
+   ],
+   "Triangulos": 88
+  },
+  "Pantalon_Bermudas__PiernaD__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Bermudas",
+   "Parte": "Right Leg",
+   "Rol": "Pantalon",
+   "Centro": [
+    0.04,
+    0.3,
+    0.0
+   ],
+   "Tamano": [
+    1.18,
+    1.4,
+    1.1
+   ],
+   "Triangulos": 88
+  },
+  "Pantalon_Falda__Torso__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Falda",
+   "Parte": "Torso",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    -0.9,
+    0.0
+   ],
+   "Tamano": [
+    2.1,
+    0.2,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Falda__Torso__Metal": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Falda",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    -0.9,
+    -0.57
+   ],
+   "Tamano": [
+    0.26,
+    0.2,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Falda__PiernaI__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Falda",
+   "Parte": "Left Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.655,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.71,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Falda__PiernaD__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Falda",
+   "Parte": "Right Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.655,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.71,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Falda__Torso__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Falda",
+   "Parte": "Torso",
+   "Rol": "Pantalon",
+   "Centro": [
+    -0.0,
+    -1.2,
+    0.0
+   ],
+   "Tamano": [
+    3.0529,
+    0.95,
+    1.922
+   ],
+   "Triangulos": 68
+  },
+  "Pantalon_Falda__Torso__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Falda",
+   "Parte": "Torso",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    -1.62,
+    0.0
+   ],
+   "Tamano": [
+    2.44,
+    0.1,
+    1.64
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Peto__Torso__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Torso",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    -0.9,
+    0.0
+   ],
+   "Tamano": [
+    2.1,
+    0.2,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Peto__Torso__Metal": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    -0.055,
+    -0.5675
+   ],
+   "Tamano": [
+    1.14,
+    1.89,
+    0.055
+   ],
+   "Triangulos": 100
+  },
+  "Pantalon_Peto__PiernaI__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Left Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.695,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.63,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Peto__PiernaD__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Right Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.695,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.63,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Peto__Torso__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Torso",
+   "Rol": "Pantalon",
+   "Centro": [
+    -0.0,
+    0.255,
+    -0.2
+   ],
+   "Tamano": [
+    1.3,
+    1.61,
+    1.0
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Peto__Torso__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Torso",
+   "Rol": "Detalle",
+   "Centro": [
+    -0.0,
+    0.45,
+    -0.58
+   ],
+   "Tamano": [
+    0.55,
+    0.4,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Peto__PiernaI__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Left Leg",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    -0.55,
+    0.0
+   ],
+   "Tamano": [
+    1.18,
+    0.14,
+    1.18
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Peto__PiernaD__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Peto",
+   "Parte": "Right Leg",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    -0.55,
+    0.0
+   ],
+   "Tamano": [
+    1.18,
+    0.14,
+    1.18
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Campana__Torso__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Torso",
+   "Rol": "Oscuro",
+   "Centro": [
+    -0.0,
+    -0.9,
+    0.0
+   ],
+   "Tamano": [
+    2.1,
+    0.2,
+    1.1
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Campana__Torso__Metal": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Torso",
+   "Rol": "Metal",
+   "Centro": [
+    -0.0,
+    -0.9,
+    -0.57
+   ],
+   "Tamano": [
+    0.26,
+    0.2,
+    0.05
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Campana__PiernaI__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Left Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.855,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.31,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Campana__PiernaD__Oscuro": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Right Leg",
+   "Rol": "Oscuro",
+   "Centro": [
+    0.0,
+    -0.855,
+    -0.06
+   ],
+   "Tamano": [
+    1.14,
+    0.31,
+    1.3
+   ],
+   "Triangulos": 132
+  },
+  "Pantalon_Campana__PiernaI__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Left Leg",
+   "Rol": "Pantalon",
+   "Centro": [
+    0.0,
+    -0.55,
+    0.0
+   ],
+   "Tamano": [
+    1.4,
+    0.9,
+    1.4
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Campana__PiernaI__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Left Leg",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    0.35,
+    0.0
+   ],
+   "Tamano": [
+    1.16,
+    0.1,
+    1.16
+   ],
+   "Triangulos": 128
+  },
+  "Pantalon_Campana__PiernaD__Pantalon": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Right Leg",
+   "Rol": "Pantalon",
+   "Centro": [
+    0.0,
+    -0.55,
+    0.0
+   ],
+   "Tamano": [
+    1.4,
+    0.9,
+    1.4
+   ],
+   "Triangulos": 44
+  },
+  "Pantalon_Campana__PiernaD__Detalle": {
+   "Archivo": "Pantalones",
+   "Categoria": "Pantalon",
+   "Id": "Campana",
+   "Parte": "Right Leg",
+   "Rol": "Detalle",
+   "Centro": [
+    0.0,
+    0.35,
+    0.0
+   ],
+   "Tamano": [
+    1.16,
+    0.1,
+    1.16
+   ],
+   "Triangulos": 128
+  },
+  "Barba_Perilla__Cabeza__Pelo": {
+   "Archivo": "Barbas",
+   "Categoria": "Barba",
+   "Id": "Perilla",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.47,
+    -0.585
+   ],
+   "Tamano": [
+    0.2,
+    0.44,
+    0.19
+   ],
+   "Triangulos": 88
+  },
+  "Barba_Bigote__Cabeza__Pelo": {
+   "Archivo": "Barbas",
+   "Categoria": "Barba",
+   "Id": "Bigote",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.1834,
+    -0.6325
+   ],
+   "Tamano": [
+    0.7559,
+    0.2268,
+    0.085
+   ],
+   "Triangulos": 132
+  },
+  "Barba_Corta__Cabeza__Pelo": {
+   "Archivo": "Barbas",
+   "Categoria": "Barba",
+   "Id": "Corta",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.2,
+    -0.3564
+   ],
+   "Tamano": [
+    1.3965,
+    0.8,
+    0.6871
+   ],
+   "Triangulos": 284
+  },
+  "Barba_Larga__Cabeza__Pelo": {
+   "Archivo": "Barbas",
+   "Categoria": "Barba",
+   "Id": "Larga",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.75,
+    -0.3498
+   ],
+   "Tamano": [
+    1.4397,
+    2.0,
+    0.7404
+   ],
+   "Triangulos": 372
+  },
+  "Barba_Patillas__Cabeza__Pelo": {
+   "Archivo": "Barbas",
+   "Categoria": "Barba",
+   "Id": "Patillas",
+   "Parte": "Head",
+   "Rol": "Pelo",
+   "Centro": [
+    -0.0,
+    -0.1,
+    -0.2893
+   ],
+   "Tamano": [
+    1.419,
+    0.7,
+    0.7615
+   ],
+   "Triangulos": 148
   }
  },
  "TriangulosPorElemento": {
@@ -1419,20 +3093,53 @@
   "Cabello_Tupe": 1152,
   "Cabello_Melena": 1408,
   "Cabello_Puntas": 1240,
+  "Cabello_Bob": 1152,
+  "Cabello_Afro": 1008,
+  "Cabello_Trenzas": 1440,
+  "Cabello_Rastas": 1016,
+  "Cabello_Hongo": 960,
+  "Cabello_Mohicano": 646,
+  "Cabello_DosColetas": 928,
+  "Cabello_ColetaAlta": 816,
+  "Cabello_Trenza": 1152,
+  "Cabello_Engominado": 1152,
+  "Cabello_Ondulado": 1200,
+  "Cabello_Entradas": 1152,
   "Accesorio_Visor": 484,
   "Accesorio_Gafas": 474,
   "Accesorio_Auriculares": 506,
   "Accesorio_Gorra": 804,
   "Accesorio_Cinta": 358,
   "Accesorio_Comunicador": 206,
+  "Accesorio_Parche": 196,
+  "Accesorio_Gorro": 1018,
+  "Accesorio_Casco": 1148,
+  "Accesorio_Explorador": 1046,
+  "Accesorio_Antenas": 414,
+  "Accesorio_Diadema": 268,
   "Chaqueta_Exploradora": 788,
   "Chaqueta_Piloto": 884,
   "Chaqueta_Cazadora": 652,
   "Chaqueta_Mecanico": 828,
   "Chaqueta_Camiseta": 516,
+  "Chaqueta_Chaleco": 380,
+  "Chaqueta_Abrigo": 656,
+  "Chaqueta_Sudadera": 756,
+  "Chaqueta_Armadura": 932,
+  "Chaqueta_Camisa": 808,
   "Pantalon_Cargo": 700,
   "Pantalon_Piloto": 548,
   "Pantalon_Vaquero": 780,
-  "Pantalon_Tactico": 1092
+  "Pantalon_Tactico": 1092,
+  "Pantalon_Shorts": 824,
+  "Pantalon_Bermudas": 868,
+  "Pantalon_Falda": 632,
+  "Pantalon_Peto": 924,
+  "Pantalon_Campana": 780,
+  "Barba_Perilla": 88,
+  "Barba_Bigote": 132,
+  "Barba_Corta": 284,
+  "Barba_Larga": 372,
+  "Barba_Patillas": 148
  }
 }
