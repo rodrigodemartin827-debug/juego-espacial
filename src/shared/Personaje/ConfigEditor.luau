@@ -55,10 +55,10 @@ Config.Escena = {
 	ColorSuelo = "#0D1118",
 	ColorPlataforma = "#2A3242",
 	ColorLuz = "#4DE8FF",
-	LuzClave = { Brillo = 1.6, Color = "#FFF4E8" },
-	LuzContra = { Brillo = 1.8, Color = "#4DE8FF" },
-	LuzRelleno = { Brillo = 0.8, Color = "#9DB8FF" },
-	LuzCara = { Brillo = 0.9, Color = "#FFF1E0" }, -- relleno suave desde delante: la cara siempre se lee
+	LuzClave = { Brillo = 1.0, Color = "#FFF4E8" },
+	LuzContra = { Brillo = 1.4, Color = "#4DE8FF" },
+	LuzRelleno = { Brillo = 0.5, Color = "#9DB8FF" },
+	LuzCara = { Brillo = 0.45, Color = "#FFF1E0" }, -- relleno suave desde delante: la cara siempre se lee
 	Motas = 6, -- partículas por segundo (motas de luz flotando)
 	-- Barrido de luz que recorre al personaje cada vez que cambia algo.
 	Barrido = { Segundos = 0.5, Color = "#4DE8FF" },
