@@ -87,12 +87,40 @@ end
 -- ===== Cámara =====
 
 local giro = 0
+local parametros = RaycastParams.new()
+parametros.FilterType = Enum.RaycastFilterType.Exclude
+
+-- Posición de la cámara para un giro dado: delante de la cara, desplazada a la derecha (el personaje queda a la
+-- izquierda de la pantalla). Devuelve también el foco y el punto de mira.
+local function encuadre(raiz: BasePart, angulo: number): (Vector3, Vector3, Vector3, Vector3)
+	local c = Config.Camara
+	local marco = raiz.CFrame * CFrame.Angles(0, angulo, 0)
+	local foco = marco * Vector3.new(0, c.Mira, 0)
+	local desde = marco * Vector3.new(0, c.Altura, -c.Distancia)
+	local derecha = (foco - desde):Cross(marco.UpVector).Unit
+	return desde + derecha * c.Desplazar, foco + derecha * c.Desplazar, foco, marco.UpVector
+end
+
+-- El giro inicial: el de delante de la cara, o el más cercano a él que no tenga nada entre la cámara y el
+-- personaje (PROBADO EN STUDIO: un tronco se quedaba en medio).
+local function giroLibre(raiz: BasePart): number
+	for _, angulo in { 0, 0.45, -0.45, 0.9, -0.9, 1.35, -1.35, 1.8, -1.8 } do
+		local desde, _, foco = encuadre(raiz, angulo)
+		if workspace:Raycast(foco, desde - foco, parametros) == nil then
+			return angulo
+		end
+	end
+	return 0
+end
 
 local function empezarCamara()
 	jugador:SetAttribute(ConfigGraficos.AtributoCamara, true)
-	giro = 0
 	local c = Config.Camara
 	local campoAntes = workspace.CurrentCamera and workspace.CurrentCamera.FieldOfView or 70
+	local personajeInicial = jugador.Character
+	parametros.FilterDescendantsInstances = { personajeInicial :: Instance }
+	local raizInicial = personajeInicial and personajeInicial:FindFirstChild("HumanoidRootPart") :: BasePart?
+	giro = if raizInicial then giroLibre(raizInicial) else 0
 	RunService:BindToRenderStep(PASO_CAMARA, Enum.RenderPriority.Camera.Value + 2, function()
 		local camara = workspace.CurrentCamera
 		local personaje = jugador.Character
@@ -102,12 +130,14 @@ local function empezarCamara()
 		end
 		camara.CameraType = Enum.CameraType.Scriptable
 		camara.FieldOfView = c.CampoVision
-		local marco = raiz.CFrame * CFrame.Angles(0, giro, 0)
-		local foco = marco * Vector3.new(0, c.Mira, 0)
-		local desde = marco * Vector3.new(0, c.Altura, -c.Distancia)
-		local derecha = (foco - desde):Cross(marco.UpVector).Unit
-		-- Se desplaza la cámara y el punto de mira a la vez: el personaje queda a la izquierda de la pantalla.
-		camara.CFrame = CFrame.lookAt(desde + derecha * c.Desplazar, foco + derecha * c.Desplazar, marco.UpVector)
+		parametros.FilterDescendantsInstances = { personaje :: Instance }
+		local desde, mira, foco, arriba = encuadre(raiz, giro)
+		-- Si al girar algo se interpone, la cámara se acerca.
+		local golpe = workspace:Raycast(foco, desde - foco, parametros)
+		if golpe then
+			desde = foco + (desde - foco).Unit * math.max(golpe.Distance - 0.5, 2)
+		end
+		camara.CFrame = CFrame.lookAt(desde, mira, arriba)
 	end)
 	-- Arrastrar (ratón o dedo) fuera de la interfaz gira al personaje.
 	local arrastrando = false
@@ -232,7 +262,8 @@ function Pantalla.Abrir(op: Opciones)
 	texto(nueva, {
 		Text = Config.Textos.Subtitulo,
 		Font = Enum.Font.Gotham,
-		TextColor3 = color(col.TextoSuave),
+		TextColor3 = color(col.Texto),
+		TextStrokeTransparency = 0.35, -- se lee sobre cualquier fondo
 		Size = UDim2.fromScale(0.4, 0.032),
 		Position = UDim2.fromScale(0.03, 0.115),
 		TextXAlignment = Enum.TextXAlignment.Left,

@@ -80,6 +80,19 @@ function Constructor.Aplicar(modelo: Model, tabla: any)
 				d:Destroy()
 			end
 		end
+		-- La cabeza clásica de R6. PROBADO EN STUDIO: el avatar de Roblox trae su cabeza como malla de la propia Head
+		-- (por ejemplo una tele con cara), que taparía la cara y el pelo propios.
+		local malla = cabeza:FindFirstChildOfClass("SpecialMesh")
+		if malla == nil then
+			malla = Instance.new("SpecialMesh")
+			malla.Parent = cabeza
+		end
+		local m = malla :: SpecialMesh
+		m.MeshType = Enum.MeshType.Head
+		m.MeshId = ""
+		m.TextureId = ""
+		m.Offset = Vector3.zero
+		m.Scale = Vector3.new(1.25, 1.25, 1.25)
 	end
 	local vieja = modelo:FindFirstChild(Constructor.CARPETA)
 	if vieja then
