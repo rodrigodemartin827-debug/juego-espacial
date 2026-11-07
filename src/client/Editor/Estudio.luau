@@ -188,7 +188,7 @@ local function construirSala(): Folder
 		Material = Enum.Material.Neon,
 		CastShadow = false,
 	})
-	pieza(carpeta, {
+	local disco = pieza(carpeta, {
 		Name = "Disco",
 		Shape = Enum.PartType.Cylinder,
 		Size = Vector3.new(0.02, r * 1.1, r * 1.1),
@@ -198,6 +198,14 @@ local function construirSala(): Folder
 		Transparency = 0.93,
 		CastShadow = false,
 	})
+
+	-- Resplandor cian de la plataforma sobre el suelo y el pie de la pared (sin él, la sala grande queda a oscuras).
+	local resplandor = Instance.new("PointLight")
+	resplandor.Color = color(e.ColorLuz)
+	resplandor.Range = e.RadioSala + 6
+	resplandor.Brightness = e.Resplandor
+	resplandor.Shadows = false
+	resplandor.Parent = disco
 
 	-- Luces: clave cálida delante a la izquierda, contraluz cian detrás y relleno azulado.
 	local function foco(
