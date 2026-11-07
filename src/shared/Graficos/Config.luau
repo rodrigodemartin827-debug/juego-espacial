@@ -106,9 +106,9 @@ Config.Pantalla = {
 	Continuar = "CONTINUAR",
 	Cerrar = "LISTO",
 	BotonAjustes = "Gráficos",
-	-- La cámara se balancea despacio delante del personaje (± Arco grados respecto a su frente), para ver los
+	-- La cámara se balancea despacio (± Arco grados) en la dirección más despejada alrededor del personaje, para ver los
 	-- cambios en el mundo de verdad. PROBADO EN STUDIO: dando la vuelta entera atravesaba su casa (aparece mirándola).
-	Camara = { Distancia = 30, Altura = 3, Arco = 55, PeriodoSegundos = 24, Mira = 3, BajarMira = 7 },
+	Camara = { Distancia = 16, Altura = 2, Arco = 40, PeriodoSegundos = 24, Mira = 2, BajarMira = 4 },
 	Colores = {
 		Fondo = "#0B0E16",
 		Tarjeta = "#141A26",

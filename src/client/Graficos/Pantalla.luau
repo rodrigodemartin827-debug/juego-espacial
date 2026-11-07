@@ -53,10 +53,37 @@ end
 local parametros = RaycastParams.new()
 parametros.FilterType = Enum.RaycastFilterType.Exclude
 
+-- De 16 direcciones alrededor del personaje, la que tiene más espacio libre hasta la distancia de la cámara (a
+-- igualdad, la más cercana a su frente). Se mira con un abanico de rayos para no meterse entre dos paredes.
+local function elegirDireccion(raiz: BasePart, arriba: Vector3, personaje: Model): Vector3
+	local c = Config.Pantalla.Camara
+	local frente = raiz.CFrame.LookVector
+	frente = (frente - arriba * frente:Dot(arriba)).Unit
+	parametros.FilterDescendantsInstances = { personaje }
+	local foco = raiz.Position + arriba * c.Mira
+	local mejor, mejorLibre = frente, -1
+	for k = 0, 15 do
+		local d = CFrame.fromAxisAngle(arriba, k * math.pi / 8):VectorToWorldSpace(frente)
+		local libre = math.huge
+		for _, desvio in { -0.35, 0, 0.35 } do
+			local rayo = CFrame.fromAxisAngle(arriba, desvio):VectorToWorldSpace(d) * c.Distancia + arriba * c.Altura
+			local golpe = workspace:Raycast(foco, rayo, parametros)
+			libre = math.min(libre, if golpe then golpe.Distance else c.Distancia)
+		end
+		if libre > mejorLibre + 0.5 then
+			mejor, mejorLibre = d, libre
+		end
+	end
+	return mejor
+end
+
+local direccionLibre: Vector3? = nil
+
 local function empezarCamara()
 	jugador:SetAttribute(Config.AtributoCamara, true)
 	local c = Config.Pantalla.Camara
 	local inicio = os.clock()
+	direccionLibre = nil
 	RunService:BindToRenderStep(PASO_CAMARA, Enum.RenderPriority.Camera.Value + 2, function()
 		local camara = workspace.CurrentCamera
 		local personaje = jugador.Character
@@ -67,9 +94,10 @@ local function empezarCamara()
 		camara.CameraType = Enum.CameraType.Scriptable
 		-- «Arriba» del sitio donde está (en el planeta redondo no es el eje Y).
 		local arriba = (raiz.CFrame.UpVector).Unit
-		-- Delante de su cara, balanceándose: se ve al personaje y el pueblo detrás de él.
-		local base = raiz.CFrame.LookVector
-		base = (base - arriba * base:Dot(arriba)).Unit
+		-- La dirección más despejada alrededor del personaje (se elige una vez): PROBADO EN STUDIO, aparece mirando
+		-- a su casa y delante de su cara la cámara quedaba contra la pared.
+		local base = direccionLibre or elegirDireccion(raiz, arriba, personaje :: Model)
+		direccionLibre = base
 		local angulo = math.rad(c.Arco) * math.sin((os.clock() - inicio) / c.PeriodoSegundos * 2 * math.pi)
 		local fuera = CFrame.fromAxisAngle(arriba, angulo):VectorToWorldSpace(base)
 		local foco = raiz.Position + arriba * c.Mira
