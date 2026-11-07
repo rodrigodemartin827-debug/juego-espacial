@@ -157,8 +157,8 @@ Datos.Muestras = {
 Datos.Roles = {
 	Pelo = { Material = "SmoothPlastic" },
 	Piel = { Material = "SmoothPlastic" },
-	Chaqueta = { Material = "Fabric" },
-	Pantalon = { Material = "Fabric" },
+	Chaqueta = { Material = "SmoothPlastic" },
+	Pantalon = { Material = "SmoothPlastic" },
 	Detalle = { Material = "SmoothPlastic" },
 	Oscuro = { Color = "#1A1D22", Material = "SmoothPlastic" },
 	Claro = { Color = "#F4F6F8", Material = "SmoothPlastic" },

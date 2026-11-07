@@ -178,8 +178,9 @@ local function construirSala(): Folder
 	pieza(carpeta, {
 		Name = "Anillo",
 		Shape = Enum.PartType.Cylinder,
-		Size = Vector3.new(0.08, r * 2 + 0.25, r * 2 + 0.25),
-		CFrame = CFrame.new(c + Vector3.new(0, e.AltoPlataforma - 0.02, 0)) * CFrame.Angles(0, 0, math.pi / 2),
+		Size = Vector3.new(0.1, r * 2 + 0.3, r * 2 + 0.3),
+		-- Por debajo de la tapa de la plataforma: de este disco solo se ve el canto que asoma alrededor.
+		CFrame = CFrame.new(c + Vector3.new(0, e.AltoPlataforma - 0.12, 0)) * CFrame.Angles(0, 0, math.pi / 2),
 		Color = color(e.ColorLuz),
 		Material = Enum.Material.Neon,
 		CastShadow = false,
@@ -187,11 +188,11 @@ local function construirSala(): Folder
 	pieza(carpeta, {
 		Name = "Disco",
 		Shape = Enum.PartType.Cylinder,
-		Size = Vector3.new(0.04, r * 1.4, r * 1.4),
+		Size = Vector3.new(0.02, r * 1.1, r * 1.1),
 		CFrame = CFrame.new(c + Vector3.new(0, e.AltoPlataforma + 0.01, 0)) * CFrame.Angles(0, 0, math.pi / 2),
 		Color = color(e.ColorLuz),
 		Material = Enum.Material.Neon,
-		Transparency = 0.8,
+		Transparency = 0.93,
 		CastShadow = false,
 	})
 
@@ -216,6 +217,19 @@ local function construirSala(): Folder
 	foco("LuzClave", c + Vector3.new(5, 9, -9), e.LuzClave, 55)
 	foco("LuzContra", c + Vector3.new(-3, 8, 8), e.LuzContra, 60)
 	foco("LuzRelleno", c + Vector3.new(-7, 4, -6), e.LuzRelleno, 70)
+	local cara = pieza(carpeta, {
+		Name = "LuzCara",
+		Size = Vector3.new(0.2, 0.2, 0.2),
+		CFrame = CFrame.new(c + Vector3.new(0, e.AltoPlataforma + 5, -6)),
+		Transparency = 1,
+		CastShadow = false,
+	})
+	local luzCara = Instance.new("PointLight")
+	luzCara.Brightness = e.LuzCara.Brillo
+	luzCara.Color = color(e.LuzCara.Color)
+	luzCara.Range = 12
+	luzCara.Shadows = false
+	luzCara.Parent = cara
 
 	-- Motas de luz flotando por la sala.
 	local emisor = pieza(carpeta, {

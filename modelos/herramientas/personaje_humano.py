@@ -393,7 +393,7 @@ def cabello_largo(m):
         espalda = s_de_altura(-1.45)
         k = mezcla(th, math.pi, 1.9)
         frente = s_de_altura(0.34)
-        kf = mezcla(th, 0.0, 1.1)
+        kf = mezcla(th, 0.0, 1.4)
         return (lados * (1 - k) + espalda * k) * (1 - kf) + frente * kf
     casquete(m, puntas_en_linea(hasta, lambda th: 0.1), lambda th, t: 0.09 + 0.05 * t * mezcla(th, math.pi, 2.2),
              n_t=30, n_s=11, espalda=True)
@@ -424,7 +424,7 @@ def cabello_melena(m):
     def hasta(th):
         frente = s_de_altura(0.3)
         lados = s_de_altura(-0.5)
-        kf = mezcla(th, 0.0, 1.05)
+        kf = mezcla(th, 0.0, 1.4)
         return lados * (1 - kf) + frente * kf
     casquete(m, puntas_en_linea(hasta, lambda th: 0.05 * (1 - mezcla(th, 0, 1.2))),
              lambda th, t: 0.1 + 0.08 * t ** 3 + 0.03 * (1 - t), n_s=11, espalda=True)

@@ -55,9 +55,10 @@ Config.Escena = {
 	ColorSuelo = "#0D1118",
 	ColorPlataforma = "#2A3242",
 	ColorLuz = "#4DE8FF",
-	LuzClave = { Brillo = 2.6, Color = "#FFF4E8" },
-	LuzContra = { Brillo = 3.2, Color = "#4DE8FF" },
-	LuzRelleno = { Brillo = 0.9, Color = "#9DB8FF" },
+	LuzClave = { Brillo = 5, Color = "#FFF4E8" },
+	LuzContra = { Brillo = 4, Color = "#4DE8FF" },
+	LuzRelleno = { Brillo = 1.6, Color = "#9DB8FF" },
+	LuzCara = { Brillo = 1.2, Color = "#FFF1E0" }, -- relleno suave desde delante: la cara siempre se lee
 	Motas = 6, -- partículas por segundo (motas de luz flotando)
 	-- Barrido de luz que recorre al personaje cada vez que cambia algo.
 	Barrido = { Segundos = 0.5, Color = "#4DE8FF" },
@@ -66,8 +67,8 @@ Config.Escena = {
 -- Cámara: fija, de frente, encuadrando el cuerpo entero.
 Config.Camara = {
 	CampoVision = 36,
-	AltoVisible = 7.2, -- studs de alto que caben en pantalla (el personaje mide ~5,5 con pelo)
-	Mira = -0.35, -- altura del punto al que mira, respecto a la raíz
+	AltoVisible = 8.6, -- studs de alto que caben en pantalla (el personaje mide ~5,5 con pelo; deja sitio a los botones)
+	Mira = -0.75, -- altura del punto al que mira, respecto a la raíz
 	-- Dónde queda el personaje en la pantalla (-1 izquierda, 0 centro, 1 derecha) según la disposición.
 	PosicionX = { Ancha = 0.0, Estrecha = -0.32 },
 }

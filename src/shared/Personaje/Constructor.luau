@@ -178,7 +178,8 @@ local function pintarCuerpo(modelo: Model, a: Apariencia.Apariencia, colores: { 
 		if parte and parte:IsA("BasePart") then
 			local rol = rolParte[nombre]
 			parte.Color = color(colores[rol])
-			parte.Material = if rol == "Piel" then Enum.Material.SmoothPlastic else Enum.Material.Fabric
+			-- PROBADO EN STUDIO: la tela (Fabric) se ve como punto de lana a esta escala; liso queda mejor.
+			parte.Material = Enum.Material.SmoothPlastic
 		end
 	end
 end

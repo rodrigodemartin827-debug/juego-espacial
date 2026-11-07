@@ -191,7 +191,7 @@ Recursos.Piezas = {
 	Cabello_Largo = {
 		{
 			Nombre = "Cabello_Largo__Cabeza__Pelo",
-			Malla = "rbxassetid://109731966853726",
+			Malla = "rbxassetid://120316542816136",
 			Parte = "Head",
 			Rol = "Pelo",
 			Centro = { 0, -0.4276, 0.025 },
@@ -201,7 +201,7 @@ Recursos.Piezas = {
 	Cabello_Melena = {
 		{
 			Nombre = "Cabello_Melena__Cabeza__Pelo",
-			Malla = "rbxassetid://72832681670345",
+			Malla = "rbxassetid://78412649730393",
 			Parte = "Head",
 			Rol = "Pelo",
 			Centro = { 0, 0.09, 0 },
@@ -211,7 +211,7 @@ Recursos.Piezas = {
 	Cabello_Mono = {
 		{
 			Nombre = "Cabello_Mono__Cabeza__Pelo",
-			Malla = "rbxassetid://129973313858705",
+			Malla = "rbxassetid://73881035595793",
 			Parte = "Head",
 			Rol = "Pelo",
 			Centro = { 0, 0.4029, 0.0041 },
