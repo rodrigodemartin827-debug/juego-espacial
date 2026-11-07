@@ -101,12 +101,50 @@ local function encuadre(raiz: BasePart, angulo: number): (Vector3, Vector3, Vect
 	return desde + derecha * c.Desplazar, foco + derecha * c.Desplazar, foco, marco.UpVector
 end
 
--- El giro inicial: el de delante de la cara, o el más cercano a él que no tenga nada entre la cámara y el
--- personaje (PROBADO EN STUDIO: un tronco se quedaba en medio).
-local function giroLibre(raiz: BasePart): number
-	for _, angulo in { 0, 0.45, -0.45, 0.9, -0.9, 1.35, -1.35, 1.8, -1.8 } do
-		local desde, _, foco = encuadre(raiz, angulo)
-		if workspace:Raycast(foco, desde - foco, parametros) == nil then
+-- Piezas que hay cerca del personaje (a menos de `radio`), visibles. PROBADO EN STUDIO: las piezas decorativas de la
+-- región no aceptan consultas (CanQuery desactivado, para que sean baratas), así que ni los rayos ni
+-- GetPartsObscuringTarget las ven; se comprueba a mano.
+local function piezasCerca(centro: Vector3, radio: number, excluir: Instance): { BasePart }
+	local lista = {}
+	for _, d in workspace:GetDescendants() do
+		if d:IsA("BasePart") and d.Transparency < 0.9 and not d:IsDescendantOf(excluir) and d.Size.Magnitude < 60 then
+			if (d.Position - centro).Magnitude < radio + d.Size.Magnitude / 2 then
+				table.insert(lista, d)
+			end
+		end
+	end
+	return lista
+end
+
+-- ¿Atraviesa el segmento de `a` a `b` alguna de las piezas? (muestras a lo largo del segmento dentro de su caja)
+local function tapado(a: Vector3, b: Vector3, piezas: { BasePart }): boolean
+	for _, p in piezas do
+		local medio = p.Size / 2
+		for k = 1, 12 do
+			local local_ = p.CFrame:PointToObjectSpace(a:Lerp(b, k / 13))
+			if math.abs(local_.X) < medio.X and math.abs(local_.Y) < medio.Y and math.abs(local_.Z) < medio.Z then
+				return true
+			end
+		end
+	end
+	return false
+end
+
+-- El giro inicial: el de delante de la cara, o el más cercano a él con la vista despejada hasta la cabeza, el pecho
+-- y los pies (PROBADO EN STUDIO: un tronco o un poste se quedaban en medio).
+local function giroLibre(raiz: BasePart, personaje: Model): number
+	local piezas = piezasCerca(raiz.Position, Config.Camara.Distancia + 4, personaje)
+	local arriba = raiz.CFrame.UpVector
+	for _, angulo in { 0, 0.4, -0.4, 0.8, -0.8, 1.2, -1.2, 1.6, -1.6, 2.0, -2.0 } do
+		local desde = encuadre(raiz, angulo)
+		local libre = true
+		for _, alto in { 1.8, 0, -2.4 } do
+			if tapado(desde, raiz.Position + arriba * alto, piezas) then
+				libre = false
+				break
+			end
+		end
+		if libre then
 			return angulo
 		end
 	end
@@ -120,7 +158,7 @@ local function empezarCamara()
 	local personajeInicial = jugador.Character
 	parametros.FilterDescendantsInstances = { personajeInicial :: Instance }
 	local raizInicial = personajeInicial and personajeInicial:FindFirstChild("HumanoidRootPart") :: BasePart?
-	giro = if raizInicial then giroLibre(raizInicial) else 0
+	giro = if raizInicial and personajeInicial then giroLibre(raizInicial, personajeInicial) else 0
 	RunService:BindToRenderStep(PASO_CAMARA, Enum.RenderPriority.Camera.Value + 2, function()
 		local camara = workspace.CurrentCamera
 		local personaje = jugador.Character
