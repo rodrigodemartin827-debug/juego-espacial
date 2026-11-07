@@ -21,6 +21,18 @@ Config.Textos = {
 	Atras = "ATRÁS",
 	Aleatorio = "ALEATORIO",
 	Continuar = "CONTINUAR",
+	UsarAvatar = "USAR MI AVATAR DE ROBLOX",
+	UsarPiezas = "USAR LAS PIEZAS DEL JUEGO",
+	CargandoAvatar = "CARGANDO TU AVATAR…",
+	ErrorAvatar = "No se pudo cargar tu avatar de Roblox. Prueba otra vez.",
+	AvatarActivo = "USANDO TU AVATAR",
+}
+
+-- Avatar de Roblox (solo Humanos). El máximo de accesorios es por rendimiento en móvil.
+Config.Avatar = {
+	MaxAccesorios = 6,
+	Intentos = 3, -- veces que el servidor pide el avatar si falla (los servicios de Roblox a veces fallan)
+	EsperaIntento = 1.5, -- segundos entre intentos
 }
 
 -- Tipografías (familias de Roblox): títulos anchos de estilo espacial y textos legibles.
@@ -46,9 +58,9 @@ Config.Colores = {
 -- mapa para que nada se ponga delante.
 Config.Escena = {
 	Centro = { 0, 6000, 0 }, -- dónde se monta (studs)
-	RadioSala = 15,
-	AltoSala = 16,
-	Paneles = 18, -- paneles de la pared
+	RadioSala = 26, -- más que la distancia de la cámara (~15): si no, la cámara queda pegada a la pared
+	AltoSala = 20,
+	Paneles = 30, -- paneles de la pared
 	RadioPlataforma = 3.2,
 	AltoPlataforma = 0.7,
 	ColorPared = "#161C28",
@@ -59,6 +71,7 @@ Config.Escena = {
 	LuzContra = { Brillo = 1.4, Color = "#4DE8FF" },
 	LuzRelleno = { Brillo = 0.5, Color = "#9DB8FF" },
 	LuzCara = { Brillo = 0.45, Color = "#FFF1E0" }, -- relleno suave desde delante: la cara siempre se lee
+	Resplandor = 0.7, -- luz cian de la plataforma sobre el suelo
 	Motas = 6, -- partículas por segundo (motas de luz flotando)
 	-- Barrido de luz que recorre al personaje cada vez que cambia algo.
 	Barrido = { Segundos = 0.5, Color = "#4DE8FF" },
@@ -67,8 +80,8 @@ Config.Escena = {
 -- Cámara: fija, de frente, encuadrando el cuerpo entero.
 Config.Camara = {
 	CampoVision = 36,
-	AltoVisible = 8.6, -- studs de alto que caben en pantalla (el personaje mide ~5,5 con pelo; deja sitio a los botones)
-	Mira = -0.75, -- altura del punto al que mira, respecto a la raíz
+	AltoVisible = 9.6, -- studs de alto que caben en pantalla (el personaje mide ~5,5 con pelo; deja sitio a los botones)
+	Mira = -0.45, -- altura del punto al que mira, respecto a la raíz
 	-- Dónde queda el personaje en la pantalla (-1 izquierda, 0 centro, 1 derecha) según la disposición.
 	PosicionX = { Ancha = 0.0, Estrecha = -0.32 },
 }

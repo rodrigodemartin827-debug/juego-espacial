@@ -39,7 +39,9 @@ export type Opciones = {
 	AlDisponer: (Disposicion) -> (),
 	AlAtras: () -> (),
 	AlAleatorio: () -> Apariencia.Apariencia,
-	AlTerminar: (Apariencia.Apariencia) -> (),
+	UsarAvatar: boolean, -- si empieza usando su avatar de Roblox
+	AlAvatar: (boolean) -> (), -- pide pasar al avatar (true) o a las piezas del juego (false)
+	AlTerminar: (Apariencia.Apariencia, boolean) -> (),
 }
 
 local NOMBRE_GUI = "EditorPersonaje"
@@ -250,6 +252,7 @@ local op: Opciones? = nil
 local objetivo = 1 -- índice en Datos.ObjetivosColor
 local hsv = { 0, 0, 1 }
 local disposicion: Disposicion = "Ancha"
+local modoAvatar = false
 
 -- Referencias de la interfaz que se actualizan.
 local ui: { [string]: any } = {}
@@ -443,12 +446,72 @@ local function aplicarHSV()
 	cambiar("Color")
 end
 
-local function crearColor(padre: Instance)
+-- Cubierta translúcida que atenúa y bloquea todo `padre` (un panel sin disposición automática).
+local function cubrir(padre: GuiObject): Frame
+	local f = crear("Frame", {
+		Name = "Cubierta",
+		Size = UDim2.fromScale(1, 1),
+		BackgroundColor3 = color(C.Fondo),
+		BackgroundTransparency = 0.2,
+		BorderSizePixel = 0,
+		Active = true,
+		ZIndex = 30,
+		Visible = false,
+	}, padre)
+	esquina(f, 10)
+	return f
+end
+
+local function crearColor(raiz: Instance)
+	local padre: Instance = raiz
 	crear("UIListLayout", {
 		Padding = UDim.new(0, 10),
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 	}, padre)
+
+	-- Botón para usar el avatar de Roblox (o volver a las piezas del juego) y el aviso de lo que no se pudo convertir.
+	local avatarBoton = boton(raiz, {
+		Name = "Avatar",
+		LayoutOrder = 0,
+		Text = Config.Textos.UsarAvatar,
+		TextSize = 12,
+		TextWrapped = true,
+		Size = UDim2.new(1, 0, 0, 46),
+	})
+	ui.Avatar = avatarBoton
+	ui.Informe = etiqueta(raiz, {
+		Name = "Informe",
+		LayoutOrder = 6,
+		Text = "",
+		TextSize = 12,
+		TextWrapped = true,
+		TextColor3 = color("#FFC46B"),
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+		Visible = false,
+	})
+
+	-- Los controles de color van en su propio contenedor, para poder cubrirlos con el aviso de «usando tu avatar».
+	local contenedor = crear("Frame", {
+		Name = "ControlColor",
+		LayoutOrder = 1,
+		BackgroundTransparency = 1,
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+	}, raiz)
+	padre = crear("Frame", {
+		Name = "Lista",
+		BackgroundTransparency = 1,
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+	}, contenedor)
+	crear("UIListLayout", {
+		Padding = UDim.new(0, 10),
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		HorizontalAlignment = Enum.HorizontalAlignment.Center,
+	}, padre)
+	ui.CubiertaColor = cubrir(contenedor)
 
 	-- Botón que cambia lo que se colorea.
 	local objetivoBoton = boton(padre, {
@@ -476,6 +539,12 @@ local function crearColor(padre: Instance)
 	end)
 	ui.Objetivo = objetivoBoton
 	ui.MuestraObjetivo = muestra
+	avatarBoton.MouseButton1Click:Connect(function()
+		local o = op
+		if o and avatarBoton.Active then
+			o.AlAvatar(not modoAvatar)
+		end
+	end)
 
 	-- Rueda de tono y saturación.
 	local rueda = crear("ImageButton", {
@@ -731,6 +800,43 @@ function Pantalla.Abierta(): boolean
 	return gui ~= nil
 end
 
+-- Cambia el modo: con el avatar de Roblox se atenúan las piezas y los colores (se conservan para cuando se vuelva).
+function Pantalla.PonerAvatar(activo: boolean)
+	modoAvatar = activo
+	local b = ui.Avatar
+	if b == nil then
+		return
+	end
+	b.Text = if activo then Config.Textos.UsarPiezas else Config.Textos.UsarAvatar
+	b.Active = true
+	ui.CubiertaIzquierda.Visible = activo
+	ui.CubiertaColor.Visible = activo
+	if not activo then
+		ui.Informe.Visible = false
+		ui.Informe.Text = ""
+	end
+end
+
+-- El avatar se está cargando (el botón espera) o ha terminado de cargarse.
+function Pantalla.AvatarCargando(cargando: boolean)
+	local b = ui.Avatar
+	if b then
+		b.Active = not cargando
+		b.Text = if cargando
+			then Config.Textos.CargandoAvatar
+			else (if modoAvatar then Config.Textos.UsarPiezas else Config.Textos.UsarAvatar)
+	end
+end
+
+-- Aviso bajo el botón (lo que no se pudo convertir, o un error). Vacío lo oculta.
+function Pantalla.Informe(lineas: { string })
+	local l = ui.Informe
+	if l then
+		l.Text = table.concat(lineas, "\n")
+		l.Visible = #lineas > 0
+	end
+end
+
 -- Pone otra apariencia en todos los controles (por ejemplo tras ALEATORIO).
 function Pantalla.Poner(a: Apariencia.Apariencia)
 	actual = table.clone(a :: any)
@@ -745,6 +851,7 @@ function Pantalla.Abrir(opciones: Opciones)
 	op = opciones
 	actual = table.clone(opciones.Inicial :: any)
 	objetivo = 1
+	modoAvatar = false
 	bloquear()
 
 	local g = crear("ScreenGui", {
@@ -839,6 +946,7 @@ function Pantalla.Abrir(opciones: Opciones)
 	}, der)
 	ui.Derecha = der
 	crearColor(der)
+	ui.CubiertaIzquierda = cubrir(izq)
 
 	-- Abajo: ATRÁS, ALEATORIO y CONTINUAR.
 	local abajo = crear("Frame", { Name = "Abajo", BackgroundTransparency = 1 }, g)
@@ -867,6 +975,9 @@ function Pantalla.Abrir(opciones: Opciones)
 		opciones.AlAtras()
 	end)
 	aleatorio.MouseButton1Click:Connect(function()
+		if modoAvatar then
+			opciones.AlAvatar(false) -- aleatorio es de las piezas del juego
+		end
 		Pantalla.Poner(opciones.AlAleatorio())
 		cambiar("Pieza")
 	end)
@@ -875,11 +986,12 @@ function Pantalla.Abrir(opciones: Opciones)
 			return
 		end
 		terminado = true
-		opciones.AlTerminar(table.clone(actual) :: any)
+		opciones.AlTerminar(table.clone(actual) :: any, modoAvatar)
 	end)
 
 	g.Parent = jugador:WaitForChild("PlayerGui")
 	maquetar()
+	Pantalla.PonerAvatar(opciones.UsarAvatar)
 	local cam = workspace.CurrentCamera
 	if cam then
 		table.insert(conexiones, cam:GetPropertyChangedSignal("ViewportSize"):Connect(maquetar))

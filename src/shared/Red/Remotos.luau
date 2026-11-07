@@ -70,7 +70,8 @@ local definiciones: { [string]: Definicion } = {
 	},
 
 	-- El jugador guarda su personaje humano (editor de personaje): un valor de cada campo, en el orden de
-	-- Personaje/Apariencia.Campos. Las opciones tienen que existir y los colores ser "#RRGGBB".
+	-- Personaje/Apariencia.Campos, y al final si usa su avatar de Roblox (el servidor lo carga con su UserId).
+	-- Las opciones tienen que existir y los colores ser "#RRGGBB".
 	GuardarAparienciaHumano = {
 		Direccion = "ClienteAServidor",
 		LimitePorSegundo = 2,
@@ -86,6 +87,7 @@ local definiciones: { [string]: Definicion } = {
 					table.insert(lista, Validador.Enumeracion(AparienciaHumanos.Ids(campo)))
 				end
 			end
+			table.insert(lista, Validador.Booleano())
 			return lista
 		end)(),
 	},

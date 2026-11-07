@@ -225,12 +225,116 @@ return function(Marco)
 		end)
 	end)
 
+	Marco.grupo("Personaje: avatar de Roblox en R6", function()
+		-- Una descripción simulada con la forma de un HumanoidDescription.
+		local function descripcion(accesorios, extra)
+			local d = {
+				HeightScale = 1,
+				WidthScale = 1,
+				HeadScale = 1,
+				DepthScale = 1,
+				BodyTypeScale = 0,
+				ProportionScale = 0,
+				IdleAnimation = 0,
+				ClimbAnimation = 0,
+				FallAnimation = 0,
+				JumpAnimation = 0,
+				MoodAnimation = 0,
+				SwimAnimation = 0,
+				WalkAnimation = 0,
+				RunAnimation = 0,
+				Torso = 0,
+				LeftArm = 0,
+				RightArm = 0,
+				LeftLeg = 0,
+				RightLeg = 0,
+				Emotes = {},
+				Accesorios = accesorios,
+			}
+			for k, v in extra or {} do
+				d[k] = v
+			end
+			function d:GetAccessories(_)
+				return self.Accesorios
+			end
+			function d:SetAccessories(lista, _)
+				self.Accesorios = lista
+			end
+			function d:GetEmotes()
+				return self.Emotes
+			end
+			function d:SetEmotes(e)
+				self.Emotes = e
+			end
+			return d
+		end
+		local function accesorios(n, capas)
+			local lista = {}
+			for k = 1, n do
+				table.insert(lista, { AssetId = k, IsLayered = k <= (capas or 0) })
+			end
+			return lista
+		end
+
+		Marco.prueba("un avatar normal pasa tal cual y no da avisos", function()
+			local _, _, _, requerir = cargar()
+			local AvatarR6 = requerir("ReplicatedStorage.Shared.Personaje.AvatarR6")
+			local d = descripcion(accesorios(3))
+			local informe = AvatarR6.Preparar(d, 6)
+			Marco.igual(#d.Accesorios, 3)
+			Marco.igual(informe.Accesorios, 3)
+			Marco.igual(#AvatarR6.Textos(informe), 0)
+		end)
+
+		Marco.prueba("quita la ropa en capas y los accesorios que pasan del máximo", function()
+			local _, _, _, requerir = cargar()
+			local AvatarR6 = requerir("ReplicatedStorage.Shared.Personaje.AvatarR6")
+			local d = descripcion(accesorios(10, 2))
+			local informe = AvatarR6.Preparar(d, 4)
+			Marco.igual(informe.Capas, 2)
+			Marco.igual(informe.Exceso, 4)
+			Marco.igual(#d.Accesorios, 4)
+			for _, a in d.Accesorios do
+				Marco.falso(a.IsLayered)
+			end
+			Marco.igual(#AvatarR6.Textos(informe), 2)
+		end)
+
+		Marco.prueba("deja el cuerpo, las animaciones y los emotes en lo normal y lo avisa", function()
+			local _, _, _, requerir = cargar()
+			local AvatarR6 = requerir("ReplicatedStorage.Shared.Personaje.AvatarR6")
+			local d = descripcion(accesorios(1), {
+				HeightScale = 0.9,
+				BodyTypeScale = 0.4,
+				IdleAnimation = 55,
+				Emotes = { Saludo = { 1 } },
+				LeftArm = 123,
+			})
+			local informe = AvatarR6.Preparar(d, 6)
+			Marco.verdadero(informe.Escalas)
+			Marco.verdadero(informe.Animaciones)
+			Marco.verdadero(informe.Partes)
+			Marco.igual(informe.Emotes, 1)
+			Marco.igual(d.HeightScale, 1)
+			Marco.igual(d.BodyTypeScale, 0)
+			Marco.igual(d.IdleAnimation, 0)
+			Marco.igual(next(d.Emotes), nil)
+			Marco.igual(#AvatarR6.Textos(informe), 3)
+		end)
+
+		Marco.prueba("el máximo de accesorios es razonable para móvil", function()
+			local Config = select(4, cargar())("ReplicatedStorage.Shared.Personaje.ConfigEditor")
+			Marco.verdadero(Config.Avatar.MaxAccesorios >= 3 and Config.Avatar.MaxAccesorios <= 10)
+		end)
+	end)
+
 	Marco.grupo("Personaje: remoto GuardarAparienciaHumano", function()
-		local function argumentos(Apariencia, a)
+		local function argumentos(Apariencia, a, avatar)
 			local lista = {}
 			for i, campo in Apariencia.Campos do
 				lista[i] = a[campo]
 			end
+			lista[#Apariencia.Campos + 1] = if avatar == nil then false else avatar
 			return lista
 		end
 
@@ -264,6 +368,17 @@ return function(Marco)
 				local ok = Validador.ValidarArgumentos(esquema, table.unpack(argumentos(Apariencia, a)))
 				Marco.falso(ok, `{cambio[1]} = {cambio[2]} no debería pasar`)
 			end
+		end)
+
+		Marco.prueba("el último argumento es si usa su avatar y tiene que ser un booleano", function()
+			local Apariencia, Datos, _, requerir = cargar()
+			local Remotos = requerir("ReplicatedStorage.Shared.Red.Remotos")
+			local Validador = requerir("ReplicatedStorage.Shared.Red.Validador")
+			local esquema = Remotos.Definiciones.GuardarAparienciaHumano.Argumentos
+			Marco.verdadero(
+				Validador.ValidarArgumentos(esquema, table.unpack(argumentos(Apariencia, Datos.Defecto, true)))
+			)
+			Marco.falso(Validador.ValidarArgumentos(esquema, table.unpack(argumentos(Apariencia, Datos.Defecto, "si"))))
 		end)
 
 		Marco.prueba("VolverEleccionBando existe y no lleva argumentos", function()

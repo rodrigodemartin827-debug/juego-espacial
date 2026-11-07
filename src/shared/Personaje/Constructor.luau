@@ -22,6 +22,7 @@
 	local del personaje). Se puede llamar las veces que se quiera: cada vez rehace todo.
 ]]
 
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Apariencia = require(script.Parent.Apariencia)
@@ -184,6 +185,149 @@ local function pintarCuerpo(modelo: Model, a: Apariencia.Apariencia, colores: { 
 	end
 end
 
+-- Quita lo que puso Aplicar (accesorios del juego, detalles de ropa y rasgos de la cara), para dejar paso al avatar de
+-- Roblox. El avatar trae lo suyo: ApplyDescription pone su cabeza, su cara, su ropa y sus colores.
+function Constructor.Limpiar(modelo: Model)
+	-- El HumanoidDescription que ya tiene el Humanoid se quita: si es igual al que se va a aplicar, ApplyDescription
+	-- cree que el personaje ya lo lleva y no hace nada (PROBADO EN STUDIO).
+	local humanoide = modelo:FindFirstChildOfClass("Humanoid")
+	local anterior = humanoide and humanoide:FindFirstChildOfClass("HumanoidDescription")
+	if anterior then
+		anterior:Destroy()
+	end
+	for _, d in modelo:GetChildren() do
+		if d:IsA("Accessory") or d.Name == Constructor.CARPETA then
+			d:Destroy()
+		end
+	end
+	local cabeza = modelo:FindFirstChild("Head")
+	if cabeza then
+		for _, d in cabeza:GetChildren() do
+			if d:IsA("Decal") and string.sub(d.Name, 1, 6) == "Rasgo_" then
+				d:Destroy()
+			end
+		end
+	end
+end
+
+-- Lo que trae un personaje de Roblox con su aspecto (el avatar) y se copia de un R6 al otro.
+local COPIAR_DEL_AVATAR = { "Shirt", "Pants", "ShirtGraphic", "BodyColors", "CharacterMesh" }
+
+-- Un accesorio copiado de otro R6 viene soldado a la cabeza (o al torso) de ESE R6: se le vuelve a soldar al
+-- Attachment del mismo nombre del personaje. PROBADO EN STUDIO: sin esto, al borrar el R6 temporal los sombreros se
+-- quedaban sin soldadura (Part1 = nil) y flotando.
+local function reatar(accesorio: Accessory, modelo: Model)
+	local asa = accesorio:FindFirstChild("Handle")
+	local soldadura = asa and asa:FindFirstChildWhichIsA("Weld")
+	local propio = asa and asa:FindFirstChildOfClass("Attachment")
+	if asa == nil or soldadura == nil or propio == nil then
+		return
+	end
+	for _, d in modelo:GetDescendants() do
+		if
+			d:IsA("Attachment")
+			and d.Name == propio.Name
+			and d.Parent
+			and d.Parent:IsA("BasePart")
+			and d.Parent ~= asa
+		then
+			soldadura.Part0 = asa :: BasePart
+			soldadura.C0 = propio.CFrame
+			soldadura.Part1 = d.Parent
+			soldadura.C1 = d.CFrame
+			return
+		end
+	end
+end
+
+--[[
+	Pone el avatar de Roblox (`descripcion`, ya preparada con Personaje/AvatarR6) en el personaje R6 `modelo`. Tarda
+	un poco (Roblox carga los recursos): hay que llamarlo desde un hilo que pueda esperar. `sigueVigente` (opcional) se
+	pregunta al volver de esa espera: si dice que no, no se toca nada. Devuelve false si no pudo.
+
+	PROBADO EN STUDIO: Humanoid:ApplyDescription falla en un personaje editado («The current HumanoidDescription does
+	not match the assets currently applied to the character»), y este juego lo edita (piezas propias, colores). Por eso se
+	construye un R6 limpio con el avatar y se le pasan al personaje su ropa, accesorios, colores, cara y cabeza.
+]]
+function Constructor.PonerAvatar(
+	modelo: Model,
+	descripcion: HumanoidDescription,
+	sigueVigente: (() -> boolean)?
+): boolean
+	local humanoide = modelo:FindFirstChildOfClass("Humanoid")
+	local cabeza = modelo:FindFirstChild("Head")
+	if humanoide == nil or cabeza == nil or not cabeza:IsA("BasePart") then
+		return false
+	end
+	local ok, rig = pcall(function()
+		return Players:CreateHumanoidModelFromDescriptionAsync(descripcion, Enum.HumanoidRigType.R6)
+	end)
+	if not ok or rig == nil then
+		warn(`[Constructor] No se pudo crear el avatar: {rig}`)
+		return false
+	end
+	local origen = rig :: Model
+	-- Mientras Roblox cargaba, puede que se haya pedido otro aspecto: entonces este ya no vale.
+	if sigueVigente and not sigueVigente() then
+		origen:Destroy()
+		return true
+	end
+
+	-- Fuera lo del aspecto anterior (piezas del juego y avatar anterior).
+	Constructor.Limpiar(modelo)
+	for _, d in modelo:GetChildren() do
+		if table.find(COPIAR_DEL_AVATAR, d.ClassName) then
+			d:Destroy()
+		end
+	end
+	for _, d in cabeza:GetChildren() do
+		if d:IsA("Decal") then
+			d:Destroy()
+		end
+	end
+
+	-- Ropa, colores y accesorios.
+	for _, d in origen:GetChildren() do
+		if table.find(COPIAR_DEL_AVATAR, d.ClassName) then
+			d:Clone().Parent = modelo
+		elseif d:IsA("Accessory") then
+			local copia = d:Clone()
+			copia.Parent = modelo
+			reatar(copia, modelo)
+		end
+	end
+	-- Colores de las partes (el BodyColors ya los pone, pero así no dependen de él) y cara.
+	for _, nombre in PARTES_R6 do
+		local de, a = origen:FindFirstChild(nombre), modelo:FindFirstChild(nombre)
+		if de and a and de:IsA("BasePart") and a:IsA("BasePart") then
+			a.Color = de.Color
+			a.Material = de.Material
+		end
+	end
+	local cabezaOrigen = origen:FindFirstChild("Head")
+	if cabezaOrigen then
+		for _, d in cabezaOrigen:GetChildren() do
+			if d:IsA("Decal") then
+				d:Clone().Parent = cabeza
+			end
+		end
+		-- La cabeza del avatar (clásica, o una malla como la tele de algunos paquetes).
+		local malla = cabezaOrigen:FindFirstChildOfClass("SpecialMesh")
+		if malla then
+			local existente = cabeza:FindFirstChildOfClass("SpecialMesh")
+			local m: SpecialMesh = if existente then existente else Instance.new("SpecialMesh")
+			m.Parent = cabeza
+			m.MeshId = malla.MeshId
+			m.TextureId = malla.TextureId
+			m.MeshType = malla.MeshType
+			m.Scale = malla.Scale
+			m.Offset = malla.Offset
+		end
+	end
+	origen:Destroy()
+	return true
+end
+
 --[[
 	Solo cambia los colores (piel, pelo, chaqueta, pantalón y detalles) de un personaje al que ya se le hizo Aplicar
 	con las mismas piezas. Es mucho más barato que Aplicar: lo usa el editor mientras se arrastra por la rueda.
@@ -232,9 +376,11 @@ function Constructor.Aplicar(modelo: Model, tabla: any, plantillas: Instance?): 
 		local existente = cabeza:FindFirstChildOfClass("SpecialMesh")
 		local m: SpecialMesh = if existente then existente else Instance.new("SpecialMesh")
 		m.Parent = cabeza
-		m.MeshType = Enum.MeshType.Head
+		-- Primero se vacían los ids y DESPUÉS se pone el tipo: al revés, un MeshId vacío cambia el tipo a FileMesh y la
+		-- cabeza desaparece (PROBADO EN STUDIO al volver del avatar de Roblox, cuya cabeza era una malla).
 		m.MeshId = ""
 		m.TextureId = ""
+		m.MeshType = Enum.MeshType.Head
 		m.Offset = Vector3.zero
 		m.Scale = Vector3.new(1.25, 1.25, 1.25)
 	end

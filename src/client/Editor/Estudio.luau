@@ -31,6 +31,8 @@ local Estudio = {}
 
 local PASO_CAMARA = "EditorEstudioCamara"
 local CLASES_FUERA = {
+	-- PROBADO EN STUDIO: con el HumanoidDescription del personaje original dentro, ApplyDescription no hace nada.
+	"HumanoidDescription",
 	"Script",
 	"LocalScript",
 	"ForceField",
@@ -62,6 +64,7 @@ local posicionX = 0
 local campoAntes = 70
 local apariencia: any = nil
 local reaplicar = false
+local numeroAvatar = 0 -- sube con cada cambio de aspecto: un avatar que tarda en cargar se descarta si ya hay otro
 
 local function color(hex: string): Color3
 	return Color3.fromHex(hex)
@@ -185,7 +188,7 @@ local function construirSala(): Folder
 		Material = Enum.Material.Neon,
 		CastShadow = false,
 	})
-	pieza(carpeta, {
+	local disco = pieza(carpeta, {
 		Name = "Disco",
 		Shape = Enum.PartType.Cylinder,
 		Size = Vector3.new(0.02, r * 1.1, r * 1.1),
@@ -195,6 +198,14 @@ local function construirSala(): Folder
 		Transparency = 0.93,
 		CastShadow = false,
 	})
+
+	-- Resplandor cian de la plataforma sobre el suelo y el pie de la pared (sin él, la sala grande queda a oscuras).
+	local resplandor = Instance.new("PointLight")
+	resplandor.Color = color(e.ColorLuz)
+	resplandor.Range = e.RadioSala + 6
+	resplandor.Brightness = e.Resplandor
+	resplandor.Shadows = false
+	resplandor.Parent = disco
 
 	-- Luces: clave cálida delante a la izquierda, contraluz cian detrás y relleno azulado.
 	local function foco(
@@ -405,6 +416,7 @@ end
 ]]
 function Estudio.Aplicar(a: any, conBarrido: boolean?)
 	apariencia = a
+	numeroAvatar += 1
 	local m = copia
 	if m == nil then
 		return
@@ -418,6 +430,36 @@ function Estudio.Aplicar(a: any, conBarrido: boolean?)
 	if conBarrido then
 		barrer()
 	end
+end
+
+--[[
+	Pone el avatar de Roblox del jugador en la copia (`descripcion`, ya preparada para R6 con Personaje/AvatarR6). Tarda
+	un poco (Roblox carga la ropa y los accesorios): `alTerminar(ok)` avisa cuando acaba.
+]]
+function Estudio.AplicarAvatar(descripcion: HumanoidDescription, alTerminar: ((boolean) -> ())?)
+	numeroAvatar += 1
+	local mio = numeroAvatar
+	local m = copia
+	if m == nil then
+		return
+	end
+	task.spawn(function()
+		local ok = Constructor.PonerAvatar(m, descripcion, function()
+			return mio == numeroAvatar and copia == m
+		end)
+		if not ok then
+			warn("[Editor] No se pudo poner el avatar")
+		end
+		if mio ~= numeroAvatar or copia ~= m then
+			return -- mientras tanto se cambió de aspecto o se cerró el editor
+		end
+		if ok then
+			barrer()
+		end
+		if alTerminar then
+			alTerminar(ok)
+		end
+	end)
 end
 
 -- Solo repinta los colores (mientras se arrastra por la rueda de color: rehacer las piezas sería demasiado).
