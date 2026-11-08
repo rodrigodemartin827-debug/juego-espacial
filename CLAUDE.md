@@ -133,3 +133,8 @@ Gamepasses (x2 monedas, VIP, almacén extra), skins de nave y de poderes, pase d
   - Para seguir una sesión desde aquí: `claude --teleport <id>`. Para mandarle otro mensaje: `claude -p "mensaje" --cloud <id>`.
 - Cada trabajo en su propia rama, con commits pequeños en español, y pull request a `main`.
 - **Rodrigo da el visto bueno final.** Enséñale capturas del antes y el después.
+
+## Aspecto del mundo humano (hora dorada y PBR)
+- **Luz**: `SuperficieHumanos` es hora dorada (sol ámbar, como mucho `Ajustes.ElevacionMaximaSuperficie` = 17° sobre el horizonte, sombras suaves, resplandor y rayos de sol). Todo en `Planetas/Datos/Iluminacion.luau`; `Luz.TopeElevacion` baja el sol conservando de qué lado viene.
+- **Materiales PBR de la región 1**: el atlas `atlas_kit.png` (1024²) lleva además `_normal`, `_roughness` y `_metalness` (se generan con `modelos/region1_valle_del_alba/herramientas/atlas.py texturas`, determinista). Se suben con `subir_modelos --imagenes`, los IDs de imagen se sacan con `InsertService:LoadAsset` a `roblox/datos/ids_texturas.json`, y cada plantilla lleva SurfaceAppearance con los 4 mapas (`prepararPiezasEnStudio`). Las casillas teñibles siguen siendo transparentes (Overlay).
+- **Pendiente**: biseles en los modelos y objetos sueltos (cajas, barriles, plantas, cuerdas, carteles); bajar la calidad de los mapas PBR según el nivel gráfico (quitar normal/rugosidad en Baja); terreno con PBR.
