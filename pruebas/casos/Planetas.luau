@@ -654,6 +654,24 @@ return function(Marco)
 			casi(Marco, alto.Y, math.sqrt(0.5), "no se toca")
 		end)
 
+		Marco.prueba("hora dorada: el sol se baja hasta el tope y conserva de qué lado viene", function()
+			local arriba = { X = 0, Y = 1, Z = 0 }
+			-- Sol casi en vertical y algo hacia +X: se baja a 17° y sigue viniendo de +X.
+			local d = Luz.TopeElevacion({ X = 0.2, Y = 1, Z = 0 }, arriba, 17)
+			casi(Marco, math.deg(math.asin(d.Y)), 17, "elevación", 1e-6)
+			Marco.verdadero(d.X > 0.9 and math.abs(d.Z) < 1e-9)
+			-- Ya más bajo que el tope: no se toca.
+			local bajo = Luz.TopeElevacion({ X = 1, Y = 0.1, Z = 0 }, arriba, 17)
+			casi(Marco, bajo.Y, 0.1 / math.sqrt(1.01), "no se toca")
+			-- Sobre un planeta redondo «arriba» es otra dirección: la elevación se cuenta desde su horizonte.
+			local lado = Luz.TopeElevacion({ X = 1, Y = 0, Z = 0 }, { X = 1, Y = 0, Z = 0 }, 17)
+			casi(Marco, lado.X, math.sin(math.rad(17)), "elevación local")
+			-- Justo encima (sin lado de dónde venir): sigue siendo una dirección válida a 17°.
+			local cenit = Luz.TopeElevacion({ X = 0, Y = 1, Z = 0 }, arriba, 17)
+			casi(Marco, cenit.Y, math.sin(math.rad(17)), "cénit")
+			casi(Marco, cenit.X ^ 2 + cenit.Y ^ 2 + cenit.Z ^ 2, 1, "unitario")
+		end)
+
 		Marco.prueba(
 			"el buscador de hora y latitud apunta la luz (sol o luna) a menos de 0,5° de lo pedido",
 			function()
