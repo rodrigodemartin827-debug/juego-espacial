@@ -79,7 +79,7 @@ end
 	También pone RenderFidelity (piezas y terreno) y la colisión precisa del terreno detallado, que tampoco se pueden
 	cambiar durante el juego.
 ]]
-function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
+function EjemploArranque.prepararPiezasEnStudio(idAtlas: string, mapas: { Normal: string?, Rugosidad: string?, Metal: string? }?): number
 	local carpeta = ReplicatedStorage:WaitForChild("Region1")
 	local n = 0
 	-- Piezas de doble cara (lonas de una capa: datos/piezas.json, «doble_cara»). DoubleSided solo se puede poner en Studio.
@@ -96,6 +96,12 @@ function EjemploArranque.prepararPiezasEnStudio(idAtlas: string): number
 				local sa = p:FindFirstChildOfClass("SurfaceAppearance") or Instance.new("SurfaceAppearance")
 				sa.ColorMap = idAtlas
 				sa.AlphaMode = Enum.AlphaMode.Overlay
+				-- PBR: normales, rugosidad y metal del mismo atlas (cada material reacciona distinto a la luz).
+				if mapas then
+					sa.NormalMap = mapas.Normal or ""
+					sa.RoughnessMap = mapas.Rugosidad or ""
+					sa.MetalnessMap = mapas.Metal or ""
+				end
 				sa.Parent = p
 				p.RenderFidelity = Enum.RenderFidelity.Performance
 				local base = string.gsub(p.Name, "__lejos$", "")
@@ -151,8 +157,12 @@ function EjemploArranque.sustituirDesdeNube(solo: { string }?): { any }
 		local destino = if sub then carpeta:FindFirstChild(CARPETAS[sub] or "") else nil
 		return destino, archivo
 	end, solo)
-	local idAtlas = (require((datos:WaitForChild("ids_texturas") :: ModuleScript):Clone()) :: any)["atlas_kit.png"]
-	EjemploArranque.prepararPiezasEnStudio(idAtlas)
+	local texturas = require((datos:WaitForChild("ids_texturas") :: ModuleScript):Clone()) :: any
+	EjemploArranque.prepararPiezasEnStudio(texturas["atlas_kit.png"], {
+		Normal = texturas["atlas_kit_normal.png"],
+		Rugosidad = texturas["atlas_kit_roughness.png"],
+		Metal = texturas["atlas_kit_metalness.png"],
+	})
 	return resultados
 end
 

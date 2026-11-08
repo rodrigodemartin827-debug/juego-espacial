@@ -1,5 +1,8 @@
 {
- "atlas_kit.png": "rbxassetid://78815411374412",
+ "atlas_kit.png": "rbxassetid://86427348464312",
+ "atlas_kit_normal.png": "rbxassetid://92749649932487",
+ "atlas_kit_roughness.png": "rbxassetid://112731379466397",
+ "atlas_kit_metalness.png": "rbxassetid://74078744137821",
  "terreno_lejos.png": "rbxassetid://74905283709602",
  "terreno_0_0.png": "rbxassetid://85245509562102",
  "terreno_0_1.png": "rbxassetid://117127301987737",

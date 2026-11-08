@@ -169,6 +169,34 @@ function Luz.LimitarElevacion(direccion: Vec, minimo: number): Vec
 	return { X = horizontal.X * math.cos(angulo), Y = math.sin(angulo), Z = horizontal.Z * math.cos(angulo) }
 end
 
+--[==[
+	Baja la dirección de la luz hasta `maximo` grados sobre el horizonte del sitio (el plano perpendicular a `arriba`),
+	conservando de qué lado viene. Si ya está más baja, no la toca. Es la hora dorada: sol bajo y sombras largas.
+]==]
+function Luz.TopeElevacion(direccion: Vec, arriba: Vec, maximo: number): Vec
+	local d = V.unitario(direccion)
+	local u = V.unitario(arriba)
+	local seno = math.clamp(d.X * u.X + d.Y * u.Y + d.Z * u.Z, -1, 1)
+	if math.deg(math.asin(seno)) <= maximo then
+		return d
+	end
+	-- Si la luz viene justo de arriba no hay «lado»: se elige uno cualquiera perpendicular a `arriba`.
+	local eje = if math.abs(u.Y) < 0.9 then { X = 0, Y = 1, Z = 0 } else { X = 1, Y = 0, Z = 0 }
+	local lado = V.unitario({
+		X = u.Y * eje.Z - u.Z * eje.Y,
+		Y = u.Z * eje.X - u.X * eje.Z,
+		Z = u.X * eje.Y - u.Y * eje.X,
+	})
+	local horizontal = V.unitario({ X = d.X - u.X * seno, Y = d.Y - u.Y * seno, Z = d.Z - u.Z * seno }, lado)
+	local a = math.rad(maximo)
+	local s, c = math.sin(a), math.cos(a)
+	return {
+		X = u.X * s + horizontal.X * c,
+		Y = u.Y * s + horizontal.Y * c,
+		Z = u.Z * s + horizontal.Z * c,
+	}
+end
+
 -- ===== Búsqueda de hora y latitud =====
 
 --[[

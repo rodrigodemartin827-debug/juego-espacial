@@ -60,6 +60,8 @@ local proximaOrientacion = 0
 local acumulado = 0
 local zonaAnterior: Espacio.Zona? = nil
 
+local resplandor: BloomEffect? = nil
+local rayos: SunRaysEffect? = nil
 local atmosfera: Atmosphere? = nil
 local cielo: Sky? = nil
 local correccion: ColorCorrectionEffect? = nil
@@ -91,6 +93,10 @@ local function objetivoDe(zona: Espacio.Zona, posicion: Vec): (any, Vec)
 			local direccion = Luz.DireccionEspacio(posicion)
 			local arriba = desde.Unit
 			local deDia = arriba.X * direccion.X + arriba.Y * direccion.Y + arriba.Z * direccion.Z > -0.05
+			if deDia then
+				-- Hora dorada: el sol, como mucho a ElevacionMaximaSuperficie grados sobre el horizonte de aquí.
+				direccion = Luz.TopeElevacion(direccion, aVec(arriba), ajustes.ElevacionMaximaSuperficie)
+			end
 			return presets[if deDia then "SuperficieHumanos" else "EspacioHumanos"], direccion
 		end
 	end
@@ -98,7 +104,11 @@ local function objetivoDe(zona: Espacio.Zona, posicion: Vec): (any, Vec)
 		local planeta = zona.Planeta :: string
 		local preset = presets[Datos.Planetas[planeta].Superficie.Iluminacion]
 		local _, fuente = Espacio.FuenteDeLuz(planeta)
-		return preset, Espacio.DireccionEnCielo(planeta, fuente)
+		local direccion = Espacio.DireccionEnCielo(planeta, fuente)
+		if preset.Fuente == "Sol" then
+			direccion = Luz.TopeElevacion(direccion, { X = 0, Y = 1, Z = 0 }, ajustes.ElevacionMaximaSuperficie)
+		end
+		return preset, direccion
 	end
 	local nombres, pesos = Luz.PesosEspacio(posicion)
 	local lista = {}
@@ -118,6 +128,15 @@ local function aplicarPreset(p: any)
 	Lighting.ColorShift_Top = color(p.TonoLuz)
 	Lighting.EnvironmentDiffuseScale = p.Difusa
 	Lighting.EnvironmentSpecularScale = p.Especular
+	Lighting.ShadowSoftness = p.SombrasSuaves
+
+	local b = resplandor :: BloomEffect
+	b.Intensity = p.Resplandor.Intensidad
+	b.Size = p.Resplandor.Tamano
+	b.Threshold = p.Resplandor.Umbral
+	local r = rayos :: SunRaysEffect
+	r.Intensity = p.RayosSol.Intensidad
+	r.Spread = p.RayosSol.Dispersion
 
 	local a = atmosfera :: Atmosphere
 	local datosAtmosfera = p.Atmosfera
@@ -238,6 +257,15 @@ function Ambiente.Iniciar()
 	nuevoCielo.Name = "CieloPlaneta"
 	nuevoCielo.Parent = Lighting
 	cielo = nuevoCielo
+
+	-- Resplandor y rayos de sol: se reutiliza el efecto que ya haya en Lighting (así no se duplica) o se crea.
+	local nuevoResplandor = Lighting:FindFirstChildOfClass("BloomEffect") or Instance.new("BloomEffect")
+	nuevoResplandor.Parent = Lighting
+	resplandor = nuevoResplandor
+	local nuevosRayos = Lighting:FindFirstChildOfClass("SunRaysEffect") or Instance.new("SunRaysEffect")
+	nuevosRayos.Name = "RayosPlaneta"
+	nuevosRayos.Parent = Lighting
+	rayos = nuevosRayos
 
 	local nuevaCorreccion = Instance.new("ColorCorrectionEffect")
 	nuevaCorreccion.Name = "ColorPlaneta"

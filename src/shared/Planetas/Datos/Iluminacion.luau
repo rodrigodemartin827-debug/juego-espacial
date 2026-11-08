@@ -37,6 +37,9 @@ Iluminacion.Presets = {
 		Atmosfera = { Densidad = 0, Desfase = 0, Color = "#000000", Decaimiento = "#000000", Brillo = 0, Bruma = 0 },
 		Cielo = { Estrellas = 3000, Astros = false },
 		Color = { Tinte = "#FFFFFF", Saturacion = 0, Contraste = 0, Brillo = 0 },
+		SombrasSuaves = 0.5,
+		Resplandor = { Intensidad = 0, Tamano = 24, Umbral = 0.95 },
+		RayosSol = { Intensidad = 0, Dispersion = 0.5 },
 	},
 	-- Cerca del sol: luz cálida e intensa y sombras profundas.
 	EspacioHumanos = {
@@ -51,6 +54,9 @@ Iluminacion.Presets = {
 		Atmosfera = { Densidad = 0, Desfase = 0, Color = "#000000", Decaimiento = "#000000", Brillo = 0, Bruma = 0 },
 		Cielo = { Estrellas = 2200, Astros = false },
 		Color = { Tinte = "#FFF6EC", Saturacion = 0.05, Contraste = 0.05, Brillo = 0 },
+		SombrasSuaves = 0.5,
+		Resplandor = { Intensidad = 0, Tamano = 24, Umbral = 0.95 },
+		RayosSol = { Intensidad = 0, Dispersion = 0.5 },
 	},
 	-- Cerca del agujero negro: luz tenue, morada y anaranjada (la del disco), casi sin luz ambiente.
 	EspacioMonstruos = {
@@ -65,27 +71,35 @@ Iluminacion.Presets = {
 		Atmosfera = { Densidad = 0, Desfase = 0, Color = "#000000", Decaimiento = "#000000", Brillo = 0, Bruma = 0 },
 		Cielo = { Estrellas = 4000, Astros = false },
 		Color = { Tinte = "#F2E6FF", Saturacion = -0.1, Contraste = 0.12, Brillo = -0.02 },
+		SombrasSuaves = 0.5,
+		Resplandor = { Intensidad = 0, Tamano = 24, Umbral = 0.95 },
+		RayosSol = { Intensidad = 0, Dispersion = 0.5 },
 	},
-	-- Superficie humana: día luminoso con cielo azul y algo de bruma en el horizonte.
+	-- Superficie humana: hora dorada. Sol bajo (ver Ajustes.ElevacionMaximaSuperficie) y de color ámbar, sombras
+	-- largas y suaves, aire cálido con bruma anaranjada hacia el horizonte, cielo de atardecer, resplandor en lo más
+	-- brillante y rayos de sol. La sombra no es negra: lleva el azul-violeta del cielo (Ambiente).
 	SuperficieHumanos = {
 		Fuente = "Sol",
-		Brillo = 3,
-		Ambiente = "#5A6070",
-		AmbienteExterior = "#8C92A2",
-		Exposicion = 0,
-		TonoLuz = "#FFF4E0",
+		Brillo = 2.6,
+		Ambiente = "#4C4458",
+		AmbienteExterior = "#8A7280",
+		Exposicion = -0.1,
+		TonoLuz = "#FFB36E",
 		Difusa = 1,
-		Especular = 1,
+		Especular = 1.15,
 		Atmosfera = {
-			Densidad = 0.32,
-			Desfase = 0.12,
-			Color = "#C7DCFF",
-			Decaimiento = "#6A7590",
-			Brillo = 0.35,
-			Bruma = 1.1,
+			Densidad = 0.38,
+			Desfase = 0.2,
+			Color = "#FFC79C",
+			Decaimiento = "#E0663C",
+			Brillo = 1.3,
+			Bruma = 1.9,
 		},
 		Cielo = { Estrellas = 0, Astros = true },
-		Color = { Tinte = "#FFFFFF", Saturacion = 0.12, Contraste = 0.06, Brillo = 0 },
+		Color = { Tinte = "#FFE3C8", Saturacion = 0.16, Contraste = 0.1, Brillo = 0 },
+		SombrasSuaves = 0.75,
+		Resplandor = { Intensidad = 0.5, Tamano = 30, Umbral = 0.92 },
+		RayosSol = { Intensidad = 0.12, Dispersion = 0.7 },
 	},
 	-- Superficie de los monstruos: noche perpetua, niebla morada espesa y poca luz.
 	SuperficieMonstruos = {
@@ -107,6 +121,9 @@ Iluminacion.Presets = {
 		},
 		Cielo = { Estrellas = 1500, Astros = false },
 		Color = { Tinte = "#E8D8FF", Saturacion = -0.25, Contraste = 0.2, Brillo = -0.03 },
+		SombrasSuaves = 0.5,
+		Resplandor = { Intensidad = 0, Tamano = 24, Umbral = 0.95 },
+		RayosSol = { Intensidad = 0, Dispersion = 0.5 },
 	},
 }
 
@@ -121,6 +138,9 @@ Iluminacion.Mezcla = {
 }
 
 Iluminacion.Ajustes = {
+	-- Altura máxima del sol sobre el horizonte del sitio en el que está el jugador, en grados (hora dorada): más alto
+	-- que esto se baja hasta aquí, conservando de dónde viene. El sol real manda hasta ese tope.
+	ElevacionMaximaSuperficie = 17,
 	ElevacionMinima = 4, -- grados: la luz de Roblox no puede venir de debajo del horizonte (ver client/Planetas/Ambiente)
 	Rapidez = 1.6, -- por segundo: lo deprisa que se pasa de un preset a otro (transición suave)
 	HzOrientacion = 6, -- veces por segundo que se recalcula hacia dónde apunta la luz
