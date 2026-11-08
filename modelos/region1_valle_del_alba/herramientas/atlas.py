@@ -1266,7 +1266,7 @@ def hojas(color, semilla, pino=False, flor=False):
     """Follaje: fondo en sombra y varias capas de hojas (o agujas) periódicas."""
     l = Lienzo(semilla, rug=0.6, fuerza=3.5)
     c = _col(color)
-    fondo = (_hex("#2F5226") if flor else c)[None, None, :] * (0.42 + 0.1 * l.f(4, k=1))[..., None]
+    fondo = (_hex("#B0607E") if flor else c)[None, None, :] * ((0.78 if flor else 0.42) + 0.1 * l.f(4, k=1))[..., None]
     l.pintar(1.0, fondo)
     l.alt[:] = 0.1
     if pino:
@@ -1289,10 +1289,10 @@ def hojas(color, semilla, pino=False, flor=False):
                         l.pintar(ag, c * tono, rug=0.6)
                         l.altura(ag, 0.3 + 0.25 * capa)
     elif flor:
-        _hojas_formas(l, 1.0, "#4E7A34", 40, 0.06, k=2)
-        for j in range(70):
+        _hojas_formas(l, 1.0, "#5F7F3E", 14, 0.05, k=2)
+        for j in range(150):
             cx, cy = l.rng.uniform(0, 1, 2)
-            r, tono, giro = l.rng.uniform(0.03, 0.05), l.rng.uniform(0.85, 1.12), l.rng.uniform(0, 6)
+            r, tono, giro = l.rng.uniform(0.035, 0.058), l.rng.uniform(0.9, 1.15), l.rng.uniform(0, 6)
             # copias desplazadas una casilla para que las flores del borde sigan al otro lado (periódico)
             for ox in (-1, 0, 1):
                 for oy in (-1, 0, 1):
