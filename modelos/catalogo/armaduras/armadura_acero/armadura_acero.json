@@ -1,0 +1,80 @@
+{
+ "modelo": "armadura_acero",
+ "triangulos": 1352,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 4.53,
+  "alto_y": 3.63,
+  "fondo_z": 1.66
+ },
+ "texturas": {
+  "color": "armadura_acero_color.png",
+  "roughness": "armadura_acero_roughness.png",
+  "metalness": "armadura_acero_metalness.png",
+  "emision": "armadura_acero_emision.png",
+  "normal": "armadura_acero_normal.png"
+ },
+ "piezas": {
+  "armadura_acero_peto": {
+   "triangulos": 696,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    -0.398,
+    0.051
+   ],
+   "pivote": [
+    0.0,
+    0.0,
+    -0.0
+   ]
+  },
+  "armadura_acero_neon": {
+   "triangulos": 56,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    0.505,
+    0.075
+   ]
+  },
+  "armadura_acero_hombrera_izq": {
+   "triangulos": 300,
+   "tipo": "textura",
+   "centro": [
+    -1.5,
+    0.723,
+    -0.0
+   ],
+   "pivote": [
+    -1.5,
+    0.0,
+    -0.0
+   ],
+   "padre": "armadura_acero_peto"
+  },
+  "armadura_acero_hombrera_der": {
+   "triangulos": 300,
+   "tipo": "textura",
+   "centro": [
+    1.5,
+    0.723,
+    0.0
+   ],
+   "pivote": [
+    1.5,
+    0.0,
+    -0.0
+   ],
+   "padre": "armadura_acero_peto"
+  }
+ },
+ "anclas": {
+  "TorsoCentro": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

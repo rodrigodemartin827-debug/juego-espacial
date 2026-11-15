@@ -1,0 +1,35 @@
+{
+ "modelo": "casco_hierro",
+ "triangulos": 530,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 1.8,
+  "alto_y": 1.6,
+  "fondo_z": 1.8
+ },
+ "texturas": {
+  "color": "casco_hierro_color.png",
+  "roughness": "casco_hierro_roughness.png",
+  "metalness": "casco_hierro_metalness.png",
+  "normal": "casco_hierro_normal.png"
+ },
+ "piezas": {
+  "casco_hierro": {
+   "triangulos": 530,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    0.18,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "CabezaCentro": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

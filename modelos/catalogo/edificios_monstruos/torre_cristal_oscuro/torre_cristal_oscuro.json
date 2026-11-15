@@ -1,0 +1,68 @@
+{
+ "modelo": "torre_cristal_oscuro",
+ "triangulos": 1234,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 22.47,
+  "alto_y": 85.31,
+  "fondo_z": 21.45
+ },
+ "texturas": {
+  "color": "torre_cristal_oscuro_color.png",
+  "roughness": "torre_cristal_oscuro_roughness.png",
+  "metalness": "torre_cristal_oscuro_metalness.png",
+  "emision": "torre_cristal_oscuro_emision.png",
+  "normal": "torre_cristal_oscuro_normal.png"
+ },
+ "piezas": {
+  "torre_cristal_oscuro": {
+   "triangulos": 666,
+   "tipo": "textura",
+   "centro": [
+    0.168,
+    38.847,
+    -0.007
+   ]
+  },
+  "torre_cristal_oscuro_cristal": {
+   "triangulos": 402,
+   "tipo": "cristal",
+   "centro": [
+    -0.027,
+    37.765,
+    0.288
+   ]
+  },
+  "torre_cristal_oscuro_neon": {
+   "triangulos": 34,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    41.8,
+    2.125
+   ]
+  },
+  "torre_cristal_oscuro_neon_magenta": {
+   "triangulos": 132,
+   "tipo": "neon",
+   "centro": [
+    0.077,
+    11.117,
+    5.526
+   ]
+  }
+ },
+ "anclas": {
+  "Puerta": [
+   0.0,
+   0.5,
+   6.5
+  ],
+  "Punta": [
+   0.0,
+   83.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

@@ -1,0 +1,72 @@
+{
+ "modelo": "mercado_monstruo",
+ "triangulos": 4765,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 27.89,
+  "alto_y": 22.66,
+  "fondo_z": 22.57
+ },
+ "texturas": {
+  "color": "mercado_monstruo_color.png",
+  "roughness": "mercado_monstruo_roughness.png",
+  "metalness": "mercado_monstruo_metalness.png",
+  "emision": "mercado_monstruo_emision.png",
+  "normal": "mercado_monstruo_normal.png"
+ },
+ "piezas": {
+  "mercado_monstruo": {
+   "triangulos": 2847,
+   "tipo": "textura",
+   "centro": [
+    -0.258,
+    10.431,
+    -0.058
+   ]
+  },
+  "mercado_monstruo_neon_magenta": {
+   "triangulos": 1372,
+   "tipo": "neon",
+   "centro": [
+    0.806,
+    12.514,
+    -1.457
+   ]
+  },
+  "mercado_monstruo_cristal": {
+   "triangulos": 258,
+   "tipo": "cristal",
+   "centro": [
+    -0.239,
+    7.508,
+    1.003
+   ]
+  },
+  "mercado_monstruo_neon": {
+   "triangulos": 180,
+   "tipo": "neon",
+   "centro": [
+    2.145,
+    5.325,
+    0.202
+   ]
+  },
+  "mercado_monstruo_lava": {
+   "triangulos": 108,
+   "tipo": "neon",
+   "centro": [
+    -0.65,
+    5.35,
+    -5.3
+   ]
+  }
+ },
+ "anclas": {
+  "Mostrador": [
+   0.0,
+   3.7,
+   5.8
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}
