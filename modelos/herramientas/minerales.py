@@ -435,7 +435,7 @@ def guardar_mapas(mapas, carpeta, ident):
     return salida
 
 
-def materiales_finales(bajas, carpeta, texturas):
+def materiales_finales(bajas, carpeta, texturas, d):
     imgs = {}
     for k, ruta in texturas.items():
         img = bpy.data.images.load(os.path.join(carpeta, ruta), check_existing=False)
@@ -463,7 +463,9 @@ def materiales_finales(bajas, carpeta, texturas):
             nt.links.new(tex("emision").outputs["Color"], bs.inputs["Emission Color"])
             bs.inputs["Emission Strength"].default_value = cfg["emision"]
         if cfg["transmision"]:
-            bs.inputs["Transmission Weight"].default_value = cfg["transmision"]
+            # Igual que en Studio: un Glass poco transparente se ve casi opaco.
+            transp = d.get("roblox", {}).get(g, {}).get("transparencia", 0.35)
+            bs.inputs["Transmission Weight"].default_value = min(cfg["transmision"], 0.15 + transp * 1.3)
             bs.inputs["IOR"].default_value = 1.5
         b.data.materials.clear()
         b.data.materials.append(mat)
@@ -562,7 +564,7 @@ def construir(d, rapido=False, incrustar=False):
     texturas = guardar_mapas(mapas, carpeta, ident)
     for a in altas_g.values():
         bpy.data.objects.remove(a)
-    materiales_finales(bajas_g, carpeta, texturas)
+    materiales_finales(bajas_g, carpeta, texturas, d)
 
     # Nombres finales de las MeshPart.
     orden = sorted(bajas_g.keys(), key=lambda g: ["", "cristal", "interior", "neon", "orbita"].index(g)

@@ -135,7 +135,7 @@ MINERALES = [
     _m(C, "mineral_sal", "Sal de roca", "Bloque blanco cristalino y semitransparente, en cubos.", "cristales",
        (2.2, 2.0, 1.8),
        dict(roca=ROCA_BASE, cristal=CR("#F4F1EC", rug=0.25, c2="#E2DDD3")),
-       con_base=False, cristales=dict(estilo="cubo", n=6, grosor=(0.16, 0.24), radio=0.25, z=0.0),
+       con_base=False, cristales=dict(estilo="cubo", n=13, grosor=(0.09, 0.2), radio=0.32, z=0.0),
        roblox=dict(cristal=dict(transparencia=0.25, color="#F4F1EC")), material="Glass"),
     _m(C, "mineral_azufre", "Azufre", "Roca amarilla brillante con cristalitos.", "cristales", (2.3, 2.0, 1.8),
        dict(roca=Pt("manchas", ("#D9C23A", "#A89220"), rug=0.6, capas=[G("#6E5E10", 0.6)]),
