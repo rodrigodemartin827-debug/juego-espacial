@@ -106,10 +106,12 @@ def mat_pieza_caliente():
     m, n, l = _mat("PiezaCaliente")
     p = n["Principled BSDF"]
     p.inputs["Metallic"].default_value = 1.0
+    # El color de la emisión se anima desde Python (cinematica.cuerpo_negro, con el canal más alto a 1): el nodo
+    # Blackbody de Cycles normaliza la luminancia y a ~800 K el rojo sale a más de 4, así que la pieza seguía
+    # al rojo vivo con un brillo casi nulo. El nodo se deja solo para guardar la temperatura (la lee el documento).
     cuerpo = n.new("ShaderNodeBlackbody")
     cuerpo.name = "Temperatura"
     cuerpo.inputs["Temperature"].default_value = 1500
-    l.new(cuerpo.outputs["Color"], p.inputs["Emission Color"])
     p.inputs["Emission Strength"].default_value = 0.0
     # Calamina (negra y rugosa) frente a acero pulido (gris claro y liso), mezclados por «Pulido»
     ruido = n.new("ShaderNodeTexNoise")
@@ -209,23 +211,34 @@ def mat_llama():
     corte.inputs["From Min"].default_value = -0.05
     corte.inputs["From Max"].default_value = 0.45
     l.new(grad.outputs[0], corte.inputs["Value"])
+    mascara0 = n.new("ShaderNodeMath")
+    mascara0.operation = "MULTIPLY"
+    l.new(corte.outputs["Result"], mascara0.inputs[0])
+    l.new(suave_borde.outputs[0], mascara0.inputs[1])
+    # el pie de la llama también se desvanece (sin esto se ve una banda recta sobre las brasas)
+    pie = n.new("ShaderNodeMapRange")
+    pie.inputs["From Min"].default_value = 0.0
+    pie.inputs["From Max"].default_value = 0.18
+    l.new(sep.outputs["Z"], pie.inputs["Value"])
     mascara = n.new("ShaderNodeMath")
     mascara.operation = "MULTIPLY"
-    l.new(corte.outputs["Result"], mascara.inputs[0])
-    l.new(suave_borde.outputs[0], mascara.inputs[1])
+    l.new(mascara0.outputs[0], mascara.inputs[0])
+    l.new(pie.outputs["Result"], mascara.inputs[1])
     opacidad = n.new("ShaderNodeMath")
     opacidad.operation = "MULTIPLY"
-    opacidad.inputs[1].default_value = 0.75
+    opacidad.inputs[1].default_value = 0.5
     l.new(mascara.outputs[0], opacidad.inputs[0])
-    temp = n.new("ShaderNodeMapRange")
-    temp.inputs["To Min"].default_value = 1100
-    temp.inputs["To Max"].default_value = 1800
-    l.new(mascara.outputs[0], temp.inputs["Value"])
-    cuerpo = n.new("ShaderNodeBlackbody")
-    l.new(temp.outputs["Result"], cuerpo.inputs["Temperature"])
+    # color: rojo oscuro en los bordes, naranja y amarillo en el corazón de la llama
+    rampa = n.new("ShaderNodeValToRGB")
+    rampa.color_ramp.elements[0].color = (0.55, 0.06, 0.0, 1)
+    rampa.color_ramp.elements[1].position = 0.55
+    rampa.color_ramp.elements[1].color = (1.0, 0.32, 0.03, 1)
+    e = rampa.color_ramp.elements.new(1.0)
+    e.color = (1.0, 0.7, 0.25, 1)
+    l.new(mascara.outputs[0], rampa.inputs["Fac"])
     em = n.new("ShaderNodeEmission")
-    em.inputs["Strength"].default_value = 2.2
-    l.new(cuerpo.outputs["Color"], em.inputs["Color"])
+    em.inputs["Strength"].default_value = 2.0
+    l.new(rampa.outputs["Color"], em.inputs["Color"])
     trans = n.new("ShaderNodeBsdfTransparent")
     mezcla = n.new("ShaderNodeMixShader")
     l.new(opacidad.outputs[0], mezcla.inputs["Fac"])
@@ -243,7 +256,7 @@ def mat_vapor(nombre):
     coord = n.new("ShaderNodeTexCoord")
     ruido = n.new("ShaderNodeTexNoise")
     ruido.inputs["Scale"].default_value = 2.2
-    ruido.inputs["Detail"].default_value = 5.0
+    ruido.inputs["Detail"].default_value = 2.0
     l.new(coord.outputs["Object"], ruido.inputs["Vector"])
     dist = n.new("ShaderNodeVectorMath")
     dist.operation = "LENGTH"
@@ -574,7 +587,7 @@ def maniqui():
 # ---------------------------------------------------------------------------------------------------------------
 
 
-def llamas(n=7):
+def llamas(n=9):
     """Lenguas de fuego sobre las brasas (planos cruzados con el material de llama)."""
     mat, ruido = mat_llama()
     obs = []
@@ -588,7 +601,7 @@ def llamas(n=7):
                                 @ Matrix.Diagonal((1.0, 1.0, 1.0, 1.0)), verts=r["verts"])
         o = _objeto(f"Llama{i}", bm, mat)
         alto = rnd.uniform(1.0, 1.7)
-        o.scale = (rnd.uniform(0.9, 1.4), rnd.uniform(0.9, 1.4), alto)
+        o.scale = (rnd.uniform(0.6, 1.0), rnd.uniform(0.6, 1.0), alto)
         o.location = (rnd.uniform(-3.9, -1.5), rnd.uniform(2.3, 5.5), 2.95 + alto * 0.5)
         o.visible_shadow = False
         obs.append(o)
@@ -731,7 +744,8 @@ def ajustes_render(scn, ancho, alto, muestras, desenfoque=True):
     scn.cycles.caustics_reflective = False
     scn.cycles.caustics_refractive = False
     scn.cycles.blur_glossy = 1.0
-    scn.cycles.volume_step_rate = 4.0
+    scn.cycles.volume_step_rate = 10.0
+    scn.cycles.volume_max_steps = 96
     scn.cycles.use_light_tree = False  # con estas luces es un 25 % más rápido y no se nota
     # Lo que brilla pero no tiene que iluminar como luz (de eso se encargan las luces de punto): chispas, llamas,
     # brasas, mirilla y destello. Así no se convierten en miles de luces diminutas.

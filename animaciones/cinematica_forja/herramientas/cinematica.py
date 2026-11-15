@@ -547,5 +547,11 @@ def cuerpo_negro(k):
     return tuple(c**2.2 for c in srgb)
 
 
+def color_pieza(k):
+    """Color de la pieza a k kelvin: cuerpo negro desplazado lt.REALCE_COLOR kelvin hacia el amarillo (el ojo se
+    adapta a la luz de la forja y el metal caliente se ve más claro que el cuerpo negro de su temperatura)."""
+    return cuerpo_negro(max(1000.0, k) + lt.REALCE_COLOR)
+
+
 def cuerpo_negro_srgb(k):
     return tuple(c ** (1 / 2.2) for c in cuerpo_negro(k))

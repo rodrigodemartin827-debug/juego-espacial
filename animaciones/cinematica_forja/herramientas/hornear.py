@@ -67,7 +67,7 @@ def montar():
     obs["contra"] = es.luz("Contraluz", "AREA", lt.LUZ_CONTRA, (6, -14, 12), (0.55, 0.65, 1.0), apuntar=(-1, 0, 3), tam=6)
     obs["contra2"] = es.luz("Contraluz2", "AREA", lt.LUZ_CONTRA * 0.8, (-12, 4, 10), (0.5, 0.6, 1.0), apuntar=(0, -2, 3),
                             tam=6)
-    obs["relleno"] = es.luz("RellenoBarril", "POINT", 120.0, (4.5, -5.5, 6.5), (1.0, 0.7, 0.5), 1.5)
+    obs["relleno"] = es.luz("RellenoBarril", "POINT", 260.0, (4.5, -5.5, 6.5), (1.0, 0.7, 0.5), 1.5)
     # Rebote cálido del fuego sobre la zona de trabajo (suave, desde arriba y delante del horno)
     obs["rebote"] = es.luz("ReboteFuego", "AREA", 350.0, (-1.0, -2.5, 11.0), (1.0, 0.55, 0.3), apuntar=(-1.0, -2.0, 0),
                            tam=8)
@@ -127,13 +127,13 @@ def _vapor(obs, f):
     rnd = random.Random(5)
     base = es.CENTRO_BARRIL + Vector((-0.05, 0.3, 0.0))
     for i, (o, dens) in enumerate(obs["vapor"]):
-        ini = v["inicio"] + i * 2.2 + rnd.uniform(0, 1.5)
+        ini = v["inicio"] + i * 2.6 + rnd.uniform(0, 1.5)
         vida = v["duracion"] * rnd.uniform(0.7, 1.1)
         deriva = Vector((rnd.uniform(-0.7, 0.7), rnd.uniform(-0.9, 0.3), 0))
         alto = rnd.uniform(4.0, 6.5)
         r0, r1 = rnd.uniform(0.35, 0.5), rnd.uniform(1.4, 2.3)
         t = (f - ini) / vida
-        visible = 0.0 <= t <= 1.0
+        visible = 0.0 <= t <= 1.0 and f < v["fin"]
         if visible:
             sube = 1 - (1 - t) ** 2.2
             o.location = base + deriva * t + Vector((0, 0, 0.3 + alto * sube))
@@ -141,6 +141,7 @@ def _vapor(obs, f):
             o.scale = (r, r, r * 1.15)
             o.rotation_euler = (0, 0, i + t * 0.8)
             d = 1.6 * min(1.0, t / 0.08) * (1 - t) ** 1.6
+            d *= max(0.0, min(1.0, (v["fin"] - f) / 12))  # se disipa antes del plano final
         else:
             d = 0.0
         dens.inputs[1].default_value = d
@@ -176,6 +177,8 @@ def hornear(scn, obs, verbose=True):
         obs["pz_temp"].inputs["Temperature"].keyframe_insert("default_value", frame=f)
         obs["pz_princ"].inputs["Emission Strength"].default_value = est.brillo
         obs["pz_princ"].inputs["Emission Strength"].keyframe_insert("default_value", frame=f)
+        obs["pz_princ"].inputs["Emission Color"].default_value = (*ci.color_pieza(est.temperatura), 1)
+        obs["pz_princ"].inputs["Emission Color"].keyframe_insert("default_value", frame=f)
         for nodo in (obs["pz_pulido"], obs["pz_rug"]):
             nodo.inputs[0].default_value = est.pulido
             nodo.inputs[0].keyframe_insert("default_value", frame=f)
@@ -187,7 +190,7 @@ def hornear(scn, obs, verbose=True):
             if fi <= f < fi + 6:
                 destello_golpe = max(destello_golpe, 2.2 * lt.FUERZA_GOLPE[i] * math.exp(-(f - fi) / 1.6))
         lp.data.energy = est.brillo * lt.LUZ_PIEZA_POR_BRILLO * (1 + destello_golpe)
-        lp.data.color = ci.cuerpo_negro(max(1000.0, est.temperatura))
+        lp.data.color = ci.color_pieza(est.temperatura)
         lp.data.keyframe_insert("energy", frame=f)
         lp.data.keyframe_insert("color", frame=f)
         # Destello del filo

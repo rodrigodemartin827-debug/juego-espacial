@@ -69,7 +69,7 @@ def cframe(M, ejes_pieza=True):
 
 
 def color3(k, brillo=1.0):
-    c = ci.cuerpo_negro_srgb(max(1000.0, k))
+    c = [x ** (1 / 2.2) for x in ci.color_pieza(k)]
     return [r(min(1.0, x * brillo)) for x in c]
 
 
@@ -404,19 +404,29 @@ def exportar_yunque_sin_martillo():
     antes = len(o.data.vertices)
     es.quitar_vertices(o, quitar)
     o.name = o.data.name = "forja_yunque_sin_martillo"
+    # como en modelos/forja/herramientas/proceso.exportar_fbx: la malla en el mundo de Blender y el objeto sin giro
     bpy.ops.object.select_all(action="DESELECT")
     o.select_set(True)
+    bpy.context.view_layer.objects.active = o
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
     ruta = os.path.join(SALIDA, "forja_yunque_sin_martillo.fbx")
     bpy.ops.export_scene.fbx(filepath=ruta, use_selection=True, object_types={"MESH"}, apply_unit_scale=True,
                              apply_scale_options="FBX_SCALE_UNITS", bake_space_transform=True, axis_forward="-Z",
                              axis_up="Y", mesh_smooth_type="FACE", path_mode="COPY", embed_textures=True,
                              bake_anim=False)
     # Comprobación: reimportado, lo que queda está donde estaba en el original
-    quedan = sorted((round(v.co.x, 3), round(v.co.y, 3), round(v.co.z, 3)) for v in o.data.vertices)
+    def mundo(ob):
+        return sorted(tuple(round(c, 3) for c in ob.matrix_world @ v.co) for v in ob.data.vertices)
+
+    quedan = mundo(o)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.fbx(filepath=ruta)
     n = next(x for x in bpy.data.objects if x.type == "MESH")
-    nuevos = sorted((round(v.co.x, 3), round(v.co.y, 3), round(v.co.z, 3)) for v in n.data.vertices)
+    nuevos = mundo(n)
+    bpy.ops.import_scene.fbx(filepath=original)
+    orig = next(x for x in bpy.data.objects if x.type == "MESH" and x != n)
+    assert tuple(round(a, 3) for a in orig.rotation_euler) == tuple(round(a, 3) for a in n.rotation_euler), \
+        "el nodo del FBX no tiene el mismo giro que el original"
     assert len(nuevos) == len(quedan) and max(abs(a - b) for p, q in zip(nuevos, quedan) for a, b in zip(p, q)) < 0.002
     print(f"[ok] {ruta}: {antes} -> {len(nuevos)} vértices (sin el martillo), {len(n.data.polygons)} caras, "
           f"tamaño {tuple(round(x, 3) for x in n.dimensions)}")

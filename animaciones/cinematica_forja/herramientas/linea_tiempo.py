@@ -177,9 +177,9 @@ BRAZO_IZQ = [  # tenazas con la pieza
     (314, ("punto", "en_agua_2", "tenazas"), "suave"),  # la agita en el agua
     (326, ("punto", "en_agua", "tenazas"), "suave"),
     (338, ("punto", "en_agua_2", "tenazas"), "suave"),
-    (348, ("punto", "en_agua", "tenazas"), "suave"),
-    (358, ("punto", "saca_agua", "tenazas"), "sale"),  # la saca por donde entró
-    (372, ("punto", "en_alto", "tenazas"), "suave"),  # la levanta en alto
+    (346, ("punto", "en_agua", "tenazas"), "suave"),
+    (356, ("punto", "saca_agua", "tenazas"), "sale"),  # la saca por donde entró
+    (380, ("punto", "en_alto", "tenazas"), "suave"),  # la levanta en alto, despacio
     (436, ("punto", "en_alto_2", "tenazas"), "suave"),
 ]
 # Martillo: anticipación (arriba y atrás), impacto (punto «golpe»), parada y rebote.
@@ -234,8 +234,8 @@ PIEZA_ORIENTACION = [
     (70, "tumbada", "suave"),
     (284, "tumbada", "suave"),
     (294, "temple", "suave"),  # sobre el barril la inclina hacia el agua
-    (358, "temple", "suave"),
-    (370, "arriba", "suave"),  # fuera del agua, la levanta punta arriba
+    (356, "temple", "suave"),
+    (380, "arriba", "suave"),  # fuera del agua, la levanta punta arriba (despacio: sin estela)
     (436, "arriba", "suave"),
 ]
 
@@ -252,33 +252,34 @@ ETAPA += [(436, 5.0, "suave")]
 TEMPERATURA = [
     (0, 700.0, "suave"),
     (68, 760.0, "suave"),
-    (82, 1150.0, "sale"),  # en el primer plano ya brilla naranja
-    (100, 1450.0, "suave"),
-    (112, 1750.0, "suave"),  # blanco-naranja al sacarla
-    (150, 1580.0, "suave"),
-    (168, 1450.0, "suave"),
-    (186, 1320.0, "suave"),
-    (206, 1180.0, "suave"),
-    (232, 1050.0, "suave"),
-    (298, 960.0, "suave"),
-    (CONTACTO_AGUA + 14, 820.0, "sale"),
+    (82, 1300.0, "sale"),  # en el primer plano ya brilla naranja
+    (100, 1600.0, "suave"),
+    (112, 1900.0, "suave"),  # blanco-naranja al sacarla
+    (150, 1730.0, "suave"),
+    (168, 1600.0, "suave"),
+    (186, 1470.0, "suave"),
+    (206, 1330.0, "suave"),
+    (232, 1200.0, "suave"),
+    (CONTACTO_AGUA - 2, 1110.0, "suave"),
+    (CONTACTO_AGUA + 14, 970.0, "sale"),
     (CONTACTO_AGUA + 30, 700.0, "suave"),
     (436, 700.0, "suave"),
 ]
 BRILLO = [
     (0, 0.0, "suave"),
     (68, 0.0, "suave"),
-    (82, 2.2, "sale"),
-    (100, 4.05, "suave"),
-    (112, 7.2, "suave"),
-    (150, 5.4, "suave"),
-    (186, 3.6, "suave"),
-    (232, 2.02, "suave"),
-    (298, 1.17, "suave"),
-    (CONTACTO_AGUA + 12, 0.11, "sale"),
-    (CONTACTO_AGUA + 26, 0.0, "suave"),
+    (82, 2.6, "sale"),
+    (100, 4.9, "suave"),
+    (112, 8.6, "suave"),
+    (150, 6.5, "suave"),
+    (186, 4.3, "suave"),
+    (232, 2.4, "suave"),
+    (CONTACTO_AGUA - 2, 1.4, "suave"),
+    (CONTACTO_AGUA + 8, 0.05, "sale"),
+    (CONTACTO_AGUA + 16, 0.0, "suave"),
     (436, 0.0, "suave"),
 ]
+REALCE_COLOR = 500.0  # K que se suman a la temperatura solo para el color (ver cinematica.color_pieza)
 # Pulido: 0 = calamina negra, 1 = acero gris pulido.
 PULIDO = [(0, 0.0, "suave"), (CONTACTO_AGUA + 2, 0.0, "suave"), (CONTACTO_AGUA + 26, 0.7, "sale"),
           (372, 1.0, "suave"), (436, 1.0, "suave")]
@@ -291,7 +292,7 @@ DESTELLO = (392, 408)
 # ---------------------------------------------------------------------------------------------------------------
 LUZ_HORNO = 1300.0  # W, dentro de la cámara del horno (la compuerta la tapa hasta que se abre)
 LUZ_BOCA = [(0, 0.0, "suave"), (44, 0.0, "suave"), (56, 450.0, "sale"), (436, 450.0, "suave")]
-LUZ_PIEZA_POR_BRILLO = 60.0  # W de la luz pegada a la pieza por cada unidad de brillo
+LUZ_PIEZA_POR_BRILLO = 100.0  # W de la luz pegada a la pieza por cada unidad de brillo
 LUZ_CONTRA = 900.0  # contraluz azul frío (luna)
 EXPOSICION = [(0, -9.0, "suave"), (8, 0.5, "sale"), (418, 0.5, "suave"), (435, -12.0, "entra")]
 
@@ -301,7 +302,7 @@ EXPOSICION = [(0, -9.0, "suave"), (8, 0.5, "sale"), (418, 0.5, "suave"), (435, -
 ASCUAS_HORNO = {"inicio": -40, "fin": 436, "cantidad": 520, "vida": 70}
 ESTALLIDO_COMPUERTA = {"inicio": 46, "fin": 54, "cantidad": 160, "vida": 26}
 CHISPAS_SACAR = {"inicio": 108, "fin": 114, "cantidad": 90, "vida": 20}
-VAPOR = {"inicio": CONTACTO_AGUA, "bocanadas": 14, "duracion": 54}
+VAPOR = {"inicio": CONTACTO_AGUA, "bocanadas": 10, "duracion": 50, "fin": 362}  # fin: ya no queda vapor
 BURBUJAS = {"inicio": CONTACTO_AGUA, "fin": CONTACTO_AGUA + 44, "cantidad": 240, "vida": 10}
 OLA_AGUA = [(0, 0.0, "suave"), (CONTACTO_AGUA - 1, 0.0, "cte"), (CONTACTO_AGUA + 2, 0.11, "golpe"),
             (CONTACTO_AGUA + 40, 0.03, "suave"), (CONTACTO_AGUA + 60, 0.0, "suave"), (436, 0.0, "suave")]
@@ -319,10 +320,10 @@ PLANOS = [
      "claves": [(34, (3.4, -6.4, 5.6), (-2.4, 1.0, 3.9), 30), (58, (2.8, -5.6, 5.3), (-2.5, 1.0, 3.7), 33)]},
     {"nombre": "Detalle del fuego: el lingote entra en las brasas", "inicio": 58, "fin": 82, "fstop": 2.4,
      "foco": "pieza",
-     "exposicion": -0.7,
+     "exposicion": -1.4,
      "claves": [(58, (-0.55, -0.25, 6.0), (-2.7, 2.9, 3.1), 34), (82, (-0.65, -0.05, 5.8), (-2.7, 3.0, 3.1), 38)]},
     {"nombre": "Desde dentro del horno: el herrero espera", "inicio": 82, "fin": 108, "fstop": 3.5, "foco": "cabeza",
-     "exposicion": -1.5,
+     "exposicion": -2.2,
      "claves": [(82, (-2.0, 6.0, 3.9), "cabeza", 30), (108, (-2.15, 5.85, 3.8), "cabeza", 34)]},
     {"nombre": "Saca la pieza al rojo y la lleva al yunque", "inicio": 108, "fin": 138, "fstop": 3.2, "foco": "pieza",
      "claves": [(108, (-8.6, -2.6, 6.0), "pieza", 28), (138, (-8.3, -3.4, 5.6), "pieza", 30)]},
@@ -330,7 +331,7 @@ PLANOS = [
      "foco": "golpe",
      "claves": [(138, (-9.0, -8.9, 3.0), (-1.4, -2.4, 4.7), 26), (163, (-8.5, -8.3, 3.0), (-1.4, -2.4, 4.8), 26)]},
     {"nombre": "Detalle del yunque: la pieza toma forma", "inicio": 163, "fin": 180, "fstop": 2.8, "foco": "golpe",
-     "exposicion": -1.0,
+     "exposicion": -1.8,
      "claves": [(163, (-3.0, -7.4, 4.1), "golpe", 50), (180, (-2.9, -7.2, 4.05), "golpe", 52)]},
     {"nombre": "Golpes 3 y 4 (frente derecho)", "inicio": 180, "fin": 214, "fstop": 3.5, "foco": "golpe",
      "exposicion": 0.4,
@@ -344,6 +345,7 @@ PLANOS = [
     {"nombre": "El vapor sube (plano medio)", "inicio": 314, "fin": 362, "fstop": 4.0, "foco": "agua",
      "claves": [(314, (6.9, -9.2, 5.2), (2.4, -2.6, 4.6), 30), (362, (6.6, -8.8, 5.4), (2.4, -2.4, 5.6), 30)]},
     {"nombre": "El resultado: giro alrededor de la hoja", "inicio": 362, "fin": 436, "fstop": 2.8, "foco": "hoja",
+     "exposicion": 0.7,
      "orbita": {"centro": "hoja", "radio": 7.0, "altura": -2.4, "mira_abajo": 1.1, "angulo": (-168.0, -98.0),
                 "lente": 28}},
 ]
