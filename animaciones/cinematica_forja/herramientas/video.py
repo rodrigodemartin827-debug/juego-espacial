@@ -12,6 +12,7 @@ import sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
 
+import bpy  # noqa: E402,F401  (linea_tiempo usa mathutils, que viene con bpy)
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
 import linea_tiempo as lt  # noqa: E402
