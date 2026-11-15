@@ -1,0 +1,32 @@
+{
+  "pieza": "forja_barril",
+  "triangulos": 1314,
+  "limite": 1500,
+  "mallas": {
+    "forja_barril": 1314
+  },
+  "tamano_studs": [
+    3.011,
+    4.115,
+    2.804
+  ],
+  "centro_caja": [
+    0.0,
+    2.057,
+    -0.0
+  ],
+  "texturas": {
+    "color": "forja_barril_color.png",
+    "rug": "forja_barril_rugosidad.png",
+    "metal": "forja_barril_metal.png",
+    "normal": "forja_barril_normal.png"
+  },
+  "anclajes": {
+    "Vapor": [
+      0.0,
+      2.76,
+      -0.0
+    ]
+  },
+  "nota": "Barril de temple. Vapor: ParticleEmitter sobre el agua (Attachment «Vapor»)."
+}
