@@ -106,7 +106,7 @@ MINERALES = [
        irregular=0.22, relieve=R(RELIEVE_LISO, olas=0.025), material="Sandstone"),
     _m(C, "pedernal", "Pedernal", "Piedra negra brillante de bordes afilados, partida en lascas.", "roca",
        (2.2, 1.8, 1.6),
-       dict(roca=Pt("manchas", ("#2E2C2C", "#141313"), rug=0.22, capas=[A("#C9C1B0", 0.18, rug=0.9),
+       dict(roca=Pt("manchas", ("#2E2C2C", "#141313"), rug=0.22, capas=[MA("#8E877C", 0.06, rug=0.9),
                                                                          G("#4A4644", 0.6)])),
        cortes=12, redondez=0.0, relieve=R(lascas=0.05, bultos=0.02, fino=0.004, grano=0.0, grietas=0.0),
        material="Basalt"),
