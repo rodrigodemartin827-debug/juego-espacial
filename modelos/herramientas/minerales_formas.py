@@ -926,11 +926,13 @@ def f_ambar_fosil(d, rnd):
     for i in range(46):
         t = i / 45
         a = t * vueltas * math.tau
-        rr = S * 0.035 * math.exp(0.42 * a / math.tau * 2.2)
+        rr = S * 0.02 * math.exp(0.9 * t * vueltas)
         pts.append(Vector((math.cos(a) * rr, 0.0, math.sin(a) * rr)))
-        rad.append(S * 0.012 * math.exp(0.42 * a / math.tau * 2.2))
+        rad.append(rr * 0.38)
     esp = tubo(pts, rad, 6, punta=False)
-    transformar(esp, Matrix.Translation((0, 0, sz * 0.45)) @ Matrix.Rotation(math.radians(18), 4, "Z"))
+    cmin, cmax = caja(amb)
+    transformar(esp, Matrix.Translation(((cmin.x + cmax.x) / 2, (cmin.y + cmax.y) / 2, (cmin.z + cmax.z) / 2)) @
+                Matrix.Rotation(math.radians(18), 4, "Z"))
     return [Pieza(amb, "cristal", d["pint"]["cristal"], None, "decimar", tris=900, nombre="ambar", suave=True,
                   voxel=S / 80),
             Pieza(esp, "interior", d["pint"]["fosil"], dict(bultos=0.004, surcos_esp=1), "decimar", tris=900,

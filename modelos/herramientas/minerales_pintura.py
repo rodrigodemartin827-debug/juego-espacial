@@ -205,7 +205,7 @@ def _patron(P, p, n, s, z01, cols):
         est = _ss(0.12, 0.02, dist[0]) * (1.0 if noise.noise(p * 24 * esc + s) > -0.1 else 0.0)
         neb = 0.5 + 0.5 * noise.fractal(p * 3 + s, 0.6, 2.0, 3)
         base = c0.lerp(cols[2] if len(cols) > 2 else c0, neb * 0.6)
-        return base.lerp(c1, est), max(est, neb * 0.25)
+        return base.lerp(c1, est), max(est, neb * 0.03)
     raise ValueError(tipo)
 
 
