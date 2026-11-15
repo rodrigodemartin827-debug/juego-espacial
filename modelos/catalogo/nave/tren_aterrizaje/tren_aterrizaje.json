@@ -1,0 +1,83 @@
+{
+ "modelo": "tren_aterrizaje",
+ "triangulos": 352,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 1.6,
+  "alto_y": 3.78,
+  "fondo_z": 2.66
+ },
+ "texturas": {
+  "color": "tren_aterrizaje_color.png",
+  "roughness": "tren_aterrizaje_roughness.png",
+  "metalness": "tren_aterrizaje_metalness.png",
+  "emision": "tren_aterrizaje_emision.png",
+  "normal": "tren_aterrizaje_normal.png"
+ },
+ "piezas": {
+  "tren_aterrizaje": {
+   "triangulos": 96,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    -0.525,
+    -0.0
+   ]
+  },
+  "tren_aterrizaje_pata": {
+   "triangulos": 140,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    -1.962,
+    -0.105
+   ],
+   "pivote": [
+    0.0,
+    -0.75,
+    -0.0
+   ]
+  },
+  "tren_aterrizaje_zapata": {
+   "triangulos": 104,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    -3.36,
+    0.55
+   ],
+   "pivote": [
+    0.0,
+    -3.2,
+    0.45
+   ],
+   "padre": "tren_aterrizaje_pata"
+  },
+  "tren_aterrizaje_neon": {
+   "triangulos": 12,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    -3.5,
+    1.62
+   ]
+  }
+ },
+ "anclas": {
+  "Acople": [
+   0.0,
+   0.0,
+   -0.0
+  ],
+  "Suelo": [
+   0.0,
+   -3.78,
+   0.55
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "tren": {
+  "giro_plegado_grados": 95,
+  "eje": "X de Roblox, en el pivote de «pata»"
+ }
+}

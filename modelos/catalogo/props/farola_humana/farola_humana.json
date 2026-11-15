@@ -1,0 +1,45 @@
+{
+ "modelo": "farola_humana",
+ "triangulos": 312,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 1.8,
+  "alto_y": 14.05,
+  "fondo_z": 5.75
+ },
+ "texturas": {
+  "color": "farola_humana_color.png",
+  "roughness": "farola_humana_roughness.png",
+  "metalness": "farola_humana_metalness.png",
+  "emision": "farola_humana_emision.png",
+  "normal": "farola_humana_normal.png"
+ },
+ "piezas": {
+  "farola_humana": {
+   "triangulos": 288,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    7.025,
+    1.977
+   ]
+  },
+  "farola_humana_neon": {
+   "triangulos": 24,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    7.47,
+    2.415
+   ]
+  }
+ },
+ "anclas": {
+  "Luz": [
+   0.0,
+   12.1,
+   3.6
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

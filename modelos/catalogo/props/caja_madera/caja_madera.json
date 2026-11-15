@@ -1,0 +1,29 @@
+{
+ "modelo": "caja_madera",
+ "triangulos": 568,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 4.24,
+  "alto_y": 4.24,
+  "fondo_z": 4.24
+ },
+ "texturas": {
+  "color": "caja_madera_color.png",
+  "roughness": "caja_madera_roughness.png",
+  "metalness": "caja_madera_metalness.png",
+  "normal": "caja_madera_normal.png"
+ },
+ "piezas": {
+  "caja_madera": {
+   "triangulos": 568,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    2.0,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

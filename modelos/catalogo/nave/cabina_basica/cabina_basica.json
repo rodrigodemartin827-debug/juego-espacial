@@ -1,0 +1,54 @@
+{
+ "modelo": "cabina_basica",
+ "triangulos": 480,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 2.88,
+  "alto_y": 2.27,
+  "fondo_z": 5.2
+ },
+ "texturas": {
+  "color": "cabina_basica_color.png",
+  "roughness": "cabina_basica_roughness.png",
+  "metalness": "cabina_basica_metalness.png",
+  "emision": "cabina_basica_emision.png",
+  "normal": "cabina_basica_normal.png"
+ },
+ "piezas": {
+  "cabina_basica": {
+   "triangulos": 368,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.133,
+    -0.0
+   ]
+  },
+  "cabina_basica_neon": {
+   "triangulos": 12,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    0.92,
+    0.8
+   ]
+  },
+  "cabina_basica_cristal": {
+   "triangulos": 100,
+   "tipo": "cristal",
+   "centro": [
+    0.0,
+    1.264,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Piloto": [
+   0.0,
+   0.9,
+   -0.624
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

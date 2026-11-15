@@ -1,0 +1,49 @@
+{
+ "modelo": "cofre_tesoro",
+ "triangulos": 528,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 5.34,
+  "alto_y": 3.68,
+  "fondo_z": 3.53
+ },
+ "texturas": {
+  "color": "cofre_tesoro_color.png",
+  "roughness": "cofre_tesoro_roughness.png",
+  "metalness": "cofre_tesoro_metalness.png",
+  "normal": "cofre_tesoro_normal.png"
+ },
+ "piezas": {
+  "cofre_tesoro": {
+   "triangulos": 388,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.065,
+    0.085
+   ]
+  },
+  "cofre_tesoro_tapa": {
+   "triangulos": 140,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    2.863,
+    0.1
+   ],
+   "pivote": [
+    0.0,
+    2.2,
+    -1.6
+   ]
+  }
+ },
+ "anclas": {
+  "Tesoro": [
+   0.0,
+   2.2,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

@@ -1,0 +1,45 @@
+{
+ "modelo": "casco_acero",
+ "triangulos": 594,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 1.84,
+  "alto_y": 1.81,
+  "fondo_z": 2.2
+ },
+ "texturas": {
+  "color": "casco_acero_color.png",
+  "roughness": "casco_acero_roughness.png",
+  "metalness": "casco_acero_metalness.png",
+  "emision": "casco_acero_emision.png",
+  "normal": "casco_acero_normal.png"
+ },
+ "piezas": {
+  "casco_acero": {
+   "triangulos": 570,
+   "tipo": "textura",
+   "centro": [
+    0.02,
+    0.295,
+    0.1
+   ]
+  },
+  "casco_acero_neon": {
+   "triangulos": 24,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    0.02,
+    0.85
+   ]
+  }
+ },
+ "anclas": {
+  "CabezaCentro": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

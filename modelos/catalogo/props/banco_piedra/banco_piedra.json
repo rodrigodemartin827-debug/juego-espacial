@@ -1,0 +1,35 @@
+{
+ "modelo": "banco_piedra",
+ "triangulos": 228,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 6.66,
+  "alto_y": 3.6,
+  "fondo_z": 2.41
+ },
+ "texturas": {
+  "color": "banco_piedra_color.png",
+  "roughness": "banco_piedra_roughness.png",
+  "metalness": "banco_piedra_metalness.png",
+  "normal": "banco_piedra_normal.png"
+ },
+ "piezas": {
+  "banco_piedra": {
+   "triangulos": 228,
+   "tipo": "textura",
+   "centro": [
+    0.129,
+    1.8,
+    -0.107
+   ]
+  }
+ },
+ "anclas": {
+  "Asiento": [
+   0.0,
+   1.95,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

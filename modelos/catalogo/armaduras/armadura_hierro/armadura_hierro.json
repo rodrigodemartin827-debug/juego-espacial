@@ -1,0 +1,70 @@
+{
+ "modelo": "armadura_hierro",
+ "triangulos": 1024,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 4.38,
+  "alto_y": 2.35,
+  "fondo_z": 1.53
+ },
+ "texturas": {
+  "color": "armadura_hierro_color.png",
+  "roughness": "armadura_hierro_roughness.png",
+  "metalness": "armadura_hierro_metalness.png",
+  "normal": "armadura_hierro_normal.png"
+ },
+ "piezas": {
+  "armadura_hierro_peto": {
+   "triangulos": 476,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    0.052,
+    0.096
+   ],
+   "pivote": [
+    0.0,
+    0.0,
+    -0.0
+   ]
+  },
+  "armadura_hierro_hombrera_izq": {
+   "triangulos": 274,
+   "tipo": "textura",
+   "centro": [
+    -1.522,
+    0.752,
+    -0.0
+   ],
+   "pivote": [
+    -1.5,
+    0.0,
+    -0.0
+   ],
+   "padre": "armadura_hierro_peto"
+  },
+  "armadura_hierro_hombrera_der": {
+   "triangulos": 274,
+   "tipo": "textura",
+   "centro": [
+    1.522,
+    0.752,
+    0.0
+   ],
+   "pivote": [
+    1.5,
+    0.0,
+    -0.0
+   ],
+   "padre": "armadura_hierro_peto"
+  }
+ },
+ "anclas": {
+  "TorsoCentro": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

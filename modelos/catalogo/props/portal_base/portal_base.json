@@ -1,0 +1,48 @@
+{
+ "modelo": "portal_base",
+ "triangulos": 1664,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 15.8,
+  "alto_y": 17.6,
+  "fondo_z": 6.0
+ },
+ "texturas": {
+  "color": "portal_base_color.png",
+  "roughness": "portal_base_roughness.png",
+  "metalness": "portal_base_metalness.png",
+  "emision": "portal_base_emision.png",
+  "normal": "portal_base_normal.png"
+ },
+ "piezas": {
+  "portal_base": {
+   "triangulos": 620,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    8.08,
+    -0.0
+   ]
+  },
+  "portal_base_runas": {
+   "triangulos": 1044,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    10.06,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Centro": [
+   0.0,
+   8.1,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "portal": {
+  "radio_interior": 5.4
+ }
+}

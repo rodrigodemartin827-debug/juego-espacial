@@ -1,0 +1,54 @@
+{
+ "modelo": "estabilizador",
+ "triangulos": 228,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 0.67,
+  "alto_y": 4.75,
+  "fondo_z": 4.7
+ },
+ "texturas": {
+  "color": "estabilizador_color.png",
+  "roughness": "estabilizador_roughness.png",
+  "metalness": "estabilizador_metalness.png",
+  "emision": "estabilizador_emision.png",
+  "normal": "estabilizador_normal.png"
+ },
+ "piezas": {
+  "estabilizador": {
+   "triangulos": 168,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    2.28,
+    -1.248
+   ]
+  },
+  "estabilizador_neon": {
+   "triangulos": 24,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    1.9,
+    -0.75
+   ]
+  },
+  "estabilizador_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    4.62,
+    -2.75
+   ]
+  }
+ },
+ "anclas": {
+  "Acople": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

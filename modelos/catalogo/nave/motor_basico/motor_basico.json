@@ -1,0 +1,50 @@
+{
+ "modelo": "motor_basico",
+ "triangulos": 410,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 2.08,
+  "alto_y": 2.08,
+  "fondo_z": 4.4
+ },
+ "texturas": {
+  "color": "motor_basico_color.png",
+  "roughness": "motor_basico_roughness.png",
+  "metalness": "motor_basico_metalness.png",
+  "emision": "motor_basico_emision.png",
+  "normal": "motor_basico_normal.png"
+ },
+ "piezas": {
+  "motor_basico": {
+   "triangulos": 370,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    0.0,
+    -2.2
+   ]
+  },
+  "motor_basico_neon": {
+   "triangulos": 40,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    -0.0,
+    -3.625
+   ]
+  }
+ },
+ "anclas": {
+  "Acople": [
+   0.0,
+   0.0,
+   -0.0
+  ],
+  "Escape": [
+   0.0,
+   0.0,
+   -4.4
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

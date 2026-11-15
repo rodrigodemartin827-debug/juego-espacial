@@ -1,0 +1,49 @@
+{
+ "modelo": "letrero_madera",
+ "triangulos": 330,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 5.06,
+  "alto_y": 8.05,
+  "fondo_z": 1.87
+ },
+ "texturas": {
+  "color": "letrero_madera_color.png",
+  "roughness": "letrero_madera_roughness.png",
+  "metalness": "letrero_madera_metalness.png",
+  "normal": "letrero_madera_normal.png"
+ },
+ "piezas": {
+  "letrero_madera": {
+   "triangulos": 238,
+   "tipo": "textura",
+   "centro": [
+    1.5,
+    3.823,
+    -0.068
+   ]
+  },
+  "letrero_madera_cartel": {
+   "triangulos": 92,
+   "tipo": "textura",
+   "centro": [
+    2.3,
+    4.75,
+    0.0
+   ],
+   "pivote": [
+    2.3,
+    6.1,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Texto": [
+   2.3,
+   4.75,
+   0.12
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

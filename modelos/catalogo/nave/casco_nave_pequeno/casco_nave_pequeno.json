@@ -1,0 +1,95 @@
+{
+ "modelo": "casco_nave_pequeno",
+ "triangulos": 664,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 4.7,
+  "alto_y": 4.93,
+  "fondo_z": 13.34
+ },
+ "texturas": {
+  "color": "casco_nave_pequeno_color.png",
+  "roughness": "casco_nave_pequeno_roughness.png",
+  "metalness": "casco_nave_pequeno_metalness.png",
+  "emision": "casco_nave_pequeno_emision.png",
+  "normal": "casco_nave_pequeno_normal.png"
+ },
+ "piezas": {
+  "casco_nave_pequeno": {
+   "triangulos": 544,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.056,
+    -0.125
+   ]
+  },
+  "casco_nave_pequeno_neon": {
+   "triangulos": 120,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    0.192,
+    -3.07
+   ]
+  }
+ },
+ "anclas": {
+  "AlaIzq": [
+   -2.35,
+   -0.16,
+   -1.04
+  ],
+  "AlaDer": [
+   2.35,
+   -0.16,
+   -1.04
+  ],
+  "Cabina": [
+   0.0,
+   1.344,
+   2.6
+  ],
+  "Estabilizador": [
+   0.0,
+   1.92,
+   -5.2
+  ],
+  "Motor": [
+   0.0,
+   0.192,
+   -6.8
+  ],
+  "ArmaIzq": [
+   -1.26,
+   -0.96,
+   3.9
+  ],
+  "ArmaDer": [
+   1.26,
+   -0.96,
+   3.9
+  ],
+  "TrenMorro": [
+   0.0,
+   -1.344,
+   3.25
+  ],
+  "TrenIzq": [
+   -1.26,
+   -1.344,
+   -3.25
+  ],
+  "TrenDer": [
+   1.26,
+   -1.344,
+   -3.25
+  ],
+  "Escudo": [
+   0.0,
+   1.76,
+   -0.65
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

@@ -1,0 +1,59 @@
+{
+ "modelo": "cofre_tesoro_abierto",
+ "triangulos": 1014,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 5.34,
+  "alto_y": 5.62,
+  "fondo_z": 5.21
+ },
+ "texturas": {
+  "color": "cofre_tesoro_abierto_color.png",
+  "roughness": "cofre_tesoro_abierto_roughness.png",
+  "metalness": "cofre_tesoro_abierto_metalness.png",
+  "emision": "cofre_tesoro_abierto_emision.png",
+  "normal": "cofre_tesoro_abierto_normal.png"
+ },
+ "piezas": {
+  "cofre_tesoro_abierto": {
+   "triangulos": 816,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.332,
+    0.085
+   ]
+  },
+  "cofre_tesoro_abierto_cristal": {
+   "triangulos": 58,
+   "tipo": "cristal",
+   "centro": [
+    0.404,
+    2.765,
+    0.106
+   ]
+  },
+  "cofre_tesoro_abierto_tapa": {
+   "triangulos": 140,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    3.836,
+    -2.48
+   ],
+   "pivote": [
+    0.0,
+    2.2,
+    -1.6
+   ]
+  }
+ },
+ "anclas": {
+  "Tesoro": [
+   0.0,
+   2.2,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

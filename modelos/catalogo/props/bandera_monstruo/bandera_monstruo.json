@@ -1,0 +1,54 @@
+{
+ "modelo": "bandera_monstruo",
+ "triangulos": 564,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 7.21,
+  "alto_y": 17.67,
+  "fondo_z": 3.35
+ },
+ "texturas": {
+  "color": "bandera_monstruo_color.png",
+  "roughness": "bandera_monstruo_roughness.png",
+  "metalness": "bandera_monstruo_metalness.png",
+  "emision": "bandera_monstruo_emision.png",
+  "normal": "bandera_monstruo_normal.png"
+ },
+ "piezas": {
+  "bandera_monstruo": {
+   "triangulos": 392,
+   "tipo": "textura",
+   "centro": [
+    2.231,
+    8.563,
+    -0.08
+   ]
+  },
+  "bandera_monstruo_neon_magenta": {
+   "triangulos": 88,
+   "tipo": "neon",
+   "centro": [
+    1.892,
+    13.821,
+    0.31
+   ]
+  },
+  "bandera_monstruo_cristal": {
+   "triangulos": 84,
+   "tipo": "cristal",
+   "centro": [
+    0.912,
+    0.448,
+    0.5
+   ]
+  }
+ },
+ "anclas": {
+  "Tela": [
+   3.03,
+   11.8,
+   0.086
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

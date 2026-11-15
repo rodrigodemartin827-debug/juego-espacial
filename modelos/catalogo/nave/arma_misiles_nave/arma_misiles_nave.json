@@ -1,0 +1,120 @@
+{
+ "modelo": "arma_misiles_nave",
+ "triangulos": 638,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.14,
+  "alto_y": 2.53,
+  "fondo_z": 5.12
+ },
+ "texturas": {
+  "color": "arma_misiles_nave_color.png",
+  "roughness": "arma_misiles_nave_roughness.png",
+  "metalness": "arma_misiles_nave_metalness.png",
+  "emision": "arma_misiles_nave_emision.png",
+  "normal": "arma_misiles_nave_normal.png"
+ },
+ "piezas": {
+  "arma_misiles_nave": {
+   "triangulos": 324,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    -1.265,
+    0.037
+   ]
+  },
+  "arma_misiles_nave_misil1": {
+   "triangulos": 58,
+   "tipo": "textura",
+   "centro": [
+    -0.86,
+    -1.94,
+    2.3
+   ],
+   "pivote": [
+    -0.86,
+    -1.94,
+    1.9
+   ]
+  },
+  "arma_misiles_nave_misil2": {
+   "triangulos": 58,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    -1.94,
+    2.3
+   ],
+   "pivote": [
+    0.0,
+    -1.94,
+    1.9
+   ]
+  },
+  "arma_misiles_nave_misil3": {
+   "triangulos": 58,
+   "tipo": "textura",
+   "centro": [
+    0.86,
+    -1.94,
+    2.3
+   ],
+   "pivote": [
+    0.86,
+    -1.94,
+    1.9
+   ]
+  },
+  "arma_misiles_nave_misil4": {
+   "triangulos": 58,
+   "tipo": "textura",
+   "centro": [
+    -0.86,
+    -1.06,
+    2.3
+   ],
+   "pivote": [
+    -0.86,
+    -1.06,
+    1.9
+   ]
+  },
+  "arma_misiles_nave_misil6": {
+   "triangulos": 58,
+   "tipo": "textura",
+   "centro": [
+    0.86,
+    -1.06,
+    2.3
+   ],
+   "pivote": [
+    0.86,
+    -1.06,
+    1.9
+   ]
+  },
+  "arma_misiles_nave_neon": {
+   "triangulos": 24,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    -1.5,
+    0.5
+   ]
+  }
+ },
+ "anclas": {
+  "Acople": [
+   0.0,
+   0.0,
+   -0.0
+  ],
+  "Salida": [
+   0.0,
+   -1.5,
+   2.9
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

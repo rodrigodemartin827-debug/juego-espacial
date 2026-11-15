@@ -1,0 +1,55 @@
+{
+ "modelo": "ala_pequena",
+ "triangulos": 244,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 5.23,
+  "alto_y": 0.78,
+  "fondo_z": 4.87
+ },
+ "texturas": {
+  "color": "ala_pequena_color.png",
+  "roughness": "ala_pequena_roughness.png",
+  "metalness": "ala_pequena_metalness.png",
+  "emision": "ala_pequena_emision.png",
+  "normal": "ala_pequena_normal.png"
+ },
+ "piezas": {
+  "ala_pequena": {
+   "triangulos": 208,
+   "tipo": "textura",
+   "centro": [
+    2.5,
+    0.0,
+    -0.334
+   ]
+  },
+  "ala_pequena_neon": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    5.05,
+    0.0,
+    -1.6
+   ]
+  }
+ },
+ "anclas": {
+  "Raiz": [
+   0.0,
+   0.0,
+   -0.0
+  ],
+  "Punta": [
+   5.0,
+   0.0,
+   -1.6
+  ],
+  "Arma": [
+   2.4,
+   -0.3,
+   -0.4
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

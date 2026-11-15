@@ -1,0 +1,84 @@
+{
+ "modelo": "arma_laser_nave",
+ "triangulos": 1028,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 2.2,
+  "alto_y": 1.75,
+  "fondo_z": 5.39
+ },
+ "texturas": {
+  "color": "arma_laser_nave_color.png",
+  "roughness": "arma_laser_nave_roughness.png",
+  "metalness": "arma_laser_nave_metalness.png",
+  "emision": "arma_laser_nave_emision.png",
+  "normal": "arma_laser_nave_normal.png"
+ },
+ "piezas": {
+  "arma_laser_nave": {
+   "triangulos": 112,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    0.325,
+    -0.0
+   ]
+  },
+  "arma_laser_nave_cabeza": {
+   "triangulos": 112,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.1,
+    -0.1
+   ],
+   "pivote": [
+    0.0,
+    0.65,
+    -0.0
+   ]
+  },
+  "arma_laser_nave_neon": {
+   "triangulos": 604,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    1.282,
+    2.193
+   ]
+  },
+  "arma_laser_nave_canones": {
+   "triangulos": 200,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    1.05,
+    2.45
+   ],
+   "pivote": [
+    0.0,
+    1.05,
+    0.3
+   ],
+   "padre": "arma_laser_nave_cabeza"
+  }
+ },
+ "anclas": {
+  "BocaIzq": [
+   -0.42,
+   1.05,
+   4.4
+  ],
+  "BocaDer": [
+   0.42,
+   1.05,
+   4.4
+  ],
+  "Acople": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

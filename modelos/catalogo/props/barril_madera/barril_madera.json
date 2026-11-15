@@ -1,0 +1,29 @@
+{
+ "modelo": "barril_madera",
+ "triangulos": 940,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.44,
+  "alto_y": 4.0,
+  "fondo_z": 3.26
+ },
+ "texturas": {
+  "color": "barril_madera_color.png",
+  "roughness": "barril_madera_roughness.png",
+  "metalness": "barril_madera_metalness.png",
+  "normal": "barril_madera_normal.png"
+ },
+ "piezas": {
+  "barril_madera": {
+   "triangulos": 940,
+   "tipo": "textura",
+   "centro": [
+    0.048,
+    2.0,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

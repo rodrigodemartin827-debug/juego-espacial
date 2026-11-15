@@ -1,0 +1,143 @@
+{
+ "modelo": "casco_nave_grande",
+ "triangulos": 1320,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 12.8,
+  "alto_y": 9.86,
+  "fondo_z": 30.34
+ },
+ "texturas": {
+  "color": "casco_nave_grande_color.png",
+  "roughness": "casco_nave_grande_roughness.png",
+  "metalness": "casco_nave_grande_metalness.png",
+  "emision": "casco_nave_grande_emision.png",
+  "normal": "casco_nave_grande_normal.png"
+ },
+ "piezas": {
+  "casco_nave_grande": {
+   "triangulos": 988,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    2.112,
+    -0.125
+   ]
+  },
+  "casco_nave_grande_neon": {
+   "triangulos": 120,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    0.384,
+    -6.895
+   ]
+  },
+  "casco_nave_grande_cristal": {
+   "triangulos": 156,
+   "tipo": "cristal",
+   "centro": [
+    0.0,
+    2.496,
+    0.375
+   ]
+  },
+  "casco_nave_grande_rampa": {
+   "triangulos": 56,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    -2.304,
+    -13.7
+   ],
+   "pivote": [
+    0.0,
+    -2.048,
+    -12.4
+   ]
+  }
+ },
+ "anclas": {
+  "AlaIzq": [
+   -5.05,
+   -0.32,
+   -2.4
+  ],
+  "AlaDer": [
+   5.05,
+   -0.32,
+   -2.4
+  ],
+  "Cabina": [
+   0.0,
+   2.688,
+   6.0
+  ],
+  "Estabilizador": [
+   0.0,
+   3.84,
+   -12.0
+  ],
+  "MotorIzq": [
+   -5.3,
+   -0.64,
+   -15.25
+  ],
+  "ArmaIzq": [
+   -3.456,
+   -1.92,
+   9.6
+  ],
+  "TrenIzq": [
+   -3.264,
+   -2.688,
+   -7.5
+  ],
+  "TrenMedioIzq": [
+   -3.264,
+   -2.688,
+   0.6
+  ],
+  "MotorDer": [
+   5.3,
+   -0.64,
+   -15.25
+  ],
+  "ArmaDer": [
+   3.456,
+   -1.92,
+   9.6
+  ],
+  "TrenDer": [
+   3.264,
+   -2.688,
+   -7.5
+  ],
+  "TrenMedioDer": [
+   3.264,
+   -2.688,
+   0.6
+  ],
+  "MotorCentro": [
+   0.0,
+   0.384,
+   -15.3
+  ],
+  "TrenMorro": [
+   0.0,
+   -2.688,
+   9.0
+  ],
+  "Escudo": [
+   0.0,
+   3.968,
+   1.5
+  ],
+  "ArmaDorsal": [
+   0.0,
+   3.328,
+   4.2
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

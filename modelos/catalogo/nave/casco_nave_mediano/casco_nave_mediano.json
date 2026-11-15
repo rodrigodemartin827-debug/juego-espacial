@@ -1,0 +1,114 @@
+{
+ "modelo": "casco_nave_mediano",
+ "triangulos": 868,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 6.9,
+  "alto_y": 6.78,
+  "fondo_z": 20.34
+ },
+ "texturas": {
+  "color": "casco_nave_mediano_color.png",
+  "roughness": "casco_nave_mediano_roughness.png",
+  "metalness": "casco_nave_mediano_metalness.png",
+  "emision": "casco_nave_mediano_emision.png",
+  "normal": "casco_nave_mediano_normal.png"
+ },
+ "piezas": {
+  "casco_nave_mediano": {
+   "triangulos": 676,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.452,
+    -0.125
+   ]
+  },
+  "casco_nave_mediano_neon": {
+   "triangulos": 120,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    0.264,
+    -4.645
+   ]
+  },
+  "casco_nave_mediano_cristal": {
+   "triangulos": 72,
+   "tipo": "cristal",
+   "centro": [
+    -0.0,
+    0.88,
+    2.2
+   ]
+  }
+ },
+ "anclas": {
+  "AlaIzq": [
+   -3.45,
+   -0.22,
+   -1.6
+  ],
+  "AlaDer": [
+   3.45,
+   -0.22,
+   -1.6
+  ],
+  "Cabina": [
+   0.0,
+   1.848,
+   4.0
+  ],
+  "Estabilizador": [
+   0.0,
+   2.64,
+   -8.0
+  ],
+  "MotorIzq": [
+   -1.408,
+   0.264,
+   -10.3
+  ],
+  "ArmaIzq": [
+   -2.176,
+   -1.32,
+   6.0
+  ],
+  "TrenIzq": [
+   -2.048,
+   -1.848,
+   -5.0
+  ],
+  "MotorDer": [
+   1.408,
+   0.264,
+   -10.3
+  ],
+  "ArmaDer": [
+   2.176,
+   -1.32,
+   6.0
+  ],
+  "TrenDer": [
+   2.048,
+   -1.848,
+   -5.0
+  ],
+  "TrenMorro": [
+   0.0,
+   -1.848,
+   5.6
+  ],
+  "Escudo": [
+   0.0,
+   2.64,
+   -1.0
+  ],
+  "ArmaDorsal": [
+   0.0,
+   2.42,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

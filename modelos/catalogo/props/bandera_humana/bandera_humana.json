@@ -1,0 +1,45 @@
+{
+ "modelo": "bandera_humana",
+ "triangulos": 356,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 8.5,
+  "alto_y": 16.34,
+  "fondo_z": 2.8
+ },
+ "texturas": {
+  "color": "bandera_humana_color.png",
+  "roughness": "bandera_humana_roughness.png",
+  "metalness": "bandera_humana_metalness.png",
+  "emision": "bandera_humana_emision.png",
+  "normal": "bandera_humana_normal.png"
+ },
+ "piezas": {
+  "bandera_humana": {
+   "triangulos": 292,
+   "tipo": "textura",
+   "centro": [
+    2.85,
+    8.17,
+    0.0
+   ]
+  },
+  "bandera_humana_neon": {
+   "triangulos": 64,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    1.02,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Tela": [
+   3.5,
+   14.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

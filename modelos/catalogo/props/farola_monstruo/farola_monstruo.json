@@ -1,0 +1,54 @@
+{
+ "modelo": "farola_monstruo",
+ "triangulos": 514,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 4.23,
+  "alto_y": 13.23,
+  "fondo_z": 4.23
+ },
+ "texturas": {
+  "color": "farola_monstruo_color.png",
+  "roughness": "farola_monstruo_roughness.png",
+  "metalness": "farola_monstruo_metalness.png",
+  "emision": "farola_monstruo_emision.png",
+  "normal": "farola_monstruo_normal.png"
+ },
+ "piezas": {
+  "farola_monstruo": {
+   "triangulos": 350,
+   "tipo": "textura",
+   "centro": [
+    -0.137,
+    5.986,
+    -0.267
+   ]
+  },
+  "farola_monstruo_cristal": {
+   "triangulos": 128,
+   "tipo": "cristal",
+   "centro": [
+    0.005,
+    6.34,
+    0.059
+   ]
+  },
+  "farola_monstruo_neon": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    1.17,
+    3.871,
+    0.617
+   ]
+  }
+ },
+ "anclas": {
+  "Luz": [
+   -0.479,
+   10.8,
+   0.287
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

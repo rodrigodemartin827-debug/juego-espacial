@@ -1,0 +1,45 @@
+{
+ "modelo": "antorcha_muro",
+ "triangulos": 332,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 0.9,
+  "alto_y": 3.5,
+  "fondo_z": 2.24
+ },
+ "texturas": {
+  "color": "antorcha_muro_color.png",
+  "roughness": "antorcha_muro_roughness.png",
+  "metalness": "antorcha_muro_metalness.png",
+  "emision": "antorcha_muro_emision.png",
+  "normal": "antorcha_muro_normal.png"
+ },
+ "piezas": {
+  "antorcha_muro": {
+   "triangulos": 296,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    0.306,
+    0.414
+   ]
+  },
+  "antorcha_muro_llama": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    1.924,
+    -0.421
+   ]
+  }
+ },
+ "anclas": {
+  "Llama": [
+   0.0,
+   1.516,
+   -0.307
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

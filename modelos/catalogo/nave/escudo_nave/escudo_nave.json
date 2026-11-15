@@ -1,0 +1,57 @@
+{
+ "modelo": "escudo_nave",
+ "triangulos": 886,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 8.0,
+  "alto_y": 4.05,
+  "fondo_z": 8.0
+ },
+ "texturas": {
+  "color": "escudo_nave_color.png",
+  "roughness": "escudo_nave_roughness.png",
+  "metalness": "escudo_nave_metalness.png",
+  "emision": "escudo_nave_emision.png",
+  "normal": "escudo_nave_normal.png"
+ },
+ "piezas": {
+  "escudo_nave": {
+   "triangulos": 338,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.363,
+    -0.0
+   ]
+  },
+  "escudo_nave_neon": {
+   "triangulos": 196,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    1.77,
+    -0.0
+   ]
+  },
+  "escudo_nave_cristal": {
+   "triangulos": 352,
+   "tipo": "cristal",
+   "centro": [
+    0.0,
+    2.05,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Acople": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "escudo": {
+  "radio_domo": 4.0
+ }
+}
