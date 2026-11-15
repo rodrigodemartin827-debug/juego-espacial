@@ -637,11 +637,11 @@ def f_geoda(d, rnd):
     """
     sx, sy, sz = d["tam"]
     R0 = max(sx, sz) / 2
-    exterior = canto((sx, sy * 2, sz), rnd, 0.1, 0.0, sub=4)
+    exterior = canto((sx, sy * 2, sz), rnd, 0.05, 0.0, sub=3)
     bmesh.ops.translate(exterior, vec=(0, 0, -sz / 2), verts=exterior.verts)
     cortar(exterior, (0, -sy * 0.0, 0), (0, -1, 0))  # quitar la mitad delantera
     # Hueco: quitar una esfera de dentro con un booleano por voxel (se hace en la ALTA con "hueco").
-    hueco = d.get("hueco", 0.72)
+    hueco = d.get("hueco", 0.75)
     bajar_a_cero(exterior)
     bm_c = bmesh.new()
     cfg = d["cristales"]
@@ -656,14 +656,15 @@ def f_geoda(d, rnd):
         th = rnd.uniform(0, math.tau)
         dirv = Vector((math.sqrt(1 - u * u) * math.cos(th), abs(math.sqrt(1 - u * u) * math.sin(th)) + 0.15, u))
         dirv.normalize()
-        pared = centro + Vector((dirv.x * sx / 2, dirv.y * sy, dirv.z * sz / 2)) * hueco * 0.97
+        pared = centro + Vector((dirv.x * sx / 2, dirv.y * sy, dirv.z * sz / 2)) * hueco
         eje = (centro - pared).normalized().lerp(Vector((0, -1, 0.3)), 0.2)
-        g = gema(pared, eje, rnd.uniform(lmin, lmax) * S, rnd.uniform(gmin, gmax) * S, 6, 0.4, rnd, enterrado=1.2)
+        g = gema(pared, eje, rnd.uniform(lmin, lmax) * S, rnd.uniform(gmin, gmax) * S, 6, 0.4, rnd, enterrado=0.7)
         unir(bm_c, g)
-    rel = d.get("relieve", RELIEVE_ROCA)
+    # Relieve suave: uno fuerte tapa los cristales con bultos de roca dentro del hueco.
+    rel = d.get("relieve", dict(bultos=0.022, fino=0.008, grano=0.003, grietas=0.012))
     p_roca = Pieza(exterior, "", d["pint"]["roca"], dict(rel, hueco=hueco, hueco_c=tuple(centro),
                                                          hueco_r=(sx / 2, sy, sz / 2)),
-                   "decimar", nombre="cascara", base_plana=True)
+                   "limpia", nombre="cascara", base_plana=True, suave=True)
     return [p_roca, Pieza(bm_c, d.get("grupo_cristal", "cristal"), d["pint"]["cristal"], None, "limpia",
                           nombre="cristales", voxel=gmin * S / 3)]
 

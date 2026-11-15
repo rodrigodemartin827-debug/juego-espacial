@@ -94,9 +94,9 @@ def _remallar(obj, voxel):
     c.aplicar_modificadores(obj)
 
 
-def _hueco(obj, centro, radios):
+def _hueco(obj, centro, radios, sub=4):
     """Vacía el interior de la cáscara de una geoda con un booleano."""
-    bm = F.icosfera(1.0, 4)
+    bm = F.icosfera(1.0, sub)
     bmesh.ops.scale(bm, vec=radios, verts=bm.verts)
     bmesh.ops.translate(bm, vec=centro, verts=bm.verts)
     cortador = _obj_desde_bm("cortador", bm)
@@ -176,6 +176,8 @@ def preparar_piezas(d, rapido):
         altas.append(alta)
         if pz.baja == "limpia":
             baja = _obj_desde_bm(nombre, pz.bm)
+            if pz.relieve and pz.relieve.get("hueco"):
+                _hueco(baja, pz.relieve["hueco_c"], [r * pz.relieve["hueco"] for r in pz.relieve["hueco_r"]], 3)
             _triangular(baja)
         else:
             baja = alta.copy()
@@ -485,9 +487,38 @@ def luz_mineral(d, S, mn, mx):
     l.energy = 60 * S * S * d.get("luz_fuerza", 1.0)
     l.shadow_soft_size = 0.2 * S
     o = bpy.data.objects.new("luz_mineral", l)
+    # Que ilumine pero no se vea como un punto blanco dentro de los cristales.
+    o.visible_glossy = False
+    o.visible_transmission = False
     o.location = ((mn.x + mx.x) / 2, (mn.y + mx.y) / 2, mn.z + (mx.z - mn.z) * 0.55)
     bpy.context.scene.collection.objects.link(o)
     return o
+
+
+def cielo_en_reflejos():
+    """La cámara ve el fondo oscuro del estudio; los reflejos y la luz rebotada ven un cielo claro (degradado
+    azul grisáceo), como en un planeta. Sin esto los metales y los cristales salen negros."""
+    nt = bpy.context.scene.world.node_tree
+    fondo = nt.nodes["Background"]
+    salida = nt.nodes["World Output"]
+    camino = nt.nodes.new("ShaderNodeLightPath")
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(coord.outputs["Generated"], sep.inputs["Vector"])
+    rampa = nt.nodes.new("ShaderNodeValToRGB")
+    rampa.color_ramp.elements[0].position = 0.45
+    rampa.color_ramp.elements[0].color = (0.05, 0.05, 0.06, 1)
+    rampa.color_ramp.elements[1].position = 0.75
+    rampa.color_ramp.elements[1].color = (0.55, 0.62, 0.75, 1)
+    nt.links.new(sep.outputs["Z"], rampa.inputs["Fac"])
+    cielo = nt.nodes.new("ShaderNodeBackground")
+    cielo.inputs["Strength"].default_value = 0.9
+    nt.links.new(rampa.outputs["Color"], cielo.inputs["Color"])
+    mezcla = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(camino.outputs["Is Camera Ray"], mezcla.inputs["Fac"])
+    nt.links.new(cielo.outputs["Background"], mezcla.inputs[1])
+    nt.links.new(fondo.outputs["Background"], mezcla.inputs[2])
+    nt.links.new(mezcla.outputs["Shader"], salida.inputs["Surface"])
 
 
 def nombre_parte(ident, g):
@@ -582,6 +613,7 @@ def construir(d, rapido=False, incrustar=False):
 
     # Render.
     c.preparar_estudio(mundo=0.6)
+    cielo_en_reflejos()
     luz = luz_mineral(d, S, mn, mx)
     tmp = os.path.join(RAIZ, "_render_tmp", ident)
     rutas = c.renderizar_vistas(partes, tmp, VISTAS, tam=240 if rapido else 380, muestras=12 if rapido else 40,
