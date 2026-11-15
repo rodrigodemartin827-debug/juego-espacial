@@ -13,6 +13,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
+| `forja/` | Herrería del planeta humano en 6 piezas (yunque, horno, mesa, barril, estantería de armas, suelo), con atlas PBR. Tiene sus propios scripts y README: va en studs, no en metros | 1.300–4.800 cada una |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 

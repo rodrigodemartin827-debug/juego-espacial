@@ -44,7 +44,7 @@ def barril():
     def r(z):
         return 1.1 + 0.27 * math.sin(math.pi * (z + 0.15) / (H + 0.3))
 
-    niveles = [0.0, 0.45, 1.0, 1.55, 2.1, 2.65, H]
+    niveles = [0.0, 0.55, 1.2, 1.9, 2.6, H]
     z_agua = 2.66
     for i in range(N):
         a0, a1 = TAU * i / N, TAU * (i + 1) / N
@@ -68,7 +68,15 @@ def barril():
                (math.cos(a1) * ri2, math.sin(a1) * ri2, z_agua - 0.2)]
         cs.append((2 * k - 2, 2 * k - 1, b + 1, b))
         cs.append((b, b + 1, b + 3, b + 2))
-        # juntas entre duelas (un poco de canto visible arriba)
+        # cantos laterales de la duela (se ven en las juntas, porque cada duela sobresale distinto)
+        c0 = len(vs)
+        for z in zs:
+            rr = r(min(z, H)) + dr - 0.07
+            vs.append((math.cos(a0) * rr, math.sin(a0) * rr, z))
+            vs.append((math.cos(a1) * rr, math.sin(a1) * rr, z))
+        for j in range(k - 1):
+            cs.append((2 * j + 1, c0 + 2 * j + 1, c0 + 2 * j + 3, 2 * j + 3))
+            cs.append((2 * j, 2 * j + 2, c0 + 2 * j + 2, c0 + 2 * j))
         p.libre(vs, cs, "madera", tex=("veta", "Z"), recalcular=False)
     # Fondo
     p.libre([(x, y, 0.0) for x, y in circulo(N, r(0) + 0.01)], [tuple(reversed(range(N)))], "madera",
@@ -80,7 +88,7 @@ def barril():
         for da in (-0.09, 0.09):
             zc = z0 + alto / 2
             n = Vector((math.cos(a + da), math.sin(a + da), 0))
-            p.remache(n * (r(zc) + 0.05), n, 0.05, "hierro")
+            p.remache(n * (r(zc) + 0.05) + Vector((0, 0, zc)), n, 0.05, "hierro")
     # Agua
     ra = r(z_agua) - 0.1
     vs = [(0, 0, z_agua)] + [(x, y, z_agua) for x, y in circulo(N, ra)]
@@ -165,7 +173,8 @@ def yunque():
             i = int(round(a / TAU * N)) % N
             a = TAU * i / N
             n = Vector((math.cos(a), math.sin(a), 0))
-            p.remache(n * (r_tocon((z0 + z1) / 2) * radios[i] + 0.045), n, 0.055, "hierro")
+            p.remache(n * (r_tocon((z0 + z1) / 2) * radios[i] + 0.045) + Vector((0, 0, (z0 + z1) / 2)), n, 0.055,
+                      "hierro")
 
     # Cuerpo del yunque: pies, cintura y arranque de la mesa
     an = []
@@ -411,7 +420,7 @@ def estanteria():
     with p.grupo(tras(ex, -0.37, ez) @ rot("Y", 8) @ rot("X", 90)):
         p.torno([(0.02, 0.0), (1.2, 0.0), (1.22, 0.05), (1.2, 0.1), (0.9, 0.17), (0.5, 0.22), (0.36, 0.235)],
                 "escudo_rojo", n=20, tex=("veta", "Y", (0, 0, 0)))
-        p.torno([(1.12, 0.125), (1.25, 0.115), (1.275, 0.05), (1.25, -0.012), (1.12, -0.018)], "hierro", n=20,
+        p.torno([(1.12, -0.018), (1.25, -0.012), (1.275, 0.05), (1.25, 0.115), (1.12, 0.125)], "hierro", n=20,
                 tex=None, tapas=(False, False))
         p.torno([(0.52, 0.2), (0.52, 0.255), (0.4, 0.27), (0.37, 0.34), (0.27, 0.44), (0.12, 0.5), (0.015, 0.515)],
                 "hierro", n=10, tex=None)

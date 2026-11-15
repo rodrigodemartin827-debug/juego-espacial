@@ -51,7 +51,7 @@ def maniqui(scn, pos, giro=0.0):
     """Figura R6 gris (5 studs de alto) para ver la escala."""
     m = bpy.data.materials.new("maniqui")
     m.use_nodes = True
-    m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.2, 0.21, 0.23, 1)
+    m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.05, 0.052, 0.058, 1)
     m.node_tree.nodes["Principled BSDF"].inputs["Roughness"].default_value = 0.9
     obs = []
     base = Matrix.Translation(pos) @ Matrix.Rotation(math.radians(giro), 4, "Z")
@@ -105,7 +105,7 @@ def montada(salida, tmp, muestras):
     pr.camara(scn, (15.5, -31, 15), (-0.8, 0.5, 5.2), lente=36)
     pr.render(scn, os.path.join(salida, "renders", "forja_montada.png"), 1920, 1200, muestras)
     bpy.data.objects.remove(scn.camera)
-    man = maniqui(scn, (5.6, -6.2, piezas.ALTO_SUELO), 160)
+    man = maniqui(scn, (0.9, -6.6, piezas.ALTO_SUELO), 25)
     pr.camara(scn, (4.5, -31, 6.5), (-0.8, 0.5, 5.6), lente=30)
     pr.render(scn, os.path.join(salida, "renders", "forja_montada_2.png"), 1920, 1200, muestras)
     for o in man:

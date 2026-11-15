@@ -48,7 +48,7 @@ COLORES = {
     "pintura_azul": hx("#172c44"),
     "pintura_crema": hx("#7d6f52"),
     "brasa": [(0.0, hx("#060403")), (0.35, hx("#5a0a02")), (0.6, hx("#ff3c05")), (0.85, hx("#ff9a1c")),
-              (1.0, hx("#ffe9a0"))],
+              (1.0, hx("#ffc35a"))],
 }
 
 REGISTRO = {}
@@ -579,7 +579,7 @@ def brasa(nombre, fuerza=1.0):
     calor = g.ruido(p, 0.9, det=4, rug=0.6)
     fino = g.ruido(p, 12.0, det=3)
     # Más caliente en las grietas y en las zonas que el ruido marca como vivas
-    t = g.m("ADD", g.rango(borde, 0.0, 0.22, 0.75, 0.0), g.m("MULTIPLY", g.m("SUBTRACT", calor, 0.35), 1.1))
+    t = g.m("ADD", g.rango(borde, 0.0, 0.2, 0.62, 0.0), g.m("MULTIPLY", g.m("SUBTRACT", calor, 0.32), 0.95))
     t = g.m("ADD", t, g.m("MULTIPLY", g.m("SUBTRACT", fino, 0.5), 0.2), tope=True)
     em = g.rampa(t, COLORES["brasa"])
     emision = g.vm("MULTIPLY", em, (fuerza, fuerza, fuerza))
