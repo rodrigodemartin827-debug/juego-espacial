@@ -20,21 +20,21 @@ import linea_tiempo as lt  # noqa: E402
 SALIDA = os.path.abspath(os.path.join(AQUI, ".."))
 # Fotogramas de la hoja de contactos: (fotograma, texto)
 HOJA = [
-    (16, "Llega con el lingote"),
-    (50, "Sube la compuerta"),
-    (74, "El lingote entra en las brasas"),
-    (98, "Espera: el fuego le ilumina"),
-    (116, "Saca la pieza al rojo blanco"),
-    (150, "1.er martillazo"),
-    (168, "2.º: toma forma"),
-    (206, "4.º martillazo"),
-    (233, "5.º: el más fuerte"),
-    (280, "Al barril"),
-    (300, "PSSSH: entra en el agua"),
-    (330, "El vapor sube, la hoja se apaga"),
-    (372, "La levanta"),
-    (400, "Destello en el filo"),
-    (426, "Fundido a negro"),
+    (40, "Llega despacio con el lingote"),
+    (130, "Sube la compuerta con calma"),
+    (232, "El lingote se calienta en las brasas"),
+    (295, "Espera: el fuego le ilumina"),
+    (318, "Saca la pieza al rojo blanco"),
+    (412, "1.er martillazo"),
+    (510, "La mira y le da la vuelta"),
+    (566, "3.er martillazo"),
+    (720, "5.º martillazo"),
+    (846, "7.º: el más fuerte"),
+    (960, "Camina al barril"),
+    (1018, "PSSSH: la hunde en el agua"),
+    (1090, "El vapor sube; se enfría"),
+    (1215, "La inspecciona"),
+    (1248, "Destello en el filo"),
 ]
 
 

@@ -110,7 +110,7 @@ def pasos(f):
     total, vel = recorrido(f)
     # suaviza la velocidad para que el paso entre y salga sin saltos
     vel = sum(recorrido(f + k)[1] for k in range(-3, 4)) / 7
-    s = min(1.0, vel / 0.13)
+    s = min(1.0, vel / 0.055)  # paso completo ya andando despacio (~1,6 studs/s)
     fase = total / ZANCADA * math.pi
     a = 0.5 * s
     izq = (-a * math.sin(fase), 0.32 * s * max(0.0, math.cos(fase)))
@@ -291,9 +291,10 @@ def punto_nombrado(nombre, f, est, pose=None, M_raiz=None):
     if nombre == "cinto":
         p, q = pose.mundo("Torso")
         return M_raiz @ (p + q @ CINTO)
-    if nombre in ("en_yunque", "sobre_yunque"):
+    if nombre in ("en_yunque", "sobre_yunque", "revisar_yunque"):
         hombro = M_raiz @ pose.mundo("Left Arm")[0]
-        return objetivo_yunque(hombro, f) + Vector((0, 0, 0.8 if nombre == "sobre_yunque" else 0.0))
+        alto = {"en_yunque": 0.0, "sobre_yunque": 0.8, "revisar_yunque": 0.55}[nombre]
+        return objetivo_yunque(hombro, f) + Vector((0, 0, alto))
     if nombre == "golpe":
         return punto_golpe(f)
     if nombre == "agua":
@@ -381,7 +382,8 @@ def evaluar(f):
     q1 = orientacion_pieza(c1[1], M_punta)
     if q0.dot(q1) < 0:
         q1.negate()
-    est.M_pieza = Matrix.Translation(M_punta.to_translation()) @ q0.slerp(q1, k).to_matrix().to_4x4()
+    giro = Quaternion((0, 0, 1), math.radians(muestrear(lt.PIEZA_GIRO, f)))  # sobre su propio eje
+    est.M_pieza = Matrix.Translation(M_punta.to_translation()) @ (q0.slerp(q1, k) @ giro).to_matrix().to_4x4()
     largo, ancho, grueso, filo, punta, espiga = etapa_pieza(f)
     est.etapa = muestrear(lt.ETAPA, f)
     est.dim_pieza = (largo, ancho, grueso, filo, punta, espiga)

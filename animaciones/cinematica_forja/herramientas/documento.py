@@ -335,7 +335,7 @@ def verificar_fbx(ruta):
     assert fin - ini == lt.DURACION - 1, (ini, fin)
     scn = bpy.context.scene
     peor = 0.0
-    for f in (0, 40, 51, 76, 150, 232, 306, 380, 435):
+    for f in (0, 112, 212, 316, lt.IMPACTOS[0], lt.IMPACTOS[-1], lt.CONTACTO_AGUA, lt.DURACION - 120, lt.DURACION - 1):
         scn.frame_set(f + ini)
         bpy.context.view_layer.update()
         est = ci.evaluar(f)

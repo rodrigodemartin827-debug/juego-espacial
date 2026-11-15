@@ -18,22 +18,7 @@ from mathutils import Vector  # noqa: E402
 import cinematica as ci  # noqa: E402
 import linea_tiempo as lt  # noqa: E402
 
-# Qué tiene que verse en cada plano (por orden). Puntos con nombre de cinematica.punto_nombrado o «mano_martillo».
-SUJETOS = {
-    0: ["pecho", "cabeza"],
-    1: ["compuerta", "cabeza"],
-    2: ["pieza"],
-    3: ["cabeza"],
-    4: ["pieza", "pecho"],
-    5: ["cabeza", "pecho", "golpe"],
-    6: ["golpe"],
-    7: ["cabeza", "pecho", "golpe"],
-    8: ["cabeza", "pecho", "golpe"],
-    9: ["pecho", "pieza"],
-    10: ["agua"],
-    11: ["agua", "cabeza"],
-    12: ["hoja", "cabeza"],
-}
+# Qué tiene que verse en cada plano: lo dice cada plano en linea_tiempo.PLANOS («sujetos»).
 IGNORAR = ("Vapor", "Llama", "Emisor", "Inst", "Destello", "AguaTemple", "Pieza")
 
 
@@ -51,7 +36,7 @@ def main():
             dg = bpy.context.evaluated_depsgraph_get()
             cam = scn.camera.matrix_world.translation.copy()
             est = ci.evaluar(f)
-            for nombre in SUJETOS[i]:
+            for nombre in p.get("sujetos", ["cabeza"]):
                 obj = ci.punto_nombrado(nombre, f, est)
                 d = obj - cam
                 origen = cam.copy()

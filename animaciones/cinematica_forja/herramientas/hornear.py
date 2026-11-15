@@ -127,7 +127,7 @@ def _vapor(obs, f):
     rnd = random.Random(5)
     base = es.CENTRO_BARRIL + Vector((-0.05, 0.3, 0.0))
     for i, (o, dens) in enumerate(obs["vapor"]):
-        ini = v["inicio"] + i * 2.6 + rnd.uniform(0, 1.5)
+        ini = v["inicio"] + i * v.get("espaciado", 2.6) + rnd.uniform(0, 1.5)
         vida = v["duracion"] * rnd.uniform(0.7, 1.1)
         deriva = Vector((rnd.uniform(-0.7, 0.7), rnd.uniform(-0.9, 0.3), 0))
         alto = rnd.uniform(4.0, 6.5)
@@ -140,7 +140,7 @@ def _vapor(obs, f):
             r = r0 + (r1 - r0) * t**0.6
             o.scale = (r, r, r * 1.15)
             o.rotation_euler = (0, 0, i + t * 0.8)
-            d = 1.6 * min(1.0, t / 0.08) * (1 - t) ** 1.6
+            d = v.get("densidad", 1.6) * min(1.0, t / 0.08) * (1 - t) ** 1.6
             d *= max(0.0, min(1.0, (v["fin"] - f) / 12))  # se disipa antes del plano final
         else:
             d = 0.0
