@@ -1,0 +1,44 @@
+{
+  "pieza": "forja_horno",
+  "triangulos": 4802,
+  "limite": 8000,
+  "mallas": {
+    "forja_horno": 4464,
+    "forja_horno_brasas": 338
+  },
+  "tamano_studs": [
+    13.914,
+    14.571,
+    7.063
+  ],
+  "centro_caja": [
+    1.357,
+    7.251,
+    0.474
+  ],
+  "texturas": {
+    "color": "forja_horno_color.png",
+    "rug": "forja_horno_rugosidad.png",
+    "metal": "forja_horno_metal.png",
+    "emision": "forja_horno_emision.png",
+    "normal": "forja_horno_normal.png"
+  },
+  "anclajes": {
+    "Humo": [
+      0.0,
+      14.6,
+      -0.0
+    ],
+    "Fuego": [
+      0.0,
+      2.3,
+      0.8
+    ],
+    "Luz": [
+      0.0,
+      2.9,
+      2.3
+    ]
+  },
+  "nota": "Horno de fundición con chimenea, fuelle, tenazas, atizador y carbonera. Las brasas van aparte (forja_horno_brasas) para ponerlas en Neon. Humo, fuego y luz: Attachments «Humo», «Fuego» y «Luz»."
+}
