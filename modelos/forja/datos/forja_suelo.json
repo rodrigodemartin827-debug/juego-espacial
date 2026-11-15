@@ -1,0 +1,26 @@
+{
+  "pieza": "forja_suelo",
+  "triangulos": 1498,
+  "limite": 2000,
+  "mallas": {
+    "forja_suelo": 1498
+  },
+  "tamano_studs": [
+    27.808,
+    0.893,
+    20.844
+  ],
+  "centro_caja": [
+    0.136,
+    0.332,
+    0.103
+  ],
+  "texturas": {
+    "color": "forja_suelo_color.png",
+    "rug": "forja_suelo_rugosidad.png",
+    "metal": "forja_suelo_metal.png",
+    "normal": "forja_suelo_normal.png"
+  },
+  "anclajes": {},
+  "nota": "Plataforma de adoquín de borde irregular. La cara de arriba está a 0,62 studs."
+}

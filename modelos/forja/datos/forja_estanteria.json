@@ -1,0 +1,26 @@
+{
+  "pieza": "forja_estanteria",
+  "triangulos": 3210,
+  "limite": 4000,
+  "mallas": {
+    "forja_estanteria": 3210
+  },
+  "tamano_studs": [
+    9.209,
+    7.458,
+    2.719
+  ],
+  "centro_caja": [
+    0.006,
+    3.719,
+    -0.0
+  ],
+  "texturas": {
+    "color": "forja_estanteria_color.png",
+    "rug": "forja_estanteria_rugosidad.png",
+    "metal": "forja_estanteria_metal.png",
+    "normal": "forja_estanteria_normal.png"
+  },
+  "anclajes": {},
+  "nota": "Estantería con 3 espadas, 2 escudos, un yelmo y un hacha de mano. Todo es una sola malla decorativa (las armas no se pueden descolgar)."
+}

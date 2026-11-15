@@ -71,7 +71,7 @@ def barril():
         # cantos laterales de la duela (se ven en las juntas, porque cada duela sobresale distinto)
         c0 = len(vs)
         for z in zs:
-            rr = r(min(z, H)) + dr - 0.07
+            rr = r(min(z, H)) + dr - (0.13 if z > H - 0.2 else 0.07)
             vs.append((math.cos(a0) * rr, math.sin(a0) * rr, z))
             vs.append((math.cos(a1) * rr, math.sin(a1) * rr, z))
         for j in range(k - 1):
@@ -79,7 +79,7 @@ def barril():
             cs.append((2 * j, 2 * j + 2, c0 + 2 * j + 2, c0 + 2 * j))
         p.libre(vs, cs, "madera", tex=("veta", "Z"), recalcular=False)
     # Fondo
-    p.libre([(x, y, 0.0) for x, y in circulo(N, r(0) + 0.01)], [tuple(reversed(range(N)))], "madera",
+    p.libre([(x, y, 0.0) for x, y in circulo(N, r(0) - 0.03)], [tuple(reversed(range(N)))], "madera",
             tex=("veta", "X"), recalcular=False)
     # Aros
     for z0, alto in ((0.22, 0.24), (0.95, 0.2), (2.0, 0.2), (2.68, 0.24)):
@@ -740,7 +740,7 @@ def horno():
     for (a, b) in (((-1.32, -1.32), (1.32, -0.74)), ((-1.32, 0.74), (1.32, 1.32)), ((-1.32, -0.74), (-0.74, 0.74)),
                    ((0.74, -0.74), (1.32, 0.74))):
         p.caja((a[0], a[1], ZT), (b[0], b[1], ZT + 0.32), "sillar", bisel=0.05, ruido=0.02)
-    p.caja((-0.74, -0.74, 13.3), (0.74, 0.74, ZT + 0.3), "ladrillo_dentro", quitar="z+", invertir=True)
+    p.caja((-0.78, -0.78, 13.3), (0.78, 0.78, ZT + 0.25), "ladrillo_dentro", quitar="z+", invertir=True)
     for zb in (10.5, 12.1):
         h = 1.22 - (zb - ZH1) / (ZT - ZH1) * 0.2 + 0.045
         p.caja((-h, -h, zb), (h, h, zb + 0.24), "hierro", tex=None)
