@@ -1,0 +1,96 @@
+{
+  "nota": "Posición del centro de cada MeshPart (studs, ejes de Roblox) respecto al centro del suelo a ras de tierra, y giro sobre el eje Y. CFrame = CFrame.new(posicion) * CFrame.Angles(0, math.rad(giro_y_grados), 0). anclajes: Position de cada Attachment dentro de su MeshPart.",
+  "piezas": {
+    "forja_yunque": {
+      "posicion": [
+        -1.677,
+        2.202,
+        4.306
+      ],
+      "giro_y_grados": 20.0,
+      "anclajes": {
+        "Golpe": [
+          -0.039,
+          1.218,
+          -0.27
+        ]
+      }
+    },
+    "forja_horno_brasas": {
+      "posicion": [
+        -2.6,
+        2.514,
+        -3.93
+      ],
+      "giro_y_grados": 0.0,
+      "anclajes": {}
+    },
+    "forja_horno": {
+      "posicion": [
+        -1.243,
+        7.871,
+        -3.726
+      ],
+      "giro_y_grados": 0.0,
+      "anclajes": {
+        "Humo": [
+          -1.357,
+          7.349,
+          -0.474
+        ],
+        "Fuego": [
+          -1.357,
+          -4.951,
+          0.326
+        ],
+        "Luz": [
+          -1.357,
+          -4.351,
+          1.826
+        ]
+      }
+    },
+    "forja_mesa": {
+      "posicion": [
+        9.264,
+        2.352,
+        1.623
+      ],
+      "giro_y_grados": -90.0,
+      "anclajes": {}
+    },
+    "forja_barril": {
+      "posicion": [
+        2.6,
+        2.677,
+        3.2
+      ],
+      "giro_y_grados": 0.0,
+      "anclajes": {
+        "Vapor": [
+          0.0,
+          0.703,
+          0.0
+        ]
+      }
+    },
+    "forja_estanteria": {
+      "posicion": [
+        -11.2,
+        4.339,
+        2.194
+      ],
+      "giro_y_grados": 90.0,
+      "anclajes": {}
+    },
+    "forja_suelo": {
+      "posicion": [
+        0.136,
+        0.332,
+        0.103
+      ],
+      "giro_y_grados": 0.0,
+      "anclajes": {}
+    }
+  }
+}
