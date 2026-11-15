@@ -22,6 +22,7 @@ from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 import piezas  # noqa: E402
 import proceso as pr  # noqa: E402
 
+FUERZA_BRASAS = 2.4
 ORDEN = ["yunque", "horno", "mesa", "barril", "estanteria", "suelo"]
 
 
@@ -38,6 +39,10 @@ def cargar(tmp, clave):
     obs = [o for o in destino.objects if o is not None]
     for o in obs:
         bpy.context.scene.collection.objects.link(o)
+        for slot in o.material_slots:   # en el render, las brasas sin quemar la imagen
+            p = slot.material.node_tree.nodes.get("Principled BSDF")
+            if p and p.inputs["Emission Color"].is_linked:
+                p.inputs["Emission Strength"].default_value = FUERZA_BRASAS
     return obs
 
 
@@ -117,7 +122,7 @@ def hoja_piezas(salida, tmp, muestras, tam=640):
     for clave in ORDEN:
         scn = pr.escena_vacia()
         pr.estudio(scn)
-        pr.suelo_estudio(scn)
+        plano = pr.suelo_estudio(scn)
         obs = cargar(tmp, clave)
         with open(os.path.join(salida, "datos", f"forja_{clave}.json"), encoding="utf-8") as f:
             d = json.load(f)
@@ -133,6 +138,7 @@ def hoja_piezas(salida, tmp, muestras, tam=640):
             _, c, radio = pr.encuadrar(scn, obs, az, el, margen=1.05)
             ls = pr.luces_pieza(scn, c, radio)
             scn.view_layers[0].material_override = malla if alambre else None
+            plano.hide_render = alambre
             ruta = os.path.join(tmp, f"hoja_{clave}_{i}.png")
             pr.render(scn, ruta, tam, tam, muestras)
             fila.append(ruta)
