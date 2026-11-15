@@ -1,0 +1,62 @@
+{
+ "modelo": "arbol_pino",
+ "triangulos": 1284,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 28.16,
+  "alto_y": 27.56,
+  "fondo_z": 10.36
+ },
+ "texturas": {
+  "color": "arbol_pino_color.png",
+  "roughness": "arbol_pino_roughness.png",
+  "metalness": "arbol_pino_metalness.png",
+  "normal": "arbol_pino_normal.png"
+ },
+ "piezas": {
+  "arbol_pino_alto": {
+   "triangulos": 490,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    13.521,
+    -0.0
+   ],
+   "pivote": [
+    0.0,
+    0.0,
+    -0.0
+   ]
+  },
+  "arbol_pino_medio": {
+   "triangulos": 428,
+   "tipo": "textura",
+   "centro": [
+    11.0,
+    9.418,
+    0.0
+   ],
+   "pivote": [
+    11.0,
+    0.0,
+    -0.0
+   ]
+  },
+  "arbol_pino_bajo": {
+   "triangulos": 366,
+   "tipo": "textura",
+   "centro": [
+    -9.5,
+    5.79,
+    -0.0
+   ],
+   "pivote": [
+    -9.5,
+    0.0,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

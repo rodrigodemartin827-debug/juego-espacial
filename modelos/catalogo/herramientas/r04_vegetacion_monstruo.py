@@ -129,7 +129,7 @@ def esporas_suelo(g):
         h = rnd.uniform(0.7, 1.6)
         px, py = d * math.cos(a), d * math.sin(a)
         g.tubo("m_negro_liso", [(px, py, 0.2), (px + 0.1, py, 0.2 + h * 0.6), (px + 0.25, py + 0.1, 0.2 + h)], [0.1, 0.07, 0.05], lados=4)
-        g.esfera("m_neon" if i % 2 else "m_magenta", rnd.uniform(0.2, 0.34), (px + 0.25, py + 0.1, 0.3 + h), esc=(1, 1, 1.25), lados=6, anillos=4)
+        g.esfera("m_neon" if i % 2 else "m_magenta", rnd.uniform(0.14, 0.24), (px + 0.25, py + 0.1, 0.3 + h), esc=(1, 1, 1.25), lados=6, anillos=4)
     g.rev("m_carne", [(0.0, 0.0), (0.6, 0.05), (0.85, 0.5), (0.7, 0.95), (0.4, 1.1), (0.3, 1.0), (0.45, 0.6), (0.0, 0.45)], (-0.6, -2.4, 0.2),
           lados=8)
     g.esfera("m_magenta", 0.3, (-0.6, -2.4, 0.85), lados=6, anillos=3)

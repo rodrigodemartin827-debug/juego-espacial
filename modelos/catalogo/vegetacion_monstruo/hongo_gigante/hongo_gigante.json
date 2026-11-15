@@ -1,0 +1,48 @@
+{
+ "modelo": "hongo_gigante",
+ "triangulos": 2241,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 18.36,
+  "alto_y": 23.18,
+  "fondo_z": 17.9
+ },
+ "texturas": {
+  "color": "hongo_gigante_color.png",
+  "roughness": "hongo_gigante_roughness.png",
+  "metalness": "hongo_gigante_metalness.png",
+  "emision": "hongo_gigante_emision.png",
+  "normal": "hongo_gigante_normal.png"
+ },
+ "piezas": {
+  "hongo_gigante": {
+   "triangulos": 1273,
+   "tipo": "textura",
+   "centro": [
+    1.2,
+    10.631,
+    0.8
+   ]
+  },
+  "hongo_gigante_neon_magenta": {
+   "triangulos": 888,
+   "tipo": "neon",
+   "centro": [
+    1.212,
+    13.607,
+    -0.315
+   ]
+  },
+  "hongo_gigante_neon": {
+   "triangulos": 80,
+   "tipo": "neon",
+   "centro": [
+    3.801,
+    12.23,
+    2.879
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

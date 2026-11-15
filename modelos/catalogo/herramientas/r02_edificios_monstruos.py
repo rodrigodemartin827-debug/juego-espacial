@@ -36,7 +36,7 @@ def guarida_monstruo(g):
         a = math.pi * (i + 0.5) / 7
         px, pz = 6.9 * math.cos(a), 8.9 * math.sin(a)
         if pz > 3.0:
-            colmillo(g, "m_hueso", (px, -9.6, pz + 0.3), 2.6 - abs(i - 3) * 0.25, 0.5, rot=(180 + 8, math.degrees(a) - 90, 0),
+            colmillo(g, "m_hueso", (px, -9.6, pz + 0.3), 4.2 - abs(i - 3) * 0.4, 0.8, rot=(180 + 8, math.degrees(a) - 90, 0),
                      curvo=0.15)
     for s in (-1, 1):
         for k in range(3):

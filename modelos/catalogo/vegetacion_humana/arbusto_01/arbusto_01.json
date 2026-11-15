@@ -1,0 +1,29 @@
+{
+ "modelo": "arbusto_01",
+ "triangulos": 744,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 7.67,
+  "alto_y": 4.11,
+  "fondo_z": 5.95
+ },
+ "texturas": {
+  "color": "arbusto_01_color.png",
+  "roughness": "arbusto_01_roughness.png",
+  "metalness": "arbusto_01_metalness.png",
+  "normal": "arbusto_01_normal.png"
+ },
+ "piezas": {
+  "arbusto_01": {
+   "triangulos": 744,
+   "tipo": "textura",
+   "centro": [
+    -0.135,
+    1.614,
+    0.35
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

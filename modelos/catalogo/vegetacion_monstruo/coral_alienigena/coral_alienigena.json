@@ -1,0 +1,48 @@
+{
+ "modelo": "coral_alienigena",
+ "triangulos": 3720,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 14.84,
+  "alto_y": 9.39,
+  "fondo_z": 11.47
+ },
+ "texturas": {
+  "color": "coral_alienigena_color.png",
+  "roughness": "coral_alienigena_roughness.png",
+  "metalness": "coral_alienigena_metalness.png",
+  "emision": "coral_alienigena_emision.png",
+  "normal": "coral_alienigena_normal.png"
+ },
+ "piezas": {
+  "coral_alienigena": {
+   "triangulos": 2040,
+   "tipo": "textura",
+   "centro": [
+    0.108,
+    4.582,
+    1.109
+   ]
+  },
+  "coral_alienigena_neon_magenta": {
+   "triangulos": 1500,
+   "tipo": "neon",
+   "centro": [
+    0.118,
+    4.984,
+    1.481
+   ]
+  },
+  "coral_alienigena_neon": {
+   "triangulos": 180,
+   "tipo": "neon",
+   "centro": [
+    0.011,
+    1.295,
+    -0.077
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

@@ -1,0 +1,29 @@
+{
+ "modelo": "arbol_frutal",
+ "triangulos": 2198,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 11.23,
+  "alto_y": 13.7,
+  "fondo_z": 10.39
+ },
+ "texturas": {
+  "color": "arbol_frutal_color.png",
+  "roughness": "arbol_frutal_roughness.png",
+  "metalness": "arbol_frutal_metalness.png",
+  "normal": "arbol_frutal_normal.png"
+ },
+ "piezas": {
+  "arbol_frutal": {
+   "triangulos": 2198,
+   "tipo": "textura",
+   "centro": [
+    0.204,
+    6.561,
+    0.477
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

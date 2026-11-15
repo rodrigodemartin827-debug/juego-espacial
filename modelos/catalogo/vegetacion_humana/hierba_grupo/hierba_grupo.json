@@ -1,0 +1,29 @@
+{
+ "modelo": "hierba_grupo",
+ "triangulos": 968,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 4.33,
+  "alto_y": 3.45,
+  "fondo_z": 4.39
+ },
+ "texturas": {
+  "color": "hierba_grupo_color.png",
+  "roughness": "hierba_grupo_roughness.png",
+  "metalness": "hierba_grupo_metalness.png",
+  "normal": "hierba_grupo_normal.png"
+ },
+ "piezas": {
+  "hierba_grupo": {
+   "triangulos": 968,
+   "tipo": "textura",
+   "centro": [
+    0.175,
+    1.466,
+    0.143
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

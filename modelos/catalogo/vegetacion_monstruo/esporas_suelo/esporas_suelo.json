@@ -1,0 +1,57 @@
+{
+ "modelo": "esporas_suelo",
+ "triangulos": 2092,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 6.72,
+  "alto_y": 3.83,
+  "fondo_z": 6.54
+ },
+ "texturas": {
+  "color": "esporas_suelo_color.png",
+  "roughness": "esporas_suelo_roughness.png",
+  "metalness": "esporas_suelo_metalness.png",
+  "emision": "esporas_suelo_emision.png",
+  "normal": "esporas_suelo_normal.png"
+ },
+ "piezas": {
+  "esporas_suelo": {
+   "triangulos": 1444,
+   "tipo": "textura",
+   "centro": [
+    0.286,
+    1.611,
+    -0.019
+   ]
+  },
+  "esporas_suelo_neon_magenta": {
+   "triangulos": 456,
+   "tipo": "neon",
+   "centro": [
+    0.579,
+    1.936,
+    0.495
+   ]
+  },
+  "esporas_suelo_neon": {
+   "triangulos": 108,
+   "tipo": "neon",
+   "centro": [
+    0.649,
+    1.423,
+    0.131
+   ]
+  },
+  "esporas_suelo_cristal": {
+   "triangulos": 84,
+   "tipo": "cristal",
+   "centro": [
+    2.397,
+    0.553,
+    1.806
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

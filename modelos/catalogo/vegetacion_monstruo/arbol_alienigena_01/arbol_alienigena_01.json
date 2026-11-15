@@ -1,0 +1,57 @@
+{
+ "modelo": "arbol_alienigena_01",
+ "triangulos": 2906,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 19.61,
+  "alto_y": 25.46,
+  "fondo_z": 15.78
+ },
+ "texturas": {
+  "color": "arbol_alienigena_01_color.png",
+  "roughness": "arbol_alienigena_01_roughness.png",
+  "metalness": "arbol_alienigena_01_metalness.png",
+  "emision": "arbol_alienigena_01_emision.png",
+  "normal": "arbol_alienigena_01_normal.png"
+ },
+ "piezas": {
+  "arbol_alienigena_01": {
+   "triangulos": 1634,
+   "tipo": "textura",
+   "centro": [
+    0.324,
+    11.541,
+    0.203
+   ]
+  },
+  "arbol_alienigena_01_neon_magenta": {
+   "triangulos": 396,
+   "tipo": "neon",
+   "centro": [
+    0.263,
+    18.257,
+    0.941
+   ]
+  },
+  "arbol_alienigena_01_neon": {
+   "triangulos": 792,
+   "tipo": "neon",
+   "centro": [
+    0.593,
+    14.125,
+    0.146
+   ]
+  },
+  "arbol_alienigena_01_cristal": {
+   "triangulos": 84,
+   "tipo": "cristal",
+   "centro": [
+    2.623,
+    0.732,
+    -1.606
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}
