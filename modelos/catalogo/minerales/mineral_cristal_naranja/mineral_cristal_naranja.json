@@ -1,0 +1,45 @@
+{
+ "modelo": "mineral_cristal_naranja",
+ "triangulos": 482,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 6.99,
+  "alto_y": 6.58,
+  "fondo_z": 6.16
+ },
+ "texturas": {
+  "color": "mineral_cristal_naranja_color.png",
+  "roughness": "mineral_cristal_naranja_roughness.png",
+  "metalness": "mineral_cristal_naranja_metalness.png",
+  "emision": "mineral_cristal_naranja_emision.png",
+  "normal": "mineral_cristal_naranja_normal.png"
+ },
+ "piezas": {
+  "mineral_cristal_naranja": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    0.446,
+    0.747,
+    -0.03
+   ]
+  },
+  "mineral_cristal_naranja_cristal": {
+   "triangulos": 382,
+   "tipo": "cristal",
+   "centro": [
+    -0.152,
+    3.045,
+    0.002
+   ]
+  }
+ },
+ "anclas": {
+  "Luz": [
+   0.0,
+   3.52,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

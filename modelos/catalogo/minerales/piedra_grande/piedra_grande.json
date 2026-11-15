@@ -1,0 +1,29 @@
+{
+ "modelo": "piedra_grande",
+ "triangulos": 650,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 14.31,
+  "alto_y": 7.78,
+  "fondo_z": 10.93
+ },
+ "texturas": {
+  "color": "piedra_grande_color.png",
+  "roughness": "piedra_grande_roughness.png",
+  "metalness": "piedra_grande_metalness.png",
+  "normal": "piedra_grande_normal.png"
+ },
+ "piezas": {
+  "piedra_grande": {
+   "triangulos": 650,
+   "tipo": "textura",
+   "centro": [
+    0.406,
+    3.833,
+    0.087
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

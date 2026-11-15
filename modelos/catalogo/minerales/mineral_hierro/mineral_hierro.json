@@ -1,0 +1,29 @@
+{
+ "modelo": "mineral_hierro",
+ "triangulos": 720,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 7.42,
+  "alto_y": 3.8,
+  "fondo_z": 5.52
+ },
+ "texturas": {
+  "color": "mineral_hierro_color.png",
+  "roughness": "mineral_hierro_roughness.png",
+  "metalness": "mineral_hierro_metalness.png",
+  "normal": "mineral_hierro_normal.png"
+ },
+ "piezas": {
+  "mineral_hierro": {
+   "triangulos": 720,
+   "tipo": "textura",
+   "centro": [
+    0.058,
+    1.783,
+    0.24
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

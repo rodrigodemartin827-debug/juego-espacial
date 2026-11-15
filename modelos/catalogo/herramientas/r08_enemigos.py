@@ -183,8 +183,8 @@ def serpiente_sombra(g):
 
     def radio(t):
         if t < 0.25:
-            return 0.12 + 0.63 * (t / 0.25)
-        return 0.75 + 0.1 * math.sin((t - 0.25) / 0.75 * math.pi)
+            return 0.15 + 0.85 * (t / 0.25)
+        return 1.0 + 0.15 * math.sin((t - 0.25) / 0.75 * math.pi)
 
     tramos = ((0, 5, "cola2"), (5, 10, "cola1"), (10, 15, "cuerpo"), (15, 20, "cuello1"), (20, 24, "cuello2"), (24, 28, "cuello3"))
     padres = {"cola2": "cola1", "cola1": "cuerpo", "cuello1": "cuerpo", "cuello2": "cuello1", "cuello3": "cuello2"}
@@ -209,14 +209,14 @@ def serpiente_sombra(g):
     c = camino[-1]
     g.pieza("cabeza", pivote=c, padre="cuello3")
     g.loft("q_escama", [[(c[0], c[1] + 0.5, c[2] - 0.1)]] + [anillo_y(c[1] - dy, rx, rz, 8, pot=2.2, cz=c[2] + dz, cx=c[0]) for dy, rx, rz, dz in
-                                                           ((0.0, 0.8, 0.62, 0.1), (0.9, 1.05, 0.62, 0.05), (1.9, 0.8, 0.45, -0.1), (2.6, 0.4, 0.26, -0.2))] +
+                                                           ((0.0, 1.05, 0.8, 0.1), (0.9, 1.3, 0.8, 0.05), (1.9, 1.0, 0.55, -0.1), (2.6, 0.5, 0.3, -0.2))] +
            [[(c[0], c[1] - 2.9, c[2] - 0.25)]])
     for s in (-1, 1):
-        g.esfera("ojo_violeta", 0.2, (c[0] + s * 0.72, c[1] - 1.5, c[2] + 0.3), esc=(0.6, 1.3, 1), lados=6, anillos=4)
+        g.esfera("ojo_violeta", 0.3, (c[0] + s * 0.92, c[1] - 1.5, c[2] + 0.35), esc=(0.6, 1.3, 1), lados=6, anillos=4)
         g.tubo("m_cristal_osc", [(c[0] + s * 0.5, c[1] - 0.2, c[2] + 0.55), (c[0] + s * 0.8, c[1] + 0.7, c[2] + 1.1)], [0.18, 0.0], lados=5)
         colmillo(g, "m_hueso", (c[0] + s * 0.32, c[1] - 2.3, c[2] - 0.35), 0.6, 0.1, rot=(170, 0, 0), curvo=0.1)
         # Capucha (con grosor) a los lados del cuello.
-        g.prisma("q_vientre", [(0.0, -1.6), (1.5, -0.6), (1.7, 0.6), (0.9, 1.5), (0.0, 1.2)], 0.2, (c[0] + s * 0.5, c[1] + 0.55, c[2] - 0.4),
+        g.prisma("q_vientre", [(0.0, -2.2), (2.0, -0.8), (2.3, 0.8), (1.2, 1.9), (0.0, 1.5)], 0.22, (c[0] + s * 0.6, c[1] + 0.55, c[2] - 0.4),
                  (20, 0, 0), plano="xz", esc=(s, 1, 1))
     g.pieza("mandibula", pivote=(c[0], c[1] - 0.6, c[2] - 0.3), padre="cabeza")
     g.loft("q_vientre", [anillo_y(c[1] - dy, rx, 0.16, 6, cz=c[2] - 0.45 - dy * 0.14, cx=c[0]) for dy, rx in ((0.5, 0.7), (1.6, 0.65), (2.5, 0.3))])

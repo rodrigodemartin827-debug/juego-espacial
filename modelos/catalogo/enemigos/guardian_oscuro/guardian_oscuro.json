@@ -1,0 +1,138 @@
+{
+ "modelo": "guardian_oscuro",
+ "triangulos": 1946,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 13.02,
+  "alto_y": 18.49,
+  "fondo_z": 5.11
+ },
+ "texturas": {
+  "color": "guardian_oscuro_color.png",
+  "roughness": "guardian_oscuro_roughness.png",
+  "metalness": "guardian_oscuro_metalness.png",
+  "emision": "guardian_oscuro_emision.png",
+  "normal": "guardian_oscuro_normal.png"
+ },
+ "piezas": {
+  "Torso": {
+   "triangulos": 498,
+   "tipo": "textura",
+   "centro": [
+    -0.009,
+    5.504,
+    0.373
+   ],
+   "pivote": [
+    0.0,
+    7.2,
+    -0.0
+   ]
+  },
+  "Head": {
+   "triangulos": 404,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    11.832,
+    0.212
+   ],
+   "pivote": [
+    0.0,
+    9.6,
+    -0.0
+   ],
+   "padre": "Torso"
+  },
+  "Left Arm": {
+   "triangulos": 244,
+   "tipo": "textura",
+   "centro": [
+    -4.286,
+    7.531,
+    -0.0
+   ],
+   "pivote": [
+    -3.6,
+    8.4,
+    -0.0
+   ],
+   "padre": "Torso"
+  },
+  "Right Arm": {
+   "triangulos": 244,
+   "tipo": "textura",
+   "centro": [
+    4.34,
+    7.531,
+    0.0
+   ],
+   "pivote": [
+    3.6,
+    8.4,
+    -0.0
+   ],
+   "padre": "Torso"
+  },
+  "Left Leg": {
+   "triangulos": 158,
+   "tipo": "textura",
+   "centro": [
+    -1.2,
+    2.4,
+    0.873
+   ],
+   "pivote": [
+    -1.2,
+    4.8,
+    -0.0
+   ],
+   "padre": "Torso"
+  },
+  "Right Leg": {
+   "triangulos": 158,
+   "tipo": "textura",
+   "centro": [
+    1.2,
+    2.4,
+    0.873
+   ],
+   "pivote": [
+    1.2,
+    4.8,
+    -0.0
+   ],
+   "padre": "Torso"
+  },
+  "Arma": {
+   "triangulos": 240,
+   "tipo": "textura",
+   "centro": [
+    3.7,
+    9.375,
+    0.763
+   ],
+   "pivote": [
+    3.6,
+    4.56,
+    0.72
+   ],
+   "padre": "Right Arm"
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "rig": {
+  "raiz": "Torso",
+  "especie": "Criatura_GuardianOscuro",
+  "humanoide": true,
+  "articulaciones": {
+   "Head": "Neck",
+   "Left Arm": "Left Shoulder",
+   "Right Arm": "Right Shoulder",
+   "Left Leg": "Left Hip",
+   "Right Leg": "Right Hip",
+   "Arma": "Arma"
+  }
+ }
+}

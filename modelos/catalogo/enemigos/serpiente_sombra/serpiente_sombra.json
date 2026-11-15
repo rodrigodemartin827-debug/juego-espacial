@@ -1,0 +1,141 @@
+{
+ "modelo": "serpiente_sombra",
+ "triangulos": 1332,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 7.58,
+  "alto_y": 8.16,
+  "fondo_z": 15.96
+ },
+ "texturas": {
+  "color": "serpiente_sombra_color.png",
+  "roughness": "serpiente_sombra_roughness.png",
+  "metalness": "serpiente_sombra_metalness.png",
+  "emision": "serpiente_sombra_emision.png",
+  "normal": "serpiente_sombra_normal.png"
+ },
+ "piezas": {
+  "serpiente_sombra": {
+   "triangulos": 184,
+   "tipo": "textura",
+   "centro": [
+    0.143,
+    0.983,
+    -1.061
+   ]
+  },
+  "serpiente_sombra_cola2": {
+   "triangulos": 170,
+   "tipo": "textura",
+   "centro": [
+    1.76,
+    0.929,
+    -6.435
+   ],
+   "pivote": [
+    2.859,
+    0.75,
+    -5.232
+   ],
+   "padre": "serpiente_sombra_cola1"
+  },
+  "serpiente_sombra_cola1": {
+   "triangulos": 184,
+   "tipo": "textura",
+   "centro": [
+    2.45,
+    0.977,
+    -3.567
+   ],
+   "pivote": [
+    1.781,
+    0.75,
+    -2.464
+   ],
+   "padre": "serpiente_sombra"
+  },
+  "serpiente_sombra_cuello1": {
+   "triangulos": 184,
+   "tipo": "textura",
+   "centro": [
+    -2.135,
+    0.989,
+    1.412
+   ],
+   "pivote": [
+    -1.429,
+    0.75,
+    0.304
+   ],
+   "padre": "serpiente_sombra"
+  },
+  "serpiente_sombra_cuello2": {
+   "triangulos": 168,
+   "tipo": "textura",
+   "centro": [
+    -1.881,
+    2.136,
+    4.388
+   ],
+   "pivote": [
+    -2.451,
+    0.75,
+    3.071
+   ],
+   "padre": "serpiente_sombra_cuello1"
+  },
+  "serpiente_sombra_cuello3": {
+   "triangulos": 168,
+   "tipo": "textura",
+   "centro": [
+    -0.73,
+    5.681,
+    5.119
+   ],
+   "pivote": [
+    -1.236,
+    3.999,
+    5.347
+   ],
+   "padre": "serpiente_sombra_cuello2"
+  },
+  "serpiente_sombra_cabeza": {
+   "triangulos": 228,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    5.809,
+    5.107
+   ],
+   "pivote": [
+    0.0,
+    6.35,
+    4.36
+   ],
+   "padre": "serpiente_sombra_cuello3"
+  },
+  "serpiente_sombra_mandibula": {
+   "triangulos": 46,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    5.69,
+    6.41
+   ],
+   "pivote": [
+    0.0,
+    6.05,
+    4.96
+   ],
+   "padre": "serpiente_sombra_cabeza"
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "rig": {
+  "raiz": "cuerpo",
+  "especie": "Criatura_SerpienteSombra",
+  "humanoide": false,
+  "articulaciones": {}
+ }
+}

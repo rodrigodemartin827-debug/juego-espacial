@@ -1,0 +1,35 @@
+{
+ "modelo": "hacha_hierro",
+ "triangulos": 492,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.37,
+  "alto_y": 6.0,
+  "fondo_z": 0.46
+ },
+ "texturas": {
+  "color": "hacha_hierro_color.png",
+  "roughness": "hacha_hierro_roughness.png",
+  "metalness": "hacha_hierro_metalness.png",
+  "normal": "hacha_hierro_normal.png"
+ },
+ "piezas": {
+  "hacha_hierro": {
+   "triangulos": 492,
+   "tipo": "textura",
+   "centro": [
+    0.535,
+    1.55,
+    0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Agarre": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

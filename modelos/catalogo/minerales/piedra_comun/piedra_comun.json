@@ -1,0 +1,62 @@
+{
+ "modelo": "piedra_comun",
+ "triangulos": 280,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 12.08,
+  "alto_y": 3.56,
+  "fondo_z": 3.82
+ },
+ "texturas": {
+  "color": "piedra_comun_color.png",
+  "roughness": "piedra_comun_roughness.png",
+  "metalness": "piedra_comun_metalness.png",
+  "normal": "piedra_comun_normal.png"
+ },
+ "piezas": {
+  "piedra_comun_a": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    0.053,
+    1.077,
+    0.146
+   ],
+   "pivote": [
+    0.0,
+    0.0,
+    -0.0
+   ]
+  },
+  "piedra_comun_b": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    4.411,
+    0.629,
+    0.163
+   ],
+   "pivote": [
+    4.5,
+    0.0,
+    -0.0
+   ]
+  },
+  "piedra_comun_c": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    -4.134,
+    1.729,
+    0.154
+   ],
+   "pivote": [
+    -4.2,
+    0.0,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

@@ -1,0 +1,45 @@
+{
+ "modelo": "pico_acero",
+ "triangulos": 534,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.73,
+  "alto_y": 5.65,
+  "fondo_z": 1.09
+ },
+ "texturas": {
+  "color": "pico_acero_color.png",
+  "roughness": "pico_acero_roughness.png",
+  "metalness": "pico_acero_metalness.png",
+  "emision": "pico_acero_emision.png",
+  "normal": "pico_acero_normal.png"
+ },
+ "piezas": {
+  "pico_acero": {
+   "triangulos": 510,
+   "tipo": "textura",
+   "centro": [
+    0.235,
+    1.575,
+    -0.0
+   ]
+  },
+  "pico_acero_neon": {
+   "triangulos": 24,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    3.6,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Agarre": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

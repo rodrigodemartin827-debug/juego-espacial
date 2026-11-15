@@ -1,0 +1,146 @@
+{
+ "modelo": "golem_musgo",
+ "triangulos": 1654,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 16.19,
+  "alto_y": 15.17,
+  "fondo_z": 7.09
+ },
+ "texturas": {
+  "color": "golem_musgo_color.png",
+  "roughness": "golem_musgo_roughness.png",
+  "metalness": "golem_musgo_metalness.png",
+  "emision": "golem_musgo_emision.png",
+  "normal": "golem_musgo_normal.png"
+ },
+ "piezas": {
+  "golem_musgo_torso": {
+   "triangulos": 522,
+   "tipo": "textura",
+   "centro": [
+    -0.138,
+    8.616,
+    -0.089
+   ],
+   "pivote": [
+    0.0,
+    8.6,
+    -0.0
+   ]
+  },
+  "golem_musgo_cabeza": {
+   "triangulos": 168,
+   "tipo": "textura",
+   "centro": [
+    0.032,
+    13.488,
+    0.847
+   ],
+   "pivote": [
+    0.0,
+    12.4,
+    0.6
+   ],
+   "padre": "golem_musgo_torso"
+  },
+  "golem_musgo_brazo_izq": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    -4.929,
+    9.078,
+    -0.154
+   ],
+   "pivote": [
+    -4.3,
+    10.6,
+    -0.0
+   ],
+   "padre": "golem_musgo_torso"
+  },
+  "golem_musgo_antebrazo_izq": {
+   "triangulos": 282,
+   "tipo": "textura",
+   "centro": [
+    -5.724,
+    3.576,
+    0.821
+   ],
+   "pivote": [
+    -5.6,
+    6.0,
+    0.3
+   ],
+   "padre": "golem_musgo_brazo_izq"
+  },
+  "golem_musgo_pierna_izq": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    -1.771,
+    2.861,
+    0.119
+   ],
+   "pivote": [
+    -1.6,
+    5.2,
+    -0.0
+   ],
+   "padre": "golem_musgo_torso"
+  },
+  "golem_musgo_brazo_der": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    5.0,
+    9.072,
+    0.124
+   ],
+   "pivote": [
+    4.3,
+    10.6,
+    -0.0
+   ],
+   "padre": "golem_musgo_torso"
+  },
+  "golem_musgo_antebrazo_der": {
+   "triangulos": 282,
+   "tipo": "textura",
+   "centro": [
+    5.827,
+    3.609,
+    0.848
+   ],
+   "pivote": [
+    5.6,
+    6.0,
+    0.3
+   ],
+   "padre": "golem_musgo_brazo_der"
+  },
+  "golem_musgo_pierna_der": {
+   "triangulos": 100,
+   "tipo": "textura",
+   "centro": [
+    1.823,
+    2.899,
+    0.5
+   ],
+   "pivote": [
+    1.6,
+    5.2,
+    -0.0
+   ],
+   "padre": "golem_musgo_torso"
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "rig": {
+  "raiz": "torso",
+  "especie": "Criatura_GolemMusgo",
+  "humanoide": false,
+  "articulaciones": {}
+ }
+}

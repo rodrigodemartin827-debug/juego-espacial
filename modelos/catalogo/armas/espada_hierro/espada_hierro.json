@@ -1,0 +1,40 @@
+{
+ "modelo": "espada_hierro",
+ "triangulos": 410,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 1.76,
+  "alto_y": 5.15,
+  "fondo_z": 0.4
+ },
+ "texturas": {
+  "color": "espada_hierro_color.png",
+  "roughness": "espada_hierro_roughness.png",
+  "metalness": "espada_hierro_metalness.png",
+  "normal": "espada_hierro_normal.png"
+ },
+ "piezas": {
+  "espada_hierro": {
+   "triangulos": 410,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.776,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Agarre": [
+   0.0,
+   0.0,
+   -0.0
+  ],
+  "Punta": [
+   0.0,
+   4.35,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

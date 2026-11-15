@@ -1,0 +1,186 @@
+{
+ "modelo": "arana_cristal",
+ "triangulos": 1498,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 12.2,
+  "alto_y": 7.64,
+  "fondo_z": 11.58
+ },
+ "texturas": {
+  "color": "arana_cristal_color.png",
+  "roughness": "arana_cristal_roughness.png",
+  "metalness": "arana_cristal_metalness.png",
+  "emision": "arana_cristal_emision.png",
+  "normal": "arana_cristal_normal.png"
+ },
+ "piezas": {
+  "arana_cristal": {
+   "triangulos": 782,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    4.383,
+    -2.469
+   ]
+  },
+  "arana_cristal_colmillo_izq": {
+   "triangulos": 38,
+   "tipo": "textura",
+   "centro": [
+    -0.421,
+    1.7,
+    2.458
+   ],
+   "pivote": [
+    -0.4,
+    2.2,
+    2.1
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_colmillo_der": {
+   "triangulos": 38,
+   "tipo": "textura",
+   "centro": [
+    0.421,
+    1.696,
+    2.452
+   ],
+   "pivote": [
+    0.4,
+    2.2,
+    2.1
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata1_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -3.271,
+    2.88,
+    2.756
+   ],
+   "pivote": [
+    -1.2,
+    2.6,
+    1.4
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata1_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    3.258,
+    2.88,
+    2.766
+   ],
+   "pivote": [
+    1.2,
+    2.6,
+    1.4
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata2_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -3.531,
+    2.88,
+    1.052
+   ],
+   "pivote": [
+    -1.2,
+    2.6,
+    0.7
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata2_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    3.513,
+    2.88,
+    1.055
+   ],
+   "pivote": [
+    1.2,
+    2.6,
+    0.7
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata3_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -3.536,
+    2.88,
+    -0.444
+   ],
+   "pivote": [
+    -1.2,
+    2.6,
+    -0.0
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata3_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    3.514,
+    2.88,
+    -0.446
+   ],
+   "pivote": [
+    1.2,
+    2.6,
+    -0.0
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata4_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -3.384,
+    2.88,
+    -2.048
+   ],
+   "pivote": [
+    -1.2,
+    2.6,
+    -0.6
+   ],
+   "padre": "arana_cristal"
+  },
+  "arana_cristal_pata4_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    3.362,
+    2.88,
+    -2.053
+   ],
+   "pivote": [
+    1.2,
+    2.6,
+    -0.6
+   ],
+   "padre": "arana_cristal"
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "rig": {
+  "raiz": "cuerpo",
+  "especie": "Criatura_AranaCristal",
+  "humanoide": false,
+  "articulaciones": {}
+ }
+}

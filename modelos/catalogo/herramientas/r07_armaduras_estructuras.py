@@ -22,14 +22,16 @@ def _peto(g, metal, oscuro, borde):
 
 def _hombrera(g, s, metal, borde, lamas=2, pua=False):
     x = s * 1.5
-    g.rev(metal, [(0.78, 0.0), (0.76, 0.2), (0.55, 0.45), (0.0, 0.55)], (x, 0, 0.72), (0, s * 14, 0), esc=(0.95, 0.9, 1), lados=10)
-    g.toro(borde, 0.76, 0.07, (x, 0, 0.74), (0, s * 14, 0), seg=10, lados=4, esc=(0.95, 0.9, 1))
+    g.rev(metal, [(0.66, 0.0), (0.64, 0.14), (0.45, 0.32), (0.0, 0.4)], (x, 0, 0.82), (0, s * 16, 0), esc=(0.95, 0.9, 1), lados=10)
+    g.toro(borde, 0.65, 0.06, (x, 0, 0.83), (0, s * 16, 0), seg=10, lados=4, esc=(0.95, 0.9, 1))
     for i in range(lamas):
-        z = 0.5 - i * 0.3
-        g.rev(metal, [(0.74 - i * 0.04, 0.0), (0.72 - i * 0.04, 0.3), (0.6, 0.34), (0.6, 0.0)], (x + s * 0.06, 0, z - 0.3),
-              (0, s * 8, 0), esc=(0.9, 0.92, 1), lados=10)
+        z = 0.62 - i * 0.26
+        g.rev(metal, [(0.6 - i * 0.03, 0.0), (0.64 - i * 0.03, 0.22), (0.5, 0.26), (0.5, 0.0)], (x + s * (0.08 + i * 0.03), 0, z - 0.22),
+              (0, s * (14 - i * 6), 0), esc=(0.9, 0.92, 1), lados=10)
+        g.toro(borde, 0.61 - i * 0.03, 0.04, (x + s * (0.08 + i * 0.03), 0, z - 0.2), (0, s * (14 - i * 6), 0), seg=10, lados=3,
+               esc=(0.9, 0.92, 1))
     if pua:
-        g.cil(borde, 0.16, 0.5, (x + s * 0.25, 0, 1.2), (0, s * 30, 0), lados=6, r2=0.0)
+        g.cil(borde, 0.14, 0.45, (x + s * 0.2, 0, 1.12), (0, s * 30, 0), lados=6, r2=0.0)
 
 
 def armadura_hierro(g):
@@ -65,7 +67,7 @@ def armadura_acero(g):
     for s, nom in ((-1, "hombrera_izq"), (1, "hombrera_der")):
         g.pieza(nom, pivote=(s * 1.5, 0, 0), padre="peto")
         _hombrera(g, s, "acero", "oro", lamas=2, pua=True)
-        g.caja("h_neon", (0.08, 0.5, 0.1), (s * 2.12, 0, 0.62))
+        g.caja("h_neon", (0.08, 0.4, 0.08), (s * 2.14, 0, 0.5))
     g.ancla("TorsoCentro", (0, 0, 0))
 
 
@@ -78,11 +80,13 @@ def casco_hierro(g):
     for i in range(10):
         a = 2 * math.pi * (i + 0.5) / 10
         g.esfera("hierro_osc", 0.055, (0.83 * math.cos(a), 0.83 * math.sin(a), 0.1), lados=5, anillos=3)
-    # Cubrenuca de cuero.
-    g.loft("cuero", [[(0.78 * math.cos(math.radians(a)), 0.78 * math.sin(math.radians(a)), -0.1) for a in range(20, 161, 28)] +
-                     [(0.7 * math.cos(math.radians(a)), 0.7 * math.sin(math.radians(a)), -0.1) for a in range(160, 19, -28)],
-                    [(0.84 * math.cos(math.radians(a)), 0.86 * math.sin(math.radians(a)), -0.55) for a in range(20, 161, 28)] +
-                    [(0.76 * math.cos(math.radians(a)), 0.78 * math.sin(math.radians(a)), -0.55) for a in range(160, 19, -28)]], suave=False)
+    # Carrilleras y cubrenuca de placas.
+    for sx in (-1, 1):
+        g.prisma("hierro", [(-0.32, 0.0), (0.3, 0.0), (0.22, -0.55), (-0.05, -0.7), (-0.3, -0.45)], 0.09, (sx * 0.8, -0.1, -0.1), plano="yz")
+        g.esfera("hierro_osc", 0.06, (sx * 0.86, -0.1, -0.3), lados=5, anillos=3)
+    for k, a in enumerate((50, 90, 130)):
+        ar = math.radians(a)
+        g.caja("hierro", (0.62, 0.09, 0.5), (0.8 * math.cos(ar), 0.8 * math.sin(ar), -0.35), rot=(-8, 0, a - 90))
     g.ancla("CabezaCentro", (0, 0, 0))
 
 
@@ -91,14 +95,16 @@ def casco_acero(g):
     g.rev("acero", [(0.78, -0.55), (0.84, -0.1), (0.84, 0.15), (0.76, 0.45), (0.55, 0.72), (0.25, 0.86), (0.0, 0.9)], (0, 0, 0), lados=12)
     g.toro("oro", 0.84, 0.06, (0, 0, 0.12), seg=12, lados=4)
     g.toro("oro", 0.79, 0.06, (0, 0, -0.55), seg=12, lados=4)
-    # Visera en pico.
-    g.loft("acero", [[(-0.6, -0.62, 0.2), (0.6, -0.62, 0.2), (0.62, -0.6, -0.5), (-0.62, -0.6, -0.5)],
-                     [(-0.3, -0.98, 0.12), (0.3, -0.98, 0.12), (0.2, -1.0, -0.42), (-0.2, -1.0, -0.42)],
-                     [(0, -1.12, -0.12)]], suave=False)
+    # Visera en cuña (pico), con ranura de visión iluminada y respiraderos.
+    g.prisma("acero", [(-0.66, -0.52), (0.0, -1.14), (0.66, -0.52)], 0.78, (0, 0, -0.14), plano="xy", sup=0.94)
+    g.prisma("oro", [(-0.7, -0.5), (0.0, -1.2), (0.7, -0.5), (0.0, -1.0)], 0.1, (0, 0, 0.26), plano="xy")
+    g.caja("oro", (0.1, 0.1, 0.8), (0, -1.12, -0.14), rot=(0, 0, 45))
+    ang = math.degrees(math.atan2(0.62, 0.66))
     for s in (-1, 1):
-        g.caja("h_neon", (0.34, 0.08, 0.07), (s * 0.3, -0.9, 0.0), rot=(0, 0, -s * 32))
+        g.caja("h_oscuro", (0.62, 0.08, 0.16), (s * 0.34, -0.845, 0.02), rot=(0, 0, s * ang))
+        g.caja("h_neon", (0.5, 0.1, 0.07), (s * 0.34, -0.85, 0.02), rot=(0, 0, s * ang))
         for k in range(3):
-            g.caja("h_oscuro", (0.05, 0.06, 0.2), (s * (0.2 + k * 0.1), -0.93 + k * 0.045, -0.28), rot=(0, 0, -s * 32))
+            g.caja("h_oscuro", (0.05, 0.1, 0.2), (s * (0.2 + k * 0.13), -0.975 + k * 0.122, -0.3), rot=(0, 0, s * ang))
         g.cil("oro", 0.13, 0.1, (s * 0.84, -0.1, 0.0), (0, 90, 0), lados=6)
     # Cresta / penacho naranja.
     cresta = [(-0.75, 0.3), (-0.55, 0.85), (-0.1, 1.2), (0.45, 1.15), (0.85, 0.75), (1.0, 0.1), (0.8, 0.3), (0.4, 0.75), (-0.1, 0.86),

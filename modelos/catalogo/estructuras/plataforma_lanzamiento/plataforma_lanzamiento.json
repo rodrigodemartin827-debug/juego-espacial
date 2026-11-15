@@ -1,0 +1,68 @@
+{
+ "modelo": "plataforma_lanzamiento",
+ "triangulos": 2952,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 50.81,
+  "alto_y": 44.28,
+  "fondo_z": 61.41
+ },
+ "texturas": {
+  "color": "plataforma_lanzamiento_color.png",
+  "roughness": "plataforma_lanzamiento_roughness.png",
+  "metalness": "plataforma_lanzamiento_metalness.png",
+  "emision": "plataforma_lanzamiento_emision.png",
+  "normal": "plataforma_lanzamiento_normal.png"
+ },
+ "piezas": {
+  "plataforma_lanzamiento": {
+   "triangulos": 2452,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    22.0,
+    5.297
+   ]
+  },
+  "plataforma_lanzamiento_neon": {
+   "triangulos": 440,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    17.67,
+    0.766
+   ]
+  },
+  "plataforma_lanzamiento_cristal": {
+   "triangulos": 24,
+   "tipo": "cristal",
+   "centro": [
+    16.575,
+    35.6,
+    -15.075
+   ]
+  },
+  "plataforma_lanzamiento_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    17.0,
+    44.0,
+    -15.5
+   ]
+  }
+ },
+ "anclas": {
+  "Nave": [
+   0.0,
+   2.8,
+   -0.0
+  ],
+  "Consola": [
+   -9.0,
+   2.6,
+   21.8
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

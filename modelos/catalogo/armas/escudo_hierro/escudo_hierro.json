@@ -1,0 +1,35 @@
+{
+ "modelo": "escudo_hierro",
+ "triangulos": 554,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.56,
+  "alto_y": 3.56,
+  "fondo_z": 1.26
+ },
+ "texturas": {
+  "color": "escudo_hierro_color.png",
+  "roughness": "escudo_hierro_roughness.png",
+  "metalness": "escudo_hierro_metalness.png",
+  "normal": "escudo_hierro_normal.png"
+ },
+ "piezas": {
+  "escudo_hierro": {
+   "triangulos": 554,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    0.0,
+    0.248
+   ]
+  }
+ },
+ "anclas": {
+  "Agarre": [
+   0.0,
+   0.0,
+   -0.3
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

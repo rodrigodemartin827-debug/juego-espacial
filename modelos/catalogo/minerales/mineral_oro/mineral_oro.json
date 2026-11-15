@@ -1,0 +1,29 @@
+{
+ "modelo": "mineral_oro",
+ "triangulos": 826,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 7.24,
+  "alto_y": 5.51,
+  "fondo_z": 5.27
+ },
+ "texturas": {
+  "color": "mineral_oro_color.png",
+  "roughness": "mineral_oro_roughness.png",
+  "metalness": "mineral_oro_metalness.png",
+  "normal": "mineral_oro_normal.png"
+ },
+ "piezas": {
+  "mineral_oro": {
+   "triangulos": 826,
+   "tipo": "textura",
+   "centro": [
+    0.282,
+    2.642,
+    0.403
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

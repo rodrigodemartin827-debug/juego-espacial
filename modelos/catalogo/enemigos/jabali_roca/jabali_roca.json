@@ -1,0 +1,126 @@
+{
+ "modelo": "jabali_roca",
+ "triangulos": 1018,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.8,
+  "alto_y": 5.67,
+  "fondo_z": 9.76
+ },
+ "texturas": {
+  "color": "jabali_roca_color.png",
+  "roughness": "jabali_roca_roughness.png",
+  "metalness": "jabali_roca_metalness.png",
+  "emision": "jabali_roca_emision.png",
+  "normal": "jabali_roca_normal.png"
+ },
+ "piezas": {
+  "jabali_roca": {
+   "triangulos": 446,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    3.347,
+    -0.352
+   ]
+  },
+  "jabali_roca_cabeza": {
+   "triangulos": 308,
+   "tipo": "textura",
+   "centro": [
+    0.033,
+    2.777,
+    4.155
+   ],
+   "pivote": [
+    0.0,
+    2.7,
+    2.9
+   ],
+   "padre": "jabali_roca"
+  },
+  "jabali_roca_cola": {
+   "triangulos": 16,
+   "tipo": "textura",
+   "centro": [
+    -0.003,
+    3.176,
+    -3.496
+   ],
+   "pivote": [
+    0.0,
+    3.0,
+    -3.2
+   ],
+   "padre": "jabali_roca"
+  },
+  "jabali_roca_pata_del_izq": {
+   "triangulos": 62,
+   "tipo": "textura",
+   "centro": [
+    -1.014,
+    1.103,
+    1.913
+   ],
+   "pivote": [
+    -1.0,
+    1.9,
+    1.9
+   ],
+   "padre": "jabali_roca"
+  },
+  "jabali_roca_pata_del_der": {
+   "triangulos": 62,
+   "tipo": "textura",
+   "centro": [
+    0.984,
+    1.102,
+    1.915
+   ],
+   "pivote": [
+    1.0,
+    1.9,
+    1.9
+   ],
+   "padre": "jabali_roca"
+  },
+  "jabali_roca_pata_tras_izq": {
+   "triangulos": 62,
+   "tipo": "textura",
+   "centro": [
+    -1.014,
+    1.103,
+    -1.987
+   ],
+   "pivote": [
+    -1.0,
+    1.9,
+    -2.0
+   ],
+   "padre": "jabali_roca"
+  },
+  "jabali_roca_pata_tras_der": {
+   "triangulos": 62,
+   "tipo": "textura",
+   "centro": [
+    0.984,
+    1.102,
+    -1.985
+   ],
+   "pivote": [
+    1.0,
+    1.9,
+    -2.0
+   ],
+   "padre": "jabali_roca"
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "rig": {
+  "raiz": "cuerpo",
+  "especie": "Criatura_JabaliRoca",
+  "humanoide": false,
+  "articulaciones": {}
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "modelo": "pico_hierro",
+ "triangulos": 464,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 3.6,
+  "alto_y": 4.8,
+  "fondo_z": 0.62
+ },
+ "texturas": {
+  "color": "pico_hierro_color.png",
+  "roughness": "pico_hierro_roughness.png",
+  "metalness": "pico_hierro_metalness.png",
+  "normal": "pico_hierro_normal.png"
+ },
+ "piezas": {
+  "pico_hierro": {
+   "triangulos": 464,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    1.301,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Agarre": [
+   0.0,
+   0.0,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

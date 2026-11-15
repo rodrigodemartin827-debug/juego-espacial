@@ -1,0 +1,68 @@
+{
+ "modelo": "generador_energia",
+ "triangulos": 3480,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 15.71,
+  "alto_y": 16.6,
+  "fondo_z": 15.95
+ },
+ "texturas": {
+  "color": "generador_energia_color.png",
+  "roughness": "generador_energia_roughness.png",
+  "metalness": "generador_energia_metalness.png",
+  "emision": "generador_energia_emision.png",
+  "normal": "generador_energia_normal.png"
+ },
+ "piezas": {
+  "generador_energia": {
+   "triangulos": 3172,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    7.7,
+    0.115
+   ]
+  },
+  "generador_energia_neon": {
+   "triangulos": 224,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    9.411,
+    1.767
+   ]
+  },
+  "generador_energia_cristal": {
+   "triangulos": 72,
+   "tipo": "cristal",
+   "centro": [
+    0.0,
+    8.1,
+    -0.0
+   ]
+  },
+  "generador_energia_neon_naranja": {
+   "triangulos": 12,
+   "tipo": "neon",
+   "centro": [
+    0.6,
+    1.7,
+    8.0
+   ]
+  }
+ },
+ "anclas": {
+  "Nucleo": [
+   0.0,
+   8.0,
+   -0.0
+  ],
+  "Consola": [
+   0.0,
+   0.6,
+   8.4
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

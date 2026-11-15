@@ -1,0 +1,171 @@
+{
+ "modelo": "escarabajo_gigante",
+ "triangulos": 1280,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 8.6,
+  "alto_y": 5.2,
+  "fondo_z": 10.81
+ },
+ "texturas": {
+  "color": "escarabajo_gigante_color.png",
+  "roughness": "escarabajo_gigante_roughness.png",
+  "metalness": "escarabajo_gigante_metalness.png",
+  "emision": "escarabajo_gigante_emision.png",
+  "normal": "escarabajo_gigante_normal.png"
+ },
+ "piezas": {
+  "escarabajo_gigante": {
+   "triangulos": 448,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    2.567,
+    -0.227
+   ]
+  },
+  "escarabajo_gigante_cabeza": {
+   "triangulos": 272,
+   "tipo": "textura",
+   "centro": [
+    0.001,
+    3.156,
+    4.401
+   ],
+   "pivote": [
+    0.0,
+    2.0,
+    3.3
+   ],
+   "padre": "escarabajo_gigante"
+  },
+  "escarabajo_gigante_mandibula_izq": {
+   "triangulos": 40,
+   "tipo": "textura",
+   "centro": [
+    -0.725,
+    1.572,
+    5.586
+   ],
+   "pivote": [
+    -0.55,
+    1.6,
+    4.6
+   ],
+   "padre": "escarabajo_gigante_cabeza"
+  },
+  "escarabajo_gigante_mandibula_der": {
+   "triangulos": 40,
+   "tipo": "textura",
+   "centro": [
+    0.724,
+    1.569,
+    5.577
+   ],
+   "pivote": [
+    0.55,
+    1.6,
+    4.6
+   ],
+   "padre": "escarabajo_gigante_cabeza"
+  },
+  "escarabajo_gigante_pata1_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -2.703,
+    1.786,
+    2.93
+   ],
+   "pivote": [
+    -1.3,
+    1.7,
+    2.4
+   ],
+   "padre": "escarabajo_gigante"
+  },
+  "escarabajo_gigante_pata1_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    2.692,
+    1.786,
+    2.936
+   ],
+   "pivote": [
+    1.3,
+    1.7,
+    2.4
+   ],
+   "padre": "escarabajo_gigante"
+  },
+  "escarabajo_gigante_pata2_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -2.71,
+    1.786,
+    0.305
+   ],
+   "pivote": [
+    -1.3,
+    1.7,
+    0.3
+   ],
+   "padre": "escarabajo_gigante"
+  },
+  "escarabajo_gigante_pata2_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    2.693,
+    1.786,
+    0.305
+   ],
+   "pivote": [
+    1.3,
+    1.7,
+    0.3
+   ],
+   "padre": "escarabajo_gigante"
+  },
+  "escarabajo_gigante_pata3_izq": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    -2.711,
+    1.786,
+    -2.426
+   ],
+   "pivote": [
+    -1.3,
+    1.7,
+    -1.8
+   ],
+   "padre": "escarabajo_gigante"
+  },
+  "escarabajo_gigante_pata3_der": {
+   "triangulos": 80,
+   "tipo": "textura",
+   "centro": [
+    2.693,
+    1.786,
+    -2.43
+   ],
+   "pivote": [
+    1.3,
+    1.7,
+    -1.8
+   ],
+   "padre": "escarabajo_gigante"
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical).",
+ "rig": {
+  "raiz": "cuerpo",
+  "especie": "Criatura_EscarabajoGigante",
+  "humanoide": false,
+  "articulaciones": {}
+ }
+}
