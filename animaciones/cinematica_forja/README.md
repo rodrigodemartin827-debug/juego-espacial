@@ -1,6 +1,6 @@
 # Cinemática de la forja
 
-Cinemática de 14,5 s (30 fps) del proceso de forjado: horno, yunque y temple, con un maniquí R6, los modelos de
+Cinemática de 44,5 s (30 fps) del proceso de forjado: horno, yunque y temple, con un maniquí R6, los modelos de
 `modelos/forja` (horno, yunque y barril), cámara cinematográfica y luz de fuego. Estilo herrería de Skyrim / Dark
 Souls: oscuro, caliente y épico.
 
@@ -28,34 +28,38 @@ Todo sale de los scripts de `herramientas/` (Blender sin pantalla, `bpy` 5.2): n
 
 ## Guion
 
+Ritmo lento y pesado: se tiene que sentir el calor y el peso del martillo.
+
 | Tiempo | Fotogramas | Plano | Qué pasa |
 | --- | --- | --- | --- |
 | **Fase 1 — El horno** | | | |
-| 0,00–1,13 | 0–34 | General bajo | El herrero llega con el lingote en las tenazas, en alto como una antorcha. Ascuas saliendo del horno |
-| 1,13–1,93 | 34–58 | Por encima del hombro | Se agacha, coge el asa y sube la compuerta de guillotina; la suelta y sigue subiendo sola. Estallido de chispas y la luz del fuego le inunda |
-| 1,93–2,73 | 58–82 | Detalle del fuego | El lingote baja hacia la boca y se hunde en las brasas; empieza a ponerse naranja |
-| 2,73–3,60 | 82–108 | Desde dentro del horno | Contraplano entre las llamas: el herrero espera con la cara iluminada; remueve la pieza |
+| 0,00–3,33 | 0–100 | General bajo | El herrero llega andando despacio con el lingote en las tenazas, en alto como una antorcha. Ascuas saliendo del horno |
+| 3,33–5,73 | 100–172 | Por encima del hombro | Se agacha, coge el asa y sube la compuerta con calma; la suelta y sigue subiendo sola. Estallido de chispas y la luz del fuego le inunda |
+| 5,73–8,33 | 172–250 | Detalle del fuego (2,6 s) | El lingote baja a la boca y se hunde despacio en las brasas; pasa de negro a naranja |
+| 8,33–10,60 | 250–318 | Desde dentro del horno (2,3 s) | Contraplano entre las llamas: la cara iluminada por el fuego mientras espera; remueve la pieza |
 | **Fase 2 — El yunque** | | | |
-| 3,60–4,60 | 108–138 | Lateral siguiendo la pieza | La saca al rojo blanco (chispas), da un paso atrás, se gira y la baja sobre el yunque; saca el martillo que lleva a la espalda |
-| 4,60–5,43 | 138–163 | Bajo, frente izquierdo | 1.er martillazo (5,00 s) con el horno de contraluz |
-| 5,43–6,00 | 163–180 | Detalle del yunque | 2.º martillazo (5,60 s): la pieza se alarga y se afila |
-| 6,00–7,13 | 180–214 | Frente derecho | 3.º (6,20 s) y 4.º (6,87 s) |
-| 7,13–8,60 | 214–258 | Contrapicado extremo, lateral | 5.º y más fuerte (7,73 s); la pieza pasa a rojo oscuro |
+| 10,60–12,67 | 318–380 | Lateral siguiendo la pieza | La saca al rojo blanco (chispas), da un paso atrás, se gira y la baja sobre el yunque; saca el martillo que lleva a la espalda |
+| 12,67–16,30 | 380–489 | Bajo, frente izquierdo | Golpes 1 (13,73 s) y 2 (15,63 s) con el horno de contraluz |
+| 16,30–19,53 | 489–586 | Detalle del yunque | Levanta la pieza, la mira y le da la vuelta; golpe 3 (18,87 s) |
+| 19,53–24,67 | 586–740 | Frente derecho | Golpe 4 (20,77 s), otra vuelta a la pieza, golpe 5 (24,00 s) |
+| 24,67–26,70 | 740–801 | Frente derecho, cerca | Golpe 6 (25,90 s) |
+| 26,70–30,53 | 801–916 | Contrapicado extremo, lateral | El último y más fuerte se hace esperar (28,20 s); la pieza queda roja |
 | **Fase 3 — El temple** | | | |
-| 8,60–9,67 | 258–290 | Siguiendo al herrero | Guarda el martillo, levanta la hoja del yunque y la lleva tumbada por encima del barril |
-| 9,67–10,47 | 290–314 | Detalle del agua | La inclina hacia el agua y la hunde de un empujón a lo largo de la hoja: la punta entra a los 9,83 s. Salpicadura de chispas, burbujas, la superficie se agita |
-| 10,47–12,07 | 314–362 | Plano medio | El vapor sube mientras la agita; la hoja pasa de rojo a gris metálico |
+| 30,53–33,47 | 916–1004 | Siguiendo al herrero | Guarda el martillo, levanta la hoja y camina despacio al barril |
+| 33,47–35,27 | 1004–1058 | Detalle del agua | La inclina y la hunde con decisión, de un empujón a lo largo de la hoja (la punta entra a los 33,83 s). Salpicadura de chispas, burbujas, el agua se agita |
+| 35,27–38,60 | 1058–1158 | Plano medio | El vapor sube lento y denso mientras la agita; la hoja se apaga poco a poco (unos 3 s) y queda gris metálico |
 | **Fase 4 — El resultado** | | | |
-| 12,07–14,53 | 362–436 | Giro alrededor de la hoja | La saca por donde entró y la levanta despacio, punta arriba; la cámara gira 70° a su alrededor; destello en el filo (13,07–13,60 s); fundido a negro desde 13,93 s |
+| 38,60–44,53 | 1158–1336 | Giro lento alrededor de la hoja | La saca, la levanta punta arriba y la inspecciona girándola; la cámara la rodea despacio (65° en 6 s); destello en el filo (41,13–41,93 s); fundido a negro desde 42,73 s |
 
-Cada martillazo: anticipación (el brazo sube arriba y atrás y el torso se arma hacia atrás), golpe en 2-3
-fotogramas con easing explosivo, **parada (hitstop) de 3 fotogramas** con el cuerpo volcado sobre el yunque,
-temblor de cámara (de 0,55° a 2,1° según el golpe), destello de la luz de la pieza y una ráfaga de chispas
-(70, 100, 140, 190 y 320), y rebote. Cada golpe arma más y cae más fuerte que el anterior.
+Cada martillazo tiene su momento: sube el martillo despacio (0,67 s) con el torso armándose hacia atrás, **pausa
+arriba** (0,27 s), cae acelerando (5 fotogramas), **parada (hitstop) de 4 fotogramas** con el cuerpo volcado sobre
+el yunque, temblor de cámara (de 0,55° a 2,2° según el golpe), destello de la luz de la pieza, ráfaga de chispas
+(70, 90, 115, 140, 170, 210 y 340), rebote y vuelta al reposo mirando la pieza. Cada golpe arma más y cae más
+fuerte que el anterior. Tras el 2.º y el 4.º levanta la pieza, la mira de cerca y le da la vuelta.
 
-La pieza va de lingote a hoja en 6 etapas (una por golpe) y su color sigue la temperatura de un cuerpo negro
-(desplazado 500 K hacia el amarillo, como lo ve el ojo en la forja): ~1900 K (naranja blanco) al sacarla, 1200 K
-(rojo) en el último golpe y apagada en el agua, donde pasa a gris metálico.
+La pieza va de lingote a hoja en 6 etapas (cada golpe la avanza 5/7 de etapa) y su color sigue la temperatura de un
+cuerpo negro (desplazado 500 K hacia el amarillo, como lo ve el ojo en la forja): ~1900 K (naranja blanco) al
+sacarla, 1240 K (rojo) en el último golpe; en el agua se apaga en unos 3 s y pasa a gris metálico.
 
 ## Recrearla en Roblox
 
@@ -86,16 +90,17 @@ Lo recomendado:
    tenazas para llegar sin codo), así que el muestreo es más exacto.
    Fuera de `martillo_en_mano` el martillo va colgado a la espalda (soldado al Torso; su CFrame también está en el
    muestreo).
-5. **La pieza.** Cambia de malla (`Pieza_Etapa0` a `Pieza_Etapa5`) en cada martillazo (`pieza_etapa_claves`, o
-   `impactos_s`). Su color y su luz están en `pieza_calor`: mientras está caliente, `Material = Neon` con el
+5. **La pieza.** Cambia de malla (`Pieza_Etapa0` a `Pieza_Etapa5`) en los martillazos: `pieza_etapa_claves` sube
+   5/7 de etapa por golpe (7 golpes, 6 mallas), así que en cada impacto se pone la malla de la etapa redondeada.
+   Las vueltas de la pieza (y el giro final) ya van en sus CFrame del muestreo. Su color y su luz están en `pieza_calor`: mientras está caliente, `Material = Neon` con el
    `Color` dado y un `PointLight`; al templarla, `Metal` con el gris y la `Reflectance` dados.
 6. **Partículas** (`particulas`): las chispas de cada golpe son `:Emit(n)` en el `Attachment` «Golpe» del yunque en
    cada impacto; ascuas continuas en «Fuego» del horno; estallido al abrir la compuerta y al sacar la pieza; vapor
    en «Vapor» del barril al tocar el agua. Cada entrada trae sus ajustes (velocidad, vida, color...).
-   Rendimiento en móvil: un solo emisor de chispas reutilizado para los 5 golpes.
+   Rendimiento en móvil: un solo emisor de chispas reutilizado para los 7 golpes.
 7. **Luces y fundido** (`luces`): `PointLight` parpadeante dentro del horno, la luz de la boca que se enciende al
    abrir, y el fundido a negro con un `Frame` o un `ColorCorrectionEffect`.
-8. **Sonido** (pendiente, se añade en Roblox): pasos, compuerta (arrastre de hierro), rugido del fuego, 5 golpes
+8. **Sonido** (pendiente, se añade en Roblox): pasos, compuerta (arrastre de hierro), rugido del fuego, 7 golpes
    metálicos en `impactos_s` (más graves cuanto más fuerte), siseo del temple en `contacto_agua_s` y un brillo
    agudo con el destello.
 
@@ -133,7 +138,7 @@ end
   agua) la punta llega con error 0,00 studs; la mano en el asa de la compuerta, con 0,02–0,21 (queda dentro de la
   mano, que mide 1 stud).
 - **Pies en el suelo:** la altura del torso se calcula en cada fotograma para que los pies pisen (error 0,00).
-- **Sin choques:** `comprobar_choques.py` recorre los 436 fotogramas y lanza rayos por la pieza, las tenazas, el
+- **Sin choques:** `comprobar_choques.py` recorre los 1.336 fotogramas y lanza rayos por la pieza, las tenazas, el
   martillo y las 12 aristas de cada pieza del maniquí contra las mallas reales del horno, el yunque, el barril y el
   suelo: **0 choques** (la superficie del agua no cuenta). Con esta prueba se cambiaron la ruta de llegada, el sitio
   de cada parada, el giro al sacar la pieza (hacia la derecha, lejos del horno), el martillo (a la espalda) y el
@@ -142,7 +147,7 @@ end
   intencionado (el brazo que sube la compuerta, el brazo con las tenazas por delante del pecho, el borde del barril
   en el plano del vapor).
 - **FBX del cuerpo:** se vuelve a importar y las articulaciones coinciden con la animación (desviación 0,0000
-  studs en 9 fotogramas), 7 huesos R6 con su jerarquía, 436 fotogramas.
+  studs en 9 fotogramas), 7 huesos R6 con su jerarquía, 1.336 fotogramas.
 
 **NO comprobado:**
 
