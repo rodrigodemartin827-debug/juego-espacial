@@ -1,0 +1,57 @@
+{
+ "modelo": "edificio_residencial",
+ "triangulos": 4620,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 22.0,
+  "alto_y": 31.67,
+  "fondo_z": 18.5
+ },
+ "texturas": {
+  "color": "edificio_residencial_color.png",
+  "roughness": "edificio_residencial_roughness.png",
+  "metalness": "edificio_residencial_metalness.png",
+  "emision": "edificio_residencial_emision.png",
+  "normal": "edificio_residencial_normal.png"
+ },
+ "piezas": {
+  "edificio_residencial": {
+   "triangulos": 4020,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    15.75,
+    0.75
+   ]
+  },
+  "edificio_residencial_cristal": {
+   "triangulos": 528,
+   "tipo": "cristal",
+   "centro": [
+    0.0,
+    12.95,
+    0.15
+   ]
+  },
+  "edificio_residencial_neon": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    15.305,
+    8.495
+   ]
+  },
+  "edificio_residencial_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    -7.5,
+    31.5,
+    4.5
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

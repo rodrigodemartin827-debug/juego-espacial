@@ -1,0 +1,54 @@
+{
+ "modelo": "cuartel_humano",
+ "triangulos": 3568,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 37.0,
+  "alto_y": 26.24,
+  "fondo_z": 28.0
+ },
+ "texturas": {
+  "color": "cuartel_humano_color.png",
+  "roughness": "cuartel_humano_roughness.png",
+  "metalness": "cuartel_humano_metalness.png",
+  "emision": "cuartel_humano_emision.png",
+  "normal": "cuartel_humano_normal.png"
+ },
+ "piezas": {
+  "cuartel_humano": {
+   "triangulos": 3264,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    13.12,
+    0.5
+   ]
+  },
+  "cuartel_humano_neon": {
+   "triangulos": 196,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    9.85,
+    -0.0
+   ]
+  },
+  "cuartel_humano_cristal": {
+   "triangulos": 108,
+   "tipo": "cristal",
+   "centro": [
+    -0.0,
+    10.139,
+    2.689
+   ]
+  }
+ },
+ "anclas": {
+  "Puerta": [
+   0.0,
+   0.5,
+   12.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

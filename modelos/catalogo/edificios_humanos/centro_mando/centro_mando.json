@@ -1,0 +1,86 @@
+{
+ "modelo": "centro_mando",
+ "triangulos": 5016,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 34.0,
+  "alto_y": 26.98,
+  "fondo_z": 34.43
+ },
+ "texturas": {
+  "color": "centro_mando_color.png",
+  "roughness": "centro_mando_roughness.png",
+  "metalness": "centro_mando_metalness.png",
+  "emision": "centro_mando_emision.png",
+  "normal": "centro_mando_normal.png"
+ },
+ "piezas": {
+  "centro_mando": {
+   "triangulos": 3948,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    13.35,
+    0.15
+   ]
+  },
+  "centro_mando_cristal": {
+   "triangulos": 292,
+   "tipo": "cristal",
+   "centro": [
+    -0.0,
+    10.4,
+    1.385
+   ]
+  },
+  "centro_mando_neon": {
+   "triangulos": 660,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    11.05,
+    1.443
+   ]
+  },
+  "centro_mando_cartel": {
+   "triangulos": 44,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    13.75,
+    8.45
+   ]
+  },
+  "centro_mando_neon_naranja": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    0.005,
+    17.33,
+    1.639
+   ]
+  },
+  "centro_mando_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    23.49,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {
+  "Puerta": [
+   0.0,
+   0.5,
+   17.0
+  ],
+  "Holograma": [
+   0.0,
+   16.5,
+   -0.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

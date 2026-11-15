@@ -1,0 +1,63 @@
+{
+ "modelo": "hospital_humano",
+ "triangulos": 2320,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 30.0,
+  "alto_y": 26.1,
+  "fondo_z": 24.5
+ },
+ "texturas": {
+  "color": "hospital_humano_color.png",
+  "roughness": "hospital_humano_roughness.png",
+  "metalness": "hospital_humano_metalness.png",
+  "emision": "hospital_humano_emision.png",
+  "normal": "hospital_humano_normal.png"
+ },
+ "piezas": {
+  "hospital_humano": {
+   "triangulos": 1532,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    13.05,
+    1.75
+   ]
+  },
+  "hospital_humano_cristal": {
+   "triangulos": 516,
+   "tipo": "cristal",
+   "centro": [
+    -0.0,
+    9.2,
+    -0.0
+   ]
+  },
+  "hospital_humano_neon_azul": {
+   "triangulos": 236,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    15.15,
+    3.87
+   ]
+  },
+  "hospital_humano_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    -2.0,
+    24.1,
+    -6.0
+   ]
+  }
+ },
+ "anclas": {
+  "Entrada": [
+   0.0,
+   0.5,
+   10.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

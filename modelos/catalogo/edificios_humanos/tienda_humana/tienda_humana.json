@@ -1,0 +1,91 @@
+{
+ "modelo": "tienda_humana",
+ "triangulos": 2312,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 19.6,
+  "alto_y": 14.25,
+  "fondo_z": 16.88
+ },
+ "texturas": {
+  "color": "tienda_humana_color.png",
+  "roughness": "tienda_humana_roughness.png",
+  "metalness": "tienda_humana_metalness.png",
+  "emision": "tienda_humana_emision.png",
+  "normal": "tienda_humana_normal.png"
+ },
+ "piezas": {
+  "tienda_humana": {
+   "triangulos": 2100,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    7.04,
+    1.34
+   ]
+  },
+  "tienda_humana_cristal": {
+   "triangulos": 24,
+   "tipo": "cristal",
+   "centro": [
+    0.0,
+    5.0,
+    -1.0
+   ]
+  },
+  "tienda_humana_persiana": {
+   "triangulos": 36,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    6.0,
+    6.05
+   ],
+   "pivote": [
+    0.0,
+    6.45,
+    6.05
+   ]
+  },
+  "tienda_humana_neon": {
+   "triangulos": 72,
+   "tipo": "neon",
+   "centro": [
+    -0.005,
+    7.625,
+    0.145
+   ]
+  },
+  "tienda_humana_cartel": {
+   "triangulos": 44,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    10.75,
+    7.1
+   ]
+  },
+  "tienda_humana_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    -6.5,
+    14.08,
+    -4.0
+   ]
+  }
+ },
+ "anclas": {
+  "Mostrador": [
+   0.0,
+   3.7,
+   4.6
+  ],
+  "LuzToldo": [
+   0.0,
+   7.3,
+   8.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

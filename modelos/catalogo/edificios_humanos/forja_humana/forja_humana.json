@@ -1,0 +1,59 @@
+{
+ "modelo": "forja_humana",
+ "triangulos": 1760,
+ "limite": 5000,
+ "tam_studs": {
+  "ancho_x": 18.6,
+  "alto_y": 13.7,
+  "fondo_z": 15.3
+ },
+ "texturas": {
+  "color": "forja_humana_color.png",
+  "roughness": "forja_humana_roughness.png",
+  "metalness": "forja_humana_metalness.png",
+  "emision": "forja_humana_emision.png",
+  "normal": "forja_humana_normal.png"
+ },
+ "piezas": {
+  "forja_humana": {
+   "triangulos": 1724,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    6.85,
+    -0.15
+   ]
+  },
+  "forja_humana_neon": {
+   "triangulos": 24,
+   "tipo": "neon",
+   "centro": [
+    -0.0,
+    6.465,
+    3.34
+   ]
+  },
+  "forja_humana_neon_naranja": {
+   "triangulos": 12,
+   "tipo": "neon",
+   "centro": [
+    1.3,
+    4.16,
+    4.0
+   ]
+  }
+ },
+ "anclas": {
+  "Yunque": [
+   1.5,
+   4.1,
+   4.0
+  ],
+  "Fuego": [
+   -4.2,
+   2.2,
+   -1.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

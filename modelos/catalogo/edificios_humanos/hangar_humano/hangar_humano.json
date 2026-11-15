@@ -1,0 +1,105 @@
+{
+ "modelo": "hangar_humano",
+ "triangulos": 6134,
+ "limite": 15000,
+ "tam_studs": {
+  "ancho_x": 58.0,
+  "alto_y": 25.68,
+  "fondo_z": 76.0
+ },
+ "texturas": {
+  "color": "hangar_humano_color.png",
+  "roughness": "hangar_humano_roughness.png",
+  "metalness": "hangar_humano_metalness.png",
+  "emision": "hangar_humano_emision.png",
+  "normal": "hangar_humano_normal.png"
+ },
+ "piezas": {
+  "hangar_humano": {
+   "triangulos": 4922,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    12.839,
+    4.0
+   ]
+  },
+  "hangar_humano_neon": {
+   "triangulos": 468,
+   "tipo": "neon",
+   "centro": [
+    -0.483,
+    11.433,
+    5.673
+   ]
+  },
+  "hangar_humano_cristal": {
+   "triangulos": 544,
+   "tipo": "cristal",
+   "centro": [
+    -0.0,
+    14.833,
+    0.35
+   ]
+  },
+  "hangar_humano_cartel": {
+   "triangulos": 44,
+   "tipo": "textura",
+   "centro": [
+    -0.0,
+    20.5,
+    31.9
+   ]
+  },
+  "hangar_humano_puerta_izq": {
+   "triangulos": 60,
+   "tipo": "textura",
+   "centro": [
+    -14.0,
+    8.8,
+    32.465
+   ],
+   "pivote": [
+    -14.0,
+    0.5,
+    32.45
+   ]
+  },
+  "hangar_humano_puerta_der": {
+   "triangulos": 60,
+   "tipo": "textura",
+   "centro": [
+    14.0,
+    8.8,
+    32.465
+   ],
+   "pivote": [
+    14.0,
+    0.5,
+    32.45
+   ]
+  },
+  "hangar_humano_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    20.0,
+    24.77,
+    -24.0
+   ]
+  }
+ },
+ "anclas": {
+  "Plataforma": [
+   0.0,
+   0.6,
+   -2.0
+  ],
+  "Gancho": [
+   6.0,
+   1.6,
+   5.0
+  ]
+ },
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}

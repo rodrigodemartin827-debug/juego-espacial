@@ -51,8 +51,8 @@ def main():
         for i, (nombre, tris, im) in enumerate(minis):
             x, y = (i % cols) * t, (i // cols) * t
             hoja.paste(im, (x, y))
-            dr.text((x + 8, y + 6), f"{nombre} · {tris} tri", font=fuente(15), fill=(255, 255, 255), stroke_width=2,
-                    stroke_fill=(0, 0, 0))
+            dr.rectangle((x, y, x + t, y + 26), fill=(22, 24, 30))
+            dr.text((x + 8, y + 5), f"{nombre} · {tris} tri", font=fuente(14), fill=(255, 255, 255))
         hoja.save(os.path.join(RAIZ, "rondas", f"{ronda}.jpg"), quality=88)
         print("hoja", ronda, len(minis))
 

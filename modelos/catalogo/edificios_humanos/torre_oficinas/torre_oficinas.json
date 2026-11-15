@@ -1,0 +1,57 @@
+{
+ "modelo": "torre_oficinas",
+ "triangulos": 1768,
+ "limite": 10000,
+ "tam_studs": {
+  "ancho_x": 26.0,
+  "alto_y": 112.65,
+  "fondo_z": 27.13
+ },
+ "texturas": {
+  "color": "torre_oficinas_color.png",
+  "roughness": "torre_oficinas_roughness.png",
+  "metalness": "torre_oficinas_metalness.png",
+  "emision": "torre_oficinas_emision.png",
+  "normal": "torre_oficinas_normal.png"
+ },
+ "piezas": {
+  "torre_oficinas": {
+   "triangulos": 1400,
+   "tipo": "textura",
+   "centro": [
+    0.0,
+    56.05,
+    0.5
+   ]
+  },
+  "torre_oficinas_cristal": {
+   "triangulos": 12,
+   "tipo": "cristal",
+   "centro": [
+    -0.0,
+    3.5,
+    11.1
+   ]
+  },
+  "torre_oficinas_neon": {
+   "triangulos": 320,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    50.77,
+    1.875
+   ]
+  },
+  "torre_oficinas_neon_rojo": {
+   "triangulos": 36,
+   "tipo": "neon",
+   "centro": [
+    0.0,
+    112.3,
+    -0.0
+   ]
+  }
+ },
+ "anclas": {},
+ "nota": "Studs, ejes de Roblox (Y arriba) respecto al origen del modelo: Blender (x, y, z) -> Roblox (x, z, -y). El FBX lleva aplicado el GIRO_IMPORTACION (180° sobre la vertical)."
+}
