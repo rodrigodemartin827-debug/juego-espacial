@@ -1,0 +1,372 @@
+{
+  "nombre": "bestia_escarabajo",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Escarabajo cósmico blindado: caparazón negro durísimo, cuernos frontales, 6 patas y alas que se abren del caparazón. Tanque viviente: 2 asientos bajo el caparazón.",
+  "triangulos": 12962,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 10.0,
+    "y": 6.0,
+    "z": 8.0
+  },
+  "tamano_pedido": {
+    "ancho": 10,
+    "fondo": 8,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cuerpo",
+      "triangulos": 4541,
+      "tamano_studs": [
+        4.66,
+        3.51,
+        5.92
+      ],
+      "centro": [
+        -0.0,
+        3.053,
+        -0.855
+      ]
+    },
+    {
+      "nombre": "cabeza",
+      "triangulos": 2128,
+      "tamano_studs": [
+        3.71,
+        4.37,
+        3.46
+      ],
+      "centro": [
+        -0.002,
+        3.813,
+        2.272
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 40,
+      "tamano_studs": [
+        1.88,
+        0.43,
+        0.29
+      ],
+      "centro": [
+        -0.0,
+        2.649,
+        1.978
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "elitro_izq",
+      "triangulos": 1299,
+      "tamano_studs": [
+        2.62,
+        2.62,
+        3.45
+      ],
+      "centro": [
+        -0.331,
+        4.224,
+        -2.02
+      ]
+    },
+    {
+      "nombre": "ala_izq",
+      "triangulos": 172,
+      "tamano_studs": [
+        4.58,
+        1.72,
+        4.15
+      ],
+      "centro": [
+        -2.71,
+        4.516,
+        -1.926
+      ]
+    },
+    {
+      "nombre": "pata_1_izq",
+      "triangulos": 551,
+      "tamano_studs": [
+        3.69,
+        3.69,
+        2.37
+      ],
+      "centro": [
+        -2.719,
+        1.852,
+        1.586
+      ]
+    },
+    {
+      "nombre": "pata_2_izq",
+      "triangulos": 552,
+      "tamano_studs": [
+        3.68,
+        3.69,
+        0.75
+      ],
+      "centro": [
+        -2.72,
+        1.837,
+        -0.587
+      ]
+    },
+    {
+      "nombre": "pata_3_izq",
+      "triangulos": 552,
+      "tamano_studs": [
+        3.68,
+        3.7,
+        2.15
+      ],
+      "centro": [
+        -2.721,
+        1.848,
+        -2.753
+      ]
+    },
+    {
+      "nombre": "elitro_der",
+      "triangulos": 1299,
+      "tamano_studs": [
+        2.6,
+        2.65,
+        3.45
+      ],
+      "centro": [
+        0.331,
+        4.226,
+        -2.034
+      ]
+    },
+    {
+      "nombre": "ala_der",
+      "triangulos": 172,
+      "tamano_studs": [
+        4.58,
+        1.72,
+        4.15
+      ],
+      "centro": [
+        2.71,
+        4.516,
+        -1.926
+      ]
+    },
+    {
+      "nombre": "pata_1_der",
+      "triangulos": 552,
+      "tamano_studs": [
+        3.68,
+        3.7,
+        2.37
+      ],
+      "centro": [
+        2.724,
+        1.843,
+        1.587
+      ]
+    },
+    {
+      "nombre": "pata_2_der",
+      "triangulos": 552,
+      "tamano_studs": [
+        3.68,
+        3.69,
+        0.75
+      ],
+      "centro": [
+        2.723,
+        1.848,
+        -0.589
+      ]
+    },
+    {
+      "nombre": "pata_3_der",
+      "triangulos": 552,
+      "tamano_studs": [
+        3.68,
+        3.68,
+        2.14
+      ],
+      "centro": [
+        2.721,
+        1.843,
+        -2.752
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_escarabajo_color.png",
+    "normal": "bestia_escarabajo_normal.png",
+    "roughness": "bestia_escarabajo_roughness.png",
+    "metalness": "bestia_escarabajo_metalness.png",
+    "emision": "bestia_escarabajo_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 13,
+    "triangulos": 12962,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      10.0,
+      8.0,
+      6.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo",
+  "articulaciones": [
+    {
+      "pieza": "cabeza",
+      "padre": "cuerpo",
+      "pivote": [
+        0.0,
+        2.541,
+        1.334
+      ]
+    },
+    {
+      "pieza": "ojos_neon",
+      "padre": "cabeza",
+      "pivote": [
+        0.0,
+        2.649,
+        1.978
+      ]
+    },
+    {
+      "pieza": "elitro_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.288,
+        3.783,
+        -0.213
+      ]
+    },
+    {
+      "pieza": "ala_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.48,
+        3.729,
+        -0.47
+      ]
+    },
+    {
+      "pieza": "pata_1_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.249,
+        2.001,
+        0.732
+      ]
+    },
+    {
+      "pieza": "pata_2_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.249,
+        2.001,
+        -0.642
+      ]
+    },
+    {
+      "pieza": "pata_3_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.249,
+        2.001,
+        -2.017
+      ]
+    },
+    {
+      "pieza": "elitro_der",
+      "padre": "cuerpo",
+      "pivote": [
+        0.288,
+        3.783,
+        -0.213
+      ]
+    },
+    {
+      "pieza": "ala_der",
+      "padre": "cuerpo",
+      "pivote": [
+        0.48,
+        3.729,
+        -0.47
+      ]
+    },
+    {
+      "pieza": "pata_1_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.249,
+        2.001,
+        0.732
+      ]
+    },
+    {
+      "pieza": "pata_2_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.249,
+        2.001,
+        -0.642
+      ]
+    },
+    {
+      "pieza": "pata_3_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.249,
+        2.001,
+        -2.017
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        0.0,
+        4.022,
+        -1.158
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "posicion": [
+        0.0,
+        3.86,
+        -2.704
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

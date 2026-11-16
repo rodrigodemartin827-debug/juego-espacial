@@ -1,0 +1,579 @@
+{
+  "nombre": "bestia_hidra",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Hidra de tres cabezas: tres cuellos largos y cada cabeza escupe un elemento distinto (verde, púrpura, rojo). Jefe raro: 1 asiento entre los cuellos y bahía de carga.",
+  "triangulos": 18939,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 16.0,
+    "y": 14.0,
+    "z": 14.0
+  },
+  "tamano_pedido": {
+    "ancho": 16,
+    "fondo": 14,
+    "alto": 14
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cuerpo",
+      "triangulos": 3564,
+      "tamano_studs": [
+        6.52,
+        6.1,
+        7.45
+      ],
+      "centro": [
+        0.021,
+        4.529,
+        -0.656
+      ]
+    },
+    {
+      "nombre": "cola",
+      "triangulos": 1347,
+      "tamano_studs": [
+        3.52,
+        4.32,
+        4.92
+      ],
+      "centro": [
+        0.085,
+        3.234,
+        -4.538
+      ]
+    },
+    {
+      "nombre": "pata_del_izq",
+      "triangulos": 834,
+      "tamano_studs": [
+        3.09,
+        4.71,
+        2.61
+      ],
+      "centro": [
+        -2.802,
+        2.359,
+        1.636
+      ]
+    },
+    {
+      "nombre": "pata_tras_izq",
+      "triangulos": 833,
+      "tamano_studs": [
+        3.09,
+        4.72,
+        2.63
+      ],
+      "centro": [
+        -2.802,
+        2.353,
+        -1.607
+      ]
+    },
+    {
+      "nombre": "pata_del_der",
+      "triangulos": 834,
+      "tamano_studs": [
+        3.11,
+        4.71,
+        2.62
+      ],
+      "centro": [
+        2.859,
+        2.367,
+        1.632
+      ]
+    },
+    {
+      "nombre": "pata_tras_der",
+      "triangulos": 834,
+      "tamano_studs": [
+        3.12,
+        4.69,
+        2.63
+      ],
+      "centro": [
+        2.858,
+        2.364,
+        -1.61
+      ]
+    },
+    {
+      "nombre": "cuello_verde",
+      "triangulos": 1140,
+      "tamano_studs": [
+        6.28,
+        6.12,
+        3.12
+      ],
+      "centro": [
+        -3.949,
+        7.814,
+        3.003
+      ]
+    },
+    {
+      "nombre": "cabeza_verde",
+      "triangulos": 1452,
+      "tamano_studs": [
+        3.13,
+        2.66,
+        3.34
+      ],
+      "centro": [
+        -6.436,
+        9.817,
+        4.199
+      ]
+    },
+    {
+      "nombre": "ojos_verde_neon",
+      "triangulos": 40,
+      "tamano_studs": [
+        1.21,
+        0.29,
+        0.65
+      ],
+      "centro": [
+        -6.001,
+        9.693,
+        4.65
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    },
+    {
+      "nombre": "mandibula_verde",
+      "triangulos": 497,
+      "tamano_studs": [
+        2.1,
+        2.02,
+        2.05
+      ],
+      "centro": [
+        -6.391,
+        8.433,
+        4.359
+      ]
+    },
+    {
+      "nombre": "aliento_verde_neon",
+      "triangulos": 420,
+      "tamano_studs": [
+        1.35,
+        0.99,
+        1.44
+      ],
+      "centro": [
+        -5.442,
+        8.324,
+        5.371
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14",
+        "transparencia": 0.15
+      }
+    },
+    {
+      "nombre": "cuello_violeta",
+      "triangulos": 1140,
+      "tamano_studs": [
+        2.07,
+        8.59,
+        3.35
+      ],
+      "centro": [
+        0.042,
+        9.252,
+        3.204
+      ]
+    },
+    {
+      "nombre": "cabeza_violeta",
+      "triangulos": 1498,
+      "tamano_studs": [
+        1.98,
+        2.26,
+        3.86
+      ],
+      "centro": [
+        0.027,
+        12.87,
+        4.527
+      ]
+    },
+    {
+      "nombre": "ojos_violeta_neon",
+      "triangulos": 40,
+      "tamano_studs": [
+        1.37,
+        0.29,
+        0.21
+      ],
+      "centro": [
+        0.027,
+        12.883,
+        4.982
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "mandibula_violeta",
+      "triangulos": 498,
+      "tamano_studs": [
+        1.69,
+        1.34,
+        2.33
+      ],
+      "centro": [
+        0.025,
+        11.609,
+        5.088
+      ]
+    },
+    {
+      "nombre": "aliento_violeta_neon",
+      "triangulos": 420,
+      "tamano_studs": [
+        0.84,
+        0.85,
+        1.72
+      ],
+      "centro": [
+        0.034,
+        11.9,
+        6.146
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF",
+        "transparencia": 0.15
+      }
+    },
+    {
+      "nombre": "cuello_roja",
+      "triangulos": 1139,
+      "tamano_studs": [
+        6.49,
+        4.22,
+        3.59
+      ],
+      "centro": [
+        4.105,
+        6.858,
+        3.237
+      ]
+    },
+    {
+      "nombre": "cabeza_roja",
+      "triangulos": 1451,
+      "tamano_studs": [
+        2.8,
+        3.64,
+        2.92
+      ],
+      "centro": [
+        6.601,
+        7.192,
+        4.782
+      ]
+    },
+    {
+      "nombre": "ojos_roja_neon",
+      "triangulos": 40,
+      "tamano_studs": [
+        1.21,
+        0.27,
+        0.66
+      ],
+      "centro": [
+        6.246,
+        6.911,
+        5.125
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#FF2A2A"
+      }
+    },
+    {
+      "nombre": "mandibula_roja",
+      "triangulos": 498,
+      "tamano_studs": [
+        1.91,
+        2.52,
+        1.74
+      ],
+      "centro": [
+        6.764,
+        5.756,
+        4.623
+      ]
+    },
+    {
+      "nombre": "aliento_roja_neon",
+      "triangulos": 420,
+      "tamano_studs": [
+        1.39,
+        1.36,
+        1.35
+      ],
+      "centro": [
+        5.836,
+        5.294,
+        5.573
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#FF2A2A",
+        "transparencia": 0.15
+      }
+    }
+  ],
+  "texturas": {
+    "color": "bestia_hidra_color.png",
+    "normal": "bestia_hidra_normal.png",
+    "roughness": "bestia_hidra_roughness.png",
+    "metalness": "bestia_hidra_metalness.png",
+    "emision": "bestia_hidra_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 21,
+    "triangulos": 18939,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      16.0,
+      14.0,
+      14.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo",
+  "articulaciones": [
+    {
+      "pieza": "cola",
+      "padre": "cuerpo",
+      "pivote": [
+        0.027,
+        3.927,
+        -3.223
+      ]
+    },
+    {
+      "pieza": "pata_del_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -2.338,
+        3.634,
+        1.247
+      ]
+    },
+    {
+      "pieza": "pata_tras_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -2.338,
+        3.634,
+        -1.99
+      ]
+    },
+    {
+      "pieza": "pata_del_der",
+      "padre": "cuerpo",
+      "pivote": [
+        2.392,
+        3.634,
+        1.247
+      ]
+    },
+    {
+      "pieza": "pata_tras_der",
+      "padre": "cuerpo",
+      "pivote": [
+        2.392,
+        3.634,
+        -1.99
+      ]
+    },
+    {
+      "pieza": "cuello_verde",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.845,
+        5.782,
+        2.249
+      ]
+    },
+    {
+      "pieza": "cabeza_verde",
+      "padre": "cuello_verde",
+      "pivote": [
+        -6.477,
+        9.493,
+        3.637
+      ]
+    },
+    {
+      "pieza": "mandibula_verde",
+      "padre": "cabeza_verde",
+      "pivote": [
+        -6.477,
+        9.103,
+        3.868
+      ]
+    },
+    {
+      "pieza": "ojos_verde_neon",
+      "padre": "cabeza_verde",
+      "pivote": [
+        -6.477,
+        9.493,
+        4.022
+      ]
+    },
+    {
+      "pieza": "aliento_verde_neon",
+      "padre": "cabeza_verde",
+      "pivote": [
+        -6.477,
+        9.493,
+        4.022
+      ]
+    },
+    {
+      "pieza": "cuello_violeta",
+      "padre": "cuerpo",
+      "pivote": [
+        0.027,
+        5.978,
+        2.326
+      ]
+    },
+    {
+      "pieza": "cabeza_violeta",
+      "padre": "cuello_violeta",
+      "pivote": [
+        0.027,
+        12.423,
+        3.945
+      ]
+    },
+    {
+      "pieza": "mandibula_violeta",
+      "padre": "cabeza_violeta",
+      "pivote": [
+        0.027,
+        12.032,
+        4.176
+      ]
+    },
+    {
+      "pieza": "ojos_violeta_neon",
+      "padre": "cabeza_violeta",
+      "pivote": [
+        0.027,
+        12.423,
+        4.33
+      ]
+    },
+    {
+      "pieza": "aliento_violeta_neon",
+      "padre": "cabeza_violeta",
+      "pivote": [
+        0.027,
+        12.423,
+        4.33
+      ]
+    },
+    {
+      "pieza": "cuello_roja",
+      "padre": "cuerpo",
+      "pivote": [
+        1.899,
+        5.782,
+        2.249
+      ]
+    },
+    {
+      "pieza": "cabeza_roja",
+      "padre": "cuello_roja",
+      "pivote": [
+        6.728,
+        6.954,
+        4.099
+      ]
+    },
+    {
+      "pieza": "mandibula_roja",
+      "padre": "cabeza_roja",
+      "pivote": [
+        6.728,
+        6.564,
+        4.33
+      ]
+    },
+    {
+      "pieza": "ojos_roja_neon",
+      "padre": "cabeza_roja",
+      "pivote": [
+        6.728,
+        6.954,
+        4.485
+      ]
+    },
+    {
+      "pieza": "aliento_roja_neon",
+      "padre": "cabeza_roja",
+      "pivote": [
+        6.728,
+        6.954,
+        4.485
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        0.027,
+        7.147,
+        0.708
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "bahia_carga": {
+    "posicion": [
+      0.027,
+      5.196,
+      -1.682
+    ],
+    "tamano": [
+      5.91,
+      1.76,
+      1.85
+    ],
+    "nota": "dos alforjas grandes, una en cada cadera"
+  }
+}

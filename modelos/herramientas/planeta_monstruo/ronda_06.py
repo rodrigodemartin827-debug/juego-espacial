@@ -235,7 +235,7 @@ def bestia_fenix_oscuro(M):
     rnd = M.rnd
     M.mat("pluma_negra", "quitina_negra", a="#0C0A12", b="#2A1440", rug=0.4, escamas=dict(esc=4.0, fuerza=0.9))
     M.mat("brasa", "lava_purpura", a="#C04DFF", b="#3A0F5A")
-    M.mat("llama", "fuego_violeta", a="#C04DFF", b="#F2D0FF")
+    M.mat("llama", "fuego_violeta", a="#7A1EC8", b="#B040F0", emis=(VIOLETA, 0.85))
     M.mat("llama_oscura", "fuego_violeta", a="#5A1E9A", b="#C04DFF", emis=(VIOLETA, 0.6))
     FUEGO = dict(material="Neon", color=VIOLETA, transparencia=0.2)
     Z = 4.6

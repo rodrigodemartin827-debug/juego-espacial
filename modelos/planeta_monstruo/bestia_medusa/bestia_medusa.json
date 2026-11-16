@@ -1,0 +1,211 @@
+{
+  "nombre": "bestia_medusa",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Medusa de nebulosa: campana translúcida con dibujos de luz púrpura y tentáculos largos que brillan. De exploración: 1 asiento dentro de la campana.",
+  "triangulos": 14258,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 12.0,
+    "y": 18.0,
+    "z": 12.0
+  },
+  "tamano_pedido": {
+    "ancho": 12,
+    "fondo": 12,
+    "alto": 18
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "campana_cristal",
+      "triangulos": 4600,
+      "tamano_studs": [
+        12.0,
+        5.9,
+        12.01
+      ],
+      "centro": [
+        -0.001,
+        15.056,
+        0.003
+      ],
+      "roblox": {
+        "material": "Glass",
+        "color": "#8A5AD0",
+        "transparencia": 0.4
+      }
+    },
+    {
+      "nombre": "patrones_neon",
+      "triangulos": 1800,
+      "tamano_studs": [
+        11.04,
+        1.77,
+        11.05
+      ],
+      "centro": [
+        -0.002,
+        14.838,
+        0.008
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "nucleo",
+      "triangulos": 2523,
+      "tamano_studs": [
+        4.46,
+        7.12,
+        4.7
+      ],
+      "centro": [
+        -0.005,
+        13.556,
+        0.125
+      ]
+    },
+    {
+      "nombre": "brazos_orales",
+      "triangulos": 2999,
+      "tamano_studs": [
+        4.47,
+        7.55,
+        3.82
+      ],
+      "centro": [
+        -0.121,
+        8.305,
+        0.08
+      ]
+    },
+    {
+      "nombre": "tentaculos_a_neon",
+      "triangulos": 1168,
+      "tamano_studs": [
+        11.16,
+        12.54,
+        10.35
+      ],
+      "centro": [
+        -0.122,
+        6.272,
+        0.201
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "tentaculos_b_neon",
+      "triangulos": 1168,
+      "tamano_studs": [
+        11.16,
+        12.45,
+        10.17
+      ],
+      "centro": [
+        -0.036,
+        6.331,
+        -0.026
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "bestia_medusa_color.png",
+    "normal": "bestia_medusa_normal.png",
+    "roughness": "bestia_medusa_roughness.png",
+    "metalness": "bestia_medusa_metalness.png",
+    "emision": "bestia_medusa_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 6,
+    "triangulos": 14258,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      12.0,
+      12.01,
+      18.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "nucleo",
+  "articulaciones": [
+    {
+      "pieza": "patrones_neon",
+      "padre": "campana_cristal",
+      "pivote": [
+        -0.002,
+        16.027,
+        0.008
+      ]
+    },
+    {
+      "pieza": "campana_cristal",
+      "padre": "nucleo",
+      "pivote": [
+        -0.002,
+        15.532,
+        0.008
+      ]
+    },
+    {
+      "pieza": "brazos_orales",
+      "padre": "nucleo",
+      "pivote": [
+        -0.002,
+        11.474,
+        0.008
+      ]
+    },
+    {
+      "pieza": "tentaculos_a_neon",
+      "padre": "campana_cristal",
+      "pivote": [
+        -0.002,
+        12.563,
+        0.008
+      ]
+    },
+    {
+      "pieza": "tentaculos_b_neon",
+      "padre": "campana_cristal",
+      "pivote": [
+        -0.002,
+        12.563,
+        0.008
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        -0.002,
+        14.006,
+        1.796
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

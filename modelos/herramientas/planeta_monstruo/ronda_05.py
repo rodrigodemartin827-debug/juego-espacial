@@ -342,16 +342,16 @@ def bestia_escarabajo(M):
     M.mat("ala_fina", "membrana", a="#7A5AA0", b="#3A2460", rug=0.25)
     Z = 2.5
     c = M.pieza("cuerpo", tris=4200, res=170, k=0.3, ruido=(0.025, 1.2))
-    c.esfera((0, -1.2, Z), 1, "capa", esc=(1.9, 1.3, 1.25))              # tórax (pronoto)
-    c.esfera((0, 1.4, Z - 0.1), 1, "quitina", esc=(1.75, 2.4, 1.0))       # abdomen
-    c.esfera((0, 0.6, Z - 0.75), 1, "piel", esc=(1.5, 2.6, 0.6))          # vientre
+    c.esfera((0, -1.2, Z), 1, "capa", esc=(2.35, 1.5, 1.55))              # tórax (pronoto)
+    c.esfera((0, 1.4, Z - 0.1), 1, "quitina", esc=(2.25, 2.6, 1.35))       # abdomen
+    c.esfera((0, 0.6, Z - 0.85), 1, "piel", esc=(1.9, 2.8, 0.8))          # vientre
     for i in range(5):
-        c.toro((0, 0.1 + i * 0.62, Z - 0.1), 1.62 - 0.12 * i, 0.12, "quitina_negra", eje=(0, 1, 0), esc=(1, 0.62, 1), k=0.08)  # segmentos
-    c.tubo([(-1.6, -1.9, Z + 0.6), (0, -2.35, Z + 0.95), (1.6, -1.9, Z + 0.6)], 0.26, "capa", suave=6, k=0.15)  # reborde
+        c.toro((0, 0.1 + i * 0.62, Z - 0.1), 2.1 - 0.15 * i, 0.12, "quitina_negra", eje=(0, 1, 0), esc=(1, 0.62, 1), k=0.08)  # segmentos
+    c.tubo([(-2.0, -2.1, Z + 0.7), (0, -2.6, Z + 1.15), (2.0, -2.1, Z + 0.7)], 0.28, "capa", suave=6, k=0.15)  # reborde
     for s in (-1, 1):
         c.duro.cuerno([(s * 1.5, -1.6, Z + 0.7), (s * 2.3, -2.2, Z + 1.3), (s * 2.2, -3.1, Z + 1.9)], 0.3, "garra", n=6, seg=4)
-    silla(M, c, (0, 0.7, Z + 0.95), s=0.85)
-    silla(M, c, (0, 2.5, Z + 0.8), s=0.85)
+    silla(M, c, (0, 0.7, Z + 1.28), s=0.85)
+    silla(M, c, (0, 2.5, Z + 1.08), s=0.85)
     h = M.pieza("cabeza", tris=2000, res=140, k=0.15, ruido=(0.02, 1.5))
     h.esfera((0, -2.7, Z - 0.3), 1, "capa", esc=(1.0, 0.85, 0.75))
     h.tubo([(0, -3.0, Z), (0, -4.1, Z + 0.9), (0, -4.9, Z + 2.2)], [0.5, 0.38, 0.28], "capa", suave=6)       # cuerno mayor
@@ -367,16 +367,16 @@ def bestia_escarabajo(M):
     for s, lado in ((-1, "izq"), (1, "der")):
         # Élitro abierto: media cáscara levantada y girada hacia fuera.
         e = M.pieza(f"elitro_{lado}", tris=1300, res=120, k=0.1, ruido=(0.02, 1.2))
-        with e.en((s * 0.25, -0.35, Z + 0.95), rot=(28, s * 30, s * 38)):
-            e.esfera((s * 0.85, 1.9, -0.1), 1, "capa", esc=(1.0, 2.3, 0.85), cascara=0.2)
-            e.caja((s * 0.85, 1.9, -1.0), (2.6, 5.2, 1.6), None, resta=True)
+        with e.en((s * 0.3, -0.35, Z + 1.3), rot=(24, s * 26, s * 30)):
+            e.esfera((s * 1.05, 1.9, 0.1), 1, "capa", esc=(1.25, 2.6, 1.05), cascara=0.2)
+            e.caja((s * 1.05, 1.9, -0.8), (3.2, 5.8, 1.6), None, resta=True)
             for i in range(4):
                 e.tubo([(s * (0.25 + i * 0.38), 0.3, 0.55 + 0.1 * i), (s * (0.3 + i * 0.4), 2.0, 0.72), (s * (0.4 + i * 0.3), 3.8, 0.3)], 0.07, "quitina", k=0.05)
         M.articulacion(f"elitro_{lado}", "cuerpo", (s * 0.3, -0.4, Z + 0.95))
         # Ala membranosa desplegada.
         w = M.pieza(f"ala_{lado}", tris=0)
-        raiz = np.array([s * 0.5, -0.1, Z + 0.9])
-        puntas = [np.array([s * 5.0, -0.8, Z + 2.4]), np.array([s * 5.2, 1.4, Z + 2.0]), np.array([s * 4.2, 3.3, Z + 1.5]), np.array([s * 2.4, 4.0, Z + 1.1])]
+        raiz = np.array([s * 0.6, -0.1, Z + 1.25])
+        puntas = [np.array([s * 4.9, -0.8, Z + 2.6]), np.array([s * 5.0, 1.4, Z + 2.2]), np.array([s * 4.1, 3.2, Z + 1.7]), np.array([s * 2.4, 3.9, Z + 1.4])]
         filas = [[raiz + (q - raiz) * t + np.array([0, 0, 0.5]) * math.sin(math.pi * t) for t in np.linspace(0.02, 1, 6)] for q in puntas]
         w.duro.superficie(filas, 0.05, "ala_fina")
         for q in puntas:
@@ -385,14 +385,14 @@ def bestia_escarabajo(M):
         # Patas.
         for i, (y, ay) in enumerate(((-1.5, -1.5), (0.1, 0.0), (1.7, 1.6))):
             p = M.pieza(f"pata_{i + 1}_{lado}", tris=520, res=110, k=0.08, ruido=(0.015, 1.8))
-            cadera = np.array([s * 1.3, y, Z - 0.7])
-            rodilla = np.array([s * 3.0, y + ay * 0.6, Z + 0.5])
-            tobillo = np.array([s * 3.9, y + ay * 1.0, 0.7])
-            pie = np.array([s * 4.3, y + ay * 1.25, 0.05])
-            p.tubo([cadera, rodilla], [0.38, 0.3], "capa")
-            p.tubo([rodilla, tobillo], [0.28, 0.18], "capa")
-            p.tubo([tobillo, pie], [0.16, 0.1], "quitina")
-            p.esfera(rodilla, 0.36, "quitina", k=0.05)
+            cadera = np.array([s * 1.6, y, Z - 0.9])
+            rodilla = np.array([s * 2.9, y + ay * 0.45, Z - 0.2])
+            tobillo = np.array([s * 3.6, y + ay * 0.75, 0.8])
+            pie = np.array([s * 3.9, y + ay * 0.95, 0.05])
+            p.tubo([cadera, rodilla], [0.55, 0.45], "capa")
+            p.tubo([rodilla, tobillo], [0.42, 0.28], "capa")
+            p.tubo([tobillo, pie], [0.26, 0.14], "quitina")
+            p.esfera(rodilla, 0.52, "quitina", k=0.05)
             for k_ in range(3):
                 q = rodilla + (tobillo - rodilla) * (0.25 + 0.25 * k_)
                 p.duro.cono(q, q + [s * 0.4, 0, 0.3], 0.07, "garra", n=4)
@@ -638,7 +638,7 @@ def bestia_aguila(M):
         w.esfera((hombro + codo) / 2 + [0, 0.6, -0.1], 1, "pluma", esc=(1.6, 0.9, 0.36), k=0.2)
         d = w.duro
         # Plumas-cuchilla: primarias largas en la mano y secundarias en el brazo, solapadas.
-        n = 13
+        n = 17
         for i in range(n):
             t = i / (n - 1)
             base = hombro + (codo - hombro) * min(1, t * 2) + (mano - codo) * max(0, t * 2 - 1)
@@ -646,7 +646,7 @@ def bestia_aguila(M):
             ang = math.radians(8 + 62 * t ** 1.3)
             dire = np.array([s * math.sin(ang), math.cos(ang), -0.12])
             punta = base + dire * L
-            lado_ = np.cross(dire, [0, 0, 1.0]) * (0.36 + 0.1 * (1 - t))
+            lado_ = np.cross(dire, [0, 0, 1.0]) * (0.62 + 0.2 * (1 - t))
             d.lamina([base - lado_ * 0.5, base + dire * L * 0.5 - lado_ + [0, 0, 0.05], punta, base + dire * L * 0.6 + lado_ * 0.8 + [0, 0, 0.05], base + lado_ * 0.5],
                      0.07, "pluma" if i % 2 else "pluma_clara", bombeo=0.05)
         for i in range(7):  # coberteras
@@ -669,7 +669,7 @@ def bestia_aguila(M):
         base = np.array([0.5 * math.sin(a), 2.6, Z + 0.2])
         dire = np.array([math.sin(a), math.cos(a), -0.08])
         L = 3.6 - 0.6 * abs(i - 3) / 3
-        lado_ = np.cross(dire, [0, 0, 1.0]) * 0.42
+        lado_ = np.cross(dire, [0, 0, 1.0]) * 0.62
         t.duro.lamina([base - lado_ * 0.4, base + dire * L * 0.6 - lado_, base + dire * L, base + dire * L * 0.6 + lado_, base + lado_ * 0.4], 0.07,
                       "pluma" if i % 2 else "pluma_clara", bombeo=0.05)
     M.articulacion("cola", "cuerpo", (0, 2.6, Z + 0.2))

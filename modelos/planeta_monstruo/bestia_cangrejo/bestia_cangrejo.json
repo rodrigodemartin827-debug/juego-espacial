@@ -1,0 +1,395 @@
+{
+  "nombre": "bestia_cangrejo",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Cangrejo acorazado: pinzas enormes, caparazón con espinas y muchas patas. Lento pero indestructible: 2 asientos encima.",
+  "triangulos": 15802,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 14.0,
+    "y": 6.0,
+    "z": 12.0
+  },
+  "tamano_pedido": {
+    "ancho": 14,
+    "fondo": 12,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cuerpo",
+      "triangulos": 5283,
+      "tamano_studs": [
+        8.84,
+        4.77,
+        4.81
+      ],
+      "centro": [
+        0.007,
+        3.613,
+        -1.724
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 40,
+      "tamano_studs": [
+        2.69,
+        0.54,
+        0.28
+      ],
+      "centro": [
+        -0.0,
+        4.575,
+        0.482
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "pinza_izq",
+      "triangulos": 2163,
+      "tamano_studs": [
+        4.22,
+        2.59,
+        5.7
+      ],
+      "centro": [
+        -4.404,
+        3.508,
+        1.947
+      ]
+    },
+    {
+      "nombre": "dedo_izq",
+      "triangulos": 724,
+      "tamano_studs": [
+        1.5,
+        1.82,
+        2.26
+      ],
+      "centro": [
+        -4.898,
+        4.476,
+        3.815
+      ]
+    },
+    {
+      "nombre": "pata_1_izq",
+      "triangulos": 588,
+      "tamano_studs": [
+        4.45,
+        4.78,
+        0.91
+      ],
+      "centro": [
+        -4.776,
+        2.389,
+        -1.379
+      ]
+    },
+    {
+      "nombre": "pata_2_izq",
+      "triangulos": 588,
+      "tamano_studs": [
+        4.39,
+        4.78,
+        0.97
+      ],
+      "centro": [
+        -4.746,
+        2.389,
+        -2.593
+      ]
+    },
+    {
+      "nombre": "pata_3_izq",
+      "triangulos": 588,
+      "tamano_studs": [
+        3.66,
+        4.78,
+        1.92
+      ],
+      "centro": [
+        -3.808,
+        2.39,
+        -3.816
+      ]
+    },
+    {
+      "nombre": "pata_4_izq",
+      "triangulos": 588,
+      "tamano_studs": [
+        2.41,
+        4.76,
+        2.61
+      ],
+      "centro": [
+        -2.177,
+        2.38,
+        -4.696
+      ]
+    },
+    {
+      "nombre": "pinza_der",
+      "triangulos": 2164,
+      "tamano_studs": [
+        4.59,
+        2.81,
+        6.72
+      ],
+      "centro": [
+        4.602,
+        3.621,
+        2.464
+      ]
+    },
+    {
+      "nombre": "dedo_der",
+      "triangulos": 724,
+      "tamano_studs": [
+        1.97,
+        2.4,
+        2.94
+      ],
+      "centro": [
+        4.762,
+        4.769,
+        4.528
+      ]
+    },
+    {
+      "nombre": "pata_1_der",
+      "triangulos": 588,
+      "tamano_studs": [
+        4.44,
+        4.77,
+        0.9
+      ],
+      "centro": [
+        4.778,
+        2.383,
+        -1.376
+      ]
+    },
+    {
+      "nombre": "pata_2_der",
+      "triangulos": 588,
+      "tamano_studs": [
+        4.41,
+        4.78,
+        0.98
+      ],
+      "centro": [
+        4.741,
+        2.388,
+        -2.597
+      ]
+    },
+    {
+      "nombre": "pata_3_der",
+      "triangulos": 588,
+      "tamano_studs": [
+        3.67,
+        4.78,
+        1.92
+      ],
+      "centro": [
+        3.806,
+        2.388,
+        -3.808
+      ]
+    },
+    {
+      "nombre": "pata_4_der",
+      "triangulos": 588,
+      "tamano_studs": [
+        2.41,
+        4.78,
+        2.61
+      ],
+      "centro": [
+        2.186,
+        2.389,
+        -4.697
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_cangrejo_color.png",
+    "normal": "bestia_cangrejo_normal.png",
+    "roughness": "bestia_cangrejo_roughness.png",
+    "metalness": "bestia_cangrejo_metalness.png",
+    "emision": "bestia_cangrejo_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 14,
+    "triangulos": 15802,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      14.0,
+      12.0,
+      6.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo",
+  "articulaciones": [
+    {
+      "pieza": "ojos_neon",
+      "padre": "cuerpo",
+      "pivote": [
+        0.0,
+        4.55,
+        0.482
+      ]
+    },
+    {
+      "pieza": "pinza_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -3.001,
+        2.952,
+        -0.447
+      ]
+    },
+    {
+      "pieza": "dedo_izq",
+      "padre": "pinza_izq",
+      "pivote": [
+        -5.09,
+        4.151,
+        3.037
+      ]
+    },
+    {
+      "pieza": "pata_1_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -3.048,
+        2.583,
+        -1.516
+      ]
+    },
+    {
+      "pieza": "pata_2_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -3.024,
+        2.583,
+        -2.418
+      ]
+    },
+    {
+      "pieza": "pata_3_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -2.456,
+        2.583,
+        -3.168
+      ]
+    },
+    {
+      "pieza": "pata_4_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.463,
+        2.583,
+        -3.704
+      ]
+    },
+    {
+      "pieza": "pinza_der",
+      "padre": "cuerpo",
+      "pivote": [
+        3.001,
+        2.952,
+        -0.447
+      ]
+    },
+    {
+      "pieza": "dedo_der",
+      "padre": "pinza_der",
+      "pivote": [
+        5.021,
+        4.335,
+        3.528
+      ]
+    },
+    {
+      "pieza": "pata_1_der",
+      "padre": "cuerpo",
+      "pivote": [
+        3.048,
+        2.583,
+        -1.516
+      ]
+    },
+    {
+      "pieza": "pata_2_der",
+      "padre": "cuerpo",
+      "pivote": [
+        3.024,
+        2.583,
+        -2.418
+      ]
+    },
+    {
+      "pieza": "pata_3_der",
+      "padre": "cuerpo",
+      "pivote": [
+        2.456,
+        2.583,
+        -3.168
+      ]
+    },
+    {
+      "pieza": "pata_4_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.463,
+        2.583,
+        -3.704
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        0.0,
+        5.182,
+        -1.413
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "posicion": [
+        0.0,
+        5.084,
+        -2.824
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

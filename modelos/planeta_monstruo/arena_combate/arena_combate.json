@@ -1,0 +1,60 @@
+{
+  "nombre": "arena_combate",
+  "zona": "guerra",
+  "clase": "grande",
+  "descripcion": "Arena de combate circular: suelo de hueso pulido, gradas de roca con espinas y manchas de sangre.",
+  "triangulos": 13122,
+  "presupuesto_triangulos": 15000,
+  "tamano_studs": {
+    "x": 16.0,
+    "y": 4.0,
+    "z": 16.0
+  },
+  "tamano_pedido": {
+    "ancho": 16,
+    "fondo": 16,
+    "alto": 4
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "arena",
+      "triangulos": 13124,
+      "tamano_studs": [
+        16.0,
+        4.0,
+        16.0
+      ],
+      "centro": [
+        0.002,
+        1.998,
+        -0.005
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "arena_combate_color.png",
+    "normal": "arena_combate_normal.png",
+    "roughness": "arena_combate_roughness.png",
+    "metalness": "arena_combate_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 13122,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      16.0,
+      16.0,
+      4.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

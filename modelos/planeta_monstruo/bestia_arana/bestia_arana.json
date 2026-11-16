@@ -1,0 +1,326 @@
+{
+  "nombre": "bestia_arana",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Araña estelar: 8 patas largas articuladas, cuerpo con muchos ojos rojos que brillan e hileras de seda en el abdomen. De emboscada: 2 asientos en el abdomen.",
+  "triangulos": 13548,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 14.0,
+    "y": 8.0,
+    "z": 14.0
+  },
+  "tamano_pedido": {
+    "ancho": 14,
+    "fondo": 14,
+    "alto": 8
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cuerpo",
+      "triangulos": 3091,
+      "tamano_studs": [
+        3.59,
+        3.51,
+        5.21
+      ],
+      "centro": [
+        -0.002,
+        3.06,
+        2.027
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 160,
+      "tamano_studs": [
+        2.58,
+        0.79,
+        1.03
+      ],
+      "centro": [
+        -0.001,
+        4.183,
+        2.972
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#FF2A2A"
+      }
+    },
+    {
+      "nombre": "abdomen",
+      "triangulos": 3608,
+      "tamano_studs": [
+        5.33,
+        6.75,
+        7.44
+      ],
+      "centro": [
+        -0.005,
+        3.842,
+        -3.282
+      ]
+    },
+    {
+      "nombre": "pata_1_izq",
+      "triangulos": 837,
+      "tamano_studs": [
+        3.55,
+        7.71,
+        4.9
+      ],
+      "centro": [
+        -2.134,
+        3.878,
+        4.541
+      ]
+    },
+    {
+      "nombre": "pata_2_izq",
+      "triangulos": 836,
+      "tamano_studs": [
+        5.83,
+        7.97,
+        2.42
+      ],
+      "centro": [
+        -3.908,
+        4.011,
+        2.641
+      ]
+    },
+    {
+      "nombre": "pata_3_izq",
+      "triangulos": 836,
+      "tamano_studs": [
+        5.97,
+        8.0,
+        2.08
+      ],
+      "centro": [
+        -4.007,
+        4.01,
+        0.248
+      ]
+    },
+    {
+      "nombre": "pata_4_izq",
+      "triangulos": 836,
+      "tamano_studs": [
+        4.04,
+        7.72,
+        4.59
+      ],
+      "centro": [
+        -2.516,
+        3.884,
+        -1.676
+      ]
+    },
+    {
+      "nombre": "pata_1_der",
+      "triangulos": 836,
+      "tamano_studs": [
+        3.54,
+        7.7,
+        4.9
+      ],
+      "centro": [
+        2.137,
+        3.884,
+        4.531
+      ]
+    },
+    {
+      "nombre": "pata_2_der",
+      "triangulos": 836,
+      "tamano_studs": [
+        5.85,
+        7.97,
+        2.42
+      ],
+      "centro": [
+        3.897,
+        4.024,
+        2.638
+      ]
+    },
+    {
+      "nombre": "pata_3_der",
+      "triangulos": 836,
+      "tamano_studs": [
+        5.97,
+        7.99,
+        2.09
+      ],
+      "centro": [
+        4.0,
+        4.008,
+        0.251
+      ]
+    },
+    {
+      "nombre": "pata_4_der",
+      "triangulos": 836,
+      "tamano_studs": [
+        4.05,
+        7.71,
+        4.59
+      ],
+      "centro": [
+        2.527,
+        3.887,
+        -1.681
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_arana_color.png",
+    "normal": "bestia_arana_normal.png",
+    "roughness": "bestia_arana_roughness.png",
+    "metalness": "bestia_arana_metalness.png",
+    "emision": "bestia_arana_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 11,
+    "triangulos": 13548,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      13.98,
+      13.99,
+      8.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo",
+  "articulaciones": [
+    {
+      "pieza": "ojos_neon",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.001,
+        4.121,
+        3.047
+      ]
+    },
+    {
+      "pieza": "abdomen",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.001,
+        3.599,
+        0.058
+      ]
+    },
+    {
+      "pieza": "pata_1_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.815,
+        3.39,
+        2.497
+      ]
+    },
+    {
+      "pieza": "pata_2_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.425,
+        3.39,
+        1.835
+      ]
+    },
+    {
+      "pieza": "pata_3_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.462,
+        3.39,
+        0.88
+      ]
+    },
+    {
+      "pieza": "pata_4_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.947,
+        3.39,
+        0.21
+      ]
+    },
+    {
+      "pieza": "pata_1_der",
+      "padre": "cuerpo",
+      "pivote": [
+        0.812,
+        3.39,
+        2.497
+      ]
+    },
+    {
+      "pieza": "pata_2_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.422,
+        3.39,
+        1.835
+      ]
+    },
+    {
+      "pieza": "pata_3_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.459,
+        3.39,
+        0.88
+      ]
+    },
+    {
+      "pieza": "pata_4_der",
+      "padre": "cuerpo",
+      "pivote": [
+        0.944,
+        3.39,
+        0.21
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        -0.001,
+        6.713,
+        -1.195
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "posicion": [
+        -0.001,
+        6.817,
+        -3.413
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

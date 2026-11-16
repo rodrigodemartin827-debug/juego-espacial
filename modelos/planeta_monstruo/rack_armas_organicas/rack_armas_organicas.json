@@ -1,0 +1,60 @@
+{
+  "nombre": "rack_armas_organicas",
+  "zona": "guerra",
+  "clase": "prop",
+  "descripcion": "Estantería de armas orgánicas: garras, lanzas de hueso y hachas de colmillo colgadas.",
+  "triangulos": 1827,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 4.0,
+    "z": 1.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 1,
+    "alto": 4
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "rack",
+      "triangulos": 1827,
+      "tamano_studs": [
+        4.01,
+        4.0,
+        1.0
+      ],
+      "centro": [
+        -0.004,
+        2.0,
+        0.001
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "rack_armas_organicas_color.png",
+    "normal": "rack_armas_organicas_normal.png",
+    "roughness": "rack_armas_organicas_roughness.png",
+    "metalness": "rack_armas_organicas_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 1827,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.01,
+      1.0,
+      4.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

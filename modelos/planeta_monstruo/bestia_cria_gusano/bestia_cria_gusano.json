@@ -1,0 +1,175 @@
+{
+  "nombre": "bestia_cria_gusano",
+  "zona": "bestias",
+  "clase": "bestia_menor",
+  "descripcion": "Cría de gusano: rápida pero frágil. 1 asiento.",
+  "triangulos": 7306,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 12.0
+  },
+  "tamano_pedido": {
+    "ancho": 3,
+    "fondo": 12,
+    "alto": 3
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cabeza",
+      "triangulos": 1976,
+      "tamano_studs": [
+        3.0,
+        2.37,
+        2.67
+      ],
+      "centro": [
+        -0.0,
+        1.586,
+        4.664
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 80,
+      "tamano_studs": [
+        2.31,
+        0.4,
+        0.52
+      ],
+      "centro": [
+        -0.007,
+        1.925,
+        4.617
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    },
+    {
+      "nombre": "cuerpo_delantero",
+      "triangulos": 2323,
+      "tamano_studs": [
+        2.96,
+        3.0,
+        3.74
+      ],
+      "centro": [
+        -0.006,
+        1.498,
+        2.134
+      ]
+    },
+    {
+      "nombre": "cuerpo_trasero",
+      "triangulos": 2200,
+      "tamano_studs": [
+        2.86,
+        2.47,
+        4.76
+      ],
+      "centro": [
+        -0.009,
+        1.231,
+        -1.719
+      ]
+    },
+    {
+      "nombre": "cola",
+      "triangulos": 727,
+      "tamano_studs": [
+        1.64,
+        2.03,
+        2.53
+      ],
+      "centro": [
+        0.002,
+        1.72,
+        -4.734
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_cria_gusano_color.png",
+    "normal": "bestia_cria_gusano_normal.png",
+    "roughness": "bestia_cria_gusano_roughness.png",
+    "metalness": "bestia_cria_gusano_metalness.png",
+    "emision": "bestia_cria_gusano_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 5,
+    "triangulos": 7306,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      3.0,
+      12.0,
+      3.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo_delantero",
+  "articulaciones": [
+    {
+      "pieza": "cabeza",
+      "padre": "cuerpo_delantero",
+      "pivote": [
+        -0.007,
+        1.384,
+        3.687
+      ]
+    },
+    {
+      "pieza": "ojos_neon",
+      "padre": "cabeza",
+      "pivote": [
+        -0.007,
+        1.925,
+        4.488
+      ]
+    },
+    {
+      "pieza": "cuerpo_trasero",
+      "padre": "cuerpo_delantero",
+      "pivote": [
+        -0.007,
+        1.384,
+        0.484
+      ]
+    },
+    {
+      "pieza": "cola",
+      "padre": "cuerpo_trasero",
+      "pivote": [
+        -0.007,
+        1.384,
+        -3.964
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        -0.007,
+        2.701,
+        2.175
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

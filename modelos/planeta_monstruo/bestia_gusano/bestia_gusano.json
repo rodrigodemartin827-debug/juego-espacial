@@ -1,0 +1,263 @@
+{
+  "nombre": "bestia_gusano",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Gusano espacial enorme: cuerpo largo segmentado, boca con anillos de dientes y patas cortas en cada segmento. Transporte de tropas: 5 asientos y bahía de carga.",
+  "triangulos": 17385,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 6.0,
+    "y": 6.0,
+    "z": 30.0
+  },
+  "tamano_pedido": {
+    "ancho": 6,
+    "fondo": 30,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cabeza",
+      "triangulos": 3839,
+      "tamano_studs": [
+        4.66,
+        4.39,
+        5.55
+      ],
+      "centro": [
+        -0.007,
+        3.062,
+        12.223
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 120,
+      "tamano_studs": [
+        4.34,
+        0.76,
+        1.31
+      ],
+      "centro": [
+        -0.001,
+        4.021,
+        11.14
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    },
+    {
+      "nombre": "cuerpo_delantero",
+      "triangulos": 3835,
+      "tamano_studs": [
+        6.0,
+        5.91,
+        8.26
+      ],
+      "centro": [
+        -0.007,
+        2.957,
+        6.681
+      ]
+    },
+    {
+      "nombre": "cuerpo_medio",
+      "triangulos": 4212,
+      "tamano_studs": [
+        5.97,
+        6.02,
+        8.27
+      ],
+      "centro": [
+        0.01,
+        3.009,
+        -0.911
+      ]
+    },
+    {
+      "nombre": "cuerpo_trasero",
+      "triangulos": 3763,
+      "tamano_studs": [
+        5.67,
+        5.88,
+        6.38
+      ],
+      "centro": [
+        0.003,
+        2.939,
+        -7.541
+      ]
+    },
+    {
+      "nombre": "cola",
+      "triangulos": 1616,
+      "tamano_studs": [
+        3.34,
+        3.94,
+        5.96
+      ],
+      "centro": [
+        -0.014,
+        3.384,
+        -12.018
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_gusano_color.png",
+    "normal": "bestia_gusano_normal.png",
+    "roughness": "bestia_gusano_roughness.png",
+    "metalness": "bestia_gusano_metalness.png",
+    "emision": "bestia_gusano_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 6,
+    "triangulos": 17385,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      6.0,
+      30.0,
+      6.02
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo_delantero",
+  "articulaciones": [
+    {
+      "pieza": "cabeza",
+      "padre": "cuerpo_delantero",
+      "pivote": [
+        -0.001,
+        2.995,
+        10.235
+      ]
+    },
+    {
+      "pieza": "ojos_neon",
+      "padre": "cabeza",
+      "pivote": [
+        -0.001,
+        2.995,
+        11.647
+      ]
+    },
+    {
+      "pieza": "cuerpo_medio",
+      "padre": "cuerpo_delantero",
+      "pivote": [
+        -0.001,
+        2.995,
+        2.912
+      ]
+    },
+    {
+      "pieza": "cuerpo_trasero",
+      "padre": "cuerpo_medio",
+      "pivote": [
+        -0.001,
+        2.995,
+        -4.676
+      ]
+    },
+    {
+      "pieza": "cola",
+      "padre": "cuerpo_trasero",
+      "pivote": [
+        -0.001,
+        2.995,
+        -10.324
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        -0.001,
+        5.53,
+        8.559
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "posicion": [
+        -0.001,
+        5.53,
+        4.765
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_3",
+      "posicion": [
+        -0.001,
+        5.624,
+        0.971
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_4",
+      "posicion": [
+        -0.001,
+        5.483,
+        -6.618
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_5",
+      "posicion": [
+        -0.001,
+        5.483,
+        -8.471
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "bahia_carga": {
+    "posicion": [
+      -0.001,
+      6.081,
+      -2.647
+    ],
+    "tamano": [
+      2.48,
+      1.27,
+      3.0
+    ],
+    "nota": "plataforma de hueso y cuatro alforjas en el tramo medio"
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "nombre": "bestia_mantarraya",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Mantarraya cósmica gigante: cuerpo plano de alas enormes, piel púrpura oscura con dibujos bioluminiscentes violeta y cola larga con aguijón. La bestia más común. 3 asientos.",
+  "triangulos": 15730,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 20.0,
+    "y": 6.0,
+    "z": 24.0
+  },
+  "tamano_pedido": {
+    "ancho": 20,
+    "fondo": 24,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cuerpo",
+      "triangulos": 4972,
+      "tamano_studs": [
+        5.18,
+        4.08,
+        14.82
+      ],
+      "centro": [
+        0.041,
+        2.041,
+        4.592
+      ]
+    },
+    {
+      "nombre": "cuerpo_neon",
+      "triangulos": 1140,
+      "tamano_studs": [
+        4.65,
+        1.74,
+        9.05
+      ],
+      "centro": [
+        0.045,
+        2.384,
+        3.848
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "ala_izq",
+      "triangulos": 3000,
+      "tamano_studs": [
+        9.31,
+        4.25,
+        9.7
+      ],
+      "centro": [
+        -5.346,
+        2.915,
+        2.989
+      ]
+    },
+    {
+      "nombre": "ala_izq_neon",
+      "triangulos": 1000,
+      "tamano_studs": [
+        6.16,
+        1.84,
+        7.63
+      ],
+      "centro": [
+        -5.731,
+        2.976,
+        2.993
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "ala_der",
+      "triangulos": 3000,
+      "tamano_studs": [
+        9.28,
+        4.3,
+        9.75
+      ],
+      "centro": [
+        5.361,
+        2.918,
+        3.012
+      ]
+    },
+    {
+      "nombre": "ala_der_neon",
+      "triangulos": 1000,
+      "tamano_studs": [
+        6.17,
+        1.84,
+        7.68
+      ],
+      "centro": [
+        5.814,
+        2.977,
+        2.997
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "cola",
+      "triangulos": 1618,
+      "tamano_studs": [
+        1.36,
+        5.18,
+        11.03
+      ],
+      "centro": [
+        0.044,
+        3.409,
+        -6.485
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_mantarraya_color.png",
+    "normal": "bestia_mantarraya_normal.png",
+    "roughness": "bestia_mantarraya_roughness.png",
+    "metalness": "bestia_mantarraya_metalness.png",
+    "emision": "bestia_mantarraya_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 7,
+    "triangulos": 15730,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      20.01,
+      24.0,
+      6.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo",
+  "articulaciones": [
+    {
+      "pieza": "ala_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -2.011,
+        1.711,
+        3.491
+      ]
+    },
+    {
+      "pieza": "ala_izq_neon",
+      "padre": "ala_izq",
+      "pivote": [
+        -2.011,
+        1.711,
+        3.491
+      ]
+    },
+    {
+      "pieza": "ala_der",
+      "padre": "cuerpo",
+      "pivote": [
+        2.1,
+        1.711,
+        3.491
+      ]
+    },
+    {
+      "pieza": "ala_der_neon",
+      "padre": "ala_der",
+      "pivote": [
+        2.1,
+        1.711,
+        3.491
+      ]
+    },
+    {
+      "pieza": "cola",
+      "padre": "cuerpo",
+      "pivote": [
+        0.045,
+        1.711,
+        -1.883
+      ]
+    },
+    {
+      "pieza": "cuerpo_neon",
+      "padre": "cuerpo",
+      "pivote": [
+        0.045,
+        1.711,
+        3.683
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_1",
+      "posicion": [
+        0.045,
+        3.509,
+        5.506
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "posicion": [
+        0.045,
+        3.56,
+        3.395
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_3",
+      "posicion": [
+        0.045,
+        3.471,
+        1.284
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,423 @@
+{
+  "nombre": "bestia_dragon",
+  "zona": "bestias",
+  "clase": "bestia",
+  "descripcion": "Dragón de asteroides: cuatro alas membranosas, cuerpo musculoso, cabeza con cuernos y boca que escupe energía verde. La bestia de combate de élite. 2 asientos (cuello y lomo).",
+  "triangulos": 17824,
+  "presupuesto_triangulos": 20000,
+  "tamano_studs": {
+    "x": 18.0,
+    "y": 14.0,
+    "z": 20.0
+  },
+  "tamano_pedido": {
+    "ancho": 18,
+    "fondo": 20,
+    "alto": 14
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cuerpo",
+      "triangulos": 3664,
+      "tamano_studs": [
+        5.49,
+        5.4,
+        7.25
+      ],
+      "centro": [
+        -0.005,
+        5.48,
+        -0.048
+      ]
+    },
+    {
+      "nombre": "cuello",
+      "triangulos": 1647,
+      "tamano_studs": [
+        2.95,
+        6.63,
+        4.29
+      ],
+      "centro": [
+        -0.01,
+        7.742,
+        4.01
+      ]
+    },
+    {
+      "nombre": "cabeza",
+      "triangulos": 2731,
+      "tamano_studs": [
+        3.73,
+        5.22,
+        4.36
+      ],
+      "centro": [
+        -0.004,
+        11.389,
+        6.405
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 40,
+      "tamano_studs": [
+        1.72,
+        0.38,
+        0.27
+      ],
+      "centro": [
+        -0.004,
+        10.491,
+        6.79
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    },
+    {
+      "nombre": "mandibula",
+      "triangulos": 779,
+      "tamano_studs": [
+        2.15,
+        2.35,
+        2.46
+      ],
+      "centro": [
+        -0.005,
+        9.121,
+        6.726
+      ]
+    },
+    {
+      "nombre": "aliento_neon",
+      "triangulos": 700,
+      "tamano_studs": [
+        1.1,
+        1.3,
+        3.36
+      ],
+      "centro": [
+        -0.062,
+        9.27,
+        8.329
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14",
+        "transparencia": 0.15
+      }
+    },
+    {
+      "nombre": "cola",
+      "triangulos": 1563,
+      "tamano_studs": [
+        2.75,
+        4.43,
+        7.95
+      ],
+      "centro": [
+        0.004,
+        4.106,
+        -6.027
+      ]
+    },
+    {
+      "nombre": "pata_del_izq",
+      "triangulos": 884,
+      "tamano_studs": [
+        2.36,
+        5.45,
+        2.41
+      ],
+      "centro": [
+        -2.113,
+        2.723,
+        2.361
+      ]
+    },
+    {
+      "nombre": "pata_tras_izq",
+      "triangulos": 883,
+      "tamano_studs": [
+        2.35,
+        5.23,
+        2.9
+      ],
+      "centro": [
+        -2.114,
+        2.627,
+        -2.024
+      ]
+    },
+    {
+      "nombre": "pata_del_der",
+      "triangulos": 883,
+      "tamano_studs": [
+        2.34,
+        5.45,
+        2.41
+      ],
+      "centro": [
+        2.11,
+        2.729,
+        2.359
+      ]
+    },
+    {
+      "nombre": "pata_tras_der",
+      "triangulos": 884,
+      "tamano_studs": [
+        2.36,
+        5.25,
+        2.9
+      ],
+      "centro": [
+        2.102,
+        2.637,
+        -2.026
+      ]
+    },
+    {
+      "nombre": "ala_sup_izq",
+      "triangulos": 792,
+      "tamano_studs": [
+        8.08,
+        7.73,
+        5.16
+      ],
+      "centro": [
+        -4.962,
+        10.088,
+        -0.97
+      ]
+    },
+    {
+      "nombre": "ala_inf_izq",
+      "triangulos": 791,
+      "tamano_studs": [
+        7.36,
+        4.04,
+        4.86
+      ],
+      "centro": [
+        -4.633,
+        6.815,
+        -3.333
+      ]
+    },
+    {
+      "nombre": "ala_sup_der",
+      "triangulos": 792,
+      "tamano_studs": [
+        8.08,
+        7.76,
+        5.18
+      ],
+      "centro": [
+        4.959,
+        10.077,
+        -0.988
+      ]
+    },
+    {
+      "nombre": "ala_inf_der",
+      "triangulos": 791,
+      "tamano_studs": [
+        7.4,
+        4.08,
+        4.88
+      ],
+      "centro": [
+        4.614,
+        6.799,
+        -3.355
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "bestia_dragon_color.png",
+    "normal": "bestia_dragon_normal.png",
+    "roughness": "bestia_dragon_roughness.png",
+    "metalness": "bestia_dragon_metalness.png",
+    "emision": "bestia_dragon_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 15,
+    "triangulos": 17824,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      18.0,
+      20.01,
+      14.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "raiz": "cuerpo",
+  "articulaciones": [
+    {
+      "pieza": "cuello",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.004,
+        6.073,
+        2.973
+      ]
+    },
+    {
+      "pieza": "cabeza",
+      "padre": "cuello",
+      "pivote": [
+        -0.004,
+        9.934,
+        5.559
+      ]
+    },
+    {
+      "pieza": "mandibula",
+      "padre": "cabeza",
+      "pivote": [
+        -0.004,
+        9.645,
+        5.781
+      ]
+    },
+    {
+      "pieza": "ojos_neon",
+      "padre": "cabeza",
+      "pivote": [
+        -0.004,
+        10.224,
+        6.224
+      ]
+    },
+    {
+      "pieza": "aliento_neon",
+      "padre": "cabeza",
+      "pivote": [
+        -0.004,
+        9.5,
+        6.963
+      ]
+    },
+    {
+      "pieza": "cola",
+      "padre": "cuerpo",
+      "pivote": [
+        -0.004,
+        4.818,
+        -3.087
+      ]
+    },
+    {
+      "pieza": "pata_del_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.77,
+        4.528,
+        1.864
+      ]
+    },
+    {
+      "pieza": "pata_tras_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.77,
+        4.335,
+        -2.274
+      ]
+    },
+    {
+      "pieza": "pata_del_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.762,
+        4.528,
+        1.864
+      ]
+    },
+    {
+      "pieza": "pata_tras_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.762,
+        4.335,
+        -2.274
+      ]
+    },
+    {
+      "pieza": "ala_sup_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.476,
+        6.749,
+        1.199
+      ]
+    },
+    {
+      "pieza": "ala_inf_izq",
+      "padre": "cuerpo",
+      "pivote": [
+        -1.476,
+        5.783,
+        -1.313
+      ]
+    },
+    {
+      "pieza": "ala_sup_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.467,
+        6.749,
+        1.199
+      ]
+    },
+    {
+      "pieza": "ala_inf_der",
+      "padre": "cuerpo",
+      "pivote": [
+        1.467,
+        5.783,
+        -1.313
+      ]
+    }
+  ],
+  "puntos_montura": [
+    {
+      "nombre": "asiento_lomo",
+      "posicion": [
+        -0.004,
+        7.338,
+        0.239
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "nombre": "asiento_cuello",
+      "posicion": [
+        -0.004,
+        8.928,
+        3.749
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "nombre": "pantano_burbuja",
+  "zona": "vegetacion",
+  "clase": "vegetacion",
+  "descripcion": "Charco de pantano que burbujea: superficie verde oscura con burbujas en 3D.",
+  "triangulos": 3669,
+  "presupuesto_triangulos": 4000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 0.5,
+    "z": 4.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 4,
+    "alto": 0.5
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "pantano",
+      "triangulos": 3669,
+      "tamano_studs": [
+        4.0,
+        0.5,
+        4.0
+      ],
+      "centro": [
+        0.0,
+        0.249,
+        0.0
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "pantano_burbuja_color.png",
+    "normal": "pantano_burbuja_normal.png",
+    "roughness": "pantano_burbuja_roughness.png",
+    "metalness": "pantano_burbuja_metalness.png",
+    "emision": "pantano_burbuja_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 3669,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.0,
+      4.0,
+      0.5
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

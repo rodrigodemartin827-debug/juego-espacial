@@ -1,0 +1,116 @@
+{
+  "nombre": "catapulta_organica",
+  "zona": "guerra",
+  "clase": "prop",
+  "descripcion": "Catapulta de tendones y hueso, con brazo de lanzamiento elástico.",
+  "triangulos": 1811,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 3.0,
+    "z": 2.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 2,
+    "alto": 3
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "bastidor",
+      "triangulos": 971,
+      "tamano_studs": [
+        3.91,
+        1.88,
+        2.0
+      ],
+      "centro": [
+        0.056,
+        0.942,
+        0.001
+      ]
+    },
+    {
+      "nombre": "brazo",
+      "triangulos": 760,
+      "tamano_studs": [
+        2.51,
+        1.84,
+        0.86
+      ],
+      "centro": [
+        -0.743,
+        2.001,
+        -0.002
+      ]
+    },
+    {
+      "nombre": "proyectil_neon",
+      "triangulos": 80,
+      "tamano_studs": [
+        0.47,
+        0.51,
+        0.49
+      ],
+      "centro": [
+        -1.665,
+        2.747,
+        -0.002
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "catapulta_organica_color.png",
+    "normal": "catapulta_organica_normal.png",
+    "roughness": "catapulta_organica_roughness.png",
+    "metalness": "catapulta_organica_metalness.png",
+    "emision": "catapulta_organica_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 3,
+    "triangulos": 1811,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.01,
+      2.0,
+      3.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "animacion": "El brazo gira sobre el eje (articulación «brazo»); el proyectil va soldado al brazo hasta que se lanza.",
+  "raiz": "bastidor",
+  "articulaciones": [
+    {
+      "pieza": "brazo",
+      "padre": "bastidor",
+      "pivote": [
+        0.148,
+        1.461,
+        -0.002
+      ]
+    },
+    {
+      "pieza": "proyectil_neon",
+      "padre": "brazo",
+      "pivote": [
+        -1.665,
+        2.747,
+        -0.002
+      ]
+    }
+  ],
+  "puntos_montura": []
+}
