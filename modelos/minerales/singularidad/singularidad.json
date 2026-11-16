@@ -1,0 +1,44 @@
+{
+  "id": "singularidad",
+  "numero": 98,
+  "nombre": "Singularidad",
+  "descripcion": "Esfera negra perfecta con un anillo de energía blanca.",
+  "rareza": "Celestial",
+  "color_hud": "#3DF2FF",
+  "aparicion_rareza_pct": 0.5,
+  "aparicion_pct": 0.1667,
+  "valor": 801,
+  "triangulos": 1408,
+  "tamano_studs": [
+    6.86,
+    6.8,
+    3.02
+  ],
+  "partes": [
+    {
+      "nombre": "singularidad",
+      "triangulos": 320,
+      "Material": "Neon",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "singularidad_neon",
+      "triangulos": 1088,
+      "Material": "Neon",
+      "Color": "#FFFFFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "girar el anillo (una vuelta cada 6 s)"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/singularidad_color.png",
+    "normal": "texturas/singularidad_normal.png",
+    "rugosidad": "texturas/singularidad_rugosidad.png",
+    "metal": "texturas/singularidad_metal.png",
+    "emision": "texturas/singularidad_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 24",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

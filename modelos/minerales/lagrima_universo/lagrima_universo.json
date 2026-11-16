@@ -1,0 +1,46 @@
+{
+  "id": "lagrima_universo",
+  "numero": 94,
+  "nombre": "Lágrima del universo",
+  "descripcion": "Gota cristalina con una galaxia espiral dentro.",
+  "rareza": "Mítico",
+  "color_hud": "#E0213B",
+  "aparicion_rareza_pct": 2.5,
+  "aparicion_pct": 0.3571,
+  "valor": 550,
+  "triangulos": 880,
+  "tamano_studs": [
+    2.5,
+    2.5,
+    4.2
+  ],
+  "partes": [
+    {
+      "nombre": "lagrima_universo_cristal",
+      "triangulos": 544,
+      "Material": "Glass",
+      "Transparency": 0.65,
+      "Color": "#CFE0FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "lagrima_universo_neon",
+      "triangulos": 336,
+      "Material": "Neon",
+      "Color": "#C8B8FF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "girar la galaxia en su plano (una vuelta cada 20 s)"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/lagrima_universo_color.png",
+    "normal": "texturas/lagrima_universo_normal.png",
+    "rugosidad": "texturas/lagrima_universo_rugosidad.png",
+    "metal": "texturas/lagrima_universo_metal.png",
+    "emision": "texturas/lagrima_universo_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #8A7AFF, Brightness 1.5, Range 15",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

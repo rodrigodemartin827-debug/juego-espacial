@@ -1,0 +1,52 @@
+{
+  "id": "cristal_genesis",
+  "numero": 96,
+  "nombre": "Cristal génesis",
+  "descripcion": "Cristal blanco perfecto con los cinco sólidos platónicos dentro.",
+  "rareza": "Mítico",
+  "color_hud": "#E0213B",
+  "aparicion_rareza_pct": 2.5,
+  "aparicion_pct": 0.3571,
+  "valor": 717,
+  "triangulos": 2900,
+  "tamano_studs": [
+    2.56,
+    2.89,
+    4.51
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_genesis",
+      "triangulos": 2642,
+      "Material": "Glass",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_genesis_cristal",
+      "triangulos": 178,
+      "Material": "Glass",
+      "Transparency": 0.6,
+      "Color": "#EEF6FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "cristal_genesis_neon",
+      "triangulos": 80,
+      "Material": "Neon",
+      "Color": "#FFF2C8",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "girar los sólidos despacio"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_genesis_color.png",
+    "normal": "texturas/cristal_genesis_normal.png",
+    "rugosidad": "texturas/cristal_genesis_rugosidad.png",
+    "metal": "texturas/cristal_genesis_metal.png",
+    "emision": "texturas/cristal_genesis_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFF6E0, Brightness 1.5, Range 16",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

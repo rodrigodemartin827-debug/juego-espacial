@@ -1,0 +1,44 @@
+{
+  "id": "semilla_cosmica",
+  "numero": 99,
+  "nombre": "Semilla cósmica",
+  "descripcion": "Semilla cristalina dorada de la que crecen raíces de luz.",
+  "rareza": "Celestial",
+  "color_hud": "#3DF2FF",
+  "aparicion_rareza_pct": 0.5,
+  "aparicion_pct": 0.1667,
+  "valor": 1400,
+  "triangulos": 2900,
+  "tamano_studs": [
+    3.39,
+    3.35,
+    4.2
+  ],
+  "partes": [
+    {
+      "nombre": "semilla_cosmica",
+      "triangulos": 2000,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "semilla_cosmica_neon",
+      "triangulos": 900,
+      "Material": "Neon",
+      "Color": "#FFE89A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "las raíces laten de la semilla hacia fuera"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/semilla_cosmica_color.png",
+    "normal": "texturas/semilla_cosmica_normal.png",
+    "rugosidad": "texturas/semilla_cosmica_rugosidad.png",
+    "metal": "texturas/semilla_cosmica_metal.png",
+    "emision": "texturas/semilla_cosmica_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFD86A, Brightness 1.5, Range 15",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

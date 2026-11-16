@@ -1,0 +1,44 @@
+{
+  "id": "fragmento_agujero_negro",
+  "numero": 93,
+  "nombre": "Fragmento de agujero negro",
+  "descripcion": "Esquirla oscura con un disco de acreción naranja girando.",
+  "rareza": "Mítico",
+  "color_hud": "#E0213B",
+  "aparicion_rareza_pct": 2.5,
+  "aparicion_pct": 0.3571,
+  "valor": 467,
+  "triangulos": 1052,
+  "tamano_studs": [
+    4.03,
+    3.93,
+    2.16
+  ],
+  "partes": [
+    {
+      "nombre": "fragmento_agujero_negro",
+      "triangulos": 60,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "fragmento_agujero_negro_neon",
+      "triangulos": 992,
+      "Material": "Neon",
+      "Color": "#FF8A1A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "girar el disco en su eje (una vuelta cada 4 s)"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/fragmento_agujero_negro_color.png",
+    "normal": "texturas/fragmento_agujero_negro_normal.png",
+    "rugosidad": "texturas/fragmento_agujero_negro_rugosidad.png",
+    "metal": "texturas/fragmento_agujero_negro_metal.png",
+    "emision": "texturas/fragmento_agujero_negro_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FF8A1A, Brightness 1.5, Range 14",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

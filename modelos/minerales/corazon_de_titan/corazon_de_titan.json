@@ -1,0 +1,52 @@
+{
+  "id": "corazon_de_titan",
+  "numero": 97,
+  "nombre": "Corazón de titán",
+  "descripcion": "Corazón cristalizado enorme que late con luz roja.",
+  "rareza": "Mítico",
+  "color_hud": "#E0213B",
+  "aparicion_rareza_pct": 2.5,
+  "aparicion_pct": 0.3571,
+  "valor": 800,
+  "triangulos": 2198,
+  "tamano_studs": [
+    4.18,
+    2.38,
+    3.75
+  ],
+  "partes": [
+    {
+      "nombre": "corazon_de_titan",
+      "triangulos": 500,
+      "Material": "Glass",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "corazon_de_titan_cristal",
+      "triangulos": 1200,
+      "Material": "Glass",
+      "Transparency": 0.35,
+      "Color": "#8A0A14",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "corazon_de_titan_neon",
+      "triangulos": 498,
+      "Material": "Neon",
+      "Color": "#FF1A2A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "latido: dos pulsos rápidos (Size ×1,06) cada 1,2 s"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/corazon_de_titan_color.png",
+    "normal": "texturas/corazon_de_titan_normal.png",
+    "rugosidad": "texturas/corazon_de_titan_rugosidad.png",
+    "metal": "texturas/corazon_de_titan_metal.png",
+    "emision": "texturas/corazon_de_titan_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FF1A2A, Brightness 1.5, Range 15",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

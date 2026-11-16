@@ -1,0 +1,52 @@
+{
+  "id": "nucleo_estelar",
+  "numero": 92,
+  "nombre": "Núcleo estelar",
+  "descripcion": "Esfera perfecta de energía blanca con partículas orbitando.",
+  "rareza": "Mítico",
+  "color_hud": "#E0213B",
+  "aparicion_rareza_pct": 2.5,
+  "aparicion_pct": 0.3571,
+  "valor": 384,
+  "triangulos": 880,
+  "tamano_studs": [
+    3.61,
+    3.03,
+    2.74
+  ],
+  "partes": [
+    {
+      "nombre": "nucleo_estelar_cristal",
+      "triangulos": 320,
+      "Material": "Glass",
+      "Transparency": 0.75,
+      "Color": "#CFE4FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "nucleo_estelar_neon",
+      "triangulos": 320,
+      "Material": "Neon",
+      "Color": "#FFFFFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    },
+    {
+      "nombre": "nucleo_estelar_orbita",
+      "triangulos": 240,
+      "Material": "Neon",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+      "Animacion": "cada anillo gira a su velocidad; mejor separarlos con un Attachment"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/nucleo_estelar_color.png",
+    "normal": "texturas/nucleo_estelar_normal.png",
+    "rugosidad": "texturas/nucleo_estelar_rugosidad.png",
+    "metal": "texturas/nucleo_estelar_metal.png",
+    "emision": "texturas/nucleo_estelar_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 13",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "fragmento_de_dios",
+  "numero": 100,
+  "nombre": "Fragmento de dios",
+  "descripcion": "Cristal imposible: todas las geometrías a la vez, de luz blanca pura.",
+  "rareza": "Celestial",
+  "color_hud": "#3DF2FF",
+  "aparicion_rareza_pct": 0.5,
+  "aparicion_pct": 0.1667,
+  "valor": 2000,
+  "triangulos": 1620,
+  "tamano_studs": [
+    6.38,
+    5.36,
+    5.04
+  ],
+  "partes": [
+    {
+      "nombre": "fragmento_de_dios_cristal",
+      "triangulos": 20,
+      "Material": "Glass",
+      "Transparency": 0.75,
+      "Color": "#F4F8FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox",
+      "Animacion": "girar en sentido contrario al núcleo"
+    },
+    {
+      "nombre": "fragmento_de_dios_neon",
+      "triangulos": 1364,
+      "Material": "Neon",
+      "Color": "#FFFFFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "girar en los tres ejes: parece que cambia de forma"
+    },
+    {
+      "nombre": "fragmento_de_dios_orbita",
+      "triangulos": 236,
+      "Material": "Neon",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+      "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/fragmento_de_dios_color.png",
+    "normal": "texturas/fragmento_de_dios_normal.png",
+    "rugosidad": "texturas/fragmento_de_dios_rugosidad.png",
+    "metal": "texturas/fragmento_de_dios_metal.png",
+    "emision": "texturas/fragmento_de_dios_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 22",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
