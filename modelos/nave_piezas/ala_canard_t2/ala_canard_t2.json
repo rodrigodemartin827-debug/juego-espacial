@@ -1,0 +1,200 @@
+{
+  "nombre": "ala_canard_t2",
+  "titulo": "Canard (militar)",
+  "categoria": "ala",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 456,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.77,
+    1.6,
+    1.966
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_canard_t2_izq",
+      "triangulos": 396,
+      "tamano": [
+        2.65,
+        1.6,
+        1.966
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_canard_t2_color.png",
+        "normal": "texturas/ala_canard_t2_normal.png",
+        "rugosidad": "texturas/ala_canard_t2_rugosidad.png",
+        "metal": "texturas/ala_canard_t2_metal.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_canard_t2_izq_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.04,
+        0.18
+      ],
+      "centro": [
+        -0.285,
+        0.139,
+        0.335
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_canard_t2_izq_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        -1.345,
+        0.1,
+        0.223
+      ],
+      "material_roblox": "Neon",
+      "color": "#7FD4FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_canard_t2_der",
+      "triangulos": 396,
+      "tamano": [
+        2.65,
+        1.6,
+        1.966
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_canard_t2_color.png",
+        "normal": "texturas/ala_canard_t2_normal.png",
+        "rugosidad": "texturas/ala_canard_t2_rugosidad.png",
+        "metal": "texturas/ala_canard_t2_metal.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_canard_t2_der_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.04,
+        0.18
+      ],
+      "centro": [
+        0.285,
+        0.139,
+        0.335
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_canard_t2_der_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        1.345,
+        0.1,
+        0.223
+      ],
+      "material_roblox": "Neon",
+      "color": "#7FD4FF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_canard_t2_izq",
+      "posicion": [
+        1.275,
+        0.0,
+        -0.002
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_canard_t2_der",
+      "posicion": [
+        -1.275,
+        0.0,
+        -0.002
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Aleta delantera pequeña (canard) para ganar maniobrabilidad."
+}

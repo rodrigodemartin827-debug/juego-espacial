@@ -1,0 +1,117 @@
+{
+  "nombre": "motor_quimico_t1",
+  "titulo": "Motor químico (básico)",
+  "categoria": "motor",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 1310,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.125,
+    2.32,
+    3.94
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_quimico_t1",
+      "triangulos": 1268,
+      "tamano": [
+        2.125,
+        2.32,
+        3.94
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_quimico_t1_color.png",
+        "normal": "texturas/motor_quimico_t1_normal.png",
+        "rugosidad": "texturas/motor_quimico_t1_rugosidad.png",
+        "metal": "texturas/motor_quimico_t1_metal.png"
+      }
+    },
+    {
+      "nombre": "motor_quimico_t1_neon",
+      "triangulos": 42,
+      "tamano": [
+        0.85,
+        0.829,
+        0.12
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.95
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB347"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_quimico_t1",
+      "posicion": [
+        0.0,
+        0.0,
+        -1.92
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "ALA_MOTOR",
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_quimico_t1",
+      "posicion": [
+        0.0,
+        0.0,
+        1.97
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor químico básico de tobera simple, chapa gris y radiadores."
+}

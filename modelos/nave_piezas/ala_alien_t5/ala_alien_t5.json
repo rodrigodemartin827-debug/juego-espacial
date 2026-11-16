@@ -1,0 +1,260 @@
+{
+  "nombre": "ala_alien_t5",
+  "titulo": "Ala alienígena (legendaria)",
+  "categoria": "ala",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 3094,
+  "limite_triangulos": 5000,
+  "tamano": [
+    8.67,
+    1.6,
+    5.425
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_alien_t5_izq",
+      "triangulos": 2550,
+      "tamano": [
+        8.67,
+        1.6,
+        5.425
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_alien_t5_color.png",
+        "normal": "texturas/ala_alien_t5_normal.png",
+        "rugosidad": "texturas/ala_alien_t5_rugosidad.png",
+        "metal": "texturas/ala_alien_t5_metal.png",
+        "emision": "texturas/ala_alien_t5_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_alien_t5_izq_neon",
+      "triangulos": 272,
+      "tamano": [
+        7.521,
+        0.498,
+        5.232
+      ],
+      "centro": [
+        -0.459,
+        0.419,
+        -0.002
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_alien_t5_izq_cristal",
+      "triangulos": 272,
+      "tamano": [
+        7.5,
+        0.823,
+        5.185
+      ],
+      "centro": [
+        -0.465,
+        0.206,
+        0.0
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35,
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_alien_t5_der",
+      "triangulos": 2550,
+      "tamano": [
+        8.67,
+        1.6,
+        5.425
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_alien_t5_color.png",
+        "normal": "texturas/ala_alien_t5_normal.png",
+        "rugosidad": "texturas/ala_alien_t5_rugosidad.png",
+        "metal": "texturas/ala_alien_t5_metal.png",
+        "emision": "texturas/ala_alien_t5_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_alien_t5_der_neon",
+      "triangulos": 272,
+      "tamano": [
+        7.521,
+        0.498,
+        5.232
+      ],
+      "centro": [
+        0.459,
+        0.419,
+        -0.002
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_alien_t5_der_cristal",
+      "triangulos": 272,
+      "tamano": [
+        7.5,
+        0.823,
+        5.185
+      ],
+      "centro": [
+        0.465,
+        0.206,
+        0.0
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35,
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_alien_t5_izq",
+      "posicion": [
+        4.285,
+        0.0,
+        -0.9
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_alien_t5_izq",
+      "posicion": [
+        -2.629,
+        -0.091,
+        -0.13
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_alien_t5_der",
+      "posicion": [
+        -4.285,
+        0.0,
+        -0.9
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_alien_t5_der",
+      "posicion": [
+        2.629,
+        -0.091,
+        -0.13
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala orgánica de huesos curvos y membranas púrpura semitransparentes con venas de neón."
+}

@@ -1,0 +1,133 @@
+{
+  "nombre": "motor_ion_t3",
+  "titulo": "Motor iónico (avanzado)",
+  "categoria": "motor",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 3684,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.091,
+    3.068,
+    4.66
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_ion_t3",
+      "triangulos": 2844,
+      "tamano": [
+        3.091,
+        3.068,
+        4.66
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_ion_t3_color.png",
+        "normal": "texturas/motor_ion_t3_normal.png",
+        "rugosidad": "texturas/motor_ion_t3_rugosidad.png",
+        "metal": "texturas/motor_ion_t3_metal.png",
+        "emision": "texturas/motor_ion_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_ion_t3_neon",
+      "triangulos": 580,
+      "tamano": [
+        3.091,
+        3.068,
+        3.449
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.606
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "motor_ion_t3_neon2",
+      "triangulos": 260,
+      "tamano": [
+        3.091,
+        3.068,
+        0.118
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.38
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_ion_t3",
+      "posicion": [
+        0.0,
+        0.0,
+        -2.28
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_ion_t3",
+      "posicion": [
+        0.0,
+        0.0,
+        2.31
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor iónico avanzado con rejilla y anillos de neón cian brillante."
+}

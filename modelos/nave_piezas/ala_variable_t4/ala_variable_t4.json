@@ -1,0 +1,412 @@
+{
+  "nombre": "ala_variable_t4",
+  "titulo": "Ala de geometría variable (élite)",
+  "categoria": "ala",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 1692,
+  "limite_triangulos": 5000,
+  "tamano": [
+    9.058,
+    1.6,
+    7.914
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_variable_t4_izq.001",
+      "triangulos": 348,
+      "tamano": [
+        2.1,
+        1.6,
+        2.492
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_variable_t4_color.png",
+        "normal": "texturas/ala_variable_t4_normal.png",
+        "rugosidad": "texturas/ala_variable_t4_rugosidad.png",
+        "metal": "texturas/ala_variable_t4_metal.png",
+        "emision": "texturas/ala_variable_t4_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_variable_t4_izq_extendida",
+      "triangulos": 612,
+      "tamano": [
+        7.315,
+        0.711,
+        2.448
+      ],
+      "centro": [
+        -4.35,
+        -0.148,
+        0.005
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_variable_t4_color.png",
+        "normal": "texturas/ala_variable_t4_normal.png",
+        "rugosidad": "texturas/ala_variable_t4_rugosidad.png",
+        "metal": "texturas/ala_variable_t4_metal.png",
+        "emision": "texturas/ala_variable_t4_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_variable_t4_izq_plegada",
+      "triangulos": 612,
+      "tamano": [
+        5.325,
+        0.711,
+        7.244
+      ],
+      "centro": [
+        -2.628,
+        -0.148,
+        3.046
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_variable_t4_color.png",
+        "normal": "texturas/ala_variable_t4_normal.png",
+        "rugosidad": "texturas/ala_variable_t4_rugosidad.png",
+        "metal": "texturas/ala_variable_t4_metal.png",
+        "emision": "texturas/ala_variable_t4_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_variable_t4_izq_extendida_neon",
+      "triangulos": 60,
+      "tamano": [
+        7.301,
+        0.151,
+        1.348
+      ],
+      "centro": [
+        -4.35,
+        0.059,
+        -0.545
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_variable_t4_izq_plegada_neon",
+      "triangulos": 60,
+      "tamano": [
+        3.511,
+        0.151,
+        6.583
+      ],
+      "centro": [
+        -3.534,
+        0.059,
+        2.715
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_variable_t4_der.001",
+      "triangulos": 348,
+      "tamano": [
+        2.1,
+        1.6,
+        2.492
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_variable_t4_color.png",
+        "normal": "texturas/ala_variable_t4_normal.png",
+        "rugosidad": "texturas/ala_variable_t4_rugosidad.png",
+        "metal": "texturas/ala_variable_t4_metal.png",
+        "emision": "texturas/ala_variable_t4_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_variable_t4_der_extendida",
+      "triangulos": 612,
+      "tamano": [
+        7.315,
+        0.711,
+        2.448
+      ],
+      "centro": [
+        4.35,
+        -0.148,
+        0.005
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_variable_t4_color.png",
+        "normal": "texturas/ala_variable_t4_normal.png",
+        "rugosidad": "texturas/ala_variable_t4_rugosidad.png",
+        "metal": "texturas/ala_variable_t4_metal.png",
+        "emision": "texturas/ala_variable_t4_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_variable_t4_der_plegada",
+      "triangulos": 612,
+      "tamano": [
+        5.325,
+        0.711,
+        7.244
+      ],
+      "centro": [
+        2.628,
+        -0.148,
+        3.046
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_variable_t4_color.png",
+        "normal": "texturas/ala_variable_t4_normal.png",
+        "rugosidad": "texturas/ala_variable_t4_rugosidad.png",
+        "metal": "texturas/ala_variable_t4_metal.png",
+        "emision": "texturas/ala_variable_t4_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_variable_t4_der_extendida_neon",
+      "triangulos": 60,
+      "tamano": [
+        7.301,
+        0.151,
+        1.348
+      ],
+      "centro": [
+        4.35,
+        0.059,
+        -0.545
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_variable_t4_der_plegada_neon",
+      "triangulos": 60,
+      "tamano": [
+        3.511,
+        0.151,
+        6.583
+      ],
+      "centro": [
+        3.534,
+        0.059,
+        2.715
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_variable_t4_izq.001",
+      "posicion": [
+        1.0,
+        0.0,
+        -0.151
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_variable_t4_izq_extendida",
+      "posicion": [
+        -2.93,
+        -0.305,
+        0.565
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_variable_t4_izq_plegada",
+      "posicion": [
+        -1.832,
+        -0.305,
+        2.665
+      ],
+      "orientacion": [
+        -90.0,
+        52.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        -0.788,
+        0.0,
+        -0.6157
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_variable_t4_der.001",
+      "posicion": [
+        -1.0,
+        0.0,
+        -0.151
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_variable_t4_der_extendida",
+      "posicion": [
+        2.93,
+        -0.305,
+        0.565
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_variable_t4_der_plegada",
+      "posicion": [
+        1.832,
+        -0.305,
+        2.665
+      ],
+      "orientacion": [
+        -90.0,
+        -52.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.788,
+        0.0,
+        -0.6157
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    }
+  ],
+  "posiciones": {
+    "extendida": 0,
+    "plegada": 52,
+    "nota": "dos mallas del panel: se muestra una u otra (o se interpola el giro alrededor del pivote)"
+  },
+  "pivote": null,
+  "descripcion": "Ala de geometría variable: el panel va en dos mallas, extendido y plegado 52° hacia atrás."
+}

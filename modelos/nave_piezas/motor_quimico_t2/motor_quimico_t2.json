@@ -1,0 +1,117 @@
+{
+  "nombre": "motor_quimico_t2",
+  "titulo": "Motor químico (militar)",
+  "categoria": "motor",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1680,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.4,
+    2.4,
+    4.44
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_quimico_t2",
+      "triangulos": 1632,
+      "tamano": [
+        2.4,
+        2.4,
+        4.44
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_quimico_t2_color.png",
+        "normal": "texturas/motor_quimico_t2_normal.png",
+        "rugosidad": "texturas/motor_quimico_t2_rugosidad.png",
+        "metal": "texturas/motor_quimico_t2_metal.png"
+      }
+    },
+    {
+      "nombre": "motor_quimico_t2_neon",
+      "triangulos": 48,
+      "tamano": [
+        0.935,
+        0.935,
+        0.12
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        1.11
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_quimico_t2",
+      "posicion": [
+        0.0,
+        0.0,
+        -2.17
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "ALA_MOTOR",
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_quimico_t2",
+      "posicion": [
+        0.0,
+        0.0,
+        2.22
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor químico militar con la tobera naranja."
+}

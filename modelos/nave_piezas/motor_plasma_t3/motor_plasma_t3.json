@@ -1,0 +1,133 @@
+{
+  "nombre": "motor_plasma_t3",
+  "titulo": "Motor de plasma (avanzado)",
+  "categoria": "motor",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 4328,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.386,
+    3.361,
+    5.758
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_plasma_t3",
+      "triangulos": 3188,
+      "tamano": [
+        3.386,
+        3.361,
+        5.758
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_plasma_t3_color.png",
+        "normal": "texturas/motor_plasma_t3_normal.png",
+        "rugosidad": "texturas/motor_plasma_t3_rugosidad.png",
+        "metal": "texturas/motor_plasma_t3_metal.png",
+        "emision": "texturas/motor_plasma_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_plasma_t3_neon",
+      "triangulos": 620,
+      "tamano": [
+        3.386,
+        3.361,
+        3.287
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -0.103
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF8A3A"
+    },
+    {
+      "nombre": "motor_plasma_t3_neon2",
+      "triangulos": 520,
+      "tamano": [
+        3.386,
+        3.361,
+        3.426
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        1.166
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DA8FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_plasma_t3",
+      "posicion": [
+        0.0,
+        0.0,
+        -2.829
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_plasma_t3",
+      "posicion": [
+        0.0,
+        0.0,
+        2.861
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor de plasma de tobera ancha, con bobinas de neón naranja y azul."
+}

@@ -1,0 +1,280 @@
+{
+  "nombre": "ala_anular_t3",
+  "titulo": "Ala anular (avanzada)",
+  "categoria": "ala",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 2484,
+  "limite_triangulos": 5000,
+  "tamano": [
+    5.905,
+    4.995,
+    2.592
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_anular_t3_izq",
+      "triangulos": 2204,
+      "tamano": [
+        5.905,
+        4.995,
+        2.592
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_anular_t3_color.png",
+        "normal": "texturas/ala_anular_t3_normal.png",
+        "rugosidad": "texturas/ala_anular_t3_rugosidad.png",
+        "metal": "texturas/ala_anular_t3_metal.png",
+        "emision": "texturas/ala_anular_t3_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_anular_t3_izq_neon",
+      "triangulos": 280,
+      "tamano": [
+        4.306,
+        4.306,
+        0.077
+      ],
+      "centro": [
+        -0.698,
+        0.243,
+        -1.146
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_anular_t3_der",
+      "triangulos": 2204,
+      "tamano": [
+        5.905,
+        4.995,
+        2.592
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_anular_t3_color.png",
+        "normal": "texturas/ala_anular_t3_normal.png",
+        "rugosidad": "texturas/ala_anular_t3_rugosidad.png",
+        "metal": "texturas/ala_anular_t3_metal.png",
+        "emision": "texturas/ala_anular_t3_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_anular_t3_der_neon",
+      "triangulos": 280,
+      "tamano": [
+        4.306,
+        4.306,
+        0.077
+      ],
+      "centro": [
+        0.698,
+        0.243,
+        -1.146
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_anular_t3_izq",
+      "posicion": [
+        2.902,
+        0.243,
+        0.404
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_motor",
+      "malla": "ala_anular_t3_izq",
+      "posicion": [
+        -0.698,
+        0.243,
+        0.744
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_anular_t3_izq",
+      "posicion": [
+        -0.698,
+        -2.447,
+        0.004
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_anular_t3_der",
+      "posicion": [
+        -2.902,
+        0.243,
+        0.404
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_motor",
+      "malla": "ala_anular_t3_der",
+      "posicion": [
+        0.698,
+        0.243,
+        0.744
+      ],
+      "orientacion": [
+        0.0,
+        -180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_anular_t3_der",
+      "posicion": [
+        0.698,
+        -2.447,
+        0.004
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala en anillo que rodea un motor: lleva un acople ALA_MOTOR en el centro del anillo."
+}
