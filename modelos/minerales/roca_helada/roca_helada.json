@@ -1,0 +1,43 @@
+{
+  "id": "roca_helada",
+  "numero": 21,
+  "nombre": "Roca helada",
+  "descripcion": "Piedra cubierta de escarcha, con hielo arriba.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 4,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.87,
+    2.7,
+    1.51
+  ],
+  "partes": [
+    {
+      "nombre": "roca_helada",
+      "triangulos": 1384,
+      "Material": "Glacier",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "roca_helada_cristal",
+      "triangulos": 216,
+      "Material": "Glass",
+      "Transparency": 0.3,
+      "Color": "#CFEFFF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/roca_helada_color.png",
+    "normal": "texturas/roca_helada_normal.png",
+    "rugosidad": "texturas/roca_helada_rugosidad.png",
+    "metal": "texturas/roca_helada_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

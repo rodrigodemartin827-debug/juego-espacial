@@ -1,0 +1,35 @@
+{
+  "id": "mineral_estano",
+  "numero": 28,
+  "nombre": "Estaño",
+  "descripcion": "Roca gris con nódulos brillantes.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 7,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.63,
+    2.31,
+    1.47
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_estano",
+      "triangulos": 1998,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_estano_color.png",
+    "normal": "texturas/mineral_estano_normal.png",
+    "rugosidad": "texturas/mineral_estano_rugosidad.png",
+    "metal": "texturas/mineral_estano_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

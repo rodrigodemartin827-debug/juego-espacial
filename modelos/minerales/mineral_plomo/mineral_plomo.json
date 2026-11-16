@@ -1,0 +1,35 @@
+{
+  "id": "mineral_plomo",
+  "numero": 30,
+  "nombre": "Plomo",
+  "descripcion": "Roca gris oscura, pesada, en bloques con brillo metálico.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 8,
+  "triangulos": 2000,
+  "tamano_studs": [
+    2.21,
+    2.36,
+    1.69
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_plomo",
+      "triangulos": 2000,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_plomo_color.png",
+    "normal": "texturas/mineral_plomo_normal.png",
+    "rugosidad": "texturas/mineral_plomo_rugosidad.png",
+    "metal": "texturas/mineral_plomo_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

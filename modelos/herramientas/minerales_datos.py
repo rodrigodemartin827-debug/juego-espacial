@@ -188,7 +188,7 @@ MINERALES = [
     _m(PC, "mineral_cobre", "Cobre", "Roca con vetas cobrizas y manchas de pátina verde.", "roca", (2.7, 2.2, 1.9),
        dict(roca=Pt("manchas", ("#77706A", "#4B4540"), capas=[G("#2A2420", 0.5),
                                                                V("#D9783A", 1.6, rug=0.3, met=1.0),
-                                                               MA("#3FA58A", 0.02, rug=0.9)])),
+                                                               MA("#3FA58A", -0.35, rug=0.9)])),
        cortes=9, redondez=0.4, material="Slate"),
     _m(PC, "mineral_estano", "Estaño", "Roca gris con nódulos brillantes.", "pepitas", (2.6, 2.2, 1.8),
        dict(roca=ROCA_BASE, pepita=Pt("liso", ("#D6D8DA", "#A8ABAE"), rug=0.22, met=1.0, oscurecer_base=0.0)),
