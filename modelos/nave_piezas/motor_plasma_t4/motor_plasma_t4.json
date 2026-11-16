@@ -1,0 +1,144 @@
+{
+  "nombre": "motor_plasma_t4",
+  "titulo": "Motor de plasma doble (élite)",
+  "categoria": "motor",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 3444,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.5,
+    3.45,
+    5.608
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_plasma_t4",
+      "triangulos": 2908,
+      "tamano": [
+        3.5,
+        3.45,
+        5.608
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_plasma_t4_color.png",
+        "normal": "texturas/motor_plasma_t4_normal.png",
+        "rugosidad": "texturas/motor_plasma_t4_rugosidad.png",
+        "metal": "texturas/motor_plasma_t4_metal.png",
+        "emision": "texturas/motor_plasma_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_plasma_t4_neon",
+      "triangulos": 536,
+      "tamano": [
+        3.306,
+        1.589,
+        1.188
+      ],
+      "centro": [
+        0.0,
+        -0.15,
+        2.21
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_plasma_t4",
+      "posicion": [
+        0.0,
+        -0.15,
+        -2.754
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape_1",
+      "malla": "motor_plasma_t4",
+      "posicion": [
+        0.85,
+        -0.15,
+        2.786
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    },
+    {
+      "nombre": "acople_escape_2",
+      "malla": "motor_plasma_t4",
+      "posicion": [
+        -0.85,
+        -0.15,
+        2.786
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor de plasma élite con doble tobera, negro y dorado."
+}

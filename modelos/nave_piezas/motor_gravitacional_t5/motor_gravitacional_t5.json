@@ -1,0 +1,188 @@
+{
+  "nombre": "motor_gravitacional_t5",
+  "titulo": "Motor gravitacional (legendario)",
+  "categoria": "motor",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 3656,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.21,
+    2.498,
+    4.574
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_gravitacional_t5.001",
+      "triangulos": 1552,
+      "tamano": [
+        2.498,
+        2.498,
+        4.097
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_gravitacional_t5_color.png",
+        "normal": "texturas/motor_gravitacional_t5_normal.png",
+        "rugosidad": "texturas/motor_gravitacional_t5_rugosidad.png",
+        "metal": "texturas/motor_gravitacional_t5_metal.png",
+        "emision": "texturas/motor_gravitacional_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_gravitacional_t5_orbita",
+      "triangulos": 640,
+      "tamano": [
+        3.21,
+        2.007,
+        3.448
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.802
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_gravitacional_t5_color.png",
+        "normal": "texturas/motor_gravitacional_t5_normal.png",
+        "rugosidad": "texturas/motor_gravitacional_t5_rugosidad.png",
+        "metal": "texturas/motor_gravitacional_t5_metal.png",
+        "emision": "texturas/motor_gravitacional_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_gravitacional_t5_neon",
+      "triangulos": 240,
+      "tamano": [
+        1.935,
+        1.935,
+        2.885
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.544
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "motor_gravitacional_t5_orbita_neon",
+      "triangulos": 640,
+      "tamano": [
+        3.21,
+        2.007,
+        3.448
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.802
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "motor_gravitacional_t5_neon2",
+      "triangulos": 224,
+      "tamano": [
+        1.26,
+        1.26,
+        1.26
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.802
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFFFFF"
+    },
+    {
+      "nombre": "motor_gravitacional_t5_cristal",
+      "triangulos": 360,
+      "tamano": [
+        2.24,
+        2.24,
+        2.24
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.802
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_gravitacional_t5.001",
+      "posicion": [
+        0.0,
+        0.0,
+        -1.998
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_gravitacional_t5.001",
+      "posicion": [
+        0.0,
+        0.0,
+        1.922
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor alienígena sin tobera: una esfera de gravedad sujeta por garras, con anillos en órbita."
+}

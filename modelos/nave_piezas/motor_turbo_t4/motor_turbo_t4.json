@@ -1,0 +1,150 @@
+{
+  "nombre": "motor_turbo_t4",
+  "titulo": "Postquemador (élite)",
+  "categoria": "motor",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 3914,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.486,
+    3.46,
+    8.95
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_turbo_t4",
+      "triangulos": 3244,
+      "tamano": [
+        3.486,
+        3.46,
+        5.59
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_turbo_t4_color.png",
+        "normal": "texturas/motor_turbo_t4_normal.png",
+        "rugosidad": "texturas/motor_turbo_t4_rugosidad.png",
+        "metal": "texturas/motor_turbo_t4_metal.png",
+        "emision": "texturas/motor_turbo_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_turbo_t4_neon",
+      "triangulos": 314,
+      "tamano": [
+        3.486,
+        3.46,
+        2.938
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -0.054
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "motor_turbo_t4_neon2",
+      "triangulos": 276,
+      "tamano": [
+        2.806,
+        2.806,
+        2.098
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        3.636
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DA8FF"
+    },
+    {
+      "nombre": "motor_turbo_t4_llama",
+      "triangulos": 80,
+      "tamano": [
+        2.295,
+        2.295,
+        3.61
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        4.35
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF7A2A",
+      "transparencia": 0.25
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_turbo_t4",
+      "posicion": [
+        0.0,
+        0.0,
+        -2.745
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_turbo_t4",
+      "posicion": [
+        0.0,
+        0.0,
+        2.645
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Postquemador élite con tobera de pétalos y la llama naranja y azul visible (malla _llama)."
+}

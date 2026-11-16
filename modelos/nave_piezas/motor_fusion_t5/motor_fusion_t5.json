@@ -1,0 +1,150 @@
+{
+  "nombre": "motor_fusion_t5",
+  "titulo": "Motor de fusión (legendario)",
+  "categoria": "motor",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 4004,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.216,
+    3.165,
+    7.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_fusion_t5",
+      "triangulos": 3136,
+      "tamano": [
+        3.216,
+        3.165,
+        7.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_fusion_t5_color.png",
+        "normal": "texturas/motor_fusion_t5_normal.png",
+        "rugosidad": "texturas/motor_fusion_t5_rugosidad.png",
+        "metal": "texturas/motor_fusion_t5_metal.png",
+        "emision": "texturas/motor_fusion_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_fusion_t5_neon",
+      "triangulos": 224,
+      "tamano": [
+        1.86,
+        1.86,
+        2.139
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -0.85
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "motor_fusion_t5_neon2",
+      "triangulos": 284,
+      "tamano": [
+        1.26,
+        1.26,
+        3.525
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.283
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFFFFF"
+    },
+    {
+      "nombre": "motor_fusion_t5_cristal",
+      "triangulos": 360,
+      "tamano": [
+        2.58,
+        2.58,
+        3.354
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -0.85
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_fusion_t5",
+      "posicion": [
+        0.0,
+        0.0,
+        -3.45
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_fusion_t5",
+      "posicion": [
+        0.0,
+        0.0,
+        3.5
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor de fusión legendario: el núcleo es una estrella visible en una jaula de costillas y cristal."
+}

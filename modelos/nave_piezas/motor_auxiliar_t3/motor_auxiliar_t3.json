@@ -1,0 +1,119 @@
+{
+  "nombre": "motor_auxiliar_t3",
+  "titulo": "Motor auxiliar (avanzado)",
+  "categoria": "motor",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 2094,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.786,
+    1.773,
+    2.458
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_auxiliar_t3",
+      "triangulos": 1592,
+      "tamano": [
+        1.786,
+        1.773,
+        2.458
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_auxiliar_t3_color.png",
+        "normal": "texturas/motor_auxiliar_t3_normal.png",
+        "rugosidad": "texturas/motor_auxiliar_t3_rugosidad.png",
+        "metal": "texturas/motor_auxiliar_t3_metal.png",
+        "emision": "texturas/motor_auxiliar_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_auxiliar_t3_neon",
+      "triangulos": 502,
+      "tamano": [
+        1.786,
+        1.773,
+        1.476
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.491
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_auxiliar_t3",
+      "posicion": [
+        0.0,
+        0.0,
+        -1.179
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "UNIVERSAL",
+      "direccion": "entrada",
+      "brida": 0.8,
+      "acepta": [
+        "ALA_MOTOR",
+        "CASCO_TRASERO",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_auxiliar_t3",
+      "posicion": [
+        0.0,
+        0.0,
+        1.211
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor auxiliar avanzado con anillo de neón."
+}

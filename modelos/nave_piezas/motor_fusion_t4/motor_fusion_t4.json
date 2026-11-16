@@ -1,0 +1,133 @@
+{
+  "nombre": "motor_fusion_t4",
+  "titulo": "Motor de fusión (élite)",
+  "categoria": "motor",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 4924,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.786,
+    3.879,
+    6.758
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_fusion_t4",
+      "triangulos": 3824,
+      "tamano": [
+        3.786,
+        3.879,
+        6.758
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_fusion_t4_color.png",
+        "normal": "texturas/motor_fusion_t4_normal.png",
+        "rugosidad": "texturas/motor_fusion_t4_rugosidad.png",
+        "metal": "texturas/motor_fusion_t4_metal.png",
+        "emision": "texturas/motor_fusion_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_fusion_t4_neon",
+      "triangulos": 840,
+      "tamano": [
+        3.786,
+        3.758,
+        5.376
+      ],
+      "centro": [
+        0.0,
+        -0.061,
+        0.691
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "motor_fusion_t4_neon2",
+      "triangulos": 260,
+      "tamano": [
+        3.786,
+        3.758,
+        0.115
+      ],
+      "centro": [
+        0.0,
+        -0.061,
+        -0.689
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_fusion_t4",
+      "posicion": [
+        0.0,
+        -0.061,
+        -3.329
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "entrada",
+      "brida": 2.4,
+      "acepta": [
+        "CASCO_TRASERO"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_fusion_t4",
+      "posicion": [
+        0.0,
+        -0.061,
+        3.361
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "descripcion": "Motor de fusión grande con anillos de contención de neón dorado y rojo."
+}

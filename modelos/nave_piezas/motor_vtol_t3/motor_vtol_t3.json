@@ -1,0 +1,145 @@
+{
+  "nombre": "motor_vtol_t3",
+  "titulo": "Motor VTOL (avanzado)",
+  "categoria": "motor",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1594,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.9,
+    2.64,
+    1.576
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "motor_vtol_t3.001",
+      "triangulos": 532,
+      "tamano": [
+        2.9,
+        1.79,
+        1.2
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_vtol_t3_color.png",
+        "normal": "texturas/motor_vtol_t3_normal.png",
+        "rugosidad": "texturas/motor_vtol_t3_rugosidad.png",
+        "metal": "texturas/motor_vtol_t3_metal.png",
+        "emision": "texturas/motor_vtol_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_vtol_t3_tobera",
+      "triangulos": 816,
+      "tamano": [
+        1.9,
+        1.73,
+        1.576
+      ],
+      "centro": [
+        0.0,
+        -0.88,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/motor_vtol_t3_color.png",
+        "normal": "texturas/motor_vtol_t3_normal.png",
+        "rugosidad": "texturas/motor_vtol_t3_rugosidad.png",
+        "metal": "texturas/motor_vtol_t3_metal.png",
+        "emision": "texturas/motor_vtol_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "motor_vtol_t3_tobera_neon",
+      "triangulos": 246,
+      "tamano": [
+        1.533,
+        0.51,
+        1.533
+      ],
+      "centro": [
+        0.0,
+        -1.49,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "motor_vtol_t3.001",
+      "posicion": [
+        0.0,
+        0.845,
+        0.0
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "CASCO_INFERIOR",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_escape",
+      "malla": "motor_vtol_t3_tobera",
+      "posicion": [
+        0.0,
+        -0.855,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "MOTOR_ESCAPE",
+      "direccion": "salida",
+      "brida": 0.0
+    }
+  ],
+  "pivote_tobera": {
+    "eje": "X de Roblox",
+    "nota": "la malla _tobera gira alrededor de su eje transversal (el del soporte); de -30° a +90° para pasar de vertical a empuje"
+  },
+  "descripcion": "Motor de despegue vertical: tobera orientable (malla aparte) en una horquilla."
+}
