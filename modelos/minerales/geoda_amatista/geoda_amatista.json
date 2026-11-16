@@ -1,0 +1,43 @@
+{
+  "id": "geoda_amatista",
+  "numero": 55,
+  "nombre": "Geoda de amatista",
+  "descripcion": "Geoda grande y abierta llena de cristales púrpura.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 29,
+  "triangulos": 1632,
+  "tamano_studs": [
+    3.2,
+    2.03,
+    3.03
+  ],
+  "partes": [
+    {
+      "nombre": "geoda_amatista",
+      "triangulos": 400,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "geoda_amatista_cristal",
+      "triangulos": 1232,
+      "Material": "Glass",
+      "Transparency": 0.2,
+      "Color": "#8A3FD8",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/geoda_amatista_color.png",
+    "normal": "texturas/geoda_amatista_normal.png",
+    "rugosidad": "texturas/geoda_amatista_rugosidad.png",
+    "metal": "texturas/geoda_amatista_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #A35BFF, Brightness 1.5, Range 11",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

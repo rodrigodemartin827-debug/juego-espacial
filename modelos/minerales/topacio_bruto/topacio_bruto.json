@@ -1,0 +1,43 @@
+{
+  "id": "topacio_bruto",
+  "numero": 53,
+  "nombre": "Topacio bruto",
+  "descripcion": "Gran cristal amarillo anaranjado en la roca.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 26,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.22,
+    2.26,
+    3.23
+  ],
+  "partes": [
+    {
+      "nombre": "topacio_bruto",
+      "triangulos": 2358,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "topacio_bruto_cristal",
+      "triangulos": 42,
+      "Material": "Glass",
+      "Transparency": 0.25,
+      "Color": "#F2A22C",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/topacio_bruto_color.png",
+    "normal": "texturas/topacio_bruto_normal.png",
+    "rugosidad": "texturas/topacio_bruto_rugosidad.png",
+    "metal": "texturas/topacio_bruto_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFB347, Brightness 1.5, Range 11",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

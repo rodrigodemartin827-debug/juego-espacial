@@ -1,0 +1,36 @@
+{
+  "id": "piedra_lunar",
+  "numero": 59,
+  "nombre": "Piedra lunar",
+  "descripcion": "Piedra blanca con destellos azulados en su interior.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 34,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.35,
+    2.05,
+    2.13
+  ],
+  "partes": [
+    {
+      "nombre": "piedra_lunar",
+      "triangulos": 2400,
+      "Material": "Marble",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/piedra_lunar_color.png",
+    "normal": "texturas/piedra_lunar_normal.png",
+    "rugosidad": "texturas/piedra_lunar_rugosidad.png",
+    "metal": "texturas/piedra_lunar_metal.png",
+    "emision": "texturas/piedra_lunar_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #AFCBFF, Brightness 1.5, Range 8",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

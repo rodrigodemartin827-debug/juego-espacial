@@ -1,0 +1,43 @@
+{
+  "id": "zafiro_bruto",
+  "numero": 52,
+  "nombre": "Zafiro bruto",
+  "descripcion": "Cristal azul intenso hexagonal en la roca.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 24,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.29,
+    2.29,
+    2.44
+  ],
+  "partes": [
+    {
+      "nombre": "zafiro_bruto",
+      "triangulos": 2328,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "zafiro_bruto_cristal",
+      "triangulos": 72,
+      "Material": "Glass",
+      "Transparency": 0.25,
+      "Color": "#1846D6",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/zafiro_bruto_color.png",
+    "normal": "texturas/zafiro_bruto_normal.png",
+    "rugosidad": "texturas/zafiro_bruto_rugosidad.png",
+    "metal": "texturas/zafiro_bruto_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #4A7CFF, Brightness 1.5, Range 9",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

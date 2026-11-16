@@ -1,0 +1,43 @@
+{
+  "id": "mineral_neon_verde",
+  "numero": 57,
+  "nombre": "Neón verde",
+  "descripcion": "Roca oscura con vetas verde neón y esquirlas brillantes.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 32,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.39,
+    2.22,
+    1.63
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_neon_verde",
+      "triangulos": 2180,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_neon_verde_neon",
+      "triangulos": 220,
+      "Material": "Neon",
+      "Color": "#39FF6A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_neon_verde_color.png",
+    "normal": "texturas/mineral_neon_verde_normal.png",
+    "rugosidad": "texturas/mineral_neon_verde_rugosidad.png",
+    "metal": "texturas/mineral_neon_verde_metal.png",
+    "emision": "texturas/mineral_neon_verde_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #39FF6A, Brightness 1.5, Range 8",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

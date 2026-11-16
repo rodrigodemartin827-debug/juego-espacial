@@ -1,0 +1,44 @@
+{
+  "id": "cristal_arcoiris",
+  "numero": 54,
+  "nombre": "Cristal arcoíris",
+  "descripcion": "Cristal que cambia de color según el ángulo.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 27,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.34,
+    1.98,
+    3.01
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_arcoiris",
+      "triangulos": 2246,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_arcoiris_cristal",
+      "triangulos": 154,
+      "Material": "Glass",
+      "Transparency": 0.2,
+      "Color": "#C8B8FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_arcoiris_color.png",
+    "normal": "texturas/cristal_arcoiris_normal.png",
+    "rugosidad": "texturas/cristal_arcoiris_rugosidad.png",
+    "metal": "texturas/cristal_arcoiris_metal.png",
+    "emision": "texturas/cristal_arcoiris_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 11",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

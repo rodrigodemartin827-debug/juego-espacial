@@ -1,0 +1,43 @@
+{
+  "id": "rubi_bruto",
+  "numero": 51,
+  "nombre": "Rubí bruto",
+  "descripcion": "Cristales rojos dentro de roca gris.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 23,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.61,
+    2.24,
+    1.78
+  ],
+  "partes": [
+    {
+      "nombre": "rubi_bruto",
+      "triangulos": 2290,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "rubi_bruto_cristal",
+      "triangulos": 110,
+      "Material": "Glass",
+      "Transparency": 0.25,
+      "Color": "#D0103A",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/rubi_bruto_color.png",
+    "normal": "texturas/rubi_bruto_normal.png",
+    "rugosidad": "texturas/rubi_bruto_rugosidad.png",
+    "metal": "texturas/rubi_bruto_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FF3355, Brightness 1.5, Range 9",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

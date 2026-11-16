@@ -1,0 +1,43 @@
+{
+  "id": "mineral_neon_azul",
+  "numero": 56,
+  "nombre": "Neón azul",
+  "descripcion": "Roca con vetas azul eléctrico que brillan.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 30,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.72,
+    2.05,
+    1.65
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_neon_azul",
+      "triangulos": 2180,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_neon_azul_neon",
+      "triangulos": 220,
+      "Material": "Neon",
+      "Color": "#1E90FF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_neon_azul_color.png",
+    "normal": "texturas/mineral_neon_azul_normal.png",
+    "rugosidad": "texturas/mineral_neon_azul_rugosidad.png",
+    "metal": "texturas/mineral_neon_azul_metal.png",
+    "emision": "texturas/mineral_neon_azul_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #1E90FF, Brightness 1.5, Range 9",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

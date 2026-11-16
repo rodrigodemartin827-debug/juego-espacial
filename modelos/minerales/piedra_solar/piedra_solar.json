@@ -1,0 +1,36 @@
+{
+  "id": "piedra_solar",
+  "numero": 60,
+  "nombre": "Piedra solar",
+  "descripcion": "Piedra dorada y cálida con brillo interno naranja.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 36,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.33,
+    2.18,
+    2.12
+  ],
+  "partes": [
+    {
+      "nombre": "piedra_solar",
+      "triangulos": 2400,
+      "Material": "Marble",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/piedra_solar_color.png",
+    "normal": "texturas/piedra_solar_normal.png",
+    "rugosidad": "texturas/piedra_solar_rugosidad.png",
+    "metal": "texturas/piedra_solar_metal.png",
+    "emision": "texturas/piedra_solar_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FF9A2A, Brightness 1.5, Range 8",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
