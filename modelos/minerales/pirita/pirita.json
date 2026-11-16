@@ -1,0 +1,35 @@
+{
+  "id": "pirita",
+  "numero": 39,
+  "nombre": "Pirita",
+  "descripcion": "Cubos dorados metálicos encajados: el oro de los tontos.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 12,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.34,
+    2.17,
+    1.58
+  ],
+  "partes": [
+    {
+      "nombre": "pirita",
+      "triangulos": 1998,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/pirita_color.png",
+    "normal": "texturas/pirita_normal.png",
+    "rugosidad": "texturas/pirita_rugosidad.png",
+    "metal": "texturas/pirita_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

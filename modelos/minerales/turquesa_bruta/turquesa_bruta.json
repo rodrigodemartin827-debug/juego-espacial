@@ -1,0 +1,35 @@
+{
+  "id": "turquesa_bruta",
+  "numero": 36,
+  "nombre": "Turquesa bruta",
+  "descripcion": "Piedra azul verdosa con vetas de cobre.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 11,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.7,
+    2.45,
+    1.81
+  ],
+  "partes": [
+    {
+      "nombre": "turquesa_bruta",
+      "triangulos": 1998,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/turquesa_bruta_color.png",
+    "normal": "texturas/turquesa_bruta_normal.png",
+    "rugosidad": "texturas/turquesa_bruta_rugosidad.png",
+    "metal": "texturas/turquesa_bruta_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

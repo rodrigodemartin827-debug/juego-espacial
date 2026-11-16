@@ -1,0 +1,43 @@
+{
+  "id": "cuarzo_ahumado",
+  "numero": 32,
+  "nombre": "Cuarzo ahumado",
+  "descripcion": "Cristal marrón oscuro semitransparente.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 9,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.18,
+    2.04,
+    3.26
+  ],
+  "partes": [
+    {
+      "nombre": "cuarzo_ahumado",
+      "triangulos": 1910,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cuarzo_ahumado_cristal",
+      "triangulos": 88,
+      "Material": "Glass",
+      "Transparency": 0.35,
+      "Color": "#6B4A33",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cuarzo_ahumado_color.png",
+    "normal": "texturas/cuarzo_ahumado_normal.png",
+    "rugosidad": "texturas/cuarzo_ahumado_rugosidad.png",
+    "metal": "texturas/cuarzo_ahumado_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "cuarzo_rosa",
+  "numero": 31,
+  "nombre": "Cuarzo rosa",
+  "descripcion": "Cristales rosa pálido translúcidos.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 8,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.48,
+    2.15,
+    2.76
+  ],
+  "partes": [
+    {
+      "nombre": "cuarzo_rosa",
+      "triangulos": 1822,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cuarzo_rosa_cristal",
+      "triangulos": 176,
+      "Material": "Glass",
+      "Transparency": 0.3,
+      "Color": "#F4B9C8",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cuarzo_rosa_color.png",
+    "normal": "texturas/cuarzo_rosa_normal.png",
+    "rugosidad": "texturas/cuarzo_rosa_rugosidad.png",
+    "metal": "texturas/cuarzo_rosa_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

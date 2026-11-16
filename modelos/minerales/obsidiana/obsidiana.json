@@ -1,0 +1,35 @@
+{
+  "id": "obsidiana",
+  "numero": 38,
+  "nombre": "Obsidiana",
+  "descripcion": "Cristal volcánico negro, ultra liso, con reflejos.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 12,
+  "triangulos": 2000,
+  "tamano_studs": [
+    2.24,
+    1.65,
+    1.41
+  ],
+  "partes": [
+    {
+      "nombre": "obsidiana",
+      "triangulos": 2000,
+      "Material": "Glass",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/obsidiana_color.png",
+    "normal": "texturas/obsidiana_normal.png",
+    "rugosidad": "texturas/obsidiana_rugosidad.png",
+    "metal": "texturas/obsidiana_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

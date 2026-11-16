@@ -1,0 +1,35 @@
+{
+  "id": "agata_bandas",
+  "numero": 37,
+  "nombre": "Ágata de bandas",
+  "descripcion": "Nódulo partido con bandas concéntricas de colores.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 11,
+  "triangulos": 2000,
+  "tamano_studs": [
+    2.45,
+    1.5,
+    1.99
+  ],
+  "partes": [
+    {
+      "nombre": "agata_bandas",
+      "triangulos": 2000,
+      "Material": "Marble",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/agata_bandas_color.png",
+    "normal": "texturas/agata_bandas_normal.png",
+    "rugosidad": "texturas/agata_bandas_rugosidad.png",
+    "metal": "texturas/agata_bandas_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "jade_verde",
+  "numero": 34,
+  "nombre": "Jade",
+  "descripcion": "Piedra verde intensa, lisa y pulida.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 10,
+  "triangulos": 2000,
+  "tamano_studs": [
+    2.38,
+    1.9,
+    1.27
+  ],
+  "partes": [
+    {
+      "nombre": "jade_verde",
+      "triangulos": 2000,
+      "Material": "Marble",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/jade_verde_color.png",
+    "normal": "texturas/jade_verde_normal.png",
+    "rugosidad": "texturas/jade_verde_rugosidad.png",
+    "metal": "texturas/jade_verde_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

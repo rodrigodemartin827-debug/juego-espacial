@@ -1,0 +1,43 @@
+{
+  "id": "fluorita_verde",
+  "numero": 40,
+  "nombre": "Fluorita verde",
+  "descripcion": "Cristales verdes translúcidos en cubos.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 13,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.28,
+    2.08,
+    1.37
+  ],
+  "partes": [
+    {
+      "nombre": "fluorita_verde",
+      "triangulos": 1926,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "fluorita_verde_cristal",
+      "triangulos": 72,
+      "Material": "Glass",
+      "Transparency": 0.3,
+      "Color": "#5EE08A",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/fluorita_verde_color.png",
+    "normal": "texturas/fluorita_verde_normal.png",
+    "rugosidad": "texturas/fluorita_verde_rugosidad.png",
+    "metal": "texturas/fluorita_verde_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
