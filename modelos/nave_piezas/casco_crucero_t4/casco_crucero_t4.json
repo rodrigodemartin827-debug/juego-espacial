@@ -1,0 +1,698 @@
+{
+  "nombre": "casco_crucero_t4",
+  "titulo": "Casco de crucero (élite)",
+  "categoria": "casco",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 7879,
+  "limite_triangulos": 8000,
+  "tamano": [
+    13.029,
+    12.718,
+    44.31
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "casco_crucero_t4",
+      "triangulos": 7347,
+      "tamano": [
+        13.029,
+        12.718,
+        44.31
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/casco_crucero_t4_color.png",
+        "normal": "texturas/casco_crucero_t4_normal.png",
+        "rugosidad": "texturas/casco_crucero_t4_rugosidad.png",
+        "metal": "texturas/casco_crucero_t4_metal.png",
+        "emision": "texturas/casco_crucero_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "casco_crucero_t4_neon",
+      "triangulos": 284,
+      "tamano": [
+        12.047,
+        7.281,
+        35.205
+      ],
+      "centro": [
+        0.0,
+        2.087,
+        0.728
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "casco_crucero_t4_neon2",
+      "triangulos": 248,
+      "tamano": [
+        11.318,
+        0.439,
+        28.616
+      ],
+      "centro": [
+        0.0,
+        -2.746,
+        0.942
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -5.248,
+        -1.621,
+        -13.355
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        5.248,
+        -1.621,
+        -13.355
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_izq_2",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -6.065,
+        -1.621,
+        -6.755
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der_2",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        6.065,
+        -1.621,
+        -6.755
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_izq_3",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -6.265,
+        -1.621,
+        -0.155
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der_3",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        6.265,
+        -1.621,
+        -0.155
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_izq_4",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -6.465,
+        -1.621,
+        6.445
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der_4",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        6.465,
+        -1.621,
+        6.445
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_izq_5",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -6.43,
+        -1.621,
+        13.045
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der_5",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        6.43,
+        -1.621,
+        13.045
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_motor_1",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        2.838,
+        -0.589,
+        22.105
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_motor_2",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -2.838,
+        -0.589,
+        22.105
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_motor_3",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        2.838,
+        -2.825,
+        22.105
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_motor_4",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        -2.838,
+        -2.825,
+        22.105
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_motor_5",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        -1.621,
+        22.105
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_cabina",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        1.259,
+        -16.875
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_torreta_1",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        2.249,
+        -8.955
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_torreta_2",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        2.382,
+        -2.355
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_torreta_3",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        2.492,
+        13.925
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_inferior_1",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        -5.261,
+        -11.155
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    },
+    {
+      "nombre": "acople_inferior_2",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        -5.708,
+        2.045
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    },
+    {
+      "nombre": "acople_inferior_3",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        -5.774,
+        13.045
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    },
+    {
+      "nombre": "acople_frontal",
+      "malla": "casco_crucero_t4",
+      "posicion": [
+        0.0,
+        -4.705,
+        -20.345
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "salida",
+      "brida": 1.2
+    }
+  ],
+  "plazas": 8,
+  "descripcion": "Fuselaje enorme de crucero con 5 pares de acoples laterales, 5 motores y 3 torretas."
+}

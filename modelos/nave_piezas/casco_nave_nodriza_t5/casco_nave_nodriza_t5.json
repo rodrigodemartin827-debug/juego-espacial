@@ -1,0 +1,483 @@
+{
+  "nombre": "casco_nave_nodriza_t5",
+  "titulo": "Casco de nave nodriza (legendario)",
+  "categoria": "casco",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 7880,
+  "limite_triangulos": 8000,
+  "tamano": [
+    25.055,
+    24.417,
+    60.306
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "casco_nave_nodriza_t5",
+      "triangulos": 5780,
+      "tamano": [
+        25.055,
+        24.417,
+        60.306
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/casco_nave_nodriza_t5_color.png",
+        "normal": "texturas/casco_nave_nodriza_t5_normal.png",
+        "rugosidad": "texturas/casco_nave_nodriza_t5_rugosidad.png",
+        "metal": "texturas/casco_nave_nodriza_t5_metal.png",
+        "emision": "texturas/casco_nave_nodriza_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "casco_nave_nodriza_t5_neon",
+      "triangulos": 1108,
+      "tamano": [
+        24.685,
+        24.417,
+        43.244
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        5.236
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "casco_nave_nodriza_t5_cristal",
+      "triangulos": 992,
+      "tamano": [
+        24.469,
+        1.023,
+        28.504
+      ],
+      "centro": [
+        0.0,
+        1.249,
+        1.419
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        -11.597,
+        0.0,
+        -12.157
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        11.597,
+        0.0,
+        -12.157
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_izq_2",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        -12.486,
+        0.0,
+        -0.157
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der_2",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        12.486,
+        0.0,
+        -0.157
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_izq_3",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        -12.163,
+        0.0,
+        11.843
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der_3",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        12.163,
+        0.0,
+        11.843
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_motor_1",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        2.268,
+        0.0,
+        30.103
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_motor_2",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        -2.268,
+        0.0,
+        30.103
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_motor_3",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        0.0,
+        30.103
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_cabina",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        3.268,
+        -20.557
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_torreta_1",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        5.776,
+        -0.157
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_torreta_2",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        4.923,
+        16.643
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_inferior_1",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        -3.318,
+        -12.157
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    },
+    {
+      "nombre": "acople_inferior_2",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        -3.701,
+        11.843
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    },
+    {
+      "nombre": "acople_frontal",
+      "malla": "casco_nave_nodriza_t5",
+      "posicion": [
+        0.0,
+        -2.199,
+        -26.947
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "salida",
+      "brida": 1.2
+    }
+  ],
+  "plazas": 12,
+  "descripcion": "Fuselaje legendario masivo orgánico-tecnológico: costillas, vainas de cristal y cubierta de hangar."
+}
