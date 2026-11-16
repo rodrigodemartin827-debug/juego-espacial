@@ -1,0 +1,35 @@
+{
+  "id": "granito_rosa",
+  "numero": 11,
+  "nombre": "Granito rosa",
+  "descripcion": "Roca moteada de rosa, gris y negro.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 3,
+  "triangulos": 1598,
+  "tamano_studs": [
+    2.6,
+    2.21,
+    1.44
+  ],
+  "partes": [
+    {
+      "nombre": "granito_rosa",
+      "triangulos": 1598,
+      "Material": "Granite",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/granito_rosa_color.png",
+    "normal": "texturas/granito_rosa_normal.png",
+    "rugosidad": "texturas/granito_rosa_rugosidad.png",
+    "metal": "texturas/granito_rosa_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "mineral_azufre",
+  "numero": 17,
+  "nombre": "Azufre",
+  "descripcion": "Roca amarilla brillante con cristalitos.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 4,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.15,
+    1.64,
+    1.4
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_azufre",
+      "triangulos": 1600,
+      "Material": "Sand",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_azufre_color.png",
+    "normal": "texturas/mineral_azufre_normal.png",
+    "rugosidad": "texturas/mineral_azufre_rugosidad.png",
+    "metal": "texturas/mineral_azufre_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

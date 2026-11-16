@@ -1,0 +1,35 @@
+{
+  "id": "roca_volcanica",
+  "numero": 14,
+  "nombre": "Roca volcánica",
+  "descripcion": "Piedra negra porosa, llena de agujeros, ligera como la pumita.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 3,
+  "triangulos": 1598,
+  "tamano_studs": [
+    2.53,
+    2.09,
+    1.5
+  ],
+  "partes": [
+    {
+      "nombre": "roca_volcanica",
+      "triangulos": 1598,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/roca_volcanica_color.png",
+    "normal": "texturas/roca_volcanica_normal.png",
+    "rugosidad": "texturas/roca_volcanica_rugosidad.png",
+    "metal": "texturas/roca_volcanica_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

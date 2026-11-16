@@ -1,0 +1,35 @@
+{
+  "id": "arcilla_roja",
+  "numero": 13,
+  "nombre": "Arcilla roja",
+  "descripcion": "Masa rojiza compacta, agrietada al secarse.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 3,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.33,
+    2.7,
+    1.85
+  ],
+  "partes": [
+    {
+      "nombre": "arcilla_roja",
+      "triangulos": 1600,
+      "Material": "Mud",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/arcilla_roja_color.png",
+    "normal": "texturas/arcilla_roja_normal.png",
+    "rugosidad": "texturas/arcilla_roja_rugosidad.png",
+    "metal": "texturas/arcilla_roja_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

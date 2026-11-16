@@ -1,0 +1,35 @@
+{
+  "id": "mineral_carbon",
+  "numero": 15,
+  "nombre": "Carbón",
+  "descripcion": "Roca negra con vetas brillantes.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 3,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.09,
+    1.98,
+    1.39
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_carbon",
+      "triangulos": 1600,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_carbon_color.png",
+    "normal": "texturas/mineral_carbon_normal.png",
+    "rugosidad": "texturas/mineral_carbon_rugosidad.png",
+    "metal": "texturas/mineral_carbon_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
