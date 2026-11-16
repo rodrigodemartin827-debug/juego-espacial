@@ -1,0 +1,44 @@
+{
+  "id": "cristal_aurora",
+  "numero": 76,
+  "nombre": "Cristal aurora",
+  "descripcion": "Cristal alargado con los colores de la aurora boreal.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 92,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.28,
+    2.16,
+    4.02
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_aurora",
+      "triangulos": 2690,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_aurora_cristal",
+      "triangulos": 110,
+      "Material": "Glass",
+      "Transparency": 0.15,
+      "Color": "#3AC8C8",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_aurora_color.png",
+    "normal": "texturas/cristal_aurora_normal.png",
+    "rugosidad": "texturas/cristal_aurora_rugosidad.png",
+    "metal": "texturas/cristal_aurora_metal.png",
+    "emision": "texturas/cristal_aurora_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #4AF2C8, Brightness 1.5, Range 14",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

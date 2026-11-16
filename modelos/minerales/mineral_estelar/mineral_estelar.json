@@ -1,0 +1,43 @@
+{
+  "id": "mineral_estelar",
+  "numero": 75,
+  "nombre": "Mineral estelar",
+  "descripcion": "Roca oscura con puntos que brillan como estrellas.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 87,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.72,
+    2.24,
+    1.71
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_estelar",
+      "triangulos": 2528,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_estelar_neon",
+      "triangulos": 272,
+      "Material": "Neon",
+      "Color": "#FFFFFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_estelar_color.png",
+    "normal": "texturas/mineral_estelar_normal.png",
+    "rugosidad": "texturas/mineral_estelar_rugosidad.png",
+    "metal": "texturas/mineral_estelar_metal.png",
+    "emision": "texturas/mineral_estelar_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #CFD8FF, Brightness 1.5, Range 10",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

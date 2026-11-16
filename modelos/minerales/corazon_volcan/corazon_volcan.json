@@ -1,0 +1,43 @@
+{
+  "id": "corazon_volcan",
+  "numero": 80,
+  "nombre": "Corazón de volcán",
+  "descripcion": "Roca volcánica con un núcleo de lava a la vista.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 119,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.11,
+    2.99,
+    2.18
+  ],
+  "partes": [
+    {
+      "nombre": "corazon_volcan",
+      "triangulos": 2630,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "corazon_volcan_neon",
+      "triangulos": 220,
+      "Material": "Neon",
+      "Color": "#FF6A0A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/corazon_volcan_color.png",
+    "normal": "texturas/corazon_volcan_normal.png",
+    "rugosidad": "texturas/corazon_volcan_rugosidad.png",
+    "metal": "texturas/corazon_volcan_metal.png",
+    "emision": "texturas/corazon_volcan_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FF6A0A, Brightness 1.5, Range 11",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

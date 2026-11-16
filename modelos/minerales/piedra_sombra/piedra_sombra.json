@@ -1,0 +1,43 @@
+{
+  "id": "piedra_sombra",
+  "numero": 72,
+  "nombre": "Piedra sombra",
+  "descripcion": "Piedra negra mate que absorbe la luz, con bordes púrpura.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 75,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.64,
+    1.89,
+    1.79
+  ],
+  "partes": [
+    {
+      "nombre": "piedra_sombra",
+      "triangulos": 2580,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "piedra_sombra_neon",
+      "triangulos": 220,
+      "Material": "Neon",
+      "Color": "#B54DFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/piedra_sombra_color.png",
+    "normal": "texturas/piedra_sombra_normal.png",
+    "rugosidad": "texturas/piedra_sombra_rugosidad.png",
+    "metal": "texturas/piedra_sombra_metal.png",
+    "emision": "texturas/piedra_sombra_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #B54DFF, Brightness 1.5, Range 9",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

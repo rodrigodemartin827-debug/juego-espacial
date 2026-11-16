@@ -1,0 +1,44 @@
+{
+  "id": "mineral_abismal",
+  "numero": 78,
+  "nombre": "Mineral abismal",
+  "descripcion": "Roca negra de las profundidades con vetas púrpura que laten.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 100,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.94,
+    2.23,
+    1.71
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_abismal",
+      "triangulos": 2580,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_abismal_neon",
+      "triangulos": 220,
+      "Material": "Neon",
+      "Color": "#8A2AFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "latido lento: Transparency 0 -> 0,5 cada 2 s"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_abismal_color.png",
+    "normal": "texturas/mineral_abismal_normal.png",
+    "rugosidad": "texturas/mineral_abismal_rugosidad.png",
+    "metal": "texturas/mineral_abismal_metal.png",
+    "emision": "texturas/mineral_abismal_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #8A2AFF, Brightness 1.5, Range 10",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
