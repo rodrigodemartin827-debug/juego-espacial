@@ -1,0 +1,35 @@
+{
+  "id": "mineral_cobalto",
+  "numero": 49,
+  "nombre": "Cobalto",
+  "descripcion": "Roca azul intenso con cristales.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 20,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.57,
+    2.11,
+    1.84
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_cobalto",
+      "triangulos": 2400,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_cobalto_color.png",
+    "normal": "texturas/mineral_cobalto_normal.png",
+    "rugosidad": "texturas/mineral_cobalto_rugosidad.png",
+    "metal": "texturas/mineral_cobalto_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

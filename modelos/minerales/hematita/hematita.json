@@ -1,0 +1,35 @@
+{
+  "id": "hematita",
+  "numero": 43,
+  "nombre": "Hematita",
+  "descripcion": "Piedra gris metálica en burbujas, roja al partirse.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 14,
+  "triangulos": 1998,
+  "tamano_studs": [
+    2.3,
+    2.26,
+    1.61
+  ],
+  "partes": [
+    {
+      "nombre": "hematita",
+      "triangulos": 1998,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/hematita_color.png",
+    "normal": "texturas/hematita_normal.png",
+    "rugosidad": "texturas/hematita_rugosidad.png",
+    "metal": "texturas/hematita_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

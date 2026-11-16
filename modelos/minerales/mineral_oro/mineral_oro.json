@@ -1,0 +1,35 @@
+{
+  "id": "mineral_oro",
+  "numero": 46,
+  "nombre": "Oro",
+  "descripcion": "Roca con pepitas doradas grandes y brillantes.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 16,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.69,
+    2.62,
+    1.61
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_oro",
+      "triangulos": 2400,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_oro_color.png",
+    "normal": "texturas/mineral_oro_normal.png",
+    "rugosidad": "texturas/mineral_oro_rugosidad.png",
+    "metal": "texturas/mineral_oro_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFD36B, Brightness 1.5, Range 9",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

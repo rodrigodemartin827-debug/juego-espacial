@@ -1,0 +1,35 @@
+{
+  "id": "mineral_titanio",
+  "numero": 48,
+  "nombre": "Titanio",
+  "descripcion": "Roca blanca metálica con brillo azulado.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 19,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.2,
+    1.81,
+    1.61
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_titanio",
+      "triangulos": 2400,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_titanio_color.png",
+    "normal": "texturas/mineral_titanio_normal.png",
+    "rugosidad": "texturas/mineral_titanio_rugosidad.png",
+    "metal": "texturas/mineral_titanio_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

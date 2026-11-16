@@ -1,0 +1,42 @@
+{
+  "id": "magnetita",
+  "numero": 41,
+  "nombre": "Magnetita",
+  "descripcion": "Octaedros negros metálicos con partículas que flotan alrededor.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 13,
+  "triangulos": 2000,
+  "tamano_studs": [
+    2.38,
+    2.39,
+    1.74
+  ],
+  "partes": [
+    {
+      "nombre": "magnetita",
+      "triangulos": 1884,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "magnetita_orbita",
+      "triangulos": 116,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+      "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/magnetita_color.png",
+    "normal": "texturas/magnetita_normal.png",
+    "rugosidad": "texturas/magnetita_rugosidad.png",
+    "metal": "texturas/magnetita_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

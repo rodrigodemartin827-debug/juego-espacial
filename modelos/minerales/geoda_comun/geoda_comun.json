@@ -1,0 +1,43 @@
+{
+  "id": "geoda_comun",
+  "numero": 45,
+  "nombre": "Geoda",
+  "descripcion": "Roca por fuera; por dentro, cristales blancos.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 15,
+  "triangulos": 1324,
+  "tamano_studs": [
+    2.42,
+    1.6,
+    2.21
+  ],
+  "partes": [
+    {
+      "nombre": "geoda_comun",
+      "triangulos": 400,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "geoda_comun_cristal",
+      "triangulos": 924,
+      "Material": "Glass",
+      "Transparency": 0.2,
+      "Color": "#F4F2EE",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/geoda_comun_color.png",
+    "normal": "texturas/geoda_comun_normal.png",
+    "rugosidad": "texturas/geoda_comun_rugosidad.png",
+    "metal": "texturas/geoda_comun_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

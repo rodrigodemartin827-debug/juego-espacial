@@ -1,0 +1,35 @@
+{
+  "id": "lapislazuli_bruto",
+  "numero": 42,
+  "nombre": "Lapislázuli",
+  "descripcion": "Piedra azul profundo con motas doradas.",
+  "rareza": "Poco común",
+  "color_hud": "#4CD964",
+  "aparicion_rareza_pct": 25.0,
+  "aparicion_pct": 1.25,
+  "valor": 14,
+  "triangulos": 2000,
+  "tamano_studs": [
+    2.35,
+    2.14,
+    1.33
+  ],
+  "partes": [
+    {
+      "nombre": "lapislazuli_bruto",
+      "triangulos": 2000,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/lapislazuli_bruto_color.png",
+    "normal": "texturas/lapislazuli_bruto_normal.png",
+    "rugosidad": "texturas/lapislazuli_bruto_rugosidad.png",
+    "metal": "texturas/lapislazuli_bruto_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

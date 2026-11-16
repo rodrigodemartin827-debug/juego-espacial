@@ -1,0 +1,43 @@
+{
+  "id": "esmeralda_bruta",
+  "numero": 50,
+  "nombre": "Esmeralda bruta",
+  "descripcion": "Gran cristal verde hexagonal dentro de la roca.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 22,
+  "triangulos": 2400,
+  "tamano_studs": [
+    2.7,
+    2.13,
+    2.92
+  ],
+  "partes": [
+    {
+      "nombre": "esmeralda_bruta",
+      "triangulos": 2334,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "esmeralda_bruta_cristal",
+      "triangulos": 66,
+      "Material": "Glass",
+      "Transparency": 0.25,
+      "Color": "#1FB26A",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/esmeralda_bruta_color.png",
+    "normal": "texturas/esmeralda_bruta_normal.png",
+    "rugosidad": "texturas/esmeralda_bruta_rugosidad.png",
+    "metal": "texturas/esmeralda_bruta_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #40E08A, Brightness 1.5, Range 10",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
