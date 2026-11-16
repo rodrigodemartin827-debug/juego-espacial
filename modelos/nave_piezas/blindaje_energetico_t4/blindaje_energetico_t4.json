@@ -1,0 +1,124 @@
+{
+  "nombre": "blindaje_energetico_t4",
+  "titulo": "Blindaje energético (élite)",
+  "categoria": "defensa",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 864,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.21,
+    2.64,
+    3.36
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "blindaje_energetico_t4",
+      "triangulos": 632,
+      "tamano": [
+        1.21,
+        2.64,
+        3.36
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/blindaje_energetico_t4_color.png",
+        "normal": "texturas/blindaje_energetico_t4_normal.png",
+        "rugosidad": "texturas/blindaje_energetico_t4_rugosidad.png",
+        "metal": "texturas/blindaje_energetico_t4_metal.png",
+        "emision": "texturas/blindaje_energetico_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "blindaje_energetico_t4_neon",
+      "triangulos": 160,
+      "tamano": [
+        0.285,
+        0.3,
+        2.771
+      ],
+      "centro": [
+        -0.455,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "blindaje_energetico_t4_neon2",
+      "triangulos": 20,
+      "tamano": [
+        0.03,
+        0.08,
+        2.0
+      ],
+      "centro": [
+        -0.07,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    },
+    {
+      "nombre": "blindaje_energetico_t4_domo",
+      "triangulos": 52,
+      "tamano": [
+        0.367,
+        2.64,
+        3.36
+      ],
+      "centro": [
+        -0.422,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "ForceField",
+      "color": "#FFC040",
+      "transparencia": 0.0
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "blindaje_energetico_t4",
+      "posicion": [
+        0.555,
+        0.0,
+        0.0
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Placa élite con emisores y un campo de fuerza curvado delante."
+}

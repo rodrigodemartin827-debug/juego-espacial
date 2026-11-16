@@ -1,0 +1,112 @@
+{
+  "nombre": "generador_escudo_t2",
+  "titulo": "Generador de escudo (militar)",
+  "categoria": "defensa",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1460,
+  "limite_triangulos": 5000,
+  "tamano": [
+    5.702,
+    3.65,
+    4.219
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "generador_escudo_t2",
+      "triangulos": 1132,
+      "tamano": [
+        2.039,
+        1.39,
+        2.039
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/generador_escudo_t2_color.png",
+        "normal": "texturas/generador_escudo_t2_normal.png",
+        "rugosidad": "texturas/generador_escudo_t2_rugosidad.png",
+        "metal": "texturas/generador_escudo_t2_metal.png"
+      }
+    },
+    {
+      "nombre": "generador_escudo_t2_neon",
+      "triangulos": 248,
+      "tamano": [
+        1.05,
+        0.7,
+        1.05
+      ],
+      "centro": [
+        0.0,
+        0.805,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A"
+    },
+    {
+      "nombre": "generador_escudo_t2_domo",
+      "triangulos": 80,
+      "tamano": [
+        5.702,
+        3.2,
+        3.2
+      ],
+      "centro": [
+        0.0,
+        1.355,
+        -1.6
+      ],
+      "material_roblox": "ForceField",
+      "color": "#FFB060",
+      "transparencia": 0.0
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "generador_escudo_t2",
+      "posicion": [
+        0.0,
+        -0.645,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "domo": {
+    "radio": 3.2,
+    "material": "ForceField",
+    "nota": "la malla _domo es el escudo encendido"
+  },
+  "descripcion": "Generador de escudo pequeño: domo parcial delante de la nave."
+}

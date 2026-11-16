@@ -1,0 +1,113 @@
+{
+  "nombre": "generador_escudo_t4",
+  "titulo": "Generador de escudo (élite)",
+  "categoria": "defensa",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 3372,
+  "limite_triangulos": 5000,
+  "tamano": [
+    8.091,
+    4.35,
+    8.091
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "generador_escudo_t4",
+      "triangulos": 1968,
+      "tamano": [
+        8.091,
+        1.65,
+        8.091
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/generador_escudo_t4_color.png",
+        "normal": "texturas/generador_escudo_t4_normal.png",
+        "rugosidad": "texturas/generador_escudo_t4_rugosidad.png",
+        "metal": "texturas/generador_escudo_t4_metal.png",
+        "emision": "texturas/generador_escudo_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "generador_escudo_t4_neon",
+      "triangulos": 872,
+      "tamano": [
+        8.091,
+        1.535,
+        8.091
+      ],
+      "centro": [
+        0.0,
+        0.267,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "generador_escudo_t4_domo",
+      "triangulos": 532,
+      "tamano": [
+        8.0,
+        4.0,
+        8.0
+      ],
+      "centro": [
+        0.0,
+        1.525,
+        0.0
+      ],
+      "material_roblox": "ForceField",
+      "color": "#FFC040",
+      "transparencia": 0.0
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "generador_escudo_t4",
+      "posicion": [
+        0.0,
+        -0.775,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "domo": {
+    "radio": 4.0,
+    "material": "ForceField",
+    "nota": "la malla _domo es el escudo encendido"
+  },
+  "descripcion": "Escudo élite de domo doble con anillos de neón dorado."
+}

@@ -1,0 +1,130 @@
+{
+  "nombre": "generador_escudo_t5",
+  "titulo": "Generador de escudo (legendario)",
+  "categoria": "defensa",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 1030,
+  "limite_triangulos": 5000,
+  "tamano": [
+    8.4,
+    4.55,
+    8.4
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "generador_escudo_t5",
+      "triangulos": 538,
+      "tamano": [
+        2.344,
+        1.459,
+        2.344
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/generador_escudo_t5_color.png",
+        "normal": "texturas/generador_escudo_t5_normal.png",
+        "rugosidad": "texturas/generador_escudo_t5_rugosidad.png",
+        "metal": "texturas/generador_escudo_t5_metal.png",
+        "emision": "texturas/generador_escudo_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "generador_escudo_t5_neon",
+      "triangulos": 120,
+      "tamano": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "centro": [
+        0.0,
+        0.72,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "generador_escudo_t5_cristal",
+      "triangulos": 60,
+      "tamano": [
+        1.435,
+        0.868,
+        1.524
+      ],
+      "centro": [
+        -0.038,
+        0.296,
+        0.029
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    },
+    {
+      "nombre": "generador_escudo_t5_domo",
+      "triangulos": 312,
+      "tamano": [
+        8.4,
+        4.2,
+        8.4
+      ],
+      "centro": [
+        0.0,
+        1.72,
+        0.0
+      ],
+      "material_roblox": "ForceField",
+      "color": "#C45CFF",
+      "transparencia": 0.0
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "generador_escudo_t5",
+      "posicion": [
+        0.0,
+        -0.68,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "domo": {
+    "radio": 4.2,
+    "material": "ForceField",
+    "nota": "la malla _domo es el escudo encendido"
+  },
+  "descripcion": "Escudo legendario alienígena: cristales púrpura y domo de energía."
+}

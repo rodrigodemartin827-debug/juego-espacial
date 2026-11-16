@@ -1,0 +1,166 @@
+{
+  "nombre": "contramedidas_t2",
+  "titulo": "Contramedidas (militar)",
+  "categoria": "defensa",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1476,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.64,
+    1.398,
+    1.4
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "contramedidas_t2",
+      "triangulos": 1476,
+      "tamano": [
+        1.64,
+        1.398,
+        1.4
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/contramedidas_t2_color.png",
+        "normal": "texturas/contramedidas_t2_normal.png",
+        "rugosidad": "texturas/contramedidas_t2_rugosidad.png",
+        "metal": "texturas/contramedidas_t2_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        0.02,
+        -0.649,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "UNIVERSAL",
+      "direccion": "entrada",
+      "brida": 0.8,
+      "acepta": [
+        "ALA_MOTOR",
+        "ALA_PUNTA",
+        "CASCO_FRONTAL",
+        "CASCO_INFERIOR",
+        "CASCO_LATERAL",
+        "CASCO_SUPERIOR",
+        "CASCO_TRASERO",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Lanzador de chaff y señuelos de 6 tubos.",
+  "anclajes_vfx": [
+    {
+      "nombre": "lanzador_1",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        0.567,
+        0.604,
+        0.077
+      ],
+      "direccion": [
+        0.2112,
+        0.8381,
+        0.5029
+      ]
+    },
+    {
+      "nombre": "lanzador_2",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        0.567,
+        0.604,
+        0.527
+      ],
+      "direccion": [
+        0.2112,
+        0.8381,
+        0.5029
+      ]
+    },
+    {
+      "nombre": "lanzador_3",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        0.02,
+        0.615,
+        0.084
+      ],
+      "direccion": [
+        0.0,
+        0.8575,
+        0.5145
+      ]
+    },
+    {
+      "nombre": "lanzador_4",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        0.02,
+        0.615,
+        0.534
+      ],
+      "direccion": [
+        0.0,
+        0.8575,
+        0.5145
+      ]
+    },
+    {
+      "nombre": "lanzador_5",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        -0.527,
+        0.604,
+        0.077
+      ],
+      "direccion": [
+        -0.2112,
+        0.8381,
+        0.5029
+      ]
+    },
+    {
+      "nombre": "lanzador_6",
+      "malla": "contramedidas_t2",
+      "posicion": [
+        -0.527,
+        0.604,
+        0.527
+      ],
+      "direccion": [
+        -0.2112,
+        0.8381,
+        0.5029
+      ]
+    }
+  ]
+}

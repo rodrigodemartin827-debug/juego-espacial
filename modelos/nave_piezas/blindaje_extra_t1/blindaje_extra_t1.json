@@ -1,0 +1,74 @@
+{
+  "nombre": "blindaje_extra_t1",
+  "titulo": "Blindaje extra (básico)",
+  "categoria": "defensa",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 520,
+  "limite_triangulos": 5000,
+  "tamano": [
+    0.71,
+    2.4,
+    3.2
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "blindaje_extra_t1",
+      "triangulos": 520,
+      "tamano": [
+        0.71,
+        2.4,
+        3.2
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/blindaje_extra_t1_color.png",
+        "normal": "texturas/blindaje_extra_t1_normal.png",
+        "rugosidad": "texturas/blindaje_extra_t1_rugosidad.png",
+        "metal": "texturas/blindaje_extra_t1_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "blindaje_extra_t1",
+      "posicion": [
+        0.305,
+        0.0,
+        0.0
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Placa de blindaje atornillada, gris. Sirve en los dos costados."
+}

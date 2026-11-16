@@ -1,0 +1,113 @@
+{
+  "nombre": "contramedidas_t4",
+  "titulo": "Guerra electrónica (élite)",
+  "categoria": "defensa",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 1680,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.425,
+    3.53,
+    1.444
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "contramedidas_t4",
+      "triangulos": 1248,
+      "tamano": [
+        1.425,
+        3.25,
+        1.444
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/contramedidas_t4_color.png",
+        "normal": "texturas/contramedidas_t4_normal.png",
+        "rugosidad": "texturas/contramedidas_t4_rugosidad.png",
+        "metal": "texturas/contramedidas_t4_metal.png",
+        "emision": "texturas/contramedidas_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "contramedidas_t4_neon",
+      "triangulos": 352,
+      "tamano": [
+        0.48,
+        2.109,
+        0.988
+      ],
+      "centro": [
+        0.0,
+        0.41,
+        -0.228
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "contramedidas_t4_neon2",
+      "triangulos": 80,
+      "tamano": [
+        0.342,
+        0.36,
+        0.326
+      ],
+      "centro": [
+        0.0,
+        1.725,
+        0.026
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "contramedidas_t4",
+      "posicion": [
+        0.0,
+        -1.575,
+        0.026
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "UNIVERSAL",
+      "direccion": "entrada",
+      "brida": 0.8,
+      "acepta": [
+        "ALA_MOTOR",
+        "ALA_PUNTA",
+        "CASCO_FRONTAL",
+        "CASCO_INFERIOR",
+        "CASCO_LATERAL",
+        "CASCO_SUPERIOR",
+        "CASCO_TRASERO",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Sistema de guerra electrónica: mástil de antenas, emisor y neón."
+}

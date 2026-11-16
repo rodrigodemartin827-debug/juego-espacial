@@ -1,0 +1,91 @@
+{
+  "nombre": "blindaje_reactivo_t3",
+  "titulo": "Blindaje reactivo (avanzado)",
+  "categoria": "defensa",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1308,
+  "limite_triangulos": 5000,
+  "tamano": [
+    0.945,
+    2.4,
+    3.2
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "blindaje_reactivo_t3",
+      "triangulos": 1164,
+      "tamano": [
+        0.945,
+        2.4,
+        3.2
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/blindaje_reactivo_t3_color.png",
+        "normal": "texturas/blindaje_reactivo_t3_normal.png",
+        "rugosidad": "texturas/blindaje_reactivo_t3_rugosidad.png",
+        "metal": "texturas/blindaje_reactivo_t3_metal.png",
+        "emision": "texturas/blindaje_reactivo_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "blindaje_reactivo_t3_neon",
+      "triangulos": 144,
+      "tamano": [
+        0.03,
+        1.72,
+        2.52
+      ],
+      "centro": [
+        -0.458,
+        0.24,
+        0.24
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "blindaje_reactivo_t3",
+      "posicion": [
+        0.422,
+        0.0,
+        0.0
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Blindaje reactivo: 12 paneles explosivos con su indicador de neón."
+}

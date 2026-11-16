@@ -1,0 +1,113 @@
+{
+  "nombre": "generador_escudo_t3",
+  "titulo": "Generador de escudo (avanzado)",
+  "categoria": "defensa",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1760,
+  "limite_triangulos": 5000,
+  "tamano": [
+    7.2,
+    3.95,
+    7.2
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "generador_escudo_t3",
+      "triangulos": 1200,
+      "tamano": [
+        2.039,
+        1.39,
+        2.039
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/generador_escudo_t3_color.png",
+        "normal": "texturas/generador_escudo_t3_normal.png",
+        "rugosidad": "texturas/generador_escudo_t3_rugosidad.png",
+        "metal": "texturas/generador_escudo_t3_metal.png",
+        "emision": "texturas/generador_escudo_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "generador_escudo_t3_neon",
+      "triangulos": 248,
+      "tamano": [
+        1.05,
+        0.7,
+        1.05
+      ],
+      "centro": [
+        0.0,
+        0.805,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "generador_escudo_t3_domo",
+      "triangulos": 312,
+      "tamano": [
+        7.2,
+        3.6,
+        7.2
+      ],
+      "centro": [
+        0.0,
+        1.455,
+        0.0
+      ],
+      "material_roblox": "ForceField",
+      "color": "#3DF2FF",
+      "transparencia": 0.0
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "generador_escudo_t3",
+      "posicion": [
+        0.0,
+        -0.645,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "domo": {
+    "radio": 3.6,
+    "material": "ForceField",
+    "nota": "la malla _domo es el escudo encendido"
+  },
+  "descripcion": "Escudo avanzado de domo completo semitransparente."
+}
