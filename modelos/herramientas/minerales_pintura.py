@@ -174,7 +174,7 @@ def _patron(P, p, n, s, z01, cols):
     if tipo == "opalo":
         dist, pts = noise.voronoi(p * 11.0 * esc + s, distance_metric="DISTANCE")
         h = 0.5 + 0.5 * noise.noise(Vector(pts[0]) * 2.3 + s) + 0.3 * n.x
-        destello = _ss(0.35, 0.0, dist[0]) * (0.5 + 0.5 * noise.noise(Vector(pts[0]) * 5 + s))
+        destello = _ss(P.get("tam_destello", 0.35), 0.0, dist[0]) * (0.5 + 0.5 * noise.noise(Vector(pts[0]) * 5 + s))
         return c0.lerp(_hsv(h, 0.85, 1.0), destello * P.get("fuerza", 0.8)), destello
     if tipo == "aurora":
         t = max(0.0, min(0.999, z01 + 0.18 * noise.noise(Vector((p.x * 6, p.y * 6, p.z * 0.8)) + s)))
