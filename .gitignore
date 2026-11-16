@@ -21,3 +21,6 @@ __pycache__/
 
 # Renders intermedios de las herramientas de modelos
 modelos/**/_render_tmp/
+
+# Render temporal del turnaround de los modelos del Planeta Monstruo
+modelos/planeta_monstruo/**/_tmp_vista.png
