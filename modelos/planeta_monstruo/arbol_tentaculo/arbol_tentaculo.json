@@ -1,0 +1,108 @@
+{
+  "nombre": "arbol_tentaculo",
+  "zona": "vegetacion",
+  "clase": "vegetacion",
+  "descripcion": "Árbol con tentáculos en vez de ramas, con ventosas. Lleva tres poses de los tentáculos (a, b, c) para animarlo mostrando una cada vez.",
+  "triangulos": 3937,
+  "presupuesto_triangulos": 4000,
+  "tamano_studs": {
+    "x": 5.0,
+    "y": 10.0,
+    "z": 5.0
+  },
+  "tamano_pedido": {
+    "ancho": 5,
+    "fondo": 5,
+    "alto": 10
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "tronco",
+      "triangulos": 1149,
+      "tamano_studs": [
+        3.42,
+        6.74,
+        3.21
+      ],
+      "centro": [
+        -0.054,
+        3.369,
+        -0.069
+      ]
+    },
+    {
+      "nombre": "tentaculos_pose_a",
+      "triangulos": 929,
+      "tamano_studs": [
+        4.96,
+        7.74,
+        4.97
+      ],
+      "centro": [
+        0.027,
+        5.953,
+        -0.005
+      ]
+    },
+    {
+      "nombre": "tentaculos_pose_b",
+      "triangulos": 929,
+      "tamano_studs": [
+        4.51,
+        7.79,
+        4.87
+      ],
+      "centro": [
+        -0.234,
+        6.086,
+        0.03
+      ]
+    },
+    {
+      "nombre": "tentaculos_pose_c",
+      "triangulos": 930,
+      "tamano_studs": [
+        4.46,
+        7.93,
+        4.51
+      ],
+      "centro": [
+        0.1,
+        6.068,
+        0.193
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "arbol_tentaculo_color.png",
+    "normal": "arbol_tentaculo_normal.png",
+    "roughness": "arbol_tentaculo_roughness.png",
+    "metalness": "arbol_tentaculo_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 4,
+    "triangulos": 3937,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.99,
+      4.97,
+      10.03
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "poses": [
+    "tentaculos_pose_a",
+    "tentaculos_pose_b",
+    "tentaculos_pose_c"
+  ],
+  "animacion": "Las tres piezas de tentáculos ocupan el mismo sitio: muestra una y oculta las otras dos."
+}

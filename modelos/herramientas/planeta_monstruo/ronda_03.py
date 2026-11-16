@@ -267,7 +267,7 @@ def planta_carnivora(M):
         p.esfera((0, 0, 0), 1, "piel_planta", esc=(0.72, 0.9, 0.86))
         p.esfera((0, 0, 0), 1, "gula", esc=(0.6, 0.8, 0.74), k=0.02)
         # la cuña que abre la boca
-        p.extrusion([(0.25, 0.0), (-1.3, 0.62), (-1.3, -0.5)], 2.0, (0, 0, 0), "gula", rot=(0, 90, 90), resta=True, k=0.05)
+        p.extrusion([(0.25, 0.0), (-1.3, 0.62), (-1.3, -0.5)], 2.0, (0, 0, 0), "gula", eje=(1, 0, 0), resta=True, k=0.05)
         p.esfera((0, 0.1, -0.12), 0.36, "gula", esc=(1, 1.3, 0.5), k=0.06)                   # garganta
         p.tubo([(0, 0.1, -0.2), (0, -0.4, -0.3), (0.05, -0.8, -0.42), (0, -1.0, -0.3)], [0.14, 0.12, 0.09, 0.05], "carne_viva", k=0.04)  # lengua
         d = p.duro

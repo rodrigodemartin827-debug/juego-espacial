@@ -1,0 +1,79 @@
+{
+  "nombre": "hongo_pequeno_a",
+  "zona": "vegetacion",
+  "clase": "prop",
+  "descripcion": "Seta venenosa pequeña, púrpura con puntos verdes que brillan.",
+  "triangulos": 1350,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 1.0,
+    "y": 1.5,
+    "z": 1.0
+  },
+  "tamano_pedido": {
+    "ancho": 1,
+    "fondo": 1,
+    "alto": 1.5
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "hongo",
+      "triangulos": 1150,
+      "tamano_studs": [
+        1.0,
+        1.49,
+        1.0
+      ],
+      "centro": [
+        -0.001,
+        0.747,
+        0.0
+      ]
+    },
+    {
+      "nombre": "puntos_neon",
+      "triangulos": 200,
+      "tamano_studs": [
+        0.88,
+        0.39,
+        0.85
+      ],
+      "centro": [
+        0.045,
+        1.305,
+        0.066
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "hongo_pequeno_a_color.png",
+    "normal": "hongo_pequeno_a_normal.png",
+    "roughness": "hongo_pequeno_a_roughness.png",
+    "metalness": "hongo_pequeno_a_metalness.png",
+    "emision": "hongo_pequeno_a_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 1350,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "nombre": "musgo_luminoso",
+  "zona": "vegetacion",
+  "clase": "vegetacion",
+  "descripcion": "Placa de musgo bioluminiscente que brilla en verde tenue.",
+  "triangulos": 3927,
+  "presupuesto_triangulos": 4000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 0.2,
+    "z": 4.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 4,
+    "alto": 0.2
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "musgo",
+      "triangulos": 3199,
+      "tamano_studs": [
+        4.0,
+        0.2,
+        3.99
+      ],
+      "centro": [
+        0.0,
+        0.1,
+        -0.003
+      ]
+    },
+    {
+      "nombre": "brotes_neon",
+      "triangulos": 728,
+      "tamano_studs": [
+        2.73,
+        0.15,
+        2.36
+      ],
+      "centro": [
+        0.033,
+        0.115,
+        -0.241
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "musgo_luminoso_color.png",
+    "normal": "musgo_luminoso_normal.png",
+    "roughness": "musgo_luminoso_roughness.png",
+    "metalness": "musgo_luminoso_metalness.png",
+    "emision": "musgo_luminoso_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 3927,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.0,
+      3.99,
+      0.2
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

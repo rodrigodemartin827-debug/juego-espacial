@@ -1,0 +1,84 @@
+{
+  "nombre": "esporas_flotantes",
+  "zona": "vegetacion",
+  "clase": "vegetacion",
+  "descripcion": "Grupo de esporas que flotan en el aire: esferas translúcidas con un núcleo verde que brilla.",
+  "triangulos": 2160,
+  "presupuesto_triangulos": 4000,
+  "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 3,
+    "fondo": 3,
+    "alto": 3
+  },
+  "origen": "centro del modelo",
+  "piezas": [
+    {
+      "nombre": "velos_cristal",
+      "triangulos": 1080,
+      "tamano_studs": [
+        2.97,
+        2.95,
+        2.96
+      ],
+      "centro": [
+        0.006,
+        0.0,
+        -0.001
+      ],
+      "roblox": {
+        "material": "Glass",
+        "color": "#7AE09A",
+        "transparencia": 0.6
+      }
+    },
+    {
+      "nombre": "nucleos_neon",
+      "triangulos": 1080,
+      "tamano_studs": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "esporas_flotantes_color.png",
+    "normal": "esporas_flotantes_normal.png",
+    "roughness": "esporas_flotantes_roughness.png",
+    "metalness": "esporas_flotantes_metalness.png",
+    "emision": "esporas_flotantes_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 2160,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "nombre": "enredadera_venenosa",
+  "zona": "vegetacion",
+  "clase": "vegetacion",
+  "descripcion": "Enredadera venenosa que cuelga: tallos con espinas y flores púrpura.",
+  "triangulos": 2956,
+  "presupuesto_triangulos": 4000,
+  "tamano_studs": {
+    "x": 1.0,
+    "y": 6.0,
+    "z": 1.0
+  },
+  "tamano_pedido": {
+    "ancho": 1,
+    "fondo": 1,
+    "alto": 6
+  },
+  "origen": "centro de la parte de arriba (cuelga)",
+  "piezas": [
+    {
+      "nombre": "enredadera",
+      "triangulos": 2956,
+      "tamano_studs": [
+        1.0,
+        6.0,
+        1.0
+      ],
+      "centro": [
+        0.0,
+        -2.997,
+        0.0
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "enredadera_venenosa_color.png",
+    "normal": "enredadera_venenosa_normal.png",
+    "roughness": "enredadera_venenosa_roughness.png",
+    "metalness": "enredadera_venenosa_metalness.png",
+    "emision": "enredadera_venenosa_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 2956,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      1.0,
+      1.0,
+      6.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}
