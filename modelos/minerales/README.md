@@ -30,6 +30,7 @@ minerales/<id>/
     <id>_metal.png      metal (gris)
     <id>_emision.png    emisión (solo si el mineral brilla)
 catalogo.json       los 100 JSON juntos, con la tabla de rarezas
+hoja_todos.jpg      los 100 de un vistazo (nombre en el color de su rareza)
 rondas/ronda_XX.jpg la vista 3/4 de los 10 minerales de cada ronda, para revisarlos de un vistazo
 ```
 
@@ -83,6 +84,9 @@ Cómo se hace cada mineral: las piezas se remallan por voxel (ALTA, cientos de m
 relieve y se pintan por vértice. La malla de juego (BAJA) es la forma limpia (cristales de caras planas) o la ALTA
 simplificada (rocas). Todas las piezas se despliegan juntas en un atlas y se hornea ALTA → BAJA por grupos, para
 que un cristal no recoja el color de la roca que tiene detrás.
+
+Comprobado aquí: los 100 FBX se reimportan con su tamaño en studs (1 unidad = 1 stud), con todas las partes y con
+UV, y ninguno pasa de 2.900 triángulos. 40 minerales brillan y llevan mapa de emisión.
 
 **Lo que hay que comprobar en Studio** (esta sesión no tiene Studio): el tamaño al importar, que las texturas
 del atlas casan con las partes y cómo se ven el Glass y el Neon con la luz del planeta.

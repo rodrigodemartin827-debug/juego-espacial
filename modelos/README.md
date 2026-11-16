@@ -12,6 +12,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `hangar/` | Hangar humano con la forja de la primera nave | ~15.600 |
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
+| `minerales/` | **Los 100 minerales** de 7 rarezas (de piedra gris a fragmento de dios), con atlas PBR, turnaround y JSON. Ver `minerales/README.md` | 156–2.900 cada uno |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.

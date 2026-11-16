@@ -1,0 +1,4174 @@
+{
+  "rarezas": {
+    "Común": {
+      "color_hud": "#FFFFFF",
+      "pct": 35.0,
+      "valor": [
+        1,
+        5
+      ],
+      "cantidad": 25
+    },
+    "Poco común": {
+      "color_hud": "#4CD964",
+      "pct": 25.0,
+      "valor": [
+        6,
+        15
+      ],
+      "cantidad": 20
+    },
+    "Raro": {
+      "color_hud": "#3D8BFF",
+      "pct": 18.0,
+      "valor": [
+        16,
+        40
+      ],
+      "cantidad": 18
+    },
+    "Épico": {
+      "color_hud": "#A855F7",
+      "pct": 12.0,
+      "valor": [
+        41,
+        100
+      ],
+      "cantidad": 15
+    },
+    "Legendario": {
+      "color_hud": "#FF9F1C",
+      "pct": 7.0,
+      "valor": [
+        101,
+        300
+      ],
+      "cantidad": 12
+    },
+    "Mítico": {
+      "color_hud": "#E0213B",
+      "pct": 2.5,
+      "valor": [
+        301,
+        800
+      ],
+      "cantidad": 7
+    },
+    "Celestial": {
+      "color_hud": "#3DF2FF",
+      "pct": 0.5,
+      "valor": [
+        801,
+        2000
+      ],
+      "cantidad": 3
+    }
+  },
+  "minerales": [
+    {
+      "id": "piedra_gris",
+      "numero": 1,
+      "nombre": "Piedra gris",
+      "descripcion": "Roca gris lisa y redondeada.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 1,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.65,
+        2.06,
+        1.51
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_gris",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_gris_color.png",
+        "normal": "texturas/piedra_gris_normal.png",
+        "rugosidad": "texturas/piedra_gris_rugosidad.png",
+        "metal": "texturas/piedra_gris_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_oscura",
+      "numero": 2,
+      "nombre": "Piedra oscura",
+      "descripcion": "Roca gris oscuro, angulosa, de aristas vivas.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 1,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.09,
+        1.75,
+        1.3
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_oscura",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_oscura_color.png",
+        "normal": "texturas/piedra_oscura_normal.png",
+        "rugosidad": "texturas/piedra_oscura_rugosidad.png",
+        "metal": "texturas/piedra_oscura_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_arenisca",
+      "numero": 3,
+      "nombre": "Piedra arenisca",
+      "descripcion": "Roca amarillenta, porosa y blanda.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 1,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.58,
+        2.22,
+        1.38
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_arenisca",
+          "triangulos": 1600,
+          "Material": "Sandstone",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_arenisca_color.png",
+        "normal": "texturas/piedra_arenisca_normal.png",
+        "rugosidad": "texturas/piedra_arenisca_rugosidad.png",
+        "metal": "texturas/piedra_arenisca_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_caliza",
+      "numero": 4,
+      "nombre": "Piedra caliza",
+      "descripcion": "Roca blanca y crema con las capas a la vista.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.73,
+        2.09,
+        1.52
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_caliza",
+          "triangulos": 1600,
+          "Material": "Limestone",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_caliza_color.png",
+        "normal": "texturas/piedra_caliza_normal.png",
+        "rugosidad": "texturas/piedra_caliza_rugosidad.png",
+        "metal": "texturas/piedra_caliza_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_pizarra",
+      "numero": 5,
+      "nombre": "Piedra pizarra",
+      "descripcion": "Losas planas y oscuras apiladas en láminas.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.76,
+        1.98,
+        1.11
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_pizarra",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_pizarra_color.png",
+        "normal": "texturas/piedra_pizarra_normal.png",
+        "rugosidad": "texturas/piedra_pizarra_rugosidad.png",
+        "metal": "texturas/piedra_pizarra_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "grava_compacta",
+      "numero": 6,
+      "nombre": "Grava compacta",
+      "descripcion": "Piedrecitas apelmazadas en un solo bloque.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        1.5,
+        1.78,
+        0.74
+      ],
+      "partes": [
+        {
+          "nombre": "grava_compacta",
+          "triangulos": 1600,
+          "Material": "Pebble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/grava_compacta_color.png",
+        "normal": "texturas/grava_compacta_normal.png",
+        "rugosidad": "texturas/grava_compacta_rugosidad.png",
+        "metal": "texturas/grava_compacta_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_musgo",
+      "numero": 7,
+      "nombre": "Roca con musgo",
+      "descripcion": "Piedra gris con manchas de musgo verde.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.46,
+        2.17,
+        1.35
+      ],
+      "partes": [
+        {
+          "nombre": "roca_musgo",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_musgo_color.png",
+        "normal": "texturas/roca_musgo_normal.png",
+        "rugosidad": "texturas/roca_musgo_rugosidad.png",
+        "metal": "texturas/roca_musgo_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_erosionada",
+      "numero": 8,
+      "nombre": "Roca erosionada",
+      "descripcion": "Piedra pulida por el agua y el viento, con surcos suaves.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.83,
+        2.13,
+        1.64
+      ],
+      "partes": [
+        {
+          "nombre": "roca_erosionada",
+          "triangulos": 1600,
+          "Material": "Sandstone",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_erosionada_color.png",
+        "normal": "texturas/roca_erosionada_normal.png",
+        "rugosidad": "texturas/roca_erosionada_rugosidad.png",
+        "metal": "texturas/roca_erosionada_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "pedernal",
+      "numero": 9,
+      "nombre": "Pedernal",
+      "descripcion": "Piedra negra brillante de bordes afilados, partida en lascas.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.07,
+        1.38,
+        1.1
+      ],
+      "partes": [
+        {
+          "nombre": "pedernal",
+          "triangulos": 1600,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/pedernal_color.png",
+        "normal": "texturas/pedernal_normal.png",
+        "rugosidad": "texturas/pedernal_rugosidad.png",
+        "metal": "texturas/pedernal_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cuarzo_blanco",
+      "numero": 10,
+      "nombre": "Cuarzo blanco",
+      "descripcion": "Cristal blanco lechoso, opaco y de forma irregular.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 2,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.15,
+        1.99,
+        2.43
+      ],
+      "partes": [
+        {
+          "nombre": "cuarzo_blanco",
+          "triangulos": 1600,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cuarzo_blanco_color.png",
+        "normal": "texturas/cuarzo_blanco_normal.png",
+        "rugosidad": "texturas/cuarzo_blanco_rugosidad.png",
+        "metal": "texturas/cuarzo_blanco_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "granito_rosa",
+      "numero": 11,
+      "nombre": "Granito rosa",
+      "descripcion": "Roca moteada de rosa, gris y negro.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 3,
+      "triangulos": 1598,
+      "tamano_studs": [
+        2.6,
+        2.21,
+        1.44
+      ],
+      "partes": [
+        {
+          "nombre": "granito_rosa",
+          "triangulos": 1598,
+          "Material": "Granite",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/granito_rosa_color.png",
+        "normal": "texturas/granito_rosa_normal.png",
+        "rugosidad": "texturas/granito_rosa_rugosidad.png",
+        "metal": "texturas/granito_rosa_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "basalto",
+      "numero": 12,
+      "nombre": "Basalto",
+      "descripcion": "Roca negra en columnas hexagonales.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 3,
+      "triangulos": 1598,
+      "tamano_studs": [
+        2.77,
+        2.01,
+        2.28
+      ],
+      "partes": [
+        {
+          "nombre": "basalto",
+          "triangulos": 1598,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/basalto_color.png",
+        "normal": "texturas/basalto_normal.png",
+        "rugosidad": "texturas/basalto_rugosidad.png",
+        "metal": "texturas/basalto_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "arcilla_roja",
+      "numero": 13,
+      "nombre": "Arcilla roja",
+      "descripcion": "Masa rojiza compacta, agrietada al secarse.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 3,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.33,
+        2.7,
+        1.85
+      ],
+      "partes": [
+        {
+          "nombre": "arcilla_roja",
+          "triangulos": 1600,
+          "Material": "Mud",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/arcilla_roja_color.png",
+        "normal": "texturas/arcilla_roja_normal.png",
+        "rugosidad": "texturas/arcilla_roja_rugosidad.png",
+        "metal": "texturas/arcilla_roja_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_volcanica",
+      "numero": 14,
+      "nombre": "Roca volcánica",
+      "descripcion": "Piedra negra porosa, llena de agujeros, ligera como la pumita.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 3,
+      "triangulos": 1598,
+      "tamano_studs": [
+        2.53,
+        2.09,
+        1.5
+      ],
+      "partes": [
+        {
+          "nombre": "roca_volcanica",
+          "triangulos": 1598,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_volcanica_color.png",
+        "normal": "texturas/roca_volcanica_normal.png",
+        "rugosidad": "texturas/roca_volcanica_rugosidad.png",
+        "metal": "texturas/roca_volcanica_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_carbon",
+      "numero": 15,
+      "nombre": "Carbón",
+      "descripcion": "Roca negra con vetas brillantes.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 3,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.09,
+        1.98,
+        1.39
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_carbon",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_carbon_color.png",
+        "normal": "texturas/mineral_carbon_normal.png",
+        "rugosidad": "texturas/mineral_carbon_rugosidad.png",
+        "metal": "texturas/mineral_carbon_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_sal",
+      "numero": 16,
+      "nombre": "Sal de roca",
+      "descripcion": "Bloque blanco cristalino y semitransparente, en cubos.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 156,
+      "tamano_studs": [
+        2.09,
+        1.65,
+        1.3
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_sal_cristal",
+          "triangulos": 156,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#F4F1EC",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_sal_color.png",
+        "normal": "texturas/mineral_sal_normal.png",
+        "rugosidad": "texturas/mineral_sal_rugosidad.png",
+        "metal": "texturas/mineral_sal_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_azufre",
+      "numero": 17,
+      "nombre": "Azufre",
+      "descripcion": "Roca amarilla brillante con cristalitos.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.15,
+        1.64,
+        1.4
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_azufre",
+          "triangulos": 1600,
+          "Material": "Sand",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_azufre_color.png",
+        "normal": "texturas/mineral_azufre_normal.png",
+        "rugosidad": "texturas/mineral_azufre_rugosidad.png",
+        "metal": "texturas/mineral_azufre_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_yeso",
+      "numero": 18,
+      "nombre": "Yeso",
+      "descripcion": "Cristal transparente en láminas finas.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.73,
+        1.74,
+        1.17
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_yeso_cristal",
+          "triangulos": 1600,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#EDEBE4",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_yeso_color.png",
+        "normal": "texturas/mineral_yeso_normal.png",
+        "rugosidad": "texturas/mineral_yeso_rugosidad.png",
+        "metal": "texturas/mineral_yeso_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_coral",
+      "numero": 19,
+      "nombre": "Coral fósil",
+      "descripcion": "Piedra con la textura de un coral fosilizado.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.46,
+        2.03,
+        1.39
+      ],
+      "partes": [
+        {
+          "nombre": "roca_coral",
+          "triangulos": 1600,
+          "Material": "Limestone",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_coral_color.png",
+        "normal": "texturas/roca_coral_normal.png",
+        "rugosidad": "texturas/roca_coral_rugosidad.png",
+        "metal": "texturas/roca_coral_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_rio",
+      "numero": 20,
+      "nombre": "Piedra de río",
+      "descripcion": "Piedra lisa y ovalada, de tonos mezclados.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.62,
+        1.81,
+        1.01
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_rio",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_rio_color.png",
+        "normal": "texturas/piedra_rio_normal.png",
+        "rugosidad": "texturas/piedra_rio_rugosidad.png",
+        "metal": "texturas/piedra_rio_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_helada",
+      "numero": 21,
+      "nombre": "Roca helada",
+      "descripcion": "Piedra cubierta de escarcha, con hielo arriba.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.87,
+        2.7,
+        1.51
+      ],
+      "partes": [
+        {
+          "nombre": "roca_helada",
+          "triangulos": 1384,
+          "Material": "Glacier",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "roca_helada_cristal",
+          "triangulos": 216,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#CFEFFF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_helada_color.png",
+        "normal": "texturas/roca_helada_normal.png",
+        "rugosidad": "texturas/roca_helada_rugosidad.png",
+        "metal": "texturas/roca_helada_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_mica",
+      "numero": 22,
+      "nombre": "Mica",
+      "descripcion": "Roca con láminas plateadas brillantes.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 4,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.0,
+        2.16,
+        1.38
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_mica",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_mica_color.png",
+        "normal": "texturas/mineral_mica_normal.png",
+        "rugosidad": "texturas/mineral_mica_rugosidad.png",
+        "metal": "texturas/mineral_mica_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "arena_compacta",
+      "numero": 23,
+      "nombre": "Arena compacta",
+      "descripcion": "Bloque de arena dorada prensada.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 5,
+      "triangulos": 1598,
+      "tamano_studs": [
+        2.2,
+        2.28,
+        1.37
+      ],
+      "partes": [
+        {
+          "nombre": "arena_compacta",
+          "triangulos": 1598,
+          "Material": "Sandstone",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/arena_compacta_color.png",
+        "normal": "texturas/arena_compacta_normal.png",
+        "rugosidad": "texturas/arena_compacta_rugosidad.png",
+        "metal": "texturas/arena_compacta_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_oxidada",
+      "numero": 24,
+      "nombre": "Roca oxidada",
+      "descripcion": "Piedra con manchas naranjas de óxido.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 5,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.44,
+        2.06,
+        1.27
+      ],
+      "partes": [
+        {
+          "nombre": "roca_oxidada",
+          "triangulos": 1600,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_oxidada_color.png",
+        "normal": "texturas/roca_oxidada_normal.png",
+        "rugosidad": "texturas/roca_oxidada_rugosidad.png",
+        "metal": "texturas/roca_oxidada_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "escoria",
+      "numero": 25,
+      "nombre": "Escoria",
+      "descripcion": "Residuo volcánico gris y negro, rugoso y burbujeante.",
+      "rareza": "Común",
+      "color_hud": "#FFFFFF",
+      "aparicion_rareza_pct": 35.0,
+      "aparicion_pct": 1.4,
+      "valor": 5,
+      "triangulos": 1600,
+      "tamano_studs": [
+        2.95,
+        2.68,
+        1.77
+      ],
+      "partes": [
+        {
+          "nombre": "escoria",
+          "triangulos": 1600,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/escoria_color.png",
+        "normal": "texturas/escoria_normal.png",
+        "rugosidad": "texturas/escoria_rugosidad.png",
+        "metal": "texturas/escoria_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_hierro",
+      "numero": 26,
+      "nombre": "Hierro",
+      "descripcion": "Roca con vetas metálicas plateadas.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 6,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.48,
+        2.32,
+        1.6
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_hierro",
+          "triangulos": 2000,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_hierro_color.png",
+        "normal": "texturas/mineral_hierro_normal.png",
+        "rugosidad": "texturas/mineral_hierro_rugosidad.png",
+        "metal": "texturas/mineral_hierro_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_cobre",
+      "numero": 27,
+      "nombre": "Cobre",
+      "descripcion": "Roca con vetas cobrizas y manchas de pátina verde.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 6,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.63,
+        2.07,
+        1.45
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_cobre",
+          "triangulos": 2000,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_cobre_color.png",
+        "normal": "texturas/mineral_cobre_normal.png",
+        "rugosidad": "texturas/mineral_cobre_rugosidad.png",
+        "metal": "texturas/mineral_cobre_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_estano",
+      "numero": 28,
+      "nombre": "Estaño",
+      "descripcion": "Roca gris con nódulos brillantes.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 7,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.63,
+        2.31,
+        1.47
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_estano",
+          "triangulos": 1998,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_estano_color.png",
+        "normal": "texturas/mineral_estano_normal.png",
+        "rugosidad": "texturas/mineral_estano_rugosidad.png",
+        "metal": "texturas/mineral_estano_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_zinc",
+      "numero": 29,
+      "nombre": "Zinc",
+      "descripcion": "Roca gris azulada con cristales pequeños.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 7,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.45,
+        1.84,
+        1.53
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_zinc",
+          "triangulos": 2000,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_zinc_color.png",
+        "normal": "texturas/mineral_zinc_normal.png",
+        "rugosidad": "texturas/mineral_zinc_rugosidad.png",
+        "metal": "texturas/mineral_zinc_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_plomo",
+      "numero": 30,
+      "nombre": "Plomo",
+      "descripcion": "Roca gris oscura, pesada, en bloques con brillo metálico.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 8,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.21,
+        2.36,
+        1.69
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_plomo",
+          "triangulos": 2000,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_plomo_color.png",
+        "normal": "texturas/mineral_plomo_normal.png",
+        "rugosidad": "texturas/mineral_plomo_rugosidad.png",
+        "metal": "texturas/mineral_plomo_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cuarzo_rosa",
+      "numero": 31,
+      "nombre": "Cuarzo rosa",
+      "descripcion": "Cristales rosa pálido translúcidos.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 8,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.48,
+        2.15,
+        2.76
+      ],
+      "partes": [
+        {
+          "nombre": "cuarzo_rosa",
+          "triangulos": 1822,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cuarzo_rosa_cristal",
+          "triangulos": 176,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#F4B9C8",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cuarzo_rosa_color.png",
+        "normal": "texturas/cuarzo_rosa_normal.png",
+        "rugosidad": "texturas/cuarzo_rosa_rugosidad.png",
+        "metal": "texturas/cuarzo_rosa_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cuarzo_ahumado",
+      "numero": 32,
+      "nombre": "Cuarzo ahumado",
+      "descripcion": "Cristal marrón oscuro semitransparente.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 9,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.18,
+        2.04,
+        3.26
+      ],
+      "partes": [
+        {
+          "nombre": "cuarzo_ahumado",
+          "triangulos": 1910,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cuarzo_ahumado_cristal",
+          "triangulos": 88,
+          "Material": "Glass",
+          "Transparency": 0.35,
+          "Color": "#6B4A33",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cuarzo_ahumado_color.png",
+        "normal": "texturas/cuarzo_ahumado_normal.png",
+        "rugosidad": "texturas/cuarzo_ahumado_rugosidad.png",
+        "metal": "texturas/cuarzo_ahumado_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "amatista_bruta",
+      "numero": 33,
+      "nombre": "Amatista bruta",
+      "descripcion": "Geoda pequeña con cristales púrpura dentro.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 9,
+      "triangulos": 1280,
+      "tamano_studs": [
+        2.36,
+        1.73,
+        2.17
+      ],
+      "partes": [
+        {
+          "nombre": "amatista_bruta",
+          "triangulos": 400,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "amatista_bruta_cristal",
+          "triangulos": 880,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#9B5BD6",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/amatista_bruta_color.png",
+        "normal": "texturas/amatista_bruta_normal.png",
+        "rugosidad": "texturas/amatista_bruta_rugosidad.png",
+        "metal": "texturas/amatista_bruta_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "jade_verde",
+      "numero": 34,
+      "nombre": "Jade",
+      "descripcion": "Piedra verde intensa, lisa y pulida.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 10,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.38,
+        1.9,
+        1.27
+      ],
+      "partes": [
+        {
+          "nombre": "jade_verde",
+          "triangulos": 2000,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/jade_verde_color.png",
+        "normal": "texturas/jade_verde_normal.png",
+        "rugosidad": "texturas/jade_verde_rugosidad.png",
+        "metal": "texturas/jade_verde_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "jaspe_rojo",
+      "numero": 35,
+      "nombre": "Jaspe rojo",
+      "descripcion": "Piedra roja con vetas blancas.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 10,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.31,
+        2.11,
+        1.47
+      ],
+      "partes": [
+        {
+          "nombre": "jaspe_rojo",
+          "triangulos": 2000,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/jaspe_rojo_color.png",
+        "normal": "texturas/jaspe_rojo_normal.png",
+        "rugosidad": "texturas/jaspe_rojo_rugosidad.png",
+        "metal": "texturas/jaspe_rojo_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "turquesa_bruta",
+      "numero": 36,
+      "nombre": "Turquesa bruta",
+      "descripcion": "Piedra azul verdosa con vetas de cobre.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 11,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.7,
+        2.45,
+        1.81
+      ],
+      "partes": [
+        {
+          "nombre": "turquesa_bruta",
+          "triangulos": 1998,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/turquesa_bruta_color.png",
+        "normal": "texturas/turquesa_bruta_normal.png",
+        "rugosidad": "texturas/turquesa_bruta_rugosidad.png",
+        "metal": "texturas/turquesa_bruta_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "agata_bandas",
+      "numero": 37,
+      "nombre": "Ágata de bandas",
+      "descripcion": "Nódulo partido con bandas concéntricas de colores.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 11,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.45,
+        1.5,
+        1.99
+      ],
+      "partes": [
+        {
+          "nombre": "agata_bandas",
+          "triangulos": 2000,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/agata_bandas_color.png",
+        "normal": "texturas/agata_bandas_normal.png",
+        "rugosidad": "texturas/agata_bandas_rugosidad.png",
+        "metal": "texturas/agata_bandas_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "obsidiana",
+      "numero": 38,
+      "nombre": "Obsidiana",
+      "descripcion": "Cristal volcánico negro, ultra liso, con reflejos.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 12,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.24,
+        1.65,
+        1.41
+      ],
+      "partes": [
+        {
+          "nombre": "obsidiana",
+          "triangulos": 2000,
+          "Material": "Glass",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/obsidiana_color.png",
+        "normal": "texturas/obsidiana_normal.png",
+        "rugosidad": "texturas/obsidiana_rugosidad.png",
+        "metal": "texturas/obsidiana_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "pirita",
+      "numero": 39,
+      "nombre": "Pirita",
+      "descripcion": "Cubos dorados metálicos encajados: el oro de los tontos.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 12,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.34,
+        2.17,
+        1.58
+      ],
+      "partes": [
+        {
+          "nombre": "pirita",
+          "triangulos": 1998,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/pirita_color.png",
+        "normal": "texturas/pirita_normal.png",
+        "rugosidad": "texturas/pirita_rugosidad.png",
+        "metal": "texturas/pirita_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "fluorita_verde",
+      "numero": 40,
+      "nombre": "Fluorita verde",
+      "descripcion": "Cristales verdes translúcidos en cubos.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 13,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.28,
+        2.08,
+        1.37
+      ],
+      "partes": [
+        {
+          "nombre": "fluorita_verde",
+          "triangulos": 1926,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "fluorita_verde_cristal",
+          "triangulos": 72,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#5EE08A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/fluorita_verde_color.png",
+        "normal": "texturas/fluorita_verde_normal.png",
+        "rugosidad": "texturas/fluorita_verde_rugosidad.png",
+        "metal": "texturas/fluorita_verde_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "magnetita",
+      "numero": 41,
+      "nombre": "Magnetita",
+      "descripcion": "Octaedros negros metálicos con partículas que flotan alrededor.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 13,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.38,
+        2.39,
+        1.74
+      ],
+      "partes": [
+        {
+          "nombre": "magnetita",
+          "triangulos": 1884,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "magnetita_orbita",
+          "triangulos": 116,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/magnetita_color.png",
+        "normal": "texturas/magnetita_normal.png",
+        "rugosidad": "texturas/magnetita_rugosidad.png",
+        "metal": "texturas/magnetita_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "lapislazuli_bruto",
+      "numero": 42,
+      "nombre": "Lapislázuli",
+      "descripcion": "Piedra azul profundo con motas doradas.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 14,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.35,
+        2.14,
+        1.33
+      ],
+      "partes": [
+        {
+          "nombre": "lapislazuli_bruto",
+          "triangulos": 2000,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/lapislazuli_bruto_color.png",
+        "normal": "texturas/lapislazuli_bruto_normal.png",
+        "rugosidad": "texturas/lapislazuli_bruto_rugosidad.png",
+        "metal": "texturas/lapislazuli_bruto_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "hematita",
+      "numero": 43,
+      "nombre": "Hematita",
+      "descripcion": "Piedra gris metálica en burbujas, roja al partirse.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 14,
+      "triangulos": 1998,
+      "tamano_studs": [
+        2.3,
+        2.26,
+        1.61
+      ],
+      "partes": [
+        {
+          "nombre": "hematita",
+          "triangulos": 1998,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/hematita_color.png",
+        "normal": "texturas/hematita_normal.png",
+        "rugosidad": "texturas/hematita_rugosidad.png",
+        "metal": "texturas/hematita_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_fumario",
+      "numero": 44,
+      "nombre": "Cristal fumario",
+      "descripcion": "Cristal negro con humo atrapado dentro.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 15,
+      "triangulos": 2000,
+      "tamano_studs": [
+        2.07,
+        2.04,
+        2.9
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_fumario",
+          "triangulos": 1780,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_fumario_cristal",
+          "triangulos": 110,
+          "Material": "Glass",
+          "Transparency": 0.45,
+          "Color": "#1A181E",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_fumario_interior",
+          "triangulos": 110,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "añadir un Smoke gris (Opacity 0,15, RiseVelocity 0,3) dentro del cristal"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_fumario_color.png",
+        "normal": "texturas/cristal_fumario_normal.png",
+        "rugosidad": "texturas/cristal_fumario_rugosidad.png",
+        "metal": "texturas/cristal_fumario_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "geoda_comun",
+      "numero": 45,
+      "nombre": "Geoda",
+      "descripcion": "Roca por fuera; por dentro, cristales blancos.",
+      "rareza": "Poco común",
+      "color_hud": "#4CD964",
+      "aparicion_rareza_pct": 25.0,
+      "aparicion_pct": 1.25,
+      "valor": 15,
+      "triangulos": 1324,
+      "tamano_studs": [
+        2.42,
+        1.6,
+        2.21
+      ],
+      "partes": [
+        {
+          "nombre": "geoda_comun",
+          "triangulos": 400,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "geoda_comun_cristal",
+          "triangulos": 924,
+          "Material": "Glass",
+          "Transparency": 0.2,
+          "Color": "#F4F2EE",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/geoda_comun_color.png",
+        "normal": "texturas/geoda_comun_normal.png",
+        "rugosidad": "texturas/geoda_comun_rugosidad.png",
+        "metal": "texturas/geoda_comun_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_oro",
+      "numero": 46,
+      "nombre": "Oro",
+      "descripcion": "Roca con pepitas doradas grandes y brillantes.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 16,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.69,
+        2.62,
+        1.61
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_oro",
+          "triangulos": 2400,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_oro_color.png",
+        "normal": "texturas/mineral_oro_normal.png",
+        "rugosidad": "texturas/mineral_oro_rugosidad.png",
+        "metal": "texturas/mineral_oro_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFD36B, Brightness 1.5, Range 9",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_plata",
+      "numero": 47,
+      "nombre": "Plata",
+      "descripcion": "Roca con hilos de plata relucientes que salen de ella.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 17,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.91,
+        2.3,
+        2.29
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_plata",
+          "triangulos": 2400,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_plata_color.png",
+        "normal": "texturas/mineral_plata_normal.png",
+        "rugosidad": "texturas/mineral_plata_rugosidad.png",
+        "metal": "texturas/mineral_plata_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_titanio",
+      "numero": 48,
+      "nombre": "Titanio",
+      "descripcion": "Roca blanca metálica con brillo azulado.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 19,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.2,
+        1.81,
+        1.61
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_titanio",
+          "triangulos": 2400,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_titanio_color.png",
+        "normal": "texturas/mineral_titanio_normal.png",
+        "rugosidad": "texturas/mineral_titanio_rugosidad.png",
+        "metal": "texturas/mineral_titanio_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_cobalto",
+      "numero": 49,
+      "nombre": "Cobalto",
+      "descripcion": "Roca azul intenso con cristales.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 20,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.57,
+        2.11,
+        1.84
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_cobalto",
+          "triangulos": 2400,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_cobalto_color.png",
+        "normal": "texturas/mineral_cobalto_normal.png",
+        "rugosidad": "texturas/mineral_cobalto_rugosidad.png",
+        "metal": "texturas/mineral_cobalto_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "esmeralda_bruta",
+      "numero": 50,
+      "nombre": "Esmeralda bruta",
+      "descripcion": "Gran cristal verde hexagonal dentro de la roca.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 22,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.7,
+        2.13,
+        2.92
+      ],
+      "partes": [
+        {
+          "nombre": "esmeralda_bruta",
+          "triangulos": 2334,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "esmeralda_bruta_cristal",
+          "triangulos": 66,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#1FB26A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/esmeralda_bruta_color.png",
+        "normal": "texturas/esmeralda_bruta_normal.png",
+        "rugosidad": "texturas/esmeralda_bruta_rugosidad.png",
+        "metal": "texturas/esmeralda_bruta_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #40E08A, Brightness 1.5, Range 10",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "rubi_bruto",
+      "numero": 51,
+      "nombre": "Rubí bruto",
+      "descripcion": "Cristales rojos dentro de roca gris.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 23,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.61,
+        2.24,
+        1.78
+      ],
+      "partes": [
+        {
+          "nombre": "rubi_bruto",
+          "triangulos": 2290,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "rubi_bruto_cristal",
+          "triangulos": 110,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#D0103A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/rubi_bruto_color.png",
+        "normal": "texturas/rubi_bruto_normal.png",
+        "rugosidad": "texturas/rubi_bruto_rugosidad.png",
+        "metal": "texturas/rubi_bruto_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF3355, Brightness 1.5, Range 9",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "zafiro_bruto",
+      "numero": 52,
+      "nombre": "Zafiro bruto",
+      "descripcion": "Cristal azul intenso hexagonal en la roca.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 24,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.29,
+        2.29,
+        2.44
+      ],
+      "partes": [
+        {
+          "nombre": "zafiro_bruto",
+          "triangulos": 2328,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "zafiro_bruto_cristal",
+          "triangulos": 72,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#1846D6",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/zafiro_bruto_color.png",
+        "normal": "texturas/zafiro_bruto_normal.png",
+        "rugosidad": "texturas/zafiro_bruto_rugosidad.png",
+        "metal": "texturas/zafiro_bruto_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #4A7CFF, Brightness 1.5, Range 9",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "topacio_bruto",
+      "numero": 53,
+      "nombre": "Topacio bruto",
+      "descripcion": "Gran cristal amarillo anaranjado en la roca.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 26,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.22,
+        2.26,
+        3.23
+      ],
+      "partes": [
+        {
+          "nombre": "topacio_bruto",
+          "triangulos": 2358,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "topacio_bruto_cristal",
+          "triangulos": 42,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#F2A22C",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/topacio_bruto_color.png",
+        "normal": "texturas/topacio_bruto_normal.png",
+        "rugosidad": "texturas/topacio_bruto_rugosidad.png",
+        "metal": "texturas/topacio_bruto_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFB347, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_arcoiris",
+      "numero": 54,
+      "nombre": "Cristal arcoíris",
+      "descripcion": "Cristal que cambia de color según el ángulo.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 27,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.34,
+        1.98,
+        3.01
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_arcoiris",
+          "triangulos": 2246,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_arcoiris_cristal",
+          "triangulos": 154,
+          "Material": "Glass",
+          "Transparency": 0.2,
+          "Color": "#C8B8FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_arcoiris_color.png",
+        "normal": "texturas/cristal_arcoiris_normal.png",
+        "rugosidad": "texturas/cristal_arcoiris_rugosidad.png",
+        "metal": "texturas/cristal_arcoiris_metal.png",
+        "emision": "texturas/cristal_arcoiris_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "geoda_amatista",
+      "numero": 55,
+      "nombre": "Geoda de amatista",
+      "descripcion": "Geoda grande y abierta llena de cristales púrpura.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 29,
+      "triangulos": 1632,
+      "tamano_studs": [
+        3.2,
+        2.03,
+        3.03
+      ],
+      "partes": [
+        {
+          "nombre": "geoda_amatista",
+          "triangulos": 400,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "geoda_amatista_cristal",
+          "triangulos": 1232,
+          "Material": "Glass",
+          "Transparency": 0.2,
+          "Color": "#8A3FD8",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/geoda_amatista_color.png",
+        "normal": "texturas/geoda_amatista_normal.png",
+        "rugosidad": "texturas/geoda_amatista_rugosidad.png",
+        "metal": "texturas/geoda_amatista_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #A35BFF, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_neon_azul",
+      "numero": 56,
+      "nombre": "Neón azul",
+      "descripcion": "Roca con vetas azul eléctrico que brillan.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 30,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.72,
+        2.05,
+        1.65
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_neon_azul",
+          "triangulos": 2180,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_neon_azul_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#1E90FF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_neon_azul_color.png",
+        "normal": "texturas/mineral_neon_azul_normal.png",
+        "rugosidad": "texturas/mineral_neon_azul_rugosidad.png",
+        "metal": "texturas/mineral_neon_azul_metal.png",
+        "emision": "texturas/mineral_neon_azul_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #1E90FF, Brightness 1.5, Range 9",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_neon_verde",
+      "numero": 57,
+      "nombre": "Neón verde",
+      "descripcion": "Roca oscura con vetas verde neón y esquirlas brillantes.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 32,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.39,
+        2.22,
+        1.63
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_neon_verde",
+          "triangulos": 2180,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_neon_verde_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#39FF6A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_neon_verde_color.png",
+        "normal": "texturas/mineral_neon_verde_normal.png",
+        "rugosidad": "texturas/mineral_neon_verde_rugosidad.png",
+        "metal": "texturas/mineral_neon_verde_metal.png",
+        "emision": "texturas/mineral_neon_verde_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #39FF6A, Brightness 1.5, Range 8",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_hielo_eterno",
+      "numero": 58,
+      "nombre": "Cristal de hielo eterno",
+      "descripcion": "Cristal azul pálido que nunca se derrite.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 33,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.8,
+        2.58,
+        3.27
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_hielo_eterno",
+          "triangulos": 2268,
+          "Material": "Glacier",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_hielo_eterno_cristal",
+          "triangulos": 132,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#BFE8FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_hielo_eterno_color.png",
+        "normal": "texturas/cristal_hielo_eterno_normal.png",
+        "rugosidad": "texturas/cristal_hielo_eterno_rugosidad.png",
+        "metal": "texturas/cristal_hielo_eterno_metal.png",
+        "emision": "texturas/cristal_hielo_eterno_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #9FDFFF, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_lunar",
+      "numero": 59,
+      "nombre": "Piedra lunar",
+      "descripcion": "Piedra blanca con destellos azulados en su interior.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 34,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.35,
+        2.05,
+        2.13
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_lunar",
+          "triangulos": 2400,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_lunar_color.png",
+        "normal": "texturas/piedra_lunar_normal.png",
+        "rugosidad": "texturas/piedra_lunar_rugosidad.png",
+        "metal": "texturas/piedra_lunar_metal.png",
+        "emision": "texturas/piedra_lunar_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #AFCBFF, Brightness 1.5, Range 8",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_solar",
+      "numero": 60,
+      "nombre": "Piedra solar",
+      "descripcion": "Piedra dorada y cálida con brillo interno naranja.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 36,
+      "triangulos": 2400,
+      "tamano_studs": [
+        2.33,
+        2.18,
+        2.12
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_solar",
+          "triangulos": 2400,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_solar_color.png",
+        "normal": "texturas/piedra_solar_normal.png",
+        "rugosidad": "texturas/piedra_solar_rugosidad.png",
+        "metal": "texturas/piedra_solar_metal.png",
+        "emision": "texturas/piedra_solar_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF9A2A, Brightness 1.5, Range 8",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "fosil_cristalizado",
+      "numero": 61,
+      "nombre": "Fósil cristalizado",
+      "descripcion": "Amonites atrapada en un cristal de ámbar.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 37,
+      "triangulos": 1800,
+      "tamano_studs": [
+        2.39,
+        1.8,
+        1.66
+      ],
+      "partes": [
+        {
+          "nombre": "fosil_cristalizado_cristal",
+          "triangulos": 900,
+          "Material": "Glass",
+          "Transparency": 0.55,
+          "Color": "#E09A2A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "fosil_cristalizado_interior",
+          "triangulos": 900,
+          "Material": "Glass",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/fosil_cristalizado_color.png",
+        "normal": "texturas/fosil_cristalizado_normal.png",
+        "rugosidad": "texturas/fosil_cristalizado_rugosidad.png",
+        "metal": "texturas/fosil_cristalizado_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFB347, Brightness 1.5, Range 8",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "coral_luminoso",
+      "numero": 62,
+      "nombre": "Coral luminoso",
+      "descripcion": "Coral de mar que brilla en turquesa suave.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 39,
+      "triangulos": 2400,
+      "tamano_studs": [
+        1.92,
+        1.74,
+        2.16
+      ],
+      "partes": [
+        {
+          "nombre": "coral_luminoso",
+          "triangulos": 900,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "coral_luminoso_neon",
+          "triangulos": 1500,
+          "Material": "Neon",
+          "Color": "#3FF2D4",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/coral_luminoso_color.png",
+        "normal": "texturas/coral_luminoso_normal.png",
+        "rugosidad": "texturas/coral_luminoso_rugosidad.png",
+        "metal": "texturas/coral_luminoso_metal.png",
+        "emision": "texturas/coral_luminoso_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #3FF2D4, Brightness 1.5, Range 8",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_magnetica",
+      "numero": 63,
+      "nombre": "Roca magnética",
+      "descripcion": "Piedra oscura con fragmentos metálicos flotando alrededor.",
+      "rareza": "Raro",
+      "color_hud": "#3D8BFF",
+      "aparicion_rareza_pct": 18.0,
+      "aparicion_pct": 1.0,
+      "valor": 40,
+      "triangulos": 2400,
+      "tamano_studs": [
+        3.46,
+        3.25,
+        2.35
+      ],
+      "partes": [
+        {
+          "nombre": "roca_magnetica",
+          "triangulos": 2222,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "roca_magnetica_orbita",
+          "triangulos": 178,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_magnetica_color.png",
+        "normal": "texturas/roca_magnetica_normal.png",
+        "rugosidad": "texturas/roca_magnetica_rugosidad.png",
+        "metal": "texturas/roca_magnetica_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "diamante_bruto",
+      "numero": 64,
+      "nombre": "Diamante bruto",
+      "descripcion": "Gran cristal transparente con reflejos arcoíris, en roca.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 41,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.75,
+        2.45,
+        2.86
+      ],
+      "partes": [
+        {
+          "nombre": "diamante_bruto",
+          "triangulos": 2696,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "diamante_bruto_cristal",
+          "triangulos": 104,
+          "Material": "Glass",
+          "Transparency": 0.4,
+          "Color": "#F4FAFF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/diamante_bruto_color.png",
+        "normal": "texturas/diamante_bruto_normal.png",
+        "rugosidad": "texturas/diamante_bruto_rugosidad.png",
+        "metal": "texturas/diamante_bruto_metal.png",
+        "emision": "texturas/diamante_bruto_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 10",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_plasma",
+      "numero": 65,
+      "nombre": "Cristal de plasma",
+      "descripcion": "Cristal naranja y rojo con energía visible dentro.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 45,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.69,
+        2.36,
+        3.45
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_plasma",
+          "triangulos": 2536,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_plasma_cristal",
+          "triangulos": 132,
+          "Material": "Glass",
+          "Transparency": 0.35,
+          "Color": "#FF6A2A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_plasma_neon",
+          "triangulos": 132,
+          "Material": "Neon",
+          "Color": "#FF7A1A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_plasma_color.png",
+        "normal": "texturas/cristal_plasma_normal.png",
+        "rugosidad": "texturas/cristal_plasma_rugosidad.png",
+        "metal": "texturas/cristal_plasma_metal.png",
+        "emision": "texturas/cristal_plasma_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF6A2A, Brightness 1.5, Range 12",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_vacio",
+      "numero": 66,
+      "nombre": "Cristal del vacío",
+      "descripcion": "Cristal negro transparente con estrellas dentro.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 49,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.43,
+        2.4,
+        3.43
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_vacio",
+          "triangulos": 2242,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_vacio_cristal",
+          "triangulos": 110,
+          "Material": "Glass",
+          "Transparency": 0.45,
+          "Color": "#0C0A18",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_vacio_neon",
+          "triangulos": 448,
+          "Material": "Neon",
+          "Color": "#DDE6FF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_vacio_color.png",
+        "normal": "texturas/cristal_vacio_normal.png",
+        "rugosidad": "texturas/cristal_vacio_rugosidad.png",
+        "metal": "texturas/cristal_vacio_metal.png",
+        "emision": "texturas/cristal_vacio_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #8A7AFF, Brightness 1.5, Range 12",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_iridio",
+      "numero": 67,
+      "nombre": "Iridio",
+      "descripcion": "Metal plateado ultrapulido con reflejos de colores.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 54,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.22,
+        2.12,
+        1.43
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_iridio",
+          "triangulos": 2800,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_iridio_color.png",
+        "normal": "texturas/mineral_iridio_normal.png",
+        "rugosidad": "texturas/mineral_iridio_rugosidad.png",
+        "metal": "texturas/mineral_iridio_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "alexandrita_gigante",
+      "numero": 68,
+      "nombre": "Alexandrita gigante",
+      "descripcion": "Cristal verde por un lado y rojo por el otro.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 58,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.41,
+        2.4,
+        3.72
+      ],
+      "partes": [
+        {
+          "nombre": "alexandrita_gigante",
+          "triangulos": 2758,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "alexandrita_gigante_cristal",
+          "triangulos": 42,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#1FA35A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/alexandrita_gigante_color.png",
+        "normal": "texturas/alexandrita_gigante_normal.png",
+        "rugosidad": "texturas/alexandrita_gigante_rugosidad.png",
+        "metal": "texturas/alexandrita_gigante_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #7AFF9A, Brightness 1.5, Range 13",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "opalo_negro",
+      "numero": 69,
+      "nombre": "Ópalo negro",
+      "descripcion": "Piedra negra con destellos de todos los colores.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 62,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.4,
+        2.12,
+        2.22
+      ],
+      "partes": [
+        {
+          "nombre": "opalo_negro",
+          "triangulos": 2800,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/opalo_negro_color.png",
+        "normal": "texturas/opalo_negro_normal.png",
+        "rugosidad": "texturas/opalo_negro_rugosidad.png",
+        "metal": "texturas/opalo_negro_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": null,
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_tormenta",
+      "numero": 70,
+      "nombre": "Cristal de tormenta",
+      "descripcion": "Cristal gris con rayos azules dentro.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 66,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.41,
+        2.48,
+        3.54
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_tormenta",
+          "triangulos": 2604,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_tormenta_cristal",
+          "triangulos": 88,
+          "Material": "Glass",
+          "Transparency": 0.4,
+          "Color": "#7A808C",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_tormenta_neon",
+          "triangulos": 108,
+          "Material": "Neon",
+          "Color": "#4AB8FF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "parpadeo irregular (rayos)"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_tormenta_color.png",
+        "normal": "texturas/cristal_tormenta_normal.png",
+        "rugosidad": "texturas/cristal_tormenta_rugosidad.png",
+        "metal": "texturas/cristal_tormenta_metal.png",
+        "emision": "texturas/cristal_tormenta_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #4AB8FF, Brightness 1.5, Range 12",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_vibranium",
+      "numero": 71,
+      "nombre": "Vibranio",
+      "descripcion": "Metal azul oscuro con pulsos de energía cian.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 70,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.29,
+        1.87,
+        1.57
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_vibranium",
+          "triangulos": 2580,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_vibranium_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#00E5FF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "pulso: Transparency 0 -> 0,4 cada 1,2 s"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_vibranium_color.png",
+        "normal": "texturas/mineral_vibranium_normal.png",
+        "rugosidad": "texturas/mineral_vibranium_rugosidad.png",
+        "metal": "texturas/mineral_vibranium_metal.png",
+        "emision": "texturas/mineral_vibranium_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #00E5FF, Brightness 1.5, Range 8",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_sombra",
+      "numero": 72,
+      "nombre": "Piedra sombra",
+      "descripcion": "Piedra negra mate que absorbe la luz, con bordes púrpura.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 75,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.64,
+        1.89,
+        1.79
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_sombra",
+          "triangulos": 2580,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "piedra_sombra_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#B54DFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_sombra_color.png",
+        "normal": "texturas/piedra_sombra_normal.png",
+        "rugosidad": "texturas/piedra_sombra_rugosidad.png",
+        "metal": "texturas/piedra_sombra_metal.png",
+        "emision": "texturas/piedra_sombra_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #B54DFF, Brightness 1.5, Range 9",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_sangre",
+      "numero": 73,
+      "nombre": "Cristal de sangre",
+      "descripcion": "Cristal carmesí profundo que brilla en rojo oscuro.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 79,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.63,
+        2.47,
+        3.34
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_sangre",
+          "triangulos": 2604,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_sangre_cristal",
+          "triangulos": 98,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#7A0614",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_sangre_neon",
+          "triangulos": 98,
+          "Material": "Neon",
+          "Color": "#8A0A1E",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_sangre_color.png",
+        "normal": "texturas/cristal_sangre_normal.png",
+        "rugosidad": "texturas/cristal_sangre_rugosidad.png",
+        "metal": "texturas/cristal_sangre_metal.png",
+        "emision": "texturas/cristal_sangre_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #C8102E, Brightness 1.5, Range 12",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_gravitacional",
+      "numero": 74,
+      "nombre": "Roca gravitacional",
+      "descripcion": "Piedra que flota con fragmentos orbitando.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 83,
+      "triangulos": 2798,
+      "tamano_studs": [
+        2.97,
+        2.69,
+        1.54
+      ],
+      "partes": [
+        {
+          "nombre": "roca_gravitacional",
+          "triangulos": 2582,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "flotar: subir y bajar 0,5 studs cada 3 s (Anchored, en el cliente)"
+        },
+        {
+          "nombre": "roca_gravitacional_orbita",
+          "triangulos": 216,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_gravitacional_color.png",
+        "normal": "texturas/roca_gravitacional_normal.png",
+        "rugosidad": "texturas/roca_gravitacional_rugosidad.png",
+        "metal": "texturas/roca_gravitacional_metal.png",
+        "emision": "texturas/roca_gravitacional_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #8A5AFF, Brightness 1.5, Range 10",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_estelar",
+      "numero": 75,
+      "nombre": "Mineral estelar",
+      "descripcion": "Roca oscura con puntos que brillan como estrellas.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 87,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.76,
+        2.25,
+        1.64
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_estelar",
+          "triangulos": 2240,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_estelar_neon",
+          "triangulos": 560,
+          "Material": "Neon",
+          "Color": "#FFFFFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_estelar_color.png",
+        "normal": "texturas/mineral_estelar_normal.png",
+        "rugosidad": "texturas/mineral_estelar_rugosidad.png",
+        "metal": "texturas/mineral_estelar_metal.png",
+        "emision": "texturas/mineral_estelar_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #CFD8FF, Brightness 1.5, Range 10",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_aurora",
+      "numero": 76,
+      "nombre": "Cristal aurora",
+      "descripcion": "Cristal alargado con los colores de la aurora boreal.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 92,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.28,
+        2.16,
+        4.02
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_aurora",
+          "triangulos": 2690,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_aurora_cristal",
+          "triangulos": 110,
+          "Material": "Glass",
+          "Transparency": 0.15,
+          "Color": "#3AC8C8",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_aurora_color.png",
+        "normal": "texturas/cristal_aurora_normal.png",
+        "rugosidad": "texturas/cristal_aurora_rugosidad.png",
+        "metal": "texturas/cristal_aurora_metal.png",
+        "emision": "texturas/cristal_aurora_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #4AF2C8, Brightness 1.5, Range 14",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "geoda_dragon",
+      "numero": 77,
+      "nombre": "Geoda de dragón",
+      "descripcion": "Geoda enorme con cristales rojos y naranjas como fuego.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 96,
+      "triangulos": 1666,
+      "tamano_studs": [
+        3.43,
+        2.16,
+        3.24
+      ],
+      "partes": [
+        {
+          "nombre": "geoda_dragon",
+          "triangulos": 434,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "geoda_dragon_cristal",
+          "triangulos": 1232,
+          "Material": "Glass",
+          "Transparency": 0.2,
+          "Color": "#FF5A1A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/geoda_dragon_color.png",
+        "normal": "texturas/geoda_dragon_normal.png",
+        "rugosidad": "texturas/geoda_dragon_rugosidad.png",
+        "metal": "texturas/geoda_dragon_metal.png",
+        "emision": "texturas/geoda_dragon_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF6A2A, Brightness 1.5, Range 12",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_abismal",
+      "numero": 78,
+      "nombre": "Mineral abismal",
+      "descripcion": "Roca negra de las profundidades con vetas púrpura que laten.",
+      "rareza": "Épico",
+      "color_hud": "#A855F7",
+      "aparicion_rareza_pct": 12.0,
+      "aparicion_pct": 0.8,
+      "valor": 100,
+      "triangulos": 2800,
+      "tamano_studs": [
+        2.94,
+        2.23,
+        1.71
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_abismal",
+          "triangulos": 2580,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_abismal_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#8A2AFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "latido lento: Transparency 0 -> 0,5 cada 2 s"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_abismal_color.png",
+        "normal": "texturas/mineral_abismal_normal.png",
+        "rugosidad": "texturas/mineral_abismal_rugosidad.png",
+        "metal": "texturas/mineral_abismal_metal.png",
+        "emision": "texturas/mineral_abismal_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #8A2AFF, Brightness 1.5, Range 10",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_sol_negro",
+      "numero": 79,
+      "nombre": "Cristal del sol negro",
+      "descripcion": "Cristal oscuro con una corona de energía dorada.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 101,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.04,
+        1.74,
+        3.8
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_sol_negro",
+          "triangulos": 2054,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_sol_negro_cristal",
+          "triangulos": 24,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#14101A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_sol_negro_neon",
+          "triangulos": 772,
+          "Material": "Neon",
+          "Color": "#FFC23A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar la corona en el eje del cristal (una vuelta cada 12 s)"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_sol_negro_color.png",
+        "normal": "texturas/cristal_sol_negro_normal.png",
+        "rugosidad": "texturas/cristal_sol_negro_rugosidad.png",
+        "metal": "texturas/cristal_sol_negro_metal.png",
+        "emision": "texturas/cristal_sol_negro_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFC23A, Brightness 1.5, Range 13",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "corazon_volcan",
+      "numero": 80,
+      "nombre": "Corazón de volcán",
+      "descripcion": "Roca volcánica con un núcleo de lava a la vista.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 119,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.11,
+        2.99,
+        2.18
+      ],
+      "partes": [
+        {
+          "nombre": "corazon_volcan",
+          "triangulos": 2630,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "corazon_volcan_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#FF6A0A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/corazon_volcan_color.png",
+        "normal": "texturas/corazon_volcan_normal.png",
+        "rugosidad": "texturas/corazon_volcan_rugosidad.png",
+        "metal": "texturas/corazon_volcan_metal.png",
+        "emision": "texturas/corazon_volcan_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF6A0A, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "diamante_estrella",
+      "numero": 81,
+      "nombre": "Diamante estrella",
+      "descripcion": "Diamante enorme en forma de estrella de cinco puntas.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 137,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.12,
+        1.88,
+        3.84
+      ],
+      "partes": [
+        {
+          "nombre": "diamante_estrella",
+          "triangulos": 2830,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "diamante_estrella_cristal",
+          "triangulos": 20,
+          "Material": "Glass",
+          "Transparency": 0.35,
+          "Color": "#F6FBFF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/diamante_estrella_color.png",
+        "normal": "texturas/diamante_estrella_normal.png",
+        "rugosidad": "texturas/diamante_estrella_rugosidad.png",
+        "metal": "texturas/diamante_estrella_metal.png",
+        "emision": "texturas/diamante_estrella_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 13",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_antimaterial",
+      "numero": 82,
+      "nombre": "Antimateria",
+      "descripcion": "Cristal que parece un negativo, de bordes inestables.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 155,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.33,
+        2.8,
+        4.01
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_antimaterial",
+          "triangulos": 2716,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_antimaterial_cristal",
+          "triangulos": 84,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#D8FFF0",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "mineral_antimaterial_neon",
+          "triangulos": 50,
+          "Material": "Neon",
+          "Color": "#B04AFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "temblar: desplazar ±0,05 studs al azar cada fotograma"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_antimaterial_color.png",
+        "normal": "texturas/mineral_antimaterial_normal.png",
+        "rugosidad": "texturas/mineral_antimaterial_rugosidad.png",
+        "metal": "texturas/mineral_antimaterial_metal.png",
+        "emision": "texturas/mineral_antimaterial_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #B04AFF, Brightness 1.5, Range 14",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "opalo_celestial",
+      "numero": 83,
+      "nombre": "Ópalo celestial",
+      "descripcion": "Ópalo gigante blanco con destellos de todos los colores.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 173,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.2,
+        2.94,
+        3.09
+      ],
+      "partes": [
+        {
+          "nombre": "opalo_celestial",
+          "triangulos": 2850,
+          "Material": "Marble",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/opalo_celestial_color.png",
+        "normal": "texturas/opalo_celestial_normal.png",
+        "rugosidad": "texturas/opalo_celestial_rugosidad.png",
+        "metal": "texturas/opalo_celestial_metal.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_del_tiempo",
+      "numero": 84,
+      "nombre": "Cristal del tiempo",
+      "descripcion": "Cristal con capas de distintas eras.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 191,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.31,
+        3.03,
+        4.85
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_del_tiempo",
+          "triangulos": 2784,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_del_tiempo_cristal",
+          "triangulos": 66,
+          "Material": "Glass",
+          "Transparency": 0.25,
+          "Color": "#C8A26A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_del_tiempo_color.png",
+        "normal": "texturas/cristal_del_tiempo_normal.png",
+        "rugosidad": "texturas/cristal_del_tiempo_rugosidad.png",
+        "metal": "texturas/cristal_del_tiempo_metal.png",
+        "emision": "texturas/cristal_del_tiempo_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFE8B0, Brightness 1.5, Range 17",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "roca_del_nucleo",
+      "numero": 85,
+      "nombre": "Roca del núcleo",
+      "descripcion": "Fragmento del núcleo del planeta: metal, lava y peso.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 210,
+      "triangulos": 2848,
+      "tamano_studs": [
+        2.36,
+        2.58,
+        1.88
+      ],
+      "partes": [
+        {
+          "nombre": "roca_del_nucleo",
+          "triangulos": 2630,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "roca_del_nucleo_neon",
+          "triangulos": 218,
+          "Material": "Neon",
+          "Color": "#FF3A0A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/roca_del_nucleo_color.png",
+        "normal": "texturas/roca_del_nucleo_normal.png",
+        "rugosidad": "texturas/roca_del_nucleo_rugosidad.png",
+        "metal": "texturas/roca_del_nucleo_metal.png",
+        "emision": "texturas/roca_del_nucleo_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF4A0A, Brightness 1.5, Range 9",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_supernova",
+      "numero": 86,
+      "nombre": "Mineral supernova",
+      "descripcion": "Roca con una explosión de luz congelada dentro.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 228,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.4,
+        3.44,
+        3.06
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_supernova",
+          "triangulos": 2518,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_supernova_neon",
+          "triangulos": 332,
+          "Material": "Neon",
+          "Color": "#E8F2FF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_supernova_color.png",
+        "normal": "texturas/mineral_supernova_normal.png",
+        "rugosidad": "texturas/mineral_supernova_rugosidad.png",
+        "metal": "texturas/mineral_supernova_metal.png",
+        "emision": "texturas/mineral_supernova_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #BFD8FF, Brightness 1.5, Range 12",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_dimensional",
+      "numero": 87,
+      "nombre": "Cristal dimensional",
+      "descripcion": "Cristal transparente con otro paisaje dentro.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 246,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.03,
+        2.71,
+        4.23
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_dimensional",
+          "triangulos": 2242,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_dimensional_cristal",
+          "triangulos": 88,
+          "Material": "Glass",
+          "Transparency": 0.65,
+          "Color": "#E8F4FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_dimensional_interior",
+          "triangulos": 500,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_dimensional_neon",
+          "triangulos": 20,
+          "Material": "Neon",
+          "Color": "#CFEFFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_dimensional_color.png",
+        "normal": "texturas/cristal_dimensional_normal.png",
+        "rugosidad": "texturas/cristal_dimensional_rugosidad.png",
+        "metal": "texturas/cristal_dimensional_metal.png",
+        "emision": "texturas/cristal_dimensional_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #CFEFFF, Brightness 1.5, Range 15",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "gema_fenix",
+      "numero": 88,
+      "nombre": "Gema fénix",
+      "descripcion": "Cristal rojo y naranja con forma de llama que brilla como fuego.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 264,
+      "triangulos": 2850,
+      "tamano_studs": [
+        2.86,
+        1.93,
+        4.01
+      ],
+      "partes": [
+        {
+          "nombre": "gema_fenix",
+          "triangulos": 2154,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "gema_fenix_cristal",
+          "triangulos": 564,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#FF3A1A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "gema_fenix_neon",
+          "triangulos": 132,
+          "Material": "Neon",
+          "Color": "#FFB02A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/gema_fenix_color.png",
+        "normal": "texturas/gema_fenix_normal.png",
+        "rugosidad": "texturas/gema_fenix_rugosidad.png",
+        "metal": "texturas/gema_fenix_metal.png",
+        "emision": "texturas/gema_fenix_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF6A1A, Brightness 1.5, Range 14",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_cero_absoluto",
+      "numero": 89,
+      "nombre": "Cero absoluto",
+      "descripcion": "Cristal de hielo perfecto; todo se congela a su alrededor.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 282,
+      "triangulos": 2850,
+      "tamano_studs": [
+        3.36,
+        3.27,
+        4.15
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_cero_absoluto",
+          "triangulos": 2826,
+          "Material": "Glacier",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_cero_absoluto_cristal",
+          "triangulos": 24,
+          "Material": "Glass",
+          "Transparency": 0.3,
+          "Color": "#BFF0FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_cero_absoluto_color.png",
+        "normal": "texturas/mineral_cero_absoluto_normal.png",
+        "rugosidad": "texturas/mineral_cero_absoluto_rugosidad.png",
+        "metal": "texturas/mineral_cero_absoluto_metal.png",
+        "emision": "texturas/mineral_cero_absoluto_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #9FE8FF, Brightness 1.5, Range 15",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "piedra_filosofal",
+      "numero": 90,
+      "nombre": "Piedra filosofal",
+      "descripcion": "Piedra carmesí perfecta con un halo dorado.",
+      "rareza": "Legendario",
+      "color_hud": "#FF9F1C",
+      "aparicion_rareza_pct": 7.0,
+      "aparicion_pct": 0.5833,
+      "valor": 300,
+      "triangulos": 2850,
+      "tamano_studs": [
+        2.55,
+        1.6,
+        3.11
+      ],
+      "partes": [
+        {
+          "nombre": "piedra_filosofal",
+          "triangulos": 1398,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "piedra_filosofal_cristal",
+          "triangulos": 36,
+          "Material": "Glass",
+          "Transparency": 0.2,
+          "Color": "#C8001E",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "piedra_filosofal_neon",
+          "triangulos": 1344,
+          "Material": "Neon",
+          "Color": "#FFC84A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar el halo lentamente"
+        },
+        {
+          "nombre": "piedra_filosofal_orbita",
+          "triangulos": 72,
+          "Material": "Slate",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/piedra_filosofal_color.png",
+        "normal": "texturas/piedra_filosofal_normal.png",
+        "rugosidad": "texturas/piedra_filosofal_rugosidad.png",
+        "metal": "texturas/piedra_filosofal_metal.png",
+        "emision": "texturas/piedra_filosofal_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFB03A, Brightness 1.5, Range 11",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_big_bang",
+      "numero": 91,
+      "nombre": "Cristal del Big Bang",
+      "descripcion": "Cristal con una explosión cósmica en miniatura dentro.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 301,
+      "triangulos": 2900,
+      "tamano_studs": [
+        3.23,
+        3.37,
+        5.12
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_big_bang",
+          "triangulos": 2582,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_big_bang_cristal",
+          "triangulos": 78,
+          "Material": "Glass",
+          "Transparency": 0.55,
+          "Color": "#4A3A8A",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_big_bang_neon",
+          "triangulos": 240,
+          "Material": "Neon",
+          "Color": "#FFFFFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar y latir (Size ×1,1 cada 1,5 s)"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_big_bang_color.png",
+        "normal": "texturas/cristal_big_bang_normal.png",
+        "rugosidad": "texturas/cristal_big_bang_rugosidad.png",
+        "metal": "texturas/cristal_big_bang_metal.png",
+        "emision": "texturas/cristal_big_bang_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 18",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "nucleo_estelar",
+      "numero": 92,
+      "nombre": "Núcleo estelar",
+      "descripcion": "Esfera perfecta de energía blanca con partículas orbitando.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 384,
+      "triangulos": 880,
+      "tamano_studs": [
+        3.61,
+        3.03,
+        2.74
+      ],
+      "partes": [
+        {
+          "nombre": "nucleo_estelar_cristal",
+          "triangulos": 320,
+          "Material": "Glass",
+          "Transparency": 0.75,
+          "Color": "#CFE4FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "nucleo_estelar_neon",
+          "triangulos": 320,
+          "Material": "Neon",
+          "Color": "#FFFFFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        },
+        {
+          "nombre": "nucleo_estelar_orbita",
+          "triangulos": 240,
+          "Material": "Neon",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "cada anillo gira a su velocidad; mejor separarlos con un Attachment"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/nucleo_estelar_color.png",
+        "normal": "texturas/nucleo_estelar_normal.png",
+        "rugosidad": "texturas/nucleo_estelar_rugosidad.png",
+        "metal": "texturas/nucleo_estelar_metal.png",
+        "emision": "texturas/nucleo_estelar_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 13",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "fragmento_agujero_negro",
+      "numero": 93,
+      "nombre": "Fragmento de agujero negro",
+      "descripcion": "Esquirla oscura con un disco de acreción naranja girando.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 467,
+      "triangulos": 1052,
+      "tamano_studs": [
+        4.03,
+        3.93,
+        2.16
+      ],
+      "partes": [
+        {
+          "nombre": "fragmento_agujero_negro",
+          "triangulos": 60,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "fragmento_agujero_negro_neon",
+          "triangulos": 992,
+          "Material": "Neon",
+          "Color": "#FF8A1A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar el disco en su eje (una vuelta cada 4 s)"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/fragmento_agujero_negro_color.png",
+        "normal": "texturas/fragmento_agujero_negro_normal.png",
+        "rugosidad": "texturas/fragmento_agujero_negro_rugosidad.png",
+        "metal": "texturas/fragmento_agujero_negro_metal.png",
+        "emision": "texturas/fragmento_agujero_negro_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF8A1A, Brightness 1.5, Range 14",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "lagrima_universo",
+      "numero": 94,
+      "nombre": "Lágrima del universo",
+      "descripcion": "Gota cristalina con una galaxia espiral dentro.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 550,
+      "triangulos": 880,
+      "tamano_studs": [
+        2.5,
+        2.5,
+        4.2
+      ],
+      "partes": [
+        {
+          "nombre": "lagrima_universo_cristal",
+          "triangulos": 544,
+          "Material": "Glass",
+          "Transparency": 0.65,
+          "Color": "#CFE0FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "lagrima_universo_neon",
+          "triangulos": 336,
+          "Material": "Neon",
+          "Color": "#C8B8FF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar la galaxia en su plano (una vuelta cada 20 s)"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/lagrima_universo_color.png",
+        "normal": "texturas/lagrima_universo_normal.png",
+        "rugosidad": "texturas/lagrima_universo_rugosidad.png",
+        "metal": "texturas/lagrima_universo_metal.png",
+        "emision": "texturas/lagrima_universo_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #8A7AFF, Brightness 1.5, Range 15",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "mineral_materia_oscura",
+      "numero": 95,
+      "nombre": "Materia oscura",
+      "descripcion": "Roca negra que deforma el espacio a su alrededor.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 634,
+      "triangulos": 2900,
+      "tamano_studs": [
+        4.1,
+        3.69,
+        3.48
+      ],
+      "partes": [
+        {
+          "nombre": "mineral_materia_oscura",
+          "triangulos": 2360,
+          "Material": "Basalt",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "mineral_materia_oscura_cristal",
+          "triangulos": 320,
+          "Material": "Glass",
+          "Transparency": 0.9,
+          "Color": "#E4DCFF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox",
+          "Animacion": "Glass con Transparency alta: refracta lo de detrás; escalar ±3 % lento"
+        },
+        {
+          "nombre": "mineral_materia_oscura_neon",
+          "triangulos": 220,
+          "Material": "Neon",
+          "Color": "#7A2AFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/mineral_materia_oscura_color.png",
+        "normal": "texturas/mineral_materia_oscura_normal.png",
+        "rugosidad": "texturas/mineral_materia_oscura_rugosidad.png",
+        "metal": "texturas/mineral_materia_oscura_metal.png",
+        "emision": "texturas/mineral_materia_oscura_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #7A2AFF, Brightness 1.5, Range 14",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "cristal_genesis",
+      "numero": 96,
+      "nombre": "Cristal génesis",
+      "descripcion": "Cristal blanco perfecto con los cinco sólidos platónicos dentro.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 717,
+      "triangulos": 2900,
+      "tamano_studs": [
+        2.56,
+        2.89,
+        4.51
+      ],
+      "partes": [
+        {
+          "nombre": "cristal_genesis",
+          "triangulos": 2642,
+          "Material": "Glass",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "cristal_genesis_cristal",
+          "triangulos": 178,
+          "Material": "Glass",
+          "Transparency": 0.6,
+          "Color": "#EEF6FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "cristal_genesis_neon",
+          "triangulos": 80,
+          "Material": "Neon",
+          "Color": "#FFF2C8",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar los sólidos despacio"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/cristal_genesis_color.png",
+        "normal": "texturas/cristal_genesis_normal.png",
+        "rugosidad": "texturas/cristal_genesis_rugosidad.png",
+        "metal": "texturas/cristal_genesis_metal.png",
+        "emision": "texturas/cristal_genesis_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFF6E0, Brightness 1.5, Range 16",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "corazon_de_titan",
+      "numero": 97,
+      "nombre": "Corazón de titán",
+      "descripcion": "Corazón cristalizado enorme que late con luz roja.",
+      "rareza": "Mítico",
+      "color_hud": "#E0213B",
+      "aparicion_rareza_pct": 2.5,
+      "aparicion_pct": 0.3571,
+      "valor": 800,
+      "triangulos": 2198,
+      "tamano_studs": [
+        4.18,
+        2.38,
+        3.75
+      ],
+      "partes": [
+        {
+          "nombre": "corazon_de_titan",
+          "triangulos": 500,
+          "Material": "Glass",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "corazon_de_titan_cristal",
+          "triangulos": 1200,
+          "Material": "Glass",
+          "Transparency": 0.35,
+          "Color": "#8A0A14",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+        },
+        {
+          "nombre": "corazon_de_titan_neon",
+          "triangulos": 498,
+          "Material": "Neon",
+          "Color": "#FF1A2A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "latido: dos pulsos rápidos (Size ×1,06) cada 1,2 s"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/corazon_de_titan_color.png",
+        "normal": "texturas/corazon_de_titan_normal.png",
+        "rugosidad": "texturas/corazon_de_titan_rugosidad.png",
+        "metal": "texturas/corazon_de_titan_metal.png",
+        "emision": "texturas/corazon_de_titan_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FF1A2A, Brightness 1.5, Range 15",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "singularidad",
+      "numero": 98,
+      "nombre": "Singularidad",
+      "descripcion": "Esfera negra perfecta con un anillo de energía blanca.",
+      "rareza": "Celestial",
+      "color_hud": "#3DF2FF",
+      "aparicion_rareza_pct": 0.5,
+      "aparicion_pct": 0.1667,
+      "valor": 801,
+      "triangulos": 1408,
+      "tamano_studs": [
+        6.86,
+        6.8,
+        3.02
+      ],
+      "partes": [
+        {
+          "nombre": "singularidad",
+          "triangulos": 320,
+          "Material": "Neon",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "singularidad_neon",
+          "triangulos": 1088,
+          "Material": "Neon",
+          "Color": "#FFFFFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar el anillo (una vuelta cada 6 s)"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/singularidad_color.png",
+        "normal": "texturas/singularidad_normal.png",
+        "rugosidad": "texturas/singularidad_rugosidad.png",
+        "metal": "texturas/singularidad_metal.png",
+        "emision": "texturas/singularidad_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 24",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "semilla_cosmica",
+      "numero": 99,
+      "nombre": "Semilla cósmica",
+      "descripcion": "Semilla cristalina dorada de la que crecen raíces de luz.",
+      "rareza": "Celestial",
+      "color_hud": "#3DF2FF",
+      "aparicion_rareza_pct": 0.5,
+      "aparicion_pct": 0.1667,
+      "valor": 1400,
+      "triangulos": 2900,
+      "tamano_studs": [
+        3.39,
+        3.35,
+        4.2
+      ],
+      "partes": [
+        {
+          "nombre": "semilla_cosmica",
+          "triangulos": 2000,
+          "Material": "Metal",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+        },
+        {
+          "nombre": "semilla_cosmica_neon",
+          "triangulos": 900,
+          "Material": "Neon",
+          "Color": "#FFE89A",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "las raíces laten de la semilla hacia fuera"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/semilla_cosmica_color.png",
+        "normal": "texturas/semilla_cosmica_normal.png",
+        "rugosidad": "texturas/semilla_cosmica_rugosidad.png",
+        "metal": "texturas/semilla_cosmica_metal.png",
+        "emision": "texturas/semilla_cosmica_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFD86A, Brightness 1.5, Range 15",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    },
+    {
+      "id": "fragmento_de_dios",
+      "numero": 100,
+      "nombre": "Fragmento de dios",
+      "descripcion": "Cristal imposible: todas las geometrías a la vez, de luz blanca pura.",
+      "rareza": "Celestial",
+      "color_hud": "#3DF2FF",
+      "aparicion_rareza_pct": 0.5,
+      "aparicion_pct": 0.1667,
+      "valor": 2000,
+      "triangulos": 1620,
+      "tamano_studs": [
+        6.38,
+        5.36,
+        5.04
+      ],
+      "partes": [
+        {
+          "nombre": "fragmento_de_dios_cristal",
+          "triangulos": 20,
+          "Material": "Glass",
+          "Transparency": 0.75,
+          "Color": "#F4F8FF",
+          "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox",
+          "Animacion": "girar en sentido contrario al núcleo"
+        },
+        {
+          "nombre": "fragmento_de_dios_neon",
+          "triangulos": 1364,
+          "Material": "Neon",
+          "Color": "#FFFFFF",
+          "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+          "Animacion": "girar en los tres ejes: parece que cambia de forma"
+        },
+        {
+          "nombre": "fragmento_de_dios_orbita",
+          "triangulos": 236,
+          "Material": "Neon",
+          "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+          "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+        }
+      ],
+      "texturas": {
+        "color": "texturas/fragmento_de_dios_color.png",
+        "normal": "texturas/fragmento_de_dios_normal.png",
+        "rugosidad": "texturas/fragmento_de_dios_rugosidad.png",
+        "metal": "texturas/fragmento_de_dios_metal.png",
+        "emision": "texturas/fragmento_de_dios_emision.png"
+      },
+      "atlas": "1024x1024",
+      "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 22",
+      "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+      "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+    }
+  ]
+}
