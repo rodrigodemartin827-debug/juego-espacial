@@ -1,0 +1,43 @@
+{
+  "id": "coral_luminoso",
+  "numero": 62,
+  "nombre": "Coral luminoso",
+  "descripcion": "Coral de mar que brilla en turquesa suave.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 39,
+  "triangulos": 2400,
+  "tamano_studs": [
+    1.92,
+    1.74,
+    2.16
+  ],
+  "partes": [
+    {
+      "nombre": "coral_luminoso",
+      "triangulos": 900,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "coral_luminoso_neon",
+      "triangulos": 1500,
+      "Material": "Neon",
+      "Color": "#3FF2D4",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/coral_luminoso_color.png",
+    "normal": "texturas/coral_luminoso_normal.png",
+    "rugosidad": "texturas/coral_luminoso_rugosidad.png",
+    "metal": "texturas/coral_luminoso_metal.png",
+    "emision": "texturas/coral_luminoso_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #3FF2D4, Brightness 1.5, Range 8",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

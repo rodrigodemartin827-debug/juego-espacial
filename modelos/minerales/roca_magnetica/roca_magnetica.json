@@ -1,0 +1,42 @@
+{
+  "id": "roca_magnetica",
+  "numero": 63,
+  "nombre": "Roca magnética",
+  "descripcion": "Piedra oscura con fragmentos metálicos flotando alrededor.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 40,
+  "triangulos": 2400,
+  "tamano_studs": [
+    3.46,
+    3.25,
+    2.35
+  ],
+  "partes": [
+    {
+      "nombre": "roca_magnetica",
+      "triangulos": 2222,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "roca_magnetica_orbita",
+      "triangulos": 178,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+      "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/roca_magnetica_color.png",
+    "normal": "texturas/roca_magnetica_normal.png",
+    "rugosidad": "texturas/roca_magnetica_rugosidad.png",
+    "metal": "texturas/roca_magnetica_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

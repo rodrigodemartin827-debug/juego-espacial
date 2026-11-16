@@ -1,0 +1,51 @@
+{
+  "id": "cristal_vacio",
+  "numero": 66,
+  "nombre": "Cristal del vacío",
+  "descripcion": "Cristal negro transparente con estrellas dentro.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 49,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.43,
+    2.4,
+    3.43
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_vacio",
+      "triangulos": 2242,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_vacio_cristal",
+      "triangulos": 110,
+      "Material": "Glass",
+      "Transparency": 0.45,
+      "Color": "#0C0A18",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "cristal_vacio_neon",
+      "triangulos": 448,
+      "Material": "Neon",
+      "Color": "#DDE6FF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_vacio_color.png",
+    "normal": "texturas/cristal_vacio_normal.png",
+    "rugosidad": "texturas/cristal_vacio_rugosidad.png",
+    "metal": "texturas/cristal_vacio_metal.png",
+    "emision": "texturas/cristal_vacio_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #8A7AFF, Brightness 1.5, Range 12",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

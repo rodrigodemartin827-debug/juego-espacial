@@ -1,0 +1,43 @@
+{
+  "id": "fosil_cristalizado",
+  "numero": 61,
+  "nombre": "Fósil cristalizado",
+  "descripcion": "Amonites atrapada en un cristal de ámbar.",
+  "rareza": "Raro",
+  "color_hud": "#3D8BFF",
+  "aparicion_rareza_pct": 18.0,
+  "aparicion_pct": 1.0,
+  "valor": 37,
+  "triangulos": 1800,
+  "tamano_studs": [
+    2.39,
+    1.8,
+    1.66
+  ],
+  "partes": [
+    {
+      "nombre": "fosil_cristalizado_cristal",
+      "triangulos": 900,
+      "Material": "Glass",
+      "Transparency": 0.55,
+      "Color": "#E09A2A",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "fosil_cristalizado_interior",
+      "triangulos": 900,
+      "Material": "Glass",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/fosil_cristalizado_color.png",
+    "normal": "texturas/fosil_cristalizado_normal.png",
+    "rugosidad": "texturas/fosil_cristalizado_rugosidad.png",
+    "metal": "texturas/fosil_cristalizado_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFB347, Brightness 1.5, Range 8",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

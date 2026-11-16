@@ -1,0 +1,43 @@
+{
+  "id": "alexandrita_gigante",
+  "numero": 68,
+  "nombre": "Alexandrita gigante",
+  "descripcion": "Cristal verde por un lado y rojo por el otro.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 58,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.41,
+    2.4,
+    3.72
+  ],
+  "partes": [
+    {
+      "nombre": "alexandrita_gigante",
+      "triangulos": 2758,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "alexandrita_gigante_cristal",
+      "triangulos": 42,
+      "Material": "Glass",
+      "Transparency": 0.3,
+      "Color": "#1FA35A",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/alexandrita_gigante_color.png",
+    "normal": "texturas/alexandrita_gigante_normal.png",
+    "rugosidad": "texturas/alexandrita_gigante_rugosidad.png",
+    "metal": "texturas/alexandrita_gigante_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #7AFF9A, Brightness 1.5, Range 13",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

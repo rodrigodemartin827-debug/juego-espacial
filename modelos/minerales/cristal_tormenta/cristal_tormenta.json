@@ -1,0 +1,52 @@
+{
+  "id": "cristal_tormenta",
+  "numero": 70,
+  "nombre": "Cristal de tormenta",
+  "descripcion": "Cristal gris con rayos azules dentro.",
+  "rareza": "Épico",
+  "color_hud": "#A855F7",
+  "aparicion_rareza_pct": 12.0,
+  "aparicion_pct": 0.8,
+  "valor": 66,
+  "triangulos": 2800,
+  "tamano_studs": [
+    2.41,
+    2.48,
+    3.54
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_tormenta",
+      "triangulos": 2604,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_tormenta_cristal",
+      "triangulos": 88,
+      "Material": "Glass",
+      "Transparency": 0.4,
+      "Color": "#7A808C",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "cristal_tormenta_neon",
+      "triangulos": 108,
+      "Material": "Neon",
+      "Color": "#4AB8FF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "parpadeo irregular (rayos)"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_tormenta_color.png",
+    "normal": "texturas/cristal_tormenta_normal.png",
+    "rugosidad": "texturas/cristal_tormenta_rugosidad.png",
+    "metal": "texturas/cristal_tormenta_metal.png",
+    "emision": "texturas/cristal_tormenta_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #4AB8FF, Brightness 1.5, Range 12",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
