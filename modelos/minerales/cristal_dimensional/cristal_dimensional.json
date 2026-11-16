@@ -1,0 +1,57 @@
+{
+  "id": "cristal_dimensional",
+  "numero": 87,
+  "nombre": "Cristal dimensional",
+  "descripcion": "Cristal transparente con otro paisaje dentro.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 246,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.03,
+    2.71,
+    4.23
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_dimensional",
+      "triangulos": 2242,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_dimensional_cristal",
+      "triangulos": 88,
+      "Material": "Glass",
+      "Transparency": 0.65,
+      "Color": "#E8F4FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "cristal_dimensional_interior",
+      "triangulos": 500,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_dimensional_neon",
+      "triangulos": 20,
+      "Material": "Neon",
+      "Color": "#CFEFFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_dimensional_color.png",
+    "normal": "texturas/cristal_dimensional_normal.png",
+    "rugosidad": "texturas/cristal_dimensional_rugosidad.png",
+    "metal": "texturas/cristal_dimensional_metal.png",
+    "emision": "texturas/cristal_dimensional_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #CFEFFF, Brightness 1.5, Range 15",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

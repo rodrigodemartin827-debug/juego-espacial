@@ -1,0 +1,59 @@
+{
+  "id": "piedra_filosofal",
+  "numero": 90,
+  "nombre": "Piedra filosofal",
+  "descripcion": "Piedra carmesí perfecta con un halo dorado.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 300,
+  "triangulos": 2850,
+  "tamano_studs": [
+    2.55,
+    1.6,
+    3.11
+  ],
+  "partes": [
+    {
+      "nombre": "piedra_filosofal",
+      "triangulos": 1398,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "piedra_filosofal_cristal",
+      "triangulos": 36,
+      "Material": "Glass",
+      "Transparency": 0.2,
+      "Color": "#C8001E",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "piedra_filosofal_neon",
+      "triangulos": 1344,
+      "Material": "Neon",
+      "Color": "#FFC84A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "girar el halo lentamente"
+    },
+    {
+      "nombre": "piedra_filosofal_orbita",
+      "triangulos": 72,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap",
+      "Animacion": "girar en Y alrededor del centro del mineral (una vuelta cada ~10 s) y subir y bajar 0,2 studs, en el cliente"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/piedra_filosofal_color.png",
+    "normal": "texturas/piedra_filosofal_normal.png",
+    "rugosidad": "texturas/piedra_filosofal_rugosidad.png",
+    "metal": "texturas/piedra_filosofal_metal.png",
+    "emision": "texturas/piedra_filosofal_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFB03A, Brightness 1.5, Range 11",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

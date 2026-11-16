@@ -1,0 +1,44 @@
+{
+  "id": "cristal_del_tiempo",
+  "numero": 84,
+  "nombre": "Cristal del tiempo",
+  "descripcion": "Cristal con capas de distintas eras.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 191,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.31,
+    3.03,
+    4.85
+  ],
+  "partes": [
+    {
+      "nombre": "cristal_del_tiempo",
+      "triangulos": 2784,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "cristal_del_tiempo_cristal",
+      "triangulos": 66,
+      "Material": "Glass",
+      "Transparency": 0.25,
+      "Color": "#C8A26A",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/cristal_del_tiempo_color.png",
+    "normal": "texturas/cristal_del_tiempo_normal.png",
+    "rugosidad": "texturas/cristal_del_tiempo_rugosidad.png",
+    "metal": "texturas/cristal_del_tiempo_metal.png",
+    "emision": "texturas/cristal_del_tiempo_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFE8B0, Brightness 1.5, Range 17",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

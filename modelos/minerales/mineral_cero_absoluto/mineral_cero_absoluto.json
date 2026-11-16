@@ -1,0 +1,44 @@
+{
+  "id": "mineral_cero_absoluto",
+  "numero": 89,
+  "nombre": "Cero absoluto",
+  "descripcion": "Cristal de hielo perfecto; todo se congela a su alrededor.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 282,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.36,
+    3.27,
+    4.15
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_cero_absoluto",
+      "triangulos": 2826,
+      "Material": "Glacier",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_cero_absoluto_cristal",
+      "triangulos": 24,
+      "Material": "Glass",
+      "Transparency": 0.3,
+      "Color": "#BFF0FF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_cero_absoluto_color.png",
+    "normal": "texturas/mineral_cero_absoluto_normal.png",
+    "rugosidad": "texturas/mineral_cero_absoluto_rugosidad.png",
+    "metal": "texturas/mineral_cero_absoluto_metal.png",
+    "emision": "texturas/mineral_cero_absoluto_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #9FE8FF, Brightness 1.5, Range 15",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

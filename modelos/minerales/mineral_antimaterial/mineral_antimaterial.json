@@ -1,0 +1,52 @@
+{
+  "id": "mineral_antimaterial",
+  "numero": 82,
+  "nombre": "Antimateria",
+  "descripcion": "Cristal que parece un negativo, de bordes inestables.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 155,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.33,
+    2.8,
+    4.01
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_antimaterial",
+      "triangulos": 2716,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_antimaterial_cristal",
+      "triangulos": 84,
+      "Material": "Glass",
+      "Transparency": 0.3,
+      "Color": "#D8FFF0",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    },
+    {
+      "nombre": "mineral_antimaterial_neon",
+      "triangulos": 50,
+      "Material": "Neon",
+      "Color": "#B04AFF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas",
+      "Animacion": "temblar: desplazar ±0,05 studs al azar cada fotograma"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_antimaterial_color.png",
+    "normal": "texturas/mineral_antimaterial_normal.png",
+    "rugosidad": "texturas/mineral_antimaterial_rugosidad.png",
+    "metal": "texturas/mineral_antimaterial_metal.png",
+    "emision": "texturas/mineral_antimaterial_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #B04AFF, Brightness 1.5, Range 14",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

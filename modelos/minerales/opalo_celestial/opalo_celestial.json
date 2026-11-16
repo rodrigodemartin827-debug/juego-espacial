@@ -1,0 +1,35 @@
+{
+  "id": "opalo_celestial",
+  "numero": 83,
+  "nombre": "Ópalo celestial",
+  "descripcion": "Ópalo gigante blanco con destellos de todos los colores.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 173,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.2,
+    2.94,
+    3.09
+  ],
+  "partes": [
+    {
+      "nombre": "opalo_celestial",
+      "triangulos": 2850,
+      "Material": "Marble",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/opalo_celestial_color.png",
+    "normal": "texturas/opalo_celestial_normal.png",
+    "rugosidad": "texturas/opalo_celestial_rugosidad.png",
+    "metal": "texturas/opalo_celestial_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 11",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

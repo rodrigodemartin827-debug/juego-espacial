@@ -1,0 +1,43 @@
+{
+  "id": "roca_del_nucleo",
+  "numero": 85,
+  "nombre": "Roca del núcleo",
+  "descripcion": "Fragmento del núcleo del planeta: metal, lava y peso.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 210,
+  "triangulos": 2848,
+  "tamano_studs": [
+    2.36,
+    2.58,
+    1.88
+  ],
+  "partes": [
+    {
+      "nombre": "roca_del_nucleo",
+      "triangulos": 2630,
+      "Material": "Metal",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "roca_del_nucleo_neon",
+      "triangulos": 218,
+      "Material": "Neon",
+      "Color": "#FF3A0A",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/roca_del_nucleo_color.png",
+    "normal": "texturas/roca_del_nucleo_normal.png",
+    "rugosidad": "texturas/roca_del_nucleo_rugosidad.png",
+    "metal": "texturas/roca_del_nucleo_metal.png",
+    "emision": "texturas/roca_del_nucleo_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FF4A0A, Brightness 1.5, Range 9",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

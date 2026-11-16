@@ -1,0 +1,43 @@
+{
+  "id": "mineral_supernova",
+  "numero": 86,
+  "nombre": "Mineral supernova",
+  "descripcion": "Roca con una explosión de luz congelada dentro.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 228,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.4,
+    3.44,
+    3.06
+  ],
+  "partes": [
+    {
+      "nombre": "mineral_supernova",
+      "triangulos": 2518,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "mineral_supernova_neon",
+      "triangulos": 332,
+      "Material": "Neon",
+      "Color": "#E8F2FF",
+      "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/mineral_supernova_color.png",
+    "normal": "texturas/mineral_supernova_normal.png",
+    "rugosidad": "texturas/mineral_supernova_rugosidad.png",
+    "metal": "texturas/mineral_supernova_metal.png",
+    "emision": "texturas/mineral_supernova_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #BFD8FF, Brightness 1.5, Range 12",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

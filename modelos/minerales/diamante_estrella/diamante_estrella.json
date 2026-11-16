@@ -1,0 +1,44 @@
+{
+  "id": "diamante_estrella",
+  "numero": 81,
+  "nombre": "Diamante estrella",
+  "descripcion": "Diamante enorme en forma de estrella de cinco puntas.",
+  "rareza": "Legendario",
+  "color_hud": "#FF9F1C",
+  "aparicion_rareza_pct": 7.0,
+  "aparicion_pct": 0.5833,
+  "valor": 137,
+  "triangulos": 2850,
+  "tamano_studs": [
+    3.12,
+    1.88,
+    3.84
+  ],
+  "partes": [
+    {
+      "nombre": "diamante_estrella",
+      "triangulos": 2830,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    },
+    {
+      "nombre": "diamante_estrella_cristal",
+      "triangulos": 20,
+      "Material": "Glass",
+      "Transparency": 0.35,
+      "Color": "#F6FBFF",
+      "SurfaceAppearance": "opcional (ColorMap+NormalMap); sin ella se ve el cristal de Roblox"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/diamante_estrella_color.png",
+    "normal": "texturas/diamante_estrella_normal.png",
+    "rugosidad": "texturas/diamante_estrella_rugosidad.png",
+    "metal": "texturas/diamante_estrella_metal.png",
+    "emision": "texturas/diamante_estrella_emision.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": "PointLight #FFFFFF, Brightness 1.5, Range 13",
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
