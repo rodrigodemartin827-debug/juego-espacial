@@ -1,0 +1,180 @@
+{
+  "nombre": "laser_doble_t2",
+  "titulo": "Láser doble (militar)",
+  "categoria": "arma",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1608,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.5,
+    2.01,
+    4.93
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "laser_doble_t2",
+      "triangulos": 1584,
+      "tamano": [
+        1.5,
+        2.01,
+        4.93
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/laser_doble_t2_color.png",
+        "normal": "texturas/laser_doble_t2_normal.png",
+        "rugosidad": "texturas/laser_doble_t2_rugosidad.png",
+        "metal": "texturas/laser_doble_t2_metal.png"
+      }
+    },
+    {
+      "nombre": "laser_doble_t2_neon",
+      "triangulos": 24,
+      "tamano": [
+        1.32,
+        0.42,
+        0.1
+      ],
+      "centro": [
+        0.0,
+        -0.155,
+        -0.085
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "laser_doble_t2",
+      "posicion": [
+        0.0,
+        0.955,
+        1.665
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "laser_doble_t2",
+      "posicion": [
+        -0.64,
+        -0.155,
+        1.665
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "laser_doble_t2",
+      "posicion": [
+        0.64,
+        -0.155,
+        1.665
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    }
+  ],
+  "descripcion": "Cañón láser doble militar.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca_1",
+      "malla": "laser_doble_t2",
+      "posicion": [
+        0.45,
+        -0.155,
+        -2.435
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "boca_2",
+      "malla": "laser_doble_t2",
+      "posicion": [
+        -0.45,
+        -0.155,
+        -2.435
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

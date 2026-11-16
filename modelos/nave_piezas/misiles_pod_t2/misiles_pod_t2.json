@@ -1,0 +1,248 @@
+{
+  "nombre": "misiles_pod_t2",
+  "titulo": "Lanzamisiles (militar)",
+  "categoria": "arma",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 2204,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.2,
+    2.03,
+    2.8
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "misiles_pod_t2",
+      "triangulos": 2204,
+      "tamano": [
+        3.2,
+        2.03,
+        2.8
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/misiles_pod_t2_color.png",
+        "normal": "texturas/misiles_pod_t2_normal.png",
+        "rugosidad": "texturas/misiles_pod_t2_rugosidad.png",
+        "metal": "texturas/misiles_pod_t2_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        0.0,
+        0.965,
+        0.6
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        -1.55,
+        -0.145,
+        0.6
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        1.55,
+        -0.145,
+        0.6
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    }
+  ],
+  "descripcion": "Lanzamisiles militar de 8 tubos.",
+  "anclajes_vfx": [
+    {
+      "nombre": "tubo_1",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        0.93,
+        -0.455,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_2",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        0.93,
+        0.165,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_3",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        0.31,
+        -0.455,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_4",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        0.31,
+        0.165,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_5",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        -0.31,
+        -0.455,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_6",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        -0.31,
+        0.165,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_7",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        -0.93,
+        -0.455,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_8",
+      "malla": "misiles_pod_t2",
+      "posicion": [
+        -0.93,
+        0.165,
+        -1.32
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

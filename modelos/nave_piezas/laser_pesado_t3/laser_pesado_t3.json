@@ -1,0 +1,213 @@
+{
+  "nombre": "laser_pesado_t3",
+  "titulo": "Láser pesado (avanzado)",
+  "categoria": "arma",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 3568,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.68,
+    2.11,
+    7.03
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "laser_pesado_t3",
+      "triangulos": 2988,
+      "tamano": [
+        1.68,
+        2.11,
+        7.03
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/laser_pesado_t3_color.png",
+        "normal": "texturas/laser_pesado_t3_normal.png",
+        "rugosidad": "texturas/laser_pesado_t3_rugosidad.png",
+        "metal": "texturas/laser_pesado_t3_metal.png",
+        "emision": "texturas/laser_pesado_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "laser_pesado_t3_neon",
+      "triangulos": 532,
+      "tamano": [
+        0.991,
+        1.296,
+        6.036
+      ],
+      "centro": [
+        0.0,
+        0.097,
+        0.197
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "laser_pesado_t3_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.36,
+        0.36,
+        0.08
+      ],
+      "centro": [
+        0.0,
+        -0.055,
+        -0.775
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "laser_pesado_t3",
+      "posicion": [
+        0.0,
+        1.005,
+        2.015
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "laser_pesado_t3",
+      "posicion": [
+        -0.79,
+        -0.155,
+        2.015
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "laser_pesado_t3",
+      "posicion": [
+        0.79,
+        -0.155,
+        2.015
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "laser_pesado_t3",
+      "posicion": [
+        0.0,
+        -0.155,
+        3.155
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "descripcion": "Cañón láser grande con bobinas de neón cian a lo largo del cañón.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "laser_pesado_t3",
+      "posicion": [
+        0.0,
+        -0.055,
+        -3.485
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

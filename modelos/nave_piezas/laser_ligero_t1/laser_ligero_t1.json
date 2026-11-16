@@ -1,0 +1,166 @@
+{
+  "nombre": "laser_ligero_t1",
+  "titulo": "Láser ligero (básico)",
+  "categoria": "arma",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 1268,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.38,
+    2.01,
+    4.73
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "laser_ligero_t1",
+      "triangulos": 1256,
+      "tamano": [
+        1.38,
+        2.01,
+        4.73
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/laser_ligero_t1_color.png",
+        "normal": "texturas/laser_ligero_t1_normal.png",
+        "rugosidad": "texturas/laser_ligero_t1_rugosidad.png",
+        "metal": "texturas/laser_ligero_t1_metal.png"
+      }
+    },
+    {
+      "nombre": "laser_ligero_t1_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.5,
+        0.1
+      ],
+      "centro": [
+        0.0,
+        -0.155,
+        -0.285
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB347"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "laser_ligero_t1",
+      "posicion": [
+        0.0,
+        0.955,
+        1.565
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "laser_ligero_t1",
+      "posicion": [
+        -0.64,
+        -0.155,
+        1.565
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "laser_ligero_t1",
+      "posicion": [
+        0.64,
+        -0.155,
+        1.565
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    }
+  ],
+  "descripcion": "Cañón láser pequeño de un tubo, gris, con radiador y cableado.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "laser_ligero_t1",
+      "posicion": [
+        0.0,
+        -0.155,
+        -2.335
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

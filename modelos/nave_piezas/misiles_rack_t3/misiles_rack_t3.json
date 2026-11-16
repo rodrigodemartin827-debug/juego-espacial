@@ -1,0 +1,321 @@
+{
+  "nombre": "misiles_rack_t3",
+  "titulo": "Rack de misiles (avanzado)",
+  "categoria": "arma",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 4924,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.36,
+    2.38,
+    3.202
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "misiles_rack_t3",
+      "triangulos": 4060,
+      "tamano": [
+        3.36,
+        2.38,
+        3.2
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/misiles_rack_t3_color.png",
+        "normal": "texturas/misiles_rack_t3_normal.png",
+        "rugosidad": "texturas/misiles_rack_t3_rugosidad.png",
+        "metal": "texturas/misiles_rack_t3_metal.png",
+        "emision": "texturas/misiles_rack_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "misiles_rack_t3_neon",
+      "triangulos": 864,
+      "tamano": [
+        2.544,
+        1.884,
+        0.043
+      ],
+      "centro": [
+        0.0,
+        -0.05,
+        -1.58
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.0,
+        1.122,
+        0.8
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -1.63,
+        -0.05,
+        0.8
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        1.63,
+        -0.05,
+        0.8
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    }
+  ],
+  "descripcion": "Rack de misiles grande de 12 celdas con bordes de neón.",
+  "anclajes_vfx": [
+    {
+      "nombre": "tubo_1",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.99,
+        -0.71,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_2",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.99,
+        -0.05,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_3",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.99,
+        0.61,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_4",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.33,
+        -0.71,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_5",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.33,
+        -0.05,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_6",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        0.33,
+        0.61,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_7",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -0.33,
+        -0.71,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_8",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -0.33,
+        -0.05,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_9",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -0.33,
+        0.61,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_10",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -0.99,
+        -0.71,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_11",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -0.99,
+        -0.05,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_12",
+      "malla": "misiles_rack_t3",
+      "posicion": [
+        -0.99,
+        0.61,
+        -1.52
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "nombre": "misiles_pod_t1",
+  "titulo": "Lanzamisiles (básico)",
+  "categoria": "arma",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 1820,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.96,
+    2.01,
+    2.6
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "misiles_pod_t1",
+      "triangulos": 1820,
+      "tamano": [
+        1.96,
+        2.01,
+        2.6
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/misiles_pod_t1_color.png",
+        "normal": "texturas/misiles_pod_t1_normal.png",
+        "rugosidad": "texturas/misiles_pod_t1_rugosidad.png",
+        "metal": "texturas/misiles_pod_t1_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        0.0,
+        0.955,
+        0.5
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        -0.93,
+        -0.155,
+        0.5
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        0.93,
+        -0.155,
+        0.5
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    }
+  ],
+  "descripcion": "Lanzamisiles básico de 4 tubos.",
+  "anclajes_vfx": [
+    {
+      "nombre": "tubo_1",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        0.31,
+        -0.465,
+        -1.22
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_2",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        0.31,
+        0.155,
+        -1.22
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_3",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        -0.31,
+        -0.465,
+        -1.22
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "tubo_4",
+      "malla": "misiles_pod_t1",
+      "posicion": [
+        -0.31,
+        0.155,
+        -1.22
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

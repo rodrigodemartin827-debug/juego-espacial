@@ -1,0 +1,213 @@
+{
+  "nombre": "laser_pesado_t4",
+  "titulo": "Láser pesado (élite)",
+  "categoria": "arma",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 2948,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.078,
+    2.11,
+    7.83
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "laser_pesado_t4",
+      "triangulos": 2516,
+      "tamano": [
+        2.078,
+        2.11,
+        7.83
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/laser_pesado_t4_color.png",
+        "normal": "texturas/laser_pesado_t4_normal.png",
+        "rugosidad": "texturas/laser_pesado_t4_rugosidad.png",
+        "metal": "texturas/laser_pesado_t4_metal.png",
+        "emision": "texturas/laser_pesado_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "laser_pesado_t4_neon",
+      "triangulos": 256,
+      "tamano": [
+        0.984,
+        0.984,
+        1.564
+      ],
+      "centro": [
+        0.0,
+        -0.055,
+        -2.235
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "laser_pesado_t4_neon2",
+      "triangulos": 176,
+      "tamano": [
+        0.984,
+        0.984,
+        1.332
+      ],
+      "centro": [
+        0.0,
+        -0.055,
+        -1.601
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "laser_pesado_t4",
+      "posicion": [
+        0.0,
+        1.005,
+        2.515
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "laser_pesado_t4",
+      "posicion": [
+        -0.79,
+        -0.155,
+        2.515
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "laser_pesado_t4",
+      "posicion": [
+        0.79,
+        -0.155,
+        2.515
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "laser_pesado_t4",
+      "posicion": [
+        0.0,
+        -0.155,
+        3.655
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "descripcion": "Cañón láser élite negro y dorado, facetado, con neón dorado y rojo.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "laser_pesado_t4",
+      "posicion": [
+        0.0,
+        -0.055,
+        -3.885
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}
