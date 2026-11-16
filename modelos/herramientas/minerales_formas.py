@@ -1312,8 +1312,9 @@ def f_cabujon(d, rnd):
     op = icosfera(1.0, 3)
     bmesh.ops.scale(op, vec=(sx * 0.36, sy * 0.3, sz * 0.42), verts=op.verts)
     transformar(op, Matrix.Translation((0, 0, sz * 0.55)) @ Matrix.Rotation(0.25, 4, "Y"))
-    piezas.append(Pieza(op, d.get("grupo_cabujon", ""), d["pint"]["cristal"], dict(bultos=0.006), "decimar",
-                        tris=900, nombre="opalo", suave=True))
+    # Malla limpia y suave (una esfera simplificada se ve facetada con un material tan brillante).
+    piezas.append(Pieza(op, d.get("grupo_cabujon", ""), d["pint"]["cristal"], None, "limpia", nombre="opalo",
+                        suave=True))
     return piezas
 
 
