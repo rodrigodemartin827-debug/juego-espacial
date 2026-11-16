@@ -10,20 +10,20 @@
   "valor": 87,
   "triangulos": 2800,
   "tamano_studs": [
-    2.72,
-    2.24,
-    1.71
+    2.76,
+    2.25,
+    1.64
   ],
   "partes": [
     {
       "nombre": "mineral_estelar",
-      "triangulos": 2528,
+      "triangulos": 2240,
       "Material": "Basalt",
       "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
     },
     {
       "nombre": "mineral_estelar_neon",
-      "triangulos": 272,
+      "triangulos": 560,
       "Material": "Neon",
       "Color": "#FFFFFF",
       "SurfaceAppearance": "no (el Neon no la usa); el color de la emisión está en el atlas"
