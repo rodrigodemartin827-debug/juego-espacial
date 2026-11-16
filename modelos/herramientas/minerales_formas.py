@@ -969,7 +969,7 @@ def f_rayos_fuera(d, rnd):
         u = rnd.uniform(-0.2, 1.0)
         th = rnd.uniform(0, math.tau)
         dirv = Vector((math.sqrt(1 - u * u) * math.cos(th), math.sqrt(1 - u * u) * math.sin(th), u))
-        largo = rnd.uniform(0.55, 0.85) * S
+        largo = rnd.uniform(0.38, 0.6) * S
         unir(bm, gema(cen, dirv, largo, S * rnd.uniform(0.02, 0.04), 4, 0.7, rnd, irregular=0.1, enterrado=0))
     unir(bm, icosfera(S * 0.2, 2, cen))
     piezas.append(Pieza(bm, "neon", d["pint"]["nucleo"], None, "limpia", nombre="rayos", voxel=S / 150))
@@ -981,7 +981,7 @@ def f_estrella(d, rnd):
     sx, sy, sz = d["tam"]
     piezas = [_base_roca(d, rnd, (sx * 0.65, sy * 0.9, sz * 0.18))]
     R0 = (sz * 0.82) / 2
-    est = estrella(5, R0, R0 * 0.45, R0 * 0.38, (0, 0, sz * 0.16 + R0 * 0.95), (0, 0, rnd.uniform(-8, 8)))
+    est = estrella(5, R0, R0 * 0.47, R0 * 0.55, (0, 0, sz * 0.16 + R0 * 0.95), (0, 0, rnd.uniform(-8, 8)))
     piezas.append(Pieza(est, "cristal", d["pint"]["cristal"], None, "limpia", nombre="estrella", voxel=R0 / 40))
     for extra in d.get("extras_internos", ()):
         pass
@@ -1073,11 +1073,9 @@ def f_singularidad(d, rnd):
     esfera = icosfera(r, 3, cen)
     anillo = disco(r * 1.35, r * 2.6, r * 0.05, 64, cen, (8, 0, 0), alabeo=r * 0.03, rnd=rnd)
     fotones = toro(r * 1.12, r * 0.035, 48, 6, cen, (82, 0, 0))
-    lente = icosfera(r * 1.22, 3, cen)
     return [Pieza(esfera, "", d["pint"]["roca"], None, "limpia", suave=True, nombre="esfera", voxel=r / 40),
             Pieza(anillo, "neon", d["pint"]["nucleo"], None, "limpia", nombre="anillo", voxel=r / 60),
-            Pieza(fotones, "neon", d["pint"]["nucleo"], None, "limpia", nombre="fotones", suave=True, voxel=r / 80),
-            Pieza(lente, "cristal", d["pint"]["cristal"], None, "limpia", suave=True, nombre="lente", voxel=r / 40)]
+            Pieza(fotones, "neon", d["pint"]["nucleo"], None, "limpia", nombre="fotones", suave=True, voxel=r / 80)]
 
 
 def f_agujero(d, rnd):
@@ -1153,14 +1151,25 @@ def f_genesis(d, rnd):
     """Cristal blanco perfecto (bipirámide) con los cinco sólidos platónicos dentro, uno sobre otro."""
     sx, sy, sz = d["tam"]
     S = max(sx, sy, sz)
-    crist = gema(Vector((0, 0, 0)), Vector((0, 0, 1)), sz, sx * 0.36, 6, 0.3, rnd, doble=True, irregular=0.0,
+    peana = _base_roca(d, rnd, (sx * 1.1, sy * 1.1, sz * 0.12))
+    z0 = sz * 0.08
+    alto = sz * 0.9
+    crist = gema(Vector((0, 0, z0)), Vector((0, 0, 1)), alto, sx * 0.3, 6, 0.3, rnd, doble=True, irregular=0.0,
                  estrechar=1.0, punta_desc=0.0)
     dentro = bmesh.new()
     for i, tipo in enumerate(("tetra", "cubo", "octa", "dodeca", "icosa")):
-        z = sz * (0.2 + 0.15 * i)
-        r = sx * (0.09 if i in (0, 4) else 0.11)
+        z = z0 + alto * (0.22 + 0.14 * i)
+        r = sx * (0.1 if i in (0, 4) else 0.12)
         unir(dentro, platonico(tipo, (0, 0, z), r, (rnd.uniform(0, 60), rnd.uniform(0, 60), rnd.uniform(0, 60))))
-    return [Pieza(crist, "cristal", d["pint"]["cristal"], None, "limpia", nombre="cristal", voxel=S / 100),
+    corona = bmesh.new()
+    for k in range(7):
+        a = k * math.tau / 7 + rnd.uniform(-0.2, 0.2)
+        p = Vector((math.cos(a) * sx * 0.3, math.sin(a) * sy * 0.3, sz * 0.08))
+        eje = Vector((math.cos(a) * 0.6, math.sin(a) * 0.6, 1))
+        unir(corona, gema(p, eje, sz * rnd.uniform(0.14, 0.24), sx * 0.06, 6, 0.35, rnd, enterrado=0.6))
+    return [peana,
+            Pieza(crist, "cristal", d["pint"]["cristal"], None, "limpia", nombre="cristal", voxel=S / 100),
+            Pieza(corona, "cristal", d["pint"]["cristal"], None, "limpia", nombre="corona", voxel=S / 160),
             Pieza(dentro, "neon", d["pint"]["nucleo"], None, "limpia", nombre="solidos", voxel=S / 200)]
 
 
@@ -1173,8 +1182,11 @@ def f_dios(d, rnd):
     for tipo, r, rot in (("icosa", 0.26, (0, 0, 0)), ("dodeca", 0.25, (31, 17, 0)), ("octa", 0.36, (0, 45, 20)),
                          ("tetra", 0.42, (10, 0, 35)), ("tetra", 0.42, (190, 0, 35)), ("cubo", 0.3, (45, 35, 0))):
         unir(nucleo, platonico(tipo, cen, sz * r, rot))
-    cascara = platonico("icosa", cen, sz * 0.47, (13, 7, 0))
-    piezas = [Pieza(nucleo, "neon", d["pint"]["nucleo"], None, "limpia", nombre="nucleo", voxel=S / 160),
+    cascara = platonico("icosa", cen, sz * 0.4, (13, 7, 0))
+    # Tres anillos cruzados como un giroscopio (cada uno con su giro en el cliente).
+    for rot, R0 in (((90, 0, 0), 0.47), ((90, 0, 60), 0.43), ((90, 0, 120), 0.39), ((0, 0, 0), 0.5)):
+        unir(nucleo, toro(sz * R0, sz * 0.012, 40, 4, cen, rot))
+    piezas = [Pieza(nucleo, "neon", d["pint"]["nucleo"], None, "limpia", nombre="nucleo", voxel=S / 300),
               Pieza(cascara, "cristal", d["pint"]["cristal"], None, "limpia", nombre="cascara", voxel=S / 100)]
     piezas += x_orbitas(d, rnd, piezas, dict(centro=cen, anillos=[
         dict(n=8, radio=0.62, incl=25, tam=(0.03, 0.05), forma="octa"),
