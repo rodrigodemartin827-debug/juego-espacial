@@ -1,0 +1,1365 @@
+{
+  "version": 1,
+  "unidades": "studs",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X",
+  "giro_importacion": 180,
+  "conectores": {
+    "CASCO_LATERAL": {
+      "forma": "cuadrado",
+      "tam": 1.6,
+      "color": "#FF5A3C",
+      "que": "alas, armas y blindaje en los costados del casco"
+    },
+    "CASCO_TRASERO": {
+      "forma": "circulo",
+      "tam": 2.4,
+      "color": "#FFB020",
+      "que": "motor principal en la popa"
+    },
+    "CASCO_SUPERIOR": {
+      "forma": "cuadrado",
+      "tam": 2.0,
+      "color": "#3CA0FF",
+      "que": "cabina, torretas, escudos y aletas encima del casco"
+    },
+    "CASCO_INFERIOR": {
+      "forma": "cuadrado",
+      "tam": 1.2,
+      "color": "#8CFF3C",
+      "que": "tren de aterrizaje, tanques y bahía de carga debajo"
+    },
+    "CASCO_FRONTAL": {
+      "forma": "circulo",
+      "tam": 1.2,
+      "color": "#FF3CC8",
+      "que": "proa: cañones frontales"
+    },
+    "ALA_PUNTA": {
+      "forma": "cuadrado",
+      "tam": 0.9,
+      "color": "#3CFFE0",
+      "que": "bajo la punta del ala y en los hardpoints: armas, tanques"
+    },
+    "ALA_MOTOR": {
+      "forma": "circulo",
+      "tam": 1.6,
+      "color": "#FF8C3C",
+      "que": "borde de salida del ala: motores pequeños y medianos"
+    },
+    "MOTOR_ESCAPE": {
+      "forma": "circulo",
+      "tam": 0.0,
+      "color": "#FFFFFF",
+      "que": "salida de la tobera (solo visual: estelas y llama)"
+    },
+    "UNIVERSAL": {
+      "forma": "circulo",
+      "tam": 0.8,
+      "color": "#E0E0E0",
+      "que": "se acopla a cualquier conector"
+    }
+  },
+  "regla_encaje": "entrada.tipo en salida.acepta o UNIVERSAL en ambos lados; brida(entrada) <= brida(salida); pieza.CFrame = salida.WorldCFrame * CFrame.Angles(0, math.pi, 0) * entrada.CFrame:Inverse()",
+  "piezas": [
+    {
+      "nombre": "casco_explorador_t1",
+      "titulo": "Casco explorador (básico)",
+      "categoria": "casco",
+      "tier": 1,
+      "triangulos": 4924,
+      "tamano": [
+        4.381,
+        5.572,
+        10.31
+      ],
+      "carpeta": "casco_explorador_t1"
+    },
+    {
+      "nombre": "casco_explorador_t2",
+      "titulo": "Casco explorador (militar)",
+      "categoria": "casco",
+      "tier": 2,
+      "triangulos": 4088,
+      "tamano": [
+        4.381,
+        5.643,
+        10.81
+      ],
+      "carpeta": "casco_explorador_t2"
+    },
+    {
+      "nombre": "casco_explorador_t3",
+      "titulo": "Casco explorador (avanzado)",
+      "categoria": "casco",
+      "tier": 3,
+      "triangulos": 4120,
+      "tamano": [
+        4.297,
+        4.125,
+        11.31
+      ],
+      "carpeta": "casco_explorador_t3"
+    },
+    {
+      "nombre": "casco_caza_t1",
+      "titulo": "Casco de caza (básico)",
+      "categoria": "casco",
+      "tier": 1,
+      "triangulos": 4512,
+      "tamano": [
+        4.183,
+        4.807,
+        14.31
+      ],
+      "carpeta": "casco_caza_t1"
+    },
+    {
+      "nombre": "casco_caza_t2",
+      "titulo": "Casco de caza (militar)",
+      "categoria": "casco",
+      "tier": 2,
+      "triangulos": 3616,
+      "tamano": [
+        4.19,
+        4.921,
+        14.81
+      ],
+      "carpeta": "casco_caza_t2"
+    },
+    {
+      "nombre": "casco_caza_t3",
+      "titulo": "Casco de caza (avanzado)",
+      "categoria": "casco",
+      "tier": 3,
+      "triangulos": 4372,
+      "tamano": [
+        3.999,
+        3.788,
+        15.31
+      ],
+      "carpeta": "casco_caza_t3"
+    },
+    {
+      "nombre": "casco_caza_t4",
+      "titulo": "Casco de caza (élite)",
+      "categoria": "casco",
+      "tier": 4,
+      "triangulos": 4656,
+      "tamano": [
+        4.299,
+        4.429,
+        15.81
+      ],
+      "carpeta": "casco_caza_t4"
+    },
+    {
+      "nombre": "casco_transporte_t1",
+      "titulo": "Casco de transporte (básico)",
+      "categoria": "casco",
+      "tier": 1,
+      "triangulos": 6424,
+      "tamano": [
+        6.9,
+        8.105,
+        16.31
+      ],
+      "carpeta": "casco_transporte_t1"
+    },
+    {
+      "nombre": "casco_transporte_t2",
+      "titulo": "Casco de transporte (militar)",
+      "categoria": "casco",
+      "tier": 2,
+      "triangulos": 5648,
+      "tamano": [
+        6.9,
+        8.105,
+        16.81
+      ],
+      "carpeta": "casco_transporte_t2"
+    },
+    {
+      "nombre": "casco_transporte_t3",
+      "titulo": "Casco de transporte (avanzado)",
+      "categoria": "casco",
+      "tier": 3,
+      "triangulos": 5912,
+      "tamano": [
+        7.284,
+        5.674,
+        17.31
+      ],
+      "carpeta": "casco_transporte_t3"
+    },
+    {
+      "nombre": "casco_bombardero_t2",
+      "titulo": "Casco de bombardero (militar)",
+      "categoria": "casco",
+      "tier": 2,
+      "triangulos": 5384,
+      "tamano": [
+        7.981,
+        7.122,
+        18.31
+      ],
+      "carpeta": "casco_bombardero_t2"
+    },
+    {
+      "nombre": "casco_bombardero_t3",
+      "titulo": "Casco de bombardero (avanzado)",
+      "categoria": "casco",
+      "tier": 3,
+      "triangulos": 6476,
+      "tamano": [
+        8.18,
+        4.668,
+        19.31
+      ],
+      "carpeta": "casco_bombardero_t3"
+    },
+    {
+      "nombre": "casco_fragata_t3",
+      "titulo": "Casco de fragata (avanzado)",
+      "categoria": "casco",
+      "tier": 3,
+      "triangulos": 7296,
+      "tamano": [
+        10.217,
+        8.458,
+        28.31
+      ],
+      "carpeta": "casco_fragata_t3"
+    },
+    {
+      "nombre": "casco_fragata_t4",
+      "titulo": "Casco de fragata (élite)",
+      "categoria": "casco",
+      "tier": 4,
+      "triangulos": 7332,
+      "tamano": [
+        9.994,
+        9.617,
+        29.31
+      ],
+      "carpeta": "casco_fragata_t4"
+    },
+    {
+      "nombre": "casco_crucero_t4",
+      "titulo": "Casco de crucero (élite)",
+      "categoria": "casco",
+      "tier": 4,
+      "triangulos": 7879,
+      "tamano": [
+        13.029,
+        12.718,
+        44.31
+      ],
+      "carpeta": "casco_crucero_t4"
+    },
+    {
+      "nombre": "casco_nave_nodriza_t5",
+      "titulo": "Casco de nave nodriza (legendario)",
+      "categoria": "casco",
+      "tier": 5,
+      "triangulos": 7880,
+      "tamano": [
+        25.055,
+        24.417,
+        60.306
+      ],
+      "carpeta": "casco_nave_nodriza_t5"
+    },
+    {
+      "nombre": "casco_interceptor_t3",
+      "titulo": "Casco de interceptor (avanzado)",
+      "categoria": "casco",
+      "tier": 3,
+      "triangulos": 3992,
+      "tamano": [
+        3.399,
+        3.75,
+        16.31
+      ],
+      "carpeta": "casco_interceptor_t3"
+    },
+    {
+      "nombre": "casco_stealth_t4",
+      "titulo": "Casco stealth (élite)",
+      "categoria": "casco",
+      "tier": 4,
+      "triangulos": 3360,
+      "tamano": [
+        7.385,
+        4.622,
+        16.31
+      ],
+      "carpeta": "casco_stealth_t4"
+    },
+    {
+      "nombre": "casco_alien_t5",
+      "titulo": "Casco alienígena (legendario)",
+      "categoria": "casco",
+      "tier": 5,
+      "triangulos": 4925,
+      "tamano": [
+        6.717,
+        4.559,
+        18.31
+      ],
+      "carpeta": "casco_alien_t5"
+    },
+    {
+      "nombre": "casco_prototipo_t5",
+      "titulo": "Casco prototipo (legendario)",
+      "categoria": "casco",
+      "tier": 5,
+      "triangulos": 4924,
+      "tamano": [
+        6.568,
+        6.502,
+        16.31
+      ],
+      "carpeta": "casco_prototipo_t5"
+    },
+    {
+      "nombre": "ala_corta_t1",
+      "titulo": "Ala corta (básica)",
+      "categoria": "ala",
+      "tier": 1,
+      "triangulos": 764,
+      "tamano": [
+        4.406,
+        1.6,
+        2.765
+      ],
+      "carpeta": "ala_corta_t1"
+    },
+    {
+      "nombre": "ala_corta_t2",
+      "titulo": "Ala corta (militar)",
+      "categoria": "ala",
+      "tier": 2,
+      "triangulos": 1040,
+      "tamano": [
+        4.778,
+        1.6,
+        2.881
+      ],
+      "carpeta": "ala_corta_t2"
+    },
+    {
+      "nombre": "ala_media_t1",
+      "titulo": "Ala media (básica)",
+      "categoria": "ala",
+      "tier": 1,
+      "triangulos": 1068,
+      "tamano": [
+        7.17,
+        1.6,
+        3.179
+      ],
+      "carpeta": "ala_media_t1"
+    },
+    {
+      "nombre": "ala_media_t2",
+      "titulo": "Ala media en flecha (militar)",
+      "categoria": "ala",
+      "tier": 2,
+      "triangulos": 1120,
+      "tamano": [
+        7.355,
+        1.95,
+        4.111
+      ],
+      "carpeta": "ala_media_t2"
+    },
+    {
+      "nombre": "ala_media_t3",
+      "titulo": "Ala media (avanzada)",
+      "categoria": "ala",
+      "tier": 3,
+      "triangulos": 1400,
+      "tamano": [
+        7.552,
+        1.6,
+        3.958
+      ],
+      "carpeta": "ala_media_t3"
+    },
+    {
+      "nombre": "ala_larga_t2",
+      "titulo": "Ala larga (militar)",
+      "categoria": "ala",
+      "tier": 2,
+      "triangulos": 2284,
+      "tamano": [
+        11.17,
+        1.809,
+        4.422
+      ],
+      "carpeta": "ala_larga_t2"
+    },
+    {
+      "nombre": "ala_larga_t3",
+      "titulo": "Ala larga curvada (avanzada)",
+      "categoria": "ala",
+      "tier": 3,
+      "triangulos": 1988,
+      "tamano": [
+        11.559,
+        2.074,
+        4.733
+      ],
+      "carpeta": "ala_larga_t3"
+    },
+    {
+      "nombre": "ala_larga_t4",
+      "titulo": "Ala larga (élite)",
+      "categoria": "ala",
+      "tier": 4,
+      "triangulos": 2104,
+      "tamano": [
+        11.355,
+        1.657,
+        5.753
+      ],
+      "carpeta": "ala_larga_t4"
+    },
+    {
+      "nombre": "ala_delta_t3",
+      "titulo": "Ala delta (avanzada)",
+      "categoria": "ala",
+      "tier": 3,
+      "triangulos": 1112,
+      "tamano": [
+        5.708,
+        1.6,
+        6.826
+      ],
+      "carpeta": "ala_delta_t3"
+    },
+    {
+      "nombre": "ala_delta_t4",
+      "titulo": "Ala delta (élite)",
+      "categoria": "ala",
+      "tier": 4,
+      "triangulos": 2096,
+      "tamano": [
+        7.68,
+        2.209,
+        9.326
+      ],
+      "carpeta": "ala_delta_t4"
+    },
+    {
+      "nombre": "ala_variable_t4",
+      "titulo": "Ala de geometría variable (élite)",
+      "categoria": "ala",
+      "tier": 4,
+      "triangulos": 1692,
+      "tamano": [
+        9.058,
+        1.6,
+        7.914
+      ],
+      "carpeta": "ala_variable_t4"
+    },
+    {
+      "nombre": "ala_anular_t3",
+      "titulo": "Ala anular (avanzada)",
+      "categoria": "ala",
+      "tier": 3,
+      "triangulos": 2484,
+      "tamano": [
+        5.905,
+        4.995,
+        2.592
+      ],
+      "carpeta": "ala_anular_t3"
+    },
+    {
+      "nombre": "ala_canard_t2",
+      "titulo": "Canard (militar)",
+      "categoria": "ala",
+      "tier": 2,
+      "triangulos": 456,
+      "tamano": [
+        2.77,
+        1.6,
+        1.966
+      ],
+      "carpeta": "ala_canard_t2"
+    },
+    {
+      "nombre": "ala_alien_t5",
+      "titulo": "Ala alienígena (legendaria)",
+      "categoria": "ala",
+      "tier": 5,
+      "triangulos": 3094,
+      "tamano": [
+        8.67,
+        1.6,
+        5.425
+      ],
+      "carpeta": "ala_alien_t5"
+    },
+    {
+      "nombre": "ala_energia_t5",
+      "titulo": "Ala de energía (legendaria)",
+      "categoria": "ala",
+      "tier": 5,
+      "triangulos": 2360,
+      "tamano": [
+        7.81,
+        1.6,
+        4.801
+      ],
+      "carpeta": "ala_energia_t5"
+    },
+    {
+      "nombre": "motor_quimico_t1",
+      "titulo": "Motor químico (básico)",
+      "categoria": "motor",
+      "tier": 1,
+      "triangulos": 1310,
+      "tamano": [
+        2.125,
+        2.32,
+        3.94
+      ],
+      "carpeta": "motor_quimico_t1"
+    },
+    {
+      "nombre": "motor_quimico_t2",
+      "titulo": "Motor químico (militar)",
+      "categoria": "motor",
+      "tier": 2,
+      "triangulos": 1680,
+      "tamano": [
+        2.4,
+        2.4,
+        4.44
+      ],
+      "carpeta": "motor_quimico_t2"
+    },
+    {
+      "nombre": "motor_ion_t2",
+      "titulo": "Motor iónico (militar)",
+      "categoria": "motor",
+      "tier": 2,
+      "triangulos": 1998,
+      "tamano": [
+        2.5,
+        2.5,
+        3.74
+      ],
+      "carpeta": "motor_ion_t2"
+    },
+    {
+      "nombre": "motor_ion_t3",
+      "titulo": "Motor iónico (avanzado)",
+      "categoria": "motor",
+      "tier": 3,
+      "triangulos": 3684,
+      "tamano": [
+        3.091,
+        3.068,
+        4.66
+      ],
+      "carpeta": "motor_ion_t3"
+    },
+    {
+      "nombre": "motor_plasma_t3",
+      "titulo": "Motor de plasma (avanzado)",
+      "categoria": "motor",
+      "tier": 3,
+      "triangulos": 4328,
+      "tamano": [
+        3.386,
+        3.361,
+        5.758
+      ],
+      "carpeta": "motor_plasma_t3"
+    },
+    {
+      "nombre": "motor_plasma_t4",
+      "titulo": "Motor de plasma doble (élite)",
+      "categoria": "motor",
+      "tier": 4,
+      "triangulos": 3444,
+      "tamano": [
+        3.5,
+        3.45,
+        5.608
+      ],
+      "carpeta": "motor_plasma_t4"
+    },
+    {
+      "nombre": "motor_fusion_t4",
+      "titulo": "Motor de fusión (élite)",
+      "categoria": "motor",
+      "tier": 4,
+      "triangulos": 4924,
+      "tamano": [
+        3.786,
+        3.879,
+        6.758
+      ],
+      "carpeta": "motor_fusion_t4"
+    },
+    {
+      "nombre": "motor_fusion_t5",
+      "titulo": "Motor de fusión (legendario)",
+      "categoria": "motor",
+      "tier": 5,
+      "triangulos": 4004,
+      "tamano": [
+        3.216,
+        3.165,
+        7.0
+      ],
+      "carpeta": "motor_fusion_t5"
+    },
+    {
+      "nombre": "motor_warp_t5",
+      "titulo": "Motor de curvatura (legendario)",
+      "categoria": "motor",
+      "tier": 5,
+      "triangulos": 4296,
+      "tamano": [
+        5.83,
+        5.742,
+        6.55
+      ],
+      "carpeta": "motor_warp_t5"
+    },
+    {
+      "nombre": "motor_gravitacional_t5",
+      "titulo": "Motor gravitacional (legendario)",
+      "categoria": "motor",
+      "tier": 5,
+      "triangulos": 3656,
+      "tamano": [
+        3.21,
+        2.498,
+        4.574
+      ],
+      "carpeta": "motor_gravitacional_t5"
+    },
+    {
+      "nombre": "motor_auxiliar_t1",
+      "titulo": "Motor auxiliar (básico)",
+      "categoria": "motor",
+      "tier": 1,
+      "triangulos": 852,
+      "tamano": [
+        1.168,
+        1.168,
+        2.14
+      ],
+      "carpeta": "motor_auxiliar_t1"
+    },
+    {
+      "nombre": "motor_auxiliar_t3",
+      "titulo": "Motor auxiliar (avanzado)",
+      "categoria": "motor",
+      "tier": 3,
+      "triangulos": 2094,
+      "tamano": [
+        1.786,
+        1.773,
+        2.458
+      ],
+      "carpeta": "motor_auxiliar_t3"
+    },
+    {
+      "nombre": "motor_retro_t2",
+      "titulo": "Retrocohete (militar)",
+      "categoria": "motor",
+      "tier": 2,
+      "triangulos": 768,
+      "tamano": [
+        1.2,
+        1.72,
+        3.05
+      ],
+      "carpeta": "motor_retro_t2"
+    },
+    {
+      "nombre": "motor_vtol_t3",
+      "titulo": "Motor VTOL (avanzado)",
+      "categoria": "motor",
+      "tier": 3,
+      "triangulos": 1594,
+      "tamano": [
+        2.9,
+        2.64,
+        1.576
+      ],
+      "carpeta": "motor_vtol_t3"
+    },
+    {
+      "nombre": "motor_turbo_t4",
+      "titulo": "Postquemador (élite)",
+      "categoria": "motor",
+      "tier": 4,
+      "triangulos": 3914,
+      "tamano": [
+        3.486,
+        3.46,
+        8.95
+      ],
+      "carpeta": "motor_turbo_t4"
+    },
+    {
+      "nombre": "laser_ligero_t1",
+      "titulo": "Láser ligero (básico)",
+      "categoria": "arma",
+      "tier": 1,
+      "triangulos": 1268,
+      "tamano": [
+        1.38,
+        2.01,
+        4.73
+      ],
+      "carpeta": "laser_ligero_t1"
+    },
+    {
+      "nombre": "laser_ligero_t2",
+      "titulo": "Láser ligero (militar)",
+      "categoria": "arma",
+      "tier": 2,
+      "triangulos": 1368,
+      "tamano": [
+        1.38,
+        2.01,
+        5.03
+      ],
+      "carpeta": "laser_ligero_t2"
+    },
+    {
+      "nombre": "laser_doble_t2",
+      "titulo": "Láser doble (militar)",
+      "categoria": "arma",
+      "tier": 2,
+      "triangulos": 1608,
+      "tamano": [
+        1.5,
+        2.01,
+        4.93
+      ],
+      "carpeta": "laser_doble_t2"
+    },
+    {
+      "nombre": "laser_pesado_t3",
+      "titulo": "Láser pesado (avanzado)",
+      "categoria": "arma",
+      "tier": 3,
+      "triangulos": 3568,
+      "tamano": [
+        1.68,
+        2.11,
+        7.03
+      ],
+      "carpeta": "laser_pesado_t3"
+    },
+    {
+      "nombre": "laser_pesado_t4",
+      "titulo": "Láser pesado (élite)",
+      "categoria": "arma",
+      "tier": 4,
+      "triangulos": 2948,
+      "tamano": [
+        2.078,
+        2.11,
+        7.83
+      ],
+      "carpeta": "laser_pesado_t4"
+    },
+    {
+      "nombre": "laser_gatling_t3",
+      "titulo": "Láser gatling (avanzado)",
+      "categoria": "arma",
+      "tier": 3,
+      "triangulos": 2892,
+      "tamano": [
+        2.152,
+        2.11,
+        6.0
+      ],
+      "carpeta": "laser_gatling_t3"
+    },
+    {
+      "nombre": "misiles_pod_t1",
+      "titulo": "Lanzamisiles (básico)",
+      "categoria": "arma",
+      "tier": 1,
+      "triangulos": 1820,
+      "tamano": [
+        1.96,
+        2.01,
+        2.6
+      ],
+      "carpeta": "misiles_pod_t1"
+    },
+    {
+      "nombre": "misiles_pod_t2",
+      "titulo": "Lanzamisiles (militar)",
+      "categoria": "arma",
+      "tier": 2,
+      "triangulos": 2204,
+      "tamano": [
+        3.2,
+        2.03,
+        2.8
+      ],
+      "carpeta": "misiles_pod_t2"
+    },
+    {
+      "nombre": "misiles_rack_t3",
+      "titulo": "Rack de misiles (avanzado)",
+      "categoria": "arma",
+      "tier": 3,
+      "triangulos": 4924,
+      "tamano": [
+        3.36,
+        2.38,
+        3.202
+      ],
+      "carpeta": "misiles_rack_t3"
+    },
+    {
+      "nombre": "torpedo_t3",
+      "titulo": "Lanzatorpedos (avanzado)",
+      "categoria": "arma",
+      "tier": 3,
+      "triangulos": 2876,
+      "tamano": [
+        1.8,
+        2.31,
+        6.5
+      ],
+      "carpeta": "torpedo_t3"
+    },
+    {
+      "nombre": "torpedo_t4",
+      "titulo": "Lanzatorpedos (élite)",
+      "categoria": "arma",
+      "tier": 4,
+      "triangulos": 3784,
+      "tamano": [
+        1.92,
+        2.42,
+        7.0
+      ],
+      "carpeta": "torpedo_t4"
+    },
+    {
+      "nombre": "canon_balistico_t2",
+      "titulo": "Cañón balístico (militar)",
+      "categoria": "arma",
+      "tier": 2,
+      "triangulos": 2212,
+      "tamano": [
+        1.48,
+        2.01,
+        9.32
+      ],
+      "carpeta": "canon_balistico_t2"
+    },
+    {
+      "nombre": "canon_balistico_t4",
+      "titulo": "Cañón balístico (élite)",
+      "categoria": "arma",
+      "tier": 4,
+      "triangulos": 2856,
+      "tamano": [
+        2.093,
+        2.31,
+        11.82
+      ],
+      "carpeta": "canon_balistico_t4"
+    },
+    {
+      "nombre": "torreta_auto_t3",
+      "titulo": "Torreta automática (avanzada)",
+      "categoria": "arma",
+      "tier": 3,
+      "triangulos": 2164,
+      "tamano": [
+        2.688,
+        2.2,
+        4.874
+      ],
+      "carpeta": "torreta_auto_t3"
+    },
+    {
+      "nombre": "torreta_auto_t4",
+      "titulo": "Torreta automática (élite)",
+      "categoria": "arma",
+      "tier": 4,
+      "triangulos": 3100,
+      "tamano": [
+        2.688,
+        2.2,
+        4.474
+      ],
+      "carpeta": "torreta_auto_t4"
+    },
+    {
+      "nombre": "railgun_t4",
+      "titulo": "Railgun (élite)",
+      "categoria": "arma",
+      "tier": 4,
+      "triangulos": 4334,
+      "tamano": [
+        1.88,
+        2.31,
+        12.0
+      ],
+      "carpeta": "railgun_t4"
+    },
+    {
+      "nombre": "railgun_t5",
+      "titulo": "Railgun (legendario)",
+      "categoria": "arma",
+      "tier": 5,
+      "triangulos": 4925,
+      "tamano": [
+        2.029,
+        3.046,
+        14.989
+      ],
+      "carpeta": "railgun_t5"
+    },
+    {
+      "nombre": "canon_plasma_t4",
+      "titulo": "Cañón de plasma (élite)",
+      "categoria": "arma",
+      "tier": 4,
+      "triangulos": 3756,
+      "tamano": [
+        2.739,
+        2.728,
+        5.19
+      ],
+      "carpeta": "canon_plasma_t4"
+    },
+    {
+      "nombre": "arma_alien_t5",
+      "titulo": "Arma alienígena (legendaria)",
+      "categoria": "arma",
+      "tier": 5,
+      "triangulos": 1842,
+      "tamano": [
+        1.872,
+        2.164,
+        5.958
+      ],
+      "carpeta": "arma_alien_t5"
+    },
+    {
+      "nombre": "desintegrador_t5",
+      "titulo": "Desintegrador (legendario)",
+      "categoria": "arma",
+      "tier": 5,
+      "triangulos": 4152,
+      "tamano": [
+        3.4,
+        3.4,
+        5.71
+      ],
+      "carpeta": "desintegrador_t5"
+    },
+    {
+      "nombre": "blindaje_extra_t1",
+      "titulo": "Blindaje extra (básico)",
+      "categoria": "defensa",
+      "tier": 1,
+      "triangulos": 520,
+      "tamano": [
+        0.71,
+        2.4,
+        3.2
+      ],
+      "carpeta": "blindaje_extra_t1"
+    },
+    {
+      "nombre": "blindaje_extra_t2",
+      "titulo": "Blindaje extra (militar)",
+      "categoria": "defensa",
+      "tier": 2,
+      "triangulos": 516,
+      "tamano": [
+        1.11,
+        2.4,
+        3.2
+      ],
+      "carpeta": "blindaje_extra_t2"
+    },
+    {
+      "nombre": "blindaje_reactivo_t3",
+      "titulo": "Blindaje reactivo (avanzado)",
+      "categoria": "defensa",
+      "tier": 3,
+      "triangulos": 1308,
+      "tamano": [
+        0.945,
+        2.4,
+        3.2
+      ],
+      "carpeta": "blindaje_reactivo_t3"
+    },
+    {
+      "nombre": "blindaje_energetico_t4",
+      "titulo": "Blindaje energético (élite)",
+      "categoria": "defensa",
+      "tier": 4,
+      "triangulos": 864,
+      "tamano": [
+        1.21,
+        2.64,
+        3.36
+      ],
+      "carpeta": "blindaje_energetico_t4"
+    },
+    {
+      "nombre": "generador_escudo_t2",
+      "titulo": "Generador de escudo (militar)",
+      "categoria": "defensa",
+      "tier": 2,
+      "triangulos": 1460,
+      "tamano": [
+        5.702,
+        3.65,
+        4.219
+      ],
+      "carpeta": "generador_escudo_t2"
+    },
+    {
+      "nombre": "generador_escudo_t3",
+      "titulo": "Generador de escudo (avanzado)",
+      "categoria": "defensa",
+      "tier": 3,
+      "triangulos": 1760,
+      "tamano": [
+        7.2,
+        3.95,
+        7.2
+      ],
+      "carpeta": "generador_escudo_t3"
+    },
+    {
+      "nombre": "generador_escudo_t4",
+      "titulo": "Generador de escudo (élite)",
+      "categoria": "defensa",
+      "tier": 4,
+      "triangulos": 3372,
+      "tamano": [
+        8.091,
+        4.35,
+        8.091
+      ],
+      "carpeta": "generador_escudo_t4"
+    },
+    {
+      "nombre": "generador_escudo_t5",
+      "titulo": "Generador de escudo (legendario)",
+      "categoria": "defensa",
+      "tier": 5,
+      "triangulos": 1030,
+      "tamano": [
+        8.4,
+        4.55,
+        8.4
+      ],
+      "carpeta": "generador_escudo_t5"
+    },
+    {
+      "nombre": "contramedidas_t2",
+      "titulo": "Contramedidas (militar)",
+      "categoria": "defensa",
+      "tier": 2,
+      "triangulos": 1476,
+      "tamano": [
+        1.64,
+        1.398,
+        1.4
+      ],
+      "carpeta": "contramedidas_t2"
+    },
+    {
+      "nombre": "contramedidas_t4",
+      "titulo": "Guerra electrónica (élite)",
+      "categoria": "defensa",
+      "tier": 4,
+      "triangulos": 1680,
+      "tamano": [
+        1.425,
+        3.53,
+        1.444
+      ],
+      "carpeta": "contramedidas_t4"
+    },
+    {
+      "nombre": "cabina_abierta_t1",
+      "titulo": "Cabina abierta (básica)",
+      "categoria": "cabina",
+      "tier": 1,
+      "triangulos": 1020,
+      "tamano": [
+        2.4,
+        2.74,
+        3.6
+      ],
+      "carpeta": "cabina_abierta_t1"
+    },
+    {
+      "nombre": "cabina_cerrada_t1",
+      "titulo": "Cabina cerrada (básica)",
+      "categoria": "cabina",
+      "tier": 1,
+      "triangulos": 1596,
+      "tamano": [
+        2.5,
+        2.54,
+        3.9
+      ],
+      "carpeta": "cabina_cerrada_t1"
+    },
+    {
+      "nombre": "cabina_caza_t2",
+      "titulo": "Cabina de caza (militar)",
+      "categoria": "cabina",
+      "tier": 2,
+      "triangulos": 1652,
+      "tamano": [
+        2.5,
+        2.44,
+        4.6
+      ],
+      "carpeta": "cabina_caza_t2"
+    },
+    {
+      "nombre": "cabina_caza_t3",
+      "titulo": "Cabina de caza con HUD (avanzada)",
+      "categoria": "cabina",
+      "tier": 3,
+      "triangulos": 1692,
+      "tamano": [
+        2.5,
+        2.44,
+        4.5
+      ],
+      "carpeta": "cabina_caza_t3"
+    },
+    {
+      "nombre": "cabina_caza_t4",
+      "titulo": "Cabina de caza (élite)",
+      "categoria": "cabina",
+      "tier": 4,
+      "triangulos": 956,
+      "tamano": [
+        2.6,
+        2.44,
+        4.916
+      ],
+      "carpeta": "cabina_caza_t4"
+    },
+    {
+      "nombre": "cabina_transporte_t2",
+      "titulo": "Cabina de transporte (militar)",
+      "categoria": "cabina",
+      "tier": 2,
+      "triangulos": 1284,
+      "tamano": [
+        3.6,
+        2.662,
+        4.047
+      ],
+      "carpeta": "cabina_transporte_t2"
+    },
+    {
+      "nombre": "cabina_puente_t3",
+      "titulo": "Puente de mando (avanzado)",
+      "categoria": "cabina",
+      "tier": 3,
+      "triangulos": 1684,
+      "tamano": [
+        5.2,
+        4.33,
+        5.0
+      ],
+      "carpeta": "cabina_puente_t3"
+    },
+    {
+      "nombre": "cabina_puente_t4",
+      "titulo": "Puente de mando (élite)",
+      "categoria": "cabina",
+      "tier": 4,
+      "triangulos": 2320,
+      "tamano": [
+        6.2,
+        3.47,
+        6.0
+      ],
+      "carpeta": "cabina_puente_t4"
+    },
+    {
+      "nombre": "cabina_alien_t5",
+      "titulo": "Cabina alienígena (legendaria)",
+      "categoria": "cabina",
+      "tier": 5,
+      "triangulos": 2548,
+      "tamano": [
+        3.116,
+        2.64,
+        4.198
+      ],
+      "carpeta": "cabina_alien_t5"
+    },
+    {
+      "nombre": "cabina_ia_t5",
+      "titulo": "Cabina de IA (legendaria)",
+      "categoria": "cabina",
+      "tier": 5,
+      "triangulos": 1836,
+      "tamano": [
+        2.8,
+        2.99,
+        3.6
+      ],
+      "carpeta": "cabina_ia_t5"
+    },
+    {
+      "nombre": "tren_aterrizaje_fijo_t1",
+      "titulo": "Tren de aterrizaje fijo (básico)",
+      "categoria": "utilidad",
+      "tier": 1,
+      "triangulos": 1620,
+      "tamano": [
+        3.8,
+        2.257,
+        2.491
+      ],
+      "carpeta": "tren_aterrizaje_fijo_t1"
+    },
+    {
+      "nombre": "tren_aterrizaje_retractil_t2",
+      "titulo": "Tren retráctil (militar)",
+      "categoria": "utilidad",
+      "tier": 2,
+      "triangulos": 1276,
+      "tamano": [
+        3.34,
+        2.53,
+        1.62
+      ],
+      "carpeta": "tren_aterrizaje_retractil_t2"
+    },
+    {
+      "nombre": "tren_aterrizaje_hover_t3",
+      "titulo": "Repulsores (avanzado)",
+      "categoria": "utilidad",
+      "tier": 3,
+      "triangulos": 2580,
+      "tamano": [
+        4.627,
+        1.21,
+        4.227
+      ],
+      "carpeta": "tren_aterrizaje_hover_t3"
+    },
+    {
+      "nombre": "estabilizador_vertical_t1",
+      "titulo": "Estabilizador vertical (básico)",
+      "categoria": "utilidad",
+      "tier": 1,
+      "triangulos": 460,
+      "tamano": [
+        2.0,
+        2.98,
+        2.926
+      ],
+      "carpeta": "estabilizador_vertical_t1"
+    },
+    {
+      "nombre": "estabilizador_vertical_t3",
+      "titulo": "Estabilizador vertical (avanzado)",
+      "categoria": "utilidad",
+      "tier": 3,
+      "triangulos": 536,
+      "tamano": [
+        2.0,
+        3.39,
+        3.496
+      ],
+      "carpeta": "estabilizador_vertical_t3"
+    },
+    {
+      "nombre": "estabilizador_doble_t2",
+      "titulo": "Estabilizador doble en V (militar)",
+      "categoria": "utilidad",
+      "tier": 2,
+      "triangulos": 560,
+      "tamano": [
+        3.763,
+        2.197,
+        2.6
+      ],
+      "carpeta": "estabilizador_doble_t2"
+    },
+    {
+      "nombre": "tanque_combustible_t1",
+      "titulo": "Tanque de combustible (básico)",
+      "categoria": "utilidad",
+      "tier": 1,
+      "triangulos": 1112,
+      "tamano": [
+        1.615,
+        2.1,
+        4.5
+      ],
+      "carpeta": "tanque_combustible_t1"
+    },
+    {
+      "nombre": "tanque_combustible_t3",
+      "titulo": "Tanque aerodinámico (avanzado)",
+      "categoria": "utilidad",
+      "tier": 3,
+      "triangulos": 552,
+      "tamano": [
+        2.1,
+        2.61,
+        5.0
+      ],
+      "carpeta": "tanque_combustible_t3"
+    },
+    {
+      "nombre": "radar_t2",
+      "titulo": "Radar (militar)",
+      "categoria": "utilidad",
+      "tier": 2,
+      "triangulos": 1264,
+      "tamano": [
+        2.773,
+        3.438,
+        1.681
+      ],
+      "carpeta": "radar_t2"
+    },
+    {
+      "nombre": "bahia_carga_t3",
+      "titulo": "Bahía de carga (avanzada)",
+      "categoria": "utilidad",
+      "tier": 3,
+      "triangulos": 1412,
+      "tamano": [
+        4.0,
+        3.13,
+        6.0
+      ],
+      "carpeta": "bahia_carga_t3"
+    }
+  ]
+}
