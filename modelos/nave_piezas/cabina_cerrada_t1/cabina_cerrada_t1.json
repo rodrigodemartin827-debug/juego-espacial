@@ -1,0 +1,107 @@
+{
+  "nombre": "cabina_cerrada_t1",
+  "titulo": "Cabina cerrada (básica)",
+  "categoria": "cabina",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 1596,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.5,
+    2.54,
+    3.9
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_cerrada_t1",
+      "triangulos": 1236,
+      "tamano": [
+        2.5,
+        2.54,
+        3.9
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_cerrada_t1_color.png",
+        "normal": "texturas/cabina_cerrada_t1_normal.png",
+        "rugosidad": "texturas/cabina_cerrada_t1_rugosidad.png",
+        "metal": "texturas/cabina_cerrada_t1_metal.png",
+        "emision": "texturas/cabina_cerrada_t1_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_cerrada_t1_cristal",
+      "triangulos": 360,
+      "tamano": [
+        2.203,
+        1.7,
+        3.791
+      ],
+      "centro": [
+        0.0,
+        0.37,
+        0.0
+      ],
+      "material_roblox": "Glass",
+      "color": "#5E8A6E",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_cerrada_t1",
+      "posicion": [
+        0.0,
+        -1.22,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Cabina cerrada básica de cristal verdoso.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_cerrada_t1",
+      "posicion": [
+        0.0,
+        -0.43,
+        0.35
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

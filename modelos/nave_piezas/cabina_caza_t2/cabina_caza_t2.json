@@ -1,0 +1,107 @@
+{
+  "nombre": "cabina_caza_t2",
+  "titulo": "Cabina de caza (militar)",
+  "categoria": "cabina",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1652,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.5,
+    2.44,
+    4.6
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_caza_t2",
+      "triangulos": 1288,
+      "tamano": [
+        2.5,
+        2.44,
+        4.6
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_caza_t2_color.png",
+        "normal": "texturas/cabina_caza_t2_normal.png",
+        "rugosidad": "texturas/cabina_caza_t2_rugosidad.png",
+        "metal": "texturas/cabina_caza_t2_metal.png",
+        "emision": "texturas/cabina_caza_t2_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_caza_t2_cristal",
+      "triangulos": 364,
+      "tamano": [
+        2.203,
+        1.6,
+        4.375
+      ],
+      "centro": [
+        0.0,
+        0.37,
+        -0.05
+      ],
+      "material_roblox": "Glass",
+      "color": "#1D3B5A",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_caza_t2",
+      "posicion": [
+        0.0,
+        -1.17,
+        -0.05
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Cabina de caza de burbuja con cristal amplio.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_caza_t2",
+      "posicion": [
+        0.0,
+        -0.38,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

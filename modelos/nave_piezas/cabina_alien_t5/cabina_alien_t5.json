@@ -1,0 +1,123 @@
+{
+  "nombre": "cabina_alien_t5",
+  "titulo": "Cabina alienígena (legendaria)",
+  "categoria": "cabina",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 2548,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.116,
+    2.64,
+    4.198
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_alien_t5",
+      "triangulos": 1720,
+      "tamano": [
+        3.116,
+        2.64,
+        4.198
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_alien_t5_color.png",
+        "normal": "texturas/cabina_alien_t5_normal.png",
+        "rugosidad": "texturas/cabina_alien_t5_rugosidad.png",
+        "metal": "texturas/cabina_alien_t5_metal.png",
+        "emision": "texturas/cabina_alien_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_alien_t5_neon",
+      "triangulos": 468,
+      "tamano": [
+        2.8,
+        1.9,
+        2.56
+      ],
+      "centro": [
+        0.0,
+        0.37,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "cabina_alien_t5_cristal",
+      "triangulos": 360,
+      "tamano": [
+        2.599,
+        1.8,
+        4.198
+      ],
+      "centro": [
+        0.0,
+        0.32,
+        0.0
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_alien_t5",
+      "posicion": [
+        0.0,
+        -1.27,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Vaina orgánica de cristal púrpura con un asiento vivo.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_alien_t5",
+      "posicion": [
+        0.0,
+        -0.13,
+        0.4
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

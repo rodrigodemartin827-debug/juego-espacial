@@ -1,0 +1,151 @@
+{
+  "nombre": "cabina_puente_t3",
+  "titulo": "Puente de mando (avanzado)",
+  "categoria": "cabina",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1684,
+  "limite_triangulos": 5000,
+  "tamano": [
+    5.2,
+    4.33,
+    5.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_puente_t3",
+      "triangulos": 1624,
+      "tamano": [
+        5.2,
+        4.24,
+        5.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_puente_t3_color.png",
+        "normal": "texturas/cabina_puente_t3_normal.png",
+        "rugosidad": "texturas/cabina_puente_t3_rugosidad.png",
+        "metal": "texturas/cabina_puente_t3_metal.png",
+        "emision": "texturas/cabina_puente_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_puente_t3_neon",
+      "triangulos": 48,
+      "tamano": [
+        0.18,
+        0.18,
+        0.18
+      ],
+      "centro": [
+        -1.5,
+        2.12,
+        1.9
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "cabina_puente_t3_cristal",
+      "triangulos": 12,
+      "tamano": [
+        4.589,
+        1.32,
+        4.391
+      ],
+      "centro": [
+        0.0,
+        0.31,
+        0.304
+      ],
+      "material_roblox": "Glass",
+      "color": "#123848",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_puente_t3",
+      "posicion": [
+        0.0,
+        -2.07,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Puente de mando para fragata: ventanal corrido, 3 puestos y consolas.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_puente_t3",
+      "posicion": [
+        1.5,
+        -1.08,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "malla": "cabina_puente_t3",
+      "posicion": [
+        0.0,
+        -1.08,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "asiento_3",
+      "malla": "cabina_puente_t3",
+      "posicion": [
+        -1.5,
+        -1.08,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

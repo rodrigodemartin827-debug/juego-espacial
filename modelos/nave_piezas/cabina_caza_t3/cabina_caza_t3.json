@@ -1,0 +1,123 @@
+{
+  "nombre": "cabina_caza_t3",
+  "titulo": "Cabina de caza con HUD (avanzada)",
+  "categoria": "cabina",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1692,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.5,
+    2.44,
+    4.5
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_caza_t3",
+      "triangulos": 1276,
+      "tamano": [
+        2.5,
+        2.44,
+        4.5
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_caza_t3_color.png",
+        "normal": "texturas/cabina_caza_t3_normal.png",
+        "rugosidad": "texturas/cabina_caza_t3_rugosidad.png",
+        "metal": "texturas/cabina_caza_t3_metal.png",
+        "emision": "texturas/cabina_caza_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_caza_t3_neon",
+      "triangulos": 52,
+      "tamano": [
+        2.176,
+        1.103,
+        2.868
+      ],
+      "centro": [
+        0.0,
+        0.152,
+        0.11
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "cabina_caza_t3_cristal",
+      "triangulos": 364,
+      "tamano": [
+        2.206,
+        1.5,
+        4.389
+      ],
+      "centro": [
+        0.0,
+        0.32,
+        0.0
+      ],
+      "material_roblox": "Glass",
+      "color": "#123848",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_caza_t3",
+      "posicion": [
+        0.0,
+        -1.17,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Cabina de caza avanzada con HUD holográfico y consolas de neón visibles.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_caza_t3",
+      "posicion": [
+        0.0,
+        -0.38,
+        0.35
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

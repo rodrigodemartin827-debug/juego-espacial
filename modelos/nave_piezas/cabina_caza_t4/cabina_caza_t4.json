@@ -1,0 +1,107 @@
+{
+  "nombre": "cabina_caza_t4",
+  "titulo": "Cabina de caza (élite)",
+  "categoria": "cabina",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 956,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.6,
+    2.44,
+    4.916
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_caza_t4",
+      "triangulos": 918,
+      "tamano": [
+        2.6,
+        2.44,
+        4.916
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_caza_t4_color.png",
+        "normal": "texturas/cabina_caza_t4_normal.png",
+        "rugosidad": "texturas/cabina_caza_t4_rugosidad.png",
+        "metal": "texturas/cabina_caza_t4_metal.png",
+        "emision": "texturas/cabina_caza_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_caza_t4_cristal",
+      "triangulos": 38,
+      "tamano": [
+        2.276,
+        1.5,
+        4.9
+      ],
+      "centro": [
+        0.0,
+        0.32,
+        0.002
+      ],
+      "material_roblox": "Glass",
+      "color": "#1A1408",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_caza_t4",
+      "posicion": [
+        0.0,
+        -1.17,
+        0.152
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Cabina élite facetada de cristal oscuro y oro.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_caza_t4",
+      "posicion": [
+        0.0,
+        -0.38,
+        0.502
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

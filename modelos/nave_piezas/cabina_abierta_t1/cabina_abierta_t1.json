@@ -1,0 +1,107 @@
+{
+  "nombre": "cabina_abierta_t1",
+  "titulo": "Cabina abierta (básica)",
+  "categoria": "cabina",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 1020,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.4,
+    2.74,
+    3.6
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_abierta_t1",
+      "triangulos": 1008,
+      "tamano": [
+        2.4,
+        2.74,
+        3.6
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_abierta_t1_color.png",
+        "normal": "texturas/cabina_abierta_t1_normal.png",
+        "rugosidad": "texturas/cabina_abierta_t1_rugosidad.png",
+        "metal": "texturas/cabina_abierta_t1_metal.png",
+        "emision": "texturas/cabina_abierta_t1_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_abierta_t1_cristal",
+      "triangulos": 12,
+      "tamano": [
+        1.8,
+        0.755,
+        0.295
+      ],
+      "centro": [
+        0.0,
+        0.398,
+        -1.432
+      ],
+      "material_roblox": "Glass",
+      "color": "#5E8A6E",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_abierta_t1",
+      "posicion": [
+        0.0,
+        -1.32,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Asiento al aire con parabrisas simple y arco antivuelco.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_abierta_t1",
+      "posicion": [
+        0.0,
+        -0.23,
+        0.4
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "nombre": "cabina_ia_t5",
+  "titulo": "Cabina de IA (legendaria)",
+  "categoria": "cabina",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 1836,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.8,
+    2.99,
+    3.6
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_ia_t5",
+      "triangulos": 1100,
+      "tamano": [
+        2.8,
+        2.779,
+        3.6
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_ia_t5_color.png",
+        "normal": "texturas/cabina_ia_t5_normal.png",
+        "rugosidad": "texturas/cabina_ia_t5_rugosidad.png",
+        "metal": "texturas/cabina_ia_t5_metal.png",
+        "emision": "texturas/cabina_ia_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_ia_t5_neon",
+      "triangulos": 216,
+      "tamano": [
+        2.64,
+        1.54,
+        3.54
+      ],
+      "centro": [
+        0.0,
+        0.181,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFFFFF"
+    },
+    {
+      "nombre": "cabina_ia_t5_neon2",
+      "triangulos": 160,
+      "tamano": [
+        1.377,
+        1.377,
+        0.077
+      ],
+      "centro": [
+        0.0,
+        0.701,
+        -0.1
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "cabina_ia_t5_cristal",
+      "triangulos": 360,
+      "tamano": [
+        2.594,
+        2.2,
+        3.592
+      ],
+      "centro": [
+        0.0,
+        0.501,
+        0.0
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_ia_t5",
+      "posicion": [
+        0.0,
+        -1.339,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "plazas": 0,
+  "descripcion": "Sin asiento: la nave la pilota una IA. Un ojo central rodeado de pantallas."
+}

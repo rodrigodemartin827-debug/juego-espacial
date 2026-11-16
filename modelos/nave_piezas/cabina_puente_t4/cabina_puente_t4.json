@@ -1,0 +1,167 @@
+{
+  "nombre": "cabina_puente_t4",
+  "titulo": "Puente de mando (élite)",
+  "categoria": "cabina",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 2320,
+  "limite_triangulos": 5000,
+  "tamano": [
+    6.2,
+    3.47,
+    6.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_puente_t4",
+      "triangulos": 1912,
+      "tamano": [
+        6.2,
+        3.47,
+        6.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_puente_t4_color.png",
+        "normal": "texturas/cabina_puente_t4_normal.png",
+        "rugosidad": "texturas/cabina_puente_t4_rugosidad.png",
+        "metal": "texturas/cabina_puente_t4_metal.png",
+        "emision": "texturas/cabina_puente_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_puente_t4_neon",
+      "triangulos": 276,
+      "tamano": [
+        6.0,
+        1.748,
+        4.249
+      ],
+      "centro": [
+        0.0,
+        -0.171,
+        -0.505
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "cabina_puente_t4_neon2",
+      "triangulos": 120,
+      "tamano": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "centro": [
+        0.0,
+        0.155,
+        1.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    },
+    {
+      "nombre": "cabina_puente_t4_cristal",
+      "triangulos": 12,
+      "tamano": [
+        5.513,
+        1.43,
+        5.395
+      ],
+      "centro": [
+        0.0,
+        0.84,
+        0.302
+      ],
+      "material_roblox": "Glass",
+      "color": "#1A1408",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_puente_t4",
+      "posicion": [
+        0.0,
+        -1.685,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Puente élite para crucero con mesa de hologramas.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_puente_t4",
+      "posicion": [
+        1.8,
+        -0.695,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "malla": "cabina_puente_t4",
+      "posicion": [
+        0.0,
+        -0.695,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "asiento_3",
+      "malla": "cabina_puente_t4",
+      "posicion": [
+        -1.8,
+        -0.695,
+        0.3
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

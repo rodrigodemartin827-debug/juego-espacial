@@ -1,0 +1,121 @@
+{
+  "nombre": "cabina_transporte_t2",
+  "titulo": "Cabina de transporte (militar)",
+  "categoria": "cabina",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1284,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.6,
+    2.662,
+    4.047
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "cabina_transporte_t2",
+      "triangulos": 1272,
+      "tamano": [
+        3.6,
+        2.662,
+        4.047
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/cabina_transporte_t2_color.png",
+        "normal": "texturas/cabina_transporte_t2_normal.png",
+        "rugosidad": "texturas/cabina_transporte_t2_rugosidad.png",
+        "metal": "texturas/cabina_transporte_t2_metal.png",
+        "emision": "texturas/cabina_transporte_t2_emision.png"
+      }
+    },
+    {
+      "nombre": "cabina_transporte_t2_cristal",
+      "triangulos": 12,
+      "tamano": [
+        3.387,
+        1.785,
+        0.9
+      ],
+      "centro": [
+        0.0,
+        0.352,
+        -1.527
+      ],
+      "material_roblox": "Glass",
+      "color": "#1D3B5A",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "cabina_transporte_t2",
+      "posicion": [
+        0.0,
+        -1.281,
+        0.023
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "descripcion": "Cabina ancha de varias lunas para 2 pilotos.",
+  "anclajes_vfx": [
+    {
+      "nombre": "asiento_1",
+      "malla": "cabina_transporte_t2",
+      "posicion": [
+        0.6,
+        -0.491,
+        0.373
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "asiento_2",
+      "malla": "cabina_transporte_t2",
+      "posicion": [
+        -0.6,
+        -0.491,
+        0.373
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}
