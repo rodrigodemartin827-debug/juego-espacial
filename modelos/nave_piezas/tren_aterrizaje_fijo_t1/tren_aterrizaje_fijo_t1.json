@@ -1,0 +1,74 @@
+{
+  "nombre": "tren_aterrizaje_fijo_t1",
+  "titulo": "Tren de aterrizaje fijo (básico)",
+  "categoria": "utilidad",
+  "tier": 1,
+  "estilo": "Básico",
+  "triangulos": 1620,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.8,
+    2.257,
+    2.491
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "tren_aterrizaje_fijo_t1",
+      "triangulos": 1620,
+      "tamano": [
+        3.8,
+        2.257,
+        2.491
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/tren_aterrizaje_fijo_t1_color.png",
+        "normal": "texturas/tren_aterrizaje_fijo_t1_normal.png",
+        "rugosidad": "texturas/tren_aterrizaje_fijo_t1_rugosidad.png",
+        "metal": "texturas/tren_aterrizaje_fijo_t1_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "tren_aterrizaje_fijo_t1",
+      "posicion": [
+        0.0,
+        1.078,
+        0.21
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_INFERIOR"
+      ]
+    }
+  ],
+  "altura_apoyo": 2.22,
+  "descripcion": "Tres patas fijas con muelles y pies planos."
+}

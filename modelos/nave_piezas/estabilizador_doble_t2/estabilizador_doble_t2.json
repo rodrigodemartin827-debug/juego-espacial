@@ -1,0 +1,74 @@
+{
+  "nombre": "estabilizador_doble_t2",
+  "titulo": "Estabilizador doble en V (militar)",
+  "categoria": "utilidad",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 560,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.763,
+    2.197,
+    2.6
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "estabilizador_doble_t2",
+      "triangulos": 560,
+      "tamano": [
+        3.763,
+        2.197,
+        2.6
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/estabilizador_doble_t2_color.png",
+        "normal": "texturas/estabilizador_doble_t2_normal.png",
+        "rugosidad": "texturas/estabilizador_doble_t2_rugosidad.png",
+        "metal": "texturas/estabilizador_doble_t2_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "estabilizador_doble_t2",
+      "posicion": [
+        0.0,
+        -1.049,
+        -0.2
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Doble aleta en V militar."
+}

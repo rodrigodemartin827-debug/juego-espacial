@@ -1,0 +1,92 @@
+{
+  "nombre": "tanque_combustible_t3",
+  "titulo": "Tanque aerodinámico (avanzado)",
+  "categoria": "utilidad",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 552,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.1,
+    2.61,
+    5.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "tanque_combustible_t3",
+      "triangulos": 512,
+      "tamano": [
+        2.1,
+        2.61,
+        5.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/tanque_combustible_t3_color.png",
+        "normal": "texturas/tanque_combustible_t3_normal.png",
+        "rugosidad": "texturas/tanque_combustible_t3_rugosidad.png",
+        "metal": "texturas/tanque_combustible_t3_metal.png",
+        "emision": "texturas/tanque_combustible_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "tanque_combustible_t3_neon",
+      "triangulos": 40,
+      "tamano": [
+        1.98,
+        0.1,
+        2.25
+      ],
+      "centro": [
+        0.0,
+        -0.035,
+        -0.375
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "tanque_combustible_t3",
+      "posicion": [
+        0.0,
+        1.255,
+        -0.25
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "CASCO_INFERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Tanque aerodinámico en gota con medidor de neón."
+}

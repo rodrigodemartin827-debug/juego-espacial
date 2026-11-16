@@ -1,0 +1,116 @@
+{
+  "nombre": "radar_t2",
+  "titulo": "Radar (militar)",
+  "categoria": "utilidad",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1264,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.773,
+    3.438,
+    1.681
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "radar_t2.001",
+      "triangulos": 648,
+      "tamano": [
+        1.587,
+        1.59,
+        1.547
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/radar_t2_color.png",
+        "normal": "texturas/radar_t2_normal.png",
+        "rugosidad": "texturas/radar_t2_rugosidad.png",
+        "metal": "texturas/radar_t2_metal.png"
+      }
+    },
+    {
+      "nombre": "radar_t2_plato",
+      "triangulos": 568,
+      "tamano": [
+        2.773,
+        2.617,
+        1.578
+      ],
+      "centro": [
+        0.0,
+        1.335,
+        0.084
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/radar_t2_color.png",
+        "normal": "texturas/radar_t2_normal.png",
+        "rugosidad": "texturas/radar_t2_rugosidad.png",
+        "metal": "texturas/radar_t2_metal.png"
+      }
+    },
+    {
+      "nombre": "radar_t2_plato_neon",
+      "triangulos": 48,
+      "tamano": [
+        0.24,
+        0.24,
+        0.24
+      ],
+      "centro": [
+        0.0,
+        1.518,
+        -0.688
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "radar_t2.001",
+      "posicion": [
+        0.0,
+        -0.745,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "UNIVERSAL",
+      "direccion": "entrada",
+      "brida": 0.8,
+      "acepta": [
+        "ALA_PUNTA",
+        "CASCO_FRONTAL",
+        "CASCO_INFERIOR",
+        "CASCO_LATERAL",
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "pivote_plato": "la malla _plato gira alrededor del eje Y de Roblox (vertical)",
+  "descripcion": "Antena de radar giratoria (plato aparte para girarlo). Brida universal."
+}

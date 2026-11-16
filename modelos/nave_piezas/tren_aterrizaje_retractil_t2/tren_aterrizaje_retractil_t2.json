@@ -1,0 +1,99 @@
+{
+  "nombre": "tren_aterrizaje_retractil_t2",
+  "titulo": "Tren retráctil (militar)",
+  "categoria": "utilidad",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1276,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.34,
+    2.53,
+    1.62
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "tren_aterrizaje_retractil_t2.001",
+      "triangulos": 252,
+      "tamano": [
+        1.6,
+        0.69,
+        1.6
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/tren_aterrizaje_retractil_t2_color.png",
+        "normal": "texturas/tren_aterrizaje_retractil_t2_normal.png",
+        "rugosidad": "texturas/tren_aterrizaje_retractil_t2_rugosidad.png",
+        "metal": "texturas/tren_aterrizaje_retractil_t2_metal.png"
+      }
+    },
+    {
+      "nombre": "tren_aterrizaje_retractil_t2_patas",
+      "triangulos": 1024,
+      "tamano": [
+        3.34,
+        1.999,
+        0.8
+      ],
+      "centro": [
+        0.0,
+        -1.185,
+        0.42
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/tren_aterrizaje_retractil_t2_color.png",
+        "normal": "texturas/tren_aterrizaje_retractil_t2_normal.png",
+        "rugosidad": "texturas/tren_aterrizaje_retractil_t2_rugosidad.png",
+        "metal": "texturas/tren_aterrizaje_retractil_t2_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "tren_aterrizaje_retractil_t2.001",
+      "posicion": [
+        0.0,
+        0.295,
+        0.0
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_INFERIOR"
+      ]
+    }
+  ],
+  "posiciones": {
+    "desplegado": "malla _patas tal cual",
+    "recogido": "girar _patas 90° hacia atrás alrededor del eje X en la base"
+  },
+  "altura_apoyo": 2.74,
+  "descripcion": "Patas retráctiles con pistones y ruedas (malla _patas aparte)."
+}

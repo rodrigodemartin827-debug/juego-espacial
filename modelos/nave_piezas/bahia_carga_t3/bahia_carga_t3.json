@@ -1,0 +1,134 @@
+{
+  "nombre": "bahia_carga_t3",
+  "titulo": "Bahía de carga (avanzada)",
+  "categoria": "utilidad",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1412,
+  "limite_triangulos": 5000,
+  "tamano": [
+    4.0,
+    3.13,
+    6.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "bahia_carga_t3",
+      "triangulos": 1248,
+      "tamano": [
+        4.0,
+        3.13,
+        6.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/bahia_carga_t3_color.png",
+        "normal": "texturas/bahia_carga_t3_normal.png",
+        "rugosidad": "texturas/bahia_carga_t3_rugosidad.png",
+        "metal": "texturas/bahia_carga_t3_metal.png",
+        "emision": "texturas/bahia_carga_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "bahia_carga_t3_neon",
+      "triangulos": 88,
+      "tamano": [
+        2.48,
+        2.15,
+        5.4
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "bahia_carga_t3_neon2",
+      "triangulos": 76,
+      "tamano": [
+        2.475,
+        0.279,
+        3.69
+      ],
+      "centro": [
+        -0.007,
+        -0.553,
+        -0.335
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "bahia_carga_t3",
+      "posicion": [
+        0.0,
+        1.515,
+        0.0
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_INFERIOR"
+      ]
+    },
+    {
+      "nombre": "acople_inferior",
+      "malla": "bahia_carga_t3",
+      "posicion": [
+        0.0,
+        -1.515,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    }
+  ],
+  "capacidad": "caja interior de 3.4 × 5.6 × 2.0 studs",
+  "descripcion": "Módulo de carga abierto bajo el casco, con cajas de recursos; debajo admite el tren de aterrizaje."
+}

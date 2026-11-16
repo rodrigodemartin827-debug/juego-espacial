@@ -1,0 +1,165 @@
+{
+  "nombre": "tren_aterrizaje_hover_t3",
+  "titulo": "Repulsores (avanzado)",
+  "categoria": "utilidad",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 2580,
+  "limite_triangulos": 5000,
+  "tamano": [
+    4.627,
+    1.21,
+    4.227
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "tren_aterrizaje_hover_t3",
+      "triangulos": 1812,
+      "tamano": [
+        4.627,
+        1.191,
+        4.227
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/tren_aterrizaje_hover_t3_color.png",
+        "normal": "texturas/tren_aterrizaje_hover_t3_normal.png",
+        "rugosidad": "texturas/tren_aterrizaje_hover_t3_rugosidad.png",
+        "metal": "texturas/tren_aterrizaje_hover_t3_metal.png",
+        "emision": "texturas/tren_aterrizaje_hover_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "tren_aterrizaje_hover_t3_neon",
+      "triangulos": 192,
+      "tamano": [
+        4.24,
+        0.05,
+        3.84
+      ],
+      "centro": [
+        0.0,
+        -0.589,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "tren_aterrizaje_hover_t3_neon2",
+      "triangulos": 576,
+      "tamano": [
+        4.54,
+        0.04,
+        4.123
+      ],
+      "centro": [
+        0.0,
+        -0.514,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "tren_aterrizaje_hover_t3",
+      "posicion": [
+        0.0,
+        0.546,
+        0.0
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_INFERIOR"
+      ]
+    }
+  ],
+  "altura_flotacion": 1.6,
+  "descripcion": "Sin patas: cuatro repulsores de neón que hacen flotar la nave.",
+  "anclajes_vfx": [
+    {
+      "nombre": "repulsor_1",
+      "malla": "tren_aterrizaje_hover_t3",
+      "posicion": [
+        -1.7,
+        -0.594,
+        0.0
+      ],
+      "direccion": [
+        0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "nombre": "repulsor_2",
+      "malla": "tren_aterrizaje_hover_t3",
+      "posicion": [
+        1.7,
+        -0.594,
+        0.0
+      ],
+      "direccion": [
+        0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "nombre": "repulsor_3",
+      "malla": "tren_aterrizaje_hover_t3",
+      "posicion": [
+        0.0,
+        -0.594,
+        1.5
+      ],
+      "direccion": [
+        0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "nombre": "repulsor_4",
+      "malla": "tren_aterrizaje_hover_t3",
+      "posicion": [
+        0.0,
+        -0.594,
+        -1.5
+      ],
+      "direccion": [
+        0.0,
+        -1.0,
+        0.0
+      ]
+    }
+  ]
+}

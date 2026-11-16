@@ -1,0 +1,107 @@
+{
+  "nombre": "estabilizador_vertical_t3",
+  "titulo": "Estabilizador vertical (avanzado)",
+  "categoria": "utilidad",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 536,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.0,
+    3.39,
+    3.496
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "estabilizador_vertical_t3",
+      "triangulos": 452,
+      "tamano": [
+        2.0,
+        3.254,
+        3.496
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/estabilizador_vertical_t3_color.png",
+        "normal": "texturas/estabilizador_vertical_t3_normal.png",
+        "rugosidad": "texturas/estabilizador_vertical_t3_rugosidad.png",
+        "metal": "texturas/estabilizador_vertical_t3_metal.png",
+        "emision": "texturas/estabilizador_vertical_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "estabilizador_vertical_t3_neon",
+      "triangulos": 36,
+      "tamano": [
+        0.08,
+        2.814,
+        2.048
+      ],
+      "centro": [
+        0.0,
+        0.22,
+        -0.724
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estabilizador_vertical_t3_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        0.0,
+        1.663,
+        0.62
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_montaje",
+      "malla": "estabilizador_vertical_t3",
+      "posicion": [
+        0.0,
+        -1.577,
+        -0.48
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR",
+        "UNIVERSAL"
+      ]
+    }
+  ],
+  "descripcion": "Aleta vertical avanzada en flecha con neón en el borde."
+}
