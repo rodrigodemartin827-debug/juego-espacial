@@ -1,0 +1,198 @@
+{
+  "nombre": "railgun_t4",
+  "titulo": "Railgun (élite)",
+  "categoria": "arma",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 4334,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.88,
+    2.31,
+    12.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "railgun_t4",
+      "triangulos": 3326,
+      "tamano": [
+        1.88,
+        2.31,
+        12.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/railgun_t4_color.png",
+        "normal": "texturas/railgun_t4_normal.png",
+        "rugosidad": "texturas/railgun_t4_rugosidad.png",
+        "metal": "texturas/railgun_t4_metal.png",
+        "emision": "texturas/railgun_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "railgun_t4_neon",
+      "triangulos": 1008,
+      "tamano": [
+        1.614,
+        1.59,
+        7.769
+      ],
+      "centro": [
+        0.0,
+        -0.055,
+        -1.5
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DA8FF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "railgun_t4",
+      "posicion": [
+        0.0,
+        1.105,
+        4.6
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "railgun_t4",
+      "posicion": [
+        -0.89,
+        -0.155,
+        4.6
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "railgun_t4",
+      "posicion": [
+        0.89,
+        -0.155,
+        4.6
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "railgun_t4",
+      "posicion": [
+        0.0,
+        -0.155,
+        5.94
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "carga": "acople visual: el brillo de los anillos (neón) sube mientras carga",
+  "descripcion": "Cañón electromagnético largo con anillos de neón azul.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "railgun_t4",
+      "posicion": [
+        0.0,
+        -0.055,
+        -6.0
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

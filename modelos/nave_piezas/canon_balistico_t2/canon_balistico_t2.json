@@ -1,0 +1,180 @@
+{
+  "nombre": "canon_balistico_t2",
+  "titulo": "Cañón balístico (militar)",
+  "categoria": "arma",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 2212,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.48,
+    2.01,
+    9.32
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "canon_balistico_t2",
+      "triangulos": 2212,
+      "tamano": [
+        1.48,
+        2.01,
+        9.32
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/canon_balistico_t2_color.png",
+        "normal": "texturas/canon_balistico_t2_normal.png",
+        "rugosidad": "texturas/canon_balistico_t2_rugosidad.png",
+        "metal": "texturas/canon_balistico_t2_metal.png"
+      }
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "canon_balistico_t2",
+      "posicion": [
+        0.0,
+        0.955,
+        3.37
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "canon_balistico_t2",
+      "posicion": [
+        -0.69,
+        -0.155,
+        3.37
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "canon_balistico_t2",
+      "posicion": [
+        0.69,
+        -0.155,
+        3.37
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "canon_balistico_t2",
+      "posicion": [
+        0.0,
+        -0.155,
+        4.61
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "descripcion": "Cañón de proyectiles cinéticos, largo.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "canon_balistico_t2",
+      "posicion": [
+        0.0,
+        -0.055,
+        -4.63
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

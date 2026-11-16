@@ -1,0 +1,184 @@
+{
+  "nombre": "arma_alien_t5",
+  "titulo": "Arma alienígena (legendaria)",
+  "categoria": "arma",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 1842,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.872,
+    2.164,
+    5.958
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "arma_alien_t5",
+      "triangulos": 1614,
+      "tamano": [
+        1.872,
+        2.164,
+        5.958
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/arma_alien_t5_color.png",
+        "normal": "texturas/arma_alien_t5_normal.png",
+        "rugosidad": "texturas/arma_alien_t5_rugosidad.png",
+        "metal": "texturas/arma_alien_t5_metal.png",
+        "emision": "texturas/arma_alien_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "arma_alien_t5_neon",
+      "triangulos": 168,
+      "tamano": [
+        0.711,
+        1.04,
+        5.042
+      ],
+      "centro": [
+        0.0,
+        0.378,
+        0.058
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    },
+    {
+      "nombre": "arma_alien_t5_cristal",
+      "triangulos": 60,
+      "tamano": [
+        1.531,
+        1.612,
+        1.022
+      ],
+      "centro": [
+        -0.078,
+        0.218,
+        -2.468
+      ],
+      "material_roblox": "Glass",
+      "color": "#8A3DFF",
+      "transparencia": 0.35
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "arma_alien_t5",
+      "posicion": [
+        0.0,
+        0.978,
+        1.979
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "arma_alien_t5",
+      "posicion": [
+        -0.74,
+        -0.182,
+        1.979
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "arma_alien_t5",
+      "posicion": [
+        0.74,
+        -0.182,
+        1.979
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    }
+  ],
+  "descripcion": "Arma orgánica de hueso con un emisor de cristal púrpura.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "arma_alien_t5",
+      "posicion": [
+        0.0,
+        0.218,
+        -2.721
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

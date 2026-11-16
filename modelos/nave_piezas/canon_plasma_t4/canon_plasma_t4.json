@@ -1,0 +1,197 @@
+{
+  "nombre": "canon_plasma_t4",
+  "titulo": "Cañón de plasma (élite)",
+  "categoria": "arma",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 3756,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.739,
+    2.728,
+    5.19
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "canon_plasma_t4",
+      "triangulos": 3432,
+      "tamano": [
+        2.739,
+        2.728,
+        5.19
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/canon_plasma_t4_color.png",
+        "normal": "texturas/canon_plasma_t4_normal.png",
+        "rugosidad": "texturas/canon_plasma_t4_rugosidad.png",
+        "metal": "texturas/canon_plasma_t4_metal.png",
+        "emision": "texturas/canon_plasma_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "canon_plasma_t4_neon",
+      "triangulos": 324,
+      "tamano": [
+        2.1,
+        2.1,
+        2.068
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -0.395
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF8A2A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "canon_plasma_t4",
+      "posicion": [
+        0.0,
+        1.06,
+        1.405
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "canon_plasma_t4",
+      "posicion": [
+        -0.84,
+        -0.2,
+        1.405
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "canon_plasma_t4",
+      "posicion": [
+        0.84,
+        -0.2,
+        1.405
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "canon_plasma_t4",
+      "posicion": [
+        0.0,
+        -0.2,
+        2.545
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "descripcion": "Cañón de plasma con una cámara esférica de neón naranja.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "canon_plasma_t4",
+      "posicion": [
+        0.0,
+        0.0,
+        -2.595
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

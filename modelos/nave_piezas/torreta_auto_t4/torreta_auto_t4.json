@@ -1,0 +1,187 @@
+{
+  "nombre": "torreta_auto_t4",
+  "titulo": "Torreta automática (élite)",
+  "categoria": "arma",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 3100,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.688,
+    2.2,
+    4.474
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "torreta_auto_t4.001",
+      "triangulos": 600,
+      "tamano": [
+        2.688,
+        0.69,
+        2.688
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/torreta_auto_t4_color.png",
+        "normal": "texturas/torreta_auto_t4_normal.png",
+        "rugosidad": "texturas/torreta_auto_t4_rugosidad.png",
+        "metal": "texturas/torreta_auto_t4_metal.png",
+        "emision": "texturas/torreta_auto_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "torreta_auto_t4_cabeza",
+      "triangulos": 2268,
+      "tamano": [
+        2.4,
+        1.45,
+        4.43
+      ],
+      "centro": [
+        0.0,
+        1.13,
+        -0.915
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/torreta_auto_t4_color.png",
+        "normal": "texturas/torreta_auto_t4_normal.png",
+        "rugosidad": "texturas/torreta_auto_t4_rugosidad.png",
+        "metal": "texturas/torreta_auto_t4_metal.png",
+        "emision": "texturas/torreta_auto_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "torreta_auto_t4_neon",
+      "triangulos": 192,
+      "tamano": [
+        2.069,
+        0.069,
+        2.069
+      ],
+      "centro": [
+        0.0,
+        0.265,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "torreta_auto_t4_cabeza_neon2",
+      "triangulos": 40,
+      "tamano": [
+        0.24,
+        0.228,
+        0.05
+      ],
+      "centro": [
+        0.0,
+        1.705,
+        0.115
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_base",
+      "malla": "torreta_auto_t4.001",
+      "posicion": [
+        0.0,
+        -0.295,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "pivote_cabeza": "la malla _cabeza gira alrededor del eje Y de Roblox (vertical)",
+  "descripcion": "Torreta élite giratoria de cuatro cañones.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca_1",
+      "malla": "torreta_auto_t4.001",
+      "posicion": [
+        0.55,
+        0.835,
+        -3.1
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "boca_2",
+      "malla": "torreta_auto_t4.001",
+      "posicion": [
+        0.55,
+        1.175,
+        -3.1
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "boca_3",
+      "malla": "torreta_auto_t4.001",
+      "posicion": [
+        -0.55,
+        0.835,
+        -3.1
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "boca_4",
+      "malla": "torreta_auto_t4.001",
+      "posicion": [
+        -0.55,
+        1.175,
+        -3.1
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

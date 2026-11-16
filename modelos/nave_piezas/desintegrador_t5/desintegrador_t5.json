@@ -1,0 +1,213 @@
+{
+  "nombre": "desintegrador_t5",
+  "titulo": "Desintegrador (legendario)",
+  "categoria": "arma",
+  "tier": 5,
+  "estilo": "Legendario",
+  "triangulos": 4152,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.4,
+    3.4,
+    5.71
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "desintegrador_t5",
+      "triangulos": 3200,
+      "tamano": [
+        3.4,
+        3.4,
+        5.71
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/desintegrador_t5_color.png",
+        "normal": "texturas/desintegrador_t5_normal.png",
+        "rugosidad": "texturas/desintegrador_t5_rugosidad.png",
+        "metal": "texturas/desintegrador_t5_metal.png",
+        "emision": "texturas/desintegrador_t5_emision.png"
+      }
+    },
+    {
+      "nombre": "desintegrador_t5_neon",
+      "triangulos": 760,
+      "tamano": [
+        2.763,
+        2.763,
+        3.894
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -0.345
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFFFFF"
+    },
+    {
+      "nombre": "desintegrador_t5_neon2",
+      "triangulos": 192,
+      "tamano": [
+        1.555,
+        1.503,
+        0.497
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        -2.235
+      ],
+      "material_roblox": "Neon",
+      "color": "#C45CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "desintegrador_t5",
+      "posicion": [
+        0.0,
+        1.06,
+        1.565
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "desintegrador_t5",
+      "posicion": [
+        -0.84,
+        -0.2,
+        1.565
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "desintegrador_t5",
+      "posicion": [
+        0.84,
+        -0.2,
+        1.565
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "desintegrador_t5",
+      "posicion": [
+        0.0,
+        -0.2,
+        2.805
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "descripcion": "Arma legendaria que abre un agujero: un anillo de neón blanco alrededor de una esfera negra.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "desintegrador_t5",
+      "posicion": [
+        0.0,
+        0.0,
+        -2.535
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

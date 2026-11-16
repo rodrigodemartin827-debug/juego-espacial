@@ -1,0 +1,240 @@
+{
+  "nombre": "canon_balistico_t4",
+  "titulo": "Cañón balístico (élite)",
+  "categoria": "arma",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 2856,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.093,
+    2.31,
+    11.82
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "canon_balistico_t4.001",
+      "triangulos": 1876,
+      "tamano": [
+        2.093,
+        2.31,
+        11.652
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/canon_balistico_t4_color.png",
+        "normal": "texturas/canon_balistico_t4_normal.png",
+        "rugosidad": "texturas/canon_balistico_t4_rugosidad.png",
+        "metal": "texturas/canon_balistico_t4_metal.png",
+        "emision": "texturas/canon_balistico_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "canon_balistico_t4_canon",
+      "triangulos": 840,
+      "tamano": [
+        1.536,
+        1.497,
+        8.53
+      ],
+      "centro": [
+        0.0,
+        -0.055,
+        -1.729
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/canon_balistico_t4_color.png",
+        "normal": "texturas/canon_balistico_t4_normal.png",
+        "rugosidad": "texturas/canon_balistico_t4_rugosidad.png",
+        "metal": "texturas/canon_balistico_t4_metal.png",
+        "emision": "texturas/canon_balistico_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "canon_balistico_t4_neon",
+      "triangulos": 128,
+      "tamano": [
+        1.088,
+        1.088,
+        0.064
+      ],
+      "centro": [
+        0.0,
+        -0.055,
+        -5.794
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "canon_balistico_t4_neon2",
+      "triangulos": 12,
+      "tamano": [
+        0.6,
+        0.1,
+        1.2
+      ],
+      "centro": [
+        0.0,
+        -0.905,
+        4.336
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "canon_balistico_t4.001",
+      "posicion": [
+        0.0,
+        1.105,
+        4.536
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "canon_balistico_t4.001",
+      "posicion": [
+        -0.84,
+        -0.155,
+        4.536
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "canon_balistico_t4.001",
+      "posicion": [
+        0.84,
+        -0.155,
+        4.536
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "canon_balistico_t4.001",
+      "posicion": [
+        0.0,
+        -0.155,
+        5.776
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "retroceso": {
+    "malla": "_canon",
+    "distancia": 0.8,
+    "eje": "+Z de Roblox (hacia atrás)"
+  },
+  "descripcion": "Cañón cinético élite masivo; el cañón es una malla aparte para el retroceso.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "canon_balistico_t4.001",
+      "posicion": [
+        0.0,
+        -0.055,
+        -5.964
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

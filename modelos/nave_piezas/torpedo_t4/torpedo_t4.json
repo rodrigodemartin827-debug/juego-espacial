@@ -1,0 +1,213 @@
+{
+  "nombre": "torpedo_t4",
+  "titulo": "Lanzatorpedos (élite)",
+  "categoria": "arma",
+  "tier": 4,
+  "estilo": "Élite",
+  "triangulos": 3784,
+  "limite_triangulos": 5000,
+  "tamano": [
+    1.92,
+    2.42,
+    7.0
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "torpedo_t4",
+      "triangulos": 3088,
+      "tamano": [
+        1.92,
+        2.31,
+        7.0
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/torpedo_t4_color.png",
+        "normal": "texturas/torpedo_t4_normal.png",
+        "rugosidad": "texturas/torpedo_t4_rugosidad.png",
+        "metal": "texturas/torpedo_t4_metal.png",
+        "emision": "texturas/torpedo_t4_emision.png"
+      }
+    },
+    {
+      "nombre": "torpedo_t4_neon",
+      "triangulos": 576,
+      "tamano": [
+        1.8,
+        1.8,
+        3.972
+      ],
+      "centro": [
+        0.0,
+        -0.155,
+        -0.075
+      ],
+      "material_roblox": "Neon",
+      "color": "#FFB020"
+    },
+    {
+      "nombre": "torpedo_t4_neon2",
+      "triangulos": 120,
+      "tamano": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "centro": [
+        0.0,
+        0.965,
+        -1.8
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF2A4A"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_colgar",
+      "malla": "torpedo_t4",
+      "posicion": [
+        0.0,
+        1.105,
+        1.05
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "entrada",
+      "brida": 0.9,
+      "acepta": [
+        "ALA_PUNTA",
+        "UNIVERSAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "torpedo_t4",
+      "posicion": [
+        -0.74,
+        -0.155,
+        1.05
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "torpedo_t4",
+      "posicion": [
+        0.74,
+        -0.155,
+        1.05
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ]
+    },
+    {
+      "nombre": "acople_trasero",
+      "malla": "torpedo_t4",
+      "posicion": [
+        0.0,
+        -0.155,
+        2.29
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "entrada",
+      "brida": 1.2,
+      "acepta": [
+        "CASCO_FRONTAL"
+      ]
+    }
+  ],
+  "descripcion": "Lanzatorpedos élite con sistema de guía de neón.",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca",
+      "malla": "torpedo_t4",
+      "posicion": [
+        0.0,
+        -0.155,
+        -3.35
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}

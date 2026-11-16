@@ -1,0 +1,159 @@
+{
+  "nombre": "torreta_auto_t3",
+  "titulo": "Torreta automática (avanzada)",
+  "categoria": "arma",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 2164,
+  "limite_triangulos": 5000,
+  "tamano": [
+    2.688,
+    2.2,
+    4.874
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "torreta_auto_t3.001",
+      "triangulos": 600,
+      "tamano": [
+        2.688,
+        0.69,
+        2.688
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/torreta_auto_t3_color.png",
+        "normal": "texturas/torreta_auto_t3_normal.png",
+        "rugosidad": "texturas/torreta_auto_t3_rugosidad.png",
+        "metal": "texturas/torreta_auto_t3_metal.png",
+        "emision": "texturas/torreta_auto_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "torreta_auto_t3_cabeza",
+      "triangulos": 1332,
+      "tamano": [
+        2.197,
+        1.55,
+        4.612
+      ],
+      "centro": [
+        0.0,
+        1.08,
+        -1.224
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/torreta_auto_t3_color.png",
+        "normal": "texturas/torreta_auto_t3_normal.png",
+        "rugosidad": "texturas/torreta_auto_t3_rugosidad.png",
+        "metal": "texturas/torreta_auto_t3_metal.png",
+        "emision": "texturas/torreta_auto_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "torreta_auto_t3_neon",
+      "triangulos": 192,
+      "tamano": [
+        2.069,
+        0.069,
+        2.069
+      ],
+      "centro": [
+        0.0,
+        0.265,
+        0.0
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "torreta_auto_t3_cabeza_neon2",
+      "triangulos": 40,
+      "tamano": [
+        0.24,
+        0.228,
+        0.05
+      ],
+      "centro": [
+        0.0,
+        1.705,
+        0.115
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_base",
+      "malla": "torreta_auto_t3.001",
+      "posicion": [
+        0.0,
+        -0.295,
+        0.0
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "entrada",
+      "brida": 2.0,
+      "acepta": [
+        "CASCO_SUPERIOR"
+      ]
+    }
+  ],
+  "pivote_cabeza": "la malla _cabeza gira alrededor del eje Y de Roblox (vertical)",
+  "descripcion": "Torreta automática giratoria de doble cañón (cabeza aparte para girarla).",
+  "anclajes_vfx": [
+    {
+      "nombre": "boca_1",
+      "malla": "torreta_auto_t3.001",
+      "posicion": [
+        0.396,
+        0.955,
+        -3.5
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "nombre": "boca_2",
+      "malla": "torreta_auto_t3.001",
+      "posicion": [
+        -0.396,
+        0.955,
+        -3.5
+      ],
+      "direccion": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ]
+}
