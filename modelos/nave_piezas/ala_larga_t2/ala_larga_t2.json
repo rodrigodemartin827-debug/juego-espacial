@@ -1,0 +1,368 @@
+{
+  "nombre": "ala_larga_t2",
+  "titulo": "Ala larga (militar)",
+  "categoria": "ala",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 2284,
+  "limite_triangulos": 5000,
+  "tamano": [
+    11.17,
+    1.809,
+    4.422
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_larga_t2_izq",
+      "triangulos": 2224,
+      "tamano": [
+        11.05,
+        1.809,
+        4.422
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_larga_t2_color.png",
+        "normal": "texturas/ala_larga_t2_normal.png",
+        "rugosidad": "texturas/ala_larga_t2_rugosidad.png",
+        "metal": "texturas/ala_larga_t2_metal.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_larga_t2_izq_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.04,
+        0.18
+      ],
+      "centro": [
+        -1.125,
+        0.252,
+        0.463
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_larga_t2_izq_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        -5.545,
+        0.245,
+        0.455
+      ],
+      "material_roblox": "Neon",
+      "color": "#7FD4FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_larga_t2_der",
+      "triangulos": 2224,
+      "tamano": [
+        11.05,
+        1.809,
+        4.422
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_larga_t2_color.png",
+        "normal": "texturas/ala_larga_t2_normal.png",
+        "rugosidad": "texturas/ala_larga_t2_rugosidad.png",
+        "metal": "texturas/ala_larga_t2_metal.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_larga_t2_der_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.04,
+        0.18
+      ],
+      "centro": [
+        1.125,
+        0.252,
+        0.463
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_larga_t2_der_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        5.545,
+        0.245,
+        0.455
+      ],
+      "material_roblox": "Neon",
+      "color": "#7FD4FF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_larga_t2_izq",
+      "posicion": [
+        5.475,
+        -0.105,
+        -0.445
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_larga_t2_izq",
+      "posicion": [
+        -4.755,
+        -0.373,
+        0.676
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_motor_1",
+      "malla": "ala_larga_t2_izq",
+      "posicion": [
+        1.955,
+        -0.043,
+        2.127
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_motor_2",
+      "malla": "ala_larga_t2_izq",
+      "posicion": [
+        -1.785,
+        0.076,
+        2.161
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_larga_t2_der",
+      "posicion": [
+        -5.475,
+        -0.105,
+        -0.445
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_larga_t2_der",
+      "posicion": [
+        4.755,
+        -0.373,
+        0.676
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_motor_1",
+      "malla": "ala_larga_t2_der",
+      "posicion": [
+        -1.955,
+        -0.043,
+        2.127
+      ],
+      "orientacion": [
+        0.0,
+        -180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_motor_2",
+      "malla": "ala_larga_t2_der",
+      "posicion": [
+        1.785,
+        0.076,
+        2.161
+      ],
+      "orientacion": [
+        0.0,
+        -180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala larga militar con dos góndolas para motores en el borde de salida."
+}

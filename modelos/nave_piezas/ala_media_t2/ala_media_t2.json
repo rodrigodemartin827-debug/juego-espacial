@@ -1,0 +1,312 @@
+{
+  "nombre": "ala_media_t2",
+  "titulo": "Ala media en flecha (militar)",
+  "categoria": "ala",
+  "tier": 2,
+  "estilo": "Militar",
+  "triangulos": 1120,
+  "limite_triangulos": 5000,
+  "tamano": [
+    7.355,
+    1.95,
+    4.111
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_media_t2_izq",
+      "triangulos": 1060,
+      "tamano": [
+        7.355,
+        1.95,
+        4.111
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_media_t2_color.png",
+        "normal": "texturas/ala_media_t2_normal.png",
+        "rugosidad": "texturas/ala_media_t2_rugosidad.png",
+        "metal": "texturas/ala_media_t2_metal.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_media_t2_izq_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.04,
+        0.18
+      ],
+      "centro": [
+        -0.572,
+        0.101,
+        0.57
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_media_t2_izq_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        -3.393,
+        0.075,
+        0.866
+      ],
+      "material_roblox": "Neon",
+      "color": "#7FD4FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_media_t2_der",
+      "triangulos": 1060,
+      "tamano": [
+        7.355,
+        1.95,
+        4.111
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_media_t2_color.png",
+        "normal": "texturas/ala_media_t2_normal.png",
+        "rugosidad": "texturas/ala_media_t2_rugosidad.png",
+        "metal": "texturas/ala_media_t2_metal.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_media_t2_der_neon",
+      "triangulos": 12,
+      "tamano": [
+        0.5,
+        0.04,
+        0.18
+      ],
+      "centro": [
+        0.572,
+        0.101,
+        0.57
+      ],
+      "material_roblox": "Neon",
+      "color": "#FF9A3A",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_media_t2_der_neon2",
+      "triangulos": 48,
+      "tamano": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "centro": [
+        3.393,
+        0.075,
+        0.866
+      ],
+      "material_roblox": "Neon",
+      "color": "#7FD4FF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_media_t2_izq",
+      "posicion": [
+        3.627,
+        -0.175,
+        -0.684
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_media_t2_izq",
+      "posicion": [
+        -2.883,
+        -0.52,
+        1.005
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_hardpoint_1",
+      "malla": "ala_media_t2_izq",
+      "posicion": [
+        0.477,
+        -0.681,
+        -0.038
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_media_t2_der",
+      "posicion": [
+        -3.627,
+        -0.175,
+        -0.684
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_media_t2_der",
+      "posicion": [
+        2.883,
+        -0.52,
+        1.005
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_hardpoint_1",
+      "malla": "ala_media_t2_der",
+      "posicion": [
+        -0.477,
+        -0.681,
+        -0.038
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala media en flecha, blanca y naranja, con winglet y un hardpoint."
+}

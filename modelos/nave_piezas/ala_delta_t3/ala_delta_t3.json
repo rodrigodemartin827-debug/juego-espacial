@@ -1,0 +1,280 @@
+{
+  "nombre": "ala_delta_t3",
+  "titulo": "Ala delta (avanzada)",
+  "categoria": "ala",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1112,
+  "limite_triangulos": 5000,
+  "tamano": [
+    5.708,
+    1.6,
+    6.826
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_delta_t3_izq",
+      "triangulos": 1020,
+      "tamano": [
+        5.708,
+        1.6,
+        6.826
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_delta_t3_color.png",
+        "normal": "texturas/ala_delta_t3_normal.png",
+        "rugosidad": "texturas/ala_delta_t3_rugosidad.png",
+        "metal": "texturas/ala_delta_t3_metal.png",
+        "emision": "texturas/ala_delta_t3_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_delta_t3_izq_neon",
+      "triangulos": 92,
+      "tamano": [
+        4.65,
+        0.08,
+        5.872
+      ],
+      "centro": [
+        -0.471,
+        0.0,
+        -0.477
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_delta_t3_der",
+      "triangulos": 1020,
+      "tamano": [
+        5.708,
+        1.6,
+        6.826
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_delta_t3_color.png",
+        "normal": "texturas/ala_delta_t3_normal.png",
+        "rugosidad": "texturas/ala_delta_t3_rugosidad.png",
+        "metal": "texturas/ala_delta_t3_metal.png",
+        "emision": "texturas/ala_delta_t3_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_delta_t3_der_neon",
+      "triangulos": 92,
+      "tamano": [
+        4.65,
+        0.08,
+        5.872
+      ],
+      "centro": [
+        0.471,
+        0.0,
+        -0.477
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_delta_t3_izq",
+      "posicion": [
+        2.804,
+        0.0,
+        -0.52
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_delta_t3_izq",
+      "posicion": [
+        -2.404,
+        -0.53,
+        2.535
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_hardpoint_1",
+      "malla": "ala_delta_t3_izq",
+      "posicion": [
+        0.004,
+        -0.601,
+        0.807
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_delta_t3_der",
+      "posicion": [
+        -2.804,
+        0.0,
+        -0.52
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_delta_t3_der",
+      "posicion": [
+        2.404,
+        -0.53,
+        2.535
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_hardpoint_1",
+      "malla": "ala_delta_t3_der",
+      "posicion": [
+        -0.004,
+        -0.601,
+        0.807
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala delta triangular avanzada, fina y con neón en el borde."
+}

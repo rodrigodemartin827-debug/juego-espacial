@@ -1,0 +1,314 @@
+{
+  "nombre": "ala_media_t3",
+  "titulo": "Ala media (avanzada)",
+  "categoria": "ala",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1400,
+  "limite_triangulos": 5000,
+  "tamano": [
+    7.552,
+    1.6,
+    3.958
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_media_t3_izq",
+      "triangulos": 1208,
+      "tamano": [
+        7.552,
+        1.6,
+        3.958
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_media_t3_color.png",
+        "normal": "texturas/ala_media_t3_normal.png",
+        "rugosidad": "texturas/ala_media_t3_rugosidad.png",
+        "metal": "texturas/ala_media_t3_metal.png",
+        "emision": "texturas/ala_media_t3_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_media_t3_izq_neon",
+      "triangulos": 124,
+      "tamano": [
+        6.553,
+        0.342,
+        2.855
+      ],
+      "centro": [
+        -0.499,
+        0.169,
+        -0.552
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_media_t3_izq_neon2",
+      "triangulos": 68,
+      "tamano": [
+        5.252,
+        0.21,
+        1.089
+      ],
+      "centro": [
+        -0.827,
+        0.262,
+        1.141
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_media_t3_der",
+      "triangulos": 1208,
+      "tamano": [
+        7.552,
+        1.6,
+        3.958
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_media_t3_color.png",
+        "normal": "texturas/ala_media_t3_normal.png",
+        "rugosidad": "texturas/ala_media_t3_rugosidad.png",
+        "metal": "texturas/ala_media_t3_metal.png",
+        "emision": "texturas/ala_media_t3_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_media_t3_der_neon",
+      "triangulos": 124,
+      "tamano": [
+        6.553,
+        0.342,
+        2.855
+      ],
+      "centro": [
+        0.499,
+        0.169,
+        -0.552
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_media_t3_der_neon2",
+      "triangulos": 68,
+      "tamano": [
+        5.252,
+        0.21,
+        1.089
+      ],
+      "centro": [
+        0.827,
+        0.262,
+        1.141
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_media_t3_izq",
+      "posicion": [
+        3.726,
+        0.0,
+        -0.604
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_media_t3_izq",
+      "posicion": [
+        -3.249,
+        -0.266,
+        1.239
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_hardpoint_1",
+      "malla": "ala_media_t3_izq",
+      "posicion": [
+        -0.024,
+        -0.439,
+        0.241
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_media_t3_der",
+      "posicion": [
+        -3.726,
+        0.0,
+        -0.604
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_media_t3_der",
+      "posicion": [
+        3.249,
+        -0.266,
+        1.239
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_hardpoint_1",
+      "malla": "ala_media_t3_der",
+      "posicion": [
+        0.024,
+        -0.439,
+        0.241
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala media avanzada de perfil fino, con el borde de ataque de neón."
+}

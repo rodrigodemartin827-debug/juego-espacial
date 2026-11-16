@@ -1,0 +1,314 @@
+{
+  "nombre": "ala_larga_t3",
+  "titulo": "Ala larga curvada (avanzada)",
+  "categoria": "ala",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 1988,
+  "limite_triangulos": 5000,
+  "tamano": [
+    11.559,
+    2.074,
+    4.733
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "variantes": [
+    "izq",
+    "der"
+  ],
+  "mallas": [
+    {
+      "nombre": "ala_larga_t3_izq",
+      "triangulos": 1748,
+      "tamano": [
+        11.559,
+        2.074,
+        4.733
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_larga_t3_color.png",
+        "normal": "texturas/ala_larga_t3_normal.png",
+        "rugosidad": "texturas/ala_larga_t3_rugosidad.png",
+        "metal": "texturas/ala_larga_t3_metal.png",
+        "emision": "texturas/ala_larga_t3_emision.png"
+      },
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_larga_t3_izq_neon",
+      "triangulos": 156,
+      "tamano": [
+        10.559,
+        1.286,
+        3.73
+      ],
+      "centro": [
+        -0.5,
+        0.359,
+        -0.502
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_larga_t3_izq_neon2",
+      "triangulos": 84,
+      "tamano": [
+        8.45,
+        1.046,
+        1.454
+      ],
+      "centro": [
+        -1.023,
+        0.404,
+        1.348
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF",
+      "variante": "izq"
+    },
+    {
+      "nombre": "ala_larga_t3_der",
+      "triangulos": 1748,
+      "tamano": [
+        11.559,
+        2.074,
+        4.733
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/ala_larga_t3_color.png",
+        "normal": "texturas/ala_larga_t3_normal.png",
+        "rugosidad": "texturas/ala_larga_t3_rugosidad.png",
+        "metal": "texturas/ala_larga_t3_metal.png",
+        "emision": "texturas/ala_larga_t3_emision.png"
+      },
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_larga_t3_der_neon",
+      "triangulos": 156,
+      "tamano": [
+        10.559,
+        1.286,
+        3.73
+      ],
+      "centro": [
+        0.5,
+        0.359,
+        -0.502
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "variante": "der"
+    },
+    {
+      "nombre": "ala_larga_t3_der_neon2",
+      "triangulos": 84,
+      "tamano": [
+        8.45,
+        1.046,
+        1.454
+      ],
+      "centro": [
+        1.023,
+        0.404,
+        1.348
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF",
+      "variante": "der"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_larga_t3_izq",
+      "posicion": [
+        5.729,
+        -0.237,
+        -0.717
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_larga_t3_izq",
+      "posicion": [
+        -4.966,
+        0.241,
+        1.641
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_motor",
+      "malla": "ala_larga_t3_izq",
+      "posicion": [
+        1.359,
+        -0.161,
+        2.179
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "izq"
+    },
+    {
+      "nombre": "acople_raiz",
+      "malla": "ala_larga_t3_der",
+      "posicion": [
+        -5.729,
+        -0.237,
+        -0.717
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "entrada",
+      "brida": 1.6,
+      "acepta": [
+        "CASCO_LATERAL"
+      ],
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_punta",
+      "malla": "ala_larga_t3_der",
+      "posicion": [
+        4.966,
+        0.241,
+        1.641
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "ALA_PUNTA",
+      "direccion": "salida",
+      "brida": 0.9,
+      "variante": "der"
+    },
+    {
+      "nombre": "acople_motor",
+      "malla": "ala_larga_t3_der",
+      "posicion": [
+        -1.359,
+        -0.161,
+        2.179
+      ],
+      "orientacion": [
+        0.0,
+        -180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "ALA_MOTOR",
+      "direccion": "salida",
+      "brida": 1.6,
+      "variante": "der"
+    }
+  ],
+  "descripcion": "Ala larga avanzada que se curva hacia arriba, con neón cian en el borde de ataque."
+}
