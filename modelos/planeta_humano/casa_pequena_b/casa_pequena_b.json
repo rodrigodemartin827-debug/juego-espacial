@@ -1,0 +1,96 @@
+{
+  "nombre": "casa_pequena_b",
+  "numero": 2,
+  "zona": "Zona residencial",
+  "categoria": "edificio_mediano",
+  "triangulos": 3748,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 6.22,
+    "fondo_z": 8.33
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 8,
+    "alto_y": 6,
+    "fondo_z": 8
+  },
+  "piezas": [
+    {
+      "nombre": "casa_pequena_b",
+      "triangulos": 3052,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "casa_pequena_b_cristal",
+      "triangulos": 592,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "casa_pequena_b_neon",
+      "triangulos": 48,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "casa_pequena_b_puerta",
+      "triangulos": 56,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "casa_pequena_b_color.png",
+    "roughness": "casa_pequena_b_roughness.png",
+    "metalness": "casa_pequena_b_metalness.png",
+    "emision": "casa_pequena_b_emision.png",
+    "normal": "casa_pequena_b_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.491,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "casa_pequena_b": {
+        "triangulos": 3052,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_b_cristal": {
+        "triangulos": 592,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_b_neon": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_b_puerta": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3748,
+    "tamano_reimportado": [
+      8.0,
+      8.33,
+      6.22
+    ]
+  }
+}

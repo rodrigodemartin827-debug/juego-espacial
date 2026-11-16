@@ -1,0 +1,107 @@
+{
+  "nombre": "casa_mediana_a",
+  "numero": 4,
+  "zona": "Zona residencial",
+  "categoria": "edificio_mediano",
+  "triangulos": 2830,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 10.3,
+    "fondo_z": 10.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 10,
+    "alto_y": 10,
+    "fondo_z": 10
+  },
+  "piezas": [
+    {
+      "nombre": "casa_mediana_a",
+      "triangulos": 2578,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "casa_mediana_a_cristal",
+      "triangulos": 192,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "casa_mediana_a_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "casa_mediana_a_puerta",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "casa_mediana_a_puerta_alta",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "casa_mediana_a_color.png",
+    "roughness": "casa_mediana_a_roughness.png",
+    "metalness": "casa_mediana_a_metalness.png",
+    "emision": "casa_mediana_a_emision.png",
+    "normal": "casa_mediana_a_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.548,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "casa_mediana_a": {
+        "triangulos": 2578,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_mediana_a_cristal": {
+        "triangulos": 192,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_mediana_a_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_mediana_a_puerta": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_mediana_a_puerta_alta": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2830,
+    "tamano_reimportado": [
+      10.0,
+      10.0,
+      10.3
+    ]
+  }
+}

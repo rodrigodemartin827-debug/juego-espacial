@@ -1,0 +1,152 @@
+{
+  "nombre": "apartamento_bloque",
+  "numero": 7,
+  "zona": "Zona residencial",
+  "categoria": "edificio_grande",
+  "triangulos": 5956,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 16.05,
+    "fondo_z": 10.1
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 16,
+    "alto_y": 16,
+    "fondo_z": 10
+  },
+  "piezas": [
+    {
+      "nombre": "apartamento_bloque",
+      "triangulos": 5380,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "apartamento_bloque_cristal",
+      "triangulos": 360,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "apartamento_bloque_neon",
+      "triangulos": 132,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "apartamento_bloque_puerta_azotea",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "apartamento_bloque_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "apartamento_bloque_puerta_emergencia_1",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "apartamento_bloque_puerta_emergencia_2",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "apartamento_bloque_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "apartamento_bloque_verde_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "apartamento_bloque_color.png",
+    "roughness": "apartamento_bloque_roughness.png",
+    "metalness": "apartamento_bloque_metalness.png",
+    "emision": "apartamento_bloque_emision.png",
+    "normal": "apartamento_bloque_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.388,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "apartamento_bloque": {
+        "triangulos": 5380,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_cristal": {
+        "triangulos": 360,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_neon": {
+        "triangulos": 132,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_puerta_azotea": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_puerta_emergencia_1": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_puerta_emergencia_2": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "apartamento_bloque_verde_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 5956,
+    "tamano_reimportado": [
+      16.0,
+      10.1,
+      16.05
+    ]
+  }
+}

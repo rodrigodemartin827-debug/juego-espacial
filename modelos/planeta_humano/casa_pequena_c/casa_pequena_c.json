@@ -1,0 +1,108 @@
+{
+  "nombre": "casa_pequena_c",
+  "numero": 3,
+  "zona": "Zona residencial",
+  "categoria": "edificio_mediano",
+  "triangulos": 1436,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 6.0,
+    "fondo_z": 8.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 8,
+    "alto_y": 6,
+    "fondo_z": 8
+  },
+  "piezas": [
+    {
+      "nombre": "casa_pequena_c",
+      "triangulos": 1176,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "casa_pequena_c_cristal",
+      "triangulos": 144,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "casa_pequena_c_neon",
+      "triangulos": 68,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "casa_pequena_c_puerta",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "casa_pequena_c_rojo_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "casa_pequena_c_color.png",
+    "roughness": "casa_pequena_c_roughness.png",
+    "metalness": "casa_pequena_c_metalness.png",
+    "emision": "casa_pequena_c_emision.png",
+    "normal": "casa_pequena_c_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.642,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "casa_pequena_c": {
+        "triangulos": 1176,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_c_cristal": {
+        "triangulos": 144,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_c_neon": {
+        "triangulos": 68,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_c_puerta": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "casa_pequena_c_rojo_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1436,
+    "tamano_reimportado": [
+      8.0,
+      8.0,
+      6.0
+    ]
+  }
+}
