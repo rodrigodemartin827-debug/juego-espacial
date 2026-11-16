@@ -1,0 +1,35 @@
+{
+  "id": "piedra_gris",
+  "numero": 1,
+  "nombre": "Piedra gris",
+  "descripcion": "Roca gris lisa y redondeada.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 1,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.65,
+    2.06,
+    1.51
+  ],
+  "partes": [
+    {
+      "nombre": "piedra_gris",
+      "triangulos": 1600,
+      "Material": "Slate",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/piedra_gris_color.png",
+    "normal": "texturas/piedra_gris_normal.png",
+    "rugosidad": "texturas/piedra_gris_rugosidad.png",
+    "metal": "texturas/piedra_gris_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

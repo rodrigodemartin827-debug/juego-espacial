@@ -1,0 +1,35 @@
+{
+  "id": "pedernal",
+  "numero": 9,
+  "nombre": "Pedernal",
+  "descripcion": "Piedra negra brillante de bordes afilados, partida en lascas.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 2,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.07,
+    1.38,
+    1.1
+  ],
+  "partes": [
+    {
+      "nombre": "pedernal",
+      "triangulos": 1600,
+      "Material": "Basalt",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/pedernal_color.png",
+    "normal": "texturas/pedernal_normal.png",
+    "rugosidad": "texturas/pedernal_rugosidad.png",
+    "metal": "texturas/pedernal_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}

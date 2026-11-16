@@ -1,0 +1,35 @@
+{
+  "id": "piedra_caliza",
+  "numero": 4,
+  "nombre": "Piedra caliza",
+  "descripcion": "Roca blanca y crema con las capas a la vista.",
+  "rareza": "Común",
+  "color_hud": "#FFFFFF",
+  "aparicion_rareza_pct": 35.0,
+  "aparicion_pct": 1.4,
+  "valor": 2,
+  "triangulos": 1600,
+  "tamano_studs": [
+    2.73,
+    2.09,
+    1.52
+  ],
+  "partes": [
+    {
+      "nombre": "piedra_caliza",
+      "triangulos": 1600,
+      "Material": "Limestone",
+      "SurfaceAppearance": "ColorMap, NormalMap, RoughnessMap, MetalnessMap"
+    }
+  ],
+  "texturas": {
+    "color": "texturas/piedra_caliza_color.png",
+    "normal": "texturas/piedra_caliza_normal.png",
+    "rugosidad": "texturas/piedra_caliza_rugosidad.png",
+    "metal": "texturas/piedra_caliza_metal.png"
+  },
+  "atlas": "1024x1024",
+  "luz_recomendada": null,
+  "escala": "1 unidad de Blender = 1 stud (FBX con Apply Scalings = FBX All)",
+  "giro_importacion": "180° en el eje vertical (Y de Roblox) aplicado antes de exportar"
+}
