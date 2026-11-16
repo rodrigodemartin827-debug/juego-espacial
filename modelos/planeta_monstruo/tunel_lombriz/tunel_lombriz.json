@@ -1,0 +1,60 @@
+{
+  "nombre": "tunel_lombriz",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Entrada a túnel subterráneo: agujero redondo con bordes de carne y anillos musculares.",
+  "triangulos": 6392,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 3.0,
+    "z": 4.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 4,
+    "alto": 3
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "tunel",
+      "triangulos": 6392,
+      "tamano_studs": [
+        4.01,
+        3.0,
+        4.01
+      ],
+      "centro": [
+        0.002,
+        1.5,
+        0.0
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "tunel_lombriz_color.png",
+    "normal": "tunel_lombriz_normal.png",
+    "roughness": "tunel_lombriz_roughness.png",
+    "metalness": "tunel_lombriz_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 6392,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.01,
+      4.01,
+      3.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

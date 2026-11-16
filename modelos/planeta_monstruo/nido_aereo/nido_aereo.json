@@ -1,0 +1,60 @@
+{
+  "nombre": "nido_aereo",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Nido aéreo: cuelga de raíces, hecho de ramas y seda, como un avispero gigante.",
+  "triangulos": 5793,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 6.0,
+    "y": 5.0,
+    "z": 6.0
+  },
+  "tamano_pedido": {
+    "ancho": 6,
+    "fondo": 6,
+    "alto": 5
+  },
+  "origen": "centro de la parte de arriba (cuelga)",
+  "piezas": [
+    {
+      "nombre": "nido",
+      "triangulos": 5797,
+      "tamano_studs": [
+        6.0,
+        5.01,
+        6.01
+      ],
+      "centro": [
+        -0.0,
+        -2.502,
+        -0.004
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "nido_aereo_color.png",
+    "normal": "nido_aereo_normal.png",
+    "roughness": "nido_aereo_roughness.png",
+    "metalness": "nido_aereo_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 5793,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      6.0,
+      6.01,
+      5.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "nombre": "cueva_incubadora",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Cueva incubadora: suelo pegajoso, huevos translúcidos con embriones que brillan en verde y paredes con mucosidad.",
+  "triangulos": 7586,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 10.0,
+    "y": 6.0,
+    "z": 8.0
+  },
+  "tamano_pedido": {
+    "ancho": 10,
+    "fondo": 8,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "cueva",
+      "triangulos": 5714,
+      "tamano_studs": [
+        10.0,
+        6.01,
+        8.0
+      ],
+      "centro": [
+        -0.0,
+        3.003,
+        -0.001
+      ]
+    },
+    {
+      "nombre": "huevos_cristal",
+      "triangulos": 900,
+      "tamano_studs": [
+        6.38,
+        1.66,
+        4.72
+      ],
+      "centro": [
+        -0.082,
+        1.056,
+        0.344
+      ],
+      "roblox": {
+        "material": "Glass",
+        "color": "#9AC27A",
+        "transparencia": 0.45
+      }
+    },
+    {
+      "nombre": "embriones_neon",
+      "triangulos": 972,
+      "tamano_studs": [
+        5.88,
+        0.84,
+        4.26
+      ],
+      "centro": [
+        -0.109,
+        0.822,
+        0.366
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "cueva_incubadora_color.png",
+    "normal": "cueva_incubadora_normal.png",
+    "roughness": "cueva_incubadora_roughness.png",
+    "metalness": "cueva_incubadora_metalness.png",
+    "emision": "cueva_incubadora_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 3,
+    "triangulos": 7586,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      10.0,
+      8.0,
+      6.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

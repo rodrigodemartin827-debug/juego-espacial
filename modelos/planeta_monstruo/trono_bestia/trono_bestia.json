@@ -1,0 +1,79 @@
+{
+  "nombre": "trono_bestia",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Trono del jefe: cráneo de una bestia gigante con la mandíbula abierta como asiento y los ojos encendidos.",
+  "triangulos": 7626,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 5.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 3,
+    "alto": 5
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "trono",
+      "triangulos": 7466,
+      "tamano_studs": [
+        4.0,
+        5.0,
+        3.0
+      ],
+      "centro": [
+        0.0,
+        2.5,
+        -0.0
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 160,
+      "tamano_studs": [
+        1.75,
+        0.49,
+        0.43
+      ],
+      "centro": [
+        -0.0,
+        3.099,
+        -0.127
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "trono_bestia_color.png",
+    "normal": "trono_bestia_normal.png",
+    "roughness": "trono_bestia_roughness.png",
+    "metalness": "trono_bestia_metalness.png",
+    "emision": "trono_bestia_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 7626,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.0,
+      3.0,
+      5.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

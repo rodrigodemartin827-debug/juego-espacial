@@ -1,0 +1,60 @@
+{
+  "nombre": "puente_tentaculo",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Puente orgánico: tentáculos entrelazados y endurecidos, con ventosas visibles, que salvan un hueco.",
+  "triangulos": 7880,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 12.0,
+    "y": 1.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 12,
+    "fondo": 3,
+    "alto": 1
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "puente",
+      "triangulos": 7880,
+      "tamano_studs": [
+        12.01,
+        1.01,
+        3.01
+      ],
+      "centro": [
+        0.001,
+        0.496,
+        0.0
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "puente_tentaculo_color.png",
+    "normal": "puente_tentaculo_normal.png",
+    "roughness": "puente_tentaculo_roughness.png",
+    "metalness": "puente_tentaculo_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 7880,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      12.01,
+      3.01,
+      1.01
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

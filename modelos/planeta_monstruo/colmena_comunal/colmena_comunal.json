@@ -1,0 +1,80 @@
+{
+  "nombre": "colmena_comunal",
+  "zona": "guaridas",
+  "clase": "grande",
+  "descripcion": "Colmena comunal: panal orgánico gigante de celdas hexagonales, con varias entradas y resina brillante.",
+  "triangulos": 13434,
+  "presupuesto_triangulos": 15000,
+  "tamano_studs": {
+    "x": 16.0,
+    "y": 12.0,
+    "z": 14.0
+  },
+  "tamano_pedido": {
+    "ancho": 16,
+    "fondo": 14,
+    "alto": 12
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "colmena",
+      "triangulos": 11168,
+      "tamano_studs": [
+        16.04,
+        12.0,
+        14.02
+      ],
+      "centro": [
+        -0.003,
+        5.999,
+        0.005
+      ]
+    },
+    {
+      "nombre": "resina_neon",
+      "triangulos": 2266,
+      "tamano_studs": [
+        12.67,
+        9.1,
+        10.5
+      ],
+      "centro": [
+        0.152,
+        5.555,
+        -0.03
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF",
+        "transparencia": 0.15
+      }
+    }
+  ],
+  "texturas": {
+    "color": "colmena_comunal_color.png",
+    "normal": "colmena_comunal_normal.png",
+    "roughness": "colmena_comunal_roughness.png",
+    "metalness": "colmena_comunal_metalness.png",
+    "emision": "colmena_comunal_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 13434,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      16.04,
+      14.02,
+      12.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

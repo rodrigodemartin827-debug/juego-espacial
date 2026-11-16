@@ -1,0 +1,97 @@
+{
+  "nombre": "guarida_alfa",
+  "zona": "guaridas",
+  "clase": "grande",
+  "descripcion": "Guarida del líder: cueva orgánica con la entrada como las fauces abiertas de una bestia gigante, venas violeta, suelo de carne y estalactitas de hueso.",
+  "triangulos": 12734,
+  "presupuesto_triangulos": 15000,
+  "tamano_studs": {
+    "x": 20.0,
+    "y": 14.0,
+    "z": 18.0
+  },
+  "tamano_pedido": {
+    "ancho": 20,
+    "fondo": 18,
+    "alto": 14
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "guarida",
+      "triangulos": 11314,
+      "tamano_studs": [
+        20.01,
+        14.0,
+        18.01
+      ],
+      "centro": [
+        0.006,
+        6.999,
+        0.002
+      ]
+    },
+    {
+      "nombre": "venas_neon",
+      "triangulos": 1260,
+      "tamano_studs": [
+        16.09,
+        10.58,
+        12.39
+      ],
+      "centro": [
+        -1.364,
+        6.46,
+        -2.528
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 160,
+      "tamano_studs": [
+        11.94,
+        1.44,
+        1.36
+      ],
+      "centro": [
+        -0.144,
+        8.247,
+        3.518
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "guarida_alfa_color.png",
+    "normal": "guarida_alfa_normal.png",
+    "roughness": "guarida_alfa_roughness.png",
+    "metalness": "guarida_alfa_metalness.png",
+    "emision": "guarida_alfa_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 3,
+    "triangulos": 12734,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      20.01,
+      18.01,
+      14.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

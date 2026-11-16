@@ -1,0 +1,79 @@
+{
+  "nombre": "nido_comun",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Nido básico: cúpula de piel curtida con placas de quitina, entrada ovalada sin puerta e interior oscuro con bulbos bioluminiscentes.",
+  "triangulos": 6800,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 8.0,
+    "y": 6.0,
+    "z": 8.0
+  },
+  "tamano_pedido": {
+    "ancho": 8,
+    "fondo": 8,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "nido",
+      "triangulos": 6396,
+      "tamano_studs": [
+        7.99,
+        5.82,
+        7.88
+      ],
+      "centro": [
+        0.007,
+        3.089,
+        -0.072
+      ]
+    },
+    {
+      "nombre": "bulbos_biolum",
+      "triangulos": 404,
+      "tamano_studs": [
+        2.48,
+        4.4,
+        5.06
+      ],
+      "centro": [
+        0.009,
+        2.2,
+        1.469
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "nido_comun_color.png",
+    "normal": "nido_comun_normal.png",
+    "roughness": "nido_comun_roughness.png",
+    "metalness": "nido_comun_metalness.png",
+    "emision": "nido_comun_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 6800,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      7.99,
+      8.01,
+      6.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

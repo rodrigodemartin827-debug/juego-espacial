@@ -1,0 +1,60 @@
+{
+  "nombre": "nido_guerrero",
+  "zona": "guaridas",
+  "clase": "mediana",
+  "descripcion": "Nido de guerrero: blindado con bandas de quitina, espinas por fuera y trofeos de hueso colgados en la entrada.",
+  "triangulos": 7878,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 10.0,
+    "y": 7.0,
+    "z": 8.0
+  },
+  "tamano_pedido": {
+    "ancho": 10,
+    "fondo": 8,
+    "alto": 7
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "nido",
+      "triangulos": 7878,
+      "tamano_studs": [
+        10.01,
+        7.0,
+        8.0
+      ],
+      "centro": [
+        -0.003,
+        3.5,
+        0.001
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "nido_guerrero_color.png",
+    "normal": "nido_guerrero_normal.png",
+    "roughness": "nido_guerrero_roughness.png",
+    "metalness": "nido_guerrero_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 7878,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      10.01,
+      8.0,
+      7.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}
