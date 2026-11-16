@@ -1,0 +1,266 @@
+{
+  "nombre": "casco_caza_t3",
+  "titulo": "Casco de caza (avanzado)",
+  "categoria": "casco",
+  "tier": 3,
+  "estilo": "Avanzado",
+  "triangulos": 4372,
+  "limite_triangulos": 5000,
+  "tamano": [
+    3.999,
+    3.788,
+    15.31
+  ],
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "ejes": "Roblox: delante -Z, arriba +Y, derecha +X. Posiciones relativas al centro de la malla del acople",
+  "giro_importacion": 180,
+  "mallas": [
+    {
+      "nombre": "casco_caza_t3",
+      "triangulos": 3876,
+      "tamano": [
+        3.999,
+        3.788,
+        15.31
+      ],
+      "centro": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "material_roblox": "SurfaceAppearance",
+      "texturas": {
+        "color": "texturas/casco_caza_t3_color.png",
+        "normal": "texturas/casco_caza_t3_normal.png",
+        "rugosidad": "texturas/casco_caza_t3_rugosidad.png",
+        "metal": "texturas/casco_caza_t3_metal.png",
+        "emision": "texturas/casco_caza_t3_emision.png"
+      }
+    },
+    {
+      "nombre": "casco_caza_t3_neon",
+      "triangulos": 248,
+      "tamano": [
+        3.113,
+        0.535,
+        12.019
+      ],
+      "centro": [
+        0.0,
+        0.358,
+        0.142
+      ],
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "casco_caza_t3_neon2",
+      "triangulos": 248,
+      "tamano": [
+        2.971,
+        0.261,
+        9.765
+      ],
+      "centro": [
+        0.0,
+        -0.124,
+        0.214
+      ],
+      "material_roblox": "Neon",
+      "color": "#2A8CFF"
+    }
+  ],
+  "puntos_acople": [
+    {
+      "nombre": "acople_lateral_izq",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        -1.949,
+        0.274,
+        0.745
+      ],
+      "orientacion": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_lateral_der",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        1.949,
+        0.274,
+        0.745
+      ],
+      "orientacion": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_LATERAL",
+      "direccion": "salida",
+      "brida": 1.6
+    },
+    {
+      "nombre": "acople_motor",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        0.0,
+        0.326,
+        7.605
+      ],
+      "orientacion": [
+        0.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_TRASERO",
+      "direccion": "salida",
+      "brida": 2.4
+    },
+    {
+      "nombre": "acople_cabina",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        0.0,
+        1.371,
+        -2.555
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_superior_cola",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        0.0,
+        1.844,
+        5.395
+      ],
+      "orientacion": [
+        90.0,
+        180.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_SUPERIOR",
+      "direccion": "salida",
+      "brida": 2.0
+    },
+    {
+      "nombre": "acople_inferior",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        0.0,
+        -1.239,
+        0.595
+      ],
+      "orientacion": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "arriba": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "tipo": "CASCO_INFERIOR",
+      "direccion": "salida",
+      "brida": 1.2
+    },
+    {
+      "nombre": "acople_frontal",
+      "malla": "casco_caza_t3",
+      "posicion": [
+        0.0,
+        -0.861,
+        -5.045
+      ],
+      "orientacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "arriba": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tipo": "CASCO_FRONTAL",
+      "direccion": "salida",
+      "brida": 1.2
+    }
+  ],
+  "plazas": 1,
+  "descripcion": "Fuselaje de caza avanzado y agresivo, con aristas marcadas y líneas de neón cian."
+}
