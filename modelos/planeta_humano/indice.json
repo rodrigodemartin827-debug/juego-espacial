@@ -1,6 +1,202 @@
 {
  "modelos": [
   {
+   "numero": 1,
+   "nombre": "casa_pequena_a",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 1252,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 6.0,
+    "fondo_z": 8.35
+   },
+   "piezas": [
+    "casa_pequena_a",
+    "casa_pequena_a_cristal",
+    "casa_pequena_a_neon",
+    "casa_pequena_a_puerta"
+   ]
+  },
+  {
+   "numero": 2,
+   "nombre": "casa_pequena_b",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 3748,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 6.22,
+    "fondo_z": 8.33
+   },
+   "piezas": [
+    "casa_pequena_b",
+    "casa_pequena_b_cristal",
+    "casa_pequena_b_neon",
+    "casa_pequena_b_puerta"
+   ]
+  },
+  {
+   "numero": 3,
+   "nombre": "casa_pequena_c",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 1436,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 6.0,
+    "fondo_z": 8.0
+   },
+   "piezas": [
+    "casa_pequena_c",
+    "casa_pequena_c_cristal",
+    "casa_pequena_c_neon",
+    "casa_pequena_c_puerta",
+    "casa_pequena_c_rojo_neon"
+   ]
+  },
+  {
+   "numero": 4,
+   "nombre": "casa_mediana_a",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2830,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 10.25,
+    "fondo_z": 10.0
+   },
+   "piezas": [
+    "casa_mediana_a",
+    "casa_mediana_a_cristal",
+    "casa_mediana_a_neon",
+    "casa_mediana_a_puerta",
+    "casa_mediana_a_puerta_alta"
+   ]
+  },
+  {
+   "numero": 5,
+   "nombre": "casa_mediana_b",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2438,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 11.05,
+    "fondo_z": 10.0
+   },
+   "piezas": [
+    "casa_mediana_b",
+    "casa_mediana_b_amarillo_neon",
+    "casa_mediana_b_cristal",
+    "casa_mediana_b_neon",
+    "casa_mediana_b_puerta",
+    "casa_mediana_b_puerta_garaje"
+   ]
+  },
+  {
+   "numero": 6,
+   "nombre": "casa_grande",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 5228,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 12.62,
+    "fondo_z": 12.0
+   },
+   "piezas": [
+    "casa_grande",
+    "casa_grande_cristal",
+    "casa_grande_neon",
+    "casa_grande_puerta_der",
+    "casa_grande_puerta_izq",
+    "casa_grande_rojo_neon"
+   ]
+  },
+  {
+   "numero": 7,
+   "nombre": "apartamento_bloque",
+   "zona": "Zona residencial",
+   "categoria": "edificio_grande",
+   "triangulos": 5956,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 16.05,
+    "fondo_z": 10.1
+   },
+   "piezas": [
+    "apartamento_bloque",
+    "apartamento_bloque_cristal",
+    "apartamento_bloque_neon",
+    "apartamento_bloque_puerta_azotea",
+    "apartamento_bloque_puerta_der",
+    "apartamento_bloque_puerta_emergencia_1",
+    "apartamento_bloque_puerta_emergencia_2",
+    "apartamento_bloque_puerta_izq",
+    "apartamento_bloque_verde_neon"
+   ]
+  },
+  {
+   "numero": 8,
+   "nombre": "farola_residencial",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1292,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 0.9,
+    "alto_y": 7.9,
+    "fondo_z": 1.0
+   },
+   "piezas": [
+    "farola_residencial",
+    "farola_residencial_neon"
+   ]
+  },
+  {
+   "numero": 9,
+   "nombre": "banco_parque",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 942,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 1.97,
+    "fondo_z": 1.71
+   },
+   "piezas": [
+    "banco_parque",
+    "banco_parque_neon"
+   ]
+  },
+  {
+   "numero": 10,
+   "nombre": "fuente_plaza",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1936,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 6.04,
+    "alto_y": 3.0,
+    "fondo_z": 6.04
+   },
+   "piezas": [
+    "fuente_plaza",
+    "fuente_plaza_agua",
+    "fuente_plaza_neon"
+   ]
+  },
+  {
    "numero": 11,
    "nombre": "arbol_cipreses_espacial",
    "zona": "Zona residencial",
@@ -15,6 +211,164 @@
    "piezas": [
     "arbol_cipreses_espacial",
     "arbol_cipreses_espacial_neon"
+   ]
+  },
+  {
+   "numero": 12,
+   "nombre": "arbol_frutal",
+   "zona": "Zona residencial",
+   "categoria": "vegetacion",
+   "triangulos": 3938,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 7.17,
+    "alto_y": 8.24,
+    "fondo_z": 6.98
+   },
+   "piezas": [
+    "arbol_frutal"
+   ]
+  },
+  {
+   "numero": 13,
+   "nombre": "arbusto_luminoso",
+   "zona": "Zona residencial",
+   "categoria": "vegetacion",
+   "triangulos": 2280,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 2.26,
+    "alto_y": 1.61,
+    "fondo_z": 2.44
+   },
+   "piezas": [
+    "arbusto_luminoso",
+    "arbusto_luminoso_neon"
+   ]
+  },
+  {
+   "numero": 14,
+   "nombre": "cesped_modular",
+   "zona": "Zona residencial",
+   "categoria": "vegetacion",
+   "triangulos": 2788,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 0.5,
+    "fondo_z": 8.0
+   },
+   "piezas": [
+    "cesped_modular"
+   ]
+  },
+  {
+   "numero": 15,
+   "nombre": "jardinera",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1152,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.06,
+    "alto_y": 1.5,
+    "fondo_z": 1.08
+   },
+   "piezas": [
+    "jardinera",
+    "jardinera_neon"
+   ]
+  },
+  {
+   "numero": 16,
+   "nombre": "valla_residencial",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 756,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 2.99,
+    "fondo_z": 0.31
+   },
+   "piezas": [
+    "valla_residencial",
+    "valla_residencial_neon"
+   ]
+  },
+  {
+   "numero": 17,
+   "nombre": "buzon",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 608,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 0.86,
+    "alto_y": 3.01,
+    "fondo_z": 0.95
+   },
+   "piezas": [
+    "buzon",
+    "buzon_bandera",
+    "buzon_blanco_luz",
+    "buzon_neon",
+    "buzon_pantalla_neon",
+    "buzon_portezuela"
+   ]
+  },
+  {
+   "numero": 18,
+   "nombre": "contenedor_basura",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 660,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 2.04,
+    "alto_y": 2.42,
+    "fondo_z": 1.91
+   },
+   "piezas": [
+    "contenedor_basura",
+    "contenedor_basura_neon",
+    "contenedor_basura_pedal",
+    "contenedor_basura_tapa"
+   ]
+  },
+  {
+   "numero": 19,
+   "nombre": "poste_indicador",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1478,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 0.95,
+    "alto_y": 5.08,
+    "fondo_z": 0.95
+   },
+   "piezas": [
+    "poste_indicador",
+    "poste_indicador_neon"
+   ]
+  },
+  {
+   "numero": 20,
+   "nombre": "puente_peatonal",
+   "zona": "Zona residencial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2564,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 10.2,
+    "alto_y": 2.88,
+    "fondo_z": 4.0
+   },
+   "piezas": [
+    "puente_peatonal",
+    "puente_peatonal_cristal",
+    "puente_peatonal_neon"
    ]
   },
   {
@@ -1671,5 +2025,5 @@
    ]
   }
  ],
- "total": 86
+ "total": 105
 }
