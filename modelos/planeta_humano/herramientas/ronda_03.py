@@ -10,10 +10,15 @@ from registro import modelo
 def escalera_publica(m):
     # Seis peldaños macizos entre dos muretes, huellas antideslizantes, luz bajo cada mamperlán y barandillas
     n, huella, contra = 6, 0.5, 0.3
+    perfil_esc = [(-1.5, 0)]
     for i in range(n):
         y0 = -1.5 + huella * i
-        m.bloque((-1.7, y0, 0), (1.7, 1.5, contra * (i + 1) - 0.05), "gris")
-        m.bloque((-1.7, y0 - 0.04, contra * (i + 1) - 0.05), (1.7, y0 + huella, contra * (i + 1)), "rejilla")
+        perfil_esc += [(y0, contra * (i + 1) - 0.05), (y0 + huella, contra * (i + 1) - 0.05)]
+    perfil_esc += [(1.5, 1.75), (1.5, 0)]
+    m.prisma(perfil_esc, -1.7, 1.7, "gris", "yz")
+    for i in range(n):
+        y0 = -1.5 + huella * i
+        m.bloque((-1.68, y0 - 0.04, contra * (i + 1) - 0.05), (1.68, y0 + huella - 0.01, contra * (i + 1)), "rejilla")
         m.caja((0, y0 - 0.045, contra * (i + 1) - 0.09), (3.2, 0.03, 0.04), "neon")
     for sx in (-1, 1):
         perfil = [(-1.5, 0), (1.5, 0), (1.5, 2.0), (1.1, 2.0), (-1.5, 0.5)]
@@ -26,7 +31,8 @@ def escalera_publica(m):
         m.barrido([(x, -1.35, 1.52), (x, 1.0, 2.87), (x, 1.42, 2.98)], 0.06, "acero", seg=6)
         m.barrido([(x, -1.35, 1.1), (x, 1.0, 2.45), (x, 1.42, 2.56)], 0.035, "acero", seg=5)
         m.esfera((x, -1.35, 1.52), 0.08, "acero", seg=8, anillos=5)
-    m.bloque((-1.7, 1.0, 1.75), (1.7, 1.5, 1.8), "rejilla")
+    m.bloque((-1.68, 0.99, 1.75), (1.68, 1.5, 1.8), "rejilla")
+    m.caja((0, 1.52, 1.0), (3.3, 0.06, 1.4), "oscuro_paneles")
 
 
 @modelo(22, "residencial", "prop", (6, 3, 4))

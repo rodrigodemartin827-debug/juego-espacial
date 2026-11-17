@@ -33,6 +33,7 @@ class Modelo:
         self.anclajes = {}     # nombre -> (x, y, z) en coordenadas de Blender
         self.notas = []
         self.rng = random.Random(sum(ord(c) * (i + 1) for i, c in enumerate(nombre)))
+        self._rng_sep = random.Random(len(nombre) * 7919)
         self.esc = min(2.0, max(0.25, max(info["objetivo"]) / 8.0))
 
     # ------------------------------------------------------------------ interno
@@ -48,6 +49,11 @@ class Modelo:
         """Cierra la primitiva (hecha en un bmesh temporal) y la añade a la malla de su parte."""
         if M is not None:
             bmesh.ops.transform(bm, matrix=M, verts=bm.verts[:])
+        # Separación mínima (~0,001 studs) para que dos piezas nunca compartan exactamente el mismo plano:
+        # las caras coincidentes parpadean en el motor y se hornean en negro.
+        r = self._rng_sep
+        bmesh.ops.translate(bm, verts=bm.verts[:], vec=(r.uniform(-0.0012, 0.0012), r.uniform(-0.0012, 0.0012),
+                                                         r.uniform(0.0, 0.0012)))
         for f in bm.faces:
             f.material_index = idx
         bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
