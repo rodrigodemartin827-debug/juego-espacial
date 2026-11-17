@@ -1,0 +1,83 @@
+{
+  "nombre": "vagoneta_mina",
+  "numero": 51,
+  "zona": "Zona industrial",
+  "categoria": "vehiculo",
+  "triangulos": 1532,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.08,
+    "alto_y": 2.34,
+    "fondo_z": 1.9
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 2,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "vagoneta_mina",
+      "triangulos": 148,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "vagoneta_mina_mineral_neon",
+      "triangulos": 56,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "vagoneta_mina_vagoneta",
+      "triangulos": 1328,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "vagoneta_mina_color.png",
+    "roughness": "vagoneta_mina_roughness.png",
+    "metalness": "vagoneta_mina_metalness.png",
+    "emision": "vagoneta_mina_emision.png",
+    "normal": "vagoneta_mina_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.518,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "vagoneta_mina": {
+        "triangulos": 148,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "vagoneta_mina_mineral_neon": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "vagoneta_mina_vagoneta": {
+        "triangulos": 1328,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1532,
+    "tamano_reimportado": [
+      3.079,
+      1.902,
+      2.341
+    ]
+  }
+}

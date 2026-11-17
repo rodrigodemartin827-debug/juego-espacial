@@ -1,0 +1,141 @@
+{
+  "nombre": "grua_carga",
+  "numero": 54,
+  "zona": "Zona industrial",
+  "categoria": "vehiculo",
+  "triangulos": 1564,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.04,
+    "alto_y": 7.82,
+    "fondo_z": 3.94
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 8,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "grua_carga",
+      "triangulos": 492,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "grua_carga_blanco_luz",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "grua_carga_brazo_1",
+      "triangulos": 196,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "grua_carga_brazo_2",
+      "triangulos": 164,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "grua_carga_cristal",
+      "triangulos": 24,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "grua_carga_gancho",
+      "triangulos": 200,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "grua_carga_naranja_neon",
+      "triangulos": 64,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "grua_carga_torre_giratoria",
+      "triangulos": 412,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "grua_carga_color.png",
+    "roughness": "grua_carga_roughness.png",
+    "metalness": "grua_carga_metalness.png",
+    "emision": "grua_carga_emision.png",
+    "normal": "grua_carga_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.577,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "grua_carga": {
+        "triangulos": 492,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_blanco_luz": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_brazo_1": {
+        "triangulos": 196,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_brazo_2": {
+        "triangulos": 164,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_cristal": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_gancho": {
+        "triangulos": 200,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_naranja_neon": {
+        "triangulos": 64,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "grua_carga_torre_giratoria": {
+        "triangulos": 412,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1564,
+    "tamano_reimportado": [
+      3.04,
+      3.94,
+      7.815
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "nombre": "viga_mina",
+  "numero": 53,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 824,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 5.02,
+    "fondo_z": 0.82
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 5,
+    "fondo_z": 0.5
+  },
+  "piezas": [
+    {
+      "nombre": "viga_mina",
+      "triangulos": 796,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "viga_mina_amarillo_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#FFD23D"
+    }
+  ],
+  "texturas": {
+    "color": "viga_mina_color.png",
+    "roughness": "viga_mina_roughness.png",
+    "metalness": "viga_mina_metalness.png",
+    "emision": "viga_mina_emision.png",
+    "normal": "viga_mina_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.74,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "viga_mina": {
+        "triangulos": 796,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "viga_mina_amarillo_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 824,
+    "tamano_reimportado": [
+      4.001,
+      0.82,
+      5.021
+    ]
+  }
+}

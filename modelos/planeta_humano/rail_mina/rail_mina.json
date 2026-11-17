@@ -1,0 +1,59 @@
+{
+  "nombre": "rail_mina",
+  "numero": 52,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 1244,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 0.3,
+    "fondo_z": 1.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 0.3,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "rail_mina",
+      "triangulos": 1244,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "rail_mina_color.png",
+    "roughness": "rail_mina_roughness.png",
+    "metalness": "rail_mina_metalness.png",
+    "normal": "rail_mina_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.637,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "rail_mina": {
+        "triangulos": 1244,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1244,
+    "tamano_reimportado": [
+      4.002,
+      1.0,
+      0.304
+    ]
+  }
+}

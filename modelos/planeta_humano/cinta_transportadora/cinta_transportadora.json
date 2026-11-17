@@ -1,0 +1,106 @@
+{
+  "nombre": "cinta_transportadora",
+  "numero": 55,
+  "zona": "Zona industrial",
+  "categoria": "vehiculo",
+  "triangulos": 1348,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 6.12,
+    "alto_y": 2.02,
+    "fondo_z": 2.58
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 2,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "cinta_transportadora",
+      "triangulos": 752,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "cinta_transportadora_banda",
+      "triangulos": 52,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "cinta_transportadora_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "cinta_transportadora_rodillos",
+      "triangulos": 504,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "cinta_transportadora_verde_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "cinta_transportadora_color.png",
+    "roughness": "cinta_transportadora_roughness.png",
+    "metalness": "cinta_transportadora_metalness.png",
+    "emision": "cinta_transportadora_emision.png",
+    "normal": "cinta_transportadora_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.58,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "cinta_transportadora": {
+        "triangulos": 752,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cinta_transportadora_banda": {
+        "triangulos": 52,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cinta_transportadora_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cinta_transportadora_rodillos": {
+        "triangulos": 504,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cinta_transportadora_verde_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1348,
+    "tamano_reimportado": [
+      6.12,
+      2.58,
+      2.02
+    ]
+  }
+}
