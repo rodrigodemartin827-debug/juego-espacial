@@ -60,7 +60,7 @@
     "normal": "casa_grande_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.504,
+  "cobertura_atlas": 0.529,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",

@@ -196,7 +196,7 @@ def monumento_fundadores(m):
     m.caja((0, 0, 1.0), (1.84, 1.84, 0.24), "piedra_clara", bisel=0.04)
     m.caja((0, 0, 3.15), (1.9, 1.9, 0.2), "piedra_clara", bisel=0.05)
     m.caja((0, -0.82, 2.1), (1.1, 0.06, 1.2), "bronce", bisel=0.02)
-    m.texto("FUNDADORES", (0, -0.86, 2.5), 0.11, 0.02, "oro", res=1)
+    m.texto("FUNDADORES", (0, -0.86, 2.5), 0.11, 0.02, "oro", res=2)
     for k in range(4):
         m.caja((0, -0.86, 2.25 - 0.12 * k), (0.8 - 0.1 * (k % 2), 0.02, 0.04), "oro")
     m.caja((0, -0.86, 1.62), (0.9, 0.02, 0.04), "neon")

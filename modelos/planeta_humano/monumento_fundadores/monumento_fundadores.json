@@ -3,7 +3,7 @@
   "numero": 104,
   "zona": "Edificios especiales",
   "categoria": "edificio_mediano",
-  "triangulos": 2844,
+  "triangulos": 3000,
   "presupuesto_triangulos": 8000,
   "dentro_de_presupuesto": true,
   "tamano_studs": {
@@ -19,7 +19,7 @@
   "piezas": [
     {
       "nombre": "monumento_fundadores",
-      "triangulos": 2360,
+      "triangulos": 2516,
       "material_roblox": "SurfaceAppearance (atlas PBR)"
     },
     {
@@ -50,7 +50,7 @@
     "normal": "monumento_fundadores_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.484,
+  "cobertura_atlas": 0.554,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -61,8 +61,8 @@
   "verificacion_fbx": {
     "piezas": {
       "monumento_fundadores": {
-        "triangulos": 2360,
-        "aristas_abiertas": 20,
+        "triangulos": 2516,
+        "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 2
       },
@@ -85,11 +85,9 @@
         "uv": 1
       }
     },
-    "ok": false,
-    "avisos": [
-      "monumento_fundadores: 20 aristas abiertas"
-    ],
-    "triangulos": 2844,
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3000,
     "tamano_reimportado": [
       3.0,
       3.0,

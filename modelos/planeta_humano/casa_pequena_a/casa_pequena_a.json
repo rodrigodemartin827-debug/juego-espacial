@@ -49,7 +49,7 @@
     "normal": "casa_pequena_a_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.56,
+  "cobertura_atlas": 0.63,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -88,8 +88,8 @@
     "avisos": [],
     "triangulos": 1252,
     "tamano_reimportado": [
-      8.0,
-      8.354,
+      8.001,
+      8.353,
       5.999
     ]
   }

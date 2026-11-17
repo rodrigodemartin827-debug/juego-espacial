@@ -55,7 +55,7 @@
     "normal": "casa_pequena_c_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.642,
+  "cobertura_atlas": 0.619,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",

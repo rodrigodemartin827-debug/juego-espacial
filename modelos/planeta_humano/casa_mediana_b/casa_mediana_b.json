@@ -60,7 +60,7 @@
     "normal": "casa_mediana_b_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.537,
+  "cobertura_atlas": 0.522,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -111,7 +111,7 @@
     "avisos": [],
     "triangulos": 2438,
     "tamano_reimportado": [
-      10.0,
+      10.001,
       10.0,
       11.05
     ]

@@ -1,0 +1,1675 @@
+{
+ "modelos": [
+  {
+   "numero": 11,
+   "nombre": "arbol_cipreses_espacial",
+   "zona": "Zona residencial",
+   "categoria": "vegetacion",
+   "triangulos": 2622,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 3.4,
+    "alto_y": 12.56,
+    "fondo_z": 3.34
+   },
+   "piezas": [
+    "arbol_cipreses_espacial",
+    "arbol_cipreses_espacial_neon"
+   ]
+  },
+  {
+   "numero": 21,
+   "nombre": "escalera_publica",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 700,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 3.03,
+    "fondo_z": 3.11
+   },
+   "piezas": [
+    "escalera_publica",
+    "escalera_publica_neon"
+   ]
+  },
+  {
+   "numero": 22,
+   "nombre": "marquesina_parada",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 972,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 3.87,
+    "fondo_z": 3.0
+   },
+   "piezas": [
+    "marquesina_parada",
+    "marquesina_parada_cristal",
+    "marquesina_parada_naranja_neon",
+    "marquesina_parada_neon",
+    "marquesina_parada_pantalla_neon"
+   ]
+  },
+  {
+   "numero": 23,
+   "nombre": "antena_comunicaciones",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1484,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 2.1,
+    "alto_y": 7.97,
+    "fondo_z": 2.06
+   },
+   "piezas": [
+    "antena_comunicaciones",
+    "antena_comunicaciones_neon",
+    "antena_comunicaciones_rojo_neon"
+   ]
+  },
+  {
+   "numero": 24,
+   "nombre": "panel_solar_techo",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1956,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 0.28,
+    "fondo_z": 3.0
+   },
+   "piezas": [
+    "panel_solar_techo",
+    "panel_solar_techo_neon"
+   ]
+  },
+  {
+   "numero": 25,
+   "nombre": "generador_electrico",
+   "zona": "Zona residencial",
+   "categoria": "prop",
+   "triangulos": 1584,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 1.96,
+    "alto_y": 2.08,
+    "fondo_z": 1.98
+   },
+   "piezas": [
+    "generador_electrico",
+    "generador_electrico_amarillo_neon",
+    "generador_electrico_pantalla_neon",
+    "generador_electrico_rojo_neon",
+    "generador_electrico_ventilador",
+    "generador_electrico_verde_neon"
+   ]
+  },
+  {
+   "numero": 26,
+   "nombre": "tienda_armas",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2810,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 9.0,
+    "fondo_z": 10.1
+   },
+   "piezas": [
+    "tienda_armas",
+    "tienda_armas_cristal",
+    "tienda_armas_escaparate_cristal",
+    "tienda_armas_neon",
+    "tienda_armas_puerta_der",
+    "tienda_armas_puerta_izq"
+   ]
+  },
+  {
+   "numero": 27,
+   "nombre": "tienda_armaduras",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 5134,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 8.7,
+    "fondo_z": 10.1
+   },
+   "piezas": [
+    "tienda_armaduras",
+    "tienda_armaduras_cristal",
+    "tienda_armaduras_escaparate_cristal",
+    "tienda_armaduras_neon",
+    "tienda_armaduras_puerta_der",
+    "tienda_armaduras_puerta_izq"
+   ]
+  },
+  {
+   "numero": 28,
+   "nombre": "tienda_pociones",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 5692,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 8.2,
+    "fondo_z": 8.8
+   },
+   "piezas": [
+    "tienda_pociones",
+    "tienda_pociones_cristal",
+    "tienda_pociones_escaparate_cristal",
+    "tienda_pociones_neon",
+    "tienda_pociones_puerta_der",
+    "tienda_pociones_puerta_izq",
+    "tienda_pociones_verde_neon"
+   ]
+  },
+  {
+   "numero": 29,
+   "nombre": "tienda_herramientas",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2730,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 7.16,
+    "fondo_z": 8.66
+   },
+   "piezas": [
+    "tienda_herramientas",
+    "tienda_herramientas_cristal",
+    "tienda_herramientas_escaparate_cristal",
+    "tienda_herramientas_naranja_neon",
+    "tienda_herramientas_neon",
+    "tienda_herramientas_persiana",
+    "tienda_herramientas_puerta_der",
+    "tienda_herramientas_puerta_izq"
+   ]
+  },
+  {
+   "numero": 30,
+   "nombre": "tienda_naves",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2470,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 8.75,
+    "fondo_z": 13.2
+   },
+   "piezas": [
+    "tienda_naves",
+    "tienda_naves_cristal",
+    "tienda_naves_escaparate_cristal",
+    "tienda_naves_maqueta_nave",
+    "tienda_naves_naranja_neon",
+    "tienda_naves_neon",
+    "tienda_naves_puerta_der",
+    "tienda_naves_puerta_izq"
+   ]
+  },
+  {
+   "numero": 31,
+   "nombre": "puesto_fruta",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 5876,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 4.2,
+    "alto_y": 3.97,
+    "fondo_z": 3.14
+   },
+   "piezas": [
+    "puesto_fruta",
+    "puesto_fruta_neon"
+   ]
+  },
+  {
+   "numero": 32,
+   "nombre": "puesto_comida",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 3850,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 4.2,
+    "alto_y": 4.12,
+    "fondo_z": 3.14
+   },
+   "piezas": [
+    "puesto_comida",
+    "puesto_comida_naranja_neon",
+    "puesto_comida_neon"
+   ]
+  },
+  {
+   "numero": 33,
+   "nombre": "puesto_telas",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2514,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 4.2,
+    "alto_y": 3.97,
+    "fondo_z": 3.38
+   },
+   "piezas": [
+    "puesto_telas"
+   ]
+  },
+  {
+   "numero": 34,
+   "nombre": "banco_galactico",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 3856,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 8.35,
+    "fondo_z": 10.0
+   },
+   "piezas": [
+    "banco_galactico",
+    "banco_galactico_blanco_luz",
+    "banco_galactico_cristal",
+    "banco_galactico_neon",
+    "banco_galactico_pantalla_neon",
+    "banco_galactico_puerta_acorazada",
+    "banco_galactico_rojo_neon",
+    "banco_galactico_verde_neon"
+   ]
+  },
+  {
+   "numero": 35,
+   "nombre": "restaurante",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 5380,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 8.65,
+    "fondo_z": 10.0
+   },
+   "piezas": [
+    "restaurante",
+    "restaurante_blanco_luz",
+    "restaurante_cristal",
+    "restaurante_menu_neon",
+    "restaurante_naranja_neon",
+    "restaurante_neon",
+    "restaurante_puerta_der",
+    "restaurante_puerta_izq"
+   ]
+  },
+  {
+   "numero": 36,
+   "nombre": "bar_cantina",
+   "zona": "Zona comercial",
+   "categoria": "edificio_mediano",
+   "triangulos": 7044,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 7.05,
+    "fondo_z": 10.0
+   },
+   "piezas": [
+    "bar_cantina",
+    "bar_cantina_amarillo_neon",
+    "bar_cantina_azul_neon",
+    "bar_cantina_cristal",
+    "bar_cantina_rosa_neon",
+    "bar_cantina_verde_neon"
+   ]
+  },
+  {
+   "numero": 37,
+   "nombre": "hospital_clinica",
+   "zona": "Zona comercial",
+   "categoria": "edificio_grande",
+   "triangulos": 3864,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 10.07,
+    "fondo_z": 12.99
+   },
+   "piezas": [
+    "hospital_clinica",
+    "hospital_clinica_blanco_luz",
+    "hospital_clinica_cristal",
+    "hospital_clinica_escaparate_cristal",
+    "hospital_clinica_neon",
+    "hospital_clinica_puerta_der",
+    "hospital_clinica_puerta_izq",
+    "hospital_clinica_rojo_neon",
+    "hospital_clinica_verde_neon"
+   ]
+  },
+  {
+   "numero": 38,
+   "nombre": "mesa_mercado",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 728,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.05,
+    "alto_y": 2.35,
+    "fondo_z": 2.07
+   },
+   "piezas": [
+    "mesa_mercado",
+    "mesa_mercado_neon"
+   ]
+  },
+  {
+   "numero": 39,
+   "nombre": "toldo_mercado",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 1330,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 5.2,
+    "alto_y": 3.23,
+    "fondo_z": 4.22
+   },
+   "piezas": [
+    "toldo_mercado",
+    "toldo_mercado_neon"
+   ]
+  },
+  {
+   "numero": 40,
+   "nombre": "cartel_holografico",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 1980,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 2.98,
+    "fondo_z": 0.32
+   },
+   "piezas": [
+    "cartel_holografico",
+    "cartel_holografico_marco_neon",
+    "cartel_holografico_naranja_neon",
+    "cartel_holografico_neon",
+    "cartel_holografico_panel_neon",
+    "cartel_holografico_texto_neon"
+   ]
+  },
+  {
+   "numero": 41,
+   "nombre": "caja_envio",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 1280,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 2.06,
+    "alto_y": 2.0,
+    "fondo_z": 2.06
+   },
+   "piezas": [
+    "caja_envio",
+    "caja_envio_neon"
+   ]
+  },
+  {
+   "numero": 42,
+   "nombre": "barril_metal",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 1260,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 1.5,
+    "alto_y": 2.05,
+    "fondo_z": 1.57
+   },
+   "piezas": [
+    "barril_metal",
+    "barril_metal_neon"
+   ]
+  },
+  {
+   "numero": 43,
+   "nombre": "estanteria_tienda",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 692,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.04,
+    "alto_y": 5.01,
+    "fondo_z": 1.04
+   },
+   "piezas": [
+    "estanteria_tienda",
+    "estanteria_tienda_neon"
+   ]
+  },
+  {
+   "numero": 44,
+   "nombre": "maniqui_expositor",
+   "zona": "Zona comercial",
+   "categoria": "prop",
+   "triangulos": 1926,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 1.29,
+    "alto_y": 5.0,
+    "fondo_z": 1.0
+   },
+   "piezas": [
+    "maniqui_expositor",
+    "maniqui_expositor_neon"
+   ]
+  },
+  {
+   "numero": 45,
+   "nombre": "carro_carga",
+   "zona": "Zona comercial",
+   "categoria": "vehiculo",
+   "triangulos": 1870,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 3.11,
+    "alto_y": 1.83,
+    "fondo_z": 1.95
+   },
+   "piezas": [
+    "carro_carga",
+    "carro_carga_neon",
+    "carro_carga_pantalla_neon",
+    "carro_carga_repulsores_neon"
+   ]
+  },
+  {
+   "numero": 46,
+   "nombre": "forja_principal",
+   "zona": "Zona industrial",
+   "categoria": "edificio_grande",
+   "triangulos": 2610,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 11.7,
+    "fondo_z": 14.0
+   },
+   "piezas": [
+    "forja_principal",
+    "forja_principal_agua",
+    "forja_principal_cristal",
+    "forja_principal_naranja_neon",
+    "forja_principal_porton"
+   ]
+  },
+  {
+   "numero": 47,
+   "nombre": "yunque_forja",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1044,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 1.86,
+    "alto_y": 2.11,
+    "fondo_z": 1.16
+   },
+   "piezas": [
+    "yunque_forja"
+   ]
+  },
+  {
+   "numero": 48,
+   "nombre": "horno_forja",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1250,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.51,
+    "alto_y": 4.04,
+    "fondo_z": 3.63
+   },
+   "piezas": [
+    "horno_forja",
+    "horno_forja_naranja_neon",
+    "horno_forja_puerta"
+   ]
+  },
+  {
+   "numero": 49,
+   "nombre": "mesa_crafting",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1412,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 2.5,
+    "fondo_z": 1.75
+   },
+   "piezas": [
+    "mesa_crafting",
+    "mesa_crafting_amarillo_neon",
+    "mesa_crafting_cajon_1",
+    "mesa_crafting_cajon_2",
+    "mesa_crafting_cajon_3",
+    "mesa_crafting_mordaza",
+    "mesa_crafting_neon",
+    "mesa_crafting_plano_neon"
+   ]
+  },
+  {
+   "numero": 50,
+   "nombre": "entrada_mina",
+   "zona": "Zona industrial",
+   "categoria": "edificio_mediano",
+   "triangulos": 2810,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 6.73,
+    "alto_y": 5.02,
+    "fondo_z": 6.74
+   },
+   "piezas": [
+    "entrada_mina",
+    "entrada_mina_amarillo_neon",
+    "entrada_mina_mineral_neon"
+   ]
+  },
+  {
+   "numero": 51,
+   "nombre": "vagoneta_mina",
+   "zona": "Zona industrial",
+   "categoria": "vehiculo",
+   "triangulos": 1532,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 3.08,
+    "alto_y": 2.34,
+    "fondo_z": 1.9
+   },
+   "piezas": [
+    "vagoneta_mina",
+    "vagoneta_mina_mineral_neon",
+    "vagoneta_mina_vagoneta"
+   ]
+  },
+  {
+   "numero": 52,
+   "nombre": "rail_mina",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1244,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 0.3,
+    "fondo_z": 1.0
+   },
+   "piezas": [
+    "rail_mina"
+   ]
+  },
+  {
+   "numero": 53,
+   "nombre": "viga_mina",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 824,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 5.02,
+    "fondo_z": 0.82
+   },
+   "piezas": [
+    "viga_mina",
+    "viga_mina_amarillo_neon"
+   ]
+  },
+  {
+   "numero": 54,
+   "nombre": "grua_carga",
+   "zona": "Zona industrial",
+   "categoria": "vehiculo",
+   "triangulos": 1564,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 3.04,
+    "alto_y": 7.82,
+    "fondo_z": 3.94
+   },
+   "piezas": [
+    "grua_carga",
+    "grua_carga_blanco_luz",
+    "grua_carga_brazo_1",
+    "grua_carga_brazo_2",
+    "grua_carga_cristal",
+    "grua_carga_gancho",
+    "grua_carga_naranja_neon",
+    "grua_carga_torre_giratoria"
+   ]
+  },
+  {
+   "numero": 55,
+   "nombre": "cinta_transportadora",
+   "zona": "Zona industrial",
+   "categoria": "vehiculo",
+   "triangulos": 1348,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 6.12,
+    "alto_y": 2.02,
+    "fondo_z": 2.58
+   },
+   "piezas": [
+    "cinta_transportadora",
+    "cinta_transportadora_banda",
+    "cinta_transportadora_pantalla_neon",
+    "cinta_transportadora_rodillos",
+    "cinta_transportadora_verde_neon"
+   ]
+  },
+  {
+   "numero": 56,
+   "nombre": "tanque_combustible_industrial",
+   "zona": "Zona industrial",
+   "categoria": "vehiculo",
+   "triangulos": 2414,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 4.95,
+    "fondo_z": 4.12
+   },
+   "piezas": [
+    "tanque_combustible_industrial",
+    "tanque_combustible_industrial_neon"
+   ]
+  },
+  {
+   "numero": 57,
+   "nombre": "silo_almacen",
+   "zona": "Zona industrial",
+   "categoria": "edificio_mediano",
+   "triangulos": 3144,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 4.7,
+    "alto_y": 9.96,
+    "fondo_z": 4.43
+   },
+   "piezas": [
+    "silo_almacen",
+    "silo_almacen_neon",
+    "silo_almacen_rojo_neon"
+   ]
+  },
+  {
+   "numero": 58,
+   "nombre": "tuberia_modular",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1560,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 1.1,
+    "fondo_z": 1.0
+   },
+   "piezas": [
+    "tuberia_modular",
+    "tuberia_modular_neon",
+    "tuberia_modular_volante"
+   ]
+  },
+  {
+   "numero": 59,
+   "nombre": "chimenea_industrial",
+   "zona": "Zona industrial",
+   "categoria": "edificio_mediano",
+   "triangulos": 3022,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 2.64,
+    "alto_y": 13.9,
+    "fondo_z": 2.2
+   },
+   "piezas": [
+    "chimenea_industrial",
+    "chimenea_industrial_neon",
+    "chimenea_industrial_rojo_neon"
+   ]
+  },
+  {
+   "numero": 60,
+   "nombre": "plataforma_elevacion",
+   "zona": "Zona industrial",
+   "categoria": "vehiculo",
+   "triangulos": 1724,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 0.5,
+    "fondo_z": 4.0
+   },
+   "piezas": [
+    "plataforma_elevacion",
+    "plataforma_elevacion_neon",
+    "plataforma_elevacion_pistones",
+    "plataforma_elevacion_tablero"
+   ]
+  },
+  {
+   "numero": 61,
+   "nombre": "deposito_minerales",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1608,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 4.46,
+    "alto_y": 2.22,
+    "fondo_z": 3.0
+   },
+   "piezas": [
+    "deposito_minerales",
+    "deposito_minerales_mineral_neon"
+   ]
+  },
+  {
+   "numero": 62,
+   "nombre": "prensa_hidraulica",
+   "zona": "Zona industrial",
+   "categoria": "vehiculo",
+   "triangulos": 1620,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 3.07,
+    "alto_y": 4.02,
+    "fondo_z": 2.01
+   },
+   "piezas": [
+    "prensa_hidraulica",
+    "prensa_hidraulica_neon",
+    "prensa_hidraulica_pantalla_neon",
+    "prensa_hidraulica_piston",
+    "prensa_hidraulica_rojo_neon",
+    "prensa_hidraulica_verde_neon"
+   ]
+  },
+  {
+   "numero": 63,
+   "nombre": "soldador_arco",
+   "zona": "Zona industrial",
+   "categoria": "prop",
+   "triangulos": 1064,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 2.0,
+    "alto_y": 2.96,
+    "fondo_z": 1.85
+   },
+   "piezas": [
+    "soldador_arco",
+    "soldador_arco_blanco_luz",
+    "soldador_arco_chispas_neon",
+    "soldador_arco_cristal",
+    "soldador_arco_naranja_neon",
+    "soldador_arco_pantalla_neon"
+   ]
+  },
+  {
+   "numero": 64,
+   "nombre": "almacen_industrial",
+   "zona": "Zona industrial",
+   "categoria": "edificio_grande",
+   "triangulos": 3026,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 7.95,
+    "fondo_z": 12.54
+   },
+   "piezas": [
+    "almacen_industrial",
+    "almacen_industrial_blanco_luz",
+    "almacen_industrial_cristal",
+    "almacen_industrial_neon",
+    "almacen_industrial_porton_der",
+    "almacen_industrial_porton_izq"
+   ]
+  },
+  {
+   "numero": 65,
+   "nombre": "torre_energia",
+   "zona": "Zona industrial",
+   "categoria": "edificio_mediano",
+   "triangulos": 3926,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 3.17,
+    "alto_y": 12.08,
+    "fondo_z": 3.0
+   },
+   "piezas": [
+    "torre_energia",
+    "torre_energia_cables_neon",
+    "torre_energia_conducto_neon",
+    "torre_energia_neon"
+   ]
+  },
+  {
+   "numero": 66,
+   "nombre": "hangar_principal",
+   "zona": "Zona del hangar",
+   "categoria": "edificio_grande",
+   "triangulos": 5294,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 24.0,
+    "alto_y": 14.67,
+    "fondo_z": 20.2
+   },
+   "piezas": [
+    "hangar_principal",
+    "hangar_principal_blanco_luz",
+    "hangar_principal_carro_grua",
+    "hangar_principal_cristal",
+    "hangar_principal_naranja_neon",
+    "hangar_principal_neon",
+    "hangar_principal_pantalla_neon",
+    "hangar_principal_porton_der",
+    "hangar_principal_porton_izq",
+    "hangar_principal_puente_grua",
+    "hangar_principal_rojo_neon"
+   ]
+  },
+  {
+   "numero": 67,
+   "nombre": "plataforma_aterrizaje",
+   "zona": "Zona del hangar",
+   "categoria": "edificio_mediano",
+   "triangulos": 2448,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 0.76,
+    "fondo_z": 12.9
+   },
+   "piezas": [
+    "plataforma_aterrizaje",
+    "plataforma_aterrizaje_naranja_neon",
+    "plataforma_aterrizaje_neon"
+   ]
+  },
+  {
+   "numero": 68,
+   "nombre": "brazo_mecanico_hangar",
+   "zona": "Zona del hangar",
+   "categoria": "vehiculo",
+   "triangulos": 1696,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 2.0,
+    "alto_y": 8.0,
+    "fondo_z": 2.24
+   },
+   "piezas": [
+    "brazo_mecanico_hangar",
+    "brazo_mecanico_hangar_brazo_inferior",
+    "brazo_mecanico_hangar_brazo_superior",
+    "brazo_mecanico_hangar_muneca",
+    "brazo_mecanico_hangar_neon",
+    "brazo_mecanico_hangar_pantalla_neon",
+    "brazo_mecanico_hangar_pinza",
+    "brazo_mecanico_hangar_torreta"
+   ]
+  },
+  {
+   "numero": 69,
+   "nombre": "consola_control_hangar",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 1240,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 1.9,
+    "alto_y": 3.0,
+    "fondo_z": 1.0
+   },
+   "piezas": [
+    "consola_control_hangar",
+    "consola_control_hangar_amarillo_neon",
+    "consola_control_hangar_holograma_marco_neon",
+    "consola_control_hangar_holograma_neon",
+    "consola_control_hangar_naranja_neon",
+    "consola_control_hangar_neon",
+    "consola_control_hangar_pantalla_neon",
+    "consola_control_hangar_rojo_neon",
+    "consola_control_hangar_verde_neon"
+   ]
+  },
+  {
+   "numero": 70,
+   "nombre": "rack_piezas_nave",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 1992,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 6.1,
+    "alto_y": 6.0,
+    "fondo_z": 2.1
+   },
+   "piezas": [
+    "rack_piezas_nave",
+    "rack_piezas_nave_cristal",
+    "rack_piezas_nave_neon"
+   ]
+  },
+  {
+   "numero": 71,
+   "nombre": "cable_combustible",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 1314,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.48,
+    "alto_y": 1.0,
+    "fondo_z": 0.9
+   },
+   "piezas": [
+    "cable_combustible",
+    "cable_combustible_neon"
+   ]
+  },
+  {
+   "numero": 72,
+   "nombre": "luz_baliza_hangar",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 756,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 0.49,
+    "alto_y": 0.48,
+    "fondo_z": 0.5
+   },
+   "piezas": [
+    "luz_baliza_hangar",
+    "luz_baliza_hangar_naranja_neon",
+    "luz_baliza_hangar_neon"
+   ]
+  },
+  {
+   "numero": 73,
+   "nombre": "escalera_nave",
+   "zona": "Zona del hangar",
+   "categoria": "vehiculo",
+   "triangulos": 1008,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 4.09,
+    "fondo_z": 1.04
+   },
+   "piezas": [
+    "escalera_nave",
+    "escalera_nave_neon"
+   ]
+  },
+  {
+   "numero": 74,
+   "nombre": "caja_herramientas_hangar",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 1664,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 2.36,
+    "alto_y": 3.05,
+    "fondo_z": 1.55
+   },
+   "piezas": [
+    "caja_herramientas_hangar",
+    "caja_herramientas_hangar_cajon_1",
+    "caja_herramientas_hangar_cajon_2",
+    "caja_herramientas_hangar_cajon_3",
+    "caja_herramientas_hangar_cajon_4",
+    "caja_herramientas_hangar_cajon_5",
+    "caja_herramientas_hangar_cajon_cofre_1",
+    "caja_herramientas_hangar_cajon_cofre_2",
+    "caja_herramientas_hangar_neon",
+    "caja_herramientas_hangar_tapa"
+   ]
+  },
+  {
+   "numero": 75,
+   "nombre": "pantalla_estado_nave",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 896,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 2.0,
+    "fondo_z": 0.24
+   },
+   "piezas": [
+    "pantalla_estado_nave",
+    "pantalla_estado_nave_amarillo_neon",
+    "pantalla_estado_nave_esquema_neon",
+    "pantalla_estado_nave_marco_neon",
+    "pantalla_estado_nave_naranja_neon",
+    "pantalla_estado_nave_panel_neon",
+    "pantalla_estado_nave_rojo_neon",
+    "pantalla_estado_nave_verde_neon"
+   ]
+  },
+  {
+   "numero": 76,
+   "nombre": "extintor",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 808,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 0.45,
+    "alto_y": 1.4,
+    "fondo_z": 0.49
+   },
+   "piezas": [
+    "extintor",
+    "extintor_neon",
+    "extintor_verde_neon"
+   ]
+  },
+  {
+   "numero": 77,
+   "nombre": "barrera_seguridad",
+   "zona": "Zona del hangar",
+   "categoria": "prop",
+   "triangulos": 1300,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 2.0,
+    "fondo_z": 0.29
+   },
+   "piezas": [
+    "barrera_seguridad",
+    "barrera_seguridad_cinta",
+    "barrera_seguridad_neon"
+   ]
+  },
+  {
+   "numero": 78,
+   "nombre": "contenedor_envio_grande",
+   "zona": "Zona del hangar",
+   "categoria": "vehiculo",
+   "triangulos": 2180,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 6.17,
+    "alto_y": 3.0,
+    "fondo_z": 3.06
+   },
+   "piezas": [
+    "contenedor_envio_grande",
+    "contenedor_envio_grande_candado",
+    "contenedor_envio_grande_neon",
+    "contenedor_envio_grande_puerta_der",
+    "contenedor_envio_grande_puerta_izq"
+   ]
+  },
+  {
+   "numero": 79,
+   "nombre": "montacargas",
+   "zona": "Zona del hangar",
+   "categoria": "vehiculo",
+   "triangulos": 1800,
+   "presupuesto": 10000,
+   "tamano_studs": {
+    "ancho_x": 3.48,
+    "alto_y": 2.86,
+    "fondo_z": 1.84
+   },
+   "piezas": [
+    "montacargas",
+    "montacargas_blanco_luz",
+    "montacargas_carga",
+    "montacargas_horquilla",
+    "montacargas_naranja_neon",
+    "montacargas_pantalla_neon",
+    "montacargas_repulsores_neon",
+    "montacargas_rojo_neon"
+   ]
+  },
+  {
+   "numero": 80,
+   "nombre": "torre_control",
+   "zona": "Zona del hangar",
+   "categoria": "edificio_grande",
+   "triangulos": 2858,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 3.7,
+    "alto_y": 14.11,
+    "fondo_z": 3.7
+   },
+   "piezas": [
+    "torre_control",
+    "torre_control_cristal",
+    "torre_control_neon",
+    "torre_control_pantallas_neon",
+    "torre_control_puerta",
+    "torre_control_radar",
+    "torre_control_rojo_neon"
+   ]
+  },
+  {
+   "numero": 81,
+   "nombre": "arbol_roble_espacial",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 3126,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 6.93,
+    "alto_y": 13.32,
+    "fondo_z": 6.72
+   },
+   "piezas": [
+    "arbol_roble_espacial",
+    "arbol_roble_espacial_neon"
+   ]
+  },
+  {
+   "numero": 82,
+   "nombre": "arbol_pino_espacial",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 3232,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 3.3,
+    "alto_y": 16.04,
+    "fondo_z": 3.3
+   },
+   "piezas": [
+    "arbol_pino_espacial",
+    "arbol_pino_espacial_neon"
+   ]
+  },
+  {
+   "numero": 83,
+   "nombre": "arbol_sauce_espacial",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 3898,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 5.24,
+    "alto_y": 9.94,
+    "fondo_z": 4.96
+   },
+   "piezas": [
+    "arbol_sauce_espacial",
+    "arbol_sauce_espacial_neon"
+   ]
+  },
+  {
+   "numero": 84,
+   "nombre": "arbol_palmera_alien",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 2528,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 4.29,
+    "alto_y": 11.68,
+    "fondo_z": 4.24
+   },
+   "piezas": [
+    "arbol_palmera_alien",
+    "arbol_palmera_alien_neon"
+   ]
+  },
+  {
+   "numero": 85,
+   "nombre": "roca_grande",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 1152,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 4.47,
+    "alto_y": 2.75,
+    "fondo_z": 3.07
+   },
+   "piezas": [
+    "roca_grande"
+   ]
+  },
+  {
+   "numero": 86,
+   "nombre": "roca_formacion",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 1688,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 5.81,
+    "alto_y": 4.84,
+    "fondo_z": 4.45
+   },
+   "piezas": [
+    "roca_formacion",
+    "roca_formacion_neon"
+   ]
+  },
+  {
+   "numero": 87,
+   "nombre": "rio_segmento",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 2532,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 8.15,
+    "alto_y": 0.52,
+    "fondo_z": 4.0
+   },
+   "piezas": [
+    "rio_segmento",
+    "rio_segmento_agua"
+   ]
+  },
+  {
+   "numero": 88,
+   "nombre": "cascada_pequena",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 2632,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 4.38,
+    "alto_y": 5.87,
+    "fondo_z": 3.01
+   },
+   "piezas": [
+    "cascada_pequena",
+    "cascada_pequena_agua",
+    "cascada_pequena_espuma",
+    "cascada_pequena_neon"
+   ]
+  },
+  {
+   "numero": 89,
+   "nombre": "puente_rio_piedra",
+   "zona": "Naturaleza y terreno",
+   "categoria": "edificio_mediano",
+   "triangulos": 4888,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 8.2,
+    "alto_y": 2.86,
+    "fondo_z": 4.15
+   },
+   "piezas": [
+    "puente_rio_piedra",
+    "puente_rio_piedra_neon"
+   ]
+  },
+  {
+   "numero": 90,
+   "nombre": "flor_luminosa_a",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 482,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 0.45,
+    "alto_y": 1.01,
+    "fondo_z": 0.45
+   },
+   "piezas": [
+    "flor_luminosa_a",
+    "flor_luminosa_a_blanco_luz",
+    "flor_luminosa_a_centro_neon",
+    "flor_luminosa_a_petalos_neon"
+   ]
+  },
+  {
+   "numero": 91,
+   "nombre": "flor_luminosa_b",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 944,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 0.47,
+    "alto_y": 0.99,
+    "fondo_z": 0.41
+   },
+   "piezas": [
+    "flor_luminosa_b",
+    "flor_luminosa_b_azul_neon"
+   ]
+  },
+  {
+   "numero": 92,
+   "nombre": "hongo_luminoso",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 1406,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 1.04,
+    "alto_y": 1.94,
+    "fondo_z": 0.98
+   },
+   "piezas": [
+    "hongo_luminoso",
+    "hongo_luminoso_neon"
+   ]
+  },
+  {
+   "numero": 93,
+   "nombre": "cristal_decorativo",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 526,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 1.53,
+    "alto_y": 2.97,
+    "fondo_z": 1.58
+   },
+   "piezas": [
+    "cristal_decorativo",
+    "cristal_decorativo_cristal_neon",
+    "cristal_decorativo_neon"
+   ]
+  },
+  {
+   "numero": 94,
+   "nombre": "cesped_alien",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 3992,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 0.48,
+    "fondo_z": 8.0
+   },
+   "piezas": [
+    "cesped_alien",
+    "cesped_alien_neon"
+   ]
+  },
+  {
+   "numero": 95,
+   "nombre": "nenufar_espacial",
+   "zona": "Naturaleza y terreno",
+   "categoria": "vegetacion",
+   "triangulos": 1034,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "ancho_x": 2.0,
+    "alto_y": 0.3,
+    "fondo_z": 2.03
+   },
+   "piezas": [
+    "nenufar_espacial",
+    "nenufar_espacial_agua",
+    "nenufar_espacial_blanco_luz",
+    "nenufar_espacial_halo_neon",
+    "nenufar_espacial_neon",
+    "nenufar_espacial_petalos_neon"
+   ]
+  },
+  {
+   "numero": 96,
+   "nombre": "centro_mando",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_grande",
+   "triangulos": 5944,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 18.0,
+    "alto_y": 12.48,
+    "fondo_z": 16.0
+   },
+   "piezas": [
+    "centro_mando",
+    "centro_mando_bandera_der",
+    "centro_mando_bandera_izq",
+    "centro_mando_blanco_luz",
+    "centro_mando_cristal",
+    "centro_mando_neon",
+    "centro_mando_pantallas_neon",
+    "centro_mando_puerta_der",
+    "centro_mando_puerta_izq",
+    "centro_mando_rojo_neon"
+   ]
+  },
+  {
+   "numero": 97,
+   "nombre": "laboratorio",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_grande",
+   "triangulos": 5492,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 10.96,
+    "fondo_z": 12.1
+   },
+   "piezas": [
+    "laboratorio",
+    "laboratorio_azul_neon",
+    "laboratorio_blanco_luz",
+    "laboratorio_cristal",
+    "laboratorio_escaparate_cristal",
+    "laboratorio_neon",
+    "laboratorio_puerta_der",
+    "laboratorio_puerta_izq",
+    "laboratorio_verde_neon"
+   ]
+  },
+  {
+   "numero": 98,
+   "nombre": "academia_entrenamiento",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_grande",
+   "triangulos": 6214,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 7.87,
+    "fondo_z": 16.0
+   },
+   "piezas": [
+    "academia_entrenamiento",
+    "academia_entrenamiento_estandartes",
+    "academia_entrenamiento_naranja_neon",
+    "academia_entrenamiento_neon"
+   ]
+  },
+  {
+   "numero": 99,
+   "nombre": "torre_vigilancia",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_mediano",
+   "triangulos": 2954,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 17.57,
+    "fondo_z": 4.05
+   },
+   "piezas": [
+    "torre_vigilancia",
+    "torre_vigilancia_cristal",
+    "torre_vigilancia_foco",
+    "torre_vigilancia_foco_neon",
+    "torre_vigilancia_neon",
+    "torre_vigilancia_rojo_neon"
+   ]
+  },
+  {
+   "numero": 100,
+   "nombre": "portal_espacial",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_grande",
+   "triangulos": 4494,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 9.82,
+    "fondo_z": 2.0
+   },
+   "piezas": [
+    "portal_espacial",
+    "portal_espacial_anillo_neon",
+    "portal_espacial_blanco_luz",
+    "portal_espacial_neon",
+    "portal_espacial_ondas_neon",
+    "portal_espacial_pantalla_neon",
+    "portal_espacial_velo_neon"
+   ]
+  },
+  {
+   "numero": 101,
+   "nombre": "estacion_escudos",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_mediano",
+   "triangulos": 3664,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 5.54,
+    "alto_y": 6.0,
+    "fondo_z": 5.54
+   },
+   "piezas": [
+    "estacion_escudos",
+    "estacion_escudos_anillos_neon",
+    "estacion_escudos_arcos_neon",
+    "estacion_escudos_blanco_luz",
+    "estacion_escudos_neon",
+    "estacion_escudos_pantalla_neon",
+    "estacion_escudos_puerta",
+    "estacion_escudos_rayo_neon"
+   ]
+  },
+  {
+   "numero": 102,
+   "nombre": "deposito_agua",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_mediano",
+   "triangulos": 3906,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 12.35,
+    "fondo_z": 4.59
+   },
+   "piezas": [
+    "deposito_agua",
+    "deposito_agua_neon",
+    "deposito_agua_rojo_neon"
+   ]
+  },
+  {
+   "numero": 103,
+   "nombre": "estacion_comunicaciones",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_mediano",
+   "triangulos": 2440,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 9.42,
+    "fondo_z": 6.0
+   },
+   "piezas": [
+    "estacion_comunicaciones",
+    "estacion_comunicaciones_antena",
+    "estacion_comunicaciones_cristal",
+    "estacion_comunicaciones_neon",
+    "estacion_comunicaciones_pantalla_neon",
+    "estacion_comunicaciones_puerta",
+    "estacion_comunicaciones_rojo_neon"
+   ]
+  },
+  {
+   "numero": 104,
+   "nombre": "monumento_fundadores",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_mediano",
+   "triangulos": 3000,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 8.23,
+    "fondo_z": 3.0
+   },
+   "piezas": [
+    "monumento_fundadores",
+    "monumento_fundadores_astro_neon",
+    "monumento_fundadores_cristal",
+    "monumento_fundadores_neon"
+   ]
+  },
+  {
+   "numero": 105,
+   "nombre": "muro_perimetral",
+   "zona": "Edificios especiales",
+   "categoria": "edificio_mediano",
+   "triangulos": 2628,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 5.15,
+    "fondo_z": 1.52
+   },
+   "piezas": [
+    "muro_perimetral",
+    "muro_perimetral_blanco_luz",
+    "muro_perimetral_naranja_neon",
+    "muro_perimetral_neon",
+    "muro_perimetral_rojo_neon",
+    "muro_perimetral_torreta_1",
+    "muro_perimetral_torreta_2"
+   ]
+  }
+ ],
+ "total": 86
+}

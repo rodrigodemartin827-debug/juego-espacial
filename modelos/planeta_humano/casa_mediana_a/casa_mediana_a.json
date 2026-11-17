@@ -8,7 +8,7 @@
   "dentro_de_presupuesto": true,
   "tamano_studs": {
     "ancho_x": 10.0,
-    "alto_y": 10.3,
+    "alto_y": 10.25,
     "fondo_z": 10.0
   },
   "tamano_objetivo_studs": {
@@ -54,7 +54,7 @@
     "normal": "casa_mediana_a_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.548,
+  "cobertura_atlas": 0.539,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -99,9 +99,9 @@
     "avisos": [],
     "triangulos": 2830,
     "tamano_reimportado": [
-      10.0,
-      10.0,
-      10.3
+      10.001,
+      10.001,
+      10.251
     ]
   }
 }

@@ -290,7 +290,7 @@ class Modelo:
         bpy.data.objects.remove(ob)
         bpy.data.curves.remove(cu)
         bpy.data.meshes.remove(me)
-        bmesh.ops.remove_doubles(bm, verts=bm.verts[:], dist=1e-4)
+        bmesh.ops.remove_doubles(bm, verts=bm.verts[:], dist=min(1e-4, alto * 2e-4))
         M = self._M(c, rot) @ Matrix.Rotation(math.pi / 2, 4, "X")
         return self._fin(bm, dst, idx, M)
 
