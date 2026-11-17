@@ -1,0 +1,59 @@
+{
+  "nombre": "yunque_forja",
+  "numero": 47,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 1044,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 1.86,
+    "alto_y": 2.11,
+    "fondo_z": 1.16
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 2,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "yunque_forja",
+      "triangulos": 1044,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "yunque_forja_color.png",
+    "roughness": "yunque_forja_roughness.png",
+    "metalness": "yunque_forja_metalness.png",
+    "normal": "yunque_forja_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.429,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "yunque_forja": {
+        "triangulos": 1044,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1044,
+    "tamano_reimportado": [
+      1.86,
+      1.165,
+      2.11
+    ]
+  }
+}

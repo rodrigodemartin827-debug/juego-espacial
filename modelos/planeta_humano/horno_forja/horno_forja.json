@@ -1,0 +1,89 @@
+{
+  "nombre": "horno_forja",
+  "numero": 48,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 1250,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.51,
+    "alto_y": 4.04,
+    "fondo_z": 3.63
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 4,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "horno_forja",
+      "triangulos": 1014,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "horno_forja_naranja_neon",
+      "triangulos": 120,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "horno_forja_puerta",
+      "triangulos": 116,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "horno_forja_color.png",
+    "roughness": "horno_forja_roughness.png",
+    "metalness": "horno_forja_metalness.png",
+    "emision": "horno_forja_emision.png",
+    "normal": "horno_forja_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.349,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "humo": [
+      0,
+      4.1,
+      0.1
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "horno_forja": {
+        "triangulos": 1014,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "horno_forja_naranja_neon": {
+        "triangulos": 120,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "horno_forja_puerta": {
+        "triangulos": 116,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1250,
+    "tamano_reimportado": [
+      3.513,
+      3.628,
+      4.04
+    ]
+  }
+}

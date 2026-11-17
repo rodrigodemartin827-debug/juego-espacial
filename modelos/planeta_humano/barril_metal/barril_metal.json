@@ -1,0 +1,72 @@
+{
+  "nombre": "barril_metal",
+  "numero": 42,
+  "zona": "Zona comercial",
+  "categoria": "prop",
+  "triangulos": 1260,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 1.5,
+    "alto_y": 2.05,
+    "fondo_z": 1.57
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 1.5,
+    "alto_y": 2,
+    "fondo_z": 1.5
+  },
+  "piezas": [
+    {
+      "nombre": "barril_metal",
+      "triangulos": 1248,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "barril_metal_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "barril_metal_color.png",
+    "roughness": "barril_metal_roughness.png",
+    "metalness": "barril_metal_metalness.png",
+    "emision": "barril_metal_emision.png",
+    "normal": "barril_metal_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.362,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "barril_metal": {
+        "triangulos": 1248,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "barril_metal_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1260,
+    "tamano_reimportado": [
+      1.5,
+      1.567,
+      2.051
+    ]
+  }
+}

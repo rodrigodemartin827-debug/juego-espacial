@@ -1,0 +1,115 @@
+{
+  "nombre": "forja_principal",
+  "numero": 46,
+  "zona": "Zona industrial",
+  "categoria": "edificio_grande",
+  "triangulos": 2610,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 11.7,
+    "fondo_z": 14.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 16,
+    "alto_y": 12,
+    "fondo_z": 14
+  },
+  "piezas": [
+    {
+      "nombre": "forja_principal",
+      "triangulos": 2274,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "forja_principal_agua",
+      "triangulos": 44,
+      "material_roblox": "Glass",
+      "color": "#3FA7C9",
+      "transparencia": 0.35
+    },
+    {
+      "nombre": "forja_principal_cristal",
+      "triangulos": 60,
+      "material_roblox": "Glass",
+      "color": "#1C3B4A",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "forja_principal_naranja_neon",
+      "triangulos": 160,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "forja_principal_porton",
+      "triangulos": 72,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "forja_principal_color.png",
+    "roughness": "forja_principal_roughness.png",
+    "metalness": "forja_principal_metalness.png",
+    "emision": "forja_principal_emision.png",
+    "normal": "forja_principal_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.625,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "humo_chimenea": [
+      -6.2,
+      11.9,
+      2.5
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "forja_principal": {
+        "triangulos": 2274,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "forja_principal_agua": {
+        "triangulos": 44,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "forja_principal_cristal": {
+        "triangulos": 60,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "forja_principal_naranja_neon": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "forja_principal_porton": {
+        "triangulos": 72,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2610,
+    "tamano_reimportado": [
+      16.0,
+      14.0,
+      11.699
+    ]
+  }
+}

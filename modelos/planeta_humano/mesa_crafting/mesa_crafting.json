@@ -1,0 +1,140 @@
+{
+  "nombre": "mesa_crafting",
+  "numero": 49,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 1412,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 2.5,
+    "fondo_z": 1.75
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 2.5,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "mesa_crafting",
+      "triangulos": 1036,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "mesa_crafting_amarillo_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#FFD23D"
+    },
+    {
+      "nombre": "mesa_crafting_cajon_1",
+      "triangulos": 56,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "mesa_crafting_cajon_2",
+      "triangulos": 56,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "mesa_crafting_cajon_3",
+      "triangulos": 56,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "mesa_crafting_mordaza",
+      "triangulos": 132,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "mesa_crafting_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "mesa_crafting_plano_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "mesa_crafting_color.png",
+    "roughness": "mesa_crafting_roughness.png",
+    "metalness": "mesa_crafting_metalness.png",
+    "emision": "mesa_crafting_emision.png",
+    "normal": "mesa_crafting_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.651,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "mesa_crafting": {
+        "triangulos": 1036,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_amarillo_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_cajon_1": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_cajon_2": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_cajon_3": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_mordaza": {
+        "triangulos": 132,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_crafting_plano_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1412,
+    "tamano_reimportado": [
+      3.001,
+      1.746,
+      2.501
+    ]
+  }
+}

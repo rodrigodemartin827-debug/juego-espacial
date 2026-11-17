@@ -1,0 +1,72 @@
+{
+  "nombre": "estanteria_tienda",
+  "numero": 43,
+  "zona": "Zona comercial",
+  "categoria": "prop",
+  "triangulos": 692,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.04,
+    "alto_y": 5.01,
+    "fondo_z": 1.04
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 5,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "estanteria_tienda",
+      "triangulos": 656,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "estanteria_tienda_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "estanteria_tienda_color.png",
+    "roughness": "estanteria_tienda_roughness.png",
+    "metalness": "estanteria_tienda_metalness.png",
+    "emision": "estanteria_tienda_emision.png",
+    "normal": "estanteria_tienda_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.404,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "estanteria_tienda": {
+        "triangulos": 656,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estanteria_tienda_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 692,
+    "tamano_reimportado": [
+      3.04,
+      1.04,
+      5.006
+    ]
+  }
+}

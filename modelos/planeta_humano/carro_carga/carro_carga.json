@@ -1,0 +1,117 @@
+{
+  "nombre": "carro_carga",
+  "numero": 45,
+  "zona": "Zona comercial",
+  "categoria": "vehiculo",
+  "triangulos": 1870,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.11,
+    "alto_y": 1.83,
+    "fondo_z": 1.95
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 2,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "carro_carga",
+      "triangulos": 1658,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "carro_carga_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "carro_carga_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "carro_carga_repulsores_neon",
+      "triangulos": 176,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "carro_carga_color.png",
+    "roughness": "carro_carga_roughness.png",
+    "metalness": "carro_carga_metalness.png",
+    "emision": "carro_carga_emision.png",
+    "normal": "carro_carga_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.499,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "repulsor_if": [
+      1.05,
+      0.15,
+      -0.62
+    ],
+    "repulsor_it": [
+      1.05,
+      0.15,
+      0.62
+    ],
+    "repulsor_df": [
+      -1.05,
+      0.15,
+      -0.62
+    ],
+    "repulsor_dt": [
+      -1.05,
+      0.15,
+      0.62
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "carro_carga": {
+        "triangulos": 1658,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "carro_carga_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "carro_carga_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "carro_carga_repulsores_neon": {
+        "triangulos": 176,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1870,
+    "tamano_reimportado": [
+      3.114,
+      1.951,
+      1.831
+    ]
+  }
+}
