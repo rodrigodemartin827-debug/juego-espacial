@@ -26,7 +26,7 @@ local CENTROS: { [string]: Vector3 } = {
 	["garra_izq"] = Vector3.new(-0.743, 1.564, 0.173),
 	["ala_der"] = Vector3.new(4.686, 4.384, 0.685),
 	["garra_der"] = Vector3.new(0.74, 1.565, 0.168),
-	["cola"] = Vector3.new(0.0, 3.185, -4.895),
+	["cola"] = Vector3.new(0.0, 3.185, -4.869),
 }
 
 -- pieza = { padre, pivote }

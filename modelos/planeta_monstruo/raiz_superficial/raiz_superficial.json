@@ -3,7 +3,7 @@
   "zona": "vegetacion",
   "clase": "vegetacion",
   "descripcion": "Raíces gruesas que salen del suelo y vuelven a entrar, como las venas del planeta.",
-  "triangulos": 3900,
+  "triangulos": 3899,
   "presupuesto_triangulos": 4000,
   "tamano_studs": {
     "x": 6.0,
@@ -19,7 +19,7 @@
   "piezas": [
     {
       "nombre": "raices",
-      "triangulos": 3900,
+      "triangulos": 3899,
       "tamano_studs": [
         6.0,
         1.01,
@@ -27,8 +27,8 @@
       ],
       "centro": [
         -0.0,
-        0.499,
-        0.0
+        0.497,
+        -0.0
       ]
     }
   ],
@@ -44,7 +44,7 @@
   "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
   "verificacion_fbx": {
     "piezas": 1,
-    "triangulos": 3900,
+    "triangulos": 3899,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,

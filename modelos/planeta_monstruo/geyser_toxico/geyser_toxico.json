@@ -21,28 +21,28 @@
       "nombre": "geiser",
       "triangulos": 1150,
       "tamano_studs": [
-        2.0,
-        1.23,
+        1.99,
+        1.36,
         2.01
       ],
       "centro": [
-        -0.004,
-        0.614,
-        -0.002
+        -0.001,
+        0.678,
+        -0.004
       ]
     },
     {
       "nombre": "vapor_neon",
       "triangulos": 800,
       "tamano_studs": [
-        1.26,
-        2.08,
-        1.21
+        1.12,
+        1.93,
+        0.93
       ],
       "centro": [
-        0.055,
-        1.96,
-        -0.228
+        0.09,
+        2.038,
+        -0.217
       ],
       "roblox": {
         "material": "Neon",
@@ -70,7 +70,7 @@
     "escala_ok": true,
     "nombres_ok": true,
     "tamano_reimportado": [
-      2.0,
+      1.99,
       2.01,
       3.0
     ],

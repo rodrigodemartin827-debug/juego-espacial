@@ -1389,7 +1389,9 @@ class Modelo:
         def hornear(tipo, clave, color, muestras=1, **kw):
             img = bpy.data.images.new(f"h_{clave}", tam_img, tam_img, alpha=True, float_buffer=True)
             img.generated_color = (0, 0, 0, 0)
-            img.colorspace_settings.name = "sRGB" if color else "Non-Color"
+            # Siempre lineal: el horneado escribe en el espacio de la imagen y la conversión a sRGB se hace una sola
+            # vez, al guardar (si no, el color y la emisión salen con la gamma aplicada dos veces, lavados).
+            img.colorspace_settings.name = "Non-Color"
             scn.cycles.samples = muestras
             scn.render.bake.margin = 0
             if baja:
@@ -1596,7 +1598,9 @@ class Modelo:
                 mn_i, mx_i = np.minimum(mn_i, w), np.maximum(mx_i, w)
         t_i = mx_i - mn_i
         ver["tamano_reimportado"] = [round(float(x), 2) for x in t_i]
-        ver["escala_ok"] = bool(np.allclose(t_i, dims, rtol=0.02, atol=0.02))
+        # Sirve para pillar errores de unidades (3,57 veces más grande, ejes cambiados): se admite lo poco que
+        # pierde el decimado en las puntas.
+        ver["escala_ok"] = bool(np.all(np.abs(t_i - dims) <= 0.03 * dims.max() + 0.02))
         ver["nombres_ok"] = vistos == esperados
         ver["triangulos_ok"] = abs(ver["triangulos"] - total) <= max(2, total // 1000)
         total = ver["triangulos"]  # lo que de verdad lleva el archivo

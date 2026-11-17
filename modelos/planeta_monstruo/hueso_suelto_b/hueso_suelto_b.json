@@ -3,7 +3,7 @@
   "zona": "props",
   "clase": "prop",
   "descripcion": "Costilla grande y curvada, suelta.",
-  "triangulos": 1699,
+  "triangulos": 1700,
   "presupuesto_triangulos": 2000,
   "tamano_studs": {
     "x": 2.0,
@@ -19,15 +19,15 @@
   "piezas": [
     {
       "nombre": "costilla",
-      "triangulos": 1699,
+      "triangulos": 1700,
       "tamano_studs": [
         2.0,
         1.5,
         0.3
       ],
       "centro": [
-        0.0,
-        0.751,
+        -0.001,
+        0.75,
         -0.001
       ]
     }
@@ -44,7 +44,7 @@
   "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
   "verificacion_fbx": {
     "piezas": 1,
-    "triangulos": 1699,
+    "triangulos": 1700,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,

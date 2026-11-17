@@ -3,7 +3,7 @@
   "zona": "props",
   "clase": "prop",
   "descripcion": "Huevo de monstruo: cáscara dura con venas y un brillo verdoso por dentro.",
-  "triangulos": 1501,
+  "triangulos": 1503,
   "presupuesto_triangulos": 2000,
   "tamano_studs": {
     "x": 1.5,
@@ -19,14 +19,14 @@
   "piezas": [
     {
       "nombre": "huevo",
-      "triangulos": 1401,
+      "triangulos": 1403,
       "tamano_studs": [
         1.5,
         2.0,
         1.5
       ],
       "centro": [
-        0.001,
+        0.0,
         1.001,
         -0.001
       ]
@@ -63,7 +63,7 @@
   "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
   "verificacion_fbx": {
     "piezas": 2,
-    "triangulos": 1501,
+    "triangulos": 1503,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,

@@ -146,7 +146,7 @@ def huevo_monstruo(M):
     M.mat("baba_nido", "mucosa", a="#2E5A1E", b="#16301A", emis=(VERDE, 0.04))
     p.torno([(0, 0), (0.75, 0), (0.85, 0.12), (0.62, 0.26), (0, 0.2)], (0, 0, 0), "baba_nido", k=0.08)   # baba del nido
     n = M.pieza("interior_neon", tris=0, roblox=dict(material="Neon", color=VERDE))
-    n.duro.torno([(0, 0.24), (0.36, 0.32), (0.58, 0.72), (0.55, 1.2), (0.36, 1.66), (0.14, 1.86), (0, 1.9)], (0, 0, 0), "neon_verde", n=10)
+    n.duro.torno([(0, 0.22), (0.4, 0.3), (0.64, 0.72), (0.6, 1.2), (0.4, 1.68), (0.16, 1.9), (0, 1.94)], (0, 0, 0), "neon_verde", n=10)
 
 
 @modelo("props", "prop", (1, 1, 2), "Capullo de seda colgante: una pupa envuelta con una forma humanoide apenas visible dentro.",

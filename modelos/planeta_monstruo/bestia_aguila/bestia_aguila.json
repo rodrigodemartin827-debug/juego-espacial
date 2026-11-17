@@ -3,7 +3,7 @@
   "zona": "bestias",
   "clase": "bestia",
   "descripcion": "Águila rapaz cósmica: alas afiladas, garras enormes, pico curvo, plumas que son escamas y ojos amarillos que brillan. Interceptor veloz: 1 asiento en el lomo.",
-  "triangulos": 11855,
+  "triangulos": 12015,
   "presupuesto_triangulos": 20000,
   "tamano_studs": {
     "x": 18.0,
@@ -65,7 +65,7 @@
     },
     {
       "nombre": "ala_izq",
-      "triangulos": 1900,
+      "triangulos": 1980,
       "tamano_studs": [
         8.64,
         2.12,
@@ -93,7 +93,7 @@
     },
     {
       "nombre": "ala_der",
-      "triangulos": 1900,
+      "triangulos": 1980,
       "tamano_studs": [
         8.63,
         2.12,
@@ -125,12 +125,12 @@
       "tamano_studs": [
         3.07,
         0.34,
-        4.21
+        4.26
       ],
       "centro": [
         0.0,
         3.185,
-        -4.895
+        -4.869
       ]
     }
   ],
@@ -147,7 +147,7 @@
   "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
   "verificacion_fbx": {
     "piezas": 8,
-    "triangulos": 11855,
+    "triangulos": 12015,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,

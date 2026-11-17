@@ -3,7 +3,7 @@
   "zona": "vegetacion",
   "clase": "vegetacion",
   "descripcion": "Planta carnívora: boca abierta con dientes, interior rojo brillante y saliva viscosa.",
-  "triangulos": 3566,
+  "triangulos": 3565,
   "presupuesto_triangulos": 4000,
   "tamano_studs": {
     "x": 2.0,
@@ -19,7 +19,7 @@
   "piezas": [
     {
       "nombre": "planta",
-      "triangulos": 3566,
+      "triangulos": 3565,
       "tamano_studs": [
         2.0,
         3.0,
@@ -45,7 +45,7 @@
   "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
   "verificacion_fbx": {
     "piezas": 1,
-    "triangulos": 3566,
+    "triangulos": 3565,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,

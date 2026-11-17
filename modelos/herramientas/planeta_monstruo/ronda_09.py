@@ -119,19 +119,24 @@ def estatua_ancestro(M):
 @modelo("props", "prop", (3, 3, 0.1), "Charco de sangre en el suelo, reflectante (con algo de grosor).")
 def charco_sangre(M):
     rnd = M.rnd
-    p = M.pieza("charco", tris=1500, res=260, k=0.16, suelo=0.0)
-    M.mat("sangre_charco", "sangre", rug=0.2, rug_var=0.1, metal=0.0, relieve=0.05)
-    # Mancha irregular: lóbulos fundidos, salpicaduras y un reguero.
-    for j in range(13):
-        a = math.tau * j / 13 + rnd.uniform(-0.2, 0.2)
-        r = rnd.uniform(0.35, 0.95)
-        p.esfera((r * math.cos(a), r * math.sin(a), 0), rnd.uniform(0.3, 0.55), "sangre_charco", esc=(1, 1, 0.17))
-    p.esfera((0, 0, 0), 1, "sangre_charco", esc=(0.95, 0.85, 0.085))
-    p.tubo([(0.8, 0.3, 0), (1.1, 0.7, 0), (1.25, 1.2, 0), (1.42, 1.42, 0)], [0.16, 0.11, 0.08, 0.05], "sangre_charco")
-    for j in range(9):
+    M.mat("sangre_charco", "sangre", rug=0.12, rug_var=0.1, relieve=0.1)
+    p = M.pieza("charco", tris=0, angulo=60)
+    d = p.duro
+
+    def borde(cx, cy, r0, n, fase, z=0.0):
+        return [(cx + r0 * (1 + 0.2 * math.sin(3 * a + fase) + 0.11 * math.sin(5 * a + 2 * fase) + 0.06 * math.sin(9 * a)) * math.cos(a),
+                 cy + r0 * (1 + 0.2 * math.sin(3 * a + fase) + 0.11 * math.sin(5 * a + 2 * fase) + 0.06 * math.sin(9 * a)) * math.sin(a), z)
+                for a in np.linspace(0, math.tau, n, endpoint=False)]
+
+    # Mancha grande abombada (lámina con grosor), un lóbulo que se le une, un reguero y salpicaduras.
+    d.lamina(borde(0, 0, 1.12, 44, 1.0), 0.07, "sangre_charco", bombeo=0.03)
+    d.lamina(borde(0.75, -0.55, 0.5, 20, 2.3), 0.075, "sangre_charco", bombeo=0.025)
+    d.lamina(borde(-0.7, 0.62, 0.42, 18, 0.4), 0.075, "sangre_charco", bombeo=0.025)
+    d.tubo([(0.7, 0.5, 0.012), (1.0, 0.8, 0.012), (1.2, 1.15, 0.012), (1.42, 1.4, 0.012)], [0.15, 0.1, 0.075, 0.03], "sangre_charco", n=8, aplastar=1.0)
+    for j in range(11):
         a = rnd.uniform(0, math.tau)
-        r = rnd.uniform(1.15, 1.45)
-        p.esfera((r * math.cos(a), r * math.sin(a), 0), rnd.uniform(0.06, 0.13), "sangre_charco", esc=(1, 1, 0.5), k=0.0)
+        r = rnd.uniform(1.2, 1.46)
+        d.esfera((r * math.cos(a), r * math.sin(a), 0.01), rnd.uniform(0.05, 0.12), "sangre_charco", sub=1, esc=(1, rnd.uniform(0.6, 1.0), 0.3), rot=(0, 0, math.degrees(a)))
 
 
 @modelo("props", "prop", (2, 2, 1), "Montón de parásitos retorciéndose: una masa de gusanos y larvas.")

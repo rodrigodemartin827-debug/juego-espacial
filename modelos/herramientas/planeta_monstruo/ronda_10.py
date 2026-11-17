@@ -13,26 +13,25 @@ NEON_V = dict(material="Neon", color=VIOLETA)
 def roca_alien_a(M):
     rnd = M.rnd
 
-    def forma(p, mat, infla=0.0):
-        p.esfera((0, 0, 0.9), 1, mat, esc=(1.6, 1.2, 1.5), rot=(0, 12, 20), infla=infla)
-        p.esfera((-0.9, 0.2, 0.5), 1, mat, esc=(1.0, 0.9, 0.9), infla=infla)
-        p.esfera((0.9, -0.3, 0.6), 1, mat, esc=(0.9, 0.8, 1.1), rot=(0, -20, 0), infla=infla)
-        p.esfera((0.3, 0.5, 1.9), 1, mat, esc=(0.7, 0.6, 0.9), rot=(15, 10, 0), infla=infla)
+    def forma(p, mat, infla=0.0, **kw):
+        p.esfera((0, 0, 0.9), 1, mat, esc=(1.6, 1.2, 1.5), rot=(0, 12, 20), infla=infla, **kw)
+        p.esfera((-0.9, 0.2, 0.5), 1, mat, esc=(1.0, 0.9, 0.9), infla=infla, **kw)
+        p.esfera((0.9, -0.3, 0.6), 1, mat, esc=(0.9, 0.8, 1.1), rot=(0, -20, 0), infla=infla, **kw)
+        p.esfera((0.3, 0.5, 1.9), 1, mat, esc=(0.7, 0.6, 0.9), rot=(15, 10, 0), infla=infla, **kw)
 
-    p = M.pieza("roca", tris=1500, res=150, k=0.25, ruido=(0.14, 1.1, 4), suelo=0.0)
+    p = M.pieza("roca", tris=1500, res=150, k=0.25, ruido=(0.1, 1.1, 4), suelo=0.0)
     forma(p, "piedra")
     for (x, y, z, r) in ((1.3, 0.6, 1.3, 0.8), (-1.2, -0.7, 1.4, 0.9), (0.2, -1.2, 2.2, 0.8), (-0.5, 1.0, 2.3, 0.7)):   # tajos planos
         p.caja((x * 1.5, y * 1.5, z + 0.9), (1.6, 1.6, 1.6), None, rot=(rnd.uniform(-30, 30), rnd.uniform(20, 50), rnd.uniform(0, 90)), resta=True, k=0.05)
-    n = M.pieza("venas_neon", tris=480, res=130, suelo=0.0, roblox=NEON_V)
+    # Venas: una cáscara fina pegada a la roca, recortada por láminas que la cruzan. Quedan líneas que rodean la piedra.
+    n = M.pieza("venas_neon", tris=480, res=200, k=0.02, ruido=(0.03, 2.2), suelo=0.0, roblox=NEON_V)
     forma(n, "neon_violeta", infla=0.07)
+    forma(n, None, infla=-0.02, resta=True)
     with n.mascara():
-        for j in range(5):
-            a = j * 1.3
-            pts = [(1.9 * math.cos(a + 0.25 * i) * (1 - 0.14 * i), 1.4 * math.sin(a + 0.25 * i) * (1 - 0.14 * i), 0.1 + 0.62 * i + 0.2 * math.sin(i * 2 + j)) for i in range(5)]
-            n.tubo(pts, [0.13, 0.12, 0.1, 0.08, 0.05], "neon_violeta", suave=8)
-            q = pts[2]
-            n.tubo([q, (q[0] * 0.6, q[1] * 1.3, q[2] + 0.5)], [0.09, 0.05], "neon_violeta")
-    M.notas["venas"] = "venas_neon sigue la superficie de la roca, un poco en relieve."
+        for (c, rot) in (((0, 0, 1.0), (62, 18, 10)), ((0.2, 0.1, 1.2), (80, -35, 70)), ((-0.3, 0, 0.9), (20, 70, -30)), ((0.5, -0.2, 1.4), (-40, 50, 120))):
+            n.caja(c, (7, 7, 0.05), "neon_violeta", rot=rot)
+        n.caja((0, 0, 1.2), (7, 7, 0.04), "neon_violeta", rot=(8, -12, 0))
+    M.notas["venas"] = "venas_neon sigue la superficie de la roca: asoma a trozos, donde la piedra no la tapa."
 
 
 @modelo("terreno", "prop", (2, 2, 8), "Formación rocosa alta en aguja, de obsidiana, con cristales.")
@@ -210,11 +209,14 @@ def cueva_entrada_natural(M):
         L = rnd.uniform(0.4, 1.0)
         d.cuerno([(x, y, -0.05), (x, y, L * 0.6), (x * 0.97, y, L)], rnd.uniform(0.12, 0.2), "piedra", n=5, seg=3)
     n = M.pieza("hongos_biolum", tris=0, roblox=NEON_V)
-    for j in range(7):    # hongos de luz que marcan la entrada
-        a = 0.3 + j * 0.42
-        b = np.array([1.75 * math.cos(a), -1.75, 0.5 + 2.6 * math.sin(a)])
-        n.duro.torno([(0, 0), (0.12, 0.03), (0.16, 0.1), (0.08, 0.17), (0, 0.19)], b, "neon_violeta", n=6, eje=(0, -1, 0.3))
-        d.tubo([b + [0, 0.02, 0], b + [0.08 * math.cos(a), 0.6, 0.08 * math.sin(a)], b + [0.2 * math.cos(a), 1.3, 0.2 * math.sin(a)]], [0.035, 0.04, 0.06], "hongo_tallo", n=5)
+    for j in range(9):    # hongos de luz pegados a la pared del túnel, mirando hacia dentro
+        a = 0.2 + j * 0.34
+        y = -0.5 + 0.5 * (j % 3)
+        cz = 0.2 + (y + 3.0) / 6.0 * 0.4
+        cx = 0.3 * (y + 3.0) / 6.0
+        dentro = np.array([-math.cos(a), 0, -math.sin(a)])
+        b = np.array([cx + 1.62 * math.cos(a), y, cz + 1.62 * math.sin(a)])
+        n.duro.torno([(0, -0.15), (0.1, 0.0), (0.17, 0.1), (0.09, 0.2), (0, 0.23)], b, "neon_violeta", n=6, eje=dentro)
 
 
 @modelo("terreno", "mediana", (4, 4, 8), "Columnas de basalto hexagonales alienígenas, negras con vetas púrpura.")

@@ -19,35 +19,35 @@ local RAIZ = "cuerpo"
 
 -- Centro de cada pieza (así se sabe dónde ha quedado el origen del modelo al importarlo).
 local CENTROS: { [string]: Vector3 } = {
-	["cuerpo"] = Vector3.new(-0.0, 3.053, -0.855),
-	["cabeza"] = Vector3.new(-0.002, 3.813, 2.272),
-	["ojos_neon"] = Vector3.new(-0.0, 2.649, 1.978),
-	["elitro_izq"] = Vector3.new(-0.331, 4.224, -2.02),
-	["ala_izq"] = Vector3.new(-2.71, 4.516, -1.926),
-	["pata_1_izq"] = Vector3.new(-2.719, 1.852, 1.586),
-	["pata_2_izq"] = Vector3.new(-2.72, 1.837, -0.587),
-	["pata_3_izq"] = Vector3.new(-2.721, 1.848, -2.753),
-	["elitro_der"] = Vector3.new(0.331, 4.226, -2.034),
-	["ala_der"] = Vector3.new(2.71, 4.516, -1.926),
-	["pata_1_der"] = Vector3.new(2.724, 1.843, 1.587),
-	["pata_2_der"] = Vector3.new(2.723, 1.848, -0.589),
-	["pata_3_der"] = Vector3.new(2.721, 1.843, -2.752),
+	["cuerpo"] = Vector3.new(-0.0, 2.91, -0.866),
+	["cabeza"] = Vector3.new(-0.002, 3.824, 2.298),
+	["ojos_neon"] = Vector3.new(-0.0, 2.671, 2.009),
+	["elitro_izq"] = Vector3.new(-0.661, 4.648, -1.992),
+	["ala_izq"] = Vector3.new(-2.768, 4.827, -1.793),
+	["pata_1_izq"] = Vector3.new(-2.694, 1.558, 1.364),
+	["pata_2_izq"] = Vector3.new(-2.696, 1.562, -0.567),
+	["pata_3_izq"] = Vector3.new(-2.696, 1.568, -2.4),
+	["elitro_der"] = Vector3.new(0.656, 4.653, -1.983),
+	["ala_der"] = Vector3.new(2.768, 4.827, -1.793),
+	["pata_1_der"] = Vector3.new(2.693, 1.557, 1.362),
+	["pata_2_der"] = Vector3.new(2.699, 1.564, -0.568),
+	["pata_3_der"] = Vector3.new(2.694, 1.569, -2.395),
 }
 
 -- pieza = { padre, pivote }
 local ARTICULACIONES: { [string]: { padre: string, pivote: Vector3 } } = {
-	["cabeza"] = { padre = "cuerpo", pivote = Vector3.new(0.0, 2.541, 1.334) },
-	["ojos_neon"] = { padre = "cabeza", pivote = Vector3.new(0.0, 2.649, 1.978) },
-	["elitro_izq"] = { padre = "cuerpo", pivote = Vector3.new(-0.288, 3.783, -0.213) },
-	["ala_izq"] = { padre = "cuerpo", pivote = Vector3.new(-0.48, 3.729, -0.47) },
-	["pata_1_izq"] = { padre = "cuerpo", pivote = Vector3.new(-1.249, 2.001, 0.732) },
-	["pata_2_izq"] = { padre = "cuerpo", pivote = Vector3.new(-1.249, 2.001, -0.642) },
-	["pata_3_izq"] = { padre = "cuerpo", pivote = Vector3.new(-1.249, 2.001, -2.017) },
-	["elitro_der"] = { padre = "cuerpo", pivote = Vector3.new(0.288, 3.783, -0.213) },
-	["ala_der"] = { padre = "cuerpo", pivote = Vector3.new(0.48, 3.729, -0.47) },
-	["pata_1_der"] = { padre = "cuerpo", pivote = Vector3.new(1.249, 2.001, 0.732) },
-	["pata_2_der"] = { padre = "cuerpo", pivote = Vector3.new(1.249, 2.001, -0.642) },
-	["pata_3_der"] = { padre = "cuerpo", pivote = Vector3.new(1.249, 2.001, -2.017) },
+	["cabeza"] = { padre = "cuerpo", pivote = Vector3.new(0.0, 2.564, 1.375) },
+	["ojos_neon"] = { padre = "cabeza", pivote = Vector3.new(0.0, 2.671, 2.009) },
+	["elitro_izq"] = { padre = "cuerpo", pivote = Vector3.new(-0.3, 3.794, -0.148) },
+	["ala_izq"] = { padre = "cuerpo", pivote = Vector3.new(-0.599, 4.115, -0.402) },
+	["pata_1_izq"] = { padre = "cuerpo", pivote = Vector3.new(-1.598, 1.815, 0.782) },
+	["pata_2_izq"] = { padre = "cuerpo", pivote = Vector3.new(-1.598, 1.815, -0.571) },
+	["pata_3_izq"] = { padre = "cuerpo", pivote = Vector3.new(-1.598, 1.815, -1.925) },
+	["elitro_der"] = { padre = "cuerpo", pivote = Vector3.new(0.3, 3.794, -0.148) },
+	["ala_der"] = { padre = "cuerpo", pivote = Vector3.new(0.599, 4.115, -0.402) },
+	["pata_1_der"] = { padre = "cuerpo", pivote = Vector3.new(1.598, 1.815, 0.782) },
+	["pata_2_der"] = { padre = "cuerpo", pivote = Vector3.new(1.598, 1.815, -0.571) },
+	["pata_3_der"] = { padre = "cuerpo", pivote = Vector3.new(1.598, 1.815, -1.925) },
 }
 
 -- Piezas que brillan: material y color.
@@ -60,8 +60,8 @@ local CRISTAL: { [string]: number } = {
 }
 
 local MONTURAS: { { nombre: string, posicion: Vector3, mirando: Vector3 } } = {
-	{ nombre = "asiento_1", posicion = Vector3.new(0.0, 4.022, -1.158), mirando = Vector3.new(0.0, 0.0, 1.0) },
-	{ nombre = "asiento_2", posicion = Vector3.new(0.0, 3.86, -2.704), mirando = Vector3.new(0.0, 0.0, 1.0) },
+	{ nombre = "asiento_1", posicion = Vector3.new(0.0, 4.384, -1.079), mirando = Vector3.new(0.0, 0.0, 1.0) },
+	{ nombre = "asiento_2", posicion = Vector3.new(0.0, 4.17, -2.602), mirando = Vector3.new(0.0, 0.0, 1.0) },
 }
 
 local BAHIA_CARGA: { posicion: Vector3, tamano: Vector3 }? = nil
