@@ -1,0 +1,72 @@
+{
+  "nombre": "cable_combustible",
+  "numero": 71,
+  "zona": "Zona del hangar",
+  "categoria": "prop",
+  "triangulos": 1314,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.48,
+    "alto_y": 1.0,
+    "fondo_z": 0.9
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 1,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "cable_combustible",
+      "triangulos": 1222,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "cable_combustible_neon",
+      "triangulos": 92,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "cable_combustible_color.png",
+    "roughness": "cable_combustible_roughness.png",
+    "metalness": "cable_combustible_metalness.png",
+    "emision": "cable_combustible_emision.png",
+    "normal": "cable_combustible_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.437,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "cable_combustible": {
+        "triangulos": 1222,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cable_combustible_neon": {
+        "triangulos": 92,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1314,
+    "tamano_reimportado": [
+      3.477,
+      0.902,
+      1.0
+    ]
+  }
+}

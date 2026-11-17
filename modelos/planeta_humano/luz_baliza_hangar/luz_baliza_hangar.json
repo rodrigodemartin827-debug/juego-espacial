@@ -1,0 +1,84 @@
+{
+  "nombre": "luz_baliza_hangar",
+  "numero": 72,
+  "zona": "Zona del hangar",
+  "categoria": "prop",
+  "triangulos": 756,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 0.49,
+    "alto_y": 0.48,
+    "fondo_z": 0.5
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 0.5,
+    "alto_y": 0.5,
+    "fondo_z": 0.5
+  },
+  "piezas": [
+    {
+      "nombre": "luz_baliza_hangar",
+      "triangulos": 590,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "luz_baliza_hangar_naranja_neon",
+      "triangulos": 96,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "luz_baliza_hangar_neon",
+      "triangulos": 70,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "luz_baliza_hangar_color.png",
+    "roughness": "luz_baliza_hangar_roughness.png",
+    "metalness": "luz_baliza_hangar_metalness.png",
+    "emision": "luz_baliza_hangar_emision.png",
+    "normal": "luz_baliza_hangar_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.448,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "luz_baliza_hangar": {
+        "triangulos": 590,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "luz_baliza_hangar_naranja_neon": {
+        "triangulos": 96,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "luz_baliza_hangar_neon": {
+        "triangulos": 70,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 756,
+    "tamano_reimportado": [
+      0.487,
+      0.5,
+      0.48
+    ]
+  }
+}

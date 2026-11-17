@@ -1,0 +1,72 @@
+{
+  "nombre": "escalera_nave",
+  "numero": 73,
+  "zona": "Zona del hangar",
+  "categoria": "vehiculo",
+  "triangulos": 1008,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 4.09,
+    "fondo_z": 1.04
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 4,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "escalera_nave",
+      "triangulos": 984,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "escalera_nave_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "escalera_nave_color.png",
+    "roughness": "escalera_nave_roughness.png",
+    "metalness": "escalera_nave_metalness.png",
+    "emision": "escalera_nave_emision.png",
+    "normal": "escalera_nave_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.294,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "escalera_nave": {
+        "triangulos": 984,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "escalera_nave_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1008,
+    "tamano_reimportado": [
+      3.005,
+      1.041,
+      4.085
+    ]
+  }
+}

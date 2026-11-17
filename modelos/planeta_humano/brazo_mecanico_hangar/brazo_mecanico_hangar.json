@@ -1,0 +1,145 @@
+{
+  "nombre": "brazo_mecanico_hangar",
+  "numero": 68,
+  "zona": "Zona del hangar",
+  "categoria": "vehiculo",
+  "triangulos": 1696,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 2.0,
+    "alto_y": 8.0,
+    "fondo_z": 2.24
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 8,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "brazo_mecanico_hangar",
+      "triangulos": 534,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_brazo_inferior",
+      "triangulos": 152,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_brazo_superior",
+      "triangulos": 142,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_muneca",
+      "triangulos": 72,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_neon",
+      "triangulos": 332,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_pinza",
+      "triangulos": 216,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_torreta",
+      "triangulos": 236,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "brazo_mecanico_hangar_color.png",
+    "roughness": "brazo_mecanico_hangar_roughness.png",
+    "metalness": "brazo_mecanico_hangar_metalness.png",
+    "emision": "brazo_mecanico_hangar_emision.png",
+    "normal": "brazo_mecanico_hangar_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.472,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "pinza": [
+      0,
+      7.2,
+      -0.75
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "brazo_mecanico_hangar": {
+        "triangulos": 534,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_brazo_inferior": {
+        "triangulos": 152,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_brazo_superior": {
+        "triangulos": 142,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_muneca": {
+        "triangulos": 72,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_neon": {
+        "triangulos": 332,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_pinza": {
+        "triangulos": 216,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "brazo_mecanico_hangar_torreta": {
+        "triangulos": 236,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1696,
+    "tamano_reimportado": [
+      2.0,
+      2.244,
+      8.003
+    ]
+  }
+}
