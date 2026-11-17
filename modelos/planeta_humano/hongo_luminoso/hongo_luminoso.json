@@ -1,43 +1,43 @@
 {
-  "nombre": "arbol_sauce_espacial",
-  "numero": 83,
+  "nombre": "hongo_luminoso",
+  "numero": 92,
   "zona": "Naturaleza y terreno",
   "categoria": "vegetacion",
-  "triangulos": 3858,
+  "triangulos": 1406,
   "presupuesto_triangulos": 4000,
   "dentro_de_presupuesto": true,
   "tamano_studs": {
-    "ancho_x": 5.23,
-    "alto_y": 9.91,
-    "fondo_z": 4.96
+    "ancho_x": 1.04,
+    "alto_y": 1.94,
+    "fondo_z": 0.98
   },
   "tamano_objetivo_studs": {
-    "ancho_x": 5,
-    "alto_y": 10,
-    "fondo_z": 5
+    "ancho_x": 1,
+    "alto_y": 2,
+    "fondo_z": 1
   },
   "piezas": [
     {
-      "nombre": "arbol_sauce_espacial",
-      "triangulos": 2802,
+      "nombre": "hongo_luminoso",
+      "triangulos": 786,
       "material_roblox": "SurfaceAppearance (atlas PBR)"
     },
     {
-      "nombre": "arbol_sauce_espacial_neon",
-      "triangulos": 1056,
+      "nombre": "hongo_luminoso_neon",
+      "triangulos": 620,
       "material_roblox": "Neon",
       "color": "#3DF2FF"
     }
   ],
   "texturas": {
-    "color": "arbol_sauce_espacial_color.png",
-    "roughness": "arbol_sauce_espacial_roughness.png",
-    "metalness": "arbol_sauce_espacial_metalness.png",
-    "emision": "arbol_sauce_espacial_emision.png",
-    "normal": "arbol_sauce_espacial_normal.png"
+    "color": "hongo_luminoso_color.png",
+    "roughness": "hongo_luminoso_roughness.png",
+    "metalness": "hongo_luminoso_metalness.png",
+    "emision": "hongo_luminoso_emision.png",
+    "normal": "hongo_luminoso_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.243,
+  "cobertura_atlas": 0.46,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -47,14 +47,14 @@
   "notas": [],
   "verificacion_fbx": {
     "piezas": {
-      "arbol_sauce_espacial": {
-        "triangulos": 2802,
+      "hongo_luminoso": {
+        "triangulos": 786,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
       },
-      "arbol_sauce_espacial_neon": {
-        "triangulos": 1056,
+      "hongo_luminoso_neon": {
+        "triangulos": 620,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
@@ -62,11 +62,11 @@
     },
     "ok": true,
     "avisos": [],
-    "triangulos": 3858,
+    "triangulos": 1406,
     "tamano_reimportado": [
-      5.234,
-      4.956,
-      9.909
+      1.038,
+      0.977,
+      1.941
     ]
   }
 }

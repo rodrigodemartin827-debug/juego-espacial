@@ -1,0 +1,121 @@
+{
+  "nombre": "nenufar_espacial",
+  "numero": 95,
+  "zona": "Naturaleza y terreno",
+  "categoria": "vegetacion",
+  "triangulos": 1034,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 2.0,
+    "alto_y": 0.3,
+    "fondo_z": 2.03
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 0.3,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "nenufar_espacial",
+      "triangulos": 604,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "nenufar_espacial_agua",
+      "triangulos": 108,
+      "material_roblox": "Glass",
+      "color": "#3FA7C9",
+      "transparencia": 0.35
+    },
+    {
+      "nombre": "nenufar_espacial_blanco_luz",
+      "triangulos": 42,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "nenufar_espacial_halo_neon",
+      "triangulos": 208,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "nenufar_espacial_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "nenufar_espacial_petalos_neon",
+      "triangulos": 48,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "nenufar_espacial_color.png",
+    "roughness": "nenufar_espacial_roughness.png",
+    "metalness": "nenufar_espacial_metalness.png",
+    "emision": "nenufar_espacial_emision.png",
+    "normal": "nenufar_espacial_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.54,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "nenufar_espacial": {
+        "triangulos": 604,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "nenufar_espacial_agua": {
+        "triangulos": 108,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "nenufar_espacial_blanco_luz": {
+        "triangulos": 42,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "nenufar_espacial_halo_neon": {
+        "triangulos": 208,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "nenufar_espacial_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "nenufar_espacial_petalos_neon": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1034,
+    "tamano_reimportado": [
+      2.001,
+      2.025,
+      0.299
+    ]
+  }
+}

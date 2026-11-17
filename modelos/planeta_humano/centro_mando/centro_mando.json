@@ -1,0 +1,165 @@
+{
+  "nombre": "centro_mando",
+  "numero": 96,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_grande",
+  "triangulos": 5944,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 18.0,
+    "alto_y": 12.48,
+    "fondo_z": 16.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 18,
+    "alto_y": 12,
+    "fondo_z": 16
+  },
+  "piezas": [
+    {
+      "nombre": "centro_mando",
+      "triangulos": 3096,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "centro_mando_bandera_der",
+      "triangulos": 48,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "centro_mando_bandera_izq",
+      "triangulos": 48,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "centro_mando_blanco_luz",
+      "triangulos": 368,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "centro_mando_cristal",
+      "triangulos": 660,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "centro_mando_neon",
+      "triangulos": 1596,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "centro_mando_pantallas_neon",
+      "triangulos": 68,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "centro_mando_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "centro_mando_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "centro_mando_rojo_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "centro_mando_color.png",
+    "roughness": "centro_mando_roughness.png",
+    "metalness": "centro_mando_metalness.png",
+    "emision": "centro_mando_emision.png",
+    "normal": "centro_mando_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.44,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "centro_mando": {
+        "triangulos": 3096,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_bandera_der": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_bandera_izq": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_blanco_luz": {
+        "triangulos": 368,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_cristal": {
+        "triangulos": 660,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_neon": {
+        "triangulos": 1596,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "centro_mando_pantallas_neon": {
+        "triangulos": 68,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "centro_mando_rojo_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 5944,
+    "tamano_reimportado": [
+      18.0,
+      16.0,
+      12.479
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "nombre": "cristal_decorativo",
+  "numero": 93,
+  "zona": "Naturaleza y terreno",
+  "categoria": "vegetacion",
+  "triangulos": 526,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 1.53,
+    "alto_y": 2.97,
+    "fondo_z": 1.58
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 1,
+    "alto_y": 3,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "cristal_decorativo",
+      "triangulos": 204,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "cristal_decorativo_cristal_neon",
+      "triangulos": 46,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "cristal_decorativo_neon",
+      "triangulos": 276,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "cristal_decorativo_color.png",
+    "roughness": "cristal_decorativo_roughness.png",
+    "metalness": "cristal_decorativo_metalness.png",
+    "emision": "cristal_decorativo_emision.png",
+    "normal": "cristal_decorativo_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.593,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "luz": [
+      0,
+      1.6,
+      0
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "cristal_decorativo": {
+        "triangulos": 204,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cristal_decorativo_cristal_neon": {
+        "triangulos": 46,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cristal_decorativo_neon": {
+        "triangulos": 276,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 526,
+    "tamano_reimportado": [
+      1.528,
+      1.578,
+      2.97
+    ]
+  }
+}

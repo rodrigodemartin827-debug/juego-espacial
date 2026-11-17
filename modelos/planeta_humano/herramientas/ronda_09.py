@@ -111,7 +111,9 @@ def arbol_sauce_espacial(m):
         puntas.append((pts[2], a))
         puntas.append((pts[3], a))
         puntas.append(((1.15 * ca, 1.15 * sa, 8.2), a + 0.3))
-    m.ico((0.05, 0, 8.9), 1.9, "hoja2", sub=2, esc=(1, 1, 0.55), ruido=0.22, semilla=4.1)       # bóveda de la copa
+    for i, (c, r) in enumerate((((0.05, 0, 9.0), 1.3), ((1.1, 0.4, 8.5), 0.95), ((-1.0, 0.6, 8.6), 0.95),
+                                ((0.3, -1.1, 8.5), 0.9), ((-0.5, -0.8, 8.9), 0.8), ((0.7, 1.0, 8.8), 0.8))):
+        m.ico(c, r, "hoja2" if i % 2 else "hoja", sub=1, esc=(1, 1, 0.75), ruido=0.25, semilla=4.1 + i)
     # Cortinas colgantes: tallo fino con hojas alargadas y la punta luminosa
     for i, (p, a) in enumerate(puntas):
         for j in range(2 if i % 5 == 0 else 1):
@@ -164,7 +166,7 @@ def arbol_palmera_alien(m):
         a = 2 * math.pi * k / n + 0.2
         ca, sa = math.cos(a), math.sin(a)
         sube = 1.9 if k % 2 == 0 else 1.1
-        alc = 0.85 if k % 2 == 0 else 0.7
+        alc = 1.05 if k % 2 == 0 else 0.85
         p0 = (cx + 0.2 * ca, cy + 0.2 * sa, cz + 0.2)
         p1 = (cx + alc * 0.55 * ca, cy + alc * 0.55 * sa, cz + sube * 0.75)
         p2 = (cx + alc * ca, cy + alc * sa, cz + sube * 0.72)
@@ -172,9 +174,9 @@ def arbol_palmera_alien(m):
         incl = -18 if k % 2 == 0 else 22
         for j in range(7):
             b = (j - 3) * 0.3
-            m.hoja(p2, 0.95 - 0.08 * abs(j - 3), 0.3, "hoja_cyan" if j % 2 == 0 else "hoja_azul",
+            m.hoja(p2, 1.15 - 0.09 * abs(j - 3), 0.34, "hoja_cyan" if j % 2 == 0 else "hoja_azul",
                    rot=(0, incl + 10 * abs(j - 3), math.degrees(a + b)), grosor=0.07)
-        m.hoja(p2, 1.0, 0.1, "neon", rot=(0, incl - 2, math.degrees(a)), grosor=0.06)       # nervio central luminoso
+        m.hoja(p2, 1.2, 0.1, "neon", rot=(0, incl - 2, math.degrees(a)), grosor=0.06)       # nervio central luminoso
     # Hierba en la base
     for k in range(10):
         a = k * 0.63
@@ -190,8 +192,8 @@ def _musgo(m, centros, n=18, mat="musgo"):
         e = math.radians(R.uniform(35, 85))
         p = (c[0] + t[0] * 0.46 * math.cos(a) * math.cos(e), c[1] + t[1] * 0.46 * math.sin(a) * math.cos(e),
              c[2] + t[2] * 0.46 * math.sin(e))
-        s = R.uniform(0.35, 0.75) * min(t) * 0.5
-        m.ico(p, s, mat, sub=1, esc=(1, 1, 0.42), ruido=0.3, semilla=i * 1.7)
+        s = R.uniform(0.25, 0.5) * min(t) * 0.24
+        m.ico(p, s, mat, sub=1, esc=(1, 1, 0.3), ruido=0.3, semilla=i * 1.7)
 
 
 @modelo(85, "naturaleza", "vegetacion", (4, 3, 3))
@@ -206,19 +208,19 @@ def roca_grande(m):
         n1 = noise.noise(p * 1.1 + Vector((3.1, 0.7, 1.9)))
         n2 = noise.noise(p * 3.2 + Vector((7.0, 2.0, 5.0)))
         f = 1.0 + 0.3 * n1 + 0.1 * n2
-        v.co = Vector((p.x * 1.95 * f, p.y * 1.45 * f, max(-0.25, p.z * 1.45 * f + 0.2 * n1)))
+        v.co = Vector((p.x * 1.95 * f, p.y * 1.45 * f, max(-0.25, p.z * 1.6 * f + 0.2 * n1)))
         v.co.z = v.co.z * (1.05 if v.co.z > 0 else 1.0) + 1.25 if False else v.co.z
     for v in bm.verts:                                                                 # estratos: escalones suaves
         z = v.co.z
         v.co.z = z + 0.06 * math.sin(z * 9.0)
         if v.co.z < -0.2:
             v.co.z = -0.2
-    m._fin(bm, dst, idx, m._M((0, 0, 1.28)))
+    m._fin(bm, dst, idx, m._M((0, 0, 0.2)))
     m.roca((1.5, -0.9, 0.42), (1.3, 1.1, 0.95), "piedra_oscura", semilla=2.2, sub=2, ruido=0.32)
     m.roca((-1.55, 0.7, 0.36), (1.0, 0.9, 0.8), "piedra", semilla=5.1, sub=2, ruido=0.3)
     for i, (x, y, s) in enumerate(((1.0, 1.2, 0.5), (-0.6, -1.25, 0.42), (-1.7, -0.6, 0.36), (0.3, -1.4, 0.3))):
         m.roca((x, y, s * 0.3), (s, s * 0.8, s * 0.6), "piedra_oscura" if i % 2 else "piedra", semilla=i * 3.7, sub=1)
-    _musgo(m, [((0, 0, 1.3), (3.6, 2.7, 3.2)), ((-1.55, 0.7, 0.36), (1.0, 0.9, 0.8))], n=20)
+    _musgo(m, [((0, 0, 1.25), (3.8, 2.8, 2.6)), ((-1.55, 0.7, 0.36), (1.0, 0.9, 0.8))], n=26)
     R = m.rng
     for k in range(9):
         a = k * 0.7
@@ -324,6 +326,9 @@ def cascada_pequena(m):
     R = m.rng
     # Pared de roca escalonada, cortina de agua con grosor que cae en dos saltos, poza con ondas y espuma
     m.bloque((-1.7, 0.1, 0), (1.7, 1.0, 4.9), "piedra_oscura")
+    for i, (c, t) in enumerate((((-1.0, 1.15, 1.4), (2.2, 1.0, 2.9)), ((1.1, 1.2, 1.6), (2.0, 1.0, 3.2)),
+                                ((-0.4, 1.2, 3.8), (2.6, 0.9, 2.4)), ((0.9, 1.1, 4.4), (1.8, 0.8, 1.4)))):
+        m.roca(c, t, "piedra" if i % 2 else "piedra_oscura", semilla=30 + i * 1.3, sub=2, ruido=0.3)
     rocas = [((-1.3, 0.35, 1.2), (1.6, 1.3, 2.6)), ((1.3, 0.4, 1.4), (1.6, 1.3, 3.0)), ((-1.2, 0.45, 3.6), (1.7, 1.2, 2.6)),
              ((1.25, 0.5, 4.0), (1.6, 1.1, 2.4)), ((0, 0.75, 5.0), (3.4, 0.9, 1.6)), ((0, 0.6, 2.4), (1.6, 1.0, 1.2)),
              ((-1.5, -0.35, 0.5), (1.0, 1.0, 1.0)), ((1.55, -0.4, 0.45), (0.9, 0.9, 0.9))]
