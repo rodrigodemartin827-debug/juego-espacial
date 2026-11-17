@@ -49,7 +49,7 @@ def main():
         ns = [n for n in datos if datos[n]["zona"] == zona]
         if not ns:
             continue
-        lineas += [f"\n### {titulo} ({len(ns)})\n", f"![{titulo}](hojas/{zona}.jpg)\n", "| Modelo | Triángulos | Tamaño (X × Y × Z studs) | Piezas |", "| --- | ---: | --- | --- |"]
+        lineas += [f"\n### {titulo} ({len(ns)})\n", f"![{titulo}](hojas/{zona}.jpg)\n", "| Modelo | Triángulos | Tamaño en studs (ancho X × alto Y × fondo Z) | Piezas |", "| --- | ---: | --- | --- |"]
         lado, cols = 384, 5
         filas = (len(ns) + cols - 1) // cols
         hoja = Image.new("RGB", (lado * cols, 40 + filas * (lado + 26)), (14, 12, 20))

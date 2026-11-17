@@ -13,6 +13,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
+| `planeta_monstruo/` | Los 105 modelos del Planeta Monstruo: guaridas, vegetación, 15 bestias cósmicas montables, zona de guerra, props y terreno. Ver su `README.md` | 600–19.500 |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 

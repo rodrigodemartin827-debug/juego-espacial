@@ -1,0 +1,2110 @@
+{
+ "total_modelos": 105,
+ "total_triangulos": 587965,
+ "modelos": [
+  {
+   "nombre": "guarida_alfa",
+   "zona": "guaridas",
+   "clase": "grande",
+   "triangulos": 12734,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "x": 20.0,
+    "y": 14.0,
+    "z": 18.0
+   },
+   "piezas": [
+    "guarida",
+    "venas_neon",
+    "ojos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "nido_comun",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 6800,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 6.0,
+    "z": 8.0
+   },
+   "piezas": [
+    "nido",
+    "bulbos_biolum"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "nido_guerrero",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 7878,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 7.0,
+    "z": 8.0
+   },
+   "piezas": [
+    "nido"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "nido_chaman",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 7757,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 8.0,
+    "z": 10.0
+   },
+   "piezas": [
+    "nido",
+    "hongos_neon",
+    "cristales_cristal",
+    "humo_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "colmena_comunal",
+   "zona": "guaridas",
+   "clase": "grande",
+   "triangulos": 13434,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "x": 16.0,
+    "y": 12.0,
+    "z": 14.0
+   },
+   "piezas": [
+    "colmena",
+    "resina_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "torre_hueso",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 6747,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 16.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "torre",
+    "ojo_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "altar_sangre",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 7878,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 3.0,
+    "z": 6.0
+   },
+   "piezas": [
+    "altar",
+    "canales_neon",
+    "velas_biolum"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cueva_incubadora",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 7586,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 6.0,
+    "z": 8.0
+   },
+   "piezas": [
+    "cueva",
+    "huevos_cristal",
+    "embriones_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "puente_tentaculo",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 7880,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 12.0,
+    "y": 1.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "puente"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "puerta_mandibula",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 6236,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 8.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "marco",
+    "mandibula_izq",
+    "mandibula_der"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "muralla_espinas",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 5892,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 5.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "muralla",
+    "venas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "faro_bioluminiscente",
+   "zona": "guaridas",
+   "clase": "prop",
+   "triangulos": 1660,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 8.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "faro",
+    "bulbo_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "fuente_acida",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 4872,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 5.0,
+    "y": 3.0,
+    "z": 5.0
+   },
+   "piezas": [
+    "fuente",
+    "acido_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "trono_bestia",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 7626,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 5.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "trono",
+    "ojos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "almacen_capullo",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 6848,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 6.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "armazon",
+    "capullos"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "tunel_lombriz",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 6392,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 3.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "tunel"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "pilar_coral_oscuro",
+   "zona": "guaridas",
+   "clase": "prop",
+   "triangulos": 1799,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 8.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "coral",
+    "puntos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [0.69, 0.82, 1.14] (modelado [2.92, 2.45, 7.03])"
+   ]
+  },
+  {
+   "nombre": "nido_aereo",
+   "zona": "guaridas",
+   "clase": "mediana",
+   "triangulos": 5793,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 5.0,
+    "z": 6.0
+   },
+   "piezas": [
+    "nido"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "pozo_sangre",
+   "zona": "guaridas",
+   "clase": "prop",
+   "triangulos": 1766,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 2.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "pozo",
+    "liquido_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "totem_ancestral",
+   "zona": "guaridas",
+   "clase": "prop",
+   "triangulos": 1908,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 10.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "totem",
+    "ojos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "arbol_carne",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3220,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 5.0,
+    "y": 14.0,
+    "z": 5.0
+   },
+   "piezas": [
+    "arbol"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "arbol_hueso",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3760,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 12.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "arbol"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "arbol_hongo_gigante",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3444,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 10.0,
+    "z": 6.0
+   },
+   "piezas": [
+    "hongo",
+    "esporas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "arbol_tentaculo",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3937,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 5.0,
+    "y": 10.0,
+    "z": 5.0
+   },
+   "piezas": [
+    "tronco",
+    "tentaculos_pose_a",
+    "tentaculos_pose_b",
+    "tentaculos_pose_c"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "arbol_cristal_oscuro",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 1462,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 12.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "base",
+    "tronco",
+    "ramas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "hongo_pequeno_a",
+   "zona": "vegetacion",
+   "clase": "prop",
+   "triangulos": 1350,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 1.5,
+    "z": 1.0
+   },
+   "piezas": [
+    "hongo",
+    "puntos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "hongo_pequeno_b",
+   "zona": "vegetacion",
+   "clase": "prop",
+   "triangulos": 1700,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.5,
+    "y": 0.5,
+    "z": 1.0
+   },
+   "piezas": [
+    "hongo"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "hongo_cluster",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3701,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 2.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "hongos"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "planta_carnivora",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3565,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 3.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "planta"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "planta_tentaculo",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3588,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 2.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "planta"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "enredadera_venenosa",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 2956,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 6.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "enredadera"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "musgo_luminoso",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3927,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 0.2,
+    "z": 4.0
+   },
+   "piezas": [
+    "musgo",
+    "brotes_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "flor_sangre",
+   "zona": "vegetacion",
+   "clase": "prop",
+   "triangulos": 1723,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 0.5,
+    "y": 1.0,
+    "z": 0.5
+   },
+   "piezas": [
+    "flor",
+    "gota_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "flor_ojo",
+   "zona": "vegetacion",
+   "clase": "prop",
+   "triangulos": 1782,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "flor",
+    "ojo"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "esporas_flotantes",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 2160,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "velos_cristal",
+    "nucleos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "raiz_superficial",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3899,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 1.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "raices"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cesped_alien_monstruo",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3940,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 0.6,
+    "z": 8.0
+   },
+   "piezas": [
+    "placa"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "liana_colgante",
+   "zona": "vegetacion",
+   "clase": "prop",
+   "triangulos": 1970,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 0.5,
+    "y": 8.0,
+    "z": 0.5
+   },
+   "piezas": [
+    "liana"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cactus_espina",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 2965,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 5.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "cactus",
+    "flor_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "pantano_burbuja",
+   "zona": "vegetacion",
+   "clase": "vegetacion",
+   "triangulos": 3669,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 0.5,
+    "z": 4.0
+   },
+   "piezas": [
+    "pantano"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_mantarraya",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 15730,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 20.0,
+    "y": 6.0,
+    "z": 24.0
+   },
+   "piezas": [
+    "cuerpo",
+    "cuerpo_neon",
+    "ala_izq",
+    "ala_izq_neon",
+    "ala_der",
+    "ala_der_neon",
+    "cola"
+   ],
+   "fbx_ok": true,
+   "asientos": 3,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_gusano",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 17385,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 6.0,
+    "z": 30.0
+   },
+   "piezas": [
+    "cabeza",
+    "ojos_neon",
+    "cuerpo_delantero",
+    "cuerpo_medio",
+    "cuerpo_trasero",
+    "cola"
+   ],
+   "fbx_ok": true,
+   "asientos": 5,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_dragon",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 17824,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 18.0,
+    "y": 14.0,
+    "z": 20.0
+   },
+   "piezas": [
+    "cuerpo",
+    "cuello",
+    "cabeza",
+    "ojos_neon",
+    "mandibula",
+    "aliento_neon",
+    "cola",
+    "pata_del_izq",
+    "pata_tras_izq",
+    "pata_del_der",
+    "pata_tras_der",
+    "ala_sup_izq",
+    "ala_inf_izq",
+    "ala_sup_der",
+    "ala_inf_der"
+   ],
+   "fbx_ok": true,
+   "asientos": 2,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_medusa",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 14258,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 12.0,
+    "y": 18.0,
+    "z": 12.0
+   },
+   "piezas": [
+    "campana_cristal",
+    "patrones_neon",
+    "nucleo",
+    "brazos_orales",
+    "tentaculos_a_neon",
+    "tentaculos_b_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_escarabajo",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 12965,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 6.0,
+    "z": 8.0
+   },
+   "piezas": [
+    "cuerpo",
+    "cabeza",
+    "ojos_neon",
+    "elitro_izq",
+    "ala_izq",
+    "pata_1_izq",
+    "pata_2_izq",
+    "pata_3_izq",
+    "elitro_der",
+    "ala_der",
+    "pata_1_der",
+    "pata_2_der",
+    "pata_3_der"
+   ],
+   "fbx_ok": true,
+   "asientos": 2,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_serpiente",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 17239,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 4.0,
+    "z": 24.0
+   },
+   "piezas": [
+    "cuerpo_1",
+    "cuerpo_2",
+    "cuerpo_3",
+    "cuerpo_4",
+    "cola",
+    "cabeza",
+    "ojos_neon",
+    "mandibula"
+   ],
+   "fbx_ok": true,
+   "asientos": 3,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_arana",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 13548,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 14.0,
+    "y": 8.0,
+    "z": 14.0
+   },
+   "piezas": [
+    "cuerpo",
+    "ojos_neon",
+    "abdomen",
+    "pata_1_izq",
+    "pata_2_izq",
+    "pata_3_izq",
+    "pata_4_izq",
+    "pata_1_der",
+    "pata_2_der",
+    "pata_3_der",
+    "pata_4_der"
+   ],
+   "fbx_ok": true,
+   "asientos": 2,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_ballena",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 18544,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 10.0,
+    "z": 28.0
+   },
+   "piezas": [
+    "cuerpo",
+    "mandibula",
+    "aleta_izq",
+    "aleta_der",
+    "cola",
+    "percebes_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 8,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_aguila",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 12015,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 18.0,
+    "y": 6.0,
+    "z": 14.0
+   },
+   "piezas": [
+    "cuerpo",
+    "cabeza",
+    "ojos_neon",
+    "ala_izq",
+    "garra_izq",
+    "ala_der",
+    "garra_der",
+    "cola"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_cangrejo",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 15802,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 14.0,
+    "y": 6.0,
+    "z": 12.0
+   },
+   "piezas": [
+    "cuerpo",
+    "ojos_neon",
+    "pinza_izq",
+    "dedo_izq",
+    "pata_1_izq",
+    "pata_2_izq",
+    "pata_3_izq",
+    "pata_4_izq",
+    "pinza_der",
+    "dedo_der",
+    "pata_1_der",
+    "pata_2_der",
+    "pata_3_der",
+    "pata_4_der"
+   ],
+   "fbx_ok": true,
+   "asientos": 2,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_cria_mantarraya",
+   "zona": "bestias",
+   "clase": "bestia_menor",
+   "triangulos": 6990,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 3.0,
+    "z": 10.0
+   },
+   "piezas": [
+    "cuerpo",
+    "manchas_neon",
+    "ala_izq",
+    "ala_der",
+    "cola"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_cria_gusano",
+   "zona": "bestias",
+   "clase": "bestia_menor",
+   "triangulos": 7306,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 12.0
+   },
+   "piezas": [
+    "cabeza",
+    "ojos_neon",
+    "cuerpo_delantero",
+    "cuerpo_trasero",
+    "cola"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_hidra",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 18939,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 16.0,
+    "y": 14.0,
+    "z": 14.0
+   },
+   "piezas": [
+    "cuerpo",
+    "cola",
+    "pata_del_izq",
+    "pata_tras_izq",
+    "pata_del_der",
+    "pata_tras_der",
+    "cuello_verde",
+    "cabeza_verde",
+    "ojos_verde_neon",
+    "mandibula_verde",
+    "aliento_verde_neon",
+    "cuello_violeta",
+    "cabeza_violeta",
+    "ojos_violeta_neon",
+    "mandibula_violeta",
+    "aliento_violeta_neon",
+    "cuello_roja",
+    "cabeza_roja",
+    "ojos_roja_neon",
+    "mandibula_roja",
+    "aliento_roja_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_kraken",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 19517,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 14.0,
+    "y": 10.0,
+    "z": 14.0
+   },
+   "piezas": [
+    "manto",
+    "pico",
+    "ojos_neon",
+    "tentaculo_1",
+    "tentaculo_2",
+    "tentaculo_3",
+    "tentaculo_4",
+    "tentaculo_5",
+    "tentaculo_6",
+    "tentaculo_7",
+    "tentaculo_8"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "bestia_fenix_oscuro",
+   "zona": "bestias",
+   "clase": "bestia",
+   "triangulos": 16090,
+   "presupuesto": 20000,
+   "tamano_studs": {
+    "x": 20.0,
+    "y": 10.0,
+    "z": 16.0
+   },
+   "piezas": [
+    "cuerpo",
+    "cabeza",
+    "ojos_neon",
+    "cresta_fuego_neon",
+    "ala_izq",
+    "ala_fuego_izq_neon",
+    "ala_der",
+    "ala_fuego_der_neon",
+    "cola_fuego_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 1,
+   "avisos": []
+  },
+  {
+   "nombre": "arena_combate",
+   "zona": "guerra",
+   "clase": "grande",
+   "triangulos": 13122,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "x": 16.0,
+    "y": 4.0,
+    "z": 16.0
+   },
+   "piezas": [
+    "arena"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "muneco_entrenamiento",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1969,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 5.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "muneco"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "rack_armas_organicas",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1827,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 4.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "rack"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "poste_trofeos",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1967,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 6.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "poste"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "catapulta_organica",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1811,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 3.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "bastidor",
+    "brazo",
+    "proyectil_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "barricada_espinas",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1804,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 3.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "barricada"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "trampa_foso",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1969,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 2.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "foso"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "red_captura",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1832,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 0.3,
+    "z": 4.0
+   },
+   "piezas": [
+    "red"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "jaula_prisioneros",
+   "zona": "guerra",
+   "clase": "mediana",
+   "triangulos": 6991,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 5.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "jaula",
+    "puerta"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "torre_vigilia_organica",
+   "zona": "guerra",
+   "clase": "mediana",
+   "triangulos": 6733,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 14.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "torre",
+    "ojo_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "emblema_clan",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1428,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 6.0,
+    "z": 0.5
+   },
+   "piezas": [
+    "estandarte"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "tambor_guerra",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1809,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "tambor"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "hoguera_clan",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1933,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 2.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "hoguera",
+    "fuego_neon",
+    "brasas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "mesa_estrategia",
+   "zona": "guerra",
+   "clase": "prop",
+   "triangulos": 1474,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 2.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "mesa"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "corral_bestias",
+   "zona": "guerra",
+   "clase": "grande",
+   "triangulos": 13709,
+   "presupuesto": 15000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 4.0,
+    "z": 10.0
+   },
+   "piezas": [
+    "corral",
+    "abrevadero_neon",
+    "puerta"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "craneo_gigante",
+   "zona": "props",
+   "clase": "mediana",
+   "triangulos": 6330,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 4.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "craneo"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [0.96, 0.68, 0.93] (modelado [6.28, 5.89, 4.3])"
+   ]
+  },
+  {
+   "nombre": "columna_vertebral_arco",
+   "zona": "props",
+   "clase": "mediana",
+   "triangulos": 7128,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 6.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "arco"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [0.93, 0.67, 1.1] (modelado [6.47, 1.5, 5.45])"
+   ]
+  },
+  {
+   "nombre": "hueso_suelto_a",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1900,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 0.5,
+    "z": 0.5
+   },
+   "piezas": [
+    "femur"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "hueso_suelto_b",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1700,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 1.5,
+    "z": 0.3
+   },
+   "piezas": [
+    "costilla"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "telarana_gigante",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1536,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 6.0,
+    "z": 0.1
+   },
+   "piezas": [
+    "telarana"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [0.99, 0.38, 1.0] (modelado [6.07, 0.26, 6.01])"
+   ]
+  },
+  {
+   "nombre": "huevo_monstruo",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1503,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.5,
+    "y": 2.0,
+    "z": 1.5
+   },
+   "piezas": [
+    "huevo",
+    "interior_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "capullo_seda",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1790,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 2.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "capullo"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cristal_oscuro_suelo",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 606,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 3.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "base",
+    "cristal_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "baba_colgante",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1500,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 0.5,
+    "y": 2.0,
+    "z": 0.5
+   },
+   "piezas": [
+    "baba_cristal"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "piedra_runica",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1430,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 3.0,
+    "z": 1.0
+   },
+   "piezas": [
+    "piedra",
+    "runas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "antorcha_organica",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1693,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 0.5,
+    "y": 3.0,
+    "z": 0.5
+   },
+   "piezas": [
+    "antorcha",
+    "llama_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "caldero_brujo",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1708,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 2.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "caldero",
+    "pocion_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "amuleto_colgante",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 628,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 0.3
+   },
+   "piezas": [
+    "amuleto",
+    "gemas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cadena_hueso",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 880,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 0.5,
+    "z": 0.5
+   },
+   "piezas": [
+    "cadena"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "estatua_ancestro",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1869,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 6.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "estatua",
+    "ojos_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "charco_sangre",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 608,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 0.1,
+    "z": 3.0
+   },
+   "piezas": [
+    "charco"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [1.08, 1.05, 0.33] (modelado [2.78, 2.86, 0.3])"
+   ]
+  },
+  {
+   "nombre": "nido_parasitos",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1948,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 1.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "nido"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [1.02, 1.01, 1.47] (modelado [1.96, 1.99, 0.68])"
+   ]
+  },
+  {
+   "nombre": "cofre_organico",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1878,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 1.5,
+    "z": 1.5
+   },
+   "piezas": [
+    "base",
+    "tapa",
+    "tesoro_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [0.97, 0.66, 0.77] (modelado [2.05, 2.28, 1.96])"
+   ]
+  },
+  {
+   "nombre": "barril_acido",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1451,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 1.5,
+    "y": 2.0,
+    "z": 1.5
+   },
+   "piezas": [
+    "vaina",
+    "acido_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "campana_resonancia",
+   "zona": "props",
+   "clase": "prop",
+   "triangulos": 1839,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 3.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "soporte",
+    "campana",
+    "badajo"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "roca_alien_a",
+   "zona": "terreno",
+   "clase": "prop",
+   "triangulos": 1968,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 3.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "roca",
+    "venas_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "roca_alien_b",
+   "zona": "terreno",
+   "clase": "prop",
+   "triangulos": 774,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 8.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "pie",
+    "aguja",
+    "cristales_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "roca_flotante",
+   "zona": "terreno",
+   "clase": "prop",
+   "triangulos": 1970,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "roca",
+    "energia_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "suelo_carne",
+   "zona": "terreno",
+   "clase": "vegetacion",
+   "triangulos": 3899,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 0.6,
+    "z": 8.0
+   },
+   "piezas": [
+    "placa"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "suelo_hueso",
+   "zona": "terreno",
+   "clase": "vegetacion",
+   "triangulos": 3939,
+   "presupuesto": 4000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 0.5,
+    "z": 8.0
+   },
+   "piezas": [
+    "placa"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "lago_acido",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 5482,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 0.5,
+    "z": 8.0
+   },
+   "piezas": [
+    "orilla",
+    "acido_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "geyser_toxico",
+   "zona": "terreno",
+   "clase": "prop",
+   "triangulos": 1950,
+   "presupuesto": 2000,
+   "tamano_studs": {
+    "x": 2.0,
+    "y": 3.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "geiser",
+    "vapor_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cueva_entrada_natural",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 7571,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 5.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "cueva",
+    "hongos_biolum"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "columna_basalto_alien",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 5687,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 8.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "columnas",
+    "cristales_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "volcan_pequeno",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 7233,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 5.0,
+    "z": 4.0
+   },
+   "piezas": [
+    "volcan",
+    "lava_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "rio_sangre_segmento",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 4940,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 0.5,
+    "z": 4.0
+   },
+   "piezas": [
+    "orillas",
+    "sangre"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "cascada_acido",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 7084,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 4.0,
+    "y": 6.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "risco",
+    "acido_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "puente_raices",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 7124,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 10.0,
+    "y": 2.0,
+    "z": 3.0
+   },
+   "piezas": [
+    "puente"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": [
+    "ajuste de escala grande [0.96, 0.96, 0.67] (modelado [10.42, 3.11, 2.97])"
+   ]
+  },
+  {
+   "nombre": "isla_flotante",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 7807,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 6.0,
+    "y": 4.0,
+    "z": 6.0
+   },
+   "piezas": [
+    "isla",
+    "energia_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  },
+  {
+   "nombre": "portal_monstruo",
+   "zona": "terreno",
+   "clase": "mediana",
+   "triangulos": 7878,
+   "presupuesto": 8000,
+   "tamano_studs": {
+    "x": 8.0,
+    "y": 10.0,
+    "z": 2.0
+   },
+   "piezas": [
+    "portal",
+    "ojos_neon",
+    "energia_neon"
+   ],
+   "fbx_ok": true,
+   "asientos": 0,
+   "avisos": []
+  }
+ ]
+}

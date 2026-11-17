@@ -10,6 +10,8 @@ for n in nombres:
     r = os.path.join(carpeta, n, f"{n}_turnaround.png")
     if os.path.exists(r):
         ims.append(Image.open(r).convert("RGB").resize((768, 539), Image.LANCZOS))
+if not ims:
+    sys.exit(0)
 cols = 2
 hoja = Image.new("RGB", (768 * cols, 539 * ((len(ims) + 1) // cols)), (0, 0, 0))
 for i, im in enumerate(ims):
