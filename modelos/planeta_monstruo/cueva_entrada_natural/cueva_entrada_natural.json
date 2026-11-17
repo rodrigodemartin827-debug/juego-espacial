@@ -3,7 +3,7 @@
   "zona": "terreno",
   "clase": "mediana",
   "descripcion": "Entrada de cueva natural: arco de roca con estalactitas.",
-  "triangulos": 7681,
+  "triangulos": 7571,
   "presupuesto_triangulos": 8000,
   "tamano_studs": {
     "x": 6.0,
@@ -19,30 +19,30 @@
   "piezas": [
     {
       "nombre": "cueva",
-      "triangulos": 7429,
+      "triangulos": 7247,
       "tamano_studs": [
         6.0,
         5.0,
-        3.81
+        4.0
       ],
       "centro": [
         0.001,
         2.501,
-        -0.098
+        -0.001
       ]
     },
     {
       "nombre": "hongos_biolum",
-      "triangulos": 252,
+      "triangulos": 324,
       "tamano_studs": [
-        3.29,
-        2.15,
-        0.18
+        3.07,
+        1.69,
+        1.43
       ],
       "centro": [
-        0.048,
-        2.327,
-        1.909
+        0.181,
+        1.438,
+        0.272
       ],
       "roblox": {
         "material": "Neon",
@@ -60,10 +60,10 @@
   "atlas": 1024,
   "escala": "1 unidad = 1 stud",
   "giro_importacion": "180 grados en Y aplicado",
-  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "ejes": "studs, ejes del archivo FBX (Y arriba, el frente mira a +Z: tras el giro de importación de Studio queda mirando a -Z)",
   "verificacion_fbx": {
     "piezas": 2,
-    "triangulos": 7681,
+    "triangulos": 7571,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,

@@ -21,28 +21,28 @@
       "nombre": "roca",
       "triangulos": 1492,
       "tamano_studs": [
-        3.93,
-        2.98,
-        2.98
+        3.97,
+        2.95,
+        2.9
       ],
       "centro": [
-        -0.032,
-        1.488,
-        0.013
+        0.005,
+        1.473,
+        -0.015
       ]
     },
     {
       "nombre": "venas_neon",
       "triangulos": 476,
       "tamano_studs": [
-        3.86,
-        2.96,
-        2.86
+        3.89,
+        3.02,
+        2.97
       ],
       "centro": [
-        0.074,
-        1.517,
-        -0.074
+        -0.05,
+        1.49,
+        -0.001
       ],
       "roblox": {
         "material": "Neon",
@@ -60,7 +60,7 @@
   "atlas": 1024,
   "escala": "1 unidad = 1 stud",
   "giro_importacion": "180 grados en Y aplicado",
-  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "ejes": "studs, ejes del archivo FBX (Y arriba, el frente mira a +Z: tras el giro de importación de Studio queda mirando a -Z)",
   "verificacion_fbx": {
     "piezas": 2,
     "triangulos": 1968,
@@ -69,12 +69,12 @@
     "escala_ok": true,
     "nombres_ok": true,
     "tamano_reimportado": [
-      4.0,
-      3.01,
-      3.0
+      3.98,
+      2.97,
+      3.02
     ],
     "triangulos_ok": true,
     "correcto": true
   },
-  "venas": "venas_neon sigue la superficie de la roca, un poco en relieve."
+  "venas": "venas_neon sigue la superficie de la roca: asoma a trozos, donde la piedra no la tapa."
 }

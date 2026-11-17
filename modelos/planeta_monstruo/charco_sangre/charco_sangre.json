@@ -3,7 +3,7 @@
   "zona": "props",
   "clase": "prop",
   "descripcion": "Charco de sangre en el suelo, reflectante (con algo de grosor).",
-  "triangulos": 1500,
+  "triangulos": 608,
   "presupuesto_triangulos": 2000,
   "tamano_studs": {
     "x": 3.0,
@@ -19,16 +19,16 @@
   "piezas": [
     {
       "nombre": "charco",
-      "triangulos": 1500,
+      "triangulos": 608,
       "tamano_studs": [
         3.0,
         0.1,
         3.0
       ],
       "centro": [
-        0.002,
+        -0.0,
         0.05,
-        -0.0
+        0.0
       ]
     }
   ],
@@ -41,10 +41,10 @@
   "atlas": 1024,
   "escala": "1 unidad = 1 stud",
   "giro_importacion": "180 grados en Y aplicado",
-  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "ejes": "studs, ejes del archivo FBX (Y arriba, el frente mira a +Z: tras el giro de importación de Studio queda mirando a -Z)",
   "verificacion_fbx": {
     "piezas": 1,
-    "triangulos": 1500,
+    "triangulos": 608,
     "normales_hacia_fuera": true,
     "uv": true,
     "escala_ok": true,
@@ -58,6 +58,6 @@
     "correcto": true
   },
   "avisos": [
-    "ajuste de escala grande [1.12, 1.05, 0.53] (modelado [2.67, 2.85, 0.19])"
+    "ajuste de escala grande [1.08, 1.05, 0.33] (modelado [2.78, 2.86, 0.3])"
   ]
 }

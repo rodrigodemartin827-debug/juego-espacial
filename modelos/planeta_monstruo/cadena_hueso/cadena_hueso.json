@@ -41,7 +41,7 @@
   "atlas": 1024,
   "escala": "1 unidad = 1 stud",
   "giro_importacion": "180 grados en Y aplicado",
-  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "ejes": "studs, ejes del archivo FBX (Y arriba, el frente mira a +Z: tras el giro de importación de Studio queda mirando a -Z)",
   "verificacion_fbx": {
     "piezas": 1,
     "triangulos": 880,
