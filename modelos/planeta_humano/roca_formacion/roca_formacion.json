@@ -1,0 +1,72 @@
+{
+  "nombre": "roca_formacion",
+  "numero": 86,
+  "zona": "Naturaleza y terreno",
+  "categoria": "vegetacion",
+  "triangulos": 1688,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 5.81,
+    "alto_y": 5.02,
+    "fondo_z": 4.45
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 5,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "roca_formacion",
+      "triangulos": 1632,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "roca_formacion_neon",
+      "triangulos": 56,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "roca_formacion_color.png",
+    "roughness": "roca_formacion_roughness.png",
+    "metalness": "roca_formacion_metalness.png",
+    "emision": "roca_formacion_emision.png",
+    "normal": "roca_formacion_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.498,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "roca_formacion": {
+        "triangulos": 1632,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "roca_formacion_neon": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1688,
+    "tamano_reimportado": [
+      5.805,
+      4.448,
+      5.015
+    ]
+  }
+}

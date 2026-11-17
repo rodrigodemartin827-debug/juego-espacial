@@ -1,0 +1,72 @@
+{
+  "nombre": "puente_rio_piedra",
+  "numero": 89,
+  "zona": "Naturaleza y terreno",
+  "categoria": "edificio_mediano",
+  "triangulos": 4888,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 8.2,
+    "alto_y": 2.86,
+    "fondo_z": 4.29
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 8,
+    "alto_y": 3,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "puente_rio_piedra",
+      "triangulos": 4632,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "puente_rio_piedra_neon",
+      "triangulos": 256,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "puente_rio_piedra_color.png",
+    "roughness": "puente_rio_piedra_roughness.png",
+    "metalness": "puente_rio_piedra_metalness.png",
+    "emision": "puente_rio_piedra_emision.png",
+    "normal": "puente_rio_piedra_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.552,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "puente_rio_piedra": {
+        "triangulos": 4632,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "puente_rio_piedra_neon": {
+        "triangulos": 256,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 4888,
+    "tamano_reimportado": [
+      8.201,
+      4.291,
+      2.861
+    ]
+  }
+}

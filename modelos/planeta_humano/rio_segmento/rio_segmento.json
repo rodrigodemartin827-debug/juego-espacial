@@ -1,0 +1,72 @@
+{
+  "nombre": "rio_segmento",
+  "numero": 87,
+  "zona": "Naturaleza y terreno",
+  "categoria": "vegetacion",
+  "triangulos": 2532,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 8.15,
+    "alto_y": 0.52,
+    "fondo_z": 4.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 8,
+    "alto_y": 0.5,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "rio_segmento",
+      "triangulos": 1456,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "rio_segmento_agua",
+      "triangulos": 1076,
+      "material_roblox": "Glass",
+      "color": "#3FA7C9",
+      "transparencia": 0.35
+    }
+  ],
+  "texturas": {
+    "color": "rio_segmento_color.png",
+    "roughness": "rio_segmento_roughness.png",
+    "metalness": "rio_segmento_metalness.png",
+    "normal": "rio_segmento_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.588,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "rio_segmento": {
+        "triangulos": 1456,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "rio_segmento_agua": {
+        "triangulos": 1076,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2532,
+    "tamano_reimportado": [
+      8.148,
+      4.001,
+      0.523
+    ]
+  }
+}
