@@ -32,9 +32,11 @@ Todas las piezas de un modelo comparten el mismo atlas.
 
 - **Escala:** 1 unidad de Blender = 1 stud, exportado con *Apply Scalings: FBX All*. Si en Studio un modelo sale
   3,57 veces más grande o más pequeño, es la unidad del importador: en *File General → Scale Unit* elige **Stud**.
-- **Giro de importación:** los modelos se modelan mirando a -Z de Roblox y se exportan girados 180° sobre la vertical
-  (eje Y de Roblox), que es lo que deshace `MontarRegion.GIRO_IMPORTACION`. Las posiciones de los JSON (centros,
-  pivotes, monturas) están en los ejes del FBX tal como se importa, en studs y relativas al origen del modelo.
+- **Giro de importación:** los modelos se exportan ya girados 180° sobre la vertical: en el archivo FBX el frente
+  mira a +Z y, como el importador de Studio gira las mallas 180° (ver `MontarRegion.GIRO_IMPORTACION`), en Studio
+  quedan mirando a -Z, el «delante» de Roblox. Las posiciones de los JSON (centros, pivotes, monturas) están en
+  studs, relativas al origen del modelo y en los ejes del archivo FBX. Los scripts de montaje de las bestias
+  averiguan solos cómo ha quedado girado el modelo, así que funcionan aunque Studio no lo gire o lo gires tú.
 - **Origen:** el centro de la base. En lo que cuelga (lianas, capullos, nido aéreo, baba, amuleto, enredadera), el
   centro de arriba. En lo que flota (esporas, roca e isla flotantes), el centro. Lo dice el campo `origen` del JSON.
 - **Piezas que brillan:** van en mallas aparte con sufijo `_neon` o `_biolum`: ponles `Material = Neon` y el color
