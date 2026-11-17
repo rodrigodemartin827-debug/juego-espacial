@@ -12,7 +12,8 @@
 	  4. Crea los asientos (Seat) de los puntos de montura, soldados a la raíz.
 	  5. Añade AnimationController + Animator (las bestias no son Humanoid) y deja atributos para el juego.
 
-	Las posiciones están en studs, relativas al origen del modelo, en los ejes del FBX tal como se importa.
+	Las posiciones están en studs, relativas al origen del modelo, en los ejes del archivo FBX. Si Studio gira el
+	modelo al importarlo (o lo giras tú), el script lo detecta solo.
 ]]
 
 local RAIZ = "cuerpo"
@@ -71,8 +72,29 @@ for nombre in CENTROS do
 end
 
 local raiz = piezas[RAIZ]
--- Marco del origen del modelo: todo lo demás se coloca respecto a él, así da igual dónde y cómo esté girado.
-local origen = raiz.CFrame * CFrame.new(-CENTROS[RAIZ])
+
+-- Marco del origen del modelo. El importador puede girar el modelo entero sobre la vertical (en este proyecto las
+-- mallas entran giradas 180°, ver MontarRegion.GIRO_IMPORTACION) y tú puedes haberlo girado después: el giro se
+-- averigua comparando dónde ha quedado la pieza más alejada de la raíz con dónde estaba en Blender.
+local function marcoOrigen(): CFrame
+	local cRaiz = CENTROS[RAIZ]
+	local lejos: string? = nil
+	local distancia = 0
+	for nombre, c in CENTROS do
+		local d = Vector3.new(c.X - cRaiz.X, 0, c.Z - cRaiz.Z).Magnitude
+		if nombre ~= RAIZ and d > distancia then
+			lejos, distancia = nombre, d
+		end
+	end
+	local giro = 0
+	if lejos and distancia > 0.5 then
+		local esperado = CENTROS[lejos] - cRaiz
+		local real = piezas[lejos].Position - raiz.Position
+		giro = math.atan2(real.X, real.Z) - math.atan2(esperado.X, esperado.Z)
+	end
+	return CFrame.new(raiz.Position) * CFrame.Angles(0, giro, 0) * CFrame.new(-cRaiz)
+end
+local origen = marcoOrigen()
 
 local modelo = Instance.new("Model")
 modelo.Name = "bestia_mantarraya"
