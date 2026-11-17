@@ -35,13 +35,13 @@
       "nombre": "interior_neon",
       "triangulos": 100,
       "tamano_studs": [
-        1.03,
-        1.66,
-        0.98
+        1.13,
+        1.72,
+        1.08
       ],
       "centro": [
         -0.001,
-        1.071,
+        1.081,
         0.001
       ],
       "roblox": {
@@ -60,7 +60,7 @@
   "atlas": 1024,
   "escala": "1 unidad = 1 stud",
   "giro_importacion": "180 grados en Y aplicado",
-  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "ejes": "studs, ejes del archivo FBX (Y arriba, el frente mira a +Z: tras el giro de importación de Studio queda mirando a -Z)",
   "verificacion_fbx": {
     "piezas": 2,
     "triangulos": 1503,
