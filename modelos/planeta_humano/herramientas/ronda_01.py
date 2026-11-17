@@ -618,7 +618,7 @@ def fuente_plaza(m):
             z = 2.1 + 0.25 * math.sin(t * 1.2) - 1.55 * t * t
             pts.append((r * ca, r * sa, z))
             rs.append(0.07 - 0.03 * t)
-        m.barrido(pts, rs, "agua", seg=5)
+        m.barrido(pts, rs, "agua", seg=4)
         m.cil((1.3 * ca, 1.3 * sa, 2.1), 0.07, 0.14, "bronce", eje="x", seg=6, rot=(0, 0, math.degrees(a)))
         m.torno((2.03 * ca, 2.03 * sa, 0.66), [(0.0, 0), (0.22, 0.0), (0.26, 0.03), (0.0, 0.06)], "agua", seg=8)
     m.anclaje("particulas_agua", (0, 0, 3.0))

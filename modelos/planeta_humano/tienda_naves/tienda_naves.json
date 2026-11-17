@@ -1,0 +1,143 @@
+{
+  "nombre": "tienda_naves",
+  "numero": 30,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 2470,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 8.75,
+    "fondo_z": 13.2
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 14,
+    "alto_y": 8,
+    "fondo_z": 12
+  },
+  "piezas": [
+    {
+      "nombre": "tienda_naves",
+      "triangulos": 1486,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_naves_cristal",
+      "triangulos": 204,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "tienda_naves_escaparate_cristal",
+      "triangulos": 12,
+      "material_roblox": "Glass",
+      "color": "#D4F1F6",
+      "transparencia": 0.8
+    },
+    {
+      "nombre": "tienda_naves_maqueta_nave",
+      "triangulos": 204,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_naves_naranja_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "tienda_naves_neon",
+      "triangulos": 528,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "tienda_naves_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_naves_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "tienda_naves_color.png",
+    "roughness": "tienda_naves_roughness.png",
+    "metalness": "tienda_naves_metalness.png",
+    "emision": "tienda_naves_emision.png",
+    "normal": "tienda_naves_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.599,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "tienda_naves": {
+        "triangulos": 1486,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_naves_cristal": {
+        "triangulos": 204,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_naves_escaparate_cristal": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_naves_maqueta_nave": {
+        "triangulos": 204,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_naves_naranja_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_naves_neon": {
+        "triangulos": 528,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "tienda_naves_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_naves_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2470,
+    "tamano_reimportado": [
+      14.0,
+      13.2,
+      8.75
+    ]
+  }
+}

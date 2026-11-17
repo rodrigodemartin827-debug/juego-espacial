@@ -1,0 +1,72 @@
+{
+  "nombre": "jardinera",
+  "numero": 15,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 1152,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.06,
+    "alto_y": 1.5,
+    "fondo_z": 1.08
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 1.5,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "jardinera",
+      "triangulos": 1140,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "jardinera_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "jardinera_color.png",
+    "roughness": "jardinera_roughness.png",
+    "metalness": "jardinera_metalness.png",
+    "emision": "jardinera_emision.png",
+    "normal": "jardinera_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.558,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "jardinera": {
+        "triangulos": 1140,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "jardinera_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1152,
+    "tamano_reimportado": [
+      4.06,
+      1.084,
+      1.495
+    ]
+  }
+}

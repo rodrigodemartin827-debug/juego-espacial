@@ -1,0 +1,119 @@
+{
+  "nombre": "generador_electrico",
+  "numero": 25,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 1584,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 1.96,
+    "alto_y": 2.08,
+    "fondo_z": 1.98
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 2,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "generador_electrico",
+      "triangulos": 1416,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "generador_electrico_amarillo_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#FFD23D"
+    },
+    {
+      "nombre": "generador_electrico_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "generador_electrico_rojo_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    },
+    {
+      "nombre": "generador_electrico_ventilador",
+      "triangulos": 72,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "generador_electrico_verde_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "generador_electrico_color.png",
+    "roughness": "generador_electrico_roughness.png",
+    "metalness": "generador_electrico_metalness.png",
+    "emision": "generador_electrico_emision.png",
+    "normal": "generador_electrico_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.471,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "generador_electrico": {
+        "triangulos": 1416,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "generador_electrico_amarillo_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "generador_electrico_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "generador_electrico_rojo_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "generador_electrico_ventilador": {
+        "triangulos": 72,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "generador_electrico_verde_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1584,
+    "tamano_reimportado": [
+      1.96,
+      1.985,
+      2.082
+    ]
+  }
+}

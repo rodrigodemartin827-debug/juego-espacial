@@ -1,0 +1,119 @@
+{
+  "nombre": "tienda_pociones",
+  "numero": 28,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 5692,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 8.7,
+    "fondo_z": 8.8
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 10,
+    "alto_y": 7,
+    "fondo_z": 8
+  },
+  "piezas": [
+    {
+      "nombre": "tienda_pociones",
+      "triangulos": 2636,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_pociones_cristal",
+      "triangulos": 2172,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "tienda_pociones_neon",
+      "triangulos": 648,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "tienda_pociones_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_pociones_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_pociones_verde_neon",
+      "triangulos": 212,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "tienda_pociones_color.png",
+    "roughness": "tienda_pociones_roughness.png",
+    "metalness": "tienda_pociones_metalness.png",
+    "emision": "tienda_pociones_emision.png",
+    "normal": "tienda_pociones_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.483,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "tienda_pociones": {
+        "triangulos": 2636,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_pociones_cristal": {
+        "triangulos": 2172,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_pociones_neon": {
+        "triangulos": 648,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "tienda_pociones_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_pociones_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_pociones_verde_neon": {
+        "triangulos": 212,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 5692,
+    "tamano_reimportado": [
+      10.0,
+      8.8,
+      8.7
+    ]
+  }
+}

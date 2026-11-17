@@ -1,0 +1,107 @@
+{
+  "nombre": "tienda_armaduras",
+  "numero": 27,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 5134,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 9.2,
+    "fondo_z": 10.1
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 12,
+    "alto_y": 8,
+    "fondo_z": 10
+  },
+  "piezas": [
+    {
+      "nombre": "tienda_armaduras",
+      "triangulos": 4398,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_armaduras_cristal",
+      "triangulos": 84,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "tienda_armaduras_neon",
+      "triangulos": 628,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "tienda_armaduras_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_armaduras_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "tienda_armaduras_color.png",
+    "roughness": "tienda_armaduras_roughness.png",
+    "metalness": "tienda_armaduras_metalness.png",
+    "emision": "tienda_armaduras_emision.png",
+    "normal": "tienda_armaduras_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.595,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "tienda_armaduras": {
+        "triangulos": 4398,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_armaduras_cristal": {
+        "triangulos": 84,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_armaduras_neon": {
+        "triangulos": 628,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "tienda_armaduras_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_armaduras_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 5134,
+    "tamano_reimportado": [
+      12.0,
+      10.1,
+      9.2
+    ]
+  }
+}

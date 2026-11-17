@@ -63,6 +63,7 @@ PALETA = {
     "hormigon": _m("#A7A9A8", 0.85, 0.0, "ruido", tam=3, fuerza=0.3, relieve=0.35),
     # Cristal y agua
     "cristal": _m("#7FE6F2", 0.08, 0.0, "plano", parte="cristal"),
+    "vidrio": _m("#D4F1F6", 0.05, 0.0, "plano", parte="escaparate_cristal"),
     "cristal_oscuro": _m("#1C3B4A", 0.08, 0.2, "plano", parte="cristal"),
     "agua": _m("#3FA7C9", 0.06, 0.0, "agua", parte="agua"),
     # Neón
@@ -86,7 +87,7 @@ PALETA = {
     "hoja_clara": _m("#6BB84F", 0.7, 0.0, "hojas", color2="#3F8F45"),
     "hoja_cyan": _m("#3FD9C9", 0.55, 0.0, "hojas", color2="#1E9C93"),
     "hoja_azul": _m("#2FA59A", 0.6, 0.0, "hojas", color2="#1B6E78"),
-    "cesped": _m("#4FA243", 0.85, 0.0, "hojas", color2="#356F2E"),
+    "cesped": _m("#3F8A3A", 0.85, 0.0, "hojas", color2="#2B5F28"),
     "cesped_alien": _m("#2FB8A0", 0.8, 0.0, "hojas", color2="#1C7A86"),
     "piedra": _m("#8C8F93", 0.9, 0.0, "piedra", color2="#5F6266"),
     "piedra_oscura": _m("#5E6166", 0.9, 0.0, "piedra", color2="#3A3C40"),

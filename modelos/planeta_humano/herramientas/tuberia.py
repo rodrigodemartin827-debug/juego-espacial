@@ -226,7 +226,7 @@ def hornear(objs, mats, carpeta, nombre, radio):
     bpy.data.images.remove(im)
 
     # Oclusión ambiental: solo las piezas opacas (el cristal y el agua no dan sombra).
-    opacos = [o for o in objs if o["parte"] not in ("cristal", "agua") and "cristal" not in o["parte"]]
+    opacos = [o for o in objs if "cristal" not in o["parte"] and "agua" not in o["parte"]]
     ocultos = [o for o in objs if o not in opacos]
     for o in ocultos:
         o.hide_render = True
@@ -244,6 +244,9 @@ def hornear(objs, mats, carpeta, nombre, radio):
         _hornear(opacos, "AO")
     ao = _pix(im)[..., :1]
     bpy.data.images.remove(im)
+    if os.environ.get("DEPURAR_AO"):
+        Image.fromarray((np.clip(ao[..., 0], 0, 1) * 255).astype(np.uint8), "L").save(
+            os.path.join(os.environ["DEPURAR_AO"], f"{nombre}_ao.png"))
     for o in ocultos:
         o.hide_render = False
 
@@ -309,11 +312,14 @@ def materiales_finales(objs, rutas, nombre):
     base = nuevo("_mat", emision=False)
     neon = nuevo("_mat_neon") if "emision" in ims else base
     cristal = nuevo("_mat_cristal", alfa=0.42, emision=False)
+    vidrio = nuevo("_mat_escaparate", alfa=0.14, emision=False)
     agua = nuevo("_mat_agua", alfa=0.6, emision=False)
     for o in objs:
         parte = o["parte"]
         if "neon" in parte or "luz" in parte:
             m = neon
+        elif "escaparate" in parte:
+            m = vidrio
         elif "cristal" in parte:
             m = cristal
         elif "agua" in parte:
@@ -616,6 +622,8 @@ def construir(nombre, info, fn, con_render=True):
             extra = {"material_roblox": mr, "color": col}
         elif "neon" in parte or "luz" in parte:
             extra = {"material_roblox": "Neon", "color": colores_parte[o.name]}
+        elif "escaparate" in parte:
+            extra = {"material_roblox": "Glass", "color": colores_parte[o.name], "transparencia": 0.8}
         elif "cristal" in parte:
             extra = {"material_roblox": "Glass", "color": colores_parte[o.name], "transparencia": 0.45}
         elif "agua" in parte:

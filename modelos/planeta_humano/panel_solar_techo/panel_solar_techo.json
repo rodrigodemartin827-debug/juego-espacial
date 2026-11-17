@@ -1,0 +1,72 @@
+{
+  "nombre": "panel_solar_techo",
+  "numero": 24,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 2020,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": false,
+  "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 0.28,
+    "fondo_z": 3.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 0.3,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "panel_solar_techo",
+      "triangulos": 2008,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "panel_solar_techo_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "panel_solar_techo_color.png",
+    "roughness": "panel_solar_techo_roughness.png",
+    "metalness": "panel_solar_techo_metalness.png",
+    "emision": "panel_solar_techo_emision.png",
+    "normal": "panel_solar_techo_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.564,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "panel_solar_techo": {
+        "triangulos": 2008,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "panel_solar_techo_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2020,
+    "tamano_reimportado": [
+      3.0,
+      3.0,
+      0.281
+    ]
+  }
+}

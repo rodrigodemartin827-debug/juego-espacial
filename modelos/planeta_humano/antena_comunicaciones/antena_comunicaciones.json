@@ -1,0 +1,84 @@
+{
+  "nombre": "antena_comunicaciones",
+  "numero": 23,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 1484,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 2.1,
+    "alto_y": 7.97,
+    "fondo_z": 2.06
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 8,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "antena_comunicaciones",
+      "triangulos": 1396,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "antena_comunicaciones_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "antena_comunicaciones_rojo_neon",
+      "triangulos": 64,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "antena_comunicaciones_color.png",
+    "roughness": "antena_comunicaciones_roughness.png",
+    "metalness": "antena_comunicaciones_metalness.png",
+    "emision": "antena_comunicaciones_emision.png",
+    "normal": "antena_comunicaciones_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.469,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "antena_comunicaciones": {
+        "triangulos": 1396,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "antena_comunicaciones_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "antena_comunicaciones_rojo_neon": {
+        "triangulos": 64,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1484,
+    "tamano_reimportado": [
+      2.1,
+      2.06,
+      7.97
+    ]
+  }
+}

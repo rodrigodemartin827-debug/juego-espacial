@@ -1,0 +1,72 @@
+{
+  "nombre": "escalera_publica",
+  "numero": 21,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 704,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 3.03,
+    "fondo_z": 3.08
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 3,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "escalera_publica",
+      "triangulos": 632,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "escalera_publica_neon",
+      "triangulos": 72,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "escalera_publica_color.png",
+    "roughness": "escalera_publica_roughness.png",
+    "metalness": "escalera_publica_metalness.png",
+    "emision": "escalera_publica_emision.png",
+    "normal": "escalera_publica_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.55,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "escalera_publica": {
+        "triangulos": 632,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "escalera_publica_neon": {
+        "triangulos": 72,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 704,
+    "tamano_reimportado": [
+      4.04,
+      3.08,
+      3.03
+    ]
+  }
+}

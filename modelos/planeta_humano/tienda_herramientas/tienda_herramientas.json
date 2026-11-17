@@ -1,0 +1,130 @@
+{
+  "nombre": "tienda_herramientas",
+  "numero": 29,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 2730,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 7.66,
+    "fondo_z": 8.66
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 10,
+    "alto_y": 7,
+    "fondo_z": 8
+  },
+  "piezas": [
+    {
+      "nombre": "tienda_herramientas",
+      "triangulos": 1694,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_herramientas_cristal",
+      "triangulos": 60,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "tienda_herramientas_naranja_neon",
+      "triangulos": 820,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "tienda_herramientas_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "tienda_herramientas_persiana",
+      "triangulos": 108,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_herramientas_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tienda_herramientas_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "tienda_herramientas_color.png",
+    "roughness": "tienda_herramientas_roughness.png",
+    "metalness": "tienda_herramientas_metalness.png",
+    "emision": "tienda_herramientas_emision.png",
+    "normal": "tienda_herramientas_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.504,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "tienda_herramientas": {
+        "triangulos": 1694,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_herramientas_cristal": {
+        "triangulos": 60,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_herramientas_naranja_neon": {
+        "triangulos": 820,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "tienda_herramientas_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_herramientas_persiana": {
+        "triangulos": 108,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_herramientas_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_herramientas_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2730,
+    "tamano_reimportado": [
+      10.0,
+      8.66,
+      7.66
+    ]
+  }
+}

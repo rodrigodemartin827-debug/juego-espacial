@@ -263,7 +263,7 @@ class Modelo:
             bm.faces.new(an[-1])
         return self._fin(bm, dst, idx, None)
 
-    def texto(self, txt, c, alto, fondo, mat, rot=None, p=None, espaciado=1.0):
+    def texto(self, txt, c, alto, fondo, mat, rot=None, p=None, espaciado=1.0, res=2):
         """Letras 3D macizas centradas en `c`, de pie y mirando a -Y (o giradas con `rot`)."""
         dst, idx = self._dest(mat, p)
         bm = bmesh.new()
@@ -271,7 +271,7 @@ class Modelo:
         cu.body = txt
         cu.size = alto / 0.72  # altura de las mayúsculas ~0,72 del tamaño de fuente
         cu.extrude = fondo / 2
-        cu.resolution_u = 2
+        cu.resolution_u = res
         cu.align_x = "CENTER"
         cu.align_y = "CENTER"
         cu.space_character = espaciado
@@ -377,9 +377,14 @@ class Modelo:
             if ng:
                 bmesh.ops.triangulate(bm, faces=ng, ngon_method="BEAUTY")
             lim = math.radians(angulo_duro)
+            # El follaje se sombrea más suave que el metal: sus masas son orgánicas, no facetadas.
+            organico = {i for i, n in enumerate(d["mats"]) if spec(n)["patron"] == "hojas"}
+            lim_org = math.radians(66.0)
             for e in bm.edges:
                 if len(e.link_faces) == 2:
-                    e.smooth = e.calc_face_angle(0.0) < lim
+                    a, b = e.link_faces
+                    l = lim_org if (a.material_index in organico and b.material_index in organico) else lim
+                    e.smooth = e.calc_face_angle(0.0) < l
                 else:
                     e.smooth = False
             for f in bm.faces:

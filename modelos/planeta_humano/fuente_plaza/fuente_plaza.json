@@ -3,9 +3,9 @@
   "numero": 10,
   "zona": "Zona residencial",
   "categoria": "prop",
-  "triangulos": 2008,
+  "triangulos": 1936,
   "presupuesto_triangulos": 2000,
-  "dentro_de_presupuesto": false,
+  "dentro_de_presupuesto": true,
   "tamano_studs": {
     "ancho_x": 6.04,
     "alto_y": 3.0,
@@ -24,7 +24,7 @@
     },
     {
       "nombre": "fuente_plaza_agua",
-      "triangulos": 752,
+      "triangulos": 680,
       "material_roblox": "Glass",
       "color": "#3FA7C9",
       "transparencia": 0.35
@@ -44,7 +44,7 @@
     "normal": "fuente_plaza_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.317,
+  "cobertura_atlas": 0.323,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -67,7 +67,7 @@
         "uv": 1
       },
       "fuente_plaza_agua": {
-        "triangulos": 752,
+        "triangulos": 680,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
@@ -81,7 +81,7 @@
     },
     "ok": true,
     "avisos": [],
-    "triangulos": 2008,
+    "triangulos": 1936,
     "tamano_reimportado": [
       6.04,
       6.04,

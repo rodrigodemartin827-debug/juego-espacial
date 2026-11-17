@@ -1,0 +1,59 @@
+{
+  "nombre": "cesped_modular",
+  "numero": 14,
+  "zona": "Zona residencial",
+  "categoria": "vegetacion",
+  "triangulos": 2788,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 0.5,
+    "fondo_z": 8.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 8,
+    "alto_y": 0.5,
+    "fondo_z": 8
+  },
+  "piezas": [
+    {
+      "nombre": "cesped_modular",
+      "triangulos": 2788,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "cesped_modular_color.png",
+    "roughness": "cesped_modular_roughness.png",
+    "metalness": "cesped_modular_metalness.png",
+    "normal": "cesped_modular_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.35,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "cesped_modular": {
+        "triangulos": 2788,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2788,
+    "tamano_reimportado": [
+      8.0,
+      8.0,
+      0.5
+    ]
+  }
+}

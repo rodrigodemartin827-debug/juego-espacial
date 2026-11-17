@@ -1,0 +1,94 @@
+{
+  "nombre": "contenedor_basura",
+  "numero": 18,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 660,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 2.04,
+    "alto_y": 2.42,
+    "fondo_z": 1.92
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 2.5,
+    "fondo_z": 1.5
+  },
+  "piezas": [
+    {
+      "nombre": "contenedor_basura",
+      "triangulos": 564,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "contenedor_basura_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "contenedor_basura_pedal",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "contenedor_basura_tapa",
+      "triangulos": 60,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "contenedor_basura_color.png",
+    "roughness": "contenedor_basura_roughness.png",
+    "metalness": "contenedor_basura_metalness.png",
+    "emision": "contenedor_basura_emision.png",
+    "normal": "contenedor_basura_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.643,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "contenedor_basura": {
+        "triangulos": 564,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "contenedor_basura_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "contenedor_basura_pedal": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "contenedor_basura_tapa": {
+        "triangulos": 60,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 660,
+    "tamano_reimportado": [
+      2.04,
+      1.917,
+      2.42
+    ]
+  }
+}
