@@ -1,0 +1,84 @@
+{
+  "nombre": "deposito_agua",
+  "numero": 102,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_mediano",
+  "triangulos": 3906,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 12.35,
+    "fondo_z": 4.59
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 12,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "deposito_agua",
+      "triangulos": 3714,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "deposito_agua_neon",
+      "triangulos": 156,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "deposito_agua_rojo_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "deposito_agua_color.png",
+    "roughness": "deposito_agua_roughness.png",
+    "metalness": "deposito_agua_metalness.png",
+    "emision": "deposito_agua_emision.png",
+    "normal": "deposito_agua_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.248,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "deposito_agua": {
+        "triangulos": 3714,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "deposito_agua_neon": {
+        "triangulos": 156,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "deposito_agua_rojo_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3906,
+    "tamano_reimportado": [
+      4.04,
+      4.589,
+      12.351
+    ]
+  }
+}

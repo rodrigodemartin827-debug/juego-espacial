@@ -1,0 +1,131 @@
+{
+  "nombre": "estacion_comunicaciones",
+  "numero": 103,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_mediano",
+  "triangulos": 2440,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 9.42,
+    "fondo_z": 6.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 10,
+    "fondo_z": 6
+  },
+  "piezas": [
+    {
+      "nombre": "estacion_comunicaciones",
+      "triangulos": 1052,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "estacion_comunicaciones_antena",
+      "triangulos": 1104,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "estacion_comunicaciones_cristal",
+      "triangulos": 36,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "estacion_comunicaciones_neon",
+      "triangulos": 160,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estacion_comunicaciones_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estacion_comunicaciones_puerta",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "estacion_comunicaciones_rojo_neon",
+      "triangulos": 64,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "estacion_comunicaciones_color.png",
+    "roughness": "estacion_comunicaciones_roughness.png",
+    "metalness": "estacion_comunicaciones_metalness.png",
+    "emision": "estacion_comunicaciones_emision.png",
+    "normal": "estacion_comunicaciones_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.429,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "estacion_comunicaciones": {
+        "triangulos": 1052,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_comunicaciones_antena": {
+        "triangulos": 1104,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_comunicaciones_cristal": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_comunicaciones_neon": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_comunicaciones_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_comunicaciones_puerta": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_comunicaciones_rojo_neon": {
+        "triangulos": 64,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2440,
+    "tamano_reimportado": [
+      6.001,
+      6.0,
+      9.417
+    ]
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "nombre": "muro_perimetral",
+  "numero": 105,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_mediano",
+  "triangulos": 2628,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 5.15,
+    "fondo_z": 1.52
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 5,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "muro_perimetral",
+      "triangulos": 1648,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "muro_perimetral_blanco_luz",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "muro_perimetral_naranja_neon",
+      "triangulos": 80,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "muro_perimetral_neon",
+      "triangulos": 336,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "muro_perimetral_rojo_neon",
+      "triangulos": 56,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    },
+    {
+      "nombre": "muro_perimetral_torreta_1",
+      "triangulos": 248,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "muro_perimetral_torreta_2",
+      "triangulos": 248,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "muro_perimetral_color.png",
+    "roughness": "muro_perimetral_roughness.png",
+    "metalness": "muro_perimetral_metalness.png",
+    "emision": "muro_perimetral_emision.png",
+    "normal": "muro_perimetral_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.585,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "boca_torreta_1": [
+      1.5,
+      4.6,
+      -1.02
+    ],
+    "boca_torreta_2": [
+      -1.5,
+      4.6,
+      -1.02
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "muro_perimetral": {
+        "triangulos": 1648,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "muro_perimetral_blanco_luz": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "muro_perimetral_naranja_neon": {
+        "triangulos": 80,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "muro_perimetral_neon": {
+        "triangulos": 336,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "muro_perimetral_rojo_neon": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "muro_perimetral_torreta_1": {
+        "triangulos": 248,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "muro_perimetral_torreta_2": {
+        "triangulos": 248,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2628,
+    "tamano_reimportado": [
+      6.002,
+      1.521,
+      5.15
+    ]
+  }
+}

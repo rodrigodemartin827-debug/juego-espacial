@@ -1,0 +1,99 @@
+{
+  "nombre": "monumento_fundadores",
+  "numero": 104,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_mediano",
+  "triangulos": 2844,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 8.23,
+    "fondo_z": 3.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 8,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "monumento_fundadores",
+      "triangulos": 2360,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "monumento_fundadores_astro_neon",
+      "triangulos": 168,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "monumento_fundadores_cristal",
+      "triangulos": 12,
+      "material_roblox": "Glass",
+      "color": "#1C3B4A",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "monumento_fundadores_neon",
+      "triangulos": 304,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "monumento_fundadores_color.png",
+    "roughness": "monumento_fundadores_roughness.png",
+    "metalness": "monumento_fundadores_metalness.png",
+    "emision": "monumento_fundadores_emision.png",
+    "normal": "monumento_fundadores_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.484,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "monumento_fundadores": {
+        "triangulos": 2360,
+        "aristas_abiertas": 20,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "monumento_fundadores_astro_neon": {
+        "triangulos": 168,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "monumento_fundadores_cristal": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "monumento_fundadores_neon": {
+        "triangulos": 304,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": false,
+    "avisos": [
+      "monumento_fundadores: 20 aristas abiertas"
+    ],
+    "triangulos": 2844,
+    "tamano_reimportado": [
+      3.0,
+      3.0,
+      8.23
+    ]
+  }
+}
