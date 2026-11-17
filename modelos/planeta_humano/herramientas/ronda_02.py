@@ -37,7 +37,7 @@ def arbol_cipreses_espacial(m):
         z = z0 + (z1 - z0) * t
         r = radio(t) * 0.9
         m.ico((R.uniform(-0.06, 0.06), R.uniform(-0.06, 0.06), z), 1.0, "hoja2", sub=2,
-              esc=(r, r, 1.25), ruido=0.22, frec=1.6, semilla=i * 1.7, rot=(0, 0, i * 37))
+              esc=(r, r, 1.9), ruido=0.2, frec=1.6, semilla=i * 1.7, rot=(0, 0, i * 37))
     m.torno((0, 0, 11.2), [(0.42, 0), (0.25, 0.45), (0.0, 0.8)], "hoja2", seg=6)
     # Hojas con volumen: verdes azuladas, y algunas luminosas (pieza de neón tenue)
     def punto(u, v):

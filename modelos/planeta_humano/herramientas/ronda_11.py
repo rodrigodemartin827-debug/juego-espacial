@@ -139,14 +139,14 @@ def estacion_comunicaciones(m):
     m.caja((-1.6, 1.6, 3.5), (1.4, 1.1, 0.7), "gris_claro", bisel=0.05)
     m.cil((-1.6, 1.6, 3.88), 0.4, 0.08, "oscuro", seg=10)
     # Pedestal y horquilla de la parabólica
-    m.torno((1.4, -1.2, 0.3), [(1.3, 0), (1.3, 0.4), (0.9, 0.7), (0.7, 3.4), (0.9, 3.6), (0.9, 3.9), (0, 3.9)], "blanco_liso", seg=14)
-    m.tubo((1.4, -1.2, 0.75), 1.32, 0.1, 0.05, "rayas", seg=14)
-    m.tubo((1.4, -1.2, 4.1), 0.95, 0.14, 0.1, "neon", seg=14)
+    m.torno((0.4, -1.2, 0.3), [(1.3, 0), (1.3, 0.4), (0.9, 0.7), (0.7, 4.9), (0.9, 5.1), (0.9, 5.4), (0, 5.4)], "blanco_liso", seg=14)
+    m.tubo((0.4, -1.2, 0.75), 1.32, 0.1, 0.05, "rayas", seg=14)
+    m.tubo((0.4, -1.2, 5.6), 0.95, 0.14, 0.1, "neon", seg=14)
     G = "antena"
-    m.cil((1.4, -1.2, 4.4), 0.85, 0.4, "gris_liso", seg=14, p=G)
+    m.cil((0.4, -1.2, 5.9), 0.85, 0.4, "gris_liso", seg=14, p=G)
     for s in (-1, 1):
-        m.prisma([(-0.5, 0), (0.5, 0), (0.3, 1.7), (-0.3, 1.7)], -0.12, 0.12, "gris", "yz", c=(1.4 + s * 0.95, -1.2, 4.5), p=G)
-    cx, cy, cz = 1.4, -1.2, 6.1
+        m.prisma([(-0.5, 0), (0.5, 0), (0.3, 1.7), (-0.3, 1.7)], -0.12, 0.12, "gris", "yz", c=(0.4 + s * 0.95, -1.2, 6.0), p=G)
+    cx, cy, cz = 0.4, -1.2, 7.6
     m.cil((cx, cy, cz), 0.2, 2.2, "acero", eje="x", seg=10, p=G)
     inc = 48
     from mathutils import Euler, Vector
@@ -155,21 +155,21 @@ def estacion_comunicaciones(m):
         v = E @ Vector((x, y, z))
         return (cx + v.x, cy + v.y, cz + v.z)
     # Plato: casquete con grosor, aro, nervios traseros, trípode y alimentador
-    m.cupula(P(0, 0, -0.2), 2.9, "blanco_liso", grosor=0.08, seg=24, anillos=5, altura=0.32, rot=(inc + 180, 0, 0), p=G)
-    m.tubo(P(0, 0, -0.2), 2.93, 0.1, 0.07, "gris_liso", seg=24, rot=(inc, 0, 0), p=G)
+    m.cupula(P(0, 0, -0.2), 2.55, "blanco_liso", grosor=0.08, seg=24, anillos=5, altura=0.32, rot=(inc + 180, 0, 0), p=G)
+    m.tubo(P(0, 0, -0.2), 2.58, 0.1, 0.07, "gris_liso", seg=24, rot=(inc, 0, 0), p=G)
     for k in range(8):
         a = math.radians(45 * k + 22.5)
-        m.barrido([P(0.3 * math.cos(a), 0.3 * math.sin(a), -1.2), P(1.6 * math.cos(a), 1.6 * math.sin(a), -0.95),
-                   P(2.85 * math.cos(a), 2.85 * math.sin(a), -0.28)], 0.05, "gris_liso", seg=4, p=G)
+        m.barrido([P(0.3 * math.cos(a), 0.3 * math.sin(a), -1.2), P(1.4 * math.cos(a), 1.4 * math.sin(a), -0.9),
+                   P(2.5 * math.cos(a), 2.5 * math.sin(a), -0.28)], 0.05, "gris_liso", seg=4, p=G)
     m.cil(P(0, 0, -1.05), 0.5, 0.5, "gris", seg=12, rot=(inc, 0, 0), p=G)
     for k in range(3):
         a = math.radians(120 * k + 90)
-        m.barrido([P(2.2 * math.cos(a), 2.2 * math.sin(a), -0.62), P(0.12 * math.cos(a), 0.12 * math.sin(a), 1.75)], 0.04, "acero",
+        m.barrido([P(1.9 * math.cos(a), 1.9 * math.sin(a), -0.62), P(0.12 * math.cos(a), 0.12 * math.sin(a), 1.75)], 0.04, "acero",
                   seg=4, p=G)
     m.cil(P(0, 0, 1.75), 0.2, 0.4, "oscuro", seg=10, rot=(inc, 0, 0), p=G)
     m.cil(P(0, 0, 1.52), 0.14, 0.06, "neon", seg=10, rot=(inc, 0, 0))
     m.caja(P(0, 0, -1.9), (1.0, 0.8, 0.9), "hierro", rot=(inc, 0, 0), bisel=0.06, p=G)             # contrapeso
-    m.barrido([P(0, 0.3, -1.1), P(0.4, 0.4, -0.2), (cx + 0.7, cy + 0.3, 4.6)], 0.04, "goma", seg=5)
+    m.barrido([P(0, 0.3, -1.1), P(0.4, 0.4, -0.2), (cx + 0.7, cy + 0.3, 6.1)], 0.04, "goma", seg=5)
     # Mástil auxiliar con antenas de panel y baliza; pequeña parabólica en la caseta
     m.cil((-2.3, -2.2, 3.3), 0.09, 6.0, "acero", seg=8)
     m.caja((-2.3, -2.2, 0.4), (0.6, 0.6, 0.2), "oscuro", bisel=0.04)
@@ -187,7 +187,7 @@ def estacion_comunicaciones(m):
         m.caja((-0.9, -0.2 - 0.3 * k, 0.5 - 0.1 * k), (1.5, 0.32, 0.1), "rejilla")
 
 
-@modelo(104, "especiales", "prop", (3, 3, 8))
+@modelo(104, "especiales", "edificio_mediano", (3, 3, 8))
 def monumento_fundadores(m):
     # Pedestal escalonado de piedra con placa, y figura heroica de bronce que alza un astro luminoso
     for k, (l, h) in enumerate(((3.0, 0.3), (2.6, 0.3), (2.2, 0.3))):

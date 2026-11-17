@@ -488,12 +488,12 @@ def hospital_clinica(m):
     m.tubo((1.0, yf - 0.16, 7.2), 1.5, 0.26, 0.12, "acento", eje="y", seg=24)
     cruz((1.0, yf - 0.26, 7.2), 1.9, 0.14, "neon")
     # Marquesina de urgencias con rótulo y luces
-    m.bloque((0.2, yf - 2.2, hz + 0.1), (4.6, yf, hz + 0.4), "blanco_liso", bisel=0.05)
-    m.bloque((0.25, yf - 2.24, hz + 0.16), (4.55, yf - 2.18, hz + 0.34), "rojo_p")
+    m.bloque((0.2, yf - 1.2, hz + 0.1), (4.6, yf, hz + 0.4), "blanco_liso", bisel=0.05)
+    m.bloque((0.25, yf - 1.24, hz + 0.16), (4.55, yf - 1.18, hz + 0.34), "rojo_p")
     for x in (0.5, 4.3):
-        m.cil((x, yf - 2.0, 2.25), 0.1, 3.7, "acero", seg=8)
-    m.texto("CLINICA", (2.4, yf - 2.27, hz + 0.25), 0.2, 0.04, "neon_blanco")
-    m.caja((2.4, yf - 1.1, hz + 0.08), (3.6, 0.2, 0.05), "neon")
+        m.cil((x, yf - 1.0, 2.25), 0.1, 3.7, "acero", seg=8)
+    m.texto("CLINICA", (2.4, yf - 1.27, hz + 0.25), 0.2, 0.04, "neon_blanco")
+    m.caja((2.4, yf - 0.6, hz + 0.08), (3.6, 0.2, 0.05), "neon")
     # Azotea: helipuerto marcado, cruz y climatización
     m.cil((-2.6, 1.5, zt + 0.34), 2.6, 0.08, "oscuro", seg=24)
     m.tubo((-2.6, 1.5, zt + 0.36), 2.5, 0.06, 0.14, "amarillo_p", seg=24)
@@ -531,9 +531,9 @@ def mesa_mercado(m):
     for s in (-1, 1):
         m.caja((0, s * 1.02, 1.74), (1.1, 0.03, 0.36), "tela_cyan")
         m.prisma([(-0.55, 1.56), (0.55, 1.56), (0, 1.36)], s * 1.02 - 0.015, s * 1.02 + 0.015, "tela_cyan", "xz")
-    m.cil((1.3, 0.8, 2.2), 0.025, 0.7, "acero", seg=6)
-    m.caja((1.3, 0.78, 2.45), (0.5, 0.03, 0.3), "plastico_negro", bisel=0.01)
-    m.caja((1.3, 0.76, 2.45), (0.36, 0.02, 0.06), "neon")
+    m.cil((1.3, 0.8, 2.05), 0.025, 0.4, "acero", seg=6)
+    m.caja((1.3, 0.78, 2.2), (0.5, 0.03, 0.3), "plastico_negro", bisel=0.01)
+    m.caja((1.3, 0.76, 2.2), (0.36, 0.02, 0.06), "neon")
     m.caja((-1.25, -0.7, 1.92), (0.3, 0.3, 0.06), "madera_clara", bisel=0.01)
 
 

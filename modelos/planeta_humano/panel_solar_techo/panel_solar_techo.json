@@ -3,9 +3,9 @@
   "numero": 24,
   "zona": "Zona residencial",
   "categoria": "prop",
-  "triangulos": 2020,
+  "triangulos": 1956,
   "presupuesto_triangulos": 2000,
-  "dentro_de_presupuesto": false,
+  "dentro_de_presupuesto": true,
   "tamano_studs": {
     "ancho_x": 3.0,
     "alto_y": 0.28,
@@ -19,7 +19,7 @@
   "piezas": [
     {
       "nombre": "panel_solar_techo",
-      "triangulos": 2008,
+      "triangulos": 1944,
       "material_roblox": "SurfaceAppearance (atlas PBR)"
     },
     {
@@ -37,7 +37,7 @@
     "normal": "panel_solar_techo_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.564,
+  "cobertura_atlas": 0.532,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -48,7 +48,7 @@
   "verificacion_fbx": {
     "piezas": {
       "panel_solar_techo": {
-        "triangulos": 2008,
+        "triangulos": 1944,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
@@ -62,11 +62,11 @@
     },
     "ok": true,
     "avisos": [],
-    "triangulos": 2020,
+    "triangulos": 1956,
     "tamano_reimportado": [
-      3.0,
-      3.0,
-      0.281
+      3.001,
+      3.001,
+      0.282
     ]
   }
 }

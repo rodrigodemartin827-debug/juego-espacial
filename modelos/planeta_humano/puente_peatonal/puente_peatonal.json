@@ -8,7 +8,7 @@
   "dentro_de_presupuesto": true,
   "tamano_studs": {
     "ancho_x": 10.2,
-    "alto_y": 2.43,
+    "alto_y": 2.88,
     "fondo_z": 4.0
   },
   "tamano_objetivo_studs": {
@@ -44,7 +44,7 @@
     "normal": "puente_peatonal_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.349,
+  "cobertura_atlas": 0.32,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -77,9 +77,9 @@
     "avisos": [],
     "triangulos": 2564,
     "tamano_reimportado": [
-      10.2,
-      4.0,
-      2.431
+      10.201,
+      4.002,
+      2.881
     ]
   }
 }

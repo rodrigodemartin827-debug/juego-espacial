@@ -1,0 +1,100 @@
+{
+  "nombre": "puesto_comida",
+  "numero": 32,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 3850,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.2,
+    "alto_y": 4.12,
+    "fondo_z": 3.14
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 4,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "puesto_comida",
+      "triangulos": 3418,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "puesto_comida_naranja_neon",
+      "triangulos": 396,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "puesto_comida_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "puesto_comida_color.png",
+    "roughness": "puesto_comida_roughness.png",
+    "metalness": "puesto_comida_metalness.png",
+    "emision": "puesto_comida_emision.png",
+    "normal": "puesto_comida_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.562,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "vapor_olla_a": [
+      1.15,
+      2.1,
+      -0.7
+    ],
+    "vapor_olla_b": [
+      0.15,
+      2.1,
+      -0.7
+    ],
+    "humo_chimenea": [
+      0.65,
+      4.15,
+      -0.7
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "puesto_comida": {
+        "triangulos": 3418,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "puesto_comida_naranja_neon": {
+        "triangulos": 396,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "puesto_comida_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3850,
+    "tamano_reimportado": [
+      4.202,
+      3.142,
+      4.12
+    ]
+  }
+}

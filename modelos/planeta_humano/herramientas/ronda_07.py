@@ -543,8 +543,8 @@ def rack_piezas_nave(m):
     # Nivel 1: tobera de motor, tren de aterrizaje y bidón
     z = niveles[0] + 0.16
     m.torno((-1.8, 0, z), [(0.6, 0), (0.7, 0.12), (0.42, 0.9), (0.46, 1.25), (0.36, 1.25), (0.32, 0.9), (0.56, 0.14),
-                           (0, 0.12)], "hierro", seg=14)
-    m.tubo((-1.8, 0, z + 1.0), 0.47, 0.1, 0.05, "cobre", seg=14)
+                           (0, 0.12)], "hierro", seg=10)
+    m.tubo((-1.8, 0, z + 1.0), 0.47, 0.1, 0.05, "cobre", seg=10)
     m.cil((0.6, 0, z + 0.3), 0.3, 0.26, "goma", eje="y", seg=14)
     m.cil((0.6, 0, z + 0.3), 0.14, 0.3, "cromo", eje="y", seg=8)
     m.barrido([(0.6, 0, z + 0.3), (0.9, 0, z + 0.9), (1.5, 0, z + 1.2)], [0.07, 0.09, 0.11], "acero", seg=8)

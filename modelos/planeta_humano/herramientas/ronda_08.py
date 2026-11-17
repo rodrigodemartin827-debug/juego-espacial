@@ -331,14 +331,14 @@ def montacargas(m):
         m.caja((-0.95, y, 1.5), (0.05, 0.05, 0.8), "oscuro", p=P)
     m.caja((-0.95, 0, 1.9), (0.05, 1.1, 0.05), "oscuro", p=P)
     for s in (-1, 1):
-        m.prisma([(-0.98, 0.62), (-0.98, 1.1), (-1.06, 1.1), (-1.06, 0.7), (-2.2, 0.66), (-2.25, 0.62)], s * 0.38 - 0.07,
+        m.prisma([(-0.98, 0.62), (-0.98, 1.1), (-1.06, 1.1), (-1.06, 0.7), (-1.95, 0.66), (-2.0, 0.62)], s * 0.38 - 0.07,
                  s * 0.38 + 0.07, "acero", "xz", p=P)
     # Carga: caja sobre las horquillas
-    m.caja((-1.6, 0, 0.72), (1.0, 1.1, 0.1), "madera_clara", p="carga")
+    m.caja((-1.5, 0, 0.72), (0.9, 1.1, 0.1), "madera_clara", p="carga")
     for y in (-0.45, 0, 0.45):
         m.caja((-1.6, y, 0.64), (1.0, 0.12, 0.06), "madera", p="carga") if False else None
-    m.caja((-1.6, 0, 1.2), (0.9, 0.9, 0.86), "gris", bisel=0.04, p="carga")
-    m.caja((-1.6, 0, 1.2), (0.93, 0.14, 0.89), "tela_naranja", p="carga")
+    m.caja((-1.5, 0, 1.2), (0.8, 0.9, 0.86), "gris", bisel=0.04, p="carga")
+    m.caja((-1.5, 0, 1.2), (0.83, 0.14, 0.89), "tela_naranja", p="carga")
     # Faros delanteros y piloto trasero
     for s in (-1, 1):
         m.caja((-0.68, s * 0.62, 1.05), (0.06, 0.16, 0.1), "neon_blanco")

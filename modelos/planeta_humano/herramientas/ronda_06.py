@@ -130,7 +130,7 @@ def grua_carga(m):
     m.caja((-0.75, -0.2, 2.5), (0.86, 1.06, 0.1), "oscuro", p=G)
     m.esfera((-0.75, -0.2, 2.62), 0.1, "neon_naranja", seg=8, anillos=5)
     # Primer tramo del brazo (sube hacia el frente) y segundo tramo
-    A, B, C = (0, -0.05, 4.3), (0, -1.6, 6.9), (0, -3.3, 7.3)
+    A, B, C = (0, -0.05, 4.3), (0, -0.9, 7.0), (0, -2.1, 7.6)
     B1 = "brazo_1"
     for sx in (-1, 1):
         m.barrido([(sx * 0.22, A[1], A[2]), (sx * 0.18, B[1], B[2])], 0.14, "amarillo_p", seg=4, p=B1)
@@ -142,20 +142,20 @@ def grua_carga(m):
     m.cil((0, B[1], B[2]), 0.2, 0.7, "acero", eje="x", seg=12)
     # pistón hidráulico de la columna al brazo
     m.barrido([(0, -0.42, 2.6), (0, -0.75, 4.3)], 0.11, "oscuro", seg=8, p=G)
-    m.barrido([(0, -0.75, 4.3), (0, -1.05, 5.6)], 0.06, "cromo", seg=8, p=B1)
+    m.barrido([(0, -0.75, 4.3), (0, -0.62, 5.6)], 0.06, "cromo", seg=8, p=B1)
     B2 = "brazo_2"
     for sx in (-1, 1):
         m.barrido([(sx * 0.14, B[1], B[2]), (sx * 0.1, C[1], C[2])], 0.1, "amarillo_p", seg=4, p=B2)
     for k in range(3):
         t = (k + 0.5) / 3
         m.cil((0, B[1] + (C[1] - B[1]) * t, B[2] + (C[2] - B[2]) * t), 0.04, 0.26, "hierro", eje="x", seg=5, p=B2)
-    m.barrido([(0, -1.0, 6.2), (0, -1.9, 6.75)], 0.07, "oscuro", seg=6, p=B1)
-    m.barrido([(0, -1.9, 6.75), (0, -2.5, 6.98)], 0.04, "cromo", seg=6, p=B2)
+    m.barrido([(0, -0.55, 6.0), (0, -1.2, 6.85)], 0.07, "oscuro", seg=6, p=B1)
+    m.barrido([(0, -1.2, 6.85), (0, -1.7, 7.2)], 0.04, "cromo", seg=6, p=B2)
     # Polea, cable de acero, pasteca y gancho
     m.cil((0, C[1], C[2]), 0.22, 0.12, "hierro", eje="x", seg=14, p=B2)
     m.cil((0, C[1], C[2]), 0.06, 0.34, "acero", eje="x", seg=6, p=B2)
     Gn = "gancho"
-    m.cil((0, C[1] - 0.2, 5.6), 0.02, 3.2, "acero", seg=5, p=Gn)
+    m.cil((0, C[1] - 0.2, 5.75), 0.02, 3.5, "acero", seg=5, p=Gn)
     m.caja((0, C[1] - 0.2, 3.85), (0.3, 0.2, 0.4), "amarillo_p", bisel=0.04, p=Gn)
     m.cil((0, C[1] - 0.2, 3.85), 0.13, 0.24, "hierro", eje="y", seg=10, p=Gn)
     pts = [(0, C[1] - 0.2, 3.65)]
@@ -222,11 +222,11 @@ def cinta_transportadora(m):
 @modelo(56, "industrial", "vehiculo", (6, 4, 4))
 def tanque_combustible_industrial(m):
     # Depósito cilíndrico horizontal con fondos bombeados, cunas con patas, boca de hombre, válvulas y pasarela
-    m.cil((0, 0, 2.2), 1.7, 3.8, "blanco_liso", eje="x", seg=24)
+    m.cil((0, 0, 2.2), 1.7, 4.4, "blanco_liso", eje="x", seg=24)
     for s in (-1, 1):
-        m.torno((s * 1.9, 0, 2.2), [(1.7, 0), (1.55, 0.3), (1.1, 0.6), (0.5, 0.76), (0, 0.8)], "blanco_liso", seg=24,
+        m.torno((s * 2.2, 0, 2.2), [(1.7, 0), (1.55, 0.3), (1.1, 0.6), (0.5, 0.76), (0, 0.8)], "blanco_liso", seg=24,
                 eje="x", rot=(0, 0, 0 if s > 0 else 180))
-        m.tubo((s * 1.9, 0, 2.2), 1.74, 0.12, 0.06, "acero", eje="x", seg=24)
+        m.tubo((s * 2.2, 0, 2.2), 1.74, 0.12, 0.06, "acero", eje="x", seg=24)
     m.tubo((0, 0, 2.2), 1.73, 0.5, 0.04, "naranja_p", eje="x", seg=24)
     m.tubo((0, 0, 2.2), 1.74, 0.08, 0.05, "acero", eje="x", seg=24)
     # Cunas y patas
@@ -246,10 +246,10 @@ def tanque_combustible_industrial(m):
         m.cil((0.4 + 0.5 * math.cos(a), 0.5 * math.sin(a), 4.17), 0.04, 0.04, "hierro", seg=6)
     m.barrido([(0.1, 0, 4.16), (0.4, 0, 4.3), (0.7, 0, 4.16)], 0.03, "acero", seg=5)
     m.barrido([(-1.2, 0, 3.85), (-1.2, 0, 4.25), (-1.2, -0.25, 4.3), (-1.2, -0.3, 4.15)], 0.07, "acero", seg=6)
-    m.caja((2.0, -1.2, 2.2), (0.12, 0.1, 1.8), "oscuro")
-    m.caja((2.0, -1.26, 2.0), (0.06, 0.03, 1.2), "neon")
-    for z in (1.4, 3.0):
-        m.barrido([(2.0, -1.2, z), (2.0, -0.9, z)], 0.03, "acero", seg=4)
+    m.caja((1.6, -1.72, 2.2), (0.12, 0.1, 1.2), "oscuro")
+    m.caja((1.6, -1.78, 2.15), (0.06, 0.03, 0.9), "neon")
+    for z in (1.7, 2.7):
+        m.barrido([(1.6, -1.72, z), (1.6, -1.5, z)], 0.03, "acero", seg=4)
     # Tubería de descarga con válvula de volante y brida
     m.barrido([(-0.6, -1.3, 1.0), (-0.6, -1.9, 0.9), (-0.6, -1.95, 0.5), (-1.6, -1.95, 0.5)], 0.13, "acero", seg=8)
     m.cil((-0.6, -1.95, 0.72), 0.2, 0.14, "rojo_p", seg=8)

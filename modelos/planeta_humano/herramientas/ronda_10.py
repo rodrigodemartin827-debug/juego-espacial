@@ -198,13 +198,13 @@ def centro_mando(m):
             m.ventana((sx * 8.52, y, 3.4), 2.2, 2.2, normal="x", sentido=sx, cruz=True)
         m.ventana((sx * 6.85, 6.02, 3.4), 2.2, 2.0, sentido=1, cruz=True)
         # Banderas: mástil y paño ondulado con grosor
-        m.cil((sx * 8.0, -2.0, 8.2), 0.06, 3.8, "acero", seg=8)
-        m.esfera((sx * 8.0, -2.0, 10.15), 0.1, "oro", seg=8, anillos=5)
-        paño = [(0.0, 0.0), (0.5, 0.08), (1.0, -0.06), (1.5, 0.06), (1.9, 0.0), (1.9, 1.1), (1.5, 1.16), (1.0, 1.04), (0.5, 1.18),
-                (0.0, 1.1)]
+        m.cil((sx * 6.9, -2.0, 8.2), 0.06, 3.8, "acero", seg=8)
+        m.esfera((sx * 6.9, -2.0, 10.15), 0.1, "oro", seg=8, anillos=5)
+        paño = [(0.0, 0.0), (0.4, 0.08), (0.8, -0.06), (1.2, 0.06), (1.5, 0.0), (1.5, 1.0), (1.2, 1.06), (0.8, 0.94), (0.4, 1.08),
+                (0.0, 1.0)]
         m.prisma([(sx * u, v) for u, v in paño] if sx < 0 else paño, -0.02, 0.02, "tela_cyan" if sx < 0 else "tela_azul", "xz",
-                 c=(sx * 8.06 if sx > 0 else sx * 8.06, -2.0, 8.9), p="bandera_izq" if sx < 0 else "bandera_der")
-        m.caja((sx * 8.06 + (0.95 if sx > 0 else -0.95), -2.03, 9.45), (0.5, 0.02, 0.14), "blanco_liso",
+                 c=(sx * 6.96, -2.0, 8.9), p="bandera_izq" if sx < 0 else "bandera_der")
+        m.caja((sx * 6.96 + (0.75 if sx > 0 else -0.75), -2.03, 9.4), (0.5, 0.02, 0.14), "blanco_liso",
                p="bandera_izq" if sx < 0 else "bandera_der")
     # Entrada: puerta doble alta con marco luminoso
     m.marco((0, -3.76, 3.1), 3.2, 3.6, 0.26, 0.3, "gris_liso")
@@ -297,14 +297,14 @@ def laboratorio(m):
     for x in (-3.5, 0, 3.5):
         m.ventana((x, 5.72, 6.9), 2.2, 1.7, sentido=1, cruz=True)
     # Azotea: chimenea de ventilación con sombrerete, extractores, depósitos esféricos y tuberías
-    m.cil((4.6, 3.6, zt + 1.5), 0.5, 2.6, "acero", seg=12)
-    for z in (0.9, 1.9):
+    m.cil((4.6, 3.6, zt + 1.0), 0.5, 1.6, "acero", seg=12)
+    for z in (0.7, 1.4):
         m.tubo((4.6, 3.6, zt + z), 0.54, 0.1, 0.05, "gris_liso", seg=12)
-    m.torno((4.6, 3.6, zt + 2.8), [(0.7, 0), (0.7, 0.08), (0, 0.4)], "gris", seg=12)
+    m.torno((4.6, 3.6, zt + 1.95), [(0.7, 0), (0.7, 0.08), (0, 0.4)], "gris", seg=12)
     for a in (0, 120, 240):
-        m.cil((4.6 + 0.45 * math.cos(math.radians(a)), 3.6 + 0.45 * math.sin(math.radians(a)), zt + 2.7), 0.03, 0.3, "acero",
+        m.cil((4.6 + 0.45 * math.cos(math.radians(a)), 3.6 + 0.45 * math.sin(math.radians(a)), zt + 1.86), 0.03, 0.3, "acero",
               seg=4)
-    m.anclaje("vapor_ventilacion", (4.6, 3.6, zt + 3.3))
+    m.anclaje("vapor_ventilacion", (4.6, 3.6, zt + 2.5))
     for x in (-4.6, -2.8):
         m.esfera((x, 3.4, zt + 1.3), 0.85, "blanco_liso", seg=14, anillos=9)
         m.tubo((x, 3.4, zt + 1.3), 0.87, 0.1, 0.04, "verde_p", seg=14)
@@ -511,7 +511,7 @@ def portal_espacial(m):
         m.caja((s * 3.6, 0, 0.45), (0.6, 2.0, 0.5), "rayas")
     for k in range(2):
         m.caja((0, -1.0 - 0.0, 0.1 + 0.2 * k), (3.4 - 0.4 * k, 0.5 - 0.2 * k, 0.2), "gris_liso") if False else None
-    cz, R = 5.3, 3.9
+    cz, R = 4.75, 3.4
     # Anillo estructural por dovelas tecnológicas
     n = 20
     for k in range(n):
@@ -531,19 +531,19 @@ def portal_espacial(m):
     m.toro((0, 0, cz), R - 0.38, 0.14, "neon", eje="y", seg=40, seg2=8, p="anillo_neon")
     m.toro((0, 0, cz), R - 0.7, 0.05, "neon_blanco", eje="y", seg=40, seg2=5)
     m.cil((0, 0, cz), R - 0.72, 0.05, "neon", eje="y", seg=40, p="velo_neon")
-    for r in (1.0, 2.0, 2.8):
+    for r in (0.9, 1.7, 2.4):
         m.toro((0, 0, cz), r, 0.03, "neon_blanco", eje="y", seg=32, seg2=4, esc=(1, 1.0, 1), p="ondas_neon")
     m.anclaje("centro_portal", (0, 0, cz))
     # Contrafuertes laterales con acumuladores y cables de alimentación
     for s in (-1, 1):
-        m.prisma([(s * 2.6, 0.6), (s * 3.9, 0.6), (s * 3.9, 3.4), (s * 3.55, 4.4), (s * 3.3, 2.6)], -0.6, 0.6, "gris", "xz")
-        m.prisma([(s * 3.92, 0.6), (s * 3.98, 0.6), (s * 3.98, 3.4), (s * 3.92, 3.4)], -0.5, 0.5, "acento", "xz")
+        m.prisma([(s * 2.3, 0.6), (s * 3.75, 0.6), (s * 3.75, 3.0), (s * 3.4, 3.9), (s * 3.0, 2.3)], -0.6, 0.6, "gris", "xz")
+        m.prisma([(s * 3.77, 0.6), (s * 3.83, 0.6), (s * 3.83, 3.0), (s * 3.77, 3.0)], -0.5, 0.5, "acento", "xz")
         m.cil((s * 3.4, 0, 1.6), 0.36, 1.6, "cristal", eje="z", seg=10) if False else None
         for y in (-0.75, 0.75):
-            m.cil((s * 3.3, y, 1.5), 0.2, 1.7, "oscuro", seg=10)
-            m.cil((s * 3.3, y, 1.5), 0.215, 1.0, "neon", seg=10)
-            m.torno((s * 3.3, y, 2.35), [(0.22, 0), (0.12, 0.14), (0, 0.16)], "acero", seg=10)
-            m.barrido([(s * 3.3, y, 2.5), (s * 3.5, y * 0.9, 3.3), (s * 3.75, y * 0.6, 4.3)], 0.05, "goma", seg=5)
+            m.cil((s * 3.1, y, 1.5), 0.2, 1.7, "oscuro", seg=10)
+            m.cil((s * 3.1, y, 1.5), 0.215, 1.0, "neon", seg=10)
+            m.torno((s * 3.1, y, 2.35), [(0.22, 0), (0.12, 0.14), (0, 0.16)], "acero", seg=10)
+            m.barrido([(s * 3.1, y, 2.5), (s * 3.3, y * 0.9, 3.0), (s * 3.5, y * 0.6, 3.8)], 0.05, "goma", seg=5)
     # Remate superior con emisor y antenas
     m.caja((0, 0, cz + R + 0.75), (1.6, 1.0, 0.5), "oscuro", bisel=0.08)
     m.torno((0, 0, cz + R + 1.0), [(0.3, 0), (0.16, 0.2), (0.05, 0.3), (0, 0.6)], "acero", seg=8)

@@ -72,7 +72,7 @@
     "normal": "tienda_naves_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.599,
+  "cobertura_atlas": 0.573,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -135,7 +135,7 @@
     "avisos": [],
     "triangulos": 2470,
     "tamano_reimportado": [
-      14.0,
+      14.001,
       13.2,
       8.75
     ]

@@ -1,0 +1,120 @@
+{
+  "nombre": "cartel_holografico",
+  "numero": 40,
+  "zona": "Zona comercial",
+  "categoria": "prop",
+  "triangulos": 1980,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 2.98,
+    "fondo_z": 0.32
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 3,
+    "fondo_z": 0.3
+  },
+  "piezas": [
+    {
+      "nombre": "cartel_holografico",
+      "triangulos": 116,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "cartel_holografico_marco_neon",
+      "triangulos": 96,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "cartel_holografico_naranja_neon",
+      "triangulos": 792,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "cartel_holografico_neon",
+      "triangulos": 84,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "cartel_holografico_panel_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "cartel_holografico_texto_neon",
+      "triangulos": 880,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    }
+  ],
+  "texturas": {
+    "color": "cartel_holografico_color.png",
+    "roughness": "cartel_holografico_roughness.png",
+    "metalness": "cartel_holografico_metalness.png",
+    "emision": "cartel_holografico_emision.png",
+    "normal": "cartel_holografico_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.541,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "cartel_holografico": {
+        "triangulos": 116,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cartel_holografico_marco_neon": {
+        "triangulos": 96,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cartel_holografico_naranja_neon": {
+        "triangulos": 792,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "cartel_holografico_neon": {
+        "triangulos": 84,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cartel_holografico_panel_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "cartel_holografico_texto_neon": {
+        "triangulos": 880,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1980,
+    "tamano_reimportado": [
+      4.002,
+      0.32,
+      2.98
+    ]
+  }
+}

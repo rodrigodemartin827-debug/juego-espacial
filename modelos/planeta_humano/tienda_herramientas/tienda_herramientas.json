@@ -8,7 +8,7 @@
   "dentro_de_presupuesto": true,
   "tamano_studs": {
     "ancho_x": 10.0,
-    "alto_y": 7.66,
+    "alto_y": 7.16,
     "fondo_z": 8.66
   },
   "tamano_objetivo_studs": {
@@ -24,10 +24,17 @@
     },
     {
       "nombre": "tienda_herramientas_cristal",
-      "triangulos": 60,
+      "triangulos": 48,
       "material_roblox": "Glass",
       "color": "#7FE6F2",
       "transparencia": 0.45
+    },
+    {
+      "nombre": "tienda_herramientas_escaparate_cristal",
+      "triangulos": 12,
+      "material_roblox": "Glass",
+      "color": "#D4F1F6",
+      "transparencia": 0.8
     },
     {
       "nombre": "tienda_herramientas_naranja_neon",
@@ -65,7 +72,7 @@
     "normal": "tienda_herramientas_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.504,
+  "cobertura_atlas": 0.538,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -82,7 +89,13 @@
         "uv": 1
       },
       "tienda_herramientas_cristal": {
-        "triangulos": 60,
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tienda_herramientas_escaparate_cristal": {
+        "triangulos": 12,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
@@ -122,9 +135,9 @@
     "avisos": [],
     "triangulos": 2730,
     "tamano_reimportado": [
-      10.0,
-      8.66,
-      7.66
+      10.002,
+      8.661,
+      7.159
     ]
   }
 }

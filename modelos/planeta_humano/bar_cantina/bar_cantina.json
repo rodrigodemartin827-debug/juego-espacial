@@ -1,0 +1,121 @@
+{
+  "nombre": "bar_cantina",
+  "numero": 36,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 7044,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 10.0,
+    "alto_y": 7.05,
+    "fondo_z": 10.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 10,
+    "alto_y": 7,
+    "fondo_z": 10
+  },
+  "piezas": [
+    {
+      "nombre": "bar_cantina",
+      "triangulos": 5958,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "bar_cantina_amarillo_neon",
+      "triangulos": 78,
+      "material_roblox": "Neon",
+      "color": "#FFD23D"
+    },
+    {
+      "nombre": "bar_cantina_azul_neon",
+      "triangulos": 208,
+      "material_roblox": "Neon",
+      "color": "#3D7BFF"
+    },
+    {
+      "nombre": "bar_cantina_cristal",
+      "triangulos": 332,
+      "material_roblox": "Glass",
+      "color": "#1C3B4A",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "bar_cantina_rosa_neon",
+      "triangulos": 432,
+      "material_roblox": "Neon",
+      "color": "#FF4DD2"
+    },
+    {
+      "nombre": "bar_cantina_verde_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "bar_cantina_color.png",
+    "roughness": "bar_cantina_roughness.png",
+    "metalness": "bar_cantina_metalness.png",
+    "emision": "bar_cantina_emision.png",
+    "normal": "bar_cantina_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.498,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "bar_cantina": {
+        "triangulos": 5958,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "bar_cantina_amarillo_neon": {
+        "triangulos": 78,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "bar_cantina_azul_neon": {
+        "triangulos": 208,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "bar_cantina_cristal": {
+        "triangulos": 332,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "bar_cantina_rosa_neon": {
+        "triangulos": 432,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "bar_cantina_verde_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 7044,
+    "tamano_reimportado": [
+      10.0,
+      10.0,
+      7.051
+    ]
+  }
+}

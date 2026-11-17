@@ -379,6 +379,9 @@ class Modelo:
             bm = d["bm"]
             if not bm.faces:
                 continue
+            for v in bm.verts:           # nada baja del suelo: las bases quedan planas en z = 0
+                if v.co.z < 0.0:
+                    v.co.z = 0.0
             ng = [f for f in bm.faces if len(f.verts) > 4]
             if ng:
                 bmesh.ops.triangulate(bm, faces=ng, ngon_method="BEAUTY")

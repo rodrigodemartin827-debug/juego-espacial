@@ -108,12 +108,12 @@ def maniqui_expositor(m):
     for s in (-1, 1):
         x = s * 0.2
         m.caja((x, -0.05, 0.2), (0.22, 0.42, 0.14), "gris_liso", bisel=0.04)                 # pie
-        m.esfera((x, 0, 0.32), 0.09, "acero", seg=8, anillos=5)
-        m.torno((x, 0, 0.36), [(0.08, 0), (0.12, 0.35), (0.1, 0.85), (0.0, 0.86)], "blanco_liso", seg=8)
-        m.esfera((x, 0, 1.28), 0.11, "acero", seg=8, anillos=5)                               # rodilla
-        m.torno((x, 0, 1.34), [(0.1, 0), (0.15, 0.4), (0.13, 0.9), (0.0, 0.92)], "blanco_liso", seg=8)
+        m.esfera((x, 0, 0.32), 0.09, "acero", seg=6, anillos=4)
+        m.torno((x, 0, 0.36), [(0.08, 0), (0.12, 0.35), (0.1, 0.85), (0.0, 0.86)], "blanco_liso", seg=7)
+        m.esfera((x, 0, 1.28), 0.11, "acero", seg=6, anillos=4)                               # rodilla
+        m.torno((x, 0, 1.34), [(0.1, 0), (0.15, 0.4), (0.13, 0.9), (0.0, 0.92)], "blanco_liso", seg=7)
         m.caja((x, -0.13, 1.8), (0.08, 0.03, 0.5), "acento")
-        m.esfera((x, 0, 2.32), 0.13, "acero", seg=8, anillos=5)                               # cadera
+        m.esfera((x, 0, 2.32), 0.13, "acero", seg=6, anillos=4)                               # cadera
     # Pelvis, columna segmentada y torso
     m.caja((0, 0, 2.42), (0.62, 0.34, 0.26), "gris_liso", bisel=0.07)
     for k in range(4):
@@ -126,10 +126,10 @@ def maniqui_expositor(m):
     # Brazos: hombro, brazo, codo, antebrazo y mano con dedos en pinza
     for s in (-1, 1):
         x = s * 0.5
-        m.esfera((x, 0, 3.85), 0.15, "acero", seg=10, anillos=6)
-        m.torno((x + s * 0.04, 0, 3.05), [(0.07, 0), (0.1, 0.3), (0.09, 0.72), (0.0, 0.74)], "blanco_liso", seg=8)
-        m.esfera((x + s * 0.05, 0, 3.0), 0.09, "acero", seg=8, anillos=5)
-        m.torno((x + s * 0.06, -0.02, 2.3), [(0.05, 0), (0.085, 0.3), (0.075, 0.66), (0.0, 0.68)], "blanco_liso", seg=8)
+        m.esfera((x, 0, 3.85), 0.15, "acero", seg=8, anillos=5)
+        m.torno((x + s * 0.04, 0, 3.05), [(0.07, 0), (0.1, 0.3), (0.09, 0.72), (0.0, 0.74)], "blanco_liso", seg=7)
+        m.esfera((x + s * 0.05, 0, 3.0), 0.09, "acero", seg=6, anillos=4)
+        m.torno((x + s * 0.06, -0.02, 2.3), [(0.05, 0), (0.085, 0.3), (0.075, 0.66), (0.0, 0.68)], "blanco_liso", seg=7)
         m.caja((x + s * 0.06, -0.02, 2.2), (0.12, 0.08, 0.16), "gris_liso", bisel=0.02)
         for dy in (-0.04, 0.03):
             m.caja((x + s * 0.06, -0.02 + dy, 2.06), (0.09, 0.025, 0.16), "oscuro")

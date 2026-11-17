@@ -1,0 +1,72 @@
+{
+  "nombre": "mesa_mercado",
+  "numero": 38,
+  "zona": "Zona comercial",
+  "categoria": "prop",
+  "triangulos": 728,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.05,
+    "alto_y": 2.35,
+    "fondo_z": 2.07
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 2,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "mesa_mercado",
+      "triangulos": 716,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "mesa_mercado_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "mesa_mercado_color.png",
+    "roughness": "mesa_mercado_roughness.png",
+    "metalness": "mesa_mercado_metalness.png",
+    "emision": "mesa_mercado_emision.png",
+    "normal": "mesa_mercado_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.557,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "mesa_mercado": {
+        "triangulos": 716,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "mesa_mercado_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 728,
+    "tamano_reimportado": [
+      3.051,
+      2.071,
+      2.345
+    ]
+  }
+}

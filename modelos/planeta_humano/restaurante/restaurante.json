@@ -1,0 +1,149 @@
+{
+  "nombre": "restaurante",
+  "numero": 35,
+  "zona": "Zona comercial",
+  "categoria": "edificio_mediano",
+  "triangulos": 5380,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 8.65,
+    "fondo_z": 10.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 14,
+    "alto_y": 8,
+    "fondo_z": 10
+  },
+  "piezas": [
+    {
+      "nombre": "restaurante",
+      "triangulos": 4174,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "restaurante_blanco_luz",
+      "triangulos": 252,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "restaurante_cristal",
+      "triangulos": 210,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "restaurante_menu_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "restaurante_naranja_neon",
+      "triangulos": 672,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "restaurante_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "restaurante_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "restaurante_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "restaurante_color.png",
+    "roughness": "restaurante_roughness.png",
+    "metalness": "restaurante_metalness.png",
+    "emision": "restaurante_emision.png",
+    "normal": "restaurante_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.501,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "humo_cocina": [
+      -4.8,
+      8.7,
+      3.2
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "restaurante": {
+        "triangulos": 4174,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "restaurante_blanco_luz": {
+        "triangulos": 252,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "restaurante_cristal": {
+        "triangulos": 210,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "restaurante_menu_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "restaurante_naranja_neon": {
+        "triangulos": 672,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "restaurante_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "restaurante_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "restaurante_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 5380,
+    "tamano_reimportado": [
+      14.0,
+      10.0,
+      8.65
+    ]
+  }
+}

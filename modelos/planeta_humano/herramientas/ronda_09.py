@@ -42,6 +42,7 @@ def arbol_roble_espacial(m):
     # Ramas principales y secundarias
     copas = [((2.2, 0.4, 9.0), 2.2), ((-2.0, 1.2, 9.4), 2.1), ((-0.8, -2.1, 9.0), 2.0), ((1.0, 2.0, 10.2), 1.9),
              ((0.1, 0.0, 11.4), 2.4), ((-2.3, -0.9, 10.6), 1.6), ((1.9, -1.6, 10.4), 1.7)]
+    copas = [((c[0] * 0.66, c[1] * 0.66, c[2]), r * 0.74) for c, r in copas]
     for i, (c, r) in enumerate(copas):
         mid = (c[0] * 0.4 + 0.05, c[1] * 0.4, 6.0 + (c[2] - 6.0) * 0.5)
         m.barrido([(0.05, 0.0, 5.6), mid, (c[0], c[1], c[2] - r * 0.3)], [0.38 - 0.02 * i, 0.24, 0.1], "corteza", seg=6)
@@ -51,7 +52,7 @@ def arbol_roble_espacial(m):
         a = 2 * math.pi * v
         e = math.radians(R.uniform(-30, 85))
         return (c[0] + r * math.cos(a) * math.cos(e), c[1] + r * math.sin(a) * math.cos(e), c[2] + r * 0.82 * math.sin(e)), a
-    _esparcir_hojas(m, 95, punto, 0.85, 0.42, "hoja_clara", subir=22)
+    _esparcir_hojas(m, 95, punto, 0.7, 0.36, "hoja_clara", subir=22)
     _esparcir_hojas(m, 55, punto, 0.8, 0.4, "hoja2", subir=18)
     _esparcir_hojas(m, 34, punto, 0.75, 0.36, "hoja_cyan", subir=25)
     _esparcir_hojas(m, 22, punto, 0.6, 0.26, "neon", subir=30)                                # bioluminiscentes
@@ -68,7 +69,7 @@ def arbol_pino_espacial(m):
     for i in range(pisos):
         t = i / (pisos - 1)
         z = 3.2 + 11.3 * t
-        largo = 1.5 * (1 - t) ** 0.8 + 0.25
+        largo = 1.05 * (1 - t) ** 0.8 + 0.2
         n = 7 if i < 7 else 5
         for k in range(n):
             a = 2 * math.pi * k / n + i * 0.55
@@ -79,7 +80,7 @@ def arbol_pino_espacial(m):
             # Masa de acículas: cuña aplastada con grosor
             for j, f in enumerate((0.45, 0.8)):
                 px, py, pz = largo * f * ca, largo * f * sa, z + cae * f * f + 0.02
-                m.hoja((px, py, pz), largo * 0.62, largo * 0.55, "hoja2" if (i + k + j) % 3 else "hoja_azul",
+                m.hoja((px, py, pz), largo * 0.55, largo * 0.6, "hoja2" if (i + k + j) % 3 else "hoja_azul",
                        rot=(0, 14, math.degrees(a)), grosor=0.11)
             if (i + k) % 4 == 0:
                 m.esfera((largo * 1.02 * ca, largo * 1.02 * sa, z + cae - 0.02), 0.06, "neon", seg=5, anillos=3)
@@ -95,7 +96,7 @@ def arbol_pino_espacial(m):
 def arbol_sauce_espacial(m):
     R = m.rng
     eje = [(0, 0, 0), (0.15, 0.0, 1.4), (-0.1, 0.12, 2.9), (0.2, -0.05, 4.3), (0.1, 0.0, 5.4)]
-    _tronco_corteza(m, eje, [0.75, 0.6, 0.52, 0.46, 0.38], nervios=9, seg=9)
+    _tronco_corteza(m, eje, [0.75, 0.6, 0.52, 0.46, 0.38], nervios=7, seg=8)
     _raices(m, 6, 0.72, 1.6, 0.8)
     # Brazos que suben y se abren en bóveda
     brazos = 9
@@ -112,18 +113,18 @@ def arbol_sauce_espacial(m):
     m.ico((0.05, 0, 8.9), 1.9, "hoja2", sub=2, esc=(1, 1, 0.55), ruido=0.22, semilla=4.1)       # bóveda de la copa
     # Cortinas colgantes: tallo fino con hojas alargadas y la punta luminosa
     for i, (p, a) in enumerate(puntas):
-        for j in range(2):
+        for j in range(2 if i % 5 == 0 else 1):
             ang = a + (j - 0.5) * 0.5 + R.uniform(-0.15, 0.15)
             ex = 0.25 + 0.3 * j
             x0, y0, z0 = p[0] + ex * math.cos(ang) * 0.3, p[1] + ex * math.sin(ang) * 0.3, p[2]
             largo = R.uniform(4.2, 6.6)
-            n = 5
+            n = 4
             pts = []
             for q in range(n + 1):
                 t = q / n
                 pts.append((x0 + ex * math.cos(ang) * t + 0.12 * math.sin(t * 3 + i), y0 + ex * math.sin(ang) * t,
                             z0 - largo * t))
-            m.barrido(pts, [0.035, 0.03, 0.028, 0.024, 0.02, 0.012], "hoja2", seg=3)
+            m.barrido(pts, [0.035, 0.03, 0.026, 0.02, 0.012], "hoja2", seg=3)
             for q in range(1, n + 1):
                 px, py, pz = pts[q]
                 lum = q >= n - 1
@@ -139,7 +140,7 @@ def arbol_palmera_alien(m):
     eje = []
     for i in range(13):
         t = i / 12
-        eje.append((0.9 * math.sin(t * 1.5) - 0.25, 0.25 * math.sin(t * 2.6), 9.6 * t))
+        eje.append((0.5 * math.sin(t * 1.5) - 0.2, 0.15 * math.sin(t * 2.6), 9.9 * t))
     radios = [0.48 - 0.2 * (i / 12) + (0.08 if i == 0 else 0) for i in range(13)]
     m.barrido(eje, radios, "corteza_palma", seg=10)
     for i in range(1, 12):
@@ -162,7 +163,7 @@ def arbol_palmera_alien(m):
         a = 2 * math.pi * k / n + 0.2
         ca, sa = math.cos(a), math.sin(a)
         sube = 1.9 if k % 2 == 0 else 1.1
-        alc = 1.5 if k % 2 == 0 else 1.25
+        alc = 0.85 if k % 2 == 0 else 0.7
         p0 = (cx + 0.2 * ca, cy + 0.2 * sa, cz + 0.2)
         p1 = (cx + alc * 0.55 * ca, cy + alc * 0.55 * sa, cz + sube * 0.75)
         p2 = (cx + alc * ca, cy + alc * sa, cz + sube * 0.72)
@@ -170,9 +171,9 @@ def arbol_palmera_alien(m):
         incl = -18 if k % 2 == 0 else 22
         for j in range(7):
             b = (j - 3) * 0.3
-            m.hoja(p2, 1.3 - 0.1 * abs(j - 3), 0.36, "hoja_cyan" if j % 2 == 0 else "hoja_azul",
+            m.hoja(p2, 0.95 - 0.08 * abs(j - 3), 0.3, "hoja_cyan" if j % 2 == 0 else "hoja_azul",
                    rot=(0, incl + 10 * abs(j - 3), math.degrees(a + b)), grosor=0.07)
-        m.hoja(p2, 1.36, 0.12, "neon", rot=(0, incl - 2, math.degrees(a)), grosor=0.06)       # nervio central luminoso
+        m.hoja(p2, 1.0, 0.1, "neon", rot=(0, incl - 2, math.degrees(a)), grosor=0.06)       # nervio central luminoso
     # Hierba en la base
     for k in range(10):
         a = k * 0.63

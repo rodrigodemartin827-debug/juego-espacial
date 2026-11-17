@@ -1,0 +1,156 @@
+{
+  "nombre": "hospital_clinica",
+  "numero": 37,
+  "zona": "Zona comercial",
+  "categoria": "edificio_grande",
+  "triangulos": 3864,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 14.0,
+    "alto_y": 10.07,
+    "fondo_z": 12.99
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 14,
+    "alto_y": 10,
+    "fondo_z": 12
+  },
+  "piezas": [
+    {
+      "nombre": "hospital_clinica",
+      "triangulos": 2992,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hospital_clinica_blanco_luz",
+      "triangulos": 260,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "hospital_clinica_cristal",
+      "triangulos": 272,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "hospital_clinica_escaparate_cristal",
+      "triangulos": 12,
+      "material_roblox": "Glass",
+      "color": "#D4F1F6",
+      "transparencia": 0.8
+    },
+    {
+      "nombre": "hospital_clinica_neon",
+      "triangulos": 228,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "hospital_clinica_puerta_der",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hospital_clinica_puerta_izq",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hospital_clinica_rojo_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    },
+    {
+      "nombre": "hospital_clinica_verde_neon",
+      "triangulos": 52,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "hospital_clinica_color.png",
+    "roughness": "hospital_clinica_roughness.png",
+    "metalness": "hospital_clinica_metalness.png",
+    "emision": "hospital_clinica_emision.png",
+    "normal": "hospital_clinica_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.556,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "hospital_clinica": {
+        "triangulos": 2992,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_blanco_luz": {
+        "triangulos": 260,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "hospital_clinica_cristal": {
+        "triangulos": 272,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_escaparate_cristal": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_neon": {
+        "triangulos": 228,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_puerta_der": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_puerta_izq": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_rojo_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hospital_clinica_verde_neon": {
+        "triangulos": 52,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3864,
+    "tamano_reimportado": [
+      14.0,
+      12.99,
+      10.07
+    ]
+  }
+}

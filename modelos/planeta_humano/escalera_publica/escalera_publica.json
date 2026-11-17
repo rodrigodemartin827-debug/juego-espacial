@@ -3,13 +3,13 @@
   "numero": 21,
   "zona": "Zona residencial",
   "categoria": "prop",
-  "triangulos": 704,
+  "triangulos": 700,
   "presupuesto_triangulos": 2000,
   "dentro_de_presupuesto": true,
   "tamano_studs": {
     "ancho_x": 4.04,
     "alto_y": 3.03,
-    "fondo_z": 3.08
+    "fondo_z": 3.11
   },
   "tamano_objetivo_studs": {
     "ancho_x": 4,
@@ -19,7 +19,7 @@
   "piezas": [
     {
       "nombre": "escalera_publica",
-      "triangulos": 632,
+      "triangulos": 628,
       "material_roblox": "SurfaceAppearance (atlas PBR)"
     },
     {
@@ -37,7 +37,7 @@
     "normal": "escalera_publica_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.55,
+  "cobertura_atlas": 0.435,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -48,7 +48,7 @@
   "verificacion_fbx": {
     "piezas": {
       "escalera_publica": {
-        "triangulos": 632,
+        "triangulos": 628,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
@@ -62,10 +62,10 @@
     },
     "ok": true,
     "avisos": [],
-    "triangulos": 704,
+    "triangulos": 700,
     "tamano_reimportado": [
-      4.04,
-      3.08,
+      4.038,
+      3.109,
       3.03
     ]
   }
