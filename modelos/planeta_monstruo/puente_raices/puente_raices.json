@@ -1,0 +1,63 @@
+{
+  "nombre": "puente_raices",
+  "zona": "terreno",
+  "clase": "mediana",
+  "descripcion": "Puente natural de raíces gruesas entrelazadas.",
+  "triangulos": 7124,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 10.0,
+    "y": 2.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 10,
+    "fondo": 3,
+    "alto": 2
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "puente",
+      "triangulos": 7124,
+      "tamano_studs": [
+        10.0,
+        2.0,
+        3.01
+      ],
+      "centro": [
+        0.002,
+        1.001,
+        0.0
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "puente_raices_color.png",
+    "normal": "puente_raices_normal.png",
+    "roughness": "puente_raices_roughness.png",
+    "metalness": "puente_raices_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 7124,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      10.0,
+      3.01,
+      2.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  },
+  "avisos": [
+    "ajuste de escala grande [0.96, 0.96, 0.67] (modelado [10.42, 3.11, 2.97])"
+  ]
+}

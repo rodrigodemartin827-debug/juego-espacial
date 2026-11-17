@@ -1,0 +1,66 @@
+{
+  "nombre": "baba_colgante",
+  "zona": "props",
+  "clase": "prop",
+  "descripcion": "Baba colgante del techo: mucosidad verde translúcida.",
+  "triangulos": 1500,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 0.5,
+    "y": 2.0,
+    "z": 0.5
+  },
+  "tamano_pedido": {
+    "ancho": 0.5,
+    "fondo": 0.5,
+    "alto": 2
+  },
+  "origen": "centro de la parte de arriba (cuelga)",
+  "piezas": [
+    {
+      "nombre": "baba_cristal",
+      "triangulos": 1500,
+      "tamano_studs": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "centro": [
+        -0.0,
+        -1.001,
+        0.001
+      ],
+      "roblox": {
+        "material": "Glass",
+        "color": "#5FB81E",
+        "transparencia": 0.35
+      }
+    }
+  ],
+  "texturas": {
+    "color": "baba_colgante_color.png",
+    "normal": "baba_colgante_normal.png",
+    "roughness": "baba_colgante_roughness.png",
+    "metalness": "baba_colgante_metalness.png",
+    "emision": "baba_colgante_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 1500,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      0.5,
+      0.5,
+      2.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

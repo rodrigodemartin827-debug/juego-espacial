@@ -1,0 +1,98 @@
+{
+  "nombre": "hoguera_clan",
+  "zona": "guerra",
+  "clase": "prop",
+  "descripcion": "Hoguera comunitaria de fuego verde y púrpura, rodeada de piedras y huesos.",
+  "triangulos": 1934,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 3.0,
+    "y": 2.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 3,
+    "fondo": 3,
+    "alto": 2
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "hoguera",
+      "triangulos": 1134,
+      "tamano_studs": [
+        2.97,
+        1.03,
+        3.0
+      ],
+      "centro": [
+        -0.002,
+        0.517,
+        0.0
+      ]
+    },
+    {
+      "nombre": "fuego_neon",
+      "triangulos": 620,
+      "tamano_studs": [
+        1.24,
+        1.94,
+        1.08
+      ],
+      "centro": [
+        0.019,
+        1.028,
+        -0.073
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#39FF14",
+        "transparencia": 0.15
+      }
+    },
+    {
+      "nombre": "brasas_neon",
+      "triangulos": 180,
+      "tamano_studs": [
+        1.12,
+        0.13,
+        1.29
+      ],
+      "centro": [
+        -0.018,
+        0.144,
+        0.156
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "hoguera_clan_color.png",
+    "normal": "hoguera_clan_normal.png",
+    "roughness": "hoguera_clan_roughness.png",
+    "metalness": "hoguera_clan_metalness.png",
+    "emision": "hoguera_clan_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 3,
+    "triangulos": 1934,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      2.97,
+      3.0,
+      2.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

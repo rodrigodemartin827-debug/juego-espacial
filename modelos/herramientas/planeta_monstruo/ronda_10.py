@@ -24,15 +24,15 @@ def roca_alien_a(M):
     for (x, y, z, r) in ((1.3, 0.6, 1.3, 0.8), (-1.2, -0.7, 1.4, 0.9), (0.2, -1.2, 2.2, 0.8), (-0.5, 1.0, 2.3, 0.7)):   # tajos planos
         p.caja((x * 1.5, y * 1.5, z + 0.9), (1.6, 1.6, 1.6), None, rot=(rnd.uniform(-30, 30), rnd.uniform(20, 50), rnd.uniform(0, 90)), resta=True, k=0.05)
     n = M.pieza("venas_neon", tris=480, res=130, suelo=0.0, roblox=NEON_V)
-    forma(n, "neon_violeta", infla=0.0)
+    forma(n, "neon_violeta", infla=0.07)
     with n.mascara():
         for j in range(5):
             a = j * 1.3
             pts = [(1.9 * math.cos(a + 0.25 * i) * (1 - 0.14 * i), 1.4 * math.sin(a + 0.25 * i) * (1 - 0.14 * i), 0.1 + 0.62 * i + 0.2 * math.sin(i * 2 + j)) for i in range(5)]
-            n.tubo(pts, [0.09, 0.08, 0.07, 0.05, 0.03], "neon_violeta", suave=8)
+            n.tubo(pts, [0.13, 0.12, 0.1, 0.08, 0.05], "neon_violeta", suave=8)
             q = pts[2]
-            n.tubo([q, (q[0] * 0.6, q[1] * 1.3, q[2] + 0.5)], [0.06, 0.03], "neon_violeta")
-    M.notas["venas"] = "venas_neon va incrustada en la roca: asoma por donde la roca tiene tajos y grietas."
+            n.tubo([q, (q[0] * 0.6, q[1] * 1.3, q[2] + 0.5)], [0.09, 0.05], "neon_violeta")
+    M.notas["venas"] = "venas_neon sigue la superficie de la roca, un poco en relieve."
 
 
 @modelo("terreno", "prop", (2, 2, 8), "Formación rocosa alta en aguja, de obsidiana, con cristales.")
@@ -175,16 +175,16 @@ def geyser_toxico(M):
     for j in range(6):
         a = math.tau * j / 6
         p.esfera((0.9 * math.cos(a), 0.9 * math.sin(a), 0.05), rnd.uniform(0.14, 0.22), "piedra")
-    v = M.pieza("vapor_neon", tris=800, res=100, k=0.3, ruido=(0.09, 1.8), roblox=dict(material="Neon", color=VERDE, transparencia=0.5))
-    M.mat("vapor", "neon_verde", a="#39FF14", b="#0F7A2A", emis=(VERDE, 0.6))
+    v = M.pieza("vapor_neon", tris=800, res=130, k=0.1, ruido=(0.05, 2.5), roblox=dict(material="Neon", color=VERDE, transparencia=0.5))
+    M.mat("vapor", "neon_verde", a="#2AC81E", b="#0F7A2A", emis=(VERDE, 0.45))
     x = y = 0.0
     for i in range(8):
         z = 1.2 + i * 0.23
-        v.esfera((x, y, z), 0.17 + 0.05 * i + 0.05 * math.sin(i * 2.0), "vapor")
-        x += rnd.uniform(-0.09, 0.12)
-        y += rnd.uniform(-0.1, 0.1)
-    v.esfera((x + 0.3, y, 2.6), 0.26, "vapor")
-    v.esfera((x - 0.25, y + 0.2, 2.45), 0.22, "vapor")
+        v.esfera((x, y, z), 0.13 + 0.022 * i + 0.04 * math.sin(i * 2.0), "vapor", esc=(1, 1, 0.8))
+        x += rnd.uniform(-0.14, 0.17)
+        y += rnd.uniform(-0.15, 0.15)
+    for (dx, dy, z, r) in ((0.42, 0.1, 2.75, 0.17), (-0.36, 0.25, 2.5, 0.14), (0.1, -0.4, 2.2, 0.11), (-0.3, -0.2, 2.9, 0.1), (0.36, -0.25, 1.75, 0.08)):
+        v.esfera((x * 0.6 + dx, y * 0.6 + dy, z), r, "vapor", esc=(1.2, 1, 0.75))   # jirones sueltos
 
 
 @modelo("terreno", "mediana", (6, 4, 5), "Entrada de cueva natural: arco de roca con estalactitas.")
@@ -214,6 +214,7 @@ def cueva_entrada_natural(M):
         a = 0.3 + j * 0.42
         b = np.array([1.75 * math.cos(a), -1.75, 0.5 + 2.6 * math.sin(a)])
         n.duro.torno([(0, 0), (0.12, 0.03), (0.16, 0.1), (0.08, 0.17), (0, 0.19)], b, "neon_violeta", n=6, eje=(0, -1, 0.3))
+        d.tubo([b + [0, 0.02, 0], b + [0.08 * math.cos(a), 0.6, 0.08 * math.sin(a)], b + [0.2 * math.cos(a), 1.3, 0.2 * math.sin(a)]], [0.035, 0.04, 0.06], "hongo_tallo", n=5)
 
 
 @modelo("terreno", "mediana", (4, 4, 8), "Columnas de basalto hexagonales alienígenas, negras con vetas púrpura.")

@@ -1,0 +1,79 @@
+{
+  "nombre": "columna_basalto_alien",
+  "zona": "terreno",
+  "clase": "mediana",
+  "descripcion": "Columnas de basalto hexagonales alienígenas, negras con vetas púrpura.",
+  "triangulos": 5687,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 4.0,
+    "y": 8.0,
+    "z": 4.0
+  },
+  "tamano_pedido": {
+    "ancho": 4,
+    "fondo": 4,
+    "alto": 8
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "columnas",
+      "triangulos": 5600,
+      "tamano_studs": [
+        4.0,
+        8.0,
+        4.0
+      ],
+      "centro": [
+        -0.002,
+        3.999,
+        -0.001
+      ]
+    },
+    {
+      "nombre": "cristales_neon",
+      "triangulos": 90,
+      "tamano_studs": [
+        2.21,
+        1.63,
+        2.05
+      ],
+      "centro": [
+        0.01,
+        5.684,
+        0.279
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "columna_basalto_alien_color.png",
+    "normal": "columna_basalto_alien_normal.png",
+    "roughness": "columna_basalto_alien_roughness.png",
+    "metalness": "columna_basalto_alien_metalness.png",
+    "emision": "columna_basalto_alien_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 5687,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      4.0,
+      4.0,
+      8.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "nombre": "capullo_seda",
+  "zona": "props",
+  "clase": "prop",
+  "descripcion": "Capullo de seda colgante: una pupa envuelta con una forma humanoide apenas visible dentro.",
+  "triangulos": 1790,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 1.0,
+    "y": 2.0,
+    "z": 1.0
+  },
+  "tamano_pedido": {
+    "ancho": 1,
+    "fondo": 1,
+    "alto": 2
+  },
+  "origen": "centro de la parte de arriba (cuelga)",
+  "piezas": [
+    {
+      "nombre": "capullo",
+      "triangulos": 1790,
+      "tamano_studs": [
+        1.0,
+        2.0,
+        1.0
+      ],
+      "centro": [
+        0.0,
+        -1.001,
+        0.0
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "capullo_seda_color.png",
+    "normal": "capullo_seda_normal.png",
+    "roughness": "capullo_seda_roughness.png",
+    "metalness": "capullo_seda_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 1790,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

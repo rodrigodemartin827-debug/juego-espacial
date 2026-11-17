@@ -1,0 +1,60 @@
+{
+  "nombre": "hueso_suelto_b",
+  "zona": "props",
+  "clase": "prop",
+  "descripcion": "Costilla grande y curvada, suelta.",
+  "triangulos": 1699,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 2.0,
+    "y": 1.5,
+    "z": 0.3
+  },
+  "tamano_pedido": {
+    "ancho": 2,
+    "fondo": 0.3,
+    "alto": 1.5
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "costilla",
+      "triangulos": 1699,
+      "tamano_studs": [
+        2.0,
+        1.5,
+        0.3
+      ],
+      "centro": [
+        0.0,
+        0.751,
+        -0.001
+      ]
+    }
+  ],
+  "texturas": {
+    "color": "hueso_suelto_b_color.png",
+    "normal": "hueso_suelto_b_normal.png",
+    "roughness": "hueso_suelto_b_roughness.png",
+    "metalness": "hueso_suelto_b_metalness.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 1,
+    "triangulos": 1699,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      2.0,
+      0.3,
+      1.5
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

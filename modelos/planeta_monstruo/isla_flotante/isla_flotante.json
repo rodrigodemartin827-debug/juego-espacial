@@ -1,0 +1,80 @@
+{
+  "nombre": "isla_flotante",
+  "zona": "terreno",
+  "clase": "mediana",
+  "descripcion": "Isla flotante pequeña con roca y vegetación monstruosa; flota con energía debajo.",
+  "triangulos": 7807,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 6.0,
+    "y": 4.0,
+    "z": 6.0
+  },
+  "tamano_pedido": {
+    "ancho": 6,
+    "fondo": 6,
+    "alto": 4
+  },
+  "origen": "centro del modelo",
+  "piezas": [
+    {
+      "nombre": "isla",
+      "triangulos": 7199,
+      "tamano_studs": [
+        6.01,
+        3.75,
+        6.01
+      ],
+      "centro": [
+        0.0,
+        0.124,
+        0.001
+      ]
+    },
+    {
+      "nombre": "energia_neon",
+      "triangulos": 608,
+      "tamano_studs": [
+        3.02,
+        3.96,
+        2.92
+      ],
+      "centro": [
+        0.198,
+        -0.02,
+        -0.247
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF",
+        "transparencia": 0.1
+      }
+    }
+  ],
+  "texturas": {
+    "color": "isla_flotante_color.png",
+    "normal": "isla_flotante_normal.png",
+    "roughness": "isla_flotante_roughness.png",
+    "metalness": "isla_flotante_metalness.png",
+    "emision": "isla_flotante_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 7807,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      6.01,
+      6.01,
+      4.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

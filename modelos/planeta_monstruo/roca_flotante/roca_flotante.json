@@ -1,0 +1,80 @@
+{
+  "nombre": "roca_flotante",
+  "zona": "terreno",
+  "clase": "prop",
+  "descripcion": "Roca que levita, con energía debajo.",
+  "triangulos": 1970,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 3.0,
+    "y": 3.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 3,
+    "fondo": 3,
+    "alto": 3
+  },
+  "origen": "centro del modelo",
+  "piezas": [
+    {
+      "nombre": "roca",
+      "triangulos": 1434,
+      "tamano_studs": [
+        3.0,
+        2.56,
+        3.0
+      ],
+      "centro": [
+        -0.001,
+        0.218,
+        0.005
+      ]
+    },
+    {
+      "nombre": "energia_neon",
+      "triangulos": 536,
+      "tamano_studs": [
+        1.71,
+        1.61,
+        1.75
+      ],
+      "centro": [
+        -0.047,
+        -0.695,
+        0.041
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF",
+        "transparencia": 0.15
+      }
+    }
+  ],
+  "texturas": {
+    "color": "roca_flotante_color.png",
+    "normal": "roca_flotante_normal.png",
+    "roughness": "roca_flotante_roughness.png",
+    "metalness": "roca_flotante_metalness.png",
+    "emision": "roca_flotante_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 1970,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

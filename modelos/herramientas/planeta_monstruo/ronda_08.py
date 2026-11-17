@@ -84,11 +84,9 @@ def hueso_suelto_b(M):
     p = M.pieza("costilla", tris=1700, res=230, k=0.04, ruido=(0.01, 3.5))
     arco = curva([(-0.95, 0, 0.12), (-0.8, 0, 0.9), (-0.2, 0, 1.4), (0.5, 0, 1.25), (0.92, 0, 0.6), (0.95, 0, 0.1)], 22)
     n = len(arco)
-    for i in range(n - 1):   # la costilla es aplanada: dos tubos pegados, uno delante y otro detrás
-        t = i / (n - 1)
-        r = 0.085 + 0.03 * math.sin(math.pi * t)
-        p.capsula(arco[i] + [0, -0.05, 0], arco[i + 1] + [0, -0.05, 0], r, "hueso")
-        p.capsula(arco[i] + [0, 0.05, 0], arco[i + 1] + [0, 0.05, 0], r * 0.9, "hueso")
+    radios = [0.085 + 0.03 * math.sin(math.pi * i / (n - 1)) for i in range(n)]
+    p.tubo([q + [0, -0.05, 0] for q in arco], radios, "hueso")          # la costilla es aplanada: dos tubos pegados
+    p.tubo([q + [0, 0.05, 0] for q in arco], [r * 0.9 for r in radios], "hueso")
     p.esfera((-0.97, 0, 0.1), 0.15, "hueso_viejo", esc=(1.1, 1, 0.9), k=0.05)      # cabeza articular
     p.esfera((-0.84, 0.03, 0.42), 0.1, "hueso_viejo", k=0.05)                       # tubérculo
     p.esfera((0.95, 0, 0.1), 0.1, "tendon", k=0.03)                                 # cartílago del extremo
@@ -144,8 +142,9 @@ def huevo_monstruo(M):
     for (a, z, la) in ((0.4, 1.2, 0.5), (2.6, 0.9, 0.4), (4.4, 1.35, 0.45)):
         c, s = math.cos(a), math.sin(a)
         p.tubo([(0.75 * c, 0.75 * s, z - la), (0.8 * math.cos(a + 0.2), 0.8 * math.sin(a + 0.2), z - la * 0.3), (0.75 * math.cos(a - 0.1), 0.75 * math.sin(a - 0.1), z + la * 0.3),
-                (0.6 * math.cos(a + 0.15), 0.6 * math.sin(a + 0.15), z + la)], [0.03, 0.07, 0.06, 0.02], None, resta=True)
-    p.torno([(0, 0), (0.75, 0), (0.85, 0.12), (0.62, 0.26), (0, 0.2)], (0, 0, 0), "mucosa", k=0.08)   # baba del nido
+                (0.6 * math.cos(a + 0.15), 0.6 * math.sin(a + 0.15), z + la)], [0.06, 0.13, 0.11, 0.04], None, resta=True)
+    M.mat("baba_nido", "mucosa", a="#2E5A1E", b="#16301A", emis=(VERDE, 0.04))
+    p.torno([(0, 0), (0.75, 0), (0.85, 0.12), (0.62, 0.26), (0, 0.2)], (0, 0, 0), "baba_nido", k=0.08)   # baba del nido
     n = M.pieza("interior_neon", tris=0, roblox=dict(material="Neon", color=VERDE))
     n.duro.torno([(0, 0.24), (0.36, 0.32), (0.58, 0.72), (0.55, 1.2), (0.36, 1.66), (0.14, 1.86), (0, 1.9)], (0, 0, 0), "neon_verde", n=10)
 
@@ -162,9 +161,9 @@ def capullo_seda(M):
     p.esfera((0, 0, 0.72), 1, "seda", esc=(0.28, 0.2, 0.3))
     p.tubo([(-0.1, 0, 0.6), (-0.12, -0.14, 0.36), (-0.08, 0.02, 0.12)], [0.12, 0.1, 0.07], "seda")
     p.tubo([(0.1, 0, 0.6), (0.12, -0.16, 0.38), (0.08, 0.02, 0.12)], [0.12, 0.1, 0.07], "seda")
-    p.torno([(0, 0.0), (0.2, 0.08), (0.36, 0.5), (0.4, 1.0), (0.3, 1.5), (0.12, 1.75), (0, 1.8)], (0, 0, 0), "seda", k=0.16)   # el envoltorio
+    p.torno([(0, 0.0), (0.16, 0.08), (0.26, 0.5), (0.29, 1.0), (0.2, 1.5), (0.1, 1.75), (0, 1.8)], (0, 0, 0), "seda", k=0.1)   # el envoltorio
     for v in range(4):   # vueltas de hilo gordo
-        pts = [(0.4 * math.cos(t * 7 + v * 1.6) * math.sin(0.25 + t * 2.6), 0.36 * math.sin(t * 7 + v * 1.6) * math.sin(0.25 + t * 2.6), 0.1 + 1.55 * t) for t in np.linspace(0, 1, 16)]
+        pts = [(0.34 * math.cos(t * 7 + v * 1.6) * math.sin(0.25 + t * 2.6), 0.3 * math.sin(t * 7 + v * 1.6) * math.sin(0.25 + t * 2.6), 0.1 + 1.55 * t) for t in np.linspace(0, 1, 16)]
         p.tubo(pts, 0.035, "tendon", k=0.02)
     p.tubo([(0, 0, 1.75), (0.02, 0, 1.9), (0, 0, 2.0)], [0.08, 0.04, 0.06], "seda", k=0.03)
     d = p.duro

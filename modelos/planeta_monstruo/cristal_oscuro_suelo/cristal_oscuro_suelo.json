@@ -1,0 +1,80 @@
+{
+  "nombre": "cristal_oscuro_suelo",
+  "zona": "props",
+  "clase": "prop",
+  "descripcion": "Cristal púrpura que crece del suelo y brilla.",
+  "triangulos": 606,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 1.0,
+    "y": 3.0,
+    "z": 1.0
+  },
+  "tamano_pedido": {
+    "ancho": 1,
+    "fondo": 1,
+    "alto": 3
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "base",
+      "triangulos": 420,
+      "tamano_studs": [
+        0.87,
+        0.22,
+        0.78
+      ],
+      "centro": [
+        0.05,
+        0.154,
+        0.1
+      ]
+    },
+    {
+      "nombre": "cristal_neon",
+      "triangulos": 186,
+      "tamano_studs": [
+        1.0,
+        3.0,
+        1.0
+      ],
+      "centro": [
+        -0.0,
+        1.5,
+        0.0
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF",
+        "transparencia": 0.1
+      }
+    }
+  ],
+  "texturas": {
+    "color": "cristal_oscuro_suelo_color.png",
+    "normal": "cristal_oscuro_suelo_normal.png",
+    "roughness": "cristal_oscuro_suelo_roughness.png",
+    "metalness": "cristal_oscuro_suelo_metalness.png",
+    "emision": "cristal_oscuro_suelo_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 606,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      1.0,
+      1.0,
+      3.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "nombre": "amuleto_colgante",
+  "zona": "props",
+  "clase": "prop",
+  "descripcion": "Amuleto grande colgante: colmillo con cuerda y gemas.",
+  "triangulos": 628,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 0.3
+  },
+  "tamano_pedido": {
+    "ancho": 1,
+    "fondo": 0.3,
+    "alto": 1
+  },
+  "origen": "centro de la parte de arriba (cuelga)",
+  "piezas": [
+    {
+      "nombre": "amuleto",
+      "triangulos": 544,
+      "tamano_studs": [
+        1.0,
+        1.0,
+        0.3
+      ],
+      "centro": [
+        -0.0,
+        -0.5,
+        -0.002
+      ]
+    },
+    {
+      "nombre": "gemas_neon",
+      "triangulos": 84,
+      "tamano_studs": [
+        0.8,
+        0.52,
+        0.2
+      ],
+      "centro": [
+        -0.0,
+        -0.501,
+        0.049
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "amuleto_colgante_color.png",
+    "normal": "amuleto_colgante_normal.png",
+    "roughness": "amuleto_colgante_roughness.png",
+    "metalness": "amuleto_colgante_metalness.png",
+    "emision": "amuleto_colgante_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 628,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      1.0,
+      0.3,
+      1.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

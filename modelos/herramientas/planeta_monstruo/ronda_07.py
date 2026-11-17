@@ -246,10 +246,12 @@ def hoguera_clan(M):
     for j in range(3):
         a = 0.8 + j * 2.1
         d.cuerno([(1.45 * math.cos(a), 1.45 * math.sin(a), 0.05), (1.3 * math.cos(a + 0.3), 1.3 * math.sin(a + 0.3), 0.3), (1.5 * math.cos(a + 0.6), 1.5 * math.sin(a + 0.6), 0.1)], 0.07, "hueso", n=5, seg=3, potencia=0.5)
-    f = M.pieza("fuego_neon", tris=620, res=110, k=0.2, ruido=(0.07, 2.0), roblox=dict(material="Neon", color=VERDE, transparencia=0.15))
-    f.esfera((0, 0, 0.5), 0.42, "fuego_verde")
-    lenguas = [((0, 0, 0.5), (0.1, 0.05, 1.2), (-0.05, 0, 1.95), "fuego_verde", 0.36), ((0.25, -0.1, 0.4), (0.4, -0.2, 1.0), (0.3, -0.1, 1.5), "fuego_violeta", 0.26),
-               ((-0.25, 0.15, 0.4), (-0.42, 0.25, 0.95), (-0.3, 0.2, 1.45), "fuego_violeta", 0.25), ((0.0, 0.3, 0.4), (0.05, 0.42, 0.9), (0.0, 0.3, 1.3), "fuego_verde", 0.22)]
+    M.mat("llama_v", "fuego_violeta", a="#7A1EC8", b="#B040F0", emis=(VIOLETA, 0.85))
+    f = M.pieza("fuego_neon", tris=620, res=150, k=0.05, ruido=(0.025, 3.0), roblox=dict(material="Neon", color=VERDE, transparencia=0.15))
+    f.esfera((0, 0, 0.45), 0.36, "fuego_verde", esc=(1.2, 1.2, 0.8), k=0.12)
+    lenguas = [((0, 0, 0.5), (0.14, 0.05, 1.2), (-0.1, 0, 1.95), "fuego_verde", 0.26), ((0.3, -0.12, 0.4), (0.55, -0.26, 0.95), (0.4, -0.15, 1.5), "llama_v", 0.2),
+               ((-0.3, 0.18, 0.4), (-0.56, 0.32, 0.9), (-0.4, 0.26, 1.4), "llama_v", 0.19), ((0.0, 0.36, 0.4), (0.08, 0.6, 0.85), (0.0, 0.45, 1.25), "fuego_verde", 0.17),
+               ((-0.1, -0.36, 0.4), (-0.2, -0.56, 0.8), (-0.12, -0.45, 1.1), "llama_v", 0.15)]
     for a, b, c, mat, r in lenguas:
         f.tubo([a, b, c], [r, r * 0.85, 0.04], mat, suave=6)
     b = M.pieza("brasas_neon", tris=0, roblox=dict(material="Neon", color=VIOLETA))

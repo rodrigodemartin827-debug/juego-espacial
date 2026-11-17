@@ -1,0 +1,79 @@
+{
+  "nombre": "estatua_ancestro",
+  "zona": "props",
+  "clase": "prop",
+  "descripcion": "Estatua tosca de un ancestro monstruo, tallada en piedra negra, con ojos que brillan.",
+  "triangulos": 1869,
+  "presupuesto_triangulos": 2000,
+  "tamano_studs": {
+    "x": 2.0,
+    "y": 6.0,
+    "z": 2.0
+  },
+  "tamano_pedido": {
+    "ancho": 2,
+    "fondo": 2,
+    "alto": 6
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "estatua",
+      "triangulos": 1809,
+      "tamano_studs": [
+        2.01,
+        6.0,
+        2.0
+      ],
+      "centro": [
+        -0.0,
+        2.999,
+        -0.0
+      ]
+    },
+    {
+      "nombre": "ojos_neon",
+      "triangulos": 60,
+      "tamano_studs": [
+        0.45,
+        0.96,
+        0.17
+      ],
+      "centro": [
+        -0.003,
+        4.326,
+        0.724
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "estatua_ancestro_color.png",
+    "normal": "estatua_ancestro_normal.png",
+    "roughness": "estatua_ancestro_roughness.png",
+    "metalness": "estatua_ancestro_metalness.png",
+    "emision": "estatua_ancestro_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 1869,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      2.01,
+      2.0,
+      6.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}

@@ -120,7 +120,7 @@ def estatua_ancestro(M):
 def charco_sangre(M):
     rnd = M.rnd
     p = M.pieza("charco", tris=1500, res=260, k=0.16, suelo=0.0)
-    M.mat("sangre_charco", "sangre", rug=0.05, metal=0.0, relieve=0.05)
+    M.mat("sangre_charco", "sangre", rug=0.2, rug_var=0.1, metal=0.0, relieve=0.05)
     # Mancha irregular: lóbulos fundidos, salpicaduras y un reguero.
     for j in range(13):
         a = math.tau * j / 13 + rnd.uniform(-0.2, 0.2)
@@ -140,7 +140,8 @@ def nido_parasitos(M):
     M.mat("larva", "carne_palida", a="#C8B090", b="#8A6A5A", rug=0.3, fibras=dict(esc=14.0, fuerza=0.9))
     M.mat("larva_roja", "carne_viva", a="#8A2A3A", b="#4A1220", rug=0.3)
     p = M.pieza("nido", tris=1900, res=180, k=0.035, ruido=(0.008, 5.0), suelo=0.0)
-    p.esfera((0, 0, 0), 1, "mucosa", esc=(0.9, 0.9, 0.2), k=0.1)
+    M.mat("baba_nido", "mucosa", a="#2E5A1E", b="#16301A", emis=(VERDE, 0.04))
+    p.esfera((0, 0, 0), 1, "baba_nido", esc=(0.9, 0.9, 0.2), k=0.1)
     for j in range(26):
         a, r = rnd.uniform(0, math.tau), 0.72 * math.sqrt(rnd.random())
         z0 = 0.12 + 0.62 * (1 - r / 0.75) * rnd.uniform(0.3, 1.0)
@@ -227,8 +228,8 @@ def campana_resonancia(M):
     for s in (-1, 1):
         p.tubo([(s * 0.9, 0, 0), (s * 0.85, 0.02, 1.6), (s * 0.6, 0, 2.7), (0, 0, 2.95)], [0.14, 0.11, 0.09, 0.09], "hueso_viejo", suave=10)
         p.esfera((s * 0.9, 0, 0), 0.26, "piedra", esc=(1, 1.3, 0.5))
-        p.tubo([(s * 0.88, 0.5, 0), (s * 0.86, 0.02, 0.9)], [0.09, 0.07], "hueso_viejo", k=0.03)
-        p.tubo([(s * 0.88, -0.5, 0), (s * 0.86, 0.02, 0.9)], [0.09, 0.07], "hueso_viejo", k=0.03)
+        p.tubo([(s * 0.88, 0.92, 0), (s * 0.86, 0.02, 1.1)], [0.09, 0.07], "hueso_viejo", k=0.03)
+        p.tubo([(s * 0.88, -0.92, 0), (s * 0.86, 0.02, 1.1)], [0.09, 0.07], "hueso_viejo", k=0.03)
     p.duro.cuerno([(0, 0, 2.95), (0.1, 0, 3.2), (-0.05, 0, 3.4)], 0.07, "garra", n=5, seg=3)
     p.duro.tubo([(0, 0, 2.9), (0, 0, 2.55)], 0.025, "tendon", n=4)
     c = M.pieza("campana", tris=900, res=150, k=0.06, ruido=(0.015, 2.5))

@@ -1,0 +1,79 @@
+{
+  "nombre": "torre_vigilia_organica",
+  "zona": "guerra",
+  "clase": "mediana",
+  "descripcion": "Torre de vigilancia orgánica: tronco de hueso con plataforma de carne y un ojo centinela arriba que brilla.",
+  "triangulos": 6733,
+  "presupuesto_triangulos": 8000,
+  "tamano_studs": {
+    "x": 3.0,
+    "y": 14.0,
+    "z": 3.0
+  },
+  "tamano_pedido": {
+    "ancho": 3,
+    "fondo": 3,
+    "alto": 14
+  },
+  "origen": "centro de la base",
+  "piezas": [
+    {
+      "nombre": "torre",
+      "triangulos": 6653,
+      "tamano_studs": [
+        3.0,
+        14.0,
+        3.0
+      ],
+      "centro": [
+        -0.0,
+        6.998,
+        0.0
+      ]
+    },
+    {
+      "nombre": "ojo_neon",
+      "triangulos": 80,
+      "tamano_studs": [
+        1.0,
+        1.11,
+        1.07
+      ],
+      "centro": [
+        -0.025,
+        13.2,
+        0.047
+      ],
+      "roblox": {
+        "material": "Neon",
+        "color": "#C04DFF"
+      }
+    }
+  ],
+  "texturas": {
+    "color": "torre_vigilia_organica_color.png",
+    "normal": "torre_vigilia_organica_normal.png",
+    "roughness": "torre_vigilia_organica_roughness.png",
+    "metalness": "torre_vigilia_organica_metalness.png",
+    "emision": "torre_vigilia_organica_emision.png"
+  },
+  "atlas": 1024,
+  "escala": "1 unidad = 1 stud",
+  "giro_importacion": "180 grados en Y aplicado",
+  "ejes": "coordenadas en studs, ejes de Roblox del FBX (Y arriba)",
+  "verificacion_fbx": {
+    "piezas": 2,
+    "triangulos": 6733,
+    "normales_hacia_fuera": true,
+    "uv": true,
+    "escala_ok": true,
+    "nombres_ok": true,
+    "tamano_reimportado": [
+      3.0,
+      3.0,
+      14.0
+    ],
+    "triangulos_ok": true,
+    "correcto": true
+  }
+}
