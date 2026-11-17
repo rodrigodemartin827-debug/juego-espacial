@@ -1,0 +1,84 @@
+{
+  "nombre": "silo_almacen",
+  "numero": 57,
+  "zona": "Zona industrial",
+  "categoria": "edificio_mediano",
+  "triangulos": 3144,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.7,
+    "alto_y": 9.96,
+    "fondo_z": 4.43
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 10,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "silo_almacen",
+      "triangulos": 2920,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "silo_almacen_neon",
+      "triangulos": 160,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "silo_almacen_rojo_neon",
+      "triangulos": 64,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "silo_almacen_color.png",
+    "roughness": "silo_almacen_roughness.png",
+    "metalness": "silo_almacen_metalness.png",
+    "emision": "silo_almacen_emision.png",
+    "normal": "silo_almacen_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.266,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "silo_almacen": {
+        "triangulos": 2920,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "silo_almacen_neon": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "silo_almacen_rojo_neon": {
+        "triangulos": 64,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3144,
+    "tamano_reimportado": [
+      4.699,
+      4.427,
+      9.959
+    ]
+  }
+}

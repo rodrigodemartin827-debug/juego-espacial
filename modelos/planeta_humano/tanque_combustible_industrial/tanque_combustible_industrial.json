@@ -1,0 +1,72 @@
+{
+  "nombre": "tanque_combustible_industrial",
+  "numero": 56,
+  "zona": "Zona industrial",
+  "categoria": "vehiculo",
+  "triangulos": 2414,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 4.95,
+    "fondo_z": 4.12
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 4,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "tanque_combustible_industrial",
+      "triangulos": 2402,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tanque_combustible_industrial_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "tanque_combustible_industrial_color.png",
+    "roughness": "tanque_combustible_industrial_roughness.png",
+    "metalness": "tanque_combustible_industrial_metalness.png",
+    "emision": "tanque_combustible_industrial_emision.png",
+    "normal": "tanque_combustible_industrial_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.342,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "tanque_combustible_industrial": {
+        "triangulos": 2402,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tanque_combustible_industrial_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2414,
+    "tamano_reimportado": [
+      5.999,
+      4.12,
+      4.954
+    ]
+  }
+}

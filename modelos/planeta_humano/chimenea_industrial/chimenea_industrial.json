@@ -1,0 +1,90 @@
+{
+  "nombre": "chimenea_industrial",
+  "numero": 59,
+  "zona": "Zona industrial",
+  "categoria": "edificio_mediano",
+  "triangulos": 3022,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 2.64,
+    "alto_y": 13.9,
+    "fondo_z": 2.2
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 14,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "chimenea_industrial",
+      "triangulos": 2902,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "chimenea_industrial_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "chimenea_industrial_rojo_neon",
+      "triangulos": 108,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "chimenea_industrial_color.png",
+    "roughness": "chimenea_industrial_roughness.png",
+    "metalness": "chimenea_industrial_metalness.png",
+    "emision": "chimenea_industrial_emision.png",
+    "normal": "chimenea_industrial_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.369,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "humo": [
+      0,
+      14.1,
+      0
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "chimenea_industrial": {
+        "triangulos": 2902,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "chimenea_industrial_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "chimenea_industrial_rojo_neon": {
+        "triangulos": 108,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3022,
+    "tamano_reimportado": [
+      2.639,
+      2.2,
+      13.899
+    ]
+  }
+}

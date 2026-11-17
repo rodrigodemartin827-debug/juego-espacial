@@ -1,0 +1,72 @@
+{
+  "nombre": "deposito_minerales",
+  "numero": 61,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 1608,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.46,
+    "alto_y": 2.22,
+    "fondo_z": 3.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 2,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "deposito_minerales",
+      "triangulos": 1524,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "deposito_minerales_mineral_neon",
+      "triangulos": 84,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "deposito_minerales_color.png",
+    "roughness": "deposito_minerales_roughness.png",
+    "metalness": "deposito_minerales_metalness.png",
+    "emision": "deposito_minerales_emision.png",
+    "normal": "deposito_minerales_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.579,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "deposito_minerales": {
+        "triangulos": 1524,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "deposito_minerales_mineral_neon": {
+        "triangulos": 84,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1608,
+    "tamano_reimportado": [
+      4.462,
+      3.002,
+      2.216
+    ]
+  }
+}

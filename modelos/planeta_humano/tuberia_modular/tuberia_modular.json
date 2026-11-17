@@ -1,0 +1,83 @@
+{
+  "nombre": "tuberia_modular",
+  "numero": 58,
+  "zona": "Zona industrial",
+  "categoria": "prop",
+  "triangulos": 1560,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 1.1,
+    "fondo_z": 1.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 1,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "tuberia_modular",
+      "triangulos": 1348,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "tuberia_modular_neon",
+      "triangulos": 44,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "tuberia_modular_volante",
+      "triangulos": 168,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "tuberia_modular_color.png",
+    "roughness": "tuberia_modular_roughness.png",
+    "metalness": "tuberia_modular_metalness.png",
+    "emision": "tuberia_modular_emision.png",
+    "normal": "tuberia_modular_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.572,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "tuberia_modular": {
+        "triangulos": 1348,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tuberia_modular_neon": {
+        "triangulos": 44,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "tuberia_modular_volante": {
+        "triangulos": 168,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1560,
+    "tamano_reimportado": [
+      4.041,
+      1.002,
+      1.1
+    ]
+  }
+}
