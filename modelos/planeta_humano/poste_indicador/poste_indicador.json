@@ -1,0 +1,72 @@
+{
+  "nombre": "poste_indicador",
+  "numero": 19,
+  "zona": "Zona residencial",
+  "categoria": "prop",
+  "triangulos": 1478,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 0.95,
+    "alto_y": 5.08,
+    "fondo_z": 0.95
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 1,
+    "alto_y": 5,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "poste_indicador",
+      "triangulos": 1442,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "poste_indicador_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "poste_indicador_color.png",
+    "roughness": "poste_indicador_roughness.png",
+    "metalness": "poste_indicador_metalness.png",
+    "emision": "poste_indicador_emision.png",
+    "normal": "poste_indicador_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.345,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "poste_indicador": {
+        "triangulos": 1442,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "poste_indicador_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1478,
+    "tamano_reimportado": [
+      0.955,
+      0.948,
+      5.08
+    ]
+  }
+}
