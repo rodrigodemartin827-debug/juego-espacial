@@ -1,0 +1,84 @@
+{
+  "nombre": "extintor",
+  "numero": 76,
+  "zona": "Zona del hangar",
+  "categoria": "prop",
+  "triangulos": 808,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 0.45,
+    "alto_y": 1.4,
+    "fondo_z": 0.49
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 0.5,
+    "alto_y": 1.5,
+    "fondo_z": 0.5
+  },
+  "piezas": [
+    {
+      "nombre": "extintor",
+      "triangulos": 768,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "extintor_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "extintor_verde_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "extintor_color.png",
+    "roughness": "extintor_roughness.png",
+    "metalness": "extintor_metalness.png",
+    "emision": "extintor_emision.png",
+    "normal": "extintor_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.622,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "extintor": {
+        "triangulos": 768,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "extintor_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "extintor_verde_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 808,
+    "tamano_reimportado": [
+      0.45,
+      0.49,
+      1.4
+    ]
+  }
+}

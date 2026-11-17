@@ -1,0 +1,142 @@
+{
+  "nombre": "montacargas",
+  "numero": 79,
+  "zona": "Zona del hangar",
+  "categoria": "vehiculo",
+  "triangulos": 1800,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.48,
+    "alto_y": 2.86,
+    "fondo_z": 1.84
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 3,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "montacargas",
+      "triangulos": 1332,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "montacargas_blanco_luz",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "montacargas_carga",
+      "triangulos": 68,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "montacargas_horquilla",
+      "triangulos": 100,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "montacargas_naranja_neon",
+      "triangulos": 64,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "montacargas_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "montacargas_repulsores_neon",
+      "triangulos": 176,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "montacargas_rojo_neon",
+      "triangulos": 24,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "montacargas_color.png",
+    "roughness": "montacargas_roughness.png",
+    "metalness": "montacargas_metalness.png",
+    "emision": "montacargas_emision.png",
+    "normal": "montacargas_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.55,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "montacargas": {
+        "triangulos": 1332,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_blanco_luz": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_carga": {
+        "triangulos": 68,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_horquilla": {
+        "triangulos": 100,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_naranja_neon": {
+        "triangulos": 64,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_repulsores_neon": {
+        "triangulos": 176,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "montacargas_rojo_neon": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1800,
+    "tamano_reimportado": [
+      3.475,
+      1.841,
+      2.862
+    ]
+  }
+}

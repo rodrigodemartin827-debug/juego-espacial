@@ -1,0 +1,83 @@
+{
+  "nombre": "barrera_seguridad",
+  "numero": 77,
+  "zona": "Zona del hangar",
+  "categoria": "prop",
+  "triangulos": 1300,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 2.0,
+    "fondo_z": 0.29
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 2,
+    "fondo_z": 0.3
+  },
+  "piezas": [
+    {
+      "nombre": "barrera_seguridad",
+      "triangulos": 880,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "barrera_seguridad_cinta",
+      "triangulos": 364,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "barrera_seguridad_neon",
+      "triangulos": 56,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "barrera_seguridad_color.png",
+    "roughness": "barrera_seguridad_roughness.png",
+    "metalness": "barrera_seguridad_metalness.png",
+    "emision": "barrera_seguridad_emision.png",
+    "normal": "barrera_seguridad_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.34,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "barrera_seguridad": {
+        "triangulos": 880,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "barrera_seguridad_cinta": {
+        "triangulos": 364,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "barrera_seguridad_neon": {
+        "triangulos": 56,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1300,
+    "tamano_reimportado": [
+      2.999,
+      0.294,
+      1.996
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "nombre": "contenedor_envio_grande",
+  "numero": 78,
+  "zona": "Zona del hangar",
+  "categoria": "vehiculo",
+  "triangulos": 2180,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 6.17,
+    "alto_y": 3.0,
+    "fondo_z": 3.06
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 3,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "contenedor_envio_grande",
+      "triangulos": 1724,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "contenedor_envio_grande_candado",
+      "triangulos": 124,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "contenedor_envio_grande_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "contenedor_envio_grande_puerta_der",
+      "triangulos": 160,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "contenedor_envio_grande_puerta_izq",
+      "triangulos": 160,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "contenedor_envio_grande_color.png",
+    "roughness": "contenedor_envio_grande_roughness.png",
+    "metalness": "contenedor_envio_grande_metalness.png",
+    "emision": "contenedor_envio_grande_emision.png",
+    "normal": "contenedor_envio_grande_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.57,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "contenedor_envio_grande": {
+        "triangulos": 1724,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "contenedor_envio_grande_candado": {
+        "triangulos": 124,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "contenedor_envio_grande_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "contenedor_envio_grande_puerta_der": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "contenedor_envio_grande_puerta_izq": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2180,
+    "tamano_reimportado": [
+      6.172,
+      3.061,
+      3.001
+    ]
+  }
+}

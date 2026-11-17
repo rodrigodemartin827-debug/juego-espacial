@@ -1,0 +1,160 @@
+{
+  "nombre": "caja_herramientas_hangar",
+  "numero": 74,
+  "zona": "Zona del hangar",
+  "categoria": "prop",
+  "triangulos": 1664,
+  "presupuesto_triangulos": 2000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 2.36,
+    "alto_y": 3.05,
+    "fondo_z": 1.55
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 2,
+    "alto_y": 3,
+    "fondo_z": 1
+  },
+  "piezas": [
+    {
+      "nombre": "caja_herramientas_hangar",
+      "triangulos": 1216,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_1",
+      "triangulos": 24,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_2",
+      "triangulos": 24,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_3",
+      "triangulos": 248,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_4",
+      "triangulos": 24,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_5",
+      "triangulos": 24,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_cofre_1",
+      "triangulos": 24,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_cofre_2",
+      "triangulos": 24,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "caja_herramientas_hangar_tapa",
+      "triangulos": 44,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "caja_herramientas_hangar_color.png",
+    "roughness": "caja_herramientas_hangar_roughness.png",
+    "metalness": "caja_herramientas_hangar_metalness.png",
+    "emision": "caja_herramientas_hangar_emision.png",
+    "normal": "caja_herramientas_hangar_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.651,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "caja_herramientas_hangar": {
+        "triangulos": 1216,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_1": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_2": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_3": {
+        "triangulos": 248,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_4": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_5": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_cofre_1": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_cajon_cofre_2": {
+        "triangulos": 24,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "caja_herramientas_hangar_tapa": {
+        "triangulos": 44,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1664,
+    "tamano_reimportado": [
+      2.361,
+      1.554,
+      3.045
+    ]
+  }
+}
