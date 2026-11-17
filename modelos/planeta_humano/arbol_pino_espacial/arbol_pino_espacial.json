@@ -1,0 +1,72 @@
+{
+  "nombre": "arbol_pino_espacial",
+  "numero": 82,
+  "zona": "Naturaleza y terreno",
+  "categoria": "vegetacion",
+  "triangulos": 3380,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.21,
+    "alto_y": 16.05,
+    "fondo_z": 3.25
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 16,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "arbol_pino_espacial",
+      "triangulos": 3040,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "arbol_pino_espacial_neon",
+      "triangulos": 340,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "arbol_pino_espacial_color.png",
+    "roughness": "arbol_pino_espacial_roughness.png",
+    "metalness": "arbol_pino_espacial_metalness.png",
+    "emision": "arbol_pino_espacial_emision.png",
+    "normal": "arbol_pino_espacial_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.32,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "arbol_pino_espacial": {
+        "triangulos": 3040,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "arbol_pino_espacial_neon": {
+        "triangulos": 340,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3380,
+    "tamano_reimportado": [
+      3.213,
+      3.249,
+      16.05
+    ]
+  }
+}

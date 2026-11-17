@@ -64,31 +64,32 @@ def arbol_pino_espacial(m):
     eje = [(0, 0, 0), (0.03, 0.02, 4.0), (-0.02, 0.0, 9.0), (0.0, 0.0, 15.2)]
     _tronco_corteza(m, eje, [0.42, 0.32, 0.2, 0.03], mat="corteza", nervios=7, seg=8, grosor=0.2)
     _raices(m, 5, 0.42, 0.95, 0.5)
-    # Pisos de ramas escalonados: cada rama es un brazo con acículas en abanico y punta luminosa
-    pisos = 11
+    # Pisos de follaje: faldones cónicos con grosor y borde dentado, cada vez más estrechos hacia la punta
+    pisos = 9
     for i in range(pisos):
         t = i / (pisos - 1)
-        z = 3.2 + 11.3 * t
-        largo = 1.05 * (1 - t) ** 0.8 + 0.2
-        n = 7 if i < 7 else 5
-        for k in range(n):
-            a = 2 * math.pi * k / n + i * 0.55
-            ca, sa = math.cos(a), math.sin(a)
-            cae = -0.28 * largo
-            m.barrido([(0.1 * ca, 0.1 * sa, z), (largo * 0.55 * ca, largo * 0.55 * sa, z + cae * 0.3),
-                       (largo * ca, largo * sa, z + cae)], [0.07, 0.05, 0.02], "corteza", seg=4)
-            # Masa de acículas: cuña aplastada con grosor
-            for j, f in enumerate((0.45, 0.8)):
-                px, py, pz = largo * f * ca, largo * f * sa, z + cae * f * f + 0.02
-                m.hoja((px, py, pz), largo * 0.55, largo * 0.6, "hoja2" if (i + k + j) % 3 else "hoja_azul",
-                       rot=(0, 14, math.degrees(a)), grosor=0.11)
-            if (i + k) % 4 == 0:
-                m.esfera((largo * 1.02 * ca, largo * 1.02 * sa, z + cae - 0.02), 0.06, "neon", seg=5, anillos=3)
-    m.torno((0, 0, 14.6), [(0.34, 0), (0.2, 0.7), (0.0, 1.45)], "hoja2", seg=7)
+        z = 2.6 + 11.2 * t
+        r = 1.12 * (1 - t) ** 0.85 + 0.28
+        h = 2.0 - 0.9 * t
+        mat = "hoja2" if i % 2 else "hoja_azul"
+        n = 12
+        # faldón: cono hueco con grosor, el borde baja y sube en picos
+        perfil_ext = [(r, 0.0), (r * 0.55, h * 0.55), (0.08, h)]
+        perfil_int = [(0.06, h * 0.82), (r * 0.5, h * 0.4), (r * 0.92, 0.06)]
+        m.torno((0, 0, z), perfil_ext + perfil_int, mat, seg=n, cerrar=True, rot=(0, 0, i * 17))
+        for k in range(n):                                                    # picos del borde (cuñas con volumen)
+            a = 2 * math.pi * (k + 0.5) / n + math.radians(i * 17)
+            m.hoja((r * 0.82 * math.cos(a), r * 0.82 * math.sin(a), z + 0.12), r * 0.42, r * 0.38,
+                   "hoja_azul" if (i + k) % 3 else "hoja2", rot=(0, 18, math.degrees(a)), grosor=0.1)
+        for k in range(3 if i < 6 else 2):                                    # puntas luminosas
+            a = 2 * math.pi * k / 3 + i
+            m.esfera(((r + 0.12) * math.cos(a), (r + 0.12) * math.sin(a), z - 0.08), 0.07, "neon", seg=5, anillos=3)
+    m.torno((0, 0, 14.0), [(0.3, 0), (0.16, 0.9), (0.0, 1.9)], "hoja2", seg=7)
+    m.esfera((0, 0, 15.95), 0.09, "neon", seg=6, anillos=4)
     # Piñas colgantes
     for k in range(6):
         a = k * 1.9
-        m.torno((0.8 * math.cos(a), 0.8 * math.sin(a), 5.2 + 0.9 * k), [(0.0, 0), (0.09, 0.08), (0.07, 0.24), (0, 0.3)],
+        m.torno((0.6 * math.cos(a), 0.6 * math.sin(a), 3.0 + 1.2 * k), [(0.0, 0), (0.09, 0.08), (0.07, 0.24), (0, 0.3)],
                 "madera_oscura", seg=6)
 
 

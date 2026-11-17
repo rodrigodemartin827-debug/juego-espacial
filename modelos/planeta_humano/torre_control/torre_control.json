@@ -1,0 +1,131 @@
+{
+  "nombre": "torre_control",
+  "numero": 80,
+  "zona": "Zona del hangar",
+  "categoria": "edificio_grande",
+  "triangulos": 2858,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.7,
+    "alto_y": 14.11,
+    "fondo_z": 3.7
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 14,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "torre_control",
+      "triangulos": 2390,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "torre_control_cristal",
+      "triangulos": 220,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "torre_control_neon",
+      "triangulos": 68,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "torre_control_pantallas_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "torre_control_puerta",
+      "triangulos": 12,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "torre_control_radar",
+      "triangulos": 96,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "torre_control_rojo_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "torre_control_color.png",
+    "roughness": "torre_control_roughness.png",
+    "metalness": "torre_control_metalness.png",
+    "emision": "torre_control_emision.png",
+    "normal": "torre_control_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.516,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "torre_control": {
+        "triangulos": 2390,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_control_cristal": {
+        "triangulos": 220,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_control_neon": {
+        "triangulos": 68,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_control_pantallas_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_control_puerta": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_control_radar": {
+        "triangulos": 96,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_control_rojo_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2858,
+    "tamano_reimportado": [
+      3.696,
+      3.696,
+      14.111
+    ]
+  }
+}

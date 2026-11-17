@@ -1,0 +1,72 @@
+{
+  "nombre": "arbol_roble_espacial",
+  "numero": 81,
+  "zona": "Naturaleza y terreno",
+  "categoria": "vegetacion",
+  "triangulos": 3126,
+  "presupuesto_triangulos": 4000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 6.93,
+    "alto_y": 13.32,
+    "fondo_z": 6.72
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 14,
+    "fondo_z": 6
+  },
+  "piezas": [
+    {
+      "nombre": "arbol_roble_espacial",
+      "triangulos": 2950,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "arbol_roble_espacial_neon",
+      "triangulos": 176,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "arbol_roble_espacial_color.png",
+    "roughness": "arbol_roble_espacial_roughness.png",
+    "metalness": "arbol_roble_espacial_metalness.png",
+    "emision": "arbol_roble_espacial_emision.png",
+    "normal": "arbol_roble_espacial_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.378,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "arbol_roble_espacial": {
+        "triangulos": 2950,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "arbol_roble_espacial_neon": {
+        "triangulos": 176,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3126,
+    "tamano_reimportado": [
+      6.933,
+      6.717,
+      13.323
+    ]
+  }
+}
