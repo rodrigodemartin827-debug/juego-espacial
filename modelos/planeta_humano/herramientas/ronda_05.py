@@ -427,13 +427,19 @@ def entrada_mina(m):
     m.bloque((-3.0, -0.6, 0), (-1.5, 3.0, 3.8), "piedra_oscura")
     m.bloque((1.5, -0.6, 0), (3.0, 3.0, 3.8), "piedra_oscura")
     m.bloque((-3.0, -0.6, 3.3), (3.0, 3.0, 4.4), "piedra_oscura")
-    m.bloque((-1.5, 2.6, 0), (1.5, 3.0, 3.3), "negro")
+    m.bloque((-1.5, 2.6, 0), (1.5, 2.7, 3.3), "negro")                       # fondo del túnel (solo se ve por delante)
+    m.bloque((-1.5, 2.7, 0), (1.5, 3.0, 3.3), "piedra_oscura")
     m.bloque((-1.5, -0.6, 0), (1.5, 2.6, 0.06), "tierra")
     rocas = [((-2.4, -0.6, 1.0), (1.9, 1.6, 2.4)), ((-2.5, 1.2, 1.6), (1.6, 3.0, 3.4)), ((2.4, -0.5, 1.2), (1.8, 1.7, 2.8)),
              ((2.5, 1.3, 1.5), (1.6, 3.0, 3.2)), ((-1.6, 0.3, 4.0), (2.8, 2.6, 1.9)), ((1.5, 0.5, 4.1), (2.9, 2.8, 1.7)),
              ((0, 1.6, 4.3), (3.4, 2.8, 1.4)), ((-2.6, -1.4, 0.45), (1.1, 1.0, 0.9)), ((2.5, -1.7, 0.35), (0.9, 1.1, 0.7))]
     for i, (c, t) in enumerate(rocas):
         m.roca(c, t, "piedra" if i % 3 else "piedra_oscura", semilla=i * 2.1, sub=2, ruido=0.3)
+    # Ladera trasera: la masa de roca se derrama hacia atrás para que el bloque no se lea como una caja
+    for i, (c, t) in enumerate((((-1.8, 2.9, 1.3), (2.6, 1.6, 2.8)), ((1.5, 3.0, 1.0), (2.8, 1.4, 2.2)),
+                                ((0.0, 3.1, 2.6), (3.2, 1.3, 2.4)), ((-0.4, 2.9, 0.4), (2.0, 1.2, 0.9)),
+                                ((2.6, 2.6, 2.8), (1.4, 1.2, 1.6)), ((-2.7, 2.4, 3.4), (1.2, 1.3, 1.4)))):
+        m.roca(c, t, "piedra_oscura" if i % 2 else "piedra", semilla=20 + i * 1.7, sub=2, ruido=0.3)
     m.roca((-2.2, 0.2, 3.3), (1.2, 1.4, 0.4), "musgo", semilla=7, sub=1)
     m.roca((1.9, -0.2, 3.2), (1.0, 1.2, 0.35), "musgo", semilla=9, sub=1)
     # Portal reforzado: pies derechos, dintel, jabalcones y cartelas con pernos; tres cuadros más hacia dentro

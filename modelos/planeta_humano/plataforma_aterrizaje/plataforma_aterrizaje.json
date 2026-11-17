@@ -1,0 +1,90 @@
+{
+  "nombre": "plataforma_aterrizaje",
+  "numero": 67,
+  "zona": "Zona del hangar",
+  "categoria": "edificio_mediano",
+  "triangulos": 2448,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 0.76,
+    "fondo_z": 12.9
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 12,
+    "alto_y": 0.5,
+    "fondo_z": 12
+  },
+  "piezas": [
+    {
+      "nombre": "plataforma_aterrizaje",
+      "triangulos": 1808,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "plataforma_aterrizaje_naranja_neon",
+      "triangulos": 256,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "plataforma_aterrizaje_neon",
+      "triangulos": 384,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "plataforma_aterrizaje_color.png",
+    "roughness": "plataforma_aterrizaje_roughness.png",
+    "metalness": "plataforma_aterrizaje_metalness.png",
+    "emision": "plataforma_aterrizaje_emision.png",
+    "normal": "plataforma_aterrizaje_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.384,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "centro_aterrizaje": [
+      0,
+      0.45,
+      0
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "plataforma_aterrizaje": {
+        "triangulos": 1808,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "plataforma_aterrizaje_naranja_neon": {
+        "triangulos": 256,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "plataforma_aterrizaje_neon": {
+        "triangulos": 384,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2448,
+    "tamano_reimportado": [
+      12.0,
+      12.901,
+      0.76
+    ]
+  }
+}

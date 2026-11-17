@@ -1,0 +1,119 @@
+{
+  "nombre": "almacen_industrial",
+  "numero": 64,
+  "zona": "Zona industrial",
+  "categoria": "edificio_grande",
+  "triangulos": 3026,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 7.95,
+    "fondo_z": 12.54
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 16,
+    "alto_y": 8,
+    "fondo_z": 12
+  },
+  "piezas": [
+    {
+      "nombre": "almacen_industrial",
+      "triangulos": 2462,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "almacen_industrial_blanco_luz",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "almacen_industrial_cristal",
+      "triangulos": 48,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "almacen_industrial_neon",
+      "triangulos": 336,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "almacen_industrial_porton_der",
+      "triangulos": 84,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "almacen_industrial_porton_izq",
+      "triangulos": 84,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    }
+  ],
+  "texturas": {
+    "color": "almacen_industrial_color.png",
+    "roughness": "almacen_industrial_roughness.png",
+    "metalness": "almacen_industrial_metalness.png",
+    "emision": "almacen_industrial_emision.png",
+    "normal": "almacen_industrial_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.474,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "almacen_industrial": {
+        "triangulos": 2462,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "almacen_industrial_blanco_luz": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "almacen_industrial_cristal": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "almacen_industrial_neon": {
+        "triangulos": 336,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "almacen_industrial_porton_der": {
+        "triangulos": 84,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "almacen_industrial_porton_izq": {
+        "triangulos": 84,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3026,
+    "tamano_reimportado": [
+      16.0,
+      12.54,
+      7.955
+    ]
+  }
+}

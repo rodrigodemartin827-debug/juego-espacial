@@ -1,0 +1,177 @@
+{
+  "nombre": "hangar_principal",
+  "numero": 66,
+  "zona": "Zona del hangar",
+  "categoria": "edificio_grande",
+  "triangulos": 5294,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 24.0,
+    "alto_y": 14.67,
+    "fondo_z": 20.2
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 24,
+    "alto_y": 14,
+    "fondo_z": 20
+  },
+  "piezas": [
+    {
+      "nombre": "hangar_principal",
+      "triangulos": 3602,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hangar_principal_blanco_luz",
+      "triangulos": 180,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "hangar_principal_carro_grua",
+      "triangulos": 160,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hangar_principal_cristal",
+      "triangulos": 120,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "hangar_principal_naranja_neon",
+      "triangulos": 200,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "hangar_principal_neon",
+      "triangulos": 596,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "hangar_principal_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "hangar_principal_porton_der",
+      "triangulos": 108,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hangar_principal_porton_izq",
+      "triangulos": 108,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hangar_principal_puente_grua",
+      "triangulos": 144,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "hangar_principal_rojo_neon",
+      "triangulos": 64,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "hangar_principal_color.png",
+    "roughness": "hangar_principal_roughness.png",
+    "metalness": "hangar_principal_metalness.png",
+    "emision": "hangar_principal_emision.png",
+    "normal": "hangar_principal_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.371,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "hangar_principal": {
+        "triangulos": 3602,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_blanco_luz": {
+        "triangulos": 180,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_carro_grua": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_cristal": {
+        "triangulos": 120,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_naranja_neon": {
+        "triangulos": 200,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_neon": {
+        "triangulos": 596,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "hangar_principal_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_porton_der": {
+        "triangulos": 108,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_porton_izq": {
+        "triangulos": 108,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_puente_grua": {
+        "triangulos": 144,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "hangar_principal_rojo_neon": {
+        "triangulos": 64,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 5294,
+    "tamano_reimportado": [
+      24.0,
+      20.201,
+      14.67
+    ]
+  }
+}

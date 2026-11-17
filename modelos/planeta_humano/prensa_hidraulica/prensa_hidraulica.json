@@ -1,0 +1,119 @@
+{
+  "nombre": "prensa_hidraulica",
+  "numero": 62,
+  "zona": "Zona industrial",
+  "categoria": "vehiculo",
+  "triangulos": 1620,
+  "presupuesto_triangulos": 10000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.07,
+    "alto_y": 4.02,
+    "fondo_z": 2.01
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 4,
+    "fondo_z": 2
+  },
+  "piezas": [
+    {
+      "nombre": "prensa_hidraulica",
+      "triangulos": 1072,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "prensa_hidraulica_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "prensa_hidraulica_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "prensa_hidraulica_piston",
+      "triangulos": 444,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "prensa_hidraulica_rojo_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    },
+    {
+      "nombre": "prensa_hidraulica_verde_neon",
+      "triangulos": 28,
+      "material_roblox": "Neon",
+      "color": "#4DFF7A"
+    }
+  ],
+  "texturas": {
+    "color": "prensa_hidraulica_color.png",
+    "roughness": "prensa_hidraulica_roughness.png",
+    "metalness": "prensa_hidraulica_metalness.png",
+    "emision": "prensa_hidraulica_emision.png",
+    "normal": "prensa_hidraulica_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.518,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "prensa_hidraulica": {
+        "triangulos": 1072,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "prensa_hidraulica_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "prensa_hidraulica_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "prensa_hidraulica_piston": {
+        "triangulos": 444,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "prensa_hidraulica_rojo_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "prensa_hidraulica_verde_neon": {
+        "triangulos": 28,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 1620,
+    "tamano_reimportado": [
+      3.066,
+      2.014,
+      4.02
+    ]
+  }
+}

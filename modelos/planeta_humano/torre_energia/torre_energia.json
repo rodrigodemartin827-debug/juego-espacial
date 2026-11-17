@@ -1,0 +1,96 @@
+{
+  "nombre": "torre_energia",
+  "numero": 65,
+  "zona": "Zona industrial",
+  "categoria": "edificio_mediano",
+  "triangulos": 3926,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 3.17,
+    "alto_y": 12.08,
+    "fondo_z": 3.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 3,
+    "alto_y": 12,
+    "fondo_z": 3
+  },
+  "piezas": [
+    {
+      "nombre": "torre_energia",
+      "triangulos": 3130,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "torre_energia_cables_neon",
+      "triangulos": 232,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "torre_energia_conducto_neon",
+      "triangulos": 20,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "torre_energia_neon",
+      "triangulos": 544,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "torre_energia_color.png",
+    "roughness": "torre_energia_roughness.png",
+    "metalness": "torre_energia_metalness.png",
+    "emision": "torre_energia_emision.png",
+    "normal": "torre_energia_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.272,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "torre_energia": {
+        "triangulos": 3130,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_energia_cables_neon": {
+        "triangulos": 232,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_energia_conducto_neon": {
+        "triangulos": 20,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_energia_neon": {
+        "triangulos": 544,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3926,
+    "tamano_reimportado": [
+      3.173,
+      3.0,
+      12.081
+    ]
+  }
+}
