@@ -1,0 +1,95 @@
+{
+  "nombre": "academia_entrenamiento",
+  "numero": 98,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_grande",
+  "triangulos": 6214,
+  "presupuesto_triangulos": 15000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 7.87,
+    "fondo_z": 16.0
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 16,
+    "alto_y": 8,
+    "fondo_z": 16
+  },
+  "piezas": [
+    {
+      "nombre": "academia_entrenamiento",
+      "triangulos": 5558,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "academia_entrenamiento_estandartes",
+      "triangulos": 32,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "academia_entrenamiento_naranja_neon",
+      "triangulos": 220,
+      "material_roblox": "Neon",
+      "color": "#FF7A1A"
+    },
+    {
+      "nombre": "academia_entrenamiento_neon",
+      "triangulos": 404,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "academia_entrenamiento_color.png",
+    "roughness": "academia_entrenamiento_roughness.png",
+    "metalness": "academia_entrenamiento_metalness.png",
+    "emision": "academia_entrenamiento_emision.png",
+    "normal": "academia_entrenamiento_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.422,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "academia_entrenamiento": {
+        "triangulos": 5558,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "academia_entrenamiento_estandartes": {
+        "triangulos": 32,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "academia_entrenamiento_naranja_neon": {
+        "triangulos": 220,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      },
+      "academia_entrenamiento_neon": {
+        "triangulos": 404,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 2
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 6214,
+    "tamano_reimportado": [
+      16.0,
+      16.0,
+      7.865
+    ]
+  }
+}

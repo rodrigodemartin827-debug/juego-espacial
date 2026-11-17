@@ -1,43 +1,43 @@
 {
-  "nombre": "puente_rio_piedra",
-  "numero": 89,
+  "nombre": "roca_formacion",
+  "numero": 86,
   "zona": "Naturaleza y terreno",
-  "categoria": "edificio_mediano",
-  "triangulos": 4888,
-  "presupuesto_triangulos": 8000,
+  "categoria": "vegetacion",
+  "triangulos": 1688,
+  "presupuesto_triangulos": 4000,
   "dentro_de_presupuesto": true,
   "tamano_studs": {
-    "ancho_x": 8.2,
-    "alto_y": 2.86,
-    "fondo_z": 4.29
+    "ancho_x": 5.81,
+    "alto_y": 4.84,
+    "fondo_z": 4.45
   },
   "tamano_objetivo_studs": {
-    "ancho_x": 8,
-    "alto_y": 3,
+    "ancho_x": 6,
+    "alto_y": 5,
     "fondo_z": 4
   },
   "piezas": [
     {
-      "nombre": "puente_rio_piedra",
-      "triangulos": 4632,
+      "nombre": "roca_formacion",
+      "triangulos": 1632,
       "material_roblox": "SurfaceAppearance (atlas PBR)"
     },
     {
-      "nombre": "puente_rio_piedra_neon",
-      "triangulos": 256,
+      "nombre": "roca_formacion_neon",
+      "triangulos": 56,
       "material_roblox": "Neon",
       "color": "#3DF2FF"
     }
   ],
   "texturas": {
-    "color": "puente_rio_piedra_color.png",
-    "roughness": "puente_rio_piedra_roughness.png",
-    "metalness": "puente_rio_piedra_metalness.png",
-    "emision": "puente_rio_piedra_emision.png",
-    "normal": "puente_rio_piedra_normal.png"
+    "color": "roca_formacion_color.png",
+    "roughness": "roca_formacion_roughness.png",
+    "metalness": "roca_formacion_metalness.png",
+    "emision": "roca_formacion_emision.png",
+    "normal": "roca_formacion_normal.png"
   },
   "atlas": "1024x1024",
-  "cobertura_atlas": 0.552,
+  "cobertura_atlas": 0.553,
   "exportacion": {
     "escala": "1 unidad = 1 stud",
     "apply_scalings": "FBX_SCALE_ALL",
@@ -47,14 +47,14 @@
   "notas": [],
   "verificacion_fbx": {
     "piezas": {
-      "puente_rio_piedra": {
-        "triangulos": 4632,
+      "roca_formacion": {
+        "triangulos": 1632,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
       },
-      "puente_rio_piedra_neon": {
-        "triangulos": 256,
+      "roca_formacion_neon": {
+        "triangulos": 56,
         "aristas_abiertas": 0,
         "normales_invertidas": 0,
         "uv": 1
@@ -62,11 +62,11 @@
     },
     "ok": true,
     "avisos": [],
-    "triangulos": 4888,
+    "triangulos": 1688,
     "tamano_reimportado": [
-      8.201,
-      4.291,
-      2.861
+      5.805,
+      4.448,
+      4.836
     ]
   }
 }

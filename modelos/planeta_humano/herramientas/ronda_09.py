@@ -185,15 +185,27 @@ def arbol_palmera_alien(m):
 
 
 def _musgo(m, centros, n=18, mat="musgo"):
+    """Manchas de musgo pegadas a la superficie: se proyectan con un rayo vertical sobre la malla ya construida."""
+    from mathutils.bvhtree import BVHTree
     R = m.rng
-    for i in range(n):
-        c, t = centros[i % len(centros)]
+    arbol = BVHTree.FromBMesh(m.partes["base"]["bm"])
+    puestos = 0
+    intentos = 0
+    while puestos < n and intentos < n * 6:
+        intentos += 1
+        c, t = centros[intentos % len(centros)]
         a = R.uniform(0, 6.28)
-        e = math.radians(R.uniform(35, 85))
-        p = (c[0] + t[0] * 0.46 * math.cos(a) * math.cos(e), c[1] + t[1] * 0.46 * math.sin(a) * math.cos(e),
-             c[2] + t[2] * 0.46 * math.sin(e))
-        s = R.uniform(0.25, 0.5) * min(t) * 0.24
-        m.ico(p, s, mat, sub=1, esc=(1, 1, 0.3), ruido=0.3, semilla=i * 1.7)
+        d = R.uniform(0.0, 0.42)
+        x, y = c[0] + t[0] * d * math.cos(a), c[1] + t[1] * d * math.sin(a)
+        loc, nor, _i, _dist = arbol.ray_cast(Vector((x, y, 50.0)), Vector((0, 0, -1)))
+        if loc is None or nor.z < 0.35 or loc.z < 0.25:
+            continue
+        s = R.uniform(0.18, 0.36) * min(t[0], t[1]) * 0.24
+        rx = math.degrees(math.atan2(-nor.y, nor.z))
+        ry = math.degrees(math.atan2(nor.x, nor.z))
+        m.ico((loc.x, loc.y, loc.z - s * 0.12), s, mat, sub=1, esc=(1, 1, 0.32), ruido=0.3, semilla=intentos * 1.7,
+              rot=(rx, ry, 0))
+        puestos += 1
 
 
 @modelo(85, "naturaleza", "vegetacion", (4, 3, 3))
@@ -208,7 +220,7 @@ def roca_grande(m):
         n1 = noise.noise(p * 1.1 + Vector((3.1, 0.7, 1.9)))
         n2 = noise.noise(p * 3.2 + Vector((7.0, 2.0, 5.0)))
         f = 1.0 + 0.3 * n1 + 0.1 * n2
-        v.co = Vector((p.x * 1.95 * f, p.y * 1.45 * f, max(-0.25, p.z * 1.6 * f + 0.2 * n1)))
+        v.co = Vector((p.x * 1.95 * f, p.y * 1.45 * f, max(-0.25, p.z * 2.5 * f + 0.2 * n1)))
         v.co.z = v.co.z * (1.05 if v.co.z > 0 else 1.0) + 1.25 if False else v.co.z
     for v in bm.verts:                                                                 # estratos: escalones suaves
         z = v.co.z

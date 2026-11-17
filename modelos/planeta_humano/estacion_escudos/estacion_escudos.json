@@ -1,0 +1,149 @@
+{
+  "nombre": "estacion_escudos",
+  "numero": 101,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_mediano",
+  "triangulos": 3664,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 5.54,
+    "alto_y": 6.0,
+    "fondo_z": 5.54
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 6,
+    "alto_y": 6,
+    "fondo_z": 6
+  },
+  "piezas": [
+    {
+      "nombre": "estacion_escudos",
+      "triangulos": 2362,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "estacion_escudos_anillos_neon",
+      "triangulos": 540,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estacion_escudos_arcos_neon",
+      "triangulos": 176,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estacion_escudos_blanco_luz",
+      "triangulos": 100,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "estacion_escudos_neon",
+      "triangulos": 380,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estacion_escudos_pantalla_neon",
+      "triangulos": 12,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "estacion_escudos_puerta",
+      "triangulos": 48,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "estacion_escudos_rayo_neon",
+      "triangulos": 46,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    }
+  ],
+  "texturas": {
+    "color": "estacion_escudos_color.png",
+    "roughness": "estacion_escudos_roughness.png",
+    "metalness": "estacion_escudos_metalness.png",
+    "emision": "estacion_escudos_emision.png",
+    "normal": "estacion_escudos_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.472,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "rayo": [
+      0,
+      6.0,
+      0
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "estacion_escudos": {
+        "triangulos": 2362,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_anillos_neon": {
+        "triangulos": 540,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_arcos_neon": {
+        "triangulos": 176,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_blanco_luz": {
+        "triangulos": 100,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_neon": {
+        "triangulos": 380,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_pantalla_neon": {
+        "triangulos": 12,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_puerta": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "estacion_escudos_rayo_neon": {
+        "triangulos": 46,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 3664,
+    "tamano_reimportado": [
+      5.543,
+      5.543,
+      6.0
+    ]
+  }
+}

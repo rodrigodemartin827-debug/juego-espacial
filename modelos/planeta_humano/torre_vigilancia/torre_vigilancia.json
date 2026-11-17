@@ -1,0 +1,126 @@
+{
+  "nombre": "torre_vigilancia",
+  "numero": 99,
+  "zona": "Edificios especiales",
+  "categoria": "edificio_mediano",
+  "triangulos": 2954,
+  "presupuesto_triangulos": 8000,
+  "dentro_de_presupuesto": true,
+  "tamano_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 17.57,
+    "fondo_z": 4.05
+  },
+  "tamano_objetivo_studs": {
+    "ancho_x": 4,
+    "alto_y": 18,
+    "fondo_z": 4
+  },
+  "piezas": [
+    {
+      "nombre": "torre_vigilancia",
+      "triangulos": 2458,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "torre_vigilancia_cristal",
+      "triangulos": 48,
+      "material_roblox": "Glass",
+      "color": "#7FE6F2",
+      "transparencia": 0.45
+    },
+    {
+      "nombre": "torre_vigilancia_foco",
+      "triangulos": 200,
+      "material_roblox": "SurfaceAppearance (atlas PBR)"
+    },
+    {
+      "nombre": "torre_vigilancia_foco_neon",
+      "triangulos": 52,
+      "material_roblox": "Neon",
+      "color": "#F4FBFF"
+    },
+    {
+      "nombre": "torre_vigilancia_neon",
+      "triangulos": 160,
+      "material_roblox": "Neon",
+      "color": "#3DF2FF"
+    },
+    {
+      "nombre": "torre_vigilancia_rojo_neon",
+      "triangulos": 36,
+      "material_roblox": "Neon",
+      "color": "#FF3B3B"
+    }
+  ],
+  "texturas": {
+    "color": "torre_vigilancia_color.png",
+    "roughness": "torre_vigilancia_roughness.png",
+    "metalness": "torre_vigilancia_metalness.png",
+    "emision": "torre_vigilancia_emision.png",
+    "normal": "torre_vigilancia_normal.png"
+  },
+  "atlas": "1024x1024",
+  "cobertura_atlas": 0.468,
+  "exportacion": {
+    "escala": "1 unidad = 1 stud",
+    "apply_scalings": "FBX_SCALE_ALL",
+    "giro_importacion": "180° en el eje Y (vertical de Roblox); el frente queda en -Z"
+  },
+  "anclajes_roblox": {
+    "haz_foco": [
+      0,
+      17.13,
+      -0.25
+    ]
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": {
+      "torre_vigilancia": {
+        "triangulos": 2458,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_vigilancia_cristal": {
+        "triangulos": 48,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_vigilancia_foco": {
+        "triangulos": 200,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_vigilancia_foco_neon": {
+        "triangulos": 52,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_vigilancia_neon": {
+        "triangulos": 160,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      },
+      "torre_vigilancia_rojo_neon": {
+        "triangulos": 36,
+        "aristas_abiertas": 0,
+        "normales_invertidas": 0,
+        "uv": 1
+      }
+    },
+    "ok": true,
+    "avisos": [],
+    "triangulos": 2954,
+    "tamano_reimportado": [
+      4.001,
+      4.055,
+      17.575
+    ]
+  }
+}
