@@ -15,6 +15,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
 | `pueblo/casa_minero/` | Casa del minero del pueblo humano: 37 piezas con un atlas PBR de 2048 | 8.765 (límite: 12.000) |
 | `pueblo/casa_comerciante/` | Casa del comerciante: tienda de suministros abajo y vivienda arriba, 49 piezas, atlas PBR de 2048 | 12.496 (límite: 14.000) |
+| `pueblo/taberna/` | Taberna «La Última Órbita»: porche cubierto, puertas de saloon y cartel tallado, 57 piezas, atlas PBR de 2048 | 15.958 (límite: 16.000) |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -295,6 +296,48 @@ y `contenedor_tapa`. El JSON da los pivotes, y `luces_sugeridas_roblox` dice dó
 dentro de la tienda (las del render) para que el expositor se vea iluminado. Los focos del cartel tienen su anclaje
 en `cartel_focos`.
 
+## Taberna «La Última Órbita» (`pueblo/taberna/`)
+
+El edificio más social del pueblo: una planta de techo alto (tejado a dos aguas de 36°) elevada un stud sobre un
+cimiento de sillares reforzado con un angular de acero y escuadras atornilladas.
+
+- **Muros:** tres bandas. Piedra abajo, chapa remachada y tablas horizontales solapadas y clavadas hasta el alero.
+  Más claras y gastadas junto a la puerta, con algunas tablas cambiadas y parches soldados de alguna pelea.
+- **Tejado:** chapa grecada pintada de rojo óxido (una chapa cambiada, galvanizada), chimenea ancha de la cocina,
+  dos aspiradores giratorios y una jarra de neón cian en la cumbrera.
+- **Porche:** tres postes de tronco con corteza, anclados con placas de 4 tornillos. Tablas con separación (se ve
+  oscuro debajo), claras en el camino a la puerta. Tiene barandillas con remates de bola, banco con escuadras de
+  hierro bajo la ventana, medio barril con un agave, cenicero de pie, campana con cuerda en el poste del centro y
+  dos faroles hexagonales.
+- **Cartel tallado:** tablón biselado con «LA ÚLTIMA ÓRBITA» en relieve dorado. Cuelga de cadenas (eslabones de
+  verdad) de una horca de hierro montada sobre el tejadillo del porche, con dos focos.
+- **Fachada:** dos puertas de saloon a 3/4 de alto (tres tablas, cruz de refuerzo, barra de latón pulida por las manos
+  y 4 bisagras de vaivén por hoja con el muelle en el mapa de normales). Ventanal con cruceta y cristal ámbar, con dos
+  jarras y una botella en el estante de dentro. Pizarra «HOY: Estofado del minero — 5 créditos» y tablón de corcho con
+  cuatro papeles clavados con chinchetas.
+- **Laterales:** ventana de la cocina con rejilla (derecha) y ventana con contraventana abierta (izquierda), las dos con
+  luz cálida dentro. Medidor grande con su cable hasta la jarra de neón.
+- **Detrás:** muelle de carga, puerta metálica ancha con cruces en X, cerrojo, candado y golpes abajo, dos barriles
+  apilados (uno con grifo, etiquetas medio despegadas) y bajante grueso desde el canalón.
+- **Entorno:** dos escalones de piedra a todo lo ancho, gastados en el centro, con musgo en las esquinas y manchas de
+  bebida. Farola y una speeder bike aparcada con sus dos discos hover.
+
+**Medidas:** 15.958 triángulos en 57 mallas. El edificio con el porche y los escalones ocupa unos 13,2 × 10 studs, con
+la cumbrera a 8,2. Contando la speeder bike, la farola, la jarra de neón y el aspirador de la chimenea la caja total
+llega a 17,1 × 11,3 × 9,7 studs.
+
+**Generador:** `herramientas/taberna.py` (piezas en `taberna_piezas.py`, materiales en `taberna_materiales.py`), con el
+mismo proceso que las casas.
+
+**En Studio**, lo mismo que en las casas, más:
+- Las piezas `_neon_calido` (la luz de las ventanas) van en Neon `#FFB45A`.
+- Los cristales van en Glass ámbar `#D9A05B`, Transparency 0,4.
+- Piezas que se mueven: `puerta_saloon_izq`, `puerta_saloon_der` (vaivén, ±95°), `puerta_trasera`,
+  `ventana_lateral_contraventana` y `medidor_puerta`.
+- `luces_sugeridas_roblox` en el JSON da dónde poner las PointLight cálidas de dentro. `faroles` y `farola` tienen su
+  anclaje de luz.
+- La farola mide 5 studs y no 3 como pedía el encargo: al lado de un alero a 5,8 parecía un bolardo.
+
 ## Regenerar
 
 Requiere Python 3.13 y las bibliotecas de `herramientas/requirements.txt` (el mismo `bpy` que usa `animaciones/`):
@@ -311,6 +354,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 .venv/bin/python modelos/herramientas/criaturas.py --salida modelos/criaturas --ronda 5
 .venv/bin/python modelos/herramientas/casa_minero.py --salida modelos/pueblo/casa_minero   # ~15 min (--rapido, --vista)
 .venv/bin/python modelos/herramientas/casa_comerciante.py --salida modelos/pueblo/casa_comerciante   # ~20 min
+.venv/bin/python modelos/herramientas/taberna.py --salida modelos/pueblo/taberna   # ~25 min
 .venv/bin/python modelos/herramientas/hoja_conjunto.py modelos/hoja_contactos_todo.png
 ```
 
