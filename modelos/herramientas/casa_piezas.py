@@ -708,9 +708,9 @@ def puerta():
     return p
 
 
-def _cerradura(c, centro):
+def _cerradura(c, centro, u=Vector((1, 0, 0)), v=Vector((0, 0, 1)), n=Vector((0, -1, 0)), mat="laton"):
     """Placa de cerradura (0,13 x 0,2) con el ojo de la llave: círculo + ranura, hundido 2 centésimas."""
-    n = 16
+    lados = 16
     cx, cy = 0.0, 0.0
 
     def dentro_ojo(x, y):
@@ -726,11 +726,11 @@ def _cerradura(c, centro):
                 hi = mid
         return (cx + math.cos(ang) * lo, cy + math.sin(ang) * lo)
 
-    angs = [math.tau * k / n + math.pi / 2 for k in range(n)]
+    angs = [math.tau * k / lados + math.pi / 2 for k in range(lados)]
     ext = [rayo(an, lambda x, y: abs(x) <= 0.065 and abs(y) <= 0.1) for an in angs]
     inte = [rayo(an, dentro_ojo) for an in angs]
-    c.anillo_placa(ext, inte, centro, Vector((1, 0, 0)), Vector((0, 0, 1)),
-                   Vector((0, -1, 0)), 0.022, "laton", fondo=0.02, mat_fondo="negro_mate", mat_hueco="negro_mate")
+    c.anillo_placa(ext, inte, centro, u, v, n, 0.022, mat, fondo=0.02, mat_fondo="negro_mate",
+                   mat_hueco="negro_mate")
 
 
 def puerta_marco():
@@ -1108,7 +1108,7 @@ def lampara():
     zt = 5.42
     brazo = [pl.p(xc, zp, PANEL + 0.04), (xc, -MY - 0.34, zp + 0.02), (xc, cy - 0.02, zp - 0.03), (cx, cy, zt + 0.02)]
     b.tubo(brazo, 0.03, "metal_oscuro", lados=6, radio_curva=0.12, pasos_curva=3, tapa_ini=False, tapa_fin=False)
-    b.revolucion([(0.04, zt + 0.015), (0.23, zt - 0.11), (0.23, zt - 0.135), (0.18, zt - 0.125)], (cx, cy, 0), 12,
+    b.revolucion([(0.18, zt - 0.125), (0.23, zt - 0.135), (0.23, zt - 0.11), (0.04, zt + 0.015)], (cx, cy, 0), 12,
                  "metal_oscuro", tapa_ini=True, tapa_fin=True)
     zb = zt - 0.46
     for k in range(4):
@@ -1123,7 +1123,7 @@ def lampara():
         tornillo(cuerpo, pl.p(xc + uu, zp, PANEL + 0.05), pl.n, 0.016, "acero", en_baja=False)
 
     pantalla = Pieza("lampara_pantalla_neon", peso_uv=0.5)
-    pantalla.baja.revolucion([(0.165, zt - 0.125), (0.165, zb + 0.01), (0.15, zb + 0.01), (0.15, zt - 0.125)],
+    pantalla.baja.revolucion([(0.15, zt - 0.125), (0.15, zb + 0.01), (0.165, zb + 0.01), (0.165, zt - 0.125)],
                              (cx, cy, 0), 12, "neon", tapa_ini=False, tapa_fin=False)
     bombilla = Pieza("lampara_bombilla_neon", peso_uv=0.5)
     bombilla.baja.revolucion([(0.0, zb - 0.08), (0.055, zb - 0.06), (0.085, zb + 0.01), (0.07, zb + 0.1),

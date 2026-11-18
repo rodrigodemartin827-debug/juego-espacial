@@ -757,7 +757,18 @@ def vistas_rapidas(objs, carpeta, alta=True):
     return rutas
 
 
-def main():
+def generar(cfg):
+    """
+    Proceso completo para una casa. cfg: nombre, titulo, descripcion, presupuesto, construir() -> (piezas, P),
+    materiales(P) -> {nombre: material}, y opcionalmente extrusion, detalles, animables, color_vidrio.
+    """
+    global NOMBRE, EXTRUSION, DETALLES, ANIMABLES, COLOR_VIDRIO
+    NOMBRE = cfg["nombre"]
+    EXTRUSION = cfg.get("extrusion", EXTRUSION)
+    DETALLES = cfg.get("detalles", DETALLES)
+    ANIMABLES = cfg.get("animables", ANIMABLES)
+    COLOR_VIDRIO = cfg.get("color_vidrio", COLOR_VIDRIO)
+    titulo = cfg["titulo"]
     ap = argparse.ArgumentParser()
     ap.add_argument("--salida", required=True)
     ap.add_argument("--rapido", action="store_true")
@@ -770,8 +781,8 @@ def main():
     t0 = time.time()
 
     escena()
-    piezas, P = cp.construir()
-    mats = cm.crear_materiales(P)
+    piezas, P = cfg["construir"]()
+    mats = cfg["materiales"](P)
     objs = crear_objetos(piezas, mats)
     total = sum(triangulos(ob) for _, ob, _ in objs)
     log(f"{len(objs)} piezas, {total} triángulos (malla baja)")
@@ -803,11 +814,11 @@ def main():
                 bpy.context.scene.view_layers[0].material_override = m
                 det.append((nombre, r))
             bpy.context.scene.view_layers[0].material_override = None
-            hoja(det, os.path.join(carpeta, "_vista_detalles.png"), "Casa del minero — detalles (malla alta)", [],
+            hoja(det, os.path.join(carpeta, "_vista_detalles.png"), f"{titulo} — detalles (malla alta)", [],
                  columnas=5)
             return
         rutas = vistas_rapidas(objs, tmp)
-        hoja(rutas, os.path.join(carpeta, "_vista_modelado.png"), "Casa del minero — modelado (malla alta)",
+        hoja(rutas, os.path.join(carpeta, "_vista_modelado.png"), f"{titulo} — modelado (malla alta)",
              [f"{total} triángulos en la malla baja"], columnas=3)
         return
 
@@ -833,7 +844,7 @@ def main():
         render_vista(bajas, luces, nombre, az, el, r, tr, mu, malla=nombre == "Wireframe")
         rutas_v.append((nombre, r))
     dims = _dimensiones(bajas)
-    hoja(rutas_v, os.path.join(carpeta, f"{NOMBRE}_turnaround.png"), "Casa del minero — casa_minero",
+    hoja(rutas_v, os.path.join(carpeta, f"{NOMBRE}_turnaround.png"), f"{titulo} — {NOMBRE}",
          [f"{total} triángulos · {dims[0]:.1f} × {dims[1]:.1f} × {dims[2]:.1f} studs (ancho × fondo × alto) · "
           f"atlas PBR {ATLAS}² · {len(bajas)} piezas"])
     # Primeros planos (puerta, ventana, entorno, medidor).
@@ -842,7 +853,7 @@ def main():
         r = os.path.join(tmp, f"d_{nombre.replace(' ', '_')}.png")
         render_vista(bajas, luces, nombre, az, el, r, 600 if not args.rapido else 360, mu, centro=c, radio=rad)
         det.append((nombre, r))
-    hoja(det, os.path.join(carpeta, f"{NOMBRE}_detalles.png"), "Casa del minero — detalles", [], columnas=4)
+    hoja(det, os.path.join(carpeta, f"{NOMBRE}_detalles.png"), f"{titulo} — detalles", [], columnas=4)
 
     # Exportación con el giro, y JSON.
     info_piezas = []
@@ -872,9 +883,9 @@ def main():
         f"{verif['tam_studs']} studs, texturas {verif['texturas']}")
     datos = {
         "nombre": NOMBRE,
-        "descripcion": "Casa de un minero en el pueblo de la colonia humana. Piezas separadas con un atlas PBR.",
+        "descripcion": cfg["descripcion"],
         "triangulos": total,
-        "presupuesto_triangulos": 12000,
+        "presupuesto_triangulos": cfg["presupuesto"],
         "tam_studs": {"ancho_x": round(dims[0], 2), "fondo": round(dims[1], 2), "alto": round(dims[2], 2)},
         "escala": "1 unidad de Blender = 1 stud; FBX en metros (1 stud = 0,28 m), Apply Scalings: FBX All",
         "giro_importacion": f"{GIRO_IMPORTACION}° alrededor del eje vertical antes de exportar",
@@ -904,6 +915,17 @@ def _caja(objetos):
 def _dimensiones(objetos):
     mn, mx = _caja(objetos)
     return list(mx - mn)
+
+
+def main():
+    generar({
+        "nombre": "casa_minero",
+        "titulo": "Casa del minero",
+        "descripcion": "Casa de un minero en el pueblo de la colonia humana. Piezas separadas con un atlas PBR.",
+        "presupuesto": 12000,
+        "construir": cp.construir,
+        "materiales": cm.crear_materiales,
+    })
 
 
 if __name__ == "__main__":
