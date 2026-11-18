@@ -140,7 +140,7 @@ def base():
     return p
 
 
-def _losa_gastada(nombre, x0, x1, y0, y1, z1, hund, centro_pisada, peso=1.6, semilla=3):
+def _losa_gastada(nombre, x0, x1, y0, y1, z1, hund, centro_pisada, peso=1.6, semilla=3, mat="losa", z0=0.0):
     p = Pieza(nombre, peso_uv=peso)
     rnd = random.Random(semilla)
     c = p.baja
@@ -158,13 +158,13 @@ def _losa_gastada(nombre, x0, x1, y0, y1, z1, hund, centro_pisada, peso=1.6, sem
             arriba[i, j] = c.v((x, y, z1 - h + borde))
     for i in range(nx):
         for j in range(ny):
-            c.cara([arriba[i, j], arriba[i + 1, j], arriba[i + 1, j + 1], arriba[i, j + 1]], "losa")
+            c.cara([arriba[i, j], arriba[i + 1, j], arriba[i + 1, j + 1], arriba[i, j + 1]], mat)
     anillo = [(i, 0) for i in range(nx)] + [(nx, j) for j in range(ny)] + \
              [(i, ny) for i in range(nx, 0, -1)] + [(0, j) for j in range(ny, 0, -1)]
-    abajo = {k: c.v((arriba[k].co.x, arriba[k].co.y, 0.0)) for k in anillo}
+    abajo = {k: c.v((arriba[k].co.x, arriba[k].co.y, z0)) for k in anillo}
     for a in range(len(anillo)):
         k1, k2 = anillo[a], anillo[(a + 1) % len(anillo)]
-        c.cara([abajo[k1], abajo[k2], arriba[k2], arriba[k1]], "losa")
+        c.cara([abajo[k1], abajo[k2], arriba[k2], arriba[k1]], mat)
     p.extra["centro"] = [centro_pisada[0], centro_pisada[1], z1]
     return p
 
@@ -761,19 +761,19 @@ def puerta_tienda():
     return [pu, cr, marco, felpudo]
 
 
-def _marco_puerta(p, pl, u0, u1, v1, mat, ancho=0.2, d_frente=0.2):
+def _marco_puerta(p, pl, u0, u1, v1, mat, ancho=0.2, d_frente=0.2, base=BASE_Z):
     """Marco de puerta en L: jambas y dintel en la fachada, forro del hueco y umbral metálico."""
     b = p.baja
-    caja_plano(b, pl, u0 - ancho, u0, BASE_Z, v1 + ancho, PANEL, d_frente, mat, sin=("+y", "-z"))
-    caja_plano(b, pl, u1, u1 + ancho, BASE_Z, v1 + ancho, PANEL, d_frente, mat, sin=("+y", "-z"))
+    caja_plano(b, pl, u0 - ancho, u0, base, v1 + ancho, PANEL, d_frente, mat, sin=("+y", "-z"))
+    caja_plano(b, pl, u1, u1 + ancho, base, v1 + ancho, PANEL, d_frente, mat, sin=("+y", "-z"))
     caja_plano(b, pl, u0, u1, v1, v1 + ancho, PANEL, d_frente, mat, sin=("+y", "-x", "+x"))
-    caja_plano(b, pl, u0, u0 + 0.04, BASE_Z + 0.08, v1, -MURO, PANEL, mat, sin=("-x", "-z"))
-    caja_plano(b, pl, u1 - 0.04, u1, BASE_Z + 0.08, v1, -MURO, PANEL, mat, sin=("+x", "-z"))
+    caja_plano(b, pl, u0, u0 + 0.04, base + 0.08, v1, -MURO, PANEL, mat, sin=("-x", "-z"))
+    caja_plano(b, pl, u1 - 0.04, u1, base + 0.08, v1, -MURO, PANEL, mat, sin=("+x", "-z"))
     caja_plano(b, pl, u0 + 0.04, u1 - 0.04, v1 - 0.04, v1, -MURO, PANEL, mat, sin=("+z", "-x", "+x"))
-    caja_plano(b, pl, u0, u1, BASE_Z, BASE_Z + 0.08, -MURO, d_frente, "acero", sin=("-z",))
+    caja_plano(b, pl, u0, u1, base, base + 0.08, -MURO, d_frente, "acero", sin=("-z",))
     for k in range(10):
         dd = -MURO + 0.03 + k * (MURO + d_frente - 0.06) / 9
-        caja_plano(p.alta, pl, u0 + 0.06, u1 - 0.06, BASE_Z + 0.08, BASE_Z + 0.086, dd - 0.005, dd + 0.005, "acero")
+        caja_plano(p.alta, pl, u0 + 0.06, u1 - 0.06, base + 0.08, base + 0.086, dd - 0.005, dd + 0.005, "acero")
     for uu in (u0 - ancho / 2, u1 + ancho / 2):
         for k in range(5):
             tornillo(p, pl.p(uu, 0.9 + k * (v1 - 1.1) / 4, d_frente), pl.n, 0.02, "acero", en_baja=False)

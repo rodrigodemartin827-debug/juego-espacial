@@ -44,6 +44,7 @@ ESTUDIO_M = 0.28                 # metros por stud
 GIRO_IMPORTACION = 180.0         # grados alrededor del eje vertical antes de exportar
 ATLAS = 2048
 COLOR_NEON = "#3DF2FF"
+COLOR_NEON_CALIDO = "#FFB45A"   # piezas *_neon_calido (luz cálida de dentro)
 COLOR_VIDRIO = "#79B8AE"
 
 # Extrusión de la jaula al hornear (studs): lo que sobresalen los detalles de la malla alta.
@@ -468,9 +469,19 @@ def materiales_finales(objs, rutas):
     bn.inputs["Emission Strength"].default_value = 6.0
     neo.diffuse_color = (*cm.lin(COLOR_NEON), 1)
 
+    calido = bpy.data.materials.new(f"{NOMBRE}_neon_calido")
+    calido.use_nodes = True
+    bc = calido.node_tree.nodes["Principled BSDF"]
+    bc.inputs["Base Color"].default_value = (*cm.lin(COLOR_NEON_CALIDO), 1)
+    bc.inputs["Emission Color"].default_value = (*cm.lin(COLOR_NEON_CALIDO), 1)
+    bc.inputs["Emission Strength"].default_value = 3.0
+    calido.diffuse_color = (*cm.lin(COLOR_NEON_CALIDO), 1)
+
     for p, ob, oa in objs:
         ob.data.materials.clear()
-        if ob.name.endswith("_neon"):
+        if ob.name.endswith("_neon_calido"):
+            ob.data.materials.append(calido)
+        elif ob.name.endswith("_neon"):
             ob.data.materials.append(neo)
         elif "cristal" in ob.name:
             ob.data.materials.append(vid)
@@ -497,7 +508,8 @@ def _material_caras():
     geo = nt.nodes.new("ShaderNodeNewGeometry")
     a = nt.nodes.new("ShaderNodeBsdfDiffuse")
     a.inputs["Color"].default_value = (0.6, 0.62, 0.66, 1)
-    b = nt.nodes.new("ShaderNodeEmission")
+    # Rojo difuso (no emisivo): las caras de espaldas escondidas no iluminan lo de alrededor y no confunden.
+    b = nt.nodes.new("ShaderNodeBsdfDiffuse")
     b.inputs["Color"].default_value = (1, 0, 0, 1)
     mix = nt.nodes.new("ShaderNodeMixShader")
     nt.links.new(geo.outputs["Backfacing"], mix.inputs["Fac"])
@@ -731,6 +743,8 @@ ANIMABLES = {
 
 
 def tipo_roblox(nombre):
+    if nombre.endswith("_neon_calido"):
+        return f"Neon, Color {COLOR_NEON_CALIDO}"
     if nombre.endswith("_neon"):
         return f"Neon, Color {COLOR_NEON}"
     if "cristal" in nombre:
