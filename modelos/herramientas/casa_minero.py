@@ -172,9 +172,10 @@ def desplegar_atlas(objs):
         capa = bm.faces.layers.int.get("oculta")
         peso = ob["peso_uv"]
         for isla in bmesh_linked_uv_islands(bm, uv):
-            oculta = capa is not None and all(f[capa] for f in isla)
+            # oculta = 1: casi no se ve (por dentro, contra la pared); 2: solo asoma en juntas finas.
+            nivel = min(f[capa] for f in isla) if capa is not None else 0
             abajo = all(f.normal.z < -0.85 for f in isla)
-            k = peso * (0.3 if oculta else (0.55 if abajo else 1.0))
+            k = peso * {0: 0.55 if abajo else 1.0, 1: 0.3, 2: 0.12}[min(nivel, 2)]
             loops = [l for f in isla for l in f.loops]
             c = sum((l[uv].uv for l in loops), Vector((0, 0))) / len(loops)
             for l in loops:

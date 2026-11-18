@@ -175,7 +175,8 @@ def zocalo():
     zt = 1.45
     for pl, u0, u1 in tramos:
         # Mortero (lo que se ve entre piedra y piedra).
-        caja_plano(p.baja, pl, u0, u1, BASE_Z, 1.46, 0.0, 0.075, "mortero", sin=("+y", "-z", "+z"))
+        caja_plano(p.baja, pl, u0, u1, BASE_Z, 1.46, 0.0, 0.075, "mortero", sin=("+y", "-z", "+z"),
+                   ocultas=("-y",))
         # Mampostería irregular: cada columna es una piedra alta o dos piedras de alturas distintas, y la
         # de arriba no siempre empieza donde acaba la de abajo (se desplaza un poco a un lado).
         u = u0
@@ -226,8 +227,9 @@ def paredes():
 
     # ---- alma: cara de fuera (oscura, se ve entre panel y panel) y cara de dentro --------------------------
     def alma(pl, contorno_ext, contorno_int, huecos, u_int):
+        # La cara de fuera solo se ve en las juntas entre paneles: casi nada de sitio en el atlas (oculta=2).
         b.cara_con_huecos([pl.p(u, v, 0) for u, v in contorno_ext], [[pl.p(u, v, 0) for u, v in h] for h in huecos],
-                          "junta", pl.n)
+                          "junta", pl.n, oculta=2)
         b.cara_con_huecos([pl.p(u, v, -MURO) for u, v in contorno_int],
                           [[pl.p(u, v, -MURO) for u, v in h] for h in huecos], "interior", -pl.n, oculta=True)
 
