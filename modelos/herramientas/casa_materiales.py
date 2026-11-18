@@ -400,7 +400,7 @@ def crear_materiales(P):
     col, rug, met, alt = pintura_metal(t, "#3E434A", debajo="#8E9398", z_oxido=(6.0, 6.9), desconchon=0.8,
                                        rug_pintura=0.5, met_pintura=0.3, chorretones=0.6)
     x, y, z = t.xyz()
-    hollin = t.mul(t.rango(z, P["chimenea_boca"] - 0.55, P["chimenea_boca"]),
+    hollin = t.mul(t.rango(z, P["chimenea_boca"] - 0.3, P["chimenea_boca"] + 0.05, 0.0, 0.85),
                    t.rango(t.ruido(6.0, t.estirar((1, 1, 0.3)), detalle=3), 0.3, 0.6, 0.6, 1.0))
     col = t.mezcla(hollin, col, "#121110")
     t.terminar(col, t.lerp(hollin, rug, 0.95), t.lerp(hollin, met, 0.0), alt, bisel=0.012)

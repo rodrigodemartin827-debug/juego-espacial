@@ -498,8 +498,7 @@ def techo():
             yv = sy * (VUELO_Y + 0.013)
             b.caja((cx, yv, zc - 0.07), (largo + 0.02, 0.026, 0.26), "metal_oscuro", giro=g)
             yf = sy * (VUELO_Y - 0.055)
-            b.caja((cx, yf, zc + 0.065), (largo + 0.02, 0.16, 0.022), "metal_oscuro", giro=g,
-                   sin=("-z",))
+            b.caja((cx, yf, zc + 0.065), (largo + 0.02, 0.16, 0.022), "metal_oscuro", giro=g)
     return p
 
 
@@ -1078,8 +1077,7 @@ def buzon():
     tapa = Pieza("buzon_tapa", pivote=pl.p((u0 + u1) / 2, eje_v, eje_d), peso_uv=1.8)
     tb = tapa.baja
     caja_plano(tb, pl, u0 - 0.03, u1 + 0.03, eje_v - 0.005, eje_v + 0.03, eje_d, d1 + 0.045, "pintura_naranja")
-    caja_plano(tb, pl, u0 - 0.03, u1 + 0.03, eje_v - 0.08, eje_v - 0.005, d1 + 0.02, d1 + 0.045, "pintura_naranja",
-               sin=("+z",))
+    caja_plano(tb, pl, u0 - 0.03, u1 + 0.03, eje_v - 0.08, eje_v - 0.005, d1 + 0.02, d1 + 0.045, "pintura_naranja")
     tb.cilindro(pl.p(u0 + 0.05, eje_v, eje_d), pl.u, 0.018, u1 - u0 - 0.1, "metal_oscuro", lados=6)
     giro = Matrix.Translation(pl.p(0, eje_v, eje_d)) @ Matrix.Rotation(math.radians(-ANG_TAPA_BUZON), 4, pl.u) @ \
         Matrix.Translation(-pl.p(0, eje_v, eje_d))
