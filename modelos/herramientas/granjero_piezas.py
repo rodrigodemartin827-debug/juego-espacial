@@ -980,19 +980,30 @@ def enredadera():
         a.tubo([q + Vector((-0.05, 0.03, 0)), q + Vector((-0.04, -0.03, 0)), q + Vector((0.04, -0.03, 0)),
                 q + Vector((0.05, 0.03, 0))], 0.006, "acero", lados=4)
     # Diez hojas en forma de corazón, cada una con su peciolo.
-    hojas = [(1, 0.3, 200, 0.3), (2, 0.6, 340, 0.28), (3, 0.2, 160, 0.26), (3, 0.8, 20, 0.3), (4, 0.4, 190, 0.24),
-             (5, 0.3, 350, 0.25), (6, 0.5, 170, 0.22), (7, 0.4, 10, 0.2)]
+    hojas = [(1, 0.3, 200, 0.42), (2, 0.6, 340, 0.4), (3, 0.2, 160, 0.38), (3, 0.8, 20, 0.42), (4, 0.4, 190, 0.36),
+             (5, 0.3, 350, 0.36), (6, 0.5, 170, 0.32), (7, 0.4, 10, 0.3)]
+    def hoja_pared(origen, ang, tam, normal):
+        """Hoja plana contra la pared (como la hiedra): mira hacia fuera y cae un poco hacia abajo."""
+        n = Vector(normal)
+        u_pared = Vector((0, 0, 1)).cross(n).normalized()
+        d = (u_pared * math.cos(ang) + Vector((0, 0, 1)) * (math.sin(ang) - 0.55)).normalized()
+        l_ = n.cross(d).normalized()
+        n2 = d.cross(l_).normalized()
+        ini_h = set(b.bm.verts)
+        hoja3d(b, Vector((0, 0, 0)), 0.0, tam, tam * 0.95, -tam * 0.12, "hoja_enredadera", subida=0.0,
+               secciones=3, alabeo=rnd.uniform(-0.3, 0.3), corazon=True)
+        M = Matrix.Translation(origen) @ Matrix((d, l_, n2)).transposed().to_4x4()
+        b.transformar([v for v in b.bm.verts if v not in ini_h], M)
+
     for seg, f, rumbo, tam in hojas:
         q = puntos[seg].lerp(puntos[seg + 1], f)
         r = math.radians(rumbo)
-        pec = q + Vector((math.cos(r) * 0.07, -0.05, 0.03))
+        pec = q + Vector((math.cos(r) * 0.06, -0.035, -0.02))
         a.tubo([q, pec], 0.008, "tallo", lados=3, tapa_ini=False)
-        hoja3d(b, pec, r, tam, tam * 0.9, tam * 0.35, "hoja_enredadera", subida=0.05, secciones=3,
-               alabeo=rnd.uniform(-0.5, 0.5), corazon=True)
-    for f, rumbo, tam in ((0.5, 250, 0.22), (0.95, 80, 0.2)):
+        hoja_pared(pec, r, tam, (0, -1, 0))
+    for f, rumbo, tam in ((0.5, 250, 0.32), (0.95, 80, 0.3)):
         q = rama[1].lerp(rama[2], f) if f < 0.9 else rama[3]
-        hoja3d(b, q + Vector((0.04, 0, 0.02)), math.radians(rumbo), tam, tam * 0.9, tam * 0.3, "hoja_enredadera",
-               subida=0.05, secciones=3, corazon=True)
+        hoja_pared(q + Vector((0.035, 0, 0.0)), math.radians(rumbo), tam, (1, 0, 0))
     # Zarcillos (malla alta).
     for seg in range(1, 8):
         q = puntos[seg]
@@ -1184,65 +1195,58 @@ GATO = Vector((2.25, -5.38, 0.27))
 
 
 def gato():
-    """Gato atigrado dormido hecho un ovillo sobre el escalón: cuerpo curvo, orejas, cola enroscada."""
+    """
+    Gato atigrado dormido en el escalón, hecho un ovillo: lomo curvo hacia la puerta, cabeza apoyada sobre las
+    patas mirando a la calle, orejas de punta y la cola rodeándolo por delante. Se modela en local y se coloca.
+    """
     p = Pieza("gato", peso_uv=2.4)
     b, a = p.baja, p.alta
-    c = GATO
-    R = 0.2
-    # Cuerpo: tubo a lo largo de un arco de 280° (de los hombros a las ancas), más grueso en la barriga.
-    a0, a1 = math.radians(115), math.radians(115 + 285)
-    n = 8
-    cam, radios = [], []
-    for k in range(n + 1):
-        f = k / n
-        ang = a0 + (a1 - a0) * f
-        r = 0.085 + 0.065 * math.sin(math.pi * min(1.0, f * 1.1)) ** 0.8
-        radios.append(r)
-        cam.append(c + Vector((math.cos(ang) * R, math.sin(ang) * R, r * 0.82)))
-    b.tubo(cam, 0.12, "pelaje", lados=6, radios=radios)
-    # Aplasta un poco el cuerpo contra la piedra (un gato dormido se desparrama).
-    vs = [v for v in b.bm.verts]
-    for v in vs:
-        if v.co.z < c.z + 0.02:
-            v.co.z = c.z + 0.005
-    # Cabeza: apoyada sobre las ancas, con el hocico hundido en la cola.
-    ang_c = a0 - math.radians(12)
-    hc = c + Vector((math.cos(ang_c) * R * 0.95, math.sin(ang_c) * R * 0.95, 0.1))
-    mira = Vector((math.cos(ang_c + 1.9), math.sin(ang_c + 1.9), -0.15)).normalized()
-    b.revolucion([(0.0, -0.11), (0.085, -0.075), (0.105, 0.0), (0.09, 0.06), (0.05, 0.1), (0.0, 0.115)], hc, 8,
-                 "pelaje", eje=mira, escala=(1.0, 0.85))
-    # Orejas triangulares (con el interior rosado en la malla alta).
-    lado = mira.cross(Vector((0, 0, 1))).normalized()
-    for s in (-1, 1):
-        o = hc + lado * s * 0.055 + Vector((0, 0, 0.065)) - mira * 0.02
-        punta = o + Vector((0, 0, 0.075)) + lado * s * 0.02 - mira * 0.03
-        tri = [o - mira * 0.035, o + lado * s * 0.035, o + mira * 0.03, o - lado * s * 0.02]
+    ini, ini_a = set(b.bm.verts), set(a.bm.verts)
+    V = Vector
+    # Cuerpo: lomo en C (se abre hacia -y, hacia donde mira la cara).
+    lomo = [V((0.26, -0.04, 0)), V((0.2, 0.05, 0)), V((0.08, 0.1, 0)), V((-0.06, 0.095, 0)), V((-0.17, 0.04, 0)),
+            V((-0.21, -0.02, 0))]
+    radios = [0.09, 0.125, 0.14, 0.13, 0.11, 0.085]
+    cam = [q + V((0, 0, r * 0.82)) for q, r in zip(lomo, radios)]
+    b.tubo(cam, 0.12, "pelaje", lados=8, radios=radios)
+    for v in [v for v in b.bm.verts if v not in ini]:
+        v.co.z = max(v.co.z, 0.004)   # se desparrama sobre la piedra
+    # Cabeza: ovalada, apoyada en las patas delanteras.
+    hc = V((-0.25, -0.08, 0.115))
+    mira = V((0.3, -1.0, -0.3)).normalized()
+    b.revolucion([(0.0, -0.1), (0.08, -0.07), (0.1, 0.0), (0.085, 0.06), (0.045, 0.095), (0.0, 0.105)], hc, 8,
+                 "pelaje", eje=mira, escala=(1.0, 0.86))
+    lado = mira.cross(V((0, 0, 1))).normalized()
+    # Orejas: pirámides triangulares de punta, con el interior rosado (malla alta).
+    for sg in (-1, 1):
+        o = hc + lado * sg * 0.055 + V((0, 0, 0.07)) - mira * 0.025
+        punta = o + V((0, 0, 0.085)) + lado * sg * 0.025 - mira * 0.02
+        tri = [o - mira * 0.04, o + lado * sg * 0.04, o + mira * 0.025, o - lado * sg * 0.025]
         b.loft([tri, [punta]], "pelaje", suave=False)
-        a.loft([[q.lerp(punta, 0.15) + mira * 0.005 for q in tri[:3]], [punta.lerp(o, 0.15) + mira * 0.01]],
+        a.loft([[q.lerp(punta, 0.2) + mira * 0.006 for q in (tri[3], tri[2], tri[1])], [punta.lerp(o, 0.2) + mira * 0.012]],
                "nariz_gato", cerrado=False, suave=False)
-    # Nariz y ojos cerrados (malla alta).
-    a.cupula(hc + mira * 0.105 + Vector((0, 0, -0.01)), mira, 0.012, "nariz_gato", alto=0.006, lados=6)
-    for s in (-1, 1):
-        q = hc + mira * 0.085 + lado * s * 0.04 + Vector((0, 0, 0.03))
-        a.tubo([q - lado * 0.018, q + Vector((0, 0, -0.006)), q + lado * 0.018], 0.004, "negro_mate", lados=3)
-    # Cola: rodea el cuerpo por fuera y termina tapando el hocico.
-    cola = []
-    for k in range(9):
-        f = k / 8
-        ang = a1 - math.radians(20) + math.radians(150) * f
-        rr = R + 0.13 - 0.02 * f
-        cola.append(c + Vector((math.cos(ang) * rr, math.sin(ang) * rr, 0.04 + 0.01 * math.sin(f * 3))))
-    b.tubo(cola, 0.04, "pelaje", lados=5, radios=[0.045, 0.042, 0.04, 0.04, 0.038, 0.036, 0.034, 0.03, 0.02],
-           radio_curva=0.05, pasos_curva=1)
-    # Patas delanteras recogidas bajo la cabeza.
-    for s in (-1, 1):
-        q = hc - Vector((0, 0, 0.07)) + lado * s * 0.05 + mira * 0.05
-        b.revolucion([(0.0, -0.03), (0.035, -0.015), (0.035, 0.05), (0.0, 0.07)], q, 6, "pelaje", eje=mira)
-    # Bigotes (malla alta).
-    for s in (-1, 1):
+    # Ojos cerrados, nariz y bigotes (malla alta).
+    a.cupula(hc + mira * 0.1 + V((0, 0, -0.012)), mira, 0.013, "nariz_gato", alto=0.006, lados=6)
+    for sg in (-1, 1):
+        q = hc + mira * 0.083 + lado * sg * 0.042 + V((0, 0, 0.03))
+        a.tubo([q - lado * 0.02, q + V((0, 0, -0.007)), q + lado * 0.02], 0.004, "negro_mate", lados=3)
         for k in range(3):
-            q = hc + mira * 0.1 + lado * s * 0.02
-            a.tubo([q, q + lado * s * 0.11 + Vector((0, 0, 0.01 * (k - 1))) + mira * 0.02], 0.002, "papel", lados=3)
+            r0 = hc + mira * 0.095 + lado * sg * 0.025 + V((0, 0, -0.02))
+            a.tubo([r0, r0 + lado * sg * 0.12 + V((0, 0, 0.012 * (k - 1))) + mira * 0.02], 0.002, "papel", lados=3)
+    # Patas delanteras recogidas bajo la barbilla.
+    for sg in (-1, 1):
+        q = hc + V((0, 0, -0.085)) + lado * sg * 0.045 + mira * 0.04
+        b.revolucion([(0.0, -0.035), (0.034, -0.015), (0.034, 0.05), (0.0, 0.07)], q, 6, "pelaje", eje=mira)
+    # Cola: sale de las ancas, rodea al gato por delante y acaba junto al hocico.
+    cola = [V((0.3, 0.02, 0.04)), V((0.36, -0.1, 0.04)), V((0.25, -0.22, 0.04)), V((0.05, -0.25, 0.04)),
+            V((-0.13, -0.21, 0.045)), V((-0.21, -0.18, 0.05))]
+    b.tubo(cola, 0.04, "pelaje", lados=5, radios=[0.045, 0.043, 0.041, 0.039, 0.035, 0.022],
+           radio_curva=0.05, pasos_curva=1)
+    nuevos = [v for v in b.bm.verts if v not in ini]
+    nuevos_a = [v for v in a.bm.verts if v not in ini_a]
+    M = Matrix.Translation(GATO) @ Matrix.Rotation(math.radians(-12), 4, "Z")
+    b.transformar(nuevos, M)
+    a.transformar(nuevos_a, M)
     return p
 
 
@@ -1763,46 +1767,48 @@ def tomateras():
     b.caja_de((x0 + 0.06, y0 + 0.06, GZ0), (x1 - 0.06, y1 - 0.06, zt - 0.05), "sustrato", sin=("-z", "-x", "+x", "-y", "+y"))
     rnd = random.Random(19)
     tb, ta = tom.baja, tom.alta
-    for k, y in enumerate((-1.95, -0.65, 0.65, 1.95)):
+    for k, y in enumerate((-1.75, 0.1, 1.95)):
         base_p = Vector((-9.0 + rnd.uniform(-0.05, 0.05), y, zt - 0.05))
-        top = 3.35 + rnd.uniform(-0.15, 0.1)
-        # Caña de bambú y cuerda que baja de la correa del techo.
-        tb.cilindro(base_p + Vector((0.12, 0, 0)), (0, 0, 1), 0.018, top - base_p.z, "madera_mango", lados=4)
-        tb.tubo([base_p + Vector((0.12, 0, top - base_p.z)), Vector((-9.0, y, 4.38))], 0.008, "cuerda", lados=3)
-        # Follaje: columna irregular que se ensancha a media altura.
-        anillos = []
-        niveles = [(0.0, 0.05), (0.35, 0.22), (0.9, 0.3), (1.5, 0.32), (2.1, 0.26), (top - base_p.z, 0.1)]
-        for j, (dz, r) in enumerate(niveles):
-            anillo = []
-            for i in range(5):
-                ang = math.tau * i / 5 + j * 0.5
-                rr = r * (1 + 0.28 * noise.noise(Vector((k * 3.1, i * 0.9, j * 1.3))))
-                anillo.append(base_p + Vector((math.cos(ang) * rr, math.sin(ang) * rr,
-                                               dz + 0.05 * math.sin(ang * 2 + k))))
-            anillos.append(anillo)
-        tb.loft(anillos, "hoja_tomate", tapa_ini=False, tapa_fin=True, suave=True)
-        # Tomates en racimos.
-        for j in range(3):
-            dz = 0.6 + j * 0.55 + rnd.uniform(-0.05, 0.05)
-            ang = rnd.uniform(0, math.tau)
-            rr = 0.27 if dz < 1.9 else 0.22
-            c0 = base_p + Vector((math.cos(ang) * rr, math.sin(ang) * rr, dz))
-            r = rnd.uniform(0.065, 0.085)
-            esfera(tb, c0, r, "tomate", lados=5, aplastar=0.88)
+        top = 3.3 + rnd.uniform(-0.15, 0.1)
+        alto = top - base_p.z
+        # Caña de bambú, cuerda que baja de la correa y tallo principal (zigzag suave, atado a la caña).
+        tb.cilindro(base_p + Vector((0.1, 0, 0)), (0, 0, 1), 0.018, alto, "madera_mango", lados=4)
+        tb.tubo([base_p + Vector((0.1, 0, alto)), Vector((-8.9, y, 4.38))], 0.008, "cuerda", lados=3)
+        tallo = [base_p + Vector((0.04 * math.sin(f * 7 + k), 0.04 * math.cos(f * 5), alto * f))
+                 for f in (0.0, 0.3, 0.6, 0.85)]
+        tb.tubo(tallo, 0.025, "tallo", lados=4, radios=[0.03, 0.024, 0.018, 0.012])
+        for f in (0.25, 0.5, 0.75):
+            ta.tubo([base_p + Vector((0.03, -0.03, alto * f)), base_p + Vector((0.12, -0.03, alto * f + 0.02)),
+                     base_p + Vector((0.12, 0.03, alto * f + 0.02)), base_p + Vector((0.03, 0.03, alto * f))],
+                    0.006, "cuerda", lados=3)
+        # Ramilletes de hojas a distintas alturas y hacia lados alternos (rompen la silueta).
+        for j, (f, ang, r) in enumerate(((0.22, 0.4, 0.27), (0.45, 2.6, 0.3), (0.68, 4.6, 0.26), (0.9, 1.5, 0.19))):
+            ang += k * 1.1
+            c0 = base_p + Vector((math.cos(ang) * r * 0.55, math.sin(ang) * r * 0.55, alto * f - 0.08))
+            bulto(tb, c0, r, r * 0.95, "hoja_tomate", lados=6, semilla=k * 4 + j, aplastar=1.0, base_r=0.35,
+                  rugoso=0.35)
+            # Rama del tallo al ramillete (alta) y hojas compuestas que asoman (alta).
+            ta.tubo([base_p + Vector((0, 0, alto * f - 0.1)), c0], 0.012, "tallo", lados=4)
+            for _ in range(22):
+                a2 = rnd.uniform(0, math.tau)
+                e2 = rnd.uniform(-0.2, 1.1)
+                q = c0 + Vector((math.cos(a2) * math.cos(e2) * r, math.sin(a2) * math.cos(e2) * r,
+                                 r * 0.35 + math.sin(e2) * r * 0.6))
+                hoja3d(ta, q - Vector((math.cos(a2), math.sin(a2), 0)) * 0.06, a2 + rnd.uniform(-0.5, 0.5),
+                       rnd.uniform(0.13, 0.2), rnd.uniform(0.08, 0.12), 0.06, "hoja_tomate", subida=0.03,
+                       secciones=3, alabeo=rnd.uniform(-0.7, 0.7))
+        # Racimos de tomates colgando por fuera, debajo de los ramilletes.
+        for j, (f, ang) in enumerate(((0.34, 1.6), (0.56, 4.0), (0.78, 0.2))):
+            ang += k * 1.1
+            c0 = base_p + Vector((math.cos(ang) * 0.24, math.sin(ang) * 0.24, alto * f - 0.12))
+            r = rnd.uniform(0.07, 0.085)
+            esfera(tb, c0, r, "tomate", lados=6, aplastar=0.88)
             ta.cupula(c0 + Vector((0, 0, r * 0.75)), (0, 0, 1), r * 0.5, "hoja_tomate", alto=0.01, lados=5)
+            ta.tubo([c0 + Vector((0, 0, r * 0.8)), base_p + Vector((0, 0, alto * f))], 0.006, "tallo", lados=3)
             for _ in range(2):
                 a2 = rnd.uniform(0, math.tau)
                 c1 = c0 + Vector((math.cos(a2) * 0.09, math.sin(a2) * 0.09, rnd.uniform(-0.1, 0.0)))
                 ta.revolucion([(0.0, -0.05), (0.05, -0.02), (0.05, 0.02), (0.0, 0.045)], c1, 8, "tomate")
-        # Hojas compuestas sueltas (malla alta).
-        for j in range(60):
-            dz = rnd.uniform(0.2, top - base_p.z - 0.1)
-            ang = rnd.uniform(0, math.tau)
-            perfil = max(0.08, 0.3 - abs(dz - 1.3) * 0.12)
-            q = base_p + Vector((math.cos(ang) * perfil, math.sin(ang) * perfil, dz))
-            hoja3d(ta, q - Vector((math.cos(ang), math.sin(ang), 0)) * 0.05, ang, rnd.uniform(0.1, 0.15),
-                   rnd.uniform(0.06, 0.09), 0.05, "hoja_tomate", subida=0.03, secciones=3,
-                   alabeo=rnd.uniform(-0.7, 0.7))
     return [bancal, tom]
 
 

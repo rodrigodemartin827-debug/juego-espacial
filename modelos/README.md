@@ -16,6 +16,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `pueblo/casa_minero/` | Casa del minero del pueblo humano: 37 piezas con un atlas PBR de 2048 | 8.765 (límite: 12.000) |
 | `pueblo/casa_comerciante/` | Casa del comerciante: tienda de suministros abajo y vivienda arriba, 49 piezas, atlas PBR de 2048 | 12.496 (límite: 14.000) |
 | `pueblo/taberna/` | Taberna «La Última Órbita»: porche cubierto, puertas de saloon y cartel tallado, 57 piezas, atlas PBR de 2048 | 15.958 (límite: 16.000) |
+| `pueblo/casa_granjero/` | Casa del granjero con invernadero hidropónico adosado por un pasillo cubierto, 64 piezas, atlas PBR de 2048 | 14.979 (límite: 15.000) |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -338,6 +339,82 @@ mismo proceso que las casas.
   anclaje de luz.
 - La farola mide 5 studs y no 3 como pedía el encargo: al lado de un alero a 5,8 parecía un bolardo.
 
+## Casa del granjero (`pueblo/casa_granjero/`)
+
+La casa del que alimenta al pueblo. Es la más verde: en la colonia no hay campos, así que el granjero cultiva con
+hidroponía en un invernadero de cristal pegado a la casa, y el verde de las plantas se ve desde la calle.
+
+- **Casa (10 × 8 × 7 studs):** paneles blancos y grises como en el resto del pueblo, pero con salpicaduras de barro,
+  cercos de cal abajo (se riega todo el día) y verdín en el muro que da al invernadero. Zócalo de piedra y tejado de
+  chapa a dos aguas con una chapa nueva y el panel solar, del que baja el cable al medidor de luz.
+- **Fachada:** puerta de tablas como la del minero, pero con la madera hinchada y verde abajo y en el canto de las
+  bisagras, que es el lado del invernadero. Tiene manija, cerradura y dos bisagras, y encima una lámpara cian. A un
+  lado, el gancho de hierro con el delantal (manchado donde se limpia las manos y con unas tijeras en el bolsillo) y
+  las botas de agua verdes, sucias de barro hasta media caña, una de ellas caída. Al otro, la ventana con alféizar y
+  tres macetas de barro: romero (la alta), albahaca (la frondosa) y lavanda (la de flores). En la esquina, una
+  enredadera que sale de su jardinera y sube por la pared con 10 hojas 3D. También está el cartel tallado
+  «PRODUCTOS FRESCOS — pregunte dentro», con una hoja tallada. Delante, el escalón gastado con el gato atigrado
+  dormido hecho un ovillo y seis piedras planas que llevan a la calle.
+- **Lateral derecho:** canalón extra grande en el alero, con hojas secas dentro. De él baja un bajante grueso al
+  tanque de lluvia (1,5 de alto y 1 de diámetro), que tiene tapa con filtro, tubo de nivel, grifo de latón y una
+  manguera corta en el suelo. En la pared están los medidores de luz y de agua, cada uno con su pantallita de neón y
+  su tubería, el grifo de pared con la manguera verde enrollada en su soporte, y la ventana con la rejilla de lamas
+  debajo.
+- **Lateral izquierdo:** puerta metálica con junta de goma que da a un **pasillo cubierto** de 1 stud con paredes
+  de cristal, tejadillo de chapa y felpudo, y que lleva a la puerta del invernadero.
+- **Invernadero (8 × 6 × 5 studs):** armazón de tubo cuadrado de aluminio (con cal en las uniones), escuadras
+  atornilladas en los hastiales y tapajuntas sobre cada junta del cristal. Los paños tienen 0,03 de grosor, un tinte
+  verde tenue, gotas de condensación, regueros y vaho abajo. La puerta es de cristal con marco de aluminio, junta de
+  goma y tirador en D. En el faldón izquierdo hay dos ventilas, una abierta 32° con su brazo y otra cerrada. Dentro:
+  - estanterías galvanizadas de tres baldas con bandejas negras de sustrato, con lechugas y albahaca en las dos de
+    abajo y plantones recién germinados en la de arriba,
+  - un bancal de madera con tres tomateras atadas a sus cañas,
+  - riego por goteo: tubería general gris, llaves de paso y tubo negro por cada bandeja,
+  - y la lámpara UV larga colgada de la cumbrera.
+- **Fuera del invernadero:** mesa de trabajo rústica manchada de tierra, con un semillero de 18 celdas, una regadera
+  de chapa y unas tijeras de podar. También un compostero de listones con la tapa medio abierta y el compost a la
+  vista, tres sacos de sustrato apoyados (uno abierto, con tierra) y la carretilla con tierra en el balde.
+
+**Cómo está hecha:** con el mismo proceso que las otras casas (`casa_minero.generar`): malla baja y malla alta
+por pieza, todo horneado a un atlas de 2048 con cinco mapas (`casa_granjero_color.png` con la oclusión, `_normal`,
+`_roughness`, `_metalness` y `_emision`). Lo nuevo de esta casa:
+- el **cristal del invernadero va en el atlas con canal alfa**: el PNG de color es RGBA y solo las islas del
+  cristal tienen alfa menor que 1. Así la condensación (gotas, regueros y vaho) se ve de verdad.
+- el **neón morado** de la lámpara UV. Las piezas con el sufijo `_neon_morado` van en `#9B59B6`.
+
+El generador es `herramientas/casa_granjero.py`, con las piezas en `granjero_piezas.py` y los materiales en
+`granjero_materiales.py`.
+
+**En Studio** (mismo giro y escala que las otras casas):
+- **Piezas normales:** `SurfaceAppearance` con los cuatro mapas del atlas.
+- **Cristal del invernadero** (`invernadero_vidrio`, `pasillo_vidrio`, `puerta_invernadero_vidrio`,
+  `ventila_abierta_vidrio` y `ventila_cerrada_vidrio`): la misma `SurfaceAppearance`, con **AlphaMode =
+  Transparency** y la MeshPart en Transparency 0. Si se ve demasiado opaco o demasiado limpio, el alfa sale del
+  material `vidrio_invernadero`.
+- **Ventanas de la casa** (`ventana_frontal_cristal`, `ventana_lateral_cristal`): Glass `#A6D3CF`, Transparency 0,4.
+- **Neón:**
+  - `lampara_uv_tubo_neon_morado`: Neon `#9B59B6`, con una `PointLight` morada en el anclaje `luz` de
+    `lampara_uv` (Brightness 1, Range 12). Es lo que hace que el invernadero brille de noche.
+  - El resto de piezas `_neon` (la lámpara de la puerta y las dos pantallas de los medidores): Neon `#3DF2FF`.
+- **Piezas que se mueven:** cada una lleva su pivote en el JSON.
+  - `puerta`, `puerta_lateral` y `puerta_invernadero`. Esta última va con su `_vidrio`, que comparte pivote y hay
+    que soldarlo a la hoja.
+  - `ventila_abierta` y `ventila_cerrada`, cada una con su `_vidrio`.
+  - `compostero_tapa`.
+
+**Lo que se quitó para no pasar de 15.000 triángulos:**
+- tres cosas que no pedía el encargo: el sombrero de paja del gancho, la cortina de la ventana y las macetas de
+  vivero de la mesa,
+- la geometría de las plantitas de las baldas de arriba: son plantones y van solo horneados.
+
+Los tornillos de las escuadras del invernadero y muchas hojas pequeñas están en la malla alta, así que se ven en el
+atlas pero no gastan triángulos.
+
+**Lo que hay que comprobar en Studio** (esta sesión no tiene Studio):
+- Que el AlphaMode Transparency del cristal se ve bien con la luz del planeta. La alternativa es un Glass verde
+  `#7FC79A` con Transparency 0,6, pero entonces se pierde la condensación.
+- Que las 64 MeshParts no pesan en móvil. Si pesan, se pueden unir las que no se mueven.
+
 ## Regenerar
 
 Requiere Python 3.13 y las bibliotecas de `herramientas/requirements.txt` (el mismo `bpy` que usa `animaciones/`):
@@ -355,6 +432,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 .venv/bin/python modelos/herramientas/casa_minero.py --salida modelos/pueblo/casa_minero   # ~15 min (--rapido, --vista)
 .venv/bin/python modelos/herramientas/casa_comerciante.py --salida modelos/pueblo/casa_comerciante   # ~20 min
 .venv/bin/python modelos/herramientas/taberna.py --salida modelos/pueblo/taberna   # ~25 min
+.venv/bin/python modelos/herramientas/casa_granjero.py --salida modelos/pueblo/casa_granjero   # ~40 min
 .venv/bin/python modelos/herramientas/hoja_conjunto.py modelos/hoja_contactos_todo.png
 ```
 
