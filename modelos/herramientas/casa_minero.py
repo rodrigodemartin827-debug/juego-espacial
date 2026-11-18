@@ -50,6 +50,8 @@ COLOR_VIDRIO = "#79B8AE"
 EXTRUSION = {"arbusto": 0.16, "casa_techo": 0.05, "casa_paredes": 0.035, "casa_zocalo": 0.03, "felpudo": 0.03,
              "botas": 0.03, "pico": 0.03}
 EXTRUSION_DEFECTO = 0.04
+# Empaquetado del atlas (ver la revisión: con islas pequeñas manda el margen).
+PACK = dict(rotate_method="ANY", shape_method="CONCAVE", margin=0.0015)
 
 
 def log(*a):
@@ -183,8 +185,8 @@ def desplegar_atlas(objs):
     bpy.ops.mesh.select_all(action="SELECT")
     bpy.ops.uv.select_all(action="SELECT")
     t = time.time()
-    bpy.ops.uv.pack_islands(udim_source="CLOSEST_UDIM", rotate=True, rotate_method="AXIS_ALIGNED", scale=True,
-                            merge_overlap=False, margin_method="FRACTION", margin=0.0035, shape_method="CONCAVE")
+    bpy.ops.uv.pack_islands(udim_source="CLOSEST_UDIM", rotate=True, scale=True, merge_overlap=False,
+                            margin_method="FRACTION", **PACK)
     log(f"UV empaquetadas en {time.time() - t:.1f} s")
     bpy.ops.object.mode_set(mode="OBJECT")
 
@@ -451,7 +453,7 @@ def materiales_finales(objs, rutas):
     bv = vid.node_tree.nodes["Principled BSDF"]
     bv.inputs["Base Color"].default_value = (*cm.lin(COLOR_VIDRIO), 1)
     bv.inputs["Roughness"].default_value = 0.05
-    bv.inputs["Transmission Weight"].default_value = 0.9
+    bv.inputs["Transmission Weight"].default_value = 0.6
     bv.inputs["IOR"].default_value = 1.45
     vid.diffuse_color = (*cm.lin(COLOR_VIDRIO), 0.5)
 
