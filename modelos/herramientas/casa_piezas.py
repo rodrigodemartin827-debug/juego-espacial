@@ -29,7 +29,7 @@ MX, MY = 4.5, 3.5     # cara exterior del alma de los muros
 MURO = 0.3            # grosor del alma
 PANEL = 0.06          # grosor de los paneles metálicos
 JUNTA = 0.035         # separación entre paneles
-CUMBRE = 7.0          # altura de las crestas en la cumbrera
+CUMBRE = 7.3          # altura de las crestas en la cumbrera
 ALERO_X = 5.05        # vuelo lateral del tejado
 VUELO_Y = 4.05        # vuelo delante y detrás
 ALERO_Z = 5.75        # altura de las crestas en el alero
@@ -172,26 +172,37 @@ def zocalo():
         (FRENTE, -4.63, PUERTA["x0"] - 0.05), (FRENTE, PUERTA["x1"] + 0.05, 4.63),
         (FONDO, -4.63, 4.63), (IZQ, -3.5, 3.5), (DER, -3.5, 3.5),
     ]
-    filas = [(BASE_Z, 0.97), (1.0, 1.45)]
+    zt = 1.45
     for pl, u0, u1 in tramos:
         # Mortero (lo que se ve entre piedra y piedra).
         caja_plano(p.baja, pl, u0, u1, BASE_Z, 1.46, 0.0, 0.075, "mortero", sin=("+y", "-z", "+z"))
-        for k, (v0, v1) in enumerate(filas):
-            u = u0 + (rnd.uniform(-0.3, 0.0) if k == 1 else 0.0)
-            while u < u1 - 0.05:
-                largo = rnd.uniform(0.5, 0.95)
-                if u1 - (u + largo) < 0.35:  # que no quede una piedra diminuta al final
-                    largo = u1 - u
-                a, b = max(u, u0), min(u + largo, u1)
-                if b - a > 0.08:
-                    frente = rnd.uniform(0.105, 0.14)
-                    giro = rot("Y", rnd.uniform(-1.6, 1.6)) @ rot("X", rnd.uniform(-1.2, 1.2))
-                    dv0 = rnd.uniform(0.0, 0.02)
-                    dv1 = rnd.uniform(0.0, 0.02)
-                    sin = ("+y", "-z") if k == 0 else ("+y", "+z")
-                    caja_plano(p.baja, pl, a + 0.016, b - 0.016, v0 + dv0, v1 - dv1, 0.05, frente, "piedra",
-                               sin=sin, giro_extra=giro)
-                u += largo
+        # Mampostería irregular: cada columna es una piedra alta o dos piedras de alturas distintas, y la
+        # de arriba no siempre empieza donde acaba la de abajo (se desplaza un poco a un lado).
+        u = u0
+        while u < u1 - 0.05:
+            largo = rnd.uniform(0.42, 0.98)
+            if u1 - (u + largo) < 0.3:
+                largo = u1 - u
+            piedras = []
+            if rnd.random() < 0.22 and largo < 0.75:
+                piedras.append((u, u + largo, BASE_Z, zt, ("+y", "-z", "+z")))
+            else:
+                corte = BASE_Z + (zt - BASE_Z) * rnd.uniform(0.36, 0.64)
+                desv = rnd.uniform(-0.12, 0.12)
+                piedras.append((u, u + largo, BASE_Z, corte, ("+y", "-z")))
+                piedras.append((u + desv * 0.5, u + largo + desv * 0.5, corte, zt, ("+y", "+z")))
+            for a, b, v0, v1, sin in piedras:
+                a, b = max(a, u0), min(b, u1)
+                if b - a < 0.1:
+                    continue
+                frente = rnd.uniform(0.1, 0.15)
+                giro = rot("Y", rnd.uniform(-2.2, 2.2)) @ rot("X", rnd.uniform(-1.5, 1.5)) @ \
+                    rot("Z", rnd.uniform(-1.5, 1.5))
+                g0 = 0.0 if v0 <= BASE_Z else rnd.uniform(0.014, 0.03)
+                g1 = 0.0 if v1 >= zt else rnd.uniform(0.0, 0.012)
+                caja_plano(p.baja, pl, a + rnd.uniform(0.012, 0.025), b - rnd.uniform(0.012, 0.025), v0 + g0,
+                           v1 - g1, 0.05, frente, "piedra", sin=sin, giro_extra=giro)
+            u += largo
         # Vierteaguas: chapa inclinada sobre el zócalo.
         perfil = [(0.035, 1.53), (0.185, 1.468), (0.185, 1.435), (0.17, 1.435), (0.17, 1.455), (0.035, 1.508)]
         ext = 0.12 if pl in (FRENTE, FONDO) else 0.0
@@ -274,16 +285,16 @@ def paredes():
     cols_f = [(-4.5, -3.7), (-3.7, -2.35), (-2.35, -1.0), (-1.0, 0.5), (0.5, 1.65), (1.65, 2.8), (2.8, 4.5)]
     for i, (u0, u1) in enumerate(cols_f):
         if 1 <= i <= 2:
-            filas = [(1.5, VENTANA["z0"]), (VENTANA["z1"], 5.75), (5.75, 7.2)]
+            filas = [(1.5, VENTANA["z0"]), (VENTANA["z1"], 5.75), (5.75, 7.6)]
         elif 4 <= i <= 5:
-            filas = [(PUERTA["z1"], 5.75), (5.75, 7.2)]
+            filas = [(PUERTA["z1"], 5.75), (5.75, 7.6)]
         else:
-            filas = [(1.5, 3.4), (3.4, 5.75), (5.75, 7.2)]
+            filas = [(1.5, 3.4), (3.4, 5.75), (5.75, 7.6)]
         for j, (v0, v1) in enumerate(filas):
             panel(FRENTE, u0, u1, v0, v1, True, abollados.get(("F", i, j), 0.0))
     cols_b = [(-4.5, -3.0), (-3.0, -1.5), (-1.5, 0.0), (0.0, 1.5), (1.5, 3.0), (3.0, 4.5)]
     for i, (u0, u1) in enumerate(cols_b):
-        for j, (v0, v1) in enumerate([(1.5, 3.6), (3.6, 5.75), (5.75, 7.2)]):
+        for j, (v0, v1) in enumerate([(1.5, 3.6), (3.6, 5.75), (5.75, 7.6)]):
             panel(FONDO, u0, u1, v0, v1, True, abollados.get(("B", i, j), 0.0))
     cols_i = [(-3.5, -2.45), (-2.45, VLAT["u0"]), (VLAT["u0"], VLAT["u1"]), (VLAT["u1"], 1.85), (1.85, 3.5)]
     for i, (u0, u1) in enumerate(cols_i):
@@ -299,6 +310,24 @@ def paredes():
                                   (FONDO, 0.85, 3.05, 0.9, 0.62, 2), (FONDO, -3.55, 4.55, 0.52, 0.4, -6),
                                   (IZQ, 2.6, 4.6, 0.6, 0.45, 5)):
         _parche(p, pl, uc, vc, w, h, ang, rnd)
+
+    # ---- respiradero redondo en el hastial (delante y detrás) -------------------------------------------------
+    for pl, uc in ((FRENTE, -0.9), (FONDO, 0.0)):
+        vc = 6.45
+        c0 = pl.p(uc, vc, PANEL)
+        b.revolucion([(0.36, 0), (0.36, 0.04), (0.3, 0.06), (0.27, 0.06), (0.27, -0.04)], c0, 14, "metal_oscuro",
+                      eje=pl.n, tapa_ini=False, tapa_fin=False)
+        b.revolucion([(0.27, -0.04), (0.0, -0.04)], c0, 14, "negro_mate", eje=pl.n, tapa_ini=False,
+                     tapa_fin=False)
+        for k in range(-2, 3):
+            vv = k * 0.1
+            w = math.sqrt(max(0.0, 0.27 ** 2 - vv ** 2)) - 0.01
+            caja_plano(b, pl, uc - w, uc + w, vc + vv - 0.022, vc + vv + 0.022, PANEL - 0.03, PANEL + 0.02,
+                       "metal_oscuro", sin=("+y",), giro_extra=rot("X", 35))
+        for k in range(8):
+            ang = math.tau * k / 8
+            tornillo(p, pl.p(uc + math.cos(ang) * 0.32, vc + math.sin(ang) * 0.32, PANEL + 0.04), pl.n, 0.016,
+                     "acero", en_baja=False)
 
     # ---- cantoneras: angulares en las cuatro esquinas ----------------------------------------------------------
     for sx in (-1, 1):
@@ -373,7 +402,8 @@ def _parche(p, pl, uc, vc, w, h, ang, rnd):
     ca, sa = math.cos(math.radians(ang)), math.sin(math.radians(ang))
     pts = [(uc + x * ca - y * sa, vc + x * sa + y * ca) for x, y in pts]
     d0 = PANEL - 0.002
-    p.baja.placa(pts, pl.p(0, 0, d0), pl.u, pl.v, pl.n, 0.02, "parche")
+    mat = "parche_minio" if rnd.random() < 0.45 else "parche"
+    p.baja.placa(pts, pl.p(0, 0, d0), pl.u, pl.v, pl.n, 0.02, mat)
     # Cordón de soldadura alrededor (malla alta).
     lazo = []
     cx = sum(q[0] for q in pts) / len(pts)
@@ -1073,31 +1103,31 @@ def lampara():
     zp = 5.5
     cuerpo = Pieza("lampara", peso_uv=1.8)
     b = cuerpo.baja
-    b.cilindro(pl.p(xc, zp, PANEL), pl.n, 0.13, 0.05, "metal_oscuro", lados=10, tapa_ini=False)
-    cx, cy = xc, -MY - 0.62
-    zt = 5.36
+    b.cilindro(pl.p(xc, zp, PANEL), pl.n, 0.16, 0.06, "metal_oscuro", lados=10, tapa_ini=False)
+    cx, cy = xc, -MY - 0.7
+    zt = 5.42
     brazo = [pl.p(xc, zp, PANEL + 0.04), (xc, -MY - 0.34, zp + 0.02), (xc, cy - 0.02, zp - 0.03), (cx, cy, zt + 0.02)]
     b.tubo(brazo, 0.03, "metal_oscuro", lados=6, radio_curva=0.12, pasos_curva=3, tapa_ini=False, tapa_fin=False)
-    b.revolucion([(0.035, zt + 0.015), (0.17, zt - 0.11), (0.17, zt - 0.13), (0.13, zt - 0.125)], (cx, cy, 0), 10,
+    b.revolucion([(0.04, zt + 0.015), (0.23, zt - 0.11), (0.23, zt - 0.135), (0.18, zt - 0.125)], (cx, cy, 0), 12,
                  "metal_oscuro", tapa_ini=True, tapa_fin=True)
-    zb = zt - 0.37
+    zb = zt - 0.46
     for k in range(4):
         ang = math.radians(45 + 90 * k)
         d = Vector((math.cos(ang), math.sin(ang), 0))
-        c = Vector((cx, cy, (zb + zt - 0.12) / 2)) + d * 0.142
+        c = Vector((cx, cy, (zb + zt - 0.12) / 2)) + d * 0.185
         b.caja(c, (0.016, 0.016, zt - 0.12 - zb), "metal_oscuro", giro=rot("Z", 45 + 90 * k))
-    anillo = [Vector((cx, cy, zb)) + Vector((math.cos(a), math.sin(a), 0)) * 0.142
+    anillo = [Vector((cx, cy, zb)) + Vector((math.cos(a), math.sin(a), 0)) * 0.185
               for a in [math.tau * i / 8 for i in range(9)]]
     b.tubo(anillo, 0.012, "metal_oscuro", lados=4, tapa_ini=False, tapa_fin=False)
     for uu in (-0.08, 0.08):
         tornillo(cuerpo, pl.p(xc + uu, zp, PANEL + 0.05), pl.n, 0.016, "acero", en_baja=False)
 
     pantalla = Pieza("lampara_pantalla_neon", peso_uv=0.5)
-    pantalla.baja.revolucion([(0.122, zt - 0.125), (0.122, zb + 0.01), (0.108, zb + 0.01), (0.108, zt - 0.125)],
-                             (cx, cy, 0), 10, "neon", tapa_ini=False, tapa_fin=False)
+    pantalla.baja.revolucion([(0.165, zt - 0.125), (0.165, zb + 0.01), (0.15, zb + 0.01), (0.15, zt - 0.125)],
+                             (cx, cy, 0), 12, "neon", tapa_ini=False, tapa_fin=False)
     bombilla = Pieza("lampara_bombilla_neon", peso_uv=0.5)
-    bombilla.baja.revolucion([(0.0, zb - 0.07), (0.045, zb - 0.055), (0.068, zb), (0.055, zb + 0.07),
-                              (0.03, zb + 0.11), (0.03, zt - 0.125)], (cx, cy, 0), 8, "neon", tapa_fin=False)
+    bombilla.baja.revolucion([(0.0, zb - 0.08), (0.055, zb - 0.06), (0.085, zb + 0.01), (0.07, zb + 0.1),
+                              (0.038, zb + 0.15), (0.038, zt - 0.125)], (cx, cy, 0), 8, "neon", tapa_fin=False)
     cuerpo.extra["luz"] = [cx, cy, zb + 0.02]
     return [cuerpo, pantalla, bombilla]
 

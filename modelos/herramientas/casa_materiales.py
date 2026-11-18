@@ -357,7 +357,7 @@ def crear_materiales(P):
     # ---- paredes ------------------------------------------------------------------------------------------
     t = nuevo("pintura_panel")
     col, rug, met, alt = pintura_metal(
-        t, "#D6D8D2", variar_isla=[(0.62, "#C4C9CB"), (0.86, "#E0DFD4")], arañazos=(P["manija"], 0.5, 1.6),
+        t, "#D9DAD3", variar_isla=[(0.35, "#C9CDCE"), (0.62, "#E2DFD2"), (0.8, "#B9BFC3"), (0.92, "#D7D2BF")], arañazos=(P["manija"], 0.5, 1.6),
         z_oxido=(P["zocalo_z"], P["zocalo_z"] + 1.3), desconchon=0.75)
     t.terminar(col, rug, met, alt, bisel=0.02)
 
@@ -370,7 +370,7 @@ def crear_materiales(P):
 
     t = nuevo("parche")
     x, y, z = t.xyz()
-    base = t.mezcla(t.rango(t.ruido(3.0, detalle=4), 0.35, 0.65), "#7E7A72", "#66625B")
+    base = t.mezcla(t.rango(t.ruido(3.0, detalle=4), 0.35, 0.65), "#9A968D", "#7F7B73")
     calor = t.borde(0.07, 0.999, 0.9)
     tinte = t.mezcla(t.ruido(6.0), "#8D6A3C", "#4D5A7A")
     col = t.mezcla(t.mul(calor, 0.7), base, tinte)
@@ -378,6 +378,11 @@ def crear_materiales(P):
     col = t.mezcla(ox, col, "#7A3F1F")
     t.terminar(col, t.lerp(ox, 0.42, 0.85), t.lerp(ox, 0.85, 0.1),
                t.mul(t.ruido(25.0, detalle=4), 0.004), bisel=0.012)
+
+    t = nuevo("parche_minio")  # chapa con imprimación roja de minio (reparación sin pintar)
+    col, rug, met, alt = pintura_metal(t, "#8E3B26", debajo="#6E6A63", z_oxido=(1.4, 2.4), desconchon=0.9,
+                                       rug_pintura=0.62, met_pintura=0.05, suciedad=0.4)
+    t.terminar(col, rug, met, alt, bisel=0.012)
 
     t = nuevo("soldadura")
     ondas = t.ola(70.0, tipo="RINGS", dist=4.0, detalle=2.0)
