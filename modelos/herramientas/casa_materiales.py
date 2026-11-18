@@ -223,7 +223,7 @@ class Arbol:
 
     # ---- salida ------------------------------------------------------------------------------------------
 
-    def terminar(self, color, rug, met, alt=None, emi=None, bisel=0.025, bump=1.0, alfa_vidrio=False):
+    def terminar(self, color, rug, met, alt=None, emi=None, bisel=0.025, bump=1.0, alfa_vidrio=False, alfa=None):
         nt = self.nt
         out = self.nodo("ShaderNodeOutputMaterial")
         out.name = "salida"
@@ -237,6 +237,9 @@ class Arbol:
             b.inputs["Emission Strength"].default_value = 1.0
         if alfa_vidrio:
             b.inputs["Transmission Weight"].default_value = 0.85
+        if alfa is not None:
+            # Opacidad horneada al canal alfa del color (cristal con condensación: AlphaMode Transparency).
+            self.poner(b.inputs["Alpha"], alfa)
         normal = None
         if alt is not None:
             bp = self.nodo("ShaderNodeBump")
@@ -254,6 +257,8 @@ class Arbol:
             nt.links.new(normal, b.inputs["Normal"])
         nt.links.new(b.outputs[0], out.inputs["Surface"])
         CANALES[self.mat.name] = {"color": color, "rug": rug, "met": met, "emi": emi if emi is not None else "#000000"}
+        if alfa is not None:
+            CANALES[self.mat.name]["alfa"] = alfa
         self.mat.diffuse_color = (*lin(color), 1.0) if isinstance(color, str) else (0.6, 0.6, 0.6, 1.0)
         return b
 
@@ -272,7 +277,7 @@ def poner_canal(mat, canal):
     em.inputs["Strength"].default_value = 1.0
     for l in list(em.inputs["Color"].links):
         nt.links.remove(l)
-    valor = CANALES[mat.name][canal]
+    valor = CANALES[mat.name].get(canal, 1.0)  # sin «alfa»: opaco
     if isinstance(valor, bpy.types.NodeSocket):
         nt.links.new(valor, em.inputs["Color"])
     elif isinstance(valor, str):

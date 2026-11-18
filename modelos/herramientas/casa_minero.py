@@ -46,6 +46,12 @@ ATLAS = 2048
 COLOR_NEON = "#3DF2FF"
 COLOR_NEON_CALIDO = "#FFB45A"   # piezas *_neon_calido (luz cálida de dentro)
 COLOR_VIDRIO = "#79B8AE"
+# Neones de otros colores: {sufijo del nombre de la pieza: (color, intensidad en el render)}. Se miran antes que
+# «_neon_calido» y «_neon». Lo rellena cada casa con cfg["neones"].
+NEONES = {}
+# Piezas translúcidas con textura (el nombre contiene esta cadena): usan el atlas con el canal alfa del color
+# (SurfaceAppearance con AlphaMode = Transparency), p. ej. el cristal con condensación del invernadero.
+TRANSLUCIDO = None
 
 # Extrusión de la jaula al hornear (studs): lo que sobresalen los detalles de la malla alta.
 EXTRUSION = {"arbusto": 0.16, "casa_techo": 0.05, "casa_paredes": 0.035, "casa_zocalo": 0.03, "felpudo": 0.03,
@@ -231,11 +237,12 @@ def hornear_atlas(objs, tam, carpeta, rapido):
     tmp = _imagen("tmp_horneado", tam, color=False)
     mat_h = _material_horneado(tmp)
     ceros = np.zeros(tam * tam * 4, dtype=np.float32)
-    canales = ["blanco", "color", "rug", "met", "emi", "normal"]
+    canales = ["blanco", "color", "rug", "met", "emi", "alfa", "normal"]
     atlas = {k: np.zeros((tam, tam, 3), dtype=np.float32) for k in ("color", "emi", "normal")}
     atlas["rug"] = np.zeros((tam, tam), dtype=np.float32)
     atlas["met"] = np.zeros((tam, tam), dtype=np.float32)
     atlas["ao"] = np.ones((tam, tam), dtype=np.float32)
+    atlas["alfa"] = np.ones((tam, tam), dtype=np.float32)
     lleno = np.zeros((tam, tam), dtype=bool)
     ids = np.full((tam, tam), -1, dtype=np.int16)
     informe = {}
@@ -269,11 +276,14 @@ def hornear_atlas(objs, tam, carpeta, rapido):
         bpy.ops.object.bake(type="EMIT", margin=0, use_selected_to_active=False)
         mascara = _leer(tmp)[..., 0] > 0.5
         mats_alta = {m for m in oa.data.materials if m is not None}
-        tiene_emision = any(m.name == "neon" for m in mats_alta)
+        tiene_emision = any(m.name.startswith("neon") for m in mats_alta)
+        tiene_alfa = any("alfa" in cm.CANALES.get(m.name, {}) for m in mats_alta)
         ext = EXTRUSION.get(p.nombre, EXTRUSION_DEFECTO)
         acierto = mascara
         for canal in canales:
             if canal == "emi" and not tiene_emision:
+                continue
+            if canal == "alfa" and not tiene_alfa:
                 continue
             for m in mats_alta:
                 cm.poner_canal(m, canal)
@@ -368,8 +378,13 @@ def guardar_atlas(atlas, lleno, carpeta):
     fondo_normal = np.zeros_like(atlas["normal"])
     fondo_normal[:] = (0.5, 0.5, 1.0)
     normal = np.where(lleno[..., None], atlas["normal"], fondo_normal)
+    translucido = bool((atlas["alfa"] < 0.995).any())
+    color_srgb = _a_srgb(color)
+    if translucido:
+        # El alfa va en el PNG de color (RGBA): solo las islas del cristal tienen alfa < 1.
+        color_srgb = np.concatenate([color_srgb, atlas["alfa"][..., None]], axis=2)
     salidas = {
-        "color": (_a_srgb(color), True),
+        "color": (color_srgb, True),
         "normal": (normal, True),
         "roughness": (atlas["rug"], False),
         "metalness": (atlas["met"], False),
@@ -379,7 +394,7 @@ def guardar_atlas(atlas, lleno, carpeta):
         dil, _ = _dilatar(arr, lleno)
         img = np.clip(dil * 255 + 0.5, 0, 255).astype(np.uint8)
         img = img[::-1]  # Blender guarda de abajo arriba
-        modo = "RGB" if rgb else "L"
+        modo = ("RGBA" if img.ndim == 3 and img.shape[2] == 4 else "RGB") if rgb else "L"
         ruta = os.path.join(carpeta, f"{NOMBRE}_{nombre}.png")
         Image.fromarray(img, modo).save(ruta, optimize=True)
         rutas[nombre] = ruta
@@ -477,9 +492,36 @@ def materiales_finales(objs, rutas):
     bc.inputs["Emission Strength"].default_value = 3.0
     calido.diffuse_color = (*cm.lin(COLOR_NEON_CALIDO), 1)
 
+    otros = {}
+    for sufijo, (hexa, fuerza) in NEONES.items():
+        mn = bpy.data.materials.new(f"{NOMBRE}{sufijo}")
+        mn.use_nodes = True
+        bx = mn.node_tree.nodes["Principled BSDF"]
+        bx.inputs["Base Color"].default_value = (*cm.lin(hexa), 1)
+        bx.inputs["Emission Color"].default_value = (*cm.lin(hexa), 1)
+        bx.inputs["Emission Strength"].default_value = fuerza
+        mn.diffuse_color = (*cm.lin(hexa), 1)
+        otros[sufijo] = mn
+
+    trans = None
+    if TRANSLUCIDO:
+        # Mismo atlas, con el alfa del PNG de color (como AlphaMode = Transparency en Studio).
+        trans = m.copy()
+        trans.name = f"{NOMBRE}_atlas_translucido"
+        nodos = trans.node_tree.nodes
+        bt = nodos["Principled BSDF"]
+        tc = [n for n in nodos if n.type == "TEX_IMAGE" and n.image == imgs["color"]][0]
+        trans.node_tree.links.new(tc.outputs["Alpha"], bt.inputs["Alpha"])
+        imgs["color"].alpha_mode = "STRAIGHT"
+
     for p, ob, oa in objs:
         ob.data.materials.clear()
-        if ob.name.endswith("_neon_calido"):
+        sufijo = next((k for k in NEONES if ob.name.endswith(k)), None)
+        if sufijo:
+            ob.data.materials.append(otros[sufijo])
+        elif TRANSLUCIDO and TRANSLUCIDO in ob.name:
+            ob.data.materials.append(trans)
+        elif ob.name.endswith("_neon_calido"):
             ob.data.materials.append(calido)
         elif ob.name.endswith("_neon"):
             ob.data.materials.append(neo)
@@ -743,6 +785,11 @@ ANIMABLES = {
 
 
 def tipo_roblox(nombre):
+    for sufijo, (hexa, _) in NEONES.items():
+        if nombre.endswith(sufijo):
+            return f"Neon, Color {hexa}"
+    if TRANSLUCIDO and TRANSLUCIDO in nombre:
+        return "SurfaceAppearance (atlas) con AlphaMode = Transparency"
     if nombre.endswith("_neon_calido"):
         return f"Neon, Color {COLOR_NEON_CALIDO}"
     if nombre.endswith("_neon"):
@@ -778,12 +825,14 @@ def generar(cfg):
     Proceso completo para una casa. cfg: nombre, titulo, descripcion, presupuesto, construir() -> (piezas, P),
     materiales(P) -> {nombre: material}, y opcionalmente extrusion, detalles, animables, color_vidrio.
     """
-    global NOMBRE, EXTRUSION, DETALLES, ANIMABLES, COLOR_VIDRIO
+    global NOMBRE, EXTRUSION, DETALLES, ANIMABLES, COLOR_VIDRIO, NEONES, TRANSLUCIDO
     NOMBRE = cfg["nombre"]
     EXTRUSION = cfg.get("extrusion", EXTRUSION)
     DETALLES = cfg.get("detalles", DETALLES)
     ANIMABLES = cfg.get("animables", ANIMABLES)
     COLOR_VIDRIO = cfg.get("color_vidrio", COLOR_VIDRIO)
+    NEONES = cfg.get("neones", NEONES)
+    TRANSLUCIDO = cfg.get("translucido", TRANSLUCIDO)
     titulo = cfg["titulo"]
     ap = argparse.ArgumentParser()
     ap.add_argument("--salida", required=True)
