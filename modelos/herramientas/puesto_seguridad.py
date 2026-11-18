@@ -777,6 +777,25 @@ def vistas_rapidas(objs, carpeta, alta=True):
     return rutas
 
 
+class sin_piezas:
+    """Oculta en el render las piezas indicadas (y sus mallas altas) mientras dura el bloque `with`."""
+
+    def __init__(self, quitar):
+        self.nombres = set(quitar[0]) if quitar else set()
+        self.ocultas = []
+
+    def __enter__(self):
+        for o in bpy.context.scene.objects:
+            base = o.name[:-5] if o.name.endswith("_alta") else o.name
+            if base in self.nombres and not o.hide_render:
+                o.hide_render = True
+                self.ocultas.append(o)
+
+    def __exit__(self, *a):
+        for o in self.ocultas:
+            o.hide_render = False
+
+
 def generar(cfg):
     """
     Proceso completo para una casa. cfg: nombre, titulo, descripcion, presupuesto, construir() -> (piezas, P),
@@ -794,6 +813,7 @@ def generar(cfg):
     ap.add_argument("--rapido", action="store_true")
     ap.add_argument("--vista", action="store_true")
     ap.add_argument("--detalles", action="store_true", help="solo para --vista: primeros planos")
+    ap.add_argument("--contar", action="store_true", help="solo cuenta los triángulos de cada pieza")
     args = ap.parse_args(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:])
     carpeta = os.path.abspath(args.salida)
     tmp = os.path.join(carpeta, "_render_tmp")
@@ -810,6 +830,8 @@ def generar(cfg):
     log(f"{len(objs)} piezas, {total} triángulos (malla baja)")
     for p, ob, oa in objs:
         log(f"  {ob.name:36s} {triangulos(ob):6d} tri   alta {triangulos(oa):7d}")
+    if args.contar:
+        return
 
     if args.vista:
         if args.detalles:
@@ -819,9 +841,10 @@ def generar(cfg):
                 if o.type == "MESH" and o.name != "suelo_estudio":
                     o.hide_render = o not in altas
             det = []
-            for nombre, az, el, c, rad in DETALLES:
+            for nombre, az, el, c, rad, *quitar in DETALLES:
                 r = os.path.join(tmp, f"vd_{nombre.replace(' ', '_')}.png")
-                render_vista(altas, luces, nombre, az, el, r, 560, 32, centro=c, radio=rad)
+                with sin_piezas(quitar):
+                    render_vista(altas, luces, nombre, az, el, r, 560, 32, centro=c, radio=rad)
                 det.append((nombre, r))
             # Comprobación de normales: caras de espaldas en rojo.
             m = _material_caras()
@@ -880,9 +903,10 @@ def generar(cfg):
           f"atlas PBR {ATLAS}² · {len(bajas)} piezas"])
     # Primeros planos (puerta, ventana, entorno, medidor).
     det = []
-    for nombre, az, el, c, rad in DETALLES:
+    for nombre, az, el, c, rad, *quitar in DETALLES:
         r = os.path.join(tmp, f"d_{nombre.replace(' ', '_')}.png")
-        render_vista(bajas, luces, nombre, az, el, r, 600 if not args.rapido else 360, mu, centro=c, radio=rad)
+        with sin_piezas(quitar):
+            render_vista(bajas, luces, nombre, az, el, r, 600 if not args.rapido else 360, mu, centro=c, radio=rad)
         det.append((nombre, r))
     hoja(det, os.path.join(carpeta, f"{NOMBRE}_detalles.png"), f"{titulo} — detalles", [], columnas=4)
 
@@ -959,6 +983,8 @@ def eje_roblox(v):
     return ("+" if d[i] > 0 else "-") + "XYZ"[i]
 
 
+QUITAR_FACHADA = ["techo", "albardilla", "foco_base", "foco_cabezal", "foco_lente_neon", "panel_solar", "antena_radio", "bandera", "sirena", "baliza", "baliza_cristal", "letrero_frontal", "paredes", "angulares", "zocalo", "ventanal_marcos", "ventanal_cristal", "ventanal_malla", "alfeizares", "camaras", "taza", "tablon"]
+
 DETALLES_PUESTO = [
     ("Ventanal y taza", -12, 12, (0.9, -3.3, 3.1), 2.3),
     ("Taza en la repisa", -25, 18, (1.55, -3.15, 2.05), 0.45),
@@ -979,6 +1005,10 @@ DETALLES_PUESTO = [
     ("Interfono y STOP", 65, 8, (3.6, -5.0, 2.4), 1.35),
     ("Cono y banda", -40, 25, (5.5, -5.9, 0.4), 1.8),
     ("Cable de la radio", 170, 10, (0.7, 3.1, 4.9), 1.0),
+    # Interior sin el techo ni la fachada (en el juego se ve a través del ventanal).
+    ("Interior", -20, 38, (0.0, -0.4, 2.3), 2.7, QUITAR_FACHADA),
+    ("La silla del guardia", -25, 30, (0.35, -0.95, 1.7), 0.85, QUITAR_FACHADA),
+    ("Cosas del guardia", -10, 35, (0.4, -2.0, 2.15), 1.0, QUITAR_FACHADA),
 ]
 
 ANIMABLES_PUESTO = {

@@ -687,7 +687,7 @@ def marco_puerta():
         caja_plano(b, pl, py0 - 0.13, py0 - 0.005, zb - 0.16, zb + 0.16, s, s + 0.025, "bisagra", sin=("+y",))
         for z0 in (zb - 0.21, zb + 0.07):
             b.cilindro(Vector((BIS_EJE.x, BIS_EJE.y, z0)), (0, 0, 1), 0.06, 0.14, "bisagra", lados=8)
-        b.cilindro(Vector((BIS_EJE.x, BIS_EJE.y, zb + 0.21)), (0, 0, 1), 0.035, 0.03, "acero_pulido", lados=8)
+        b.cilindro(Vector((BIS_EJE.x, BIS_EJE.y, zb + 0.21)), (0, 0, 1), 0.035, 0.03, "acero_pulido", lados=6)
         b.caja_de((X1 + s, py0 - 0.06, zb - 0.21), (BIS_EJE.x, BIS_EJE.y + 0.02, zb + 0.21), "bisagra",
                   sin=("-x", "+x", "-z", "+z"))
         for dz in (-0.11, 0.11):
@@ -894,7 +894,7 @@ def antena_radio():
         for sy in (-1, 1):
             perno_hex(p, c + Vector((sx * 0.14, sy * 0.14, 0.05)), (0, 0, 1), 0.025, "tornilleria", arandela=False)
     b.cilindro(c + Vector((0, 0, 0.05)), (0, 0, 1), 0.06, 0.9, "galvanizado", lados=8, radio2=0.05, tapa_ini=False)
-    b.cilindro(c + Vector((0, 0, 0.95)), (0, 0, 1), 0.075, 0.12, "plastico_negro", lados=10)  # conector
+    b.cilindro(c + Vector((0, 0, 0.95)), (0, 0, 1), 0.075, 0.12, "plastico_negro", lados=8)  # conector
     b.cilindro(c + Vector((0, 0, 1.07)), (0, 0, 1), 0.03, 1.75, "antena", lados=6, radio2=0.018)
     b.revolucion([(0.03, 0.0), (0.045, 0.02), (0.0, 0.06)], c + Vector((0, 0, 2.82)), 8, "plastico_negro",
                  tapa_ini=False)
@@ -913,7 +913,7 @@ def antena_radio():
         pts.append(c + Vector((math.cos(a) * rr, math.sin(a) * rr, z0 + (z1 - z0) * f)))
     b.tubo(pts, 0.016, "cobre", lados=4)
     for zz in (z0 - 0.05, z1 + 0.05):  # abrazaderas de la espiral
-        b.cilindro(c + Vector((0, 0, zz - 0.03)), (0, 0, 1), rr + 0.02, 0.06, "plastico_negro", lados=8)
+        b.cilindro(c + Vector((0, 0, zz - 0.03)), (0, 0, 1), rr + 0.02, 0.06, "plastico_negro", lados=6)
     # Caja de la radio con disipador, asa y conectores.
     rc = Vector((0.95, 2.4, CUBIERTA))
     b.caja_de(rc + Vector((-0.32, -0.2, 0.0)), rc + Vector((0.32, 0.2, 0.42)), "radio_caja", sin=("-z",))
@@ -1078,8 +1078,8 @@ def _camara(p, pl, u, v, objetivo, nombre_punto):
     arriba = q @ Vector((0, 0, 1))
     lado = q @ Vector((1, 0, 0))
     vis = []
-    for k in range(7):
-        a = math.radians(-70 + k * 140 / 6)
+    for k in range(5):
+        a = math.radians(-70 + k * 140 / 4)
         vis.append(lado * math.sin(a) * 0.135 + arriba * math.cos(a) * 0.135)
     anillo0 = [trasera + d * 0.03 + w for w in vis]
     anillo1 = [trasera + d * 0.52 + w for w in vis]
@@ -1088,12 +1088,12 @@ def _camara(p, pl, u, v, objetivo, nombre_punto):
     vs0i = [b.v(x - (x - (trasera + d * 0.03)).normalized() * 0.015) for x in anillo0]
     vs1i = [b.v(x - (x - (trasera + d * 0.52)).normalized() * 0.015) for x in anillo1]
     caras = []
-    for i in range(6):
+    for i in range(4):
         caras.append(b.cara([vs0[i], vs1[i], vs1[i + 1], vs0[i + 1]], "plastico_blanco"))
         caras.append(b.cara([vs0i[i + 1], vs1i[i + 1], vs1i[i], vs0i[i]], "plastico_blanco"))
         caras.append(b.cara([vs1[i], vs1i[i], vs1i[i + 1], vs1[i + 1]], "plastico_blanco"))
         caras.append(b.cara([vs0[i + 1], vs0i[i + 1], vs0i[i], vs0[i]], "plastico_blanco"))
-    for i in (0, 6):
+    for i in (0, 4):
         caras.append(b.cara([vs0[i], vs0i[i], vs1i[i], vs1[i]], "plastico_blanco"))
     b.recalcular(caras)
     # LEDs infrarrojos alrededor de la lente y prensaestopas detrás (malla alta).
@@ -1305,7 +1305,7 @@ def barrera_poste():
         b.cilindro(Vector((c.x, y + s * 0.025, zc)), (0, s, 0), 0.07, 0.04, "acero_pulido", lados=6)
         p.alta.cilindro(Vector((c.x, y + s * 0.065, zc)), (0, s, 0), 0.035, 0.03, "acero_pulido", lados=10)
     b.revolucion([(0.0, 0.0), (0.2, 0.0), (0.2, 0.05), (0.17, 0.08), (0.0, 0.08)],
-                 Vector((c.x, c.y - MEJILLA_Y - 0.05, zc)), 12, "barrera_gris", eje=(0, -1, 0), tapa_ini=False)
+                 Vector((c.x, c.y - MEJILLA_Y - 0.05, zc)), 10, "barrera_gris", eje=(0, -1, 0), tapa_ini=False)
     for k in range(6):
         a = k * math.tau / 6
         p.alta.cupula(Vector((c.x + math.cos(a) * 0.16, c.y - MEJILLA_Y - 0.13, zc + math.sin(a) * 0.16)), (0, -1, 0),
@@ -1608,7 +1608,7 @@ def silla():
         d = Vector((math.cos(a), math.sin(a), 0))
         b.tubo([c + Vector((0, 0, 0.2)), c + d * 0.5 + Vector((0, 0, 0.14))], 0.035, "plastico_negro", lados=4)
         rueda = c + d * 0.5 + Vector((0, 0, 0.06))
-        b.cilindro(rueda - d.cross(Vector((0, 0, 1))) * 0.03, d.cross(Vector((0, 0, 1))), 0.06, 0.06, "goma", lados=6)
+        b.cilindro(rueda - d.cross(Vector((0, 0, 1))) * 0.03, d.cross(Vector((0, 0, 1))), 0.06, 0.06, "goma", lados=5)
     b.cilindro(c + Vector((0, 0, 0.16)), (0, 0, 1), 0.09, 0.1, "plastico_negro", lados=10)
     b.cilindro(c + Vector((0, 0, 0.26)), (0, 0, 1), 0.045, 0.85, "acero_pulido", lados=8)   # pistón
     b.cilindro(c + Vector((0, 0, 0.26)), (0, 0, 1), 0.065, 0.4, "plastico_negro", lados=8)  # funda
