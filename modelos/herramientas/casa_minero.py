@@ -453,8 +453,10 @@ def materiales_finales(objs, rutas):
     vid.use_nodes = True
     bv = vid.node_tree.nodes["Principled BSDF"]
     bv.inputs["Base Color"].default_value = (*cm.lin(COLOR_VIDRIO), 1)
-    bv.inputs["Roughness"].default_value = 0.05
-    bv.inputs["Transmission Weight"].default_value = 0.6
+    # En el render el cristal deja ver lo de dentro como en Studio (Glass con Transparency 0,4).
+    bv.inputs["Roughness"].default_value = 0.02
+    bv.inputs["Transmission Weight"].default_value = 0.0
+    bv.inputs["Alpha"].default_value = 0.3
     bv.inputs["IOR"].default_value = 1.45
     vid.diffuse_color = (*cm.lin(COLOR_VIDRIO), 0.5)
 
@@ -834,6 +836,15 @@ def generar(cfg):
     bajas = [ob for _, ob, _ in objs]
     materiales_finales(objs, rutas)
     luces = preparar_estudio()
+    for pos, energia, color in cfg.get("luces_render", ()):
+        # Luces de dentro (solo para el render; en Studio van como PointLight en el anclaje del JSON).
+        d = bpy.data.lights.new("luz_interior", "POINT")
+        d.energy = energia
+        d.color = color
+        d.shadow_soft_size = 0.8
+        o = bpy.data.objects.new("luz_interior", d)
+        o.location = pos
+        bpy.context.scene.collection.objects.link(o)
     tr = 520 if args.rapido else 900
     mu = 24 if args.rapido else 96
     vistas = [("Frente", 0, 6), ("3/4 Frontal", -38, 20), ("Lateral Izq", -90, 6), ("3/4 Trasera", 140, 22),
@@ -895,6 +906,8 @@ def generar(cfg):
         "horneado": informe,
         "verificacion_fbx": verif,
         "piezas": info_piezas,
+        "luces_sugeridas_roblox": [{"posicion": a_roblox(pos), "color": [round(c, 2) for c in color]}
+                                   for pos, _, color in cfg.get("luces_render", ())],
     }
     with open(os.path.join(carpeta, f"{NOMBRE}.json"), "w", encoding="utf-8") as f:
         json.dump(datos, f, indent=2, ensure_ascii=False)
