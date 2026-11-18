@@ -175,7 +175,7 @@ def polvo(nb, fuerza=1.0, alto=1.3, base=0.0, esquinas=True):
         d = nb.math("MAXIMUM", dx, dy)
         esq = nb.rango(d, 1.8, 0.0)
         alto_esq = nb.rango(h, alto * 2.2, 0.0)
-        m = nb.math("ADD", m, nb.math("MULTIPLY", nb.math("MULTIPLY", esq, alto_esq), 0.8))
+        m = nb.math("ADD", m, nb.math("MULTIPLY", nb.math("MULTIPLY", esq, alto_esq), 1.2))
     rincon = nb.math("SUBTRACT", 1.0, nb.ao(0.35))
     m = nb.math("ADD", m, nb.math("MULTIPLY", nb.math("MULTIPLY", rincon, nb.rango(h, alto * 1.5, 0.0)), 0.7))
     return nb.math("MULTIPLY", m, fuerza, clamp=True)
@@ -261,7 +261,7 @@ def construir(rot):
     # --- Paneles blancos de fachada: los más limpios del pueblo -------------------------------------------------
     def panel(nb):
         base = nb.mix(nb.math("MULTIPLY", nb.ruido(0.6, 2, 0.5), 0.12), "#F1F3F2", "#E2E6E5")
-        c, r, m = con_polvo(nb, base, 0.3, 1.0, 1.25)
+        c, r, m = con_polvo(nb, base, 0.3, 1.6, 1.45)
         # salpicaduras de lluvia contra el zócalo, finas
         gotas = nb.rango(nb.ruido(38.0, 2, 0.5), 0.66, 0.75)
         gotas = nb.math("MULTIPLY", gotas, nb.rango(nb.xyz()[2], 1.1, 0.45))
@@ -556,6 +556,7 @@ def construir(rot):
         """Placa de latón cepillado con el texto grabado (surco oscuro + relieve)."""
         img = nb.imagen(rot["placa_grabado"], color=False)
         g = img.outputs["Color"]
+        g = nb.rango(g, 0.08, 0.45, 0.0, 1.0, False)  # surco nítido
         cep = nb.ruido(4.0, 8, 0.7, esc_vec=(1.0, 80.0, 80.0))
         base = nb.mix(nb.math("MULTIPLY", cep, 0.35), "#C9CED3", "#AEB4BA")
         c = nb.mix(g, base, "#2B2E33")

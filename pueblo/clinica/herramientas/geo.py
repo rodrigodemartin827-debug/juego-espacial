@@ -136,10 +136,27 @@ def tornillo(g, p, n, r=0.045, alto=0.03, mat="acero", segs=6):
         j = (i + 1) % segs
         bm.faces.new((base[i], base[j], arriba[j], arriba[i]))
         bm.faces.new((arriba[i], arriba[j], cima))
-    bm.faces.new(list(reversed(base)))
+    # sin cara de abajo: la cabeza va hundida 1 cm en la superficie y esa cara nunca se ve
     q = V((0, 0, 1)).rotation_difference(n)
     _transformar(bm, Matrix.Translation(p) @ q.to_matrix().to_4x4())
     g.fusionar(bm, mat, suave=True)
+
+
+def cordon(g, a, b, normal, ancho, alto, mat="silicona"):
+    """Cordón de silicona entre a y b sobre una superficie de normal `normal`: prisma de sección triangular baja."""
+    a, b, n = V(a), V(b), V(normal).normalized()
+    t = (b - a).normalized()
+    lat = t.cross(n).normalized()
+    bm = bmesh.new()
+    sec = [(-ancho / 2, -0.008), (ancho / 2, -0.008), (0.0, alto)]
+    r1 = [bm.verts.new(a + lat * x + n * y) for x, y in sec]
+    r2 = [bm.verts.new(b + lat * x + n * y) for x, y in sec]
+    bm.faces.new(r1)
+    bm.faces.new(list(reversed(r2)))
+    for i in range(3):
+        j = (i + 1) % 3
+        bm.faces.new((r1[i], r2[i], r2[j], r1[j]))
+    g.fusionar(bm, mat)
 
 
 def prisma(g, perfil, origen, eu, ev, p0, p1, mat, mat_cara=None, deco=None, suave=False):

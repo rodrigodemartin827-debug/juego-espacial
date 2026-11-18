@@ -1,0 +1,423 @@
+{
+  "nombre": "clinica",
+  "descripcion": "Clínica Colonial de la Dra. Voss: el único edificio médico del pueblo.",
+  "unidades": "1 unidad = 1 stud. FBX exportado con Apply Scalings = FBX All: en el importador de Roblox elige la unidad Stud si el tamaño no sale a ~10 studs de ancho.",
+  "giro_importacion": "GIRO_IMPORTACION aplicado: 180° alrededor del eje vertical (Y de Roblox) antes de exportar. La fachada mira a -Z (el delante de Roblox).",
+  "ejes": "Coordenadas en studs, ejes de Roblox, origen en el centro del edificio a ras de suelo.",
+  "tamano_studs": {
+    "edificio": [
+      10.4,
+      7.42,
+      10.0
+    ],
+    "con_equipos_del_techo": [
+      10.4,
+      11.02,
+      10.0
+    ],
+    "con_rampa_y_entorno": [
+      14.4,
+      11.02,
+      16.5
+    ]
+  },
+  "triangulos": {
+    "total": 11617,
+    "presupuesto": 12000,
+    "por_pieza": {
+      "Edificio": 2767,
+      "Interior": 278,
+      "Techo_Equipos": 1810,
+      "Detalles": 1856,
+      "Rampa": 1520,
+      "Mobiliario": 1428,
+      "Cristales": 56,
+      "Puerta_Izq": 300,
+      "Puerta_Der": 300,
+      "Puerta_Izq_Cristal": 100,
+      "Puerta_Der_Cristal": 100,
+      "Puerta_Trasera": 864,
+      "Cruz_neon": 44,
+      "Marquesina_neon": 68,
+      "Farola_neon": 10,
+      "Medidor_neon": 12,
+      "Sensor_neon": 28,
+      "Interior_neon": 48,
+      "Antena_neon": 28
+    }
+  },
+  "texturas": {
+    "ColorMap": "clinica_color.png (sRGB, oclusión horneada; el alfa solo baja en los cristales)",
+    "NormalMap": "clinica_normal.png (tangente, OpenGL +Y)",
+    "RoughnessMap": "clinica_roughness.png",
+    "MetalnessMap": "clinica_metalness.png",
+    "Emision": "clinica_emision.png (máscara de emisión: pantalla del medidor, neones)",
+    "tam": 2048
+  },
+  "piezas": {
+    "Edificio": {
+      "triangulos": 2767,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Paredes, zócalo, techo, ventanas, marquesina y mecanismo de la puerta",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Interior": {
+      "triangulos": 278,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Suelo, tabiques, mostrador y bancada de la sala de espera",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Techo_Equipos": {
+      "triangulos": 1810,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Climatizador, panel solar y antena",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Detalles": {
+      "triangulos": 1856,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Cruz (carcasa), placa, tablón, gel, botiquín, medidor y tubo con filtro HEPA",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Rampa": {
+      "triangulos": 1520,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Rellano, rampa con barandillas y escalón trasero",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Mobiliario": {
+      "triangulos": 1428,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Banco, papelera, señal de parking y farola",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Cristales": {
+      "triangulos": 56,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Ventanas, tablón y tapa del mecanismo (SurfaceAppearance con AlphaMode = Transparency)",
+      "alpha_mode": "Transparency",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Puerta_Izq": {
+      "triangulos": 300,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Hoja corredera izquierda (anima)",
+      "pivote_roblox": [
+        2.125,
+        0.4,
+        -4.75
+      ]
+    },
+    "Puerta_Der": {
+      "triangulos": 300,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Hoja corredera derecha (anima)",
+      "pivote_roblox": [
+        0.275,
+        0.4,
+        -4.75
+      ]
+    },
+    "Puerta_Izq_Cristal": {
+      "triangulos": 100,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Cristal de la hoja izquierda (soldar a Puerta_Izq)",
+      "alpha_mode": "Transparency",
+      "pivote_roblox": [
+        2.125,
+        0.4,
+        -4.75
+      ]
+    },
+    "Puerta_Der_Cristal": {
+      "triangulos": 100,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Cristal de la hoja derecha (soldar a Puerta_Der)",
+      "alpha_mode": "Transparency",
+      "pivote_roblox": [
+        0.275,
+        0.4,
+        -4.75
+      ]
+    },
+    "Puerta_Trasera": {
+      "triangulos": 864,
+      "material": "SurfaceAppearance (atlas)",
+      "que_es": "Puerta de suministros (gira en las bisagras)",
+      "pivote_roblox": [
+        -3.5,
+        0.4,
+        5.2
+      ]
+    },
+    "Cruz_neon": {
+      "triangulos": 44,
+      "material": "Neon",
+      "color": "#FFFFFF",
+      "que_es": "Cruz médica luminosa",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Marquesina_neon": {
+      "triangulos": 68,
+      "material": "Neon",
+      "color": "#FFE1B5",
+      "que_es": "Dos luces empotradas de la marquesina (blanco cálido)",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Farola_neon": {
+      "triangulos": 10,
+      "material": "Neon",
+      "color": "#FFFFFF",
+      "que_es": "Difusor de la farola (blanco)",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Medidor_neon": {
+      "triangulos": 12,
+      "material": "Neon",
+      "color": "#5CFF9A",
+      "que_es": "Pantalla del medidor (si se quiere ver la cifra: SurfaceAppearance en vez de Neon)",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Sensor_neon": {
+      "triangulos": 28,
+      "material": "Neon",
+      "color": "#FF2E2E",
+      "que_es": "LED del sensor de movimiento",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Interior_neon": {
+      "triangulos": 48,
+      "material": "Neon",
+      "color": "#FFFFFF",
+      "que_es": "Paneles de luz del techo interior",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    },
+    "Antena_neon": {
+      "triangulos": 28,
+      "material": "Neon",
+      "color": "#FF2E2E",
+      "que_es": "Baliza de la antena",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        -0.0
+      ]
+    }
+  },
+  "puertas_correderas": {
+    "como": "Tween del CFrame de cada hoja (y su cristal soldado) a lo largo del eje indicado. Abrir: 0,6 s Quad Out; cerrar: 0,8 s Quad InOut, a los 3 s sin nadie delante del sensor.",
+    "Puerta_Izq": {
+      "pivote": [
+        2.125,
+        0.4,
+        -4.75
+      ],
+      "desplazamiento_abrir": [
+        1.8,
+        0.0,
+        0.0
+      ]
+    },
+    "Puerta_Der": {
+      "pivote": [
+        0.275,
+        0.4,
+        -4.75
+      ],
+      "desplazamiento_abrir": [
+        -1.8,
+        0.0,
+        -0.0
+      ]
+    },
+    "nota": "Las hojas se esconden dentro de la pared (bolsillos); el carro y las ruedas van con la hoja por el raíl visible tras la tapa transparente."
+  },
+  "puerta_trasera": {
+    "pivote_bisagras": [
+      -3.5,
+      0.4,
+      5.2
+    ],
+    "eje": "Y (vertical)",
+    "abrir": "pivote * CFrame.Angles(0, math.rad(-95), 0): abre hacia fuera (hacia +Z, la parte de atrás). Abrir 0,5 s Quad Out; cerrar 0,7 s Back Out (golpe del cierre)."
+  },
+  "luces": {
+    "Cruz": {
+      "pos": [
+        -3.6,
+        5.78,
+        -5.69
+      ],
+      "tipo": "PointLight",
+      "color": "#FFFFFF",
+      "brillo": 1.5,
+      "rango": 10
+    },
+    "Marquesina": [
+      {
+        "pos": [
+          2.45,
+          6.75,
+          -5.55
+        ],
+        "tipo": "SpotLight hacia abajo",
+        "color": "#FFE1B5",
+        "brillo": 2,
+        "rango": 12,
+        "angulo": 70
+      },
+      {
+        "pos": [
+          -0.05,
+          6.75,
+          -5.55
+        ],
+        "tipo": "SpotLight hacia abajo",
+        "color": "#FFE1B5",
+        "brillo": 2,
+        "rango": 12,
+        "angulo": 70
+      }
+    ],
+    "Farola": {
+      "pos": [
+        -4.85,
+        8.1,
+        -9.3
+      ],
+      "tipo": "SpotLight hacia abajo",
+      "color": "#FFFFFF",
+      "brillo": 3,
+      "rango": 22,
+      "angulo": 100
+    },
+    "Interior": [
+      {
+        "pos": [
+          2.0,
+          6.4,
+          -2.3
+        ],
+        "tipo": "SurfaceLight/PointLight",
+        "color": "#F4FBFF",
+        "brillo": 0.8,
+        "rango": 10
+      },
+      {
+        "pos": [
+          2.0,
+          6.4,
+          1.6
+        ],
+        "tipo": "SurfaceLight/PointLight",
+        "color": "#F4FBFF",
+        "brillo": 0.8,
+        "rango": 10
+      },
+      {
+        "pos": [
+          -3.0,
+          6.4,
+          -2.8
+        ],
+        "tipo": "SurfaceLight/PointLight",
+        "color": "#F4FBFF",
+        "brillo": 0.8,
+        "rango": 10
+      },
+      {
+        "pos": [
+          -3.0,
+          6.4,
+          2.2
+        ],
+        "tipo": "SurfaceLight/PointLight",
+        "color": "#F4FBFF",
+        "brillo": 0.8,
+        "rango": 10
+      }
+    ],
+    "Baliza": {
+      "pos": [
+        -3.7,
+        10.96,
+        2.9
+      ],
+      "tipo": "PointLight parpadeante",
+      "color": "#FF2E2E"
+    },
+    "Sensor_LED": {
+      "pos": [
+        1.02,
+        6.63,
+        -5.29
+      ],
+      "nota": "verde cuando detecta (abre), rojo en reposo"
+    }
+  },
+  "anclajes": {
+    "Banco_asientos_centro": [
+      -3.8,
+      1.27,
+      -6.41
+    ],
+    "Papelera": [
+      -1.25,
+      0.4,
+      -5.48
+    ]
+  },
+  "colision": "Edificio, Interior, Rampa y Mobiliario: CollisionFidelity = PreciseConvexDecomposition. Detalles, Techo_Equipos, Cristales y neones: CanCollide = false salvo Cristales de ventanas."
+}

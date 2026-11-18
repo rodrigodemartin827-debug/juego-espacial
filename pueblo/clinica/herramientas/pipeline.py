@@ -85,6 +85,65 @@ def construir(carpeta_tmp):
     return objetos, datos, mats, socks
 
 
+MOVILES = {"Puerta_Izq", "Puerta_Der", "Puerta_Izq_Cristal", "Puerta_Der_Cristal", "Puerta_Trasera"}
+
+
+def quitar_caras_ocultas(objetos, holgura=0.006):
+    """
+    Borra las caras que nunca se ven: las apoyadas en el suelo (z = 0, mirando abajo) y las que tocan cara a cara
+    otra superficie opaca (la trasera de una placa atornillada a la pared, la cara compartida entre dos bloques de
+    pared...). Una cara solo se borra si TODOS sus puntos de muestra están tapados. Las piezas móviles no se tocan
+    ni tapan nada (se mueven), y los cristales y neones tampoco tapan (se ve a través o brillan).
+    """
+    from mathutils.bvhtree import BVHTree
+
+    tapan = [o for n, o in objetos.items() if n not in MOVILES and "Cristal" not in n and not n.endswith("_neon")]
+    verts, polis = [], []
+    for o in tapan:
+        base = len(verts)
+        verts += [o.matrix_world @ v.co for v in o.data.vertices]
+        polis += [[base + i for i in p.vertices] for p in o.data.polygons]
+    arbol = BVHTree.FromPolygons(verts, polis, epsilon=0.0)
+    total = 0
+    for n, o in objetos.items():
+        if n in MOVILES:
+            continue
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        borrar = []
+        for f in bm.faces:
+            c = f.calc_center_median()
+            nn = f.normal
+            if nn.z < -0.99 and c.z < 0.01:
+                borrar.append(f)
+                continue
+            muestras = [c] + [v.co + (c - v.co) * 0.12 for v in f.verts]
+            tapada = True
+            for p in muestras:
+                # alguna cara opaca que pase por este punto (o justo delante) mirando al lado contrario
+                ok = False
+                for co, nh, _i, _d in arbol.find_nearest_range(p, holgura):
+                    dv = co - p
+                    dn = dv.dot(nn)
+                    lateral = (dv - nn * dn).length
+                    if nh.dot(nn) < -0.95 and -0.001 <= dn <= holgura and lateral < 0.0005:
+                        ok = True
+                        break
+                if not ok:
+                    tapada = False
+                    break
+            if tapada:
+                borrar.append(f)
+        antes = sum(len(f.verts) - 2 for f in bm.faces)
+        bmesh.ops.delete(bm, geom=borrar, context="FACES_ONLY")
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+        despues = sum(len(f.verts) - 2 for f in bm.faces)
+        bm.to_mesh(o.data)
+        bm.free()
+        total += antes - despues
+    print(f"[ocultas] {total} triángulos de caras que no se ven", flush=True)
+
+
 def triangulos(obj):
     return sum(len(p.vertices) - 2 for p in obj.data.polygons)
 
@@ -99,7 +158,8 @@ def preparar_luz(scn, noche=False):
     scn.cycles.device = "CPU"
     scn.cycles.use_denoising = True
     scn.view_settings.view_transform = "AgX"
-    scn.view_settings.look = "AgX - Medium High Contrast"
+    scn.view_settings.look = "AgX - Base Contrast"
+    scn.view_settings.exposure = -0.95
     scn.world.use_nodes = True
     nt = scn.world.node_tree
     nt.nodes.clear()
@@ -117,7 +177,7 @@ def preparar_luz(scn, noche=False):
     nt.links.new(cielo.outputs[0], fondo.inputs[0])
     nt.links.new(fondo.outputs[0], out.inputs[0])
     sol = bpy.data.lights.new("sol", "SUN")
-    sol.energy = 4.2
+    sol.energy = 3.6
     sol.angle = math.radians(2.5)
     sol.color = (1.0, 0.96, 0.9)
     o = bpy.data.objects.new("sol", sol)
@@ -226,7 +286,7 @@ MATS_TEXTO = {"placa", "rot_solo_personal", "rot_parking_p", "rot_parking_sub", 
               "rot_gel", "rot_residuos", "rot_cartel", "teclado", "botiquin_texto"}
 
 
-def desplegar_atlas(objs, margen=0.0025):
+def desplegar_atlas(objs, margen=0.004):
     bpy.ops.object.select_all(action="DESELECT")
     for o in objs:
         o.select_set(True)
@@ -247,7 +307,8 @@ def desplegar_atlas(objs, margen=0.0025):
             esc = 1.0
             nm = nombres[p.material_index] if p.material_index < len(nombres) else ""
             if nm in MATS_TEXTO:
-                esc = 4.0 if nm in ("teclado", "rot_gel", "rot_medidor", "botiquin_texto", "placa") else 3.0
+                esc = 6.0 if nm in ("teclado", "rot_gel", "rot_medidor", "botiquin_texto", "placa", "rot_horario",
+                                    "rot_solo_personal") else 3.0
             elif nm.startswith("neon"):
                 esc = 0.35
             elif p.normal.z < -0.95 and (o.matrix_world @ p.center).z < 0.05:
@@ -283,7 +344,7 @@ def hornear(objs, mats, socks, tam, carpeta_tex, muestras_ao=48):
     scn = bpy.context.scene
     scn.render.engine = "CYCLES"
     scn.cycles.device = "CPU"
-    scn.render.bake.margin = 6
+    scn.render.bake.margin = 4
     scn.render.bake.margin_type = "EXTEND"
     usados = {m for o in objs for m in o.data.materials}
 
@@ -314,7 +375,7 @@ def hornear(objs, mats, socks, tam, carpeta_tex, muestras_ao=48):
             guard[m] = em
         seleccionar()
         scn.cycles.samples = 4
-        bpy.ops.object.bake(type="EMIT", margin=6)
+        bpy.ops.object.bake(type="EMIT", margin=4)
         for m, em in guard.items():
             nt = m.node_tree
             nt.nodes.remove(em)
@@ -334,7 +395,7 @@ def hornear(objs, mats, socks, tam, carpeta_tex, muestras_ao=48):
     destino(img)
     seleccionar()
     scn.cycles.samples = 4
-    bpy.ops.object.bake(type="ROUGHNESS", margin=6)
+    bpy.ops.object.bake(type="ROUGHNESS", margin=4)
     resultados["roughness"] = img
     print(f"[horneado] roughness: {time.time() - t0:.0f} s", flush=True)
 
@@ -342,7 +403,7 @@ def hornear(objs, mats, socks, tam, carpeta_tex, muestras_ao=48):
     destino(img)
     seleccionar()
     scn.cycles.samples = 4
-    bpy.ops.object.bake(type="NORMAL", normal_space="TANGENT", margin=6)
+    bpy.ops.object.bake(type="NORMAL", normal_space="TANGENT", margin=4)
     resultados["normal"] = img
     print(f"[horneado] normal: {time.time() - t0:.0f} s", flush=True)
 
@@ -355,7 +416,7 @@ def hornear(objs, mats, socks, tam, carpeta_tex, muestras_ao=48):
     seleccionar()
     scn.world.light_settings.distance = 1.0
     scn.cycles.samples = muestras_ao
-    bpy.ops.object.bake(type="AO", margin=6)
+    bpy.ops.object.bake(type="AO", margin=4)
     resultados["ao"] = img
     bpy.data.objects.remove(suelo_ao)
     print(f"[horneado] oclusión: {time.time() - t0:.0f} s", flush=True)
@@ -452,6 +513,7 @@ def main():
 
     escena_vacia()
     objetos, datos, mats, socks = construir(tmp)
+    quitar_caras_ocultas(objetos)
     total = 0
     for n, o in objetos.items():
         t = triangulos(o)
@@ -587,7 +649,7 @@ def escribir_json(salida, datos, tris, objetos):
         "puerta_trasera": {
             "pivote_bisagras": r(datos["Puerta_Trasera"]["pivote"]),
             "eje": "Y (vertical)",
-            "abrir": "CFrame.Angles(0, math.rad(95), 0) alrededor del pivote: abre hacia fuera (hacia +Z).",
+            "abrir": "pivote * CFrame.Angles(0, math.rad(-95), 0): abre hacia fuera (hacia +Z, la parte de atrás). Abrir 0,5 s Quad Out; cerrar 0,7 s Back Out (golpe del cierre).",
         },
         "luces": {
             "Cruz": {"pos": r(datos["Cruz"]), "tipo": "PointLight", "color": "#FFFFFF", "brillo": 1.5, "rango": 10},

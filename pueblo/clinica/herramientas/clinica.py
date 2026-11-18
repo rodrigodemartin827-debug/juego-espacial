@@ -162,14 +162,15 @@ def estructura(g):
                     tr = _restar(tr, h[0] - 0.16, h[1] + 0.16)
             return tr
 
+        # (las horizontales un poco más bajas que las verticales para que no se pisen en los cruces)
         for u in JUNTAS_V[nombre]:
             for z0, z1 in libre_v(u):
-                par.caja(E, u - 0.025, u + 0.025, z0, z1, -0.01, 0.018, "silicona")
+                geo.cordon(E, par.p(u, z0), par.p(u, z1), par.n, 0.055, 0.02)
         for u in (par.rango[0] + 0.02, par.rango[1] - 0.02):  # encuentro con el perfil de esquina
-            par.caja(E, u - 0.025, u + 0.025, SUELO + 0.05, PRETIL, -0.01, 0.018, "silicona")
+            geo.cordon(E, par.p(u, SUELO + 0.05), par.p(u, PRETIL), par.n, 0.05, 0.02)
         for z, conjunto in ((JUNTA_H, libre_h(JUNTA_H)), (SUELO + 0.03, libre_h(SUELO + 0.03))):
             for u0, u1 in conjunto:
-                par.caja(E, u0, u1, z - 0.025, z + 0.025, -0.01, 0.018, "silicona")
+                geo.cordon(E, par.p(u0, z), par.p(u1, z), par.n, 0.05, 0.016)
 
     # Perfiles de esquina: cuarto de cilindro de aluminio, un pelo más grueso que la pared, con tornillos.
     for sx in (-1, 1):
@@ -284,7 +285,7 @@ def puertas_correderas(g, datos):
     F.caja(E, u0 + 0.2, u1 - 0.2, 6.39, 6.41, -0.085, -0.055, "caucho")  # correa (ramal de arriba)
     F.caja(E, u0 + 0.2, u1 - 0.2, 6.21, 6.23, -0.085, -0.055, "caucho")  # correa (ramal de abajo)
     # motorreductor: caja, motor cilíndrico y bornera
-    F.caja(E, -2.25, -1.55, 6.26, 6.44, -0.10, -0.01, "oscuro", bisel=0.015)
+    F.caja(E, -2.25, -1.55, 6.26, 6.44, -0.10, -0.01, "oscuro")
     cilindro(E, F.p(-1.55, 6.35, -0.055), F.p(-1.05, 6.35, -0.055), 0.075, 10, "gris")
     cilindro(E, F.p(-1.05, 6.35, -0.055), F.p(-1.0, 6.35, -0.055), 0.06, 10, "oscuro")
     F.caja(E, -2.1, -1.8, 6.44, 6.45, -0.09, -0.03, "gris")
@@ -366,7 +367,7 @@ def puerta_trasera(g, datos):
     cilindro(T, (xm, yh1, 2.35), (xm, yh1 + 0.03, 2.35), 0.05, 8, "acero")  # bombín
     # cerradura con teclado numérico: caja, 12 teclas, LED y pantallita
     kx, kz = xm + 0.05, 3.55
-    caja(T, (kx - 0.17, yh1, kz - 0.28), (kx + 0.17, yh1 + 0.07, kz + 0.28), "oscuro", bisel=0.015)
+    caja(T, (kx - 0.17, yh1, kz - 0.28), (kx + 0.17, yh1 + 0.07, kz + 0.28), "oscuro")
     caja(T, (kx - 0.12, yh1 + 0.07, kz + 0.13), (kx + 0.12, yh1 + 0.075, kz + 0.23), "negro_mate")
     cilindro(T, (kx + 0.11, yh1 + 0.07, kz + 0.06), (kx + 0.11, yh1 + 0.085, kz + 0.06), 0.015, 6, "neon_rojo")
     dw, dh = 0.26, 0.36
@@ -533,7 +534,7 @@ def detalles_fachada(g, datos):
                                                                           z - h / 2 + 0.07),
                        (u - w / 2, u - w / 2 + 0.07, z - h / 2 + 0.07, z + h / 2 - 0.07),
                        (u + w / 2 - 0.07, u + w / 2, z - h / 2 + 0.07, z + h / 2 - 0.07)):
-        F.caja(D, a, b, c, d, 0.03, 0.12, "perfil", bisel=0.01)
+        F.caja(D, a, b, c, d, 0.03, 0.12, "perfil")
     F.caja(D, u - 0.45, u + 0.45, z - 0.54, z + 0.54, 0.03, 0.036, "rot_horario",
            deco=(F.p(u, z), F.eu, V((0, 0, 1)), 0.9, 1.08),
            mat_cara=lambda c, n: "rot_horario" if n.dot(F.n) > 0.9 else "blanco_puro")
@@ -555,7 +556,7 @@ def detalles_fachada(g, datos):
            deco=(F.p(u, z + 0.14), F.eu, V((0, 0, 1)), 0.28, 0.14),
            mat_cara=lambda c, n: "rot_gel" if n.dot(F.n) > 0.9 else "blanco_puro")
     F.caja(D, u - 0.06, u + 0.06, z - 0.08, z + 0.02, 0.22, 0.225, "cristal")  # ventanita del nivel
-    F.caja(D, u - 0.13, u + 0.13, z - 0.2, z - 0.06, 0.2, 0.27, "gris", bisel=0.015)  # pulsador
+    F.caja(D, u - 0.13, u + 0.13, z - 0.2, z - 0.06, 0.2, 0.27, "gris")  # pulsador
     cilindro(D, F.p(u, z - 0.2, 0.15), F.p(u, z - 0.25, 0.15), 0.02, 6, "oscuro")  # boquilla
     F.caja(D, u - 0.15, u + 0.15, z - 0.58, z - 0.55, 0.02, 0.22, "gris")  # bandeja antigoteo
     F.caja(D, u - 0.15, u + 0.15, z - 0.55, z - 0.5, 0.19, 0.22, "gris")
@@ -588,7 +589,7 @@ def detalles_fachada(g, datos):
     for su in (-1, 1):
         for sz in (-1, 1):
             tornillo(D, R.p(u + su * 0.34, z + sz * 0.44, 0.3), R.n, r=0.022, alto=0.012)
-    tubo(D, [R.p(u, z - 0.5, 0.15), R.p(u, 0.6, 0.15), R.p(u, 0.25, 0.32), R.p(u, -0.05, 0.32)], 0.05, 8, "gris",
+    tubo(D, [R.p(u, z - 0.5, 0.15), R.p(u, 0.6, 0.15), R.p(u, 0.25, 0.32), R.p(u, -0.05, 0.32)], 0.05, 6, "gris",
          radio_codo=0.15, pasos_codo=2)
     R.caja(D, u - 0.08, u + 0.08, 1.4, 1.48, 0.0, 0.22, "gris")  # abrazadera
 
@@ -792,12 +793,12 @@ def entorno(g, datos):
                 # remate: se alarga 0,3 y baja hacia el suelo (como piden las normas de accesibilidad)
                 fin = pts[-1]
                 pts += [fin + V((0, -0.3, -0.02)), fin + V((0, -0.32, -0.55))]
-                tubo(R, pts, r, segs, "acero", radio_codo=0.18, pasos_codo=3)
+                tubo(R, pts, r, segs, "acero", radio_codo=0.18, pasos_codo=2)
                 # roseta en la pared
                 cilindro(R, (xl, -Y_EXT, SUELO + alto), (xl, -Y_EXT - 0.04, SUELO + alto), 0.11, 8, "acero")
             else:
                 pts[0] = pts[0] + V((0, -0.5, 0))
-                tubo(R, pts, r, segs, "acero", radio_codo=0.12, pasos_codo=2)
+                tubo(R, pts, r, segs, "acero", radio_codo=0.12, pasos_codo=1)
         for x, y in postes:
             base = suelo_en(y) + (0.12 if (x == xr and y < RAMPA_Y[1]) else 0.0)
             altura_post = 2.6 - 0.03
@@ -828,7 +829,7 @@ def entorno(g, datos):
             tornillo(M, ((xa + xb) / 2, yb(f0) + 0.03, 0.03), (0, 0, 1), r=0.022, alto=0.012)
         caja(M, (xa, yb(fondo - 0.02), zs - 0.1), (xb, yb(0.04), zs), "poste")  # travesaño
         caja(M, (xa, yb(fondo - 0.02), zs), (xb, yb(fondo - 0.1), 1.78), "poste")  # pilar del reposabrazos
-        caja(M, (xa - 0.01, yb(fondo + 0.02), 1.78), (xb + 0.01, yb(0.14), 1.86), "poste", bisel=0.02)
+        caja(M, (xa - 0.01, yb(fondo + 0.02), 1.78), (xb + 0.01, yb(0.14), 1.86), "poste")
         caja(M, (xa, yb(0.12), zs), (xb, yb(0.04), 2.35), "poste")  # montante del respaldo
     caja(M, (bx0, yb(0.5), zs - 0.16), (bx0 + largo, yb(0.42), zs - 0.08), "gris")  # larguero
     for i in range(3):
@@ -842,19 +843,19 @@ def entorno(g, datos):
 
     # --- Papelera médica con pedal, en el rellano junto a la puerta ---------------------------------------------
     px, py = 1.25, -Y_EXT - 0.48
-    cilindro(M, (px, py, SUELO), (px, py, SUELO + 0.05), 0.27, 12, "oscuro")
-    cilindro(M, (px, py, SUELO + 0.05), (px, py, SUELO + 0.8), 0.25, 12, "marco", r2=0.26)
-    cilindro(M, (px, py, SUELO + 0.8), (px, py, SUELO + 0.86), 0.275, 12, "amarillo",
+    cilindro(M, (px, py, SUELO), (px, py, SUELO + 0.05), 0.27, 10, "oscuro")
+    cilindro(M, (px, py, SUELO + 0.05), (px, py, SUELO + 0.8), 0.25, 10, "marco", r2=0.26)
+    cilindro(M, (px, py, SUELO + 0.8), (px, py, SUELO + 0.86), 0.275, 10, "amarillo",
              mat_cara=lambda c, n: "rot_residuos" if n.z > 0.9 else "amarillo")
     # pegatina en la tapa: la UV deco solo cuenta en la cara de arriba
     _uv_tapa(M, (px, py), 0.5)
     caja(M, (px - 0.1, py + 0.24, SUELO + 0.78), (px + 0.1, py + 0.31, SUELO + 0.84), "gris")  # bisagra
-    caja(M, (px - 0.12, py - 0.4, SUELO + 0.02), (px + 0.12, py - 0.2, SUELO + 0.07), "gris", bisel=0.01)  # pedal
+    caja(M, (px - 0.12, py - 0.4, SUELO + 0.02), (px + 0.12, py - 0.2, SUELO + 0.07), "gris")  # pedal
     caja(M, (px - 0.04, py - 0.26, SUELO + 0.04), (px + 0.04, py - 0.2, SUELO + 0.25), "gris")
     datos["Papelera"] = V((px, py, SUELO))
 
     # --- Señal de parking ------------------------------------------------------------------------------------------
-    sx, sy = -4.9, -10.4
+    sx, sy = -5.7, -10.6
     caja(M, (sx - 0.2, sy - 0.2, 0.0), (sx + 0.2, sy + 0.2, 0.03), "gris")
     for a in (1, -1):
         for b in (1, -1):
@@ -927,7 +928,7 @@ def interior(g, datos):
          mat_cara=lambda c, n: "rot_cartel" if n.x < -0.9 else "blanco_puro")
     # mostrador de recepción frente a la puerta
     caja(I, (-3.4, 1.5, zs), (-0.4, 2.2, 2.85), "mostrador")
-    caja(I, (-3.5, 1.38, 2.85), (-0.3, 2.25, 2.95), "blanco_puro", bisel=0.02)
+    caja(I, (-3.5, 1.38, 2.85), (-0.3, 2.25, 2.95), "blanco_puro")
     caja(I, (-3.4, 1.47, 0.5), (-0.4, 1.5, 0.75), "acero")  # zócalo de acero
     caja(I, (-2.2, 1.9, 2.95), (-1.4, 2.0, 3.55), "negro_mate")  # pantalla del ordenador
     caja(I, (-1.85, 1.95, 2.95), (-1.75, 2.05, 3.0), "gris")
@@ -937,8 +938,8 @@ def interior(g, datos):
         caja(I, (-xi + 0.2, y - 0.05, zs), (-xi + 0.45, y + 0.05, 1.05), "gris")
     for k in range(3):
         y0 = -2.25 + k * 1.08
-        caja(I, (-xi + 0.05, y0, 1.05), (-xi + 0.8, y0 + 1.0, 1.15), "asiento", bisel=0.02)
-        caja(I, (-xi + 0.02, y0, 1.3), (-xi + 0.1, y0 + 1.0, 2.3), "asiento", bisel=0.02)
+        caja(I, (-xi + 0.05, y0, 1.05), (-xi + 0.8, y0 + 1.0, 1.15), "asiento")
+        caja(I, (-xi + 0.02, y0, 1.3), (-xi + 0.1, y0 + 1.0, 2.3), "asiento")
     # luces del techo (neón)
     N = g["Interior_neon"]
     for (x, y) in ((-2.0, -2.3), (-2.0, 1.6), (3.0, -2.8), (3.0, 2.2)):
