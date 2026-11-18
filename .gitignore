@@ -21,3 +21,6 @@ __pycache__/
 
 # Renders intermedios de las herramientas de modelos
 modelos/**/_render_tmp/
+
+# Vistas rápidas de modelado (--vista)
+modelos/**/_vista_*.png
