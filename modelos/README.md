@@ -234,7 +234,7 @@ solares...). Todo se hornea desde la alta a **un solo atlas de 2048** con cinco 
 medidor). Los materiales cuentan la historia con máscaras: óxido en las juntas bajas, pintura desconchada en las
 aristas, madera más oscura abajo por la lluvia, desgaste y brillo alrededor de la manija, camino gastado hasta la
 puerta y losa del escalón hundida en el centro. `casa_minero_control_atlas.png` es la revisión del horneado (gris:
-islas; verde: horneado; rojo: agujeros). La última pasada: 61 % del atlas usado, 0 islas solapadas y 24 píxeles
+islas; verde: horneado; rojo: agujeros). La última pasada: 61 % del atlas usado, 0 islas solapadas y 38 píxeles
 sueltos sin hornear (rellenados por la dilatación).
 
 **Escala y ejes.** 1 unidad de Blender = 1 stud. El FBX va en metros (1 stud = 0,28 m, *Apply Scalings: FBX All*) y

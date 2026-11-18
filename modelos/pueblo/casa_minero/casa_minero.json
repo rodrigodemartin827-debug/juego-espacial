@@ -20,129 +20,129 @@
   },
   "atlas": {
     "tam": 2048,
-    "uso_atlas": 0.6087,
-    "agujeros": 24,
+    "uso_atlas": 0.6089,
+    "agujeros": 38,
     "solapes": 0
   },
   "horneado": {
     "casa_base": {
-      "pixeles": 207835,
+      "pixeles": 208242,
       "sin_alta": 0
     },
     "escalon": {
-      "pixeles": 29686,
+      "pixeles": 29692,
       "sin_alta": 0
     },
     "casa_zocalo": {
-      "pixeles": 152254,
+      "pixeles": 151890,
       "sin_alta": 0
     },
     "casa_paredes": {
-      "pixeles": 562998,
+      "pixeles": 564610,
       "sin_alta": 0
     },
     "casa_techo": {
-      "pixeles": 460755,
+      "pixeles": 457153,
       "sin_alta": 0
     },
     "casa_panel_solar": {
-      "pixeles": 72745,
+      "pixeles": 72102,
       "sin_alta": 0
     },
     "casa_chimenea": {
-      "pixeles": 26068,
+      "pixeles": 26019,
       "sin_alta": 0
     },
     "casa_canalon": {
-      "pixeles": 32728,
+      "pixeles": 32711,
       "sin_alta": 0
     },
     "casa_bajante": {
-      "pixeles": 17315,
+      "pixeles": 17290,
       "sin_alta": 0
     },
     "puerta": {
-      "pixeles": 317780,
+      "pixeles": 319819,
       "sin_alta": 0
     },
     "puerta_marco": {
-      "pixeles": 69875,
+      "pixeles": 69542,
       "sin_alta": 0
     },
     "ventana_frontal_marco": {
-      "pixeles": 41989,
+      "pixeles": 41621,
       "sin_alta": 0
     },
     "ventana_frontal_cristal": {
-      "pixeles": 13338,
+      "pixeles": 13388,
       "sin_alta": 0
     },
     "ventana_frontal_alfeizar": {
-      "pixeles": 17573,
+      "pixeles": 17511,
       "sin_alta": 0
     },
     "ventana_frontal_contraventana_izq": {
-      "pixeles": 52460,
+      "pixeles": 52304,
       "sin_alta": 0
     },
     "ventana_frontal_contraventana_der": {
-      "pixeles": 52127,
+      "pixeles": 52328,
       "sin_alta": 0
     },
     "ventana_frontal_cortinas": {
-      "pixeles": 22330,
-      "sin_alta": 1
+      "pixeles": 22302,
+      "sin_alta": 0
     },
     "maceta_pequena": {
-      "pixeles": 7586,
+      "pixeles": 7681,
       "sin_alta": 0
     },
     "ventana_lateral_marco": {
-      "pixeles": 21192,
+      "pixeles": 21504,
       "sin_alta": 0
     },
     "ventana_lateral_cristal": {
-      "pixeles": 4947,
+      "pixeles": 4992,
       "sin_alta": 0
     },
     "rejilla_ventilacion": {
-      "pixeles": 14329,
+      "pixeles": 14371,
       "sin_alta": 0
     },
     "placa_numero": {
-      "pixeles": 6207,
+      "pixeles": 6286,
       "sin_alta": 0
     },
     "buzon": {
-      "pixeles": 40149,
+      "pixeles": 40160,
       "sin_alta": 0
     },
     "buzon_tapa": {
-      "pixeles": 8460,
+      "pixeles": 8629,
       "sin_alta": 0
     },
     "buzon_bandera": {
-      "pixeles": 1258,
+      "pixeles": 1318,
       "sin_alta": 0
     },
     "lampara": {
-      "pixeles": 7845,
+      "pixeles": 6840,
       "sin_alta": 0
     },
     "lampara_pantalla_neon": {
-      "pixeles": 550,
+      "pixeles": 489,
       "sin_alta": 0
     },
     "lampara_bombilla_neon": {
-      "pixeles": 117,
+      "pixeles": 112,
       "sin_alta": 0
     },
     "medidor": {
-      "pixeles": 10252,
+      "pixeles": 10148,
       "sin_alta": 0
     },
     "medidor_puerta": {
-      "pixeles": 10464,
+      "pixeles": 10587,
       "sin_alta": 0
     },
     "medidor_pantalla_neon": {
@@ -150,27 +150,27 @@
       "sin_alta": 0
     },
     "cable_electrico": {
-      "pixeles": 2597,
+      "pixeles": 2577,
       "sin_alta": 0
     },
     "felpudo": {
-      "pixeles": 9246,
+      "pixeles": 9514,
       "sin_alta": 0
     },
     "maceta_grande": {
-      "pixeles": 18625,
+      "pixeles": 18488,
       "sin_alta": 0
     },
     "arbusto": {
-      "pixeles": 25574,
+      "pixeles": 25489,
       "sin_alta": 0
     },
     "pico": {
-      "pixeles": 15784,
+      "pixeles": 15871,
       "sin_alta": 0
     },
     "botas": {
-      "pixeles": 19897,
+      "pixeles": 19970,
       "sin_alta": 0
     }
   },
@@ -1495,5 +1495,6 @@
         0.64
       ]
     }
-  ]
+  ],
+  "luces_sugeridas_roblox": []
 }
