@@ -456,7 +456,7 @@ def materiales_finales(objs, rutas):
     # En el render el cristal deja ver lo de dentro como en Studio (Glass con Transparency 0,4).
     bv.inputs["Roughness"].default_value = 0.02
     bv.inputs["Transmission Weight"].default_value = 0.0
-    bv.inputs["Alpha"].default_value = 0.3
+    bv.inputs["Alpha"].default_value = 0.14
     bv.inputs["IOR"].default_value = 1.45
     vid.diffuse_color = (*cm.lin(COLOR_VIDRIO), 0.5)
 

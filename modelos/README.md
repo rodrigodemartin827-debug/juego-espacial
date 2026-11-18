@@ -14,6 +14,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
 | `pueblo/casa_minero/` | Casa del minero del pueblo humano: 37 piezas con un atlas PBR de 2048 | 8.765 (límite: 12.000) |
+| `pueblo/casa_comerciante/` | Casa del comerciante: tienda de suministros abajo y vivienda arriba, 49 piezas, atlas PBR de 2048 | 12.496 (límite: 14.000) |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -260,6 +261,40 @@ mayor o menor (*Scale Unit*), que la fachada mira hacia donde se espera con el g
 invertido en el verde (si los remaches parecen hundidos, invierte el canal G) y que las 37 MeshParts no pesan en
 móvil; si pesan, se pueden unir las piezas que no se mueven en una sola malla (el atlas ya es común).
 
+## Casa del comerciante (`pueblo/casa_comerciante/`)
+
+La tienda del pueblo: abajo vende suministros (escaparate y puerta acristalada) y arriba vive el comerciante. Está
+mejor cuidada que la del minero: paneles sin abolladuras y los de la fachada más nuevos, zócalo de sillería regular,
+y el azul oscuro de la tienda desconchado solo en las esquinas.
+
+- **Fachada:** escaparate de 6,4 studs con marco azul y tres cristales limpios, y detrás el expositor: tarima, panel
+  perforado, estante con latas, rollo de cable, una llave inglesa grande en su atril, un cilindro de motor con aletas
+  y su tarjeta de precio, y cajas apiladas con su etiqueta. Hay un papel de «SE BUSCA REPARTIDOR» pegado por dentro.
+- **Toldo, cartel y puerta:** toldo de rayas con faldón ondulado, descolorido por el sol, sobre dos brazos articulados
+  con muelle. Cartel «SUMINISTROS» con 8 remaches y dos focos. Puerta de la tienda acristalada con «ABIERTO» por
+  dentro, tirador largo a los dos lados, dos bisagras de vaivén y campanilla. Felpudo de rejilla, pizarra con los
+  precios en tiza, poste de amarre y escalón ancho gastado.
+- **Arriba:** ventana con persiana a medio bajar (se ven el rodillo y la cinta) y una maceta, y pretil con albardilla.
+- **Lateral derecho:** puerta de casa metálica, mucho más gastada que la de la tienda, con cerradura y mirilla. Placa
+  «12», farol, medidor con el cable que sube al aire acondicionado, silla plegable con la lona gastada, tres cajas (una
+  abierta y vacía, con las etiquetas medio despegadas) y el contenedor de reciclaje con ruedas.
+- **El resto:** ventana con cortina en el lateral izquierdo, bajante con su embudo detrás, y en la cubierta (plana,
+  cae hacia atrás) el aire acondicionado con el ventilador visible y la antena parabólica con sus vientos.
+
+Mide 13,7 × 11 × 10,5 studs contando todo (escalones, contenedor y antena); la casa en sí son 11,7 × 9,6 studs de
+planta y 9,3 de alto hasta el pretil. Son **12.496 triángulos** en 49 mallas. Se genera con
+`herramientas/casa_comerciante.py` (piezas en `comerciante_piezas.py`, materiales en `comerciante_materiales.py`)
+con el mismo proceso que la del minero (`casa_minero.generar`). Los textos («SUMINISTROS», «ABIERTO», «12») son
+geometría hecha con la fuente de Blender. La tiza, las etiquetas y el cartel del repartidor van horneados en el atlas.
+
+**En Studio:** lo mismo que la casa del minero (`SurfaceAppearance` con los cuatro mapas, mismo giro y escala). Los
+cristales (`escaparate_cristal`, `puerta_tienda_cristal` y los de las ventanas) van en Glass `#A6D3CF`, Transparency
+0,4, y las piezas `_neon` en Neon `#3DF2FF`. Piezas que se mueven: `puerta_tienda` (vaivén, con su
+`puerta_tienda_cristal`, que tiene el mismo pivote y hay que soldarla a la hoja), `puerta_lateral`, `medidor_puerta`
+y `contenedor_tapa`. El JSON da los pivotes, y `luces_sugeridas_roblox` dice dónde poner las PointLight cálidas de
+dentro de la tienda (las del render) para que el expositor se vea iluminado. Los focos del cartel tienen su anclaje
+en `cartel_focos`.
+
 ## Regenerar
 
 Requiere Python 3.13 y las bibliotecas de `herramientas/requirements.txt` (el mismo `bpy` que usa `animaciones/`):
@@ -275,6 +310,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 .venv/bin/python modelos/herramientas/cristal_abisal.py --salida modelos/cristal_abisal --ronda 5
 .venv/bin/python modelos/herramientas/criaturas.py --salida modelos/criaturas --ronda 5
 .venv/bin/python modelos/herramientas/casa_minero.py --salida modelos/pueblo/casa_minero   # ~15 min (--rapido, --vista)
+.venv/bin/python modelos/herramientas/casa_comerciante.py --salida modelos/pueblo/casa_comerciante   # ~20 min
 .venv/bin/python modelos/herramientas/hoja_conjunto.py modelos/hoja_contactos_todo.png
 ```
 
