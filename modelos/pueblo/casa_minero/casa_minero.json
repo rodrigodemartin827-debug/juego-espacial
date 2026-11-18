@@ -1,0 +1,1499 @@
+{
+  "nombre": "casa_minero",
+  "descripcion": "Casa de un minero en el pueblo de la colonia humana. Piezas separadas con un atlas PBR.",
+  "triangulos": 8765,
+  "presupuesto_triangulos": 12000,
+  "tam_studs": {
+    "ancho_x": 10.58,
+    "fondo": 9.42,
+    "alto": 8.18
+  },
+  "escala": "1 unidad de Blender = 1 stud; FBX en metros (1 stud = 0,28 m), Apply Scalings: FBX All",
+  "giro_importacion": "180.0° alrededor del eje vertical antes de exportar",
+  "frente": "En Blender la fachada mira a -Y. Con el giro, en el FBX mira a +Z.",
+  "texturas": {
+    "color": "casa_minero_color.png",
+    "normal": "casa_minero_normal.png",
+    "roughness": "casa_minero_roughness.png",
+    "metalness": "casa_minero_metalness.png",
+    "emision": "casa_minero_emision.png"
+  },
+  "atlas": {
+    "tam": 2048,
+    "uso_atlas": 0.6087,
+    "agujeros": 24,
+    "solapes": 0
+  },
+  "horneado": {
+    "casa_base": {
+      "pixeles": 207835,
+      "sin_alta": 0
+    },
+    "escalon": {
+      "pixeles": 29686,
+      "sin_alta": 0
+    },
+    "casa_zocalo": {
+      "pixeles": 152254,
+      "sin_alta": 0
+    },
+    "casa_paredes": {
+      "pixeles": 562998,
+      "sin_alta": 0
+    },
+    "casa_techo": {
+      "pixeles": 460755,
+      "sin_alta": 0
+    },
+    "casa_panel_solar": {
+      "pixeles": 72745,
+      "sin_alta": 0
+    },
+    "casa_chimenea": {
+      "pixeles": 26068,
+      "sin_alta": 0
+    },
+    "casa_canalon": {
+      "pixeles": 32728,
+      "sin_alta": 0
+    },
+    "casa_bajante": {
+      "pixeles": 17315,
+      "sin_alta": 0
+    },
+    "puerta": {
+      "pixeles": 317780,
+      "sin_alta": 0
+    },
+    "puerta_marco": {
+      "pixeles": 69875,
+      "sin_alta": 0
+    },
+    "ventana_frontal_marco": {
+      "pixeles": 41989,
+      "sin_alta": 0
+    },
+    "ventana_frontal_cristal": {
+      "pixeles": 13338,
+      "sin_alta": 0
+    },
+    "ventana_frontal_alfeizar": {
+      "pixeles": 17573,
+      "sin_alta": 0
+    },
+    "ventana_frontal_contraventana_izq": {
+      "pixeles": 52460,
+      "sin_alta": 0
+    },
+    "ventana_frontal_contraventana_der": {
+      "pixeles": 52127,
+      "sin_alta": 0
+    },
+    "ventana_frontal_cortinas": {
+      "pixeles": 22330,
+      "sin_alta": 1
+    },
+    "maceta_pequena": {
+      "pixeles": 7586,
+      "sin_alta": 0
+    },
+    "ventana_lateral_marco": {
+      "pixeles": 21192,
+      "sin_alta": 0
+    },
+    "ventana_lateral_cristal": {
+      "pixeles": 4947,
+      "sin_alta": 0
+    },
+    "rejilla_ventilacion": {
+      "pixeles": 14329,
+      "sin_alta": 0
+    },
+    "placa_numero": {
+      "pixeles": 6207,
+      "sin_alta": 0
+    },
+    "buzon": {
+      "pixeles": 40149,
+      "sin_alta": 0
+    },
+    "buzon_tapa": {
+      "pixeles": 8460,
+      "sin_alta": 0
+    },
+    "buzon_bandera": {
+      "pixeles": 1258,
+      "sin_alta": 0
+    },
+    "lampara": {
+      "pixeles": 7845,
+      "sin_alta": 0
+    },
+    "lampara_pantalla_neon": {
+      "pixeles": 550,
+      "sin_alta": 0
+    },
+    "lampara_bombilla_neon": {
+      "pixeles": 117,
+      "sin_alta": 0
+    },
+    "medidor": {
+      "pixeles": 10252,
+      "sin_alta": 0
+    },
+    "medidor_puerta": {
+      "pixeles": 10464,
+      "sin_alta": 0
+    },
+    "medidor_pantalla_neon": {
+      "pixeles": 47,
+      "sin_alta": 0
+    },
+    "cable_electrico": {
+      "pixeles": 2597,
+      "sin_alta": 0
+    },
+    "felpudo": {
+      "pixeles": 9246,
+      "sin_alta": 0
+    },
+    "maceta_grande": {
+      "pixeles": 18625,
+      "sin_alta": 0
+    },
+    "arbusto": {
+      "pixeles": 25574,
+      "sin_alta": 0
+    },
+    "pico": {
+      "pixeles": 15784,
+      "sin_alta": 0
+    },
+    "botas": {
+      "pixeles": 19897,
+      "sin_alta": 0
+    }
+  },
+  "verificacion_fbx": {
+    "mallas": {
+      "arbusto": {
+        "triangulos": 160,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "botas": {
+        "triangulos": 492,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "buzon": {
+        "triangulos": 50,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "buzon_bandera": {
+        "triangulos": 52,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "buzon_tapa": {
+        "triangulos": 44,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "cable_electrico": {
+        "triangulos": 428,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_bajante": {
+        "triangulos": 398,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_base": {
+        "triangulos": 20,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_canalon": {
+        "triangulos": 304,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_chimenea": {
+        "triangulos": 250,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_panel_solar": {
+        "triangulos": 240,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_paredes": {
+        "triangulos": 1309,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_techo": {
+        "triangulos": 592,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "casa_zocalo": {
+        "triangulos": 758,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "escalon": {
+        "triangulos": 72,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "felpudo": {
+        "triangulos": 10,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "lampara": {
+        "triangulos": 340,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "lampara_bombilla_neon": {
+        "triangulos": 72,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_neon"
+        ]
+      },
+      "lampara_pantalla_neon": {
+        "triangulos": 72,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_neon"
+        ]
+      },
+      "maceta_grande": {
+        "triangulos": 92,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "maceta_pequena": {
+        "triangulos": 315,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "medidor": {
+        "triangulos": 42,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "medidor_pantalla_neon": {
+        "triangulos": 10,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_neon"
+        ]
+      },
+      "medidor_puerta": {
+        "triangulos": 82,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "pico": {
+        "triangulos": 236,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "placa_numero": {
+        "triangulos": 105,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "puerta": {
+        "triangulos": 736,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "puerta_marco": {
+        "triangulos": 436,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "rejilla_ventilacion": {
+        "triangulos": 76,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "ventana_frontal_alfeizar": {
+        "triangulos": 42,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "ventana_frontal_contraventana_der": {
+        "triangulos": 176,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "ventana_frontal_contraventana_izq": {
+        "triangulos": 176,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "ventana_frontal_cortinas": {
+        "triangulos": 228,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "ventana_frontal_cristal": {
+        "triangulos": 12,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_cristal"
+        ]
+      },
+      "ventana_frontal_marco": {
+        "triangulos": 228,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      },
+      "ventana_lateral_cristal": {
+        "triangulos": 12,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_cristal"
+        ]
+      },
+      "ventana_lateral_marco": {
+        "triangulos": 98,
+        "uv": 1,
+        "materiales": [
+          "casa_minero_atlas"
+        ]
+      }
+    },
+    "texturas": [
+      "casa_minero_color.png",
+      "casa_minero_emision.png",
+      "casa_minero_metalness.png",
+      "casa_minero_normal.png",
+      "casa_minero_roughness.png"
+    ],
+    "tam_metros": [
+      2.962,
+      2.638,
+      2.29
+    ],
+    "tam_studs": [
+      10.58,
+      9.42,
+      8.18
+    ],
+    "total_triangulos": 8765
+  },
+  "piezas": [
+    {
+      "nombre": "casa_base",
+      "triangulos": 20,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -0.285,
+        -0.375,
+        0.25
+      ],
+      "pivote_roblox": [
+        -0.285,
+        0.25,
+        0.375
+      ],
+      "centro_caja_roblox": [
+        -0.285,
+        0.25,
+        0.375
+      ],
+      "tam_studs_blender": [
+        10.27,
+        8.45,
+        0.5
+      ]
+    },
+    {
+      "nombre": "escalon",
+      "triangulos": 72,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        1.65,
+        -4.95,
+        0.137
+      ],
+      "pivote_roblox": [
+        1.65,
+        0.137,
+        4.95
+      ],
+      "centro_caja_roblox": [
+        1.65,
+        0.137,
+        4.95
+      ],
+      "tam_studs_blender": [
+        2.6,
+        0.7,
+        0.274
+      ],
+      "anclajes_roblox": {
+        "centro": [
+          1.65,
+          0.27,
+          4.95
+        ]
+      }
+    },
+    {
+      "nombre": "casa_zocalo",
+      "triangulos": 758,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        0.0,
+        0.0,
+        1.007
+      ],
+      "pivote_roblox": [
+        0.0,
+        1.007,
+        0.0
+      ],
+      "centro_caja_roblox": [
+        0.0,
+        1.007,
+        0.0
+      ],
+      "tam_studs_blender": [
+        9.5,
+        7.37,
+        1.045
+      ]
+    },
+    {
+      "nombre": "casa_paredes",
+      "triangulos": 1309,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        0.0,
+        0.0,
+        3.838
+      ],
+      "pivote_roblox": [
+        0.0,
+        3.838,
+        0.0
+      ],
+      "centro_caja_roblox": [
+        0.0,
+        3.838,
+        0.0
+      ],
+      "tam_studs_blender": [
+        9.19,
+        7.24,
+        6.675
+      ]
+    },
+    {
+      "nombre": "casa_techo",
+      "triangulos": 592,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        0.0,
+        0.0,
+        6.481
+      ],
+      "pivote_roblox": [
+        0.0,
+        6.481,
+        0.0
+      ],
+      "centro_caja_roblox": [
+        0.0,
+        6.481,
+        0.0
+      ],
+      "tam_studs_blender": [
+        10.195,
+        8.18,
+        1.826
+      ]
+    },
+    {
+      "nombre": "casa_panel_solar",
+      "triangulos": 240,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        2.595,
+        -0.55,
+        6.655
+      ],
+      "pivote_roblox": [
+        2.595,
+        6.655,
+        0.55
+      ],
+      "centro_caja_roblox": [
+        2.595,
+        6.655,
+        0.55
+      ],
+      "tam_studs_blender": [
+        1.747,
+        2.7,
+        0.634
+      ],
+      "anclajes_roblox": {
+        "conexion": [
+          3.169,
+          6.421,
+          1.63
+        ]
+      }
+    },
+    {
+      "nombre": "casa_chimenea",
+      "triangulos": 250,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -2.35,
+        1.75,
+        7.254
+      ],
+      "pivote_roblox": [
+        -2.35,
+        7.254,
+        -1.75
+      ],
+      "centro_caja_roblox": [
+        -2.35,
+        7.254,
+        -1.75
+      ],
+      "tam_studs_blender": [
+        0.869,
+        0.9,
+        1.851
+      ],
+      "anclajes_roblox": {
+        "humo": [
+          -2.35,
+          7.8,
+          -1.75
+        ]
+      }
+    },
+    {
+      "nombre": "casa_canalon",
+      "triangulos": 304,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -5.14,
+        0.0,
+        5.512
+      ],
+      "pivote_roblox": [
+        -5.14,
+        5.512,
+        -0.0
+      ],
+      "centro_caja_roblox": [
+        -5.14,
+        5.512,
+        -0.0
+      ],
+      "tam_studs_blender": [
+        0.439,
+        8.24,
+        0.253
+      ]
+    },
+    {
+      "nombre": "casa_bajante",
+      "triangulos": 398,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -4.891,
+        -3.2,
+        3.035
+      ],
+      "pivote_roblox": [
+        -4.891,
+        3.035,
+        3.2
+      ],
+      "centro_caja_roblox": [
+        -4.891,
+        3.035,
+        3.2
+      ],
+      "tam_studs_blender": [
+        0.672,
+        0.225,
+        4.87
+      ],
+      "anclajes_roblox": {
+        "pie": [
+          -5.1,
+          0.0,
+          3.2
+        ]
+      }
+    },
+    {
+      "nombre": "puerta",
+      "triangulos": 736,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        0.6,
+        -3.6,
+        0.62
+      ],
+      "pivote_roblox": [
+        0.6,
+        0.62,
+        3.6
+      ],
+      "centro_caja_roblox": [
+        1.597,
+        2.74,
+        3.509
+      ],
+      "tam_studs_blender": [
+        2.105,
+        0.418,
+        4.24
+      ],
+      "animable": {
+        "descripcion": "Bisagras (eje vertical). Se abre hacia fuera.",
+        "eje_roblox": "Y",
+        "angulos": [
+          0,
+          -100
+        ]
+      },
+      "anclajes_roblox": {
+        "manija_agarre": [
+          2.21,
+          2.81,
+          3.69
+        ]
+      }
+    },
+    {
+      "nombre": "puerta_marco",
+      "triangulos": 436,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        1.65,
+        -3.445,
+        2.84
+      ],
+      "pivote_roblox": [
+        1.65,
+        2.84,
+        3.445
+      ],
+      "centro_caja_roblox": [
+        1.65,
+        2.84,
+        3.445
+      ],
+      "tam_studs_blender": [
+        2.54,
+        0.49,
+        4.68
+      ]
+    },
+    {
+      "nombre": "ventana_frontal_marco",
+      "triangulos": 228,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -2.35,
+        -3.441,
+        3.48
+      ],
+      "pivote_roblox": [
+        -2.35,
+        3.48,
+        3.441
+      ],
+      "centro_caja_roblox": [
+        -2.35,
+        3.48,
+        3.441
+      ],
+      "tam_studs_blender": [
+        3.1,
+        0.482,
+        2.36
+      ]
+    },
+    {
+      "nombre": "ventana_frontal_cristal",
+      "triangulos": 12,
+      "roblox": "Glass, Color #79B8AE, Transparency 0.4",
+      "pivote_blender": [
+        -2.35,
+        -3.395,
+        3.4
+      ],
+      "pivote_roblox": [
+        -2.35,
+        3.4,
+        3.395
+      ],
+      "centro_caja_roblox": [
+        -2.35,
+        3.4,
+        3.395
+      ],
+      "tam_studs_blender": [
+        2.62,
+        0.05,
+        2.12
+      ]
+    },
+    {
+      "nombre": "ventana_frontal_alfeizar",
+      "triangulos": 42,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -2.35,
+        -3.595,
+        2.071
+      ],
+      "pivote_roblox": [
+        -2.35,
+        2.071,
+        3.595
+      ],
+      "centro_caja_roblox": [
+        -2.35,
+        2.071,
+        3.595
+      ],
+      "tam_studs_blender": [
+        3.18,
+        0.695,
+        0.482
+      ]
+    },
+    {
+      "nombre": "ventana_frontal_contraventana_izq",
+      "triangulos": 176,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -3.88,
+        -3.66,
+        2.32
+      ],
+      "pivote_roblox": [
+        -3.88,
+        2.32,
+        3.66
+      ],
+      "centro_caja_roblox": [
+        -4.227,
+        3.49,
+        4.306
+      ],
+      "tam_studs_blender": [
+        0.775,
+        1.418,
+        2.34
+      ],
+      "animable": {
+        "descripcion": "Bisagras (eje vertical). Modelada entreabierta 115°.",
+        "eje_roblox": "Y",
+        "angulos": [
+          -115,
+          0
+        ]
+      },
+      "anclajes_roblox": {}
+    },
+    {
+      "nombre": "ventana_frontal_contraventana_der",
+      "triangulos": 176,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -0.82,
+        -3.66,
+        2.32
+      ],
+      "pivote_roblox": [
+        -0.82,
+        2.32,
+        3.66
+      ],
+      "centro_caja_roblox": [
+        -0.711,
+        3.49,
+        4.388
+      ],
+      "tam_studs_blender": [
+        0.295,
+        1.532,
+        2.34
+      ],
+      "animable": {
+        "descripcion": "Bisagras (eje vertical). Modelada entreabierta 95°.",
+        "eje_roblox": "Y",
+        "angulos": [
+          95,
+          0
+        ]
+      },
+      "anclajes_roblox": {}
+    },
+    {
+      "nombre": "ventana_frontal_cortinas",
+      "triangulos": 228,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -2.35,
+        -3.261,
+        3.414
+      ],
+      "pivote_roblox": [
+        -2.35,
+        3.414,
+        3.261
+      ],
+      "centro_caja_roblox": [
+        -2.35,
+        3.414,
+        3.261
+      ],
+      "tam_studs_blender": [
+        2.62,
+        0.102,
+        2.068
+      ]
+    },
+    {
+      "nombre": "maceta_pequena",
+      "triangulos": 315,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -1.486,
+        -3.815,
+        2.587
+      ],
+      "pivote_roblox": [
+        -1.486,
+        2.587,
+        3.815
+      ],
+      "centro_caja_roblox": [
+        -1.486,
+        2.587,
+        3.815
+      ],
+      "tam_studs_blender": [
+        0.482,
+        0.516,
+        0.598
+      ]
+    },
+    {
+      "nombre": "ventana_lateral_marco",
+      "triangulos": 98,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -4.405,
+        0.6,
+        3.6
+      ],
+      "pivote_roblox": [
+        -4.405,
+        3.6,
+        -0.6
+      ],
+      "centro_caja_roblox": [
+        -4.405,
+        3.6,
+        -0.6
+      ],
+      "tam_studs_blender": [
+        0.41,
+        1.88,
+        1.68
+      ]
+    },
+    {
+      "nombre": "ventana_lateral_cristal",
+      "triangulos": 12,
+      "roblox": "Glass, Color #79B8AE, Transparency 0.4",
+      "pivote_blender": [
+        -4.395,
+        0.6,
+        3.6
+      ],
+      "pivote_roblox": [
+        -4.395,
+        3.6,
+        -0.6
+      ],
+      "centro_caja_roblox": [
+        -4.395,
+        3.6,
+        -0.6
+      ],
+      "tam_studs_blender": [
+        0.05,
+        1.52,
+        1.32
+      ]
+    },
+    {
+      "nombre": "rejilla_ventilacion",
+      "triangulos": 76,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -4.59,
+        0.6,
+        2.07
+      ],
+      "pivote_roblox": [
+        -4.59,
+        2.07,
+        -0.6
+      ],
+      "centro_caja_roblox": [
+        -4.59,
+        2.07,
+        -0.6
+      ],
+      "tam_studs_blender": [
+        0.06,
+        1.1,
+        0.7
+      ]
+    },
+    {
+      "nombre": "placa_numero",
+      "triangulos": 105,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -0.25,
+        -3.583,
+        4.15
+      ],
+      "pivote_roblox": [
+        -0.25,
+        4.15,
+        3.583
+      ],
+      "centro_caja_roblox": [
+        -0.25,
+        4.15,
+        3.583
+      ],
+      "tam_studs_blender": [
+        0.4,
+        0.047,
+        0.52
+      ]
+    },
+    {
+      "nombre": "buzon",
+      "triangulos": 50,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        3.69,
+        -3.78,
+        3.231
+      ],
+      "pivote_roblox": [
+        3.69,
+        3.231,
+        3.78
+      ],
+      "centro_caja_roblox": [
+        3.69,
+        3.231,
+        3.78
+      ],
+      "tam_studs_blender": [
+        0.78,
+        0.44,
+        0.801
+      ]
+    },
+    {
+      "nombre": "buzon_tapa",
+      "triangulos": 44,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        3.69,
+        -3.595,
+        3.565
+      ],
+      "pivote_roblox": [
+        3.69,
+        3.565,
+        3.595
+      ],
+      "centro_caja_roblox": [
+        3.69,
+        3.633,
+        3.814
+      ],
+      "tam_studs_blender": [
+        0.84,
+        0.472,
+        0.17
+      ],
+      "animable": {
+        "descripcion": "Bisagra de atrás (eje horizontal, paralelo a la fachada). Modelada abierta 16°.",
+        "eje_roblox": "X",
+        "angulos": [
+          -16,
+          0
+        ]
+      }
+    },
+    {
+      "nombre": "buzon_bandera",
+      "triangulos": 52,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        4.092,
+        -3.88,
+        3.15
+      ],
+      "pivote_roblox": [
+        4.092,
+        3.15,
+        3.88
+      ],
+      "centro_caja_roblox": [
+        4.095,
+        3.345,
+        3.957
+      ],
+      "tam_studs_blender": [
+        0.03,
+        0.206,
+        0.47
+      ],
+      "animable": {
+        "descripcion": "Remache (eje horizontal, perpendicular al lateral del buzón). Modelada levantada.",
+        "eje_roblox": "X",
+        "angulos": [
+          0,
+          90
+        ]
+      }
+    },
+    {
+      "nombre": "lampara",
+      "triangulos": 340,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        1.65,
+        -3.995,
+        5.305
+      ],
+      "pivote_roblox": [
+        1.65,
+        5.305,
+        3.995
+      ],
+      "centro_caja_roblox": [
+        1.65,
+        5.305,
+        3.995
+      ],
+      "tam_studs_blender": [
+        0.46,
+        0.87,
+        0.709
+      ],
+      "anclajes_roblox": {
+        "luz": [
+          1.65,
+          4.98,
+          4.2
+        ]
+      }
+    },
+    {
+      "nombre": "lampara_pantalla_neon",
+      "triangulos": 72,
+      "roblox": "Neon, Color #3DF2FF",
+      "pivote_blender": [
+        1.65,
+        -4.2,
+        5.132
+      ],
+      "pivote_roblox": [
+        1.65,
+        5.132,
+        4.2
+      ],
+      "centro_caja_roblox": [
+        1.65,
+        5.132,
+        4.2
+      ],
+      "tam_studs_blender": [
+        0.33,
+        0.33,
+        0.325
+      ]
+    },
+    {
+      "nombre": "lampara_bombilla_neon",
+      "triangulos": 72,
+      "roblox": "Neon, Color #3DF2FF",
+      "pivote_blender": [
+        1.65,
+        -4.2,
+        5.088
+      ],
+      "pivote_roblox": [
+        1.65,
+        5.088,
+        4.2
+      ],
+      "centro_caja_roblox": [
+        1.65,
+        5.088,
+        4.2
+      ],
+      "tam_studs_blender": [
+        0.17,
+        0.17,
+        0.415
+      ]
+    },
+    {
+      "nombre": "medidor",
+      "triangulos": 42,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        4.665,
+        -1.4,
+        2.505
+      ],
+      "pivote_roblox": [
+        4.665,
+        2.505,
+        1.4
+      ],
+      "centro_caja_roblox": [
+        4.665,
+        2.505,
+        1.4
+      ],
+      "tam_studs_blender": [
+        0.21,
+        0.56,
+        1.95
+      ],
+      "anclajes_roblox": {
+        "salida_cable": [
+          4.66,
+          3.48,
+          1.4
+        ]
+      }
+    },
+    {
+      "nombre": "medidor_puerta",
+      "triangulos": 82,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        4.782,
+        -1.68,
+        2.62
+      ],
+      "pivote_roblox": [
+        4.782,
+        2.62,
+        1.68
+      ],
+      "centro_caja_roblox": [
+        4.794,
+        3.05,
+        1.408
+      ],
+      "tam_studs_blender": [
+        0.052,
+        0.576,
+        0.86
+      ],
+      "animable": {
+        "descripcion": "Bisagras (eje vertical) en el canto delantero.",
+        "eje_roblox": "Y",
+        "angulos": [
+          0,
+          110
+        ]
+      }
+    },
+    {
+      "nombre": "medidor_pantalla_neon",
+      "triangulos": 10,
+      "roblox": "Neon, Color #3DF2FF",
+      "pivote_blender": [
+        4.762,
+        -1.4,
+        3.24
+      ],
+      "pivote_roblox": [
+        4.762,
+        3.24,
+        1.4
+      ],
+      "centro_caja_roblox": [
+        4.762,
+        3.24,
+        1.4
+      ],
+      "tam_studs_blender": [
+        0.024,
+        0.22,
+        0.12
+      ]
+    },
+    {
+      "nombre": "cable_electrico",
+      "triangulos": 428,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        4.153,
+        -1.358,
+        4.961
+      ],
+      "pivote_roblox": [
+        4.153,
+        4.961,
+        1.358
+      ],
+      "centro_caja_roblox": [
+        4.153,
+        4.961,
+        1.358
+      ],
+      "tam_studs_blender": [
+        2.009,
+        0.576,
+        2.966
+      ]
+    },
+    {
+      "nombre": "felpudo",
+      "triangulos": 10,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        1.65,
+        -4.06,
+        0.52
+      ],
+      "pivote_roblox": [
+        1.65,
+        0.52,
+        4.06
+      ],
+      "centro_caja_roblox": [
+        1.65,
+        0.52,
+        4.06
+      ],
+      "tam_studs_blender": [
+        1.5,
+        0.64,
+        0.04
+      ],
+      "anclajes_roblox": {
+        "centro": [
+          1.65,
+          0.5,
+          4.06
+        ]
+      }
+    },
+    {
+      "nombre": "maceta_grande",
+      "triangulos": 92,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        3.72,
+        -4.02,
+        0.86
+      ],
+      "pivote_roblox": [
+        3.72,
+        0.86,
+        4.02
+      ],
+      "centro_caja_roblox": [
+        3.72,
+        0.86,
+        4.02
+      ],
+      "tam_studs_blender": [
+        0.81,
+        0.81,
+        0.72
+      ],
+      "anclajes_roblox": {
+        "tierra": [
+          3.72,
+          1.16,
+          4.02
+        ]
+      }
+    },
+    {
+      "nombre": "arbusto",
+      "triangulos": 160,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        3.718,
+        -3.994,
+        1.532
+      ],
+      "pivote_roblox": [
+        3.718,
+        1.532,
+        3.994
+      ],
+      "centro_caja_roblox": [
+        3.718,
+        1.532,
+        3.994
+      ],
+      "tam_studs_blender": [
+        0.897,
+        0.777,
+        0.767
+      ]
+    },
+    {
+      "nombre": "pico",
+      "triangulos": 236,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        -0.23,
+        -3.908,
+        1.845
+      ],
+      "pivote_roblox": [
+        -0.23,
+        1.845,
+        3.908
+      ],
+      "centro_caja_roblox": [
+        -0.23,
+        1.845,
+        3.908
+      ],
+      "tam_studs_blender": [
+        1.242,
+        0.675,
+        2.711
+      ],
+      "anclajes_roblox": {}
+    },
+    {
+      "nombre": "botas",
+      "triangulos": 492,
+      "roblox": "SurfaceAppearance (atlas)",
+      "pivote_blender": [
+        0.558,
+        -4.208,
+        0.82
+      ],
+      "pivote_roblox": [
+        0.558,
+        0.82,
+        4.208
+      ],
+      "centro_caja_roblox": [
+        0.558,
+        0.82,
+        4.208
+      ],
+      "tam_studs_blender": [
+        0.748,
+        0.817,
+        0.64
+      ]
+    }
+  ]
+}

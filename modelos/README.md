@@ -13,6 +13,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
+| `pueblo/casa_minero/` | Casa del minero del pueblo humano: 37 piezas con un atlas PBR de 2048 | 8.765 (límite: 12.000) |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -212,6 +213,53 @@ ojos, añade `AnimationController` + `Animator`, y les pone la etiqueta **`Escan
 **`EspecieId`**: con eso el escáner ya las reconoce. Los ojos del brincador son SmoothPlastic negro con Reflectance
 (el brillo de la mirada); los del acechador, Neon morado.
 
+## Casa del minero (`pueblo/casa_minero/`)
+
+Casa humilde de un minero en el pueblo de la colonia: paneles metálicos blancos y grises con juntas y remaches,
+parches soldados (de chapa desnuda o con minio), un panel abollado, zócalo de mampostería irregular, tejado de chapa
+grecada con una chapa cambiada más nueva, panel solar, chimenea con sombrerete, canalón y bajante. Delante: puerta de
+tablas con barras de hierro, ventana con contraventanas verdes entreabiertas, cortinas y una maceta en el alféizar,
+número 7 de latón, buzón con la banderita levantada (hay carta), aplique de luz, felpudo, escalón gastado, maceta grande
+con arbusto, el pico apoyado en la pared y las botas (una tumbada). En el lateral derecho, el medidor de luz con el
+cable que sube al panel solar.
+
+Mide 10,6 × 9,4 × 8,2 studs (ancho × fondo × alto, con la chimenea). Son **8.765 triángulos** en 37 mallas.
+Se genera con `herramientas/casa_minero.py` (más `casa_piezas.py`, `casa_materiales.py` y `casa_malla.py`).
+
+**Cómo está hecha.** Cada pieza tiene una malla baja (la del juego) y una alta con los detalles finos (remaches,
+cordones de soldadura, tornillos con arandela, hojas del arbusto, cordones de las botas, pistas de las células
+solares...). Todo se hornea desde la alta a **un solo atlas de 2048** con cinco mapas: `casa_minero_color.png`
+(con oclusión ambiental), `_normal`, `_roughness`, `_metalness` y `_emision` (solo la lámpara y la pantalla del
+medidor). Los materiales cuentan la historia con máscaras: óxido en las juntas bajas, pintura desconchada en las
+aristas, madera más oscura abajo por la lluvia, desgaste y brillo alrededor de la manija, camino gastado hasta la
+puerta y losa del escalón hundida en el centro. `casa_minero_control_atlas.png` es la revisión del horneado (gris:
+islas; verde: horneado; rojo: agujeros). La última pasada: 61 % del atlas usado, 0 islas solapadas y 24 píxeles
+sueltos sin hornear (rellenados por la dilatación).
+
+**Escala y ejes.** 1 unidad de Blender = 1 stud. El FBX va en metros (1 stud = 0,28 m, *Apply Scalings: FBX All*) y
+lleva el **GIRO_IMPORTACION**: 180° alrededor del eje vertical antes de exportar, así que en el FBX la fachada mira
+a **+Z**. Si en Studio sale mirando al revés, quita el giro (`GIRO_IMPORTACION = 0` en el script) y vuelve a generar.
+
+**En Studio.**
+- Importa `casa_minero.fbx` (Anchored activado, *Import only as model*). A todas las piezas normales les va una
+  `SurfaceAppearance` con los cuatro mapas (`ColorMap`, `NormalMap`, `RoughnessMap`, `MetalnessMap`): las mismas
+  cuatro imágenes para todas, porque comparten atlas.
+- `ventana_frontal_cristal` y `ventana_lateral_cristal`: Material **Glass**, color `#79B8AE`, Transparency 0,4, sin
+  SurfaceAppearance.
+- `lampara_pantalla_neon`, `lampara_bombilla_neon` y `medidor_pantalla_neon`: Material **Neon**, color `#3DF2FF`.
+  Una `PointLight` cian en el anclaje `luz` de la lámpara (Brightness 1, Range 12).
+- **Piezas que se mueven**, cada una con el pivote donde gira: `puerta` (bisagras, se abre hacia fuera),
+  `ventana_frontal_contraventana_izq/der`, `buzon_tapa`, `buzon_bandera` y `medidor_puerta`. `casa_minero.json` da
+  para cada pieza su pivote en coordenadas de Roblox, el centro de su caja (la diferencia es el `PivotOffset`), el eje
+  de giro y los ángulos. El importador pone el pivote de cada MeshPart en el centro de la caja: hay que fijar el
+  `PivotOffset` con esos números (o girar con `CFrame` alrededor del punto del JSON).
+- La puerta abre el interior: por dentro solo hay paredes lisas y el suelo de la base (no hay mobiliario).
+
+**Lo que hay que comprobar en Studio** (esta sesión no tiene Studio): que el tamaño llega en studs y no 3,57 veces
+mayor o menor (*Scale Unit*), que la fachada mira hacia donde se espera con el giro, que el mapa de normales no sale
+invertido en el verde (si los remaches parecen hundidos, invierte el canal G) y que las 37 MeshParts no pesan en
+móvil; si pesan, se pueden unir las piezas que no se mueven en una sola malla (el atlas ya es común).
+
 ## Regenerar
 
 Requiere Python 3.13 y las bibliotecas de `herramientas/requirements.txt` (el mismo `bpy` que usa `animaciones/`):
@@ -226,6 +274,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 .venv/bin/python modelos/herramientas/planeta_monstruos.py --salida modelos/planeta_monstruos --ronda 5
 .venv/bin/python modelos/herramientas/cristal_abisal.py --salida modelos/cristal_abisal --ronda 5
 .venv/bin/python modelos/herramientas/criaturas.py --salida modelos/criaturas --ronda 5
+.venv/bin/python modelos/herramientas/casa_minero.py --salida modelos/pueblo/casa_minero   # ~15 min (--rapido, --vista)
 .venv/bin/python modelos/herramientas/hoja_conjunto.py modelos/hoja_contactos_todo.png
 ```
 
