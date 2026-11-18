@@ -60,7 +60,7 @@ def main():
         "extrusion": EXTRUSION,
         "color_vidrio": "#A6D3CF",
         # Luz cálida dentro de la tienda (abierta): ilumina el expositor tras el cristal.
-        "luces_render": [((-1.7, -2.2, 4.6), 260.0, (1.0, 0.82, 0.6)), ((3.2, -2.0, 4.6), 120.0, (1.0, 0.82, 0.6))],
+        "luces_render": [((-3.3, -3.4, 4.9), 70.0, (1.0, 0.84, 0.62)), ((-0.2, -3.4, 4.9), 70.0, (1.0, 0.84, 0.62)), ((3.2, -2.0, 4.6), 120.0, (1.0, 0.84, 0.62))],
     })
 
 
