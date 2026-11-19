@@ -356,7 +356,7 @@ def banco_galactico():
     # cúpula de vigilancia y antena en el tejado
     c.cil((3.5, 2.5, ZT + 0.75), (3.5, 2.5, ZT + 0.95), 0.4, acero, n=12)
     c.esfera((3.5, 2.5, ZT + 0.95), 0.32, osc, seg=12, anillos=6, esc=(1, 1, 0.7))
-    c.cil((-3.8, 3.0, ZT + 0.75), (-3.8, 3.0, ZT + 2.2), 0.04, acero, n=6)
+    c.cil((-3.8, 3.0, ZT + 0.75), (-3.8, 3.0, ZT + 1.05), 0.04, acero, n=6)  # antena corta (alto total 8,25)
     m.terminar()
 
 

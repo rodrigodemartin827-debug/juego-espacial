@@ -3,6 +3,8 @@
 import math
 
 import arq
+from mathutils import Matrix
+
 from ph import NEON, V, Modelo
 
 ZONA = "comercial"
@@ -356,8 +358,12 @@ def mesa_mercado():
     m = Modelo("mesa_mercado", ZONA, (3, 2, 2), 2000,
                "Mesa de mercado vacía para NPCs: patas plegables de tubo con bisagras, tablero de tablones gastados "
                "y cajón con tirador.")
+    # La mesa se modela a 1,7 de alto y se estira en vertical hasta los 2 studs pedidos.
+    k = 2.0 / 1.675
     c = m.parte()
-    cajon = m.parte("cajon", pivote=(0, -0.65, 1.15), nota="Cajón: se abre deslizándolo 0,6 studs hacia delante (-Z).")
+    cajon = m.parte("cajon", pivote=(0, -0.65, 1.15 * k), nota="Cajón: se abre deslizándolo 0,6 studs hacia delante (-Z).")
+    for p in (c, cajon):
+        p.pila = [Matrix.Diagonal((1.0, 1.0, k, 1.0))]
     tabla = m.mat("madera", "#9A7044", eje="X", desgaste=0.5, c_desgaste="#C9A57A")
     tubo = m.mat("pintura", "#3C5A66", desgaste=0.6)
     acero = m.mat("metal", "#8A9096")
