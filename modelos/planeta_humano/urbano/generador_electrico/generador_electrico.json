@@ -1,0 +1,98 @@
+{
+  "nombre": "generador_electrico",
+  "zona": "urbano",
+  "descripcion": "Generador eléctrico: caja metálica sobre patín con orejetas de izado, rejillas de lamas inclinadas, escape lateral con silenciador y tapa basculante, puerta de acceso con bisagras y cerradura, display de voltaje verde, interruptor de palanca, 2 cables gruesos de salida con prensaestopas y toma de tierra.",
+  "tam_pedido_studs": [
+    2,
+    2,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 2.19,
+    "alto_y": 2.06,
+    "fondo_z": 1.97
+  },
+  "triangulos": 2292,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/generador_electrico_color.png",
+    "rugosidad": "texturas/generador_electrico_rugosidad.png",
+    "metal": "texturas/generador_electrico_metal.png",
+    "normal": "texturas/generador_electrico_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "generador_electrico",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2028,
+      "tam_studs": [
+        2.194,
+        2.062,
+        1.975
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.09,
+        1.011,
+        0.107
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "generador_electrico_display_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#39FF14",
+      "transparencia": null,
+      "triangulos": 264,
+      "tam_studs": [
+        0.146,
+        0.047,
+        0.006
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.481,
+        1.181,
+        -0.704
+      ],
+      "nota": "Dígitos del display de voltaje."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2292,
+    "tam_studs": [
+      2.194,
+      1.975,
+      2.062
+    ],
+    "centro": [
+      -0.09,
+      -0.107,
+      1.011
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "generador_electrico_turnaround.png"
+}
