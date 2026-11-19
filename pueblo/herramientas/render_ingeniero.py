@@ -105,6 +105,7 @@ def renderizar_todo(objetos, salida, nombre, rapido, total, tris):
         ld.shadow_soft_size = 0.6
         lo = bpy.data.objects.new(n_luz, ld)
         lo.location = pos
+        lo.visible_camera = False  # que no se vea la bola de luz por la ventana
         scn.collection.objects.link(lo)
     scn.cycles.max_bounces = 8
     scn.cycles.transparent_max_bounces = 8

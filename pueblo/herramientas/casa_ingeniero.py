@@ -1294,6 +1294,10 @@ def main():
         RI.renderizar_todo(objetos, salida, NOMBRE, a.rapido, total, tris)
 
     exportar(objetos, extra, salida, tris, total, rutas)
+    # fuera los temporales (hoja de letreros, renders sueltos)
+    import shutil
+    shutil.rmtree(tmp, ignore_errors=True)
+    os.remove(os.path.join(salida, "_estado.json"))
 
 
 def exportar(objetos, extra, salida, tris, total, rutas):
