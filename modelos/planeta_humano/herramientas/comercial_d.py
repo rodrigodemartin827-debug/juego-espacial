@@ -666,10 +666,20 @@ def carro_carga():
     c.torno([(0.0, 0.0), (0.28, 0.0), (0.3, 0.05), (0.3, 0.8), (0.26, 0.85), (0.0, 0.85)], m.mat("pintura", "#2E6A8A",
                                                                                                  desgaste=0.6),
             n=14, c=(-0.85, 0.2, Z + 0.14))
-    for x in (-0.15, 0.6):
-        c.lamina(lambda u, v, x=x: (x + (v - 0.5) * 0.12,
-                                    -0.86 + u * 1.72,
-                                    Z + 0.13 + 1.05 * math.sin(u * math.pi) ** 0.6), 12, 1, 0.02, cinta)
+    # cinchas ceñidas a la carga: tramos rectos de cinta (con grosor) que siguen el contorno de las cajas
+    ZM = Z + 0.97  # techo de la caja metálica (+ grosor de la cinta)
+    ZW = Z + 0.71  # techo de la caja de madera
+    caminos = {
+        -0.15: [(-0.88, Z + 0.12), (-0.72, Z + 0.32), (-0.72, ZM - 0.04), (-0.66, ZM), (0.16, ZM), (0.22, ZM - 0.04),
+                (0.22, Z + 0.4), (0.62, Z + 0.16), (0.88, Z + 0.12)],
+        0.6: [(-0.88, Z + 0.12), (-0.72, Z + 0.32), (-0.72, ZM - 0.04), (-0.66, ZM), (0.16, ZM), (0.22, ZM - 0.04),
+              (0.22, ZW + 0.01), (0.28, ZW), (0.7, ZW), (0.76, ZW - 0.05), (0.88, Z + 0.12)],
+    }
+    for x, pts in caminos.items():
+        for (ya, za), (yb, zb) in zip(pts, pts[1:]):
+            L = math.hypot(yb - ya, zb - za)
+            ang = math.degrees(math.atan2(zb - za, yb - ya))
+            c.caja((x, (ya + yb) / 2, (za + zb) / 2), (0.12, L + 0.012, 0.02), cinta, 0.0, rot=(ang, 0, 0))
         for s in (-1, 1):
             c.caja((x, s * 0.88, Z + 0.15), (0.16, 0.05, 0.12), acero, 0.01)  # carraca
     m.terminar()
