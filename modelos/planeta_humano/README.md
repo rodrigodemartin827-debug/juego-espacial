@@ -21,13 +21,14 @@ regenerar. Las 10 casas residenciales (casa_minero, taberna, clínica de casa…
   <modelo>.json             tamaño, triángulos, piezas con su pivote, anclajes, notas y verificación del FBX
   <modelo>_turnaround.png   las 8 vistas
   texturas/<modelo>_color.png, _normal.png, _rugosidad.png, _metal.png   (atlas de 2048 × 2048)
+  texturas/<modelo>_color_<variante>.png   solo si el modelo tiene variantes de color (contenedor_basura: azul)
 ```
 
 ## Reglas con las que están hechos
 
 | Regla | Cómo se cumple |
 | --- | --- |
-| Todo 3D real, con grosor | Cada pieza es un sólido cerrado: frutas esféricas, letras extruidas, tornillos de cabeza hexagonal, cristales con grosor, telas y lonas como láminas con grosor. Lo «pintado» (líneas del suelo, etiquetas, tiza) también tiene unas centésimas de grosor. |
+| Todo 3D real, con grosor | Cada pieza es un sólido cerrado: frutas esféricas, letras extruidas, tornillos de cabeza hexagonal, cristales con grosor, telas y lonas como láminas con grosor. Lo «pintado» (líneas del suelo, etiquetas, tiza) también tiene unas centésimas de grosor. En el mobiliario urbano 2 (`urbano_b.py`) el texto pintado largo (flechas del poste, horarios, mapa, logos, avisos) va como **calcomanía horneada en el atlas** (`calcos` en `crear_material`): no gasta triángulos y se pela y ensucia con la pintura de debajo. |
 | Un modelo = una escena limpia | `Modelo()` llama a `bpy.ops.wm.read_factory_settings()` y lo modela desde cero. No se reutiliza geometría entre modelos. |
 | Escala 1 unidad = 1 stud | Se modela en studs y se exporta con **Apply Scalings: FBX All**; la cabecera del FBX dice 0,28 m por unidad (`unidades_fbx.py` corrige los que salieron antes con 1 m). |
 | GIRO_IMPORTACION | Antes de exportar se gira 180° sobre el eje vertical (la Y de Roblox). En Studio el frente mira a **-Z**. |
@@ -76,8 +77,8 @@ Cada modelo tarda unos 3 minutos en una CPU de 4 núcleos (casi todo es el horne
 
 ## Lo que falta o hay que revisar
 
-- **El encargo llegó cortado** a mitad de `contenedor_envio_grande` (zona del hangar). La zona del hangar decía
-  14 modelos y solo se veían 12; puede que también falten zonas enteras detrás. Hay que mandar el resto.
+- El primer encargo llegó cortado en `contenedor_envio_grande`; el segundo completó los modelos #49-85
+  (hangar, naturaleza, edificios especiales y mobiliario urbano). Ya están los 85.
 - No se ha visto nada en Studio (unidad del importador, giro y SurfaceAppearance sin confirmar).
 - Las traseras y laterales de los edificios son más sencillas que las fachadas: están pensadas para ir contra
   otros edificios en el pueblo. Si alguno queda exento, conviene añadirles detalle.

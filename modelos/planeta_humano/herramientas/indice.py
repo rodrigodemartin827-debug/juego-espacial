@@ -10,7 +10,8 @@ from glob import glob
 from PIL import Image, ImageDraw, ImageFont
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-ZONAS = [("comercial", "Zona comercial"), ("industrial", "Zona industrial"), ("hangar", "Zona del hangar")]
+ZONAS = [("comercial", "Zona comercial"), ("industrial", "Zona industrial"), ("hangar", "Zona del hangar"),
+         ("naturaleza", "Naturaleza"), ("especiales", "Edificios especiales"), ("urbano", "Mobiliario urbano")]
 F = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
 
