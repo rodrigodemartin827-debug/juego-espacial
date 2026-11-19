@@ -1,0 +1,203 @@
+{
+  "nombre": "tienda_pociones",
+  "zona": "comercial",
+  "descripcion": "Suministros (boticario): entramado de madera sobre piedra, mirador con estantes de frascos 3D, ventanilla con mostrador y balanza, rejilla de ventilación que echa vapor verde.",
+  "tam_pedido_studs": [
+    10,
+    8,
+    7
+  ],
+  "tam_studs": {
+    "ancho_x": 11.34,
+    "alto_y": 7.95,
+    "fondo_z": 8.42
+  },
+  "triangulos": 11586,
+  "presupuesto": 12000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tienda_pociones_color.png",
+    "rugosidad": "texturas/tienda_pociones_rugosidad.png",
+    "metal": "texturas/tienda_pociones_metal.png",
+    "normal": "texturas/tienda_pociones_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tienda_pociones",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 6934,
+      "tam_studs": [
+        11.345,
+        7.949,
+        8.423
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.223,
+        3.974,
+        0.001
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_pociones_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#B5DCE6",
+      "transparencia": 0.4,
+      "triangulos": 88,
+      "tam_studs": [
+        6.03,
+        2.6,
+        1.04
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.435,
+        2.7,
+        -3.46
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_pociones_frascos_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#DDF3F5",
+      "transparencia": 0.55,
+      "triangulos": 2324,
+      "tam_studs": [
+        3.337,
+        2.405,
+        0.623
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        2.482,
+        2.653,
+        -3.4
+      ],
+      "nota": "Cristal de los frascos: el líquido opaco va dentro, en la malla con textura."
+    },
+    {
+      "nombre": "tienda_pociones_cartel_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 1268,
+      "tam_studs": [
+        8.055,
+        3.413,
+        0.38
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.172,
+        3.272,
+        -3.545
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_pociones_vapor_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#7CFFA8",
+      "transparencia": 0.5,
+      "triangulos": 100,
+      "tam_studs": [
+        0.763,
+        2.08,
+        0.851
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -5.47,
+        3.816,
+        -0.001
+      ],
+      "nota": "Vapor verde tenue: Neon #7CFFA8 con Transparency 0,5. Se puede animar subiendo y encogiéndolo, o sustituir por un ParticleEmitter en el anclaje Vapor."
+    },
+    {
+      "nombre": "tienda_pociones_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 872,
+      "tam_studs": [
+        1.975,
+        3.58,
+        0.355
+      ],
+      "pivote_studs": [
+        -0.33,
+        0.3,
+        -2.95
+      ],
+      "centro_studs": [
+        -1.273,
+        2.12,
+        -3.077
+      ],
+      "nota": "Puerta batiente de tablas: gira sobre las bisagras (eje vertical del pivote)."
+    }
+  ],
+  "anclajes": {
+    "Vapor": {
+      "pos_studs": [
+        -5.3,
+        2.9,
+        0.0
+      ],
+      "nota": "Salida del vapor: aquí puede ir un ParticleEmitter verde tenue."
+    }
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 11586,
+    "tam_studs": [
+      11.345,
+      8.423,
+      7.949
+    ],
+    "centro": [
+      -0.223,
+      -0.001,
+      3.974
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tienda_pociones_turnaround.png"
+}
