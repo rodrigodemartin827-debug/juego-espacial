@@ -1,0 +1,194 @@
+{
+  "nombre": "estacion_comunicaciones",
+  "zona": "especiales",
+  "descripcion": "Estación de comunicaciones: parabólica grande de 3 studs sobre mástil giratorio, parabólica secundaria, tres antenas omnidireccionales, cabina de equipos con puerta y ventana, cables, luz estroboscópica roja en la cima y panel solar.",
+  "tam_pedido_studs": [
+    6,
+    6,
+    10
+  ],
+  "tam_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 9.8,
+    "fondo_z": 6.0
+  },
+  "triangulos": 2596,
+  "presupuesto": 10000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/estacion_comunicaciones_color.png",
+    "rugosidad": "texturas/estacion_comunicaciones_rugosidad.png",
+    "metal": "texturas/estacion_comunicaciones_metal.png",
+    "normal": "texturas/estacion_comunicaciones_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "estacion_comunicaciones",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1968,
+      "tam_studs": [
+        6.0,
+        9.62,
+        6.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.81,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "estacion_comunicaciones_parabolica",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 440,
+      "tam_studs": [
+        2.8,
+        2.997,
+        2.064
+      ],
+      "pivote_studs": [
+        -1.2,
+        6.2,
+        1.2
+      ],
+      "centro_studs": [
+        -1.387,
+        6.822,
+        0.488
+      ],
+      "nota": "Parabólica grande: gira sobre el eje vertical del mástil."
+    },
+    {
+      "nombre": "estacion_comunicaciones_estrobo_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FF2A2A",
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        0.19,
+        0.2,
+        0.2
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -1.2,
+        9.7,
+        1.6
+      ],
+      "nota": "Luz estroboscópica de aviso: Neon rojo (parpadeo)."
+    },
+    {
+      "nombre": "estacion_comunicaciones_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        0.4,
+        0.08,
+        0.05
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.6,
+        2.5,
+        -1.7
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "estacion_comunicaciones_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9EC6D6",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        0.7,
+        0.9,
+        0.05
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.25,
+        1.75,
+        -1.575
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "estacion_comunicaciones_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 64,
+      "tam_studs": [
+        0.98,
+        1.96,
+        0.21
+      ],
+      "pivote_studs": [
+        2.15,
+        0.3,
+        -1.62
+      ],
+      "centro_studs": [
+        1.61,
+        1.3,
+        -1.725
+      ],
+      "nota": "Puerta de la cabina: gira sobre su bisagra."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2596,
+    "tam_studs": [
+      6.0,
+      6.0,
+      9.8
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      4.9
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "estacion_comunicaciones_turnaround.png"
+}
