@@ -80,9 +80,38 @@ def centro_mando():
     m.seccion("cuerpo")
     PUE = (-1.8, 1.8, Z0, 5.6)
     arq.muro_huecos(c, X0, X1, Z0, ZT, YF, YF + 0.5, [PUE, (-6.2, -3.4, 2.6, 6.4), (3.4, 6.2, 2.6, 6.4)], blanco)
-    for x in (X0, X1 - 0.5):
-        c.caja_de((x, YF + 0.5, Z0), (x + 0.5, YB - 0.5, ZT), blanco)
-    c.caja_de((X0, YB - 0.5, Z0), (X1, YB, ZT), blanco)
+    # laterales y trasera: es un edificio exento, así que también llevan ventanales, puerta de servicio y bajantes
+    VL = [(-0.9, 1.0), (1.6, 3.5), (4.1, 6.0)]
+    for x, xf, s in ((X0, X0, -1), (X1 - 0.5, X1, 1)):
+        arq.muro_huecos(c, YF + 0.5, YB - 0.5, Z0, ZT, x, x + 0.5, [(a, b, 2.6, 6.4) for a, b in VL], blanco, eje="Y")
+        for a, b in VL:
+            yb = xf if s < 0 else xf + 0.15
+            arq.marco(c, a, b, 2.6, 6.4, yb, 0.15, 0.15, gris, eje="Y")
+            cr.caja_de((xf - s * 0.2 - 0.05, a, 2.6), (xf - s * 0.2 + 0.05, b, 6.4), None)
+            ym = (a + b) / 2
+            c.caja((xf - s * 0.05, ym, 4.5), (0.3, 0.1, 3.8), gris, 0.01)  # montante central
+            c.caja((xf + s * 0.12, ym, 2.48), (0.36, b - a + 0.3, 0.2), marmol, 0.02)  # alféizar
+    PS = (-0.9, 0.9, Z0, Z0 + 2.9)  # puerta de servicio trasera
+    VT = [(-6.0, -4.0), (-3.2, -1.6), (1.6, 3.2), (4.0, 6.0)]
+    arq.muro_huecos(c, X0, X1, Z0, ZT, YB - 0.5, YB, [PS] + [(a, b, 3.2, 6.2) for a, b in VT], blanco)
+    for a, b in VT:
+        arq.marco(c, a, b, 3.2, 6.2, YB + 0.15, 0.15, 0.15, gris)
+        cr.caja_de((a, YB - 0.25, 3.2), (b, YB - 0.15, 6.2), None)
+        c.caja(((a + b) / 2, YB + 0.12, 3.08), (b - a + 0.3, 0.36, 0.2), marmol, 0.02)  # alféizar
+    arq.marco(c, PS[0], PS[1], PS[2], PS[3], YB + 0.2, 0.2, 0.2, gris, abajo=False)
+    c.caja_de((PS[0], YB - 0.35, PS[2]), (PS[1], YB - 0.2, PS[3]), m.mat("metal", "#5A6A7A", rug=0.35, aranazos=0.3), 0.02)
+    c.cil((0.6, YB - 0.2, Z0 + 1.3), (0.6, YB - 0.1, Z0 + 1.3), 0.05, acero, n=8)  # pomo
+    c.caja_de((-1.4, YB, PS[3] + 0.25), (1.4, YB + 1.2, PS[3] + 0.4), gris, 0.03)  # tejadillo
+    for k in range(3):  # escalera de servicio hasta el basamento
+        c.caja_de((-1.2, YB + 0.3 + k * 0.4, 0), (1.2, YB + 1.5, Z0 - k * Z0 / 3), piedra, 0.03)
+    arq.foco_pared(c, luces, (-1.8, YB, PS[3]), gris, acero, salida=1)
+    arq.foco_pared(c, luces, (1.8, YB, PS[3]), gris, acero, salida=1)
+    for x in (X0 + 0.3, X1 - 0.3):
+        arq.bajante(c, x, YB, ZT, gris, acero, salida=1)
+    # climatizadora en la trasera, sobre ménsulas
+    c.caja((4.8, YB + 0.55, 1.9), (1.6, 1.0, 1.1), m.mat("paneles", "#C8CCD0", tam_panel=(0.8, 0.55)), 0.04)
+    c.cil((4.4, YB + 1.06, 1.9), (4.4, YB + 1.1, 1.9), 0.38, osc, n=14)
+    c.cil((5.25, YB + 1.06, 1.9), (5.25, YB + 1.1, 1.9), 0.3, osc, n=12)
     for (x0, x1) in ((-6.2, -3.4), (3.4, 6.2)):  # ventanales con montantes
         arq.marco(c, x0, x1, 2.6, 6.4, YF, 0.15, 0.15, gris)
         cr.caja_de((x0, YF + 0.1, 2.6), (x1, YF + 0.2, 6.4), None)
