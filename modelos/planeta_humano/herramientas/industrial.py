@@ -312,29 +312,32 @@ def yunque_forja():
     corteza = m.mat("madera", "#4A3424", eje="Z", bump=1.0, patron="piedra", escala=2.0)
     anillos = m.mat("madera", "#B08A5C", eje="Z", suciedad=0.2)
     mango = m.mat("madera", "#8A5C34", eje="Z")
-    # tocón: corteza irregular, raíces y cara superior con anillos
-    perfil = [(0.0, 0.0), (0.62, 0.0), (0.66, 0.08), (0.56, 0.3), (0.53, 0.8), (0.54, 1.02), (0.0, 1.02)]
+    # tocón: corteza irregular, raíces que se agarran al suelo y cara superior con anillos (diámetro ~0,9: cabe en el
+    # fondo de 1 stud pedido y es algo más ancho que el pie del yunque)
+    perfil = [(0.0, 0.0), (0.47, 0.0), (0.5, 0.08), (0.43, 0.3), (0.4, 0.8), (0.41, 1.02), (0.0, 1.02)]
     c.torno(perfil, corteza, n=14)
     for k in range(5):
         a = k * math.tau / 5 + 0.3
-        c.cil((math.cos(a) * 0.45, math.sin(a) * 0.45, 0.25), (math.cos(a) * 0.78, math.sin(a) * 0.78, 0.0), 0.12, corteza,
-              n=5, r1=0.05)
-    c.cil((0, 0, 1.02), (0, 0, 1.04), 0.52, anillos, n=14)
-    for r in (0.15, 0.28, 0.4):
+        c.cil((math.cos(a) * 0.3, math.sin(a) * 0.3, 0.34), (math.cos(a) * 0.55, math.sin(a) * 0.55, 0.0), 0.12, corteza,
+              n=6, r1=0.06)
+    c.cil((0, 0, 1.02), (0, 0, 1.04), 0.39, anillos, n=14)
+    for r in (0.1, 0.2, 0.3):
         c.toro((0, 0, 1.04), r, 0.008, m.mat("madera", "#6E4E30", eje="Z"), n=14, m=3)
     # el yunque
-    _yunque(c, 0.0, 0.0, 1.04, hierro, cara, 1.12)
+    k = 1.12
+    _yunque(c, 0.0, 0.0, 1.04, hierro, cara, k)
+    zc = 1.04 + 0.795 * k  # cara de golpeo
     # tenazas apoyadas contra el tocón
-    with c.en((0.35, -0.6, 0.0), (8, -18, 15)):
+    with c.en((0.25, -0.4, 0.0), (10, -16, 15)):
         for s in (-1, 1):
             c.tubo([(s * 0.03, 0, 0.0), (s * 0.05, 0, 0.6), (s * 0.02, 0, 0.88), (-s * 0.04, 0, 1.08)], 0.025, hierro, n=5,
                    seg=2)
         c.cil((-0.05, -0.04, 0.88), (0.05, 0.04, 0.88), 0.035, hierro, n=6)
-    # martillo apoyado en el yunque
-    with c.en((-0.35, 0.05, 1.04 + 0.92), (0, 0, 30)):
-        c.cil((0.0, 0, 0.06), (0.75, 0, 0.06), 0.04, mango, n=8)
-        c.caja((0.0, 0, 0.11), (0.14, 0.12, 0.3), hierro, 0.02, rot=(90, 0, 0))
-        c.caja((0.0, 0, 0.11), (0.16, 0.34, 0.14), hierro, 0.02)
+    # martillo tumbado sobre la cara de golpeo: el mango toca la cara y la cabeza apoya de lado
+    with c.en((-0.3, 0.02, zc), (0, 0, 28)):
+        c.cil((0.05, 0, 0.04), (0.72, 0, 0.04), 0.04, mango, n=8)
+        c.caja((0.0, 0, 0.07), (0.16, 0.34, 0.14), hierro, 0.02)
+        c.caja((0.0, 0.2, 0.07), (0.13, 0.06, 0.11), hierro, 0.01)
     m.terminar()
 
 
