@@ -420,6 +420,7 @@ def academia_entrenamiento():
     holo = m.parte("marcador_neon", tipo="neon", color=NEON, transparencia=0.55, nota="Fondo del marcador holográfico.")
     cifras = m.parte("cifras_neon", tipo="neon", color=TEXTO_HOLO, nota="Cifras del marcador.")
     luces = m.parte("luces_neon", tipo="neon", color=NEON)
+    cr = m.parte("cristal", tipo="cristal", color="#9EC6D6", transparencia=0.4, nota="Lucernarios y ventanas altas.")
     rnd = random.Random(97)
     panel = m.mat("paneles", "#5A6472", tam_panel=(2.0, 2.0), desgaste=0.45)
     gris = m.mat("pintura", "#3A424C", desgaste=0.45)
@@ -439,9 +440,36 @@ def academia_entrenamiento():
     m.seccion("nave")
     c.caja_de((X0, YF - 1.0, 0), (X1, YB, Z0), horm, 0.04)
     c.caja_de((X0 + 0.4, YF, Z0), (X1 - 0.4, YB - 0.4, Z0 + 0.05), suelo)
-    for x in (X0, X1 - 0.4):  # muros laterales y del fondo
-        c.caja_de((x, YF + 1.0, Z0), (x + 0.4, YB, ZT), panel)
-    c.caja_de((X0, YB - 0.4, Z0), (X1, YB, ZT), panel)
+    # muros laterales con ventanas altas corridas y pilastras de acero por fuera
+    VL = [(YF + 1.6, YF + 4.6), (YF + 5.5, YF + 8.5), (YF + 9.4, YB - 1.0)]
+    for x, xf, s in ((X0, X0, -1), (X1 - 0.4, X1, 1)):
+        arq.muro_huecos(c, YF + 1.0, YB, Z0, ZT, x, x + 0.4, [(a, b, 4.4, 6.2) for a, b in VL], panel, eje="Y")
+        for a, b in VL:
+            arq.marco(c, a, b, 4.4, 6.2, xf if s < 0 else xf + 0.12, 0.12, 0.12, gris, eje="Y")
+            cr.caja_de((xf - s * 0.2 - 0.04, a, 4.4), (xf - s * 0.2 + 0.04, b, 6.2), None)
+            for k in (1, 2):
+                y = a + k * (b - a) / 3
+                c.caja((xf - s * 0.15, y, 5.3), (0.12, 0.08, 1.8), gris)
+            c.caja((xf + s * 0.1, (a + b) / 2, 4.32), (0.3, b - a + 0.24, 0.16), horm)  # alféizar
+        for y in (YF + 1.05, (VL[0][1] + VL[1][0]) / 2, (VL[1][1] + VL[2][0]) / 2, YB - 0.4):
+            c.caja((xf + s * 0.15, y, (Z0 + ZT) / 2), (0.3, 0.36, ZT - Z0), gris)  # pilastra
+        c.caja((xf + s * 0.06, (YF + 1 + YB) / 2, Z0 + 0.5), (0.14, YB - YF - 1.0, 1.0), horm, 0.03)  # zócalo
+    # muro del fondo: ventanas altas, puerta de emergencia, bajantes y el lema pintado
+    VT = [(-7.0, -5.6), (5.6, 7.0)]
+    PE = (5.6, 7.0, Z0, Z0 + 3.0)
+    arq.muro_huecos(c, X0, X1, Z0, ZT, YB - 0.4, YB, [PE] + [(a, b, 4.8, 6.2) for a, b in VT], panel)
+    for a, b in VT:
+        arq.marco(c, a, b, 4.8, 6.2, YB + 0.12, 0.12, 0.12, gris)
+        cr.caja_de((a, YB - 0.24, 4.8), (b, YB - 0.16, 6.2), None)
+    arq.marco(c, PE[0], PE[1], PE[2], PE[3], YB + 0.15, 0.15, 0.15, gris, abajo=False)
+    c.caja_de((PE[0], YB - 0.3, PE[2]), (PE[1], YB - 0.15, PE[3]), m.mat("pintura", "#2E7D4F", desgaste=0.5), 0.02)
+    c.caja((6.3, YB + 0.02, Z0 + 1.1), (1.2, 0.08, 0.08), acero, 0.01)  # barra antipánico (por fuera, tirador)
+    c.caja_de((PE[0] - 0.3, YB, PE[3] + 0.2), (PE[1] + 0.3, YB + 0.9, PE[3] + 0.32), gris, 0.02)  # tejadillo
+    arq.foco_pared(c, luces, (6.3, YB, PE[3] + 0.8), gris, acero, salida=1)
+    for x in (X0 + 0.3, X1 - 0.3, 0.0):
+        arq.bajante(c, x, YB, ZT + 0.4, gris, acero, salida=1)
+    c.caja((-2.6, YB + 0.02, 3.4), (4.4, 0.04, 1.2), rojo, 0.01)
+    c.texto("HONOR", oro, alto=0.6, grosor=0.03, c=(-2.6, YB + 0.05, 3.1), rot=(90, 0, 180), fuente="serif", resol=1)
     # pórtico del frente abierto: pilares y viga
     for x in (X0 + 0.2, -2.7, 2.7, X1 - 0.2):
         arq.viga_h(c, (x, YF + 0.2, Z0), (x, YF + 0.2, ZT), 0.45, 0.4, gris)
@@ -453,9 +481,15 @@ def academia_entrenamiento():
         ang = math.degrees(math.atan2(1.0, y1 - y0))
         with c.en((0, (y0 + y1) / 2, ZT + 0.55), (-ang, 0, 0)):
             c.caja((0, 0, 0), (X1 - X0 + 0.6, math.hypot(y1 - y0, 1.0), 0.14), gris, 0.04)
-    for k in range(3):
+    for k in range(3):  # paños verticales de los dientes: lucernarios de cristal con montantes
         y1 = YF + (k + 1) * (YB - YF) / 3
-        c.caja((0, y1 - 0.05, ZT + 0.55), (X1 - X0, 0.1, 1.1), acero, 0.01)
+        if k < 2:
+            cr.caja((0, y1 - 0.05, ZT + 0.55), (X1 - X0, 0.06, 1.0), None)
+            for i in range(9):
+                c.caja((X0 + i * (X1 - X0) / 8, y1 - 0.05, ZT + 0.55), (0.1, 0.12, 1.06), gris)
+            c.caja((0, y1 - 0.05, ZT + 0.07), (X1 - X0, 0.14, 0.08), gris, 0.01)
+        else:
+            c.caja((0, y1 - 0.05, ZT + 0.55), (X1 - X0, 0.1, 1.1), acero, 0.01)
     luz_y = [YF + 2.0, YF + 6.5, YF + 11.0]
     for y in luz_y:
         for x in (-4.5, 0.0, 4.5):
@@ -525,9 +559,17 @@ def academia_entrenamiento():
     for k, txt in enumerate(("12", "09")):
         cifras.texto(txt, None, alto=0.55, grosor=0.03, c=(-0.8 + k * 1.6, YB - 0.64, 5.62), fuente="mono", resol=1)
     cifras.caja((0, YB - 0.64, 5.9), (0.1, 0.02, 0.1), None)
-    c.caja((0, YF + 0.0, ZT - 0.9), (6.2, 0.12, 0.9), rojo, 0.03)
-    c.texto("ACADEMIA", oro, alto=0.42, grosor=0.03, c=(0, YF - 0.08, ZT - 0.95), fuente="serif", resol=1)
-    c.texto("HONOR Y DISCIPLINA", blanco, alto=0.16, grosor=0.02, c=(0, YF - 0.08, ZT - 1.25), fuente="mono", resol=1)
+    # gran cartel sobre la viga del pórtico, con marco dorado y emblemas
+    zc = ZT + 0.65
+    c.caja((0, YF + 0.05, zc), (9.0, 0.16, 1.5), rojo, 0.04)
+    c.caja((0, YF + 0.1, zc), (9.3, 0.12, 1.75), oro, 0.03)
+    c.texto("ACADEMIA", oro, alto=0.78, grosor=0.04, c=(0, YF - 0.06, zc - 0.2), fuente="serif", resol=1)
+    c.texto("HONOR Y DISCIPLINA", blanco, alto=0.24, grosor=0.02, c=(0, YF - 0.05, zc - 0.58), fuente="mono", resol=1)
+    for x in (-2.7, 2.7):  # estandartes colgados de los pilares centrales
+        c.cil((x - 0.55, YF - 0.3, ZT - 0.6), (x + 0.55, YF - 0.3, ZT - 0.6), 0.03, oro, n=6)
+        c.lamina(lambda u, v, x=x: (x - 0.5 + u, YF - 0.3 + 0.03 * math.sin(u * 6 + v * 3), ZT - 0.62 - 2.6 * v),
+                 4, 3, 0.03, rojo)
+        _emblema(c, oro, (x, YF - 0.34, ZT - 1.5), 0.3)
     m.terminar()
 
 
