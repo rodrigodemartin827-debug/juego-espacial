@@ -12,7 +12,7 @@
     "alto_y": 7.12,
     "fondo_z": 8.15
   },
-  "triangulos": 11436,
+  "triangulos": 11640,
   "presupuesto": 12000,
   "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
@@ -31,7 +31,7 @@
       "material_roblox": "SurfaceAppearance",
       "color": null,
       "transparencia": null,
-      "triangulos": 10316,
+      "triangulos": 10520,
       "tam_studs": [
         10.967,
         7.12,
@@ -176,7 +176,8 @@
     "piezas": 6,
     "ok": true,
     "problemas": [],
-    "triangulos": 11436,
+    "unidad_fbx_m": 0.28,
+    "triangulos": 11640,
     "tam_studs": [
       10.967,
       8.15,
@@ -187,8 +188,7 @@
       0.225,
       3.56
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "tienda_herramientas_turnaround.png"
 }
