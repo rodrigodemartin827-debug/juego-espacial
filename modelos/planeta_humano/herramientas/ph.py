@@ -1050,7 +1050,7 @@ class Modelo:
         return rutas
 
     # ---- render --------------------------------------------------------------------------------------------
-    def _turnaround(self, objs, tam=560, muestras=40):
+    def _turnaround(self, objs, tam=560, muestras=40, vistas=None, salida=None, cols=4):
         scn = bpy.context.scene
         scn.render.engine = "CYCLES"
         scn.cycles.device = "CPU"
@@ -1105,8 +1105,9 @@ class Modelo:
         fov = 2 * math.atan(18 / 50)
         dist = radio * 1.08 / math.sin(fov / 2)
         # el frente es -Y; "Lateral Izq" es el lado izquierdo del modelo (+X)
-        vistas = [("Frente", 0, 10), ("3/4 Frontal", -40, 22), ("Lateral Izq", 90, 8), ("3/4 Trasera", 140, 24),
-                  ("Trasera", 180, 10), ("Lateral Der", -90, 8), ("Arriba", 0, 89.5), ("Wireframe", -40, 22)]
+        vistas = vistas or [("Frente", 0, 10), ("3/4 Frontal", -40, 22), ("Lateral Izq", 90, 8),
+                            ("3/4 Trasera", 140, 24), ("Trasera", 180, 10), ("Lateral Der", -90, 8),
+                            ("Arriba", 0, 89.5), ("Wireframe", -40, 22)]
         carpeta = os.path.join(self.dir, "_render")
         os.makedirs(carpeta, exist_ok=True)
         rutas = []
@@ -1126,8 +1127,8 @@ class Modelo:
             rutas.append((nombre, ruta))
         scn.view_layers[0].material_override = None
         # hoja
-        cols = 4
-        hoja = Image.new("RGB", (cols * tam, 2 * tam + 70), (18, 20, 26))
+        filas = (len(rutas) + cols - 1) // cols
+        hoja = Image.new("RGB", (cols * tam, filas * tam + 70), (18, 20, 26))
         d = ImageDraw.Draw(hoja)
         d.text((16, 10), f"{self.nombre}", fill=(255, 214, 102), font=_fuente(30))
         tris = sum(_tris(o) for o in objs)
@@ -1140,7 +1141,7 @@ class Modelo:
             hoja.paste(Image.open(ruta).convert("RGB"), (x, y))
             d.rectangle((x, y, x + tam - 1, y + tam - 1), outline=(44, 48, 60))
             d.text((x + 10, y + 8), nombre, fill=(255, 255, 255), font=_fuente(17))
-        salida = os.path.join(self.dir, f"{self.nombre}_turnaround.png")
+        salida = salida or os.path.join(self.dir, f"{self.nombre}_turnaround.png")
         hoja.save(salida, optimize=True)
         for o in (suelo, mira, cam):
             bpy.data.objects.remove(o)
@@ -1212,6 +1213,19 @@ class Modelo:
     def terminar(self, muestras_horneado=16):
         print(f"== {self.nombre}", flush=True)
         self.seccion("fin")
+        if os.environ.get("PH_PREVIEW"):
+            # vista previa rápida para revisar la geometría: sin UV ni horneado, materiales procedurales tal cual
+            objs = self._objetos()
+            carpeta = os.environ["PH_PREVIEW"]
+            os.makedirs(carpeta, exist_ok=True)
+            self.dir = os.path.join(carpeta, "_tmp_" + self.nombre)
+            os.makedirs(self.dir, exist_ok=True)
+            ruta = self._turnaround(objs, tam=420, muestras=10, cols=2, salida=os.path.join(carpeta, self.nombre + ".png"),
+                                    vistas=[("Frente", 0, 10), ("3/4 Frontal", -40, 22), ("3/4 Trasera", 140, 24),
+                                            ("Lateral Izq", 90, 8)])
+            shutil.rmtree(self.dir, ignore_errors=True)
+            print("   vista previa:", ruta, flush=True)
+            raise SystemExit
         if os.environ.get("PH_DEBUG"):
             for (a, ta), (b, tb) in zip(self._secc, self._secc[1:]):
                 print(f"   {a:<28} {tb - ta:>7}")
