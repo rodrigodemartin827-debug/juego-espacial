@@ -1,0 +1,100 @@
+{
+  "nombre": "rio_segmento",
+  "zona": "naturaleza",
+  "descripcion": "Segmento modular de río de 8 studs: lecho de piedras bajo el agua, superficie de agua ondulada semitransparente y orillas de tierra y hierba con piedras. Se encadena por los extremos (eje X).",
+  "tam_pedido_studs": [
+    8,
+    4,
+    0.5
+  ],
+  "tam_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 0.63,
+    "fondo_z": 4.04
+  },
+  "triangulos": 2920,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/rio_segmento_color.png",
+    "rugosidad": "texturas/rio_segmento_rugosidad.png",
+    "metal": "texturas/rio_segmento_metal.png",
+    "normal": "texturas/rio_segmento_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "rio_segmento",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2336,
+      "tam_studs": [
+        8.0,
+        0.633,
+        4.038
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.252,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "rio_segmento_agua_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9ADCE8",
+      "transparencia": 0.4,
+      "triangulos": 584,
+      "tam_studs": [
+        8.003,
+        0.119,
+        2.903
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.0,
+        0.32,
+        0.0
+      ],
+      "nota": "Agua: Glass celeste, Transparency 0,4. Las ondas están modeladas en la superficie."
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Los extremos están cortados en x = ±4: coloca los segmentos cada 8 studs en el eje X de Roblox."
+  ],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2920,
+    "tam_studs": [
+      8.003,
+      4.038,
+      0.633
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      0.252
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "rio_segmento_turnaround.png"
+}
