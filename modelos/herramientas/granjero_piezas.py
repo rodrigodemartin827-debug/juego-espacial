@@ -1701,8 +1701,8 @@ CULTIVOS = {
 
 def bandejas_plantas():
     """Bandejas negras con sustrato en cada balda y las plantas encima (lechugas, albahaca, plantones)."""
-    band = Pieza("invernadero_bandejas", peso_uv=0.9)
-    plantas = Pieza("invernadero_plantas", peso_uv=1.1)
+    band = Pieza("invernadero_bandejas", peso_uv=1.6)
+    plantas = Pieza("invernadero_plantas", peso_uv=2.3)
     rnd = random.Random(8)
     goteros = []
     for iu, (x0, x1, y0, y1, montantes) in enumerate(UNIDADES):
@@ -1752,7 +1752,7 @@ def bandejas_plantas():
 def tomateras():
     """Bancal de madera en el centro con cuatro tomateras atadas a sus cañas, con tomates rojos y alguno verde."""
     bancal = Pieza("invernadero_bancal", peso_uv=1.0)
-    tom = Pieza("invernadero_tomateras", peso_uv=1.2)
+    tom = Pieza("invernadero_tomateras", peso_uv=1.9)
     b = bancal.baja
     x0, x1, y0, y1 = -9.55, -8.45, -2.7, 2.9
     zt = GZ0 + 0.45
