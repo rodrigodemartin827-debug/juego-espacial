@@ -1,0 +1,155 @@
+{
+  "nombre": "horno_forja",
+  "zona": "industrial",
+  "descripcion": "Horno de fundición de ladrillo refractario: puerta de hierro con bisagras y lamas por las que se ve el fuego (pieza aparte), brillo naranja, arco de dovelas, chimenea trasera con hollín, fuelle de cuero con palanca de madera y bandeja de cenizas extraíble.",
+  "tam_pedido_studs": [
+    3,
+    3,
+    4
+  ],
+  "tam_studs": {
+    "ancho_x": 3.24,
+    "alto_y": 4.1,
+    "fondo_z": 2.91
+  },
+  "triangulos": 3084,
+  "presupuesto": 5000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/horno_forja_color.png",
+    "rugosidad": "texturas/horno_forja_rugosidad.png",
+    "metal": "texturas/horno_forja_metal.png",
+    "normal": "texturas/horno_forja_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "horno_forja",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2436,
+      "tam_studs": [
+        3.24,
+        4.101,
+        2.59
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.08,
+        2.044,
+        -0.045
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "horno_forja_fuego_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FF6B35",
+      "transparencia": null,
+      "triangulos": 152,
+      "tam_studs": [
+        1.1,
+        0.896,
+        0.164
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.252,
+        -1.242
+      ],
+      "nota": "Fuego del horno: Neon #FF6B35. Queda bien con una PointLight naranja en el anclaje Fuego."
+    },
+    {
+      "nombre": "horno_forja_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 388,
+      "tam_studs": [
+        1.29,
+        1.02,
+        0.35
+      ],
+      "pivote_studs": [
+        0.62,
+        1.27,
+        -1.36
+      ],
+      "centro_studs": [
+        0.025,
+        1.27,
+        -1.485
+      ],
+      "nota": "Puerta de hierro: gira sobre las bisagras (eje vertical del pivote) hasta 110°."
+    },
+    {
+      "nombre": "horno_forja_bandeja_cenizas",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 108,
+      "tam_studs": [
+        1.2,
+        0.13,
+        0.6
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.25,
+        -1.25
+      ],
+      "centro_studs": [
+        -0.0,
+        0.255,
+        -1.05
+      ],
+      "nota": "Bandeja de cenizas: se extrae 0,8 studs hacia delante."
+    }
+  ],
+  "anclajes": {
+    "Fuego": {
+      "pos_studs": [
+        -0.0,
+        1.25,
+        -1.4
+      ],
+      "nota": "PointLight naranja (Brightness 2, Range 12) delante de la boca."
+    }
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 4,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3084,
+    "tam_studs": [
+      3.24,
+      2.91,
+      4.101
+    ],
+    "centro": [
+      -0.08,
+      0.205,
+      2.044
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "horno_forja_turnaround.png"
+}
