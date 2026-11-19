@@ -1,0 +1,179 @@
+{
+  "nombre": "portal_espacial",
+  "zona": "especiales",
+  "descripcion": "Portal interdimensional: arco tecnológico con dos pilares de circuitos y tubos de energía, anillo central de energía cyan intenso, disco de distorsión transparente, plataforma de embarque con rampa, panel con palanca de activación, cables gruesos al suelo y marcas NO CRUZAR.",
+  "tam_pedido_studs": [
+    8,
+    2,
+    10
+  ],
+  "tam_studs": {
+    "ancho_x": 8.99,
+    "alto_y": 9.54,
+    "fondo_z": 3.82
+  },
+  "triangulos": 7976,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/portal_espacial_color.png",
+    "rugosidad": "texturas/portal_espacial_rugosidad.png",
+    "metal": "texturas/portal_espacial_metal.png",
+    "normal": "texturas/portal_espacial_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "portal_espacial",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 5460,
+      "tam_studs": [
+        8.988,
+        9.536,
+        3.822
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.682,
+        -1.011
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "portal_espacial_anillo_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 640,
+      "tam_studs": [
+        5.08,
+        5.08,
+        0.24
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        5.3,
+        0.0
+      ],
+      "nota": "Anillo de energía: Neon cyan, el elemento más brillante del planeta (añadir PointLight cyan Brightness 4)."
+    },
+    {
+      "nombre": "portal_espacial_circuitos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.2,
+      "triangulos": 1548,
+      "tam_studs": [
+        8.159,
+        7.82,
+        2.311
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        5.09,
+        -0.385
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "portal_espacial_distorsion_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#BFF6FF",
+      "transparencia": 0.6,
+      "triangulos": 156,
+      "tam_studs": [
+        4.7,
+        4.7,
+        0.08
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        5.3,
+        0.0
+      ],
+      "nota": "Disco de distorsión: Glass, Transparency 0,6 (con Reflectance 0,3 parece que refracta)."
+    },
+    {
+      "nombre": "portal_espacial_palanca",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 172,
+      "tam_studs": [
+        0.3,
+        0.81,
+        0.57
+      ],
+      "pivote_studs": [
+        -3.7,
+        1.55,
+        -1.55
+      ],
+      "centro_studs": [
+        -3.7,
+        1.795,
+        -1.735
+      ],
+      "nota": "Palanca de activación: gira 60° sobre el eje X de Roblox."
+    }
+  ],
+  "anclajes": {
+    "CentroPortal": {
+      "pos_studs": [
+        -0.0,
+        5.3,
+        0.0
+      ],
+      "nota": "Centro del anillo: aquí va el efecto del portal y la PointLight cyan."
+    }
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 5,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 7976,
+    "tam_studs": [
+      8.988,
+      3.822,
+      9.536
+    ],
+    "centro": [
+      0.0,
+      1.011,
+      4.682
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "portal_espacial_turnaround.png"
+}
