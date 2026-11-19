@@ -1,0 +1,122 @@
+{
+  "nombre": "cartel_holografico",
+  "zona": "comercial",
+  "descripcion": "Cartel publicitario holográfico de pared: marco metálico fino, cuatro proyectores en las esquinas, pantalla neón con logotipo y texto simulado, tornillos de montaje.",
+  "tam_pedido_studs": [
+    4,
+    0.3,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 4.06,
+    "alto_y": 3.06,
+    "fondo_z": 0.44
+  },
+  "triangulos": 1768,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/cartel_holografico_color.png",
+    "rugosidad": "texturas/cartel_holografico_rugosidad.png",
+    "metal": "texturas/cartel_holografico_metal.png",
+    "normal": "texturas/cartel_holografico_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "cartel_holografico",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1052,
+      "tam_studs": [
+        4.06,
+        3.06,
+        0.443
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.5,
+        0.019
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "cartel_holografico_pantalla_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.6,
+      "triangulos": 12,
+      "tam_studs": [
+        3.7,
+        2.7,
+        0.02
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.5,
+        0.03
+      ],
+      "nota": "Fondo del holograma: Neon cyan con Transparency 0,6."
+    },
+    {
+      "nombre": "cartel_holografico_contenido_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#E8FEFF",
+      "transparencia": null,
+      "triangulos": 704,
+      "tam_studs": [
+        3.494,
+        2.497,
+        0.251
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.5,
+        -0.055
+      ],
+      "nota": "Logotipo, texto y lentes: Neon blanco azulado, opaco (se lee sobre el fondo translúcido)."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1768,
+    "tam_studs": [
+      4.06,
+      0.443,
+      3.06
+    ],
+    "centro": [
+      0.0,
+      -0.019,
+      1.5
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "cartel_holografico_turnaround.png"
+}
