@@ -1,0 +1,98 @@
+{
+  "nombre": "barril_metal",
+  "zona": "comercial",
+  "descripcion": "Barril metálico sci-fi: cierre hermético con junta de goma, asa articulada, manómetro, etiqueta y abolladuras de uso.",
+  "tam_pedido_studs": [
+    1.5,
+    1.5,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 1.48,
+    "alto_y": 2.11,
+    "fondo_z": 1.59
+  },
+  "triangulos": 1728,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/barril_metal_color.png",
+    "rugosidad": "texturas/barril_metal_rugosidad.png",
+    "metal": "texturas/barril_metal_metal.png",
+    "normal": "texturas/barril_metal_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "barril_metal",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1572,
+      "tam_studs": [
+        1.482,
+        2.06,
+        1.586
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.021,
+        1.03,
+        -0.073
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "barril_metal_asa",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 156,
+      "tam_studs": [
+        0.898,
+        0.118,
+        0.324
+      ],
+      "pivote_studs": [
+        -0.0,
+        2.02,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.054,
+        0.158
+      ],
+      "nota": "Asa articulada, plegada sobre la tapa: para levantarla, girarla 80° sobre el eje X de Roblox en el pivote."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1728,
+    "tam_studs": [
+      1.482,
+      1.586,
+      2.113
+    ],
+    "centro": [
+      -0.021,
+      0.073,
+      1.056
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "barril_metal_turnaround.png"
+}
