@@ -1,0 +1,98 @@
+{
+  "nombre": "roca_grande",
+  "zona": "naturaleza",
+  "descripcion": "Roca grande erosionada: gris con vetas de mineral azulado, musgo arriba, líquenes en la cara norte (+Z de Roblox) y cristales cyan asomando por las grietas.",
+  "tam_pedido_studs": [
+    4,
+    3,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 4.47,
+    "alto_y": 3.04,
+    "fondo_z": 3.36
+  },
+  "triangulos": 2128,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/roca_grande_color.png",
+    "rugosidad": "texturas/roca_grande_rugosidad.png",
+    "metal": "texturas/roca_grande_metal.png",
+    "normal": "texturas/roca_grande_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "roca_grande",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1920,
+      "tam_studs": [
+        4.471,
+        2.358,
+        3.356
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.001,
+        1.139,
+        -0.078
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "roca_grande_cristales_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.15,
+      "triangulos": 208,
+      "tam_studs": [
+        2.736,
+        2.016,
+        1.204
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.697,
+        1.988,
+        -0.892
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2128,
+    "tam_studs": [
+      4.471,
+      3.356,
+      3.036
+    ],
+    "centro": [
+      0.001,
+      0.078,
+      1.478
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "roca_grande_turnaround.png"
+}
