@@ -1,0 +1,194 @@
+{
+  "nombre": "caja_herramientas_hangar",
+  "zona": "hangar",
+  "descripcion": "Caja de herramientas rodante profesional: 5 cajones con tiradores y cerradura, 2 ruedas fijas y 2 giratorias, borde anti-caída, 3 llaves inglesas en el soporte lateral y un destornillador.",
+  "tam_pedido_studs": [
+    2,
+    1,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 1.91,
+    "alto_y": 2.67,
+    "fondo_z": 0.93
+  },
+  "triangulos": 1792,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/caja_herramientas_hangar_color.png",
+    "rugosidad": "texturas/caja_herramientas_hangar_rugosidad.png",
+    "metal": "texturas/caja_herramientas_hangar_metal.png",
+    "normal": "texturas/caja_herramientas_hangar_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "caja_herramientas_hangar",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1292,
+      "tam_studs": [
+        1.91,
+        2.675,
+        0.872
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.005,
+        1.343,
+        -0.011
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_1",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        1.5,
+        0.28,
+        0.102
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.4,
+        -0.4
+      ],
+      "centro_studs": [
+        -0.0,
+        0.54,
+        -0.451
+      ],
+      "nota": "Cajón: se abre 0,5 studs hacia delante."
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_2",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        1.5,
+        0.28,
+        0.102
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.73,
+        -0.4
+      ],
+      "centro_studs": [
+        -0.0,
+        0.87,
+        -0.451
+      ],
+      "nota": "Cajón: se abre 0,5 studs hacia delante."
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_3",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        1.5,
+        0.28,
+        0.102
+      ],
+      "pivote_studs": [
+        -0.0,
+        1.06,
+        -0.4
+      ],
+      "centro_studs": [
+        -0.0,
+        1.2,
+        -0.451
+      ],
+      "nota": "Cajón: se abre 0,5 studs hacia delante."
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_4",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        1.5,
+        0.28,
+        0.102
+      ],
+      "pivote_studs": [
+        -0.0,
+        1.39,
+        -0.4
+      ],
+      "centro_studs": [
+        -0.0,
+        1.53,
+        -0.451
+      ],
+      "nota": "Cajón: se abre 0,5 studs hacia delante."
+    },
+    {
+      "nombre": "caja_herramientas_hangar_cajon_5",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        1.5,
+        0.55,
+        0.102
+      ],
+      "pivote_studs": [
+        -0.0,
+        1.72,
+        -0.4
+      ],
+      "centro_studs": [
+        -0.0,
+        1.995,
+        -0.451
+      ],
+      "nota": "Cajón: se abre 0,5 studs hacia delante."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1792,
+    "tam_studs": [
+      1.91,
+      0.927,
+      2.675
+    ],
+    "centro": [
+      0.005,
+      0.039,
+      1.343
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "caja_herramientas_hangar_turnaround.png"
+}
