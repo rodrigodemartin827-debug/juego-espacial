@@ -13,6 +13,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
+| `pueblo/taller/` | Taller de reparaciones del pueblo: nave de chapa con techo de hangar, portón corredero, 42 piezas, atlas PBR de 2048 | 14.975 (límite: 15.000) |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -212,6 +213,67 @@ ojos, añade `AnimationController` + `Animator`, y les pone la etiqueta **`Escan
 **`EspecieId`**: con eso el escáner ya las reconoce. Los ojos del brincador son SmoothPlastic negro con Reflectance
 (el brillo de la mirada); los del acechador, Neon morado.
 
+## Taller de reparaciones (`pueblo/taller/`)
+
+El músculo del pueblo: aquí se arregla todo. Nave ancha y baja de **chapa grecada gris oscuro** (12 × 9 studs de
+muros) sobre un **zócalo de hormigón armado de 1,5 studs** (juntas del encofrado, agujeros de los latiguillos,
+angulares y pletinas de acero atornillados), con **techo curvo de hangar** (bóveda de chapa con nervios remachados y
+frontis curvos), **dos lucernarios** de policarbonato y un **extractor industrial** en el techo con las aspas a la
+vista entre los barrotes de la jaula. El suelo es la losa, a ras: los vehículos entran sin escalón por una **rampa
+de chapa estriada** (patrón de diamante).
+
+Lo que cuenta cada lado:
+- **Fachada:** el **portón corredero** (3 × 4 studs) colgado de su raíl con 4 ruedas de garganta, tirador de tubo
+  grueso, remaches arriba y abajo, ventanilla y el borde de abajo **quemado de soldar** (tintes de calor, hollín y
+  gotas de metal). Encima, dos **focos industriales cian** en brazo, la **pluma con cadena gruesa y gancho en C**, y el
+  letrero «TALLER». A la izquierda, la **soldadora** (cables enrollados, careta colgada del asa, la pinza de masa
+  agarrada a la rampa). A la derecha, el **banco de trabajo** (tablero rayado, golpeado y quemado; tornillo de banco
+  atornillado en la esquina; aceitera, tuercas y la llave combinada) y encima el **panel perforado** con la llave
+  inglesa, el martillo, el destornillador, la llave de tubo y los alicates en 3D delante de sus **siluetas
+  pintadas**: hay una silueta vacía, la de la llave que está en el banco. Después, el **cuadro eléctrico** abierto
+  (magnetotérmicos, diferencial, interruptor general y cables), la señal **⚡ ALTO VOLTAJE** y el **medidor de
+  energía** con su pantallita de neón y la acometida gruesa que sube al arco.
+- **Lateral derecho:** el **compresor** (calderín, motor, bomba con aletas, guardapoleas, **manómetro**) con la
+  manguera enrollada en su gancho de pared, la **puerta del mecánico** (manija de palanca, llavín, dos bisagras
+  gruesas, chapa de patada abollada) con la placa **«HORARIO: Cuando estoy»** grabada, y la **carretilla** apoyada.
+- **Lateral izquierdo:** los **tres bidones** (aceite azul con el embudo metido, combustible rojo, refrigerante verde,
+  con chorretones de lo que guardan), la **ventana de cristal armado** (marco grueso, cruceta y malla de alambre de
+  verdad dentro del vidrio) y las **piezas apiladas**: tres tubos sobre traviesas, una chapa curva y una turbina rota.
+- **Detrás:** ventana pequeña y el **extractor redondo** con rejilla protectora y **hollín en penacho** encima.
+- **Dentro** (se ve por el portón abierto y las ventanas): estantería con cajas, bloque de motor en su caballete,
+  un taladro de minería en la mesa y una lámpara colgada.
+
+Los materiales cuentan la historia: **manchas de aceite permanentes** en la losa delante del portón y por dentro,
+rodadas que entran, el charco del grifo de purga del compresor; **hollín** bajo el extractor del techo y encima del
+de atrás; **grasa de manos** junto al banco, la jamba del portón y la manija; óxido y churretes en lo bajo de la chapa.
+
+Mide 15,7 × 11,9 × 7,1 studs con todo lo de alrededor (el edificio con el techo, 12,7 × 9,6; lo que pasa del ancho
+pedido de 14 es la acometida que sale del arco y lo que hay apoyado en los laterales). Son **14.975 triángulos** en
+42 mallas. Se genera con `herramientas/taller.py` (`taller_piezas.py`, `taller_materiales.py`), con el mismo proceso
+que las casas (`casa_minero.py`, `casa_materiales.py`, `casa_malla.py`, `casa_piezas.py`, `comerciante_piezas.py`).
+
+**Escala, ejes y texturas.** Igual que las casas: 1 unidad de Blender = 1 stud, FBX en metros (*Apply Scalings:
+FBX All*) con el **GIRO_IMPORTACION** de 180° en el eje vertical (en el FBX la fachada mira a +Z). Un solo atlas de
+2048 con cinco mapas: `taller_color.png`, `taller_normal.png`, `taller_roughness.png`, `taller_metalness.png` y
+`taller_emision.png` (pantalla de la soldadora y luces).
+
+**En Studio.**
+- Importa `taller.fbx` (Anchored activado). A las piezas normales, una `SurfaceAppearance` con los cuatro mapas.
+- `*_cristal` (portón, ventanas, lucernarios): **Glass**, color `#8E978C` (vidrio sucio de polvo y humo),
+  Transparency 0,4.
+- `focos_neon` y `medidor_energia_neon`: **Neon** cian `#3DF2FF`; `lampara_interior_neon_calido`: Neon `#FFB45A`.
+  `SpotLight` cian en `luz_foco_izq/der` apuntando a la explanada y `PointLight` cálida en `luz_interior`.
+- **Piezas que se mueven** (pivote en el JSON, en coordenadas de Roblox): `porton` **desliza** (dirección y
+  recorrido de 3,05 studs en `taller.json`; `porton_cristal` se suelda a él), `puerta_lateral` y `cuadro_puerta`
+  (bisagras), `extractor_aspas` y `ventilador_trasero_aspas` (giran sin parar).
+- **Efectos** (CLAUDE.md: «siempre hay chispas»): `taller.json` → `efectos_sugeridos` y los anclajes `chispas`
+  (pinza de la soldadora), `chispas_cuadro`, `extractor_boca` y `boca` (humo).
+
+**A tener en cuenta.** El portón mide 3 × 4 studs, como se pidió: un personaje R6 (5 studs) no pasa de pie. Si tiene
+que entrar, escala el modelo ×1,3 en Studio o sube `HUECO`/`HOJA` en `taller_piezas.py`. Lo mismo que en las casas
+está sin comprobar en Studio (esta sesión no tiene Studio): unidad de escala, orientación con el giro, el canal verde
+del mapa de normales y el peso de 42 MeshParts en móvil.
+
 ## Regenerar
 
 Requiere Python 3.13 y las bibliotecas de `herramientas/requirements.txt` (el mismo `bpy` que usa `animaciones/`):
@@ -226,6 +288,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 .venv/bin/python modelos/herramientas/planeta_monstruos.py --salida modelos/planeta_monstruos --ronda 5
 .venv/bin/python modelos/herramientas/cristal_abisal.py --salida modelos/cristal_abisal --ronda 5
 .venv/bin/python modelos/herramientas/criaturas.py --salida modelos/criaturas --ronda 5
+.venv/bin/python modelos/herramientas/taller.py --salida modelos/pueblo/taller   # ~22 min (--rapido, --vista, --detalles)
 .venv/bin/python modelos/herramientas/hoja_conjunto.py modelos/hoja_contactos_todo.png
 ```
 
