@@ -8,11 +8,11 @@
     10
   ],
   "tam_studs": {
-    "ancho_x": 6.0,
+    "ancho_x": 6.35,
     "alto_y": 9.8,
-    "fondo_z": 6.0
+    "fondo_z": 6.12
   },
-  "triangulos": 2596,
+  "triangulos": 4566,
   "presupuesto": 10000,
   "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
@@ -31,11 +31,11 @@
       "material_roblox": "SurfaceAppearance",
       "color": null,
       "transparencia": null,
-      "triangulos": 1968,
+      "triangulos": 3938,
       "tam_studs": [
-        6.0,
+        6.352,
         9.62,
-        6.0
+        6.115
       ],
       "pivote_studs": [
         -0.0,
@@ -43,9 +43,9 @@
         0.0
       ],
       "centro_studs": [
-        -0.0,
+        0.176,
         4.81,
-        0.0
+        -0.058
       ],
       "nota": ""
     },
@@ -177,15 +177,15 @@
     "ok": true,
     "problemas": [],
     "unidad_fbx_m": 0.28,
-    "triangulos": 2596,
+    "triangulos": 4566,
     "tam_studs": [
-      6.0,
-      6.0,
+      6.352,
+      6.115,
       9.8
     ],
     "centro": [
-      0.0,
-      0.0,
+      0.176,
+      0.058,
       4.9
     ],
     "normales_fuera": true
