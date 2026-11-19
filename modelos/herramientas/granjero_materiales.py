@@ -133,13 +133,14 @@ def crear_materiales(P):
     vaho = t.mul(t.rango(z, 2.6, 0.6, 0.25, 1.0), t.rango(t.ruido(1.2, detalle=3), 0.3, 0.75, 0.3, 1.0))
     vaho = t.op("MINIMUM", t.suma(vaho, t.mul(finas, 0.6)), 1.0)
     agua = t.op("MINIMUM", t.suma(gota, t.mul(reguero, 0.8)), 1.0)
-    col = t.mezcla(t.mul(vaho, 0.55), "#6FB384", "#D3E8D7")
+    col = t.mezcla(t.mul(vaho, 0.55), "#86D49A", "#D8EEDC")
     col = t.mezcla(agua, col, "#EAF6EE")
     # Polvo y verdín en el borde de abajo, por fuera.
     pie = t.mul(t.rango(z, 0.95, 0.55), t.rango(t.ruido(8.0, detalle=4), 0.35, 0.65))
     col = t.mezcla(t.mul(pie, 0.7), col, "#7A7F55")
-    alfa = t.suma(0.16, t.suma(t.mul(vaho, 0.32), t.suma(t.mul(agua, 0.45), t.mul(pie, 0.5))))
-    alfa = t.op("MINIMUM", alfa, 0.95)
+    # Opacidad: base del 30 % (se lee el verde del cristal aunque dentro esté en sombra) + vaho y gotas.
+    alfa = t.suma(0.3, t.suma(t.mul(vaho, 0.28), t.suma(t.mul(agua, 0.4), t.mul(pie, 0.45))))
+    alfa = t.op("MINIMUM", alfa, 0.92)
     alt = t.suma(t.mul(gota, 0.004), t.mul(reguero, 0.0015))
     t.terminar(col, t.lerp(agua, t.lerp(vaho, 0.06, 0.3), 0.02), 0.0, alt, bisel=0, alfa=alfa)
 

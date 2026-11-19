@@ -73,7 +73,8 @@ def main():
         "neones": {"_neon_morado": ("#9B59B6", 5.0)},
         "translucido": "vidrio",
         # Resplandor morado de la lámpara UV dentro del invernadero y luz de día que entra por el cristal.
-        "luces_render": [((-9.0, -2.0, 4.1), 60.0, (0.62, 0.36, 0.72)), ((-9.0, 2.0, 4.1), 60.0, (0.62, 0.36, 0.72))],
+        "luces_render": [((-9.0, -2.0, 4.1), 140.0, (0.62, 0.36, 0.72)), ((-9.0, 2.0, 4.1), 140.0, (0.62, 0.36, 0.72)),
+                         ((-9.0, 0.0, 3.0), 260.0, (0.92, 1.0, 0.9))],
     })
 
 
