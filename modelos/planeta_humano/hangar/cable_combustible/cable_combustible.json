@@ -1,0 +1,98 @@
+{
+  "nombre": "cable_combustible",
+  "zona": "hangar",
+  "descripcion": "Punto de repostaje de pared: panel de servicio con carrete de manguera, boquilla con seguro de bayoneta en su soporte, manómetro en la conexión y cartel COMBUSTIBLE — NO FUMAR.",
+  "tam_pedido_studs": [
+    3,
+    1,
+    1
+  ],
+  "tam_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 1.08,
+    "fondo_z": 1.03
+  },
+  "triangulos": 1988,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/cable_combustible_color.png",
+    "rugosidad": "texturas/cable_combustible_rugosidad.png",
+    "metal": "texturas/cable_combustible_metal.png",
+    "normal": "texturas/cable_combustible_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "cable_combustible",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1572,
+      "tam_studs": [
+        3.0,
+        1.08,
+        0.76
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.55,
+        0.13
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "cable_combustible_carrete",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 416,
+      "tam_studs": [
+        0.88,
+        0.858,
+        0.87
+      ],
+      "pivote_studs": [
+        0.85,
+        0.55,
+        0.0
+      ],
+      "centro_studs": [
+        0.85,
+        0.55,
+        -0.085
+      ],
+      "nota": "Tambor del carrete: gira sobre el eje Z de Roblox (perpendicular a la pared)."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1988,
+    "tam_studs": [
+      3.0,
+      1.03,
+      1.08
+    ],
+    "centro": [
+      -0.0,
+      0.005,
+      0.55
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "cable_combustible_turnaround.png"
+}
