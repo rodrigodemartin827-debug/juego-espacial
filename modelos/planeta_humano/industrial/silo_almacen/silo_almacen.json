@@ -1,0 +1,98 @@
+{
+  "nombre": "silo_almacen",
+  "zona": "industrial",
+  "descripcion": "Silo vertical de almacén: techo cónico con respiradero, escalerilla con jaula arriba, puerta de inspección con bisagras y volante, base de hormigón con cuatro patas y salida con válvula de mariposa.",
+  "tam_pedido_studs": [
+    4,
+    4,
+    10
+  ],
+  "tam_studs": {
+    "ancho_x": 4.67,
+    "alto_y": 10.05,
+    "fondo_z": 4.0
+  },
+  "triangulos": 4906,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/silo_almacen_color.png",
+    "rugosidad": "texturas/silo_almacen_rugosidad.png",
+    "metal": "texturas/silo_almacen_metal.png",
+    "normal": "texturas/silo_almacen_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "silo_almacen",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 4654,
+      "tam_studs": [
+        4.67,
+        10.05,
+        4.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.335,
+        5.025,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "silo_almacen_puerta_inspeccion",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 252,
+      "tam_studs": [
+        1.125,
+        1.05,
+        0.255
+      ],
+      "pivote_studs": [
+        0.55,
+        5.0,
+        -1.63
+      ],
+      "centro_studs": [
+        0.037,
+        5.0,
+        -1.798
+      ],
+      "nota": "Puerta de inspección: gira sobre sus bisagras (eje vertical del pivote)."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 4906,
+    "tam_studs": [
+      4.67,
+      4.0,
+      10.05
+    ],
+    "centro": [
+      -0.335,
+      0.0,
+      5.025
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "silo_almacen_turnaround.png"
+}
