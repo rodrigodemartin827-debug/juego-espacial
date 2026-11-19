@@ -9,7 +9,7 @@
   ],
   "tam_studs": {
     "ancho_x": 12.0,
-    "alto_y": 9.4,
+    "alto_y": 8.37,
     "fondo_z": 9.97
   },
   "triangulos": 8192,
@@ -34,7 +34,7 @@
       "triangulos": 6948,
       "tam_studs": [
         12.0,
-        9.4,
+        8.374,
         9.97
       ],
       "pivote_studs": [
@@ -44,7 +44,7 @@
       ],
       "centro_studs": [
         -0.0,
-        4.7,
+        4.187,
         0.115
       ],
       "nota": ""
@@ -82,8 +82,8 @@
       "triangulos": 236,
       "tam_studs": [
         4.513,
-        4.225,
-        3.405
+        1.482,
+        0.557
       ],
       "pivote_studs": [
         -0.0,
@@ -92,8 +92,8 @@
       ],
       "centro_studs": [
         -0.0,
-        2.164,
-        -1.939
+        4.934,
+        -3.802
       ],
       "nota": ""
     },
@@ -176,19 +176,19 @@
     "piezas": 6,
     "ok": true,
     "problemas": [],
+    "unidad_fbx_m": 0.28,
     "triangulos": 8192,
     "tam_studs": [
       12.0,
       9.97,
-      9.4
+      8.374
     ],
     "centro": [
       -0.0,
       -0.115,
-      4.7
+      4.187
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "banco_galactico_turnaround.png"
 }
