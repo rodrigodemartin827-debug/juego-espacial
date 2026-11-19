@@ -1,0 +1,98 @@
+{
+  "nombre": "arbol_sauce_espacial",
+  "zona": "naturaleza",
+  "descripcion": "Sauce llorón espacial: tronco curvado con surcos verticales, ramas en arco de las que cuelgan cortinas de hojas alargadas casi hasta el suelo, bordes con bioluminiscencia cyan tenue y raíces aéreas.",
+  "tam_pedido_studs": [
+    5,
+    5,
+    10
+  ],
+  "tam_studs": {
+    "ancho_x": 4.88,
+    "alto_y": 8.7,
+    "fondo_z": 5.02
+  },
+  "triangulos": 6368,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/arbol_sauce_espacial_color.png",
+    "rugosidad": "texturas/arbol_sauce_espacial_rugosidad.png",
+    "metal": "texturas/arbol_sauce_espacial_metal.png",
+    "normal": "texturas/arbol_sauce_espacial_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "arbol_sauce_espacial",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 6080,
+      "tam_studs": [
+        4.882,
+        8.7,
+        5.023
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.223,
+        4.228,
+        0.256
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "arbol_sauce_espacial_bordes_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.55,
+      "triangulos": 288,
+      "tam_studs": [
+        4.241,
+        2.849,
+        4.103
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.425,
+        1.947,
+        0.117
+      ],
+      "nota": "Bioluminiscencia tenue: Neon cyan con Transparency 0,55."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 6368,
+    "tam_studs": [
+      4.882,
+      5.023,
+      8.7
+    ],
+    "centro": [
+      0.223,
+      -0.256,
+      4.228
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "arbol_sauce_espacial_turnaround.png"
+}
