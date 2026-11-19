@@ -1,0 +1,194 @@
+{
+  "nombre": "montacargas",
+  "zona": "hangar",
+  "descripcion": "Carretilla elevadora hover: horquilla de dos brazos en un mástil con cilindro hidráulico, 4 discos de levitación, volante y asiento, contrapeso trasero, panel con medidor de carga y baliza naranja.",
+  "tam_pedido_studs": [
+    3,
+    2,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 1.91,
+    "alto_y": 2.73,
+    "fondo_z": 3.36
+  },
+  "triangulos": 3844,
+  "presupuesto": 6000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/montacargas_color.png",
+    "rugosidad": "texturas/montacargas_rugosidad.png",
+    "metal": "texturas/montacargas_metal.png",
+    "normal": "texturas/montacargas_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "montacargas",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3028,
+      "tam_studs": [
+        1.91,
+        2.478,
+        2.195
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.554,
+        0.027
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "montacargas_horquilla",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 340,
+      "tam_studs": [
+        1.1,
+        1.431,
+        1.176
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.35,
+        -1.05
+      ],
+      "centro_studs": [
+        -0.0,
+        0.963,
+        -1.648
+      ],
+      "nota": "Carro y horquilla: suben por el mástil hasta 2 studs (mover en Y de Roblox)."
+    },
+    {
+      "nombre": "montacargas_discos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.3,
+      "triangulos": 240,
+      "tam_studs": [
+        1.68,
+        0.04,
+        1.92
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.33,
+        0.05
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "montacargas_baliza_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FF8C1A",
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        0.171,
+        0.216,
+        0.18
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.83,
+        0.3
+      ],
+      "nota": "Baliza giratoria: Neon naranja; se puede girar sobre su eje vertical."
+    },
+    {
+      "nombre": "montacargas_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 36,
+      "tam_studs": [
+        1.4,
+        0.41,
+        1.88
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.585,
+        0.17
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "montacargas_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#D9F1F6",
+      "transparencia": 0.4,
+      "triangulos": 100,
+      "tam_studs": [
+        0.228,
+        0.3,
+        0.24
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.83,
+        0.3
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3844,
+    "tam_studs": [
+      1.91,
+      3.361,
+      2.732
+    ],
+    "centro": [
+      0.0,
+      0.555,
+      1.614
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "montacargas_turnaround.png"
+}

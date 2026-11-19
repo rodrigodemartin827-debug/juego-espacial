@@ -686,19 +686,33 @@ class Parte:
         bmesh.ops.scale(self.bm, vec=V(esc), verts=vs)
         return self._cerrar(vs, mat, Matrix.Translation(V(c)))
 
-    def ico(self, c, r, mat, sub=1, esc=(1, 1, 1), ruido=0.0, semilla=0):
+    def ico(self, c, r, mat, sub=1, esc=(1, 1, 1), ruido=0.0, semilla=0, suave=None, base_plana=None):
+        """Icosfera (sub=1: icosaedro de 20 caras; 2: 80; 3: 320). ruido: azar por vértice.
+        suave=(amplitud, frecuencia): deformación de baja frecuencia (rocas erosionadas, masas de hojas).
+        base_plana: z local por debajo de la cual se aplana (rocas que apoyan en el suelo)."""
+        from mathutils import noise
         res = bmesh.ops.create_icosphere(self.bm, subdivisions=sub, radius=r)
         vs = res["verts"]
         rnd = random.Random(semilla)
+        off = V((semilla * 1.37, semilla * 2.11, semilla * 0.73))
+        if suave:
+            amp, freq = suave
+            for v in vs:
+                d = v.co.normalized()
+                v.co *= 1.0 + amp * noise.noise(d * freq + off) + amp * 0.5 * noise.noise(d * freq * 2.3 + off)
         if ruido:
             for v in vs:
                 v.co *= 1.0 + rnd.uniform(-ruido, ruido)
+        if base_plana is not None:
+            for v in vs:
+                if v.co.z < base_plana * r:
+                    v.co.z = base_plana * r + (v.co.z - base_plana * r) * 0.05
         bmesh.ops.scale(self.bm, vec=V(esc), verts=vs)
         return self._cerrar(vs, mat, Matrix.Translation(V(c)))
 
-    def roca(self, c, r, mat, semilla=0, esc=(1, 1, 0.8), ruido=0.28, sub=1):
+    def roca(self, c, r, mat, semilla=0, esc=(1, 1, 0.8), ruido=0.28, sub=1, suave=None, base_plana=None):
         """Piedra irregular (icosfera deformada y aplastada)."""
-        return self.ico(c, r, mat, sub=sub, esc=esc, ruido=ruido, semilla=semilla)
+        return self.ico(c, r, mat, sub=sub, esc=esc, ruido=ruido, semilla=semilla, suave=suave, base_plana=base_plana)
 
     def tubo(self, puntos, r, mat, n=8, suave=True, seg=4, tapas=True, cerrado=False, r_fin=None, surcos=0,
              prof=0.0, semilla=0, radios=None):
