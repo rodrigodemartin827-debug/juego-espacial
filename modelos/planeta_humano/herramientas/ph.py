@@ -506,7 +506,6 @@ class Parte:
         self.nota = nota
         self.bm = bmesh.new()
         self.mats = []
-        self.pila = [Matrix.Identity(4)]
         if tipo == "neon":
             self.mat_unico = material_simple(f"{nombre}_m", color, emision=6.0, alfa=1.0 - (transparencia or 0.0))
         elif tipo == "cristal":
@@ -515,6 +514,16 @@ class Parte:
             self.mat_unico = None
 
     # ---- transformaciones -----------------------------------------------------------------------------------
+    # La pila de transformaciones es UNA por modelo y la comparten todas las piezas: dentro de un
+    # `with pieza.en(...)` también se mueven los neones, cristales y demás piezas que se modelen en el bloque.
+    @property
+    def pila(self):
+        return self.modelo.pila
+
+    @pila.setter
+    def pila(self, valor):
+        self.modelo.pila = valor
+
     @contextmanager
     def en(self, loc=(0, 0, 0), rot=None, esc=None):
         m = Matrix.Translation(V(loc)) @ rot_m(rot)
@@ -870,6 +879,7 @@ class Modelo:
         self.anclajes = {}
         self.notas = []
         self._secc = [("inicio", 0)]
+        self.pila = [Matrix.Identity(4)]  # transformaciones activas (compartidas por todas las piezas)
         # Se genera en una carpeta temporal fuera del repositorio y solo se mueve a su sitio (RAIZ/zona/nombre)
         # cuando todo ha salido bien y el FBX está verificado: así nunca queda un modelo a medias en la rama.
         self.dir_final = os.path.join(RAIZ, zona, nombre)

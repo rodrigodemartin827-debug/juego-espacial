@@ -536,6 +536,8 @@ def mesa_crafting():
     for yy in (vy - 0.25, vy - 0.38):
         c.caja((vx, yy, Z + 0.3), (0.4, 0.02, 0.12), osc, 0.0)  # mordazas estriadas
     c.cil((vx, vy - 0.51, Z + 0.2), (vx, vy - 0.2, Z + 0.2), 0.03, acero, n=6)
+    for dx in (-0.13, 0.13):  # guías por las que corre la mandíbula móvil
+        c.cil((vx + dx, vy - 0.5, Z + 0.17), (vx + dx, vy - 0.12, Z + 0.17), 0.028, acero, n=6)
     c.cil((vx - 0.25, vy - 0.56, Z + 0.2), (vx + 0.25, vy - 0.56, Z + 0.2), 0.022, acero, n=6)  # manivela
     for s in (-1, 1):
         c.esfera((vx + s * 0.26, vy - 0.56, Z + 0.2), 0.04, acero, seg=6, anillos=4)
