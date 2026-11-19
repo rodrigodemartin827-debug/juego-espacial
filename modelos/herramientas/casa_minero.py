@@ -261,7 +261,7 @@ def hornear_atlas(objs, tam, carpeta, rapido):
 
     todos = [o for o in scn.objects if o.type == "MESH"]
     muestras = {"blanco": 1, "color": 2 if rapido else 4, "rug": 2 if rapido else 4, "met": 2 if rapido else 4,
-                "emi": 1, "normal": 2 if rapido else 6}
+                "emi": 1, "alfa": 2 if rapido else 4, "normal": 2 if rapido else 6}
     t0 = time.time()
     for idx, (p, ob, oa) in enumerate(objs):
         ti = time.time()
