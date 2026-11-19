@@ -338,6 +338,8 @@ def hornear_atlas(objs, tam, carpeta, rapido):
         bpy.ops.object.bake(type="AO", margin=0, use_selected_to_active=False)
         sel = ids == idx
         atlas["ao"][sel] = _leer(tmp)[..., 0][sel]
+    for o in todos:
+        o.hide_render = o.name.endswith("_alta")
     log(f"Horneado completo en {time.time() - t0:.0f} s")
 
     # Restaurar materiales de las bajas.
@@ -640,6 +642,9 @@ def render_vista(objetos, luces, nombre, az, el, ruta, tam, muestras, centro=Non
     colocar(luces["relleno"], 65, 18, 18 * k)
     colocar(luces["contra"], 170, 38, 16 * k)
     anterior = scn.view_layers[0].material_override
+    suelo = bpy.data.objects.get("suelo_estudio")
+    if suelo is not None:
+        suelo.hide_render = malla
     if malla:
         scn.view_layers[0].material_override = _material_malla()
     scn.render.filepath = ruta
@@ -997,7 +1002,7 @@ DETALLES_PUESTO = [
     ("Baliza", 35, 15, (2.63, -2.73, 6.2), 0.45),
     ("Antena y radio", 150, 18, (1.45, 2.35, 6.7), 1.9),
     ("Bandera", -8, 8, (-1.4, 2.3, 7.4), 0.95),
-    ("Cámara de la barrera", 70, 15, (3.15, -2.45, 5.05), 0.6),
+    ("Cámara de la barrera", 40, -2, (3.2, -2.65, 4.95), 0.5),
     ("Tablón de avisos", -90, 4, (-2.9, 1.5, 2.9), 1.35),
     ("Extintor", 92, 4, (2.9, 0.12, 1.7), 0.85),
     ("Papelera", 110, 15, (3.35, 2.95, 0.8), 0.75),
@@ -1007,13 +1012,14 @@ DETALLES_PUESTO = [
     ("Cable de la radio", 170, 10, (0.7, 3.1, 4.9), 1.0),
     # Interior sin el techo ni la fachada (en el juego se ve a través del ventanal).
     ("Interior", -20, 38, (0.0, -0.4, 2.3), 2.7, QUITAR_FACHADA),
-    ("La silla del guardia", -25, 30, (0.35, -0.95, 1.7), 0.85, QUITAR_FACHADA),
+    ("La silla del guardia", -70, 48, (0.35, -0.9, 1.75), 0.95, QUITAR_FACHADA + ["monitores", "mostrador"]),
     ("Cosas del guardia", -10, 35, (0.4, -2.0, 2.15), 1.0, QUITAR_FACHADA),
 ]
 
 ANIMABLES_PUESTO = {
     "puerta": ("Bisagras en el canto delantero (eje vertical por fuera de la hoja). Abre hacia fuera, hacia la "
-               "barrera. Limítala a 95° para que no choque con el extintor.", (0, 0, 1), [0, 95]),
+               "barrera (ángulo positivo = abre). Limítala a 95° para que no choque con el extintor.", (0, 0, -1),
+               [0, 95]),
     "barrera_brazo": ("Eje horizontal del cubo en la horquilla del poste. Ángulo positivo = el brazo sube "
                       "(90° = vertical).", (0, -1, 0), [0, 88]),
     "foco_cabezal": ("Gira sobre el eje vertical de la base motorizada (barrido de vigilancia). La lente "

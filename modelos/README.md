@@ -13,6 +13,7 @@ importador 3D de Roblox Studio. No hay nada hecho a mano en Blender: todo sale d
 | `planeta_monstruos/` | 3 árboles muertos, 2 rocas oscuras con grietas brillantes y el «Arco de costillas» | 680–4.000 |
 | `cristal_abisal/` | El recurso exclusivo de los monstruos: cristal oscuro con brillo morado | ~1.300 |
 | `criaturas/` | Brincador lanudo (pacífico, humanos) y Acechador del abismo (agresivo, monstruos), por piezas | 2.900 y 3.700 |
+| `pueblo/puesto_seguridad/` | Puesto de seguridad del pueblo con su barrera, 41 piezas, atlas PBR de 2048 | 9.894 (límite: 10.000) |
 
 `hoja_contactos_todo.png` junta todos los modelos en una sola hoja.
 
@@ -211,6 +212,75 @@ pivote en la articulación y nombres como `Pata1` u `OrejaIzq`, para animarlas c
 ojos, añade `AnimationController` + `Animator`, y les pone la etiqueta **`Escaneable`** y el atributo
 **`EspecieId`**: con eso el escáner ya las reconoce. Los ojos del brincador son SmoothPlastic negro con Reflectance
 (el brillo de la mirada); los del acechador, Neon morado.
+
+## Puesto de seguridad (`pueblo/puesto_seguridad/`)
+
+La garita del guardia de la colonia: el edificio más pequeño, robusto y mejor cuidado del pueblo, con la barrera que
+controla quién entra. La caseta mide 5,6 × 6,0 studs y 5,9 de alto (hasta la albardilla); con el entorno (barrera,
+interfono, STOP, cono y banda reductora) y lo del techo, la caja total es de 10,6 × 10,4 × 8,3 studs.
+
+- **Estructura:** paredes de paneles de acero de 0,35 (más gruesas que las casas) en gris oscuro con juntas y
+  tornillos, franja reflectante naranja y amarilla todo alrededor (también en la puerta), angulares de acero
+  atornillados en las cuatro esquinas, zócalo galvanizado y pretil con albardilla. «SEGURIDAD» en letras blancas en el
+  pretil de la fachada, para que se lea desde la calle.
+- **Ventanal de 270°:** fachada y los dos laterales, con marco reforzado atornillado, parteluz, cristal grueso y
+  malla de alambre dentro (vidrio armado). Debajo, una repisa con escuadras y la **taza de café** («EL MEJOR
+  GUARDIA», con cercos de otras tazas en la repisa).
+- **Puerta** (lateral derecho, hacia la barrera): acero azul reforzado con bastidor y cuarterones en X, **3
+  bisagras industriales** con engrasador, cerradura con **teclado numérico** (las teclas del código, más gastadas),
+  manilla y bombín, cierre de varillas visible por fuera, **barra antipánico** por dentro, mirilla, cierrapuertas,
+  cartel «SEGURIDAD COLONIAL» con escudo y pegatina «SOLO PERSONAL AUTORIZADO».
+- **Techo:** **foco** grande con base motorizada (aletas y cables) y cabezal giratorio con lente cian, **sirena** roja
+  en la esquina delantera izquierda, **baliza** naranja en la derecha, **antena con espiral** y su caja de radio
+  (el cable baja por el muro de atrás hasta un pasamuros y, dentro, llega a la radio base), **panel solar** y
+  **bandera** de la colonia (tela con grosor, estrella en círculo).
+- **Fuera:** **2 cámaras** (una mira a la barrera, otra a la calle), **tablón** con tres avisos «SE BUSCA», el
+  horario de patrulla (con «¡Doble turno toda la semana!» a boli) y el toque de queda; **extintor** con su señal,
+  **papelera** anclada junto a la puerta.
+- **Barrera:** poste cilíndrico sobre placa con **4 pernos grandes** y cartelas, horquilla con eje y tapa del
+  engranaje; **brazo de 3 studs** con franjas rojas y blancas, faldón de goma, catadióptricos y **contrapeso**; apoyo
+  en horquilla al otro lado de la calzada.
+- **Entorno:** **interfono** (pantallita cian, altavoz, botón «PULSE PARA LLAMAR»), **cono** con dos franjas,
+  **STOP** octogonal con borde reflectante y abrazaderas, **banda reductora** de módulos negros y amarillos, y la
+  isla de hormigón con la punta pintada a franjas.
+- **Dentro** (se ve por el ventanal; hay luz que brilla en el techo): mostrador en L, dos monitores con lo que ven
+  las cámaras, teclado, walkie en su cargador, **la silla del guardia** con el asiento hundido y clareado de tantas
+  horas (y un parche de cinta americana), foto de su familia, termo, cactus con flor, portapapeles, gorra colgada,
+  calendario con los días tachados, caja de llaves, reloj y la radio base en una estantería.
+
+**Generador:** `herramientas/puesto_seguridad.py` (piezas en `puesto_piezas.py`, materiales en
+`puesto_materiales.py`, avisos y carteles dibujados con Pillow en `puesto_calcos.py`). Es el mismo proceso que las
+casas del pueblo: malla alta horneada a un atlas PBR de 2048 (color, normal, roughness, metalness, emisión), GIRO de
+importación de 180° en el eje vertical, FBX con «Apply Scalings: FBX All» (1 stud = 0,28 m) reimportado y
+comprobado, y `puesto_seguridad.json` con los triángulos, las medidas, los pivotes y cómo va cada pieza en Studio.
+
+```bash
+python modelos/herramientas/puesto_seguridad.py --salida modelos/pueblo/puesto_seguridad
+```
+
+`--contar` solo cuenta triángulos, `--vista` hace vistas rápidas sin hornear (añade `--detalles` para los primeros
+planos y la comprobación de normales) y `--rapido` hace todo con un atlas de 512.
+
+**En Studio:**
+- Las piezas de atlas llevan una `SurfaceAppearance` con las 5 texturas de la carpeta (`ColorMap`, `NormalMap`,
+  `RoughnessMap`, `MetalnessMap`; la emisión ilumina pantallas, LED, el display de la radio, el botón del interfono,
+  la bombilla de la baliza y la luz del techo).
+- `foco_lente_neon` e `interfono_pantalla_neon`: **Material Neon**, color `#3DF2FF`.
+- `ventanal_cristal`: **Glass** `#9FC4CF`, Transparency 0,5. `baliza_cristal`: **Glass** `#FF8A1E`, Transparency 0,35.
+- Luz: una `PointLight` cálida en `luces_sugeridas_roblox` del JSON (la del techo de dentro). Para el foco, una
+  `SpotLight` cian en la lente, y si se quiere, una luz naranja giratoria dentro de la baliza.
+- **Piezas que se mueven** (el JSON da el pivote y el eje en coordenadas de Roblox):
+  - `puerta`: gira sobre el eje de las bisagras (canto delantero, por fuera), 0–95° hacia fuera.
+  - `barrera_brazo`: gira sobre el eje horizontal del cubo de la horquilla, 0° bajada y 88° levantada.
+  - `foco_cabezal` (con `foco_lente_neon` soldada): gira 360° sobre el eje vertical de la base.
+- **Ojo con la escala:** el encargo pide una caseta de unos 6 × 6 × 6 studs. Con esas medidas la puerta tiene 4,3
+  studs de alto y 1,9 de ancho, y un personaje R6 de 5 studs no pasa de pie. Si el guardia o el jugador tienen que
+  entrar, hay que escalar el modelo ×1,25 (o más) al colocarlo.
+
+**Lo que hay que comprobar en Studio** (esta sesión no tiene Studio): que el importador cree la
+`SurfaceAppearance` con las texturas, que la orientación sea la esperada con el giro de 180°, y que los pivotes de
+`puerta`, `barrera_brazo` y `foco_cabezal` caigan en su eje (si el importador los mueve al centro de la pieza, hay
+que poner el `PivotOffset` con el valor del JSON).
 
 ## Regenerar
 

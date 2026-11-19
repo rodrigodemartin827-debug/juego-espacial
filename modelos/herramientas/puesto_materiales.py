@@ -288,7 +288,7 @@ def crear_materiales(P, calcos):
     col = t.mezcla(t.rango(t.ruido(30.0), 0.3, 0.7), "#3A3E43", "#44494E")
     if "teclado" in P:
         col, _ = calco_sobre(t, col, "teclado", P["teclado"], cara=(1, 0, 0))
-    # El código se marca siempre igual: el 1, el 7 y el 0 están más gastados (brillan).
+    # El código se marca siempre igual: dos teclas de la primera columna están más gastadas (brillan).
     gast = t.maxi(t.lejos_de(P["teclado"]["origen"] + Vector((0, 0.045, 0.27)), 0.0, 0.04),
                   t.lejos_de(P["teclado"]["origen"] + Vector((0, 0.045, 0.04)), 0.0, 0.04)) if "teclado" in P else 0.0
     t.terminar(col, t.lerp(gast, 0.55, 0.2), t.lerp(gast, 0.0, 0.3), bisel=0.006)

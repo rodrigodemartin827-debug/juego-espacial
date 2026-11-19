@@ -575,8 +575,8 @@ def puerta():
     caja_plano(b, pl, y0 + m, y1 - m, z0 + m, z0 + m + 0.5, 0.0, 0.012, "inox", sin=("+y", "-x", "+x"))
     P["puerta_patada"] = pl.p((y0 + y1) / 2, z0 + 0.4, 0.0)
     # Franja reflectante también en la puerta (sigue la de la pared).
-    caja_plano(p.alta, pl, y0 + 0.02, y1 - 0.02, CINTA_Z[0], CINTA_Z[1], 0.035, 0.041, "cinta", sin=("+y",))
-    caja_plano(p.alta, pl, y0 + m, y1 - m, CINTA_Z[0], CINTA_Z[1], 0.0, 0.006, "cinta", sin=("+y",))
+    caja_plano(p.alta, pl, y0 + 0.02, y1 - 0.02, CINTA_Z[0], CINTA_Z[1], 0.037, 0.043, "cinta", sin=("+y",))
+    caja_plano(p.alta, pl, y0 + m, y1 - m, CINTA_Z[0], CINTA_Z[1], 0.009, 0.014, "cinta", sin=("+y",))
     # Paneles embutidos (malla alta): dos cuarterones con pliegue en diagonal (puerta blindada).
     for v0, v1 in ((z0 + m + 0.55, 2.9), (3.12, z1 - m - 0.05)):
         caja_plano(p.alta, pl, y0 + m + 0.08, y1 - m - 0.08, v0, v1, -0.004, 0.006, "puerta_acero", sin=("+y",))
@@ -1246,7 +1246,7 @@ def papelera():
 
 def taza():
     """Taza de café en la repisa del ventanal: cerámica con grosor, asa y café dentro."""
-    p = Pieza("taza", peso_uv=1.8)
+    p = Pieza("taza", peso_uv=4.0)
     b = p.baja
     c = P["taza"] + Vector((0, 0, 0.0))
     r, h, e = 0.11, 0.24, 0.016
