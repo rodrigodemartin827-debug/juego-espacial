@@ -344,65 +344,130 @@ def yunque_forja():
 # ==============================================================================================================
 def horno_forja():
     m = Modelo("horno_forja", ZONA, (3, 3, 4), 5000,
-               "Horno de fundición de ladrillo refractario: puerta de hierro con bisagras (pieza aparte), brillo "
-               "naranja, chimenea trasera, fuelle de cuero con mecanismo de madera y bandeja de cenizas extraíble.")
+               "Horno de fundición de ladrillo refractario: puerta de hierro con bisagras y lamas por las que se ve "
+               "el fuego (pieza aparte), brillo naranja, arco de dovelas, chimenea trasera con hollín, fuelle de cuero "
+               "con palanca de madera y bandeja de cenizas extraíble.")
     c = m.parte()
-    fuego = m.parte("fuego_neon", tipo="neon", color=NARANJA_FORJA)
-    puerta = m.parte("puerta", pivote=(-0.65, -1.27, 1.25), nota="Puerta de hierro: gira sobre las bisagras "
-                                                                 "(eje vertical del pivote) hasta 110°.")
-    bandeja = m.parte("bandeja_cenizas", pivote=(0, -1.15, 0.28), nota="Bandeja: se extrae 0,8 studs hacia delante.")
-    ladr = m.mat("ladrillo", "#B06A44", c2="#5C534D", tam_ladrillo=(0.32, 0.16), hollin=(2.0, 3.6))
+    fuego = m.parte("fuego_neon", tipo="neon", color=NARANJA_FORJA, nota="Fuego del horno: Neon #FF6B35. Queda bien con "
+                                                                         "una PointLight naranja en el anclaje Fuego.")
+    puerta = m.parte("puerta", pivote=(-0.62, -1.36, 1.27), nota="Puerta de hierro: gira sobre las bisagras (eje "
+                                                                 "vertical del pivote) hasta 110°.")
+    bandeja = m.parte("bandeja_cenizas", pivote=(0, -1.25, 0.25), nota="Bandeja de cenizas: se extrae 0,8 studs hacia "
+                                                                       "delante.")
+    ladr = m.mat("ladrillo", "#B06A44", c2="#5C534D", tam_ladrillo=(0.32, 0.16), manchas=[(0, -1.2, 1.9, 0.9, "#1A1612", 0.8)])
+    ladr_ch = m.mat("ladrillo", "#A0603E", c2="#5C534D", tam_ladrillo=(0.32, 0.16), hollin=(3.0, 4.05))
+    dovela = m.mat("piedra", "#9A8C7C", hollin=(1.7, 2.3))
     piedra = m.mat("piedra", "#6E6860")
     hierro = m.mat("metal", "#2E2C2B", rug=0.6, suciedad=0.6)
+    hollin = m.mat("metal", "#0F0E0D", rug=0.9, suciedad=0.0)
     madera = m.mat("madera", "#6A4628", eje="X")
+    madera_z = m.mat("madera", "#6A4628", eje="Z")
+    madera_y = m.mat("madera", "#6A4628", eje="Y")
     cuero = m.mat("cuero", "#5E3A22", bump=0.6)
     ceniza = m.mat("piedra", "#3C3A38", rug=1.0)
-    # base de piedra y cuerpo abovedado
-    c.caja((0, 0, 0.25), (2.7, 2.6, 0.5), piedra, 0.05)
-    c.caja((0, 0, 1.4), (2.4, 2.4, 1.8), ladr, 0.05)
-    c.loft([[(math.cos(a) * 1.2 * 1.0, math.sin(a) * 1.2, 2.3) for a in [i * math.tau / 16 for i in range(16)]],
-            [(math.cos(a) * 1.05, math.sin(a) * 1.05, 2.8) for a in [i * math.tau / 16 for i in range(16)]],
-            [(math.cos(a) * 0.6, math.sin(a) * 0.6, 3.2) for a in [i * math.tau / 16 for i in range(16)]]], ladr)
-    # zunchos de hierro
-    for zz in (0.8, 2.0):
-        c.caja((0, 0, zz), (2.48, 2.48, 0.1), hierro, 0.01)
-    # boca con marco de hierro y brillo
-    c.caja((0, -1.22, 1.25), (1.5, 0.1, 1.2), hierro, 0.04)
-    fuego.caja((0, -1.2, 1.25), (1.2, 0.06, 0.9), None)
-    # puerta (entreabierta 35°) con bisagras y tirador
-    with puerta.en((-0.65, -1.27, 1.25), (0, 0, -35)):
-        puerta.caja((0.62, -0.03, 0), (1.25, 0.1, 1.0), hierro, 0.03)
-        for k in range(3):
-            puerta.caja((0.62, -0.09, -0.3 + k * 0.3), (1.15, 0.03, 0.06), hierro, 0.01)
-        puerta.cil((1.1, -0.1, 0.0), (1.1, -0.3, 0.0), 0.03, hierro, n=6)
-        puerta.cil((1.0, -0.3, 0.0), (1.25, -0.3, 0.0), 0.035, madera, n=6)
-        for zz in (-0.35, 0.35):
-            puerta.cil((0, -0.0, zz - 0.12), (0, -0.0, zz + 0.12), 0.05, hierro, n=8)
-    # chimenea trasera
-    c.caja((0, 0.9, 3.4), (0.8, 0.8, 1.4), ladr, 0.04)
-    c.cil((0, 0.9, 4.1), (0, 0.9, 4.15), 0.45, hierro, n=8)
-    # bandeja de cenizas extraíble bajo la boca
-    bandeja.caja((0, -1.0, 0.28), (1.2, 0.8, 0.12), hierro, 0.02)
-    bandeja.caja((0, -1.0, 0.33), (1.05, 0.65, 0.04), ceniza, 0.0)
-    bandeja.cil((-0.2, -1.42, 0.3), (0.2, -1.42, 0.3), 0.03, hierro, n=6)
+    carbon = m.mat("piedra", "#1C1B1A", rug=0.7, suciedad=0.1)
+
+    m.seccion("base y cuerpo")
+    c.caja((0, 0, 0.25), (2.5, 2.5, 0.5), piedra, 0.06)
+    c.caja((0, 0, 1.4), (2.2, 2.2, 1.8), ladr, 0.04)
+    c.loft([[(math.cos(a) * 1.1, math.sin(a) * 1.1, 2.3) for a in [i * math.tau / 16 for i in range(16)]],
+            [(math.cos(a) * 0.98, math.sin(a) * 0.98, 2.8) for a in [i * math.tau / 16 for i in range(16)]],
+            [(math.cos(a) * 0.55, math.sin(a) * 0.55, 3.2) for a in [i * math.tau / 16 for i in range(16)]]], ladr)
+    # zunchos de hierro y cantoneras en L remachadas en las cuatro esquinas
+    for zz in (0.75, 2.2):
+        c.caja((0, 0, zz), (2.28, 2.28, 0.1), hierro, 0.01)
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            c.caja((sx * 1.1, sy * 0.98, 1.45), (0.06, 0.28, 1.6), hierro, 0.01)
+            c.caja((sx * 0.98, sy * 1.1, 1.45), (0.28, 0.06, 1.6), hierro, 0.01)
+            for zz in (1.0, 1.9):
+                c.remache((sx * 1.13, sy * 0.95, zz), (sx, 0, 0), hierro, 0.03)
+
+    m.seccion("boca, arco y fuego")
+    # marco de la boca (cuatro piezas: deja el hueco libre) y fuego al fondo
+    yb = -1.1
+    for (x, z, w, h) in ((0, 0.78, 1.36, 0.12), (0, 1.76, 1.36, 0.12), (-0.62, 1.27, 0.12, 1.1), (0.62, 1.27, 0.12, 1.1)):
+        c.caja((x, yb - 0.17, z), (w, 0.14, h), hierro, 0.02)
+    c.caja((0, yb - 0.04, 1.27), (1.12, 0.06, 0.88), hollin, 0.0)  # fondo de la cámara, ennegrecido
+    fuego.caja((0, yb - 0.08, 1.27), (1.1, 0.04, 0.86), None)
+    for k in range(7):  # brasas en el umbral
+        fuego.ico((-0.45 + k * 0.15, yb - 0.16, 0.88), 0.06, None, sub=1, ruido=0.3, semilla=k)
+    m.anclaje("Fuego", (0, yb - 0.3, 1.25), "PointLight naranja (Brightness 2, Range 12) delante de la boca.")
+    # arco de dovelas sobre la boca (piezas individuales en abanico)
+    for k in range(7):
+        a = math.radians(160 - k * (140 / 6))
+        r = 0.86
+        c.caja((math.cos(a) * r, yb - 0.15, 1.6 + math.sin(a) * r * 0.55), (0.26, 0.12, 0.34), dovela, 0.02,
+               rot=(0, -(math.degrees(a) - 90) * 0.8, 0))
+    # puerta (pieza aparte) cerrada, con lamas: entre ellas se ve el fuego
+    with puerta.en((0, 0, 0)):
+        xa, xb = -0.6, 0.6
+        y0, y1 = yb - 0.3, yb - 0.24
+        puerta.caja_de((xa, y0, 0.76), (xb, y1, 0.86), hierro, 0.01)
+        puerta.caja_de((xa, y0, 1.68), (xb, y1, 1.78), hierro, 0.01)
+        puerta.caja_de((xa, y0, 0.86), (xa + 0.1, y1, 1.68), hierro, 0.01)
+        puerta.caja_de((xb - 0.1, y0, 0.86), (xb, y1, 1.68), hierro, 0.01)
+        puerta.caja_de((xa + 0.1, y0 + 0.01, 0.86), (xb - 0.1, y1 - 0.01, 1.18), hierro, 0.01)  # chapa inferior
+        for k in range(4):
+            puerta.caja((0, (y0 + y1) / 2, 1.27 + k * 0.11), (1.0, 0.04, 0.05), hierro, 0.0, rot=(35, 0, 0))
+        for zz in (0.95, 1.6):
+            puerta.cil((-0.62, yb - 0.26, zz - 0.1), (-0.62, yb - 0.26, zz + 0.1), 0.05, hierro, n=8)
+            puerta.caja((-0.45, y0 - 0.01, zz), (0.32, 0.02, 0.08), hierro, 0.0)
+        puerta.cil((0.45, y0, 1.1), (0.45, y0 - 0.22, 1.1), 0.03, hierro, n=6)
+        puerta.cil((0.35, y0 - 0.22, 1.1), (0.62, y0 - 0.22, 1.1), 0.04, madera, n=6)
+
+    m.seccion("chimenea")
+    c.caja((0, 0.55, 3.45), (0.8, 0.8, 1.15), ladr_ch, 0.04)
+    c.caja((0, 0.55, 4.03), (0.92, 0.92, 0.1), hierro, 0.01)
+    c.caja((0, 0.55, 4.085), (0.5, 0.5, 0.02), hollin, 0.0)  # boca negra
+
+    m.seccion("bandeja de cenizas")
+    bandeja.caja((0, -1.0, 0.25), (1.2, 0.5, 0.12), hierro, 0.02)
+    bandeja.caja((0, -1.0, 0.3), (1.05, 0.4, 0.04), ceniza, 0.0)
+    bandeja.cil((-0.2, -1.32, 0.27), (0.2, -1.32, 0.27), 0.03, hierro, n=6)
     for s in (-1, 1):
-        bandeja.cil((s * 0.2, -1.42, 0.3), (s * 0.2, -1.38, 0.3), 0.02, hierro, n=5)
-    # fuelle de cuero a un lado, con tablas, boquilla al horno y palanca de madera sobre poste
-    fx, fy = 1.65, -0.2
-    with c.en((fx, fy, 1.05), (0, 0, 90)):
-        c.extruir([(-0.5, -0.3), (0.5, -0.3), (0.5, 0.3), (0.0, 0.42), (-0.5, 0.3)], 0.06, madera, c=(0, 0, -0.05),
-                  rot=(0, 0, 0))
-        c.extruir([(-0.5, -0.3), (0.5, -0.3), (0.5, 0.3), (0.0, 0.42), (-0.5, 0.3)], 0.06, madera, c=(0, 0, 0.35),
-                  rot=(0, 0, 0))
-        c.loft([[(x, y, -0.02) for x, y in ((-0.45, -0.27), (0.45, -0.27), (0.45, 0.27), (0.0, 0.38), (-0.45, 0.27))],
-                [(x * 1.15, y * 1.15, 0.15) for x, y in ((-0.45, -0.27), (0.45, -0.27), (0.45, 0.27), (0.0, 0.38),
-                                                         (-0.45, 0.27))],
-                [(x, y, 0.32) for x, y in ((-0.45, -0.27), (0.45, -0.27), (0.45, 0.27), (0.0, 0.38), (-0.45, 0.27))]],
-               cuero)
-    c.cil((fx, fy + 0.5, 1.2), (1.2, fy + 0.6, 1.2), 0.06, hierro, n=8)  # boquilla
-    c.cil((fx + 0.55, fy - 0.3, 0.0), (fx + 0.55, fy - 0.3, 2.0), 0.07, madera, n=6)
-    c.cil((fx + 0.55, fy - 0.3, 1.95), (fx - 0.1, fy, 1.45), 0.05, madera, n=6)
-    c.cil((fx + 0.45, fy - 0.3, 1.95), (fx + 0.65, fy - 0.3, 1.95), 0.04, hierro, n=6)
+        bandeja.cil((s * 0.2, -1.32, 0.27), (s * 0.2, -1.25, 0.27), 0.02, hierro, n=5)
+    c.caja((0, -1.24, 0.25), (1.3, 0.04, 0.2), hierro, 0.01)  # boca de la bandeja en el zócalo
+
+    m.seccion("fuelle y palanca")
+    # caballete de madera en el lateral +X, fuelle horizontal (tablas en forma de gota, cuero con pliegues)
+    fx = 1.45
+    for y in (-0.55, 0.45):
+        for s in (-1, 1):
+            c.cil((fx + s * 0.2, y, 0.0), (fx + s * 0.08, y, 0.8), 0.045, madera_z, n=5)
+        c.caja((fx, y, 0.82), (0.5, 0.08, 0.06), madera, 0.01)
+    gota = [(0.0, -0.62), (0.16, -0.5), (0.24, -0.2), (0.24, 0.2), (0.16, 0.42), (0.0, 0.5), (-0.16, 0.42), (-0.24, 0.2),
+            (-0.24, -0.2), (-0.16, -0.5)]
+    c.extruir(gota, 0.05, madera_y, c=(fx, -0.05, 0.9))
+    c.extruir(gota, 0.05, madera_y, c=(fx, -0.05, 1.25), rot=(-6, 0, 0))
+    c.loft([[(fx + x * 0.95, -0.05 + y * 0.95, z) for x, y in gota] for z in (0.92, 1.0, 1.06, 1.14, 1.2)], cuero)
+    for z in (0.99, 1.13):  # pliegues: aros de cuero algo más anchos
+        c.loft([[(fx + x * 1.02, -0.05 + y * 1.02, z + dz) for x, y in gota] for dz in (0.0, 0.025)], cuero)
+    # boquilla de hierro que entra en el lateral del horno
+    c.cil((fx, -0.7, 1.05), (fx, -0.85, 1.05), 0.06, hierro, n=8)
+    c.tubo([(fx, -0.85, 1.05), (fx - 0.1, -0.95, 1.05), (1.12, -0.6, 1.1)], 0.045, hierro, n=6, seg=2)
+    # palanca: poste trasero, brazo con eje y biela al tablero superior
+    c.caja((fx, 0.8, 1.1), (0.14, 0.14, 2.2), madera_z, 0.02)
+    eje = V((fx, 0.8, 2.15))
+    c.cil(eje + V((-0.1, 0, 0)), eje + V((0.1, 0, 0)), 0.035, hierro, n=6)
+    brazo_fin = V((fx, -0.9, 1.75))
+    c.cil(eje + V((0, 0.15, 0.06)), brazo_fin, 0.045, madera, n=6)
+    c.cil(brazo_fin, brazo_fin + V((0, -0.12, -0.06)), 0.05, cuero, n=6)  # empuñadura
+    c.cil(V((fx, 0.05, 1.98)), V((fx, 0.05, 1.3)), 0.02, hierro, n=4)  # biela
+    c.caja((fx, 0.05, 1.3), (0.08, 0.08, 0.05), hierro, 0.005)
+
+    m.seccion("atizadores y carbón")
+    for k in range(2):
+        x = -1.32 - k * 0.08
+        c.cil((x, -0.4 + k * 0.25, 0.0), (x + 0.12, -0.35 + k * 0.25, 1.4), 0.025, hierro, n=5)
+        c.toro((x + 0.13, -0.35 + k * 0.25, 1.47), 0.06, 0.015, hierro, n=8, m=3, rot=(90, 0, 0))
+    # cubo de carbón con asa
+    c.torno([(0.0, 0.0), (0.2, 0.0), (0.24, 0.35), (0.22, 0.35), (0.18, 0.04), (0.0, 0.04)], hierro, n=12,
+            c=(-1.3, 0.75, 0.0))
+    for i in range(6):
+        c.roca((-1.3 + math.cos(i) * 0.1, 0.75 + math.sin(i) * 0.1, 0.33), 0.08, carbon, semilla=i)
+    c.tubo([(-1.52, 0.75, 0.33), (-1.45, 0.75, 0.55), (-1.15, 0.75, 0.55), (-1.08, 0.75, 0.33)], 0.012, hierro, n=4,
+           seg=2)
     m.terminar()
 
 
