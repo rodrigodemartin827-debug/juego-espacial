@@ -1,0 +1,314 @@
+{
+  "nombre": "hospital_clinica",
+  "zona": "comercial",
+  "descripcion": "Clínica Colonial: el edificio más limpio, paneles blancos, cruz médica blanca luminosa, rampa con barandillas, puerta doble corredera esmerilada, camilla tras la ventana, botiquín y ambulancia hover.",
+  "tam_pedido_studs": [
+    14,
+    12,
+    10
+  ],
+  "tam_studs": {
+    "ancho_x": 13.43,
+    "alto_y": 10.46,
+    "fondo_z": 11.96
+  },
+  "triangulos": 7392,
+  "presupuesto": 16000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/hospital_clinica_color.png",
+    "rugosidad": "texturas/hospital_clinica_rugosidad.png",
+    "metal": "texturas/hospital_clinica_metal.png",
+    "normal": "texturas/hospital_clinica_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "hospital_clinica",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 5820,
+      "tam_studs": [
+        10.5,
+        10.463,
+        11.958
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -1.6,
+        5.074,
+        -1.129
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hospital_clinica_cruz_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FFFFFF",
+      "transparencia": null,
+      "triangulos": 176,
+      "tam_studs": [
+        3.465,
+        3.88,
+        5.205
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -3.807,
+        8.265,
+        -0.077
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hospital_clinica_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FFFFFF",
+      "transparencia": null,
+      "triangulos": 36,
+      "tam_studs": [
+        6.25,
+        0.26,
+        3.25
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.875,
+        5.76,
+        -1.825
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hospital_clinica_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#B9DCE8",
+      "transparencia": 0.3,
+      "triangulos": 84,
+      "tam_studs": [
+        10.16,
+        5.45,
+        5.73
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -1.6,
+        4.625,
+        0.385
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hospital_clinica_ambulancia",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 608,
+      "tam_studs": [
+        1.97,
+        1.72,
+        3.1
+      ],
+      "pivote_studs": [
+        5.6,
+        0.0,
+        -1.0
+      ],
+      "centro_studs": [
+        5.6,
+        1.19,
+        -0.95
+      ],
+      "nota": "Ambulancia hover (3 × 2 × 2): pieza aparte para poder moverla; flota a 0,35 studs del suelo."
+    },
+    {
+      "nombre": "hospital_clinica_ambulancia_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FFFFFF",
+      "transparencia": null,
+      "triangulos": 288,
+      "tam_studs": [
+        1.685,
+        1.87,
+        2.69
+      ],
+      "pivote_studs": [
+        5.6,
+        0.0,
+        -1.0
+      ],
+      "centro_studs": [
+        5.6,
+        1.235,
+        -1.195
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hospital_clinica_ambulancia_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#2E4A60",
+      "transparencia": 0.3,
+      "triangulos": 12,
+      "tam_studs": [
+        1.445,
+        0.62,
+        0.31
+      ],
+      "pivote_studs": [
+        5.6,
+        0.0,
+        -1.0
+      ],
+      "centro_studs": [
+        5.6,
+        1.61,
+        -2.205
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hospital_clinica_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 172,
+      "tam_studs": [
+        1.7,
+        5.1,
+        0.135
+      ],
+      "pivote_studs": [
+        -1.85,
+        0.5,
+        -2.6
+      ],
+      "centro_studs": [
+        -1.85,
+        3.05,
+        -2.608
+      ],
+      "nota": "Hoja corredera: abrir 1.60 studs hacia fuera del hueco."
+    },
+    {
+      "nombre": "hospital_clinica_puerta_izq_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#E9F1F3",
+      "transparencia": 0.15,
+      "triangulos": 12,
+      "tam_studs": [
+        1.5,
+        4.86,
+        0.06
+      ],
+      "pivote_studs": [
+        -1.85,
+        0.5,
+        -2.6
+      ],
+      "centro_studs": [
+        -1.85,
+        3.05,
+        -2.6
+      ],
+      "nota": "Cristal esmerilado: Glass blanco con poca transparencia."
+    },
+    {
+      "nombre": "hospital_clinica_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 172,
+      "tam_studs": [
+        1.7,
+        5.1,
+        0.135
+      ],
+      "pivote_studs": [
+        -3.55,
+        0.5,
+        -2.6
+      ],
+      "centro_studs": [
+        -3.55,
+        3.05,
+        -2.608
+      ],
+      "nota": "Hoja corredera: abrir 1.60 studs hacia fuera del hueco."
+    },
+    {
+      "nombre": "hospital_clinica_puerta_der_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#E9F1F3",
+      "transparencia": 0.15,
+      "triangulos": 12,
+      "tam_studs": [
+        1.5,
+        4.86,
+        0.06
+      ],
+      "pivote_studs": [
+        -3.55,
+        0.5,
+        -2.6
+      ],
+      "centro_studs": [
+        -3.55,
+        3.05,
+        -2.6
+      ],
+      "nota": "Cristal esmerilado: Glass blanco con poca transparencia."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 11,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 7392,
+    "tam_studs": [
+      13.435,
+      11.958,
+      10.463
+    ],
+    "centro": [
+      -0.133,
+      1.129,
+      5.074
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "hospital_clinica_turnaround.png"
+}
