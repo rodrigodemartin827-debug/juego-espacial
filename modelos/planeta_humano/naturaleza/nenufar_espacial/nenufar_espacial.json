@@ -1,0 +1,124 @@
+{
+  "nombre": "nenufar_espacial",
+  "zona": "naturaleza",
+  "descripcion": "Nenúfar flotante: hoja circular con el borde ondulado y la ranura típica, flor central de 3 pétalos con brillo cyan suave, raíz colgando bajo la hoja y tres gotas de agua sobre ella.",
+  "tam_pedido_studs": [
+    2,
+    2,
+    0.3
+  ],
+  "tam_studs": {
+    "ancho_x": 2.0,
+    "alto_y": 1.07,
+    "fondo_z": 2.0
+  },
+  "triangulos": 824,
+  "presupuesto": 1000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/nenufar_espacial_color.png",
+    "rugosidad": "texturas/nenufar_espacial_rugosidad.png",
+    "metal": "texturas/nenufar_espacial_metal.png",
+    "normal": "texturas/nenufar_espacial_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "nenufar_espacial",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 548,
+      "tam_studs": [
+        1.996,
+        1.053,
+        1.999
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.003,
+        -0.325,
+        -0.001
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "nenufar_espacial_flor_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.35,
+      "triangulos": 84,
+      "tam_studs": [
+        0.439,
+        0.085,
+        0.43
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.029,
+        0.175,
+        -0.038
+      ],
+      "nota": "Pétalos: Neon cyan suave."
+    },
+    {
+      "nombre": "nenufar_espacial_gotas_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#DDF6FA",
+      "transparencia": 0.5,
+      "triangulos": 192,
+      "tam_studs": [
+        0.9,
+        0.06,
+        1.04
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.057,
+        0.1,
+        -0.077
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "El origen está a nivel del agua: la hoja flota y la raíz cuelga 0,85 studs bajo la superficie."
+  ],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 824,
+    "tam_studs": [
+      1.996,
+      1.999,
+      1.069
+    ],
+    "centro": [
+      0.003,
+      0.001,
+      -0.317
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "nenufar_espacial_turnaround.png"
+}
