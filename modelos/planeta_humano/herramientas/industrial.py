@@ -761,9 +761,22 @@ def vagoneta_mina():
     azul = m.mat("organico", "#3A7FC4", rug=0.2)
     madera = m.mat("madera", "#6A4628", eje="Z")
     Z = 0.55
-    # caja troncopiramidal con borde doblado
-    c.loft([[(x, y, Z) for x, y in ((-1.15, -0.6), (1.15, -0.6), (1.15, 0.6), (-1.15, 0.6))],
-            [(x, y, Z + 1.0) for x, y in ((-1.4, -0.82), (1.4, -0.82), (1.4, 0.82), (-1.4, 0.82))]], chapa)
+    # caja troncopiramidal HUECA: fondo y cuatro paredes de chapa con grosor (cada una es un sólido cerrado)
+    G = 0.08
+    c.caja((0, 0, Z + G / 2), (2.3, 1.2, G), chapa, 0.01)
+
+    def pared(q, hacia):
+        """q: 4 esquinas (abajo-izq, abajo-der, arriba-der, arriba-izq) de la cara exterior; hacia: vector al interior."""
+        d = V(hacia).normalized() * G
+        c.loft([[V(p) for p in q], [V(p) + d for p in q]], chapa)
+
+    for s in (-1, 1):
+        pared([(-1.15, s * 0.6, Z), (1.15, s * 0.6, Z), (1.4, s * 0.82, Z + 1.0), (-1.4, s * 0.82, Z + 1.0)], (0, -s, 0))
+        pared([(s * 1.15, -0.6, Z), (s * 1.15, 0.6, Z), (s * 1.4, 0.82, Z + 1.0), (s * 1.4, -0.82, Z + 1.0)], (-s, 0, 0))
+    # capa de grava dentro (lo que asoma entre las piedras grandes)
+    c.loft([[(x * 0.96, y * 0.96, Z + 0.78) for x, y in ((-1.33, -0.75), (1.33, -0.75), (1.33, 0.75), (-1.33, 0.75))],
+            [(x * 0.96, y * 0.96, Z + 0.84) for x, y in ((-1.33, -0.75), (1.33, -0.75), (1.33, 0.75), (-1.33, 0.75))]],
+           m.mat("piedra", "#4E4A46", bump=1.0, escala=3.0))
     for s in (-1, 1):
         c.caja((0, s * 0.83, Z + 1.02), (2.9, 0.08, 0.08), acero, 0.01)
         c.caja((s * 1.42, 0, Z + 1.02), (0.08, 1.7, 0.08), acero, 0.01)
