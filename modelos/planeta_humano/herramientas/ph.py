@@ -361,6 +361,35 @@ def crear_material(nombre, tipo, color, p):
         sumar_altura(nb.rango(ab, 0.55, 0.75), -p["abolladuras"])
     sumar_altura(nb.ruido(pos, 40.0, 2.0, 0.5), 0.04)
 
+    # --- calcomanías pintadas (texto, logos, pantallas): imagen RGBA proyectada en un rectángulo del objeto ----
+    # Cada calco = dict(img=ruta_png, o=esquina inferior izquierda, u=vector ancho, v=vector alto). Solo se pinta
+    # en las caras que miran hacia u×v, para que la cara trasera no salga en espejo. Va antes del desgaste y la
+    # suciedad, así la pintura también se pela y se ensucia.
+    for cal in p.get("calcos", []):
+        o, u, v = V(cal["o"]), V(cal["u"]), V(cal["v"])
+        rel = nb.n("ShaderNodeVectorMath", operation="SUBTRACT")
+        nb.con(tc.outputs["Object"], rel.inputs[0])
+        rel.inputs[1].default_value = o
+        coords = []
+        for eje in (u, v):
+            dp = nb.n("ShaderNodeVectorMath", operation="DOT_PRODUCT")
+            nb.con(rel.outputs[0], dp.inputs[0])
+            dp.inputs[1].default_value = eje / eje.length_squared
+            coords.append(dp.outputs["Value"])
+        cxyz = nb.n("ShaderNodeCombineXYZ")
+        nb.con(coords[0], cxyz.inputs[0])
+        nb.con(coords[1], cxyz.inputs[1])
+        im = nb.n("ShaderNodeTexImage", extension="CLIP", interpolation="Cubic")
+        im.image = bpy.data.images.load(cal["img"], check_existing=True)
+        nb.con(cxyz.outputs[0], im.inputs[0])
+        cara = nb.n("ShaderNodeVectorMath", operation="DOT_PRODUCT")
+        nb.con(nrm, cara.inputs[0])
+        cara.inputs[1].default_value = u.cross(v).normalized()
+        fa = nb.m("MULTIPLY", im.outputs["Alpha"], nb.rango(cara.outputs["Value"], 0.3, 0.6))
+        col = nb.mezcla(fa, col, im.outputs["Color"])
+        if cal.get("rug") is not None:
+            rug_s = nb.lerp(fa, rug_s, cal["rug"])
+
     # --- desgaste de cantos -----------------------------------------------------------------------------------
     if p.get("desgaste", 0) > 0:
         bev = nb.n("ShaderNodeBevel", samples=6)
@@ -928,6 +957,8 @@ class Modelo:
         self._mats = {}
         self.anclajes = {}
         self.notas = []
+        # variantes de color: {"azul": {material_original: material_sustituto}}; se hornea un canal de color extra
+        self.variantes = {}
         self._secc = [("inicio", 0)]
         self.pila = [Matrix.Identity(4)]  # transformaciones activas (compartidas por todas las piezas)
         # vistas añadidas al turnaround: (nombre, azimut, elevación, nombres de mallas que se ocultan)
@@ -1069,6 +1100,43 @@ class Modelo:
                     nt.links.new(prev, out.inputs["Surface"])
                     nt.nodes.remove(em)
             print(f"   horneado {canal}: {time.time() - t:.0f} s", flush=True)
+        # variantes de color: se cambian los materiales de los huecos y se hornea solo el color otra vez
+        for var, cambios in self.variantes.items():
+            img = bpy.data.images.new(f"{self.nombre}_color_{var}", TAM_ATLAS, TAM_ATLAS, alpha=False)
+            img.colorspace_settings.name = "sRGB"
+            imgs[f"color_{var}"] = img
+            huecos = []
+            for o in objs:
+                for i, mt in enumerate(o.data.materials):
+                    if mt in cambios:
+                        huecos.append((o, i, mt))
+                        o.data.materials[i] = cambios[mt]
+            mats_v = {m for o in objs for m in o.data.materials}
+            guardado = []
+            for m in mats_v:
+                nt = m.node_tree
+                dest = nt.nodes.get("destino") or nt.nodes.new("ShaderNodeTexImage")
+                dest.name = "destino"
+                dest.image = img
+                nt.nodes.active = dest
+                out = next(n for n in nt.nodes if n.type == "OUTPUT_MATERIAL")
+                em = nt.nodes.new("ShaderNodeEmission")
+                nt.links.new(nt.nodes["canal_color"].outputs[2], em.inputs["Color"])
+                prev = out.inputs["Surface"].links[0].from_socket
+                nt.links.new(em.outputs[0], out.inputs["Surface"])
+                guardado.append((nt, out, prev, em))
+            bpy.ops.object.select_all(action="DESELECT")
+            for o in objs:
+                o.select_set(True)
+            bpy.context.view_layer.objects.active = objs[0]
+            scn.cycles.samples = muestras
+            bpy.ops.object.bake(type="EMIT", margin=6, use_clear=True)
+            for nt, out, prev, em in guardado:
+                nt.links.new(prev, out.inputs["Surface"])
+                nt.nodes.remove(em)
+            for o, i, mt in huecos:
+                o.data.materials[i] = mt
+            print(f"   horneado variante {var}", flush=True)
         rutas = {}
         for canal, img in imgs.items():
             ruta = os.path.join(self.dir, "texturas", f"{self.nombre}_{canal}.png")

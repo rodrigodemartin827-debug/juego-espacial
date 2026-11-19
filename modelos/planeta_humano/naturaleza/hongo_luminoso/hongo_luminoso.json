@@ -1,0 +1,122 @@
+{
+  "nombre": "hongo_luminoso",
+  "zona": "naturaleza",
+  "descripcion": "Seta grande bioluminiscente: pie grueso poroso con anillo, sombrero convexo con laminillas radiales debajo, puntos luminosos cyan y esporas flotando alrededor.",
+  "tam_pedido_studs": [
+    1,
+    1,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 1.03,
+    "alto_y": 1.83,
+    "fondo_z": 1.0
+  },
+  "triangulos": 1096,
+  "presupuesto": 1500,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/hongo_luminoso_color.png",
+    "rugosidad": "texturas/hongo_luminoso_rugosidad.png",
+    "metal": "texturas/hongo_luminoso_metal.png",
+    "normal": "texturas/hongo_luminoso_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "hongo_luminoso",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 636,
+      "tam_studs": [
+        1.0,
+        1.83,
+        1.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.885,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hongo_luminoso_puntos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 220,
+      "tam_studs": [
+        0.82,
+        0.343,
+        0.817
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.076,
+        1.611,
+        -0.012
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hongo_luminoso_esporas_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#9AF6FF",
+      "transparencia": 0.3,
+      "triangulos": 240,
+      "tam_studs": [
+        0.987,
+        0.973,
+        0.78
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.034,
+        1.231,
+        0.036
+      ],
+      "nota": "Esporas flotantes: Neon cyan claro; se pueden mover despacio en el cliente."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1096,
+    "tam_studs": [
+      1.028,
+      1.0,
+      1.83
+    ],
+    "centro": [
+      0.014,
+      0.0,
+      0.885
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "hongo_luminoso_turnaround.png"
+}

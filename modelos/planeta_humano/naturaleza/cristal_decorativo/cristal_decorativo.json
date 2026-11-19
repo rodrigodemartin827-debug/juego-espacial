@@ -1,0 +1,122 @@
+{
+  "nombre": "cristal_decorativo",
+  "zona": "naturaleza",
+  "descripcion": "Racimo de 4 cristales cyan (prismas hexagonales con punta) que salen en ángulo de una base de roca, con cristal semitransparente, núcleo luminoso y polvo de cristal en la base.",
+  "tam_pedido_studs": [
+    1,
+    1,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 1.5,
+    "alto_y": 2.93,
+    "fondo_z": 1.2
+  },
+  "triangulos": 540,
+  "presupuesto": 1500,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/cristal_decorativo_color.png",
+    "rugosidad": "texturas/cristal_decorativo_rugosidad.png",
+    "metal": "texturas/cristal_decorativo_metal.png",
+    "normal": "texturas/cristal_decorativo_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "cristal_decorativo",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 140,
+      "tam_studs": [
+        1.023,
+        0.451,
+        1.01
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.031,
+        0.193,
+        -0.033
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "cristal_decorativo_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#7FE8F2",
+      "transparencia": 0.45,
+      "triangulos": 104,
+      "tam_studs": [
+        1.499,
+        2.719,
+        1.197
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.104,
+        1.537,
+        -0.03
+      ],
+      "nota": "Cuerpo de los cristales: Glass cyan, Transparency 0,45; deja ver el núcleo."
+    },
+    {
+      "nombre": "cristal_decorativo_nucleo_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 296,
+      "tam_studs": [
+        1.393,
+        2.736,
+        1.077
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.11,
+        1.409,
+        -0.054
+      ],
+      "nota": "Núcleo luminoso: Neon cyan."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 540,
+    "tam_studs": [
+      1.499,
+      1.197,
+      2.928
+    ],
+    "centro": [
+      -0.104,
+      0.03,
+      1.432
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "cristal_decorativo_turnaround.png"
+}
