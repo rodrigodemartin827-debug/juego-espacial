@@ -457,8 +457,10 @@ def cartel_holografico():
                "Cartel publicitario holográfico de pared: marco metálico fino, cuatro proyectores en las esquinas, "
                "pantalla neón con logotipo y texto simulado, tornillos de montaje.")
     c = m.parte()
-    pant = m.parte("pantalla_neon", tipo="neon", color=NEON, transparencia=0.25,
-                   nota="Pantalla: Neon cyan, Transparency 0,25 para el efecto holograma.")
+    pant = m.parte("pantalla_neon", tipo="neon", color=NEON, transparencia=0.6,
+                   nota="Fondo del holograma: Neon cyan con Transparency 0,6.")
+    cont = m.parte("contenido_neon", tipo="neon", color="#E8FEFF",
+                   nota="Logotipo, texto y lentes: Neon blanco azulado, opaco (se lee sobre el fondo translúcido).")
     acero = m.mat("metal", "#7C8288")
     osc = m.mat("metal", "#262A2F", rug=0.45)
     lente = m.mat("cromo", "#9FE8F0", rug=0.1)
@@ -478,7 +480,7 @@ def cartel_holografico():
             p = V((x, -0.1, z))
             c.cil(p, p + d, 0.07, osc, n=10)
             c.cil(p + d, p + d * 1.15, 0.055, lente, n=10)
-            pant.cil(p + d * 1.15, p + d * 1.2, 0.04, None, n=8)
+            cont.cil(p + d * 1.15, p + d * 1.2, 0.04, None, n=8)
             for k in range(2):
                 c.perno((x + sx * 0.1 * (-1 if k else 1), 0.0 - 0.08, z + (0.1 if k else -0.1)), (0, -1, 0), acero, r=0.025)
     # tornillos de montaje a pared con escuadras
@@ -488,12 +490,12 @@ def cartel_holografico():
             c.perno((x, 0.16, z), (0, -1, 0), acero, r=0.035)
     # pantalla: lámina fina + logotipo (anillo y planeta) + líneas de texto
     pant.caja((0, 0.03, H / 2), (W - 0.3, 0.02, H - 0.3), None, 0.0)
-    with pant.en((-0.9, -0.02, H / 2 + 0.25), (90, 0, 0)):
-        pant.toro((0, 0, 0), 0.5, 0.04, None, n=20, m=4)
-        pant.esfera((0, 0, 0), 0.3, None, seg=10, anillos=6, esc=(1, 1, 0.3))
-    pant.texto("NOVA", None, alto=0.42, grosor=0.04, c=(0.65, -0.02, H / 2 + 0.25), fuente="estrecha")
+    with cont.en((-0.9, -0.02, H / 2 + 0.25), (90, 0, 0)):
+        cont.toro((0, 0, 0), 0.5, 0.04, None, n=20, m=4)
+        cont.esfera((0, 0, 0), 0.3, None, seg=10, anillos=6, esc=(1, 1, 0.3))
+    cont.texto("NOVA", None, alto=0.42, grosor=0.04, c=(0.65, -0.02, H / 2 + 0.25), fuente="estrecha")
     for k in range(3):
-        pant.caja((0, -0.01, 0.65 - k * 0.15 + 0.2), (2.6 - k * 0.6, 0.02, 0.06), None, 0.0)
+        cont.caja((0, -0.01, 0.65 - k * 0.15 + 0.2), (2.6 - k * 0.6, 0.02, 0.06), None, 0.0)
     m.terminar()
 
 

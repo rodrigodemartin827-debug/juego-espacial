@@ -367,7 +367,10 @@ def restaurante():
                "articulados, menú holográfico, macetas y ventanal con la barra a la vista.")
     c = m.parte()
     cr = m.parte("cristal", tipo="cristal", color="#B2D4E0", transparencia=0.35)
-    neon = m.parte("menu_neon", tipo="neon", color=NEON)
+    neon = m.parte("menu_neon", tipo="neon", color=NEON, transparencia=0.6,
+                   nota="Panel del menú holográfico: Neon cyan con Transparency 0,6.")
+    menu_txt = m.parte("menu_texto_neon", tipo="neon", color="#E8FEFF",
+                       nota="Texto del menú: Neon blanco azulado, opaco.")
     luces = m.parte("luces_neon", tipo="neon", color=NEON)
     toldo = m.parte("toldo", pivote=(0, -0.95, 5.9), nota="Toldo extendido. Se recoge girando/encogiendo hacia el "
                                                         "cajón (pivote): en Studio, escalar en Z de Roblox hasta 0,1.")
@@ -547,9 +550,10 @@ def restaurante():
         c.cil((hx + s * 0.18, hy - 0.12, Z0 + 2.1), (hx + s * 0.18, hy - 0.12, Z0 + 2.16), 0.04, cromo, n=8)
     neon.caja((hx, hy, Z0 + 2.95), (1.0, 0.02, 1.4), None)
     for k in range(6):
-        neon.caja((hx - 0.15 + (k % 2) * 0.08, hy - 0.025, Z0 + 3.45 - k * 0.18), (0.6 - (k % 3) * 0.1, 0.02, 0.06), None)
-    neon.texto("MENÚ", None, alto=0.16, grosor=0.02, c=(hx, hy - 0.03, Z0 + 3.5), fuente="negrita")
-    m.notas.append("El menú holográfico es un panel Neon: para que parezca holograma, Transparency 0,4 en Studio.")
+        menu_txt.caja((hx - 0.15 + (k % 2) * 0.08, hy - 0.025, Z0 + 3.3 - k * 0.18), (0.6 - (k % 3) * 0.1, 0.02, 0.06),
+                      None)
+    menu_txt.texto("MENÚ", None, alto=0.16, grosor=0.02, c=(hx, hy - 0.03, Z0 + 3.45), fuente="negrita")
+    m.notas.append("Menú holográfico: el panel (menu_neon) es translúcido y el texto (menu_texto_neon) opaco.")
     m.terminar()
 
 

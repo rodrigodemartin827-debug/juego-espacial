@@ -351,7 +351,7 @@ def consola_control_hangar():
                "Terminal de control: pantalla holográfica con marco, teclado de 24 teclas 3D, joystick, botones de "
                "emergencia, activar y espera, cable de alimentación y silla giratoria aparte.")
     c = m.parte()
-    luz = m.parte("pantalla_neon", tipo="neon", color=NEON, transparencia=0.15)
+    luz = m.parte("pantalla_neon", tipo="neon", color=NEON, nota="Interfaz de la pantalla: Neon cyan.")
     silla = m.parte("silla", pivote=(0, -1.0, 0), nota="Silla giratoria: pieza aparte (se puede mover y girar).")
     gris = m.mat("pintura", "#3E4650", desgaste=0.45)
     blanco = m.mat("pintura", "#D9DDE1", desgaste=0.35)
@@ -393,7 +393,17 @@ def consola_control_hangar():
         for (cx, cz, w, h) in ((0, 0.52, 1.8, 0.08), (0, -0.52, 1.8, 0.08), (-0.86, 0, 0.08, 1.1), (0.86, 0, 0.08, 1.1)):
             c.caja((cx, 0, cz), (w, 0.1, h), osc, 0.02)
         c.caja((0, 0.05, 0), (1.7, 0.04, 1.0), osc, 0.0)
-        luz.caja((0, -0.02, 0), (1.62, 0.02, 0.94), None)
+        c.caja((0, -0.01, 0), (1.62, 0.02, 0.94), m.mat("plastico", "#0B2230", desgaste=0.0, aranazos=0.0,
+                                                       suciedad=0.0), 0.0)
+        # interfaz en relieve: radar con cruz, barras de estado y líneas de marco
+        luz.toro((-0.45, -0.03, 0.02), 0.3, 0.012, None, n=20, m=3, rot=(90, 0, 0))
+        luz.toro((-0.45, -0.03, 0.02), 0.16, 0.01, None, n=16, m=3, rot=(90, 0, 0))
+        luz.caja((-0.45, -0.03, 0.02), (0.62, 0.008, 0.012), None)
+        luz.caja((-0.45, -0.03, 0.02), (0.012, 0.008, 0.62), None)
+        for k in range(5):
+            luz.caja((0.38, -0.03, 0.28 - k * 0.14), (0.62 - (k % 3) * 0.14, 0.008, 0.05), None)
+        for zz in (-0.42, 0.42):
+            luz.caja((0, -0.03, zz), (1.5, 0.008, 0.015), None)
         for k in range(4):
             c.perno((-0.82 + 1.64 * (k % 2), -0.06, -0.48 + 0.96 * (k // 2)), (0, -1, 0), acero, r=0.02, arandela=False)
     # cable de alimentación por detrás hasta el suelo

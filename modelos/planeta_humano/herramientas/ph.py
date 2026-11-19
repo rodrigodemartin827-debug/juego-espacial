@@ -508,7 +508,7 @@ class Parte:
         self.mats = []
         self.pila = [Matrix.Identity(4)]
         if tipo == "neon":
-            self.mat_unico = material_simple(f"{nombre}_m", color, emision=6.0)
+            self.mat_unico = material_simple(f"{nombre}_m", color, emision=6.0, alfa=1.0 - (transparencia or 0.0))
         elif tipo == "cristal":
             self.mat_unico = material_simple(f"{nombre}_m", color or "#9FC4D8", cristal=True)
         else:
