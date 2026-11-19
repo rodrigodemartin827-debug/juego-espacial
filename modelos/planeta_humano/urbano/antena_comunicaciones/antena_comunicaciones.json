@@ -1,0 +1,98 @@
+{
+  "nombre": "antena_comunicaciones",
+  "zona": "urbano",
+  "descripcion": "Antena de comunicaciones: mástil de tubo en tramos con bridas atornilladas, 3 vientos de cable a 120° con tensores y anclajes, parábola pequeña con su brazo y LNB, látigo y baliza roja en la cima, cable coaxial bajando por el mástil con abrazaderas, peldaños y placa base con 4 pernos.",
+  "tam_pedido_studs": [
+    2,
+    2,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 1.81,
+    "alto_y": 7.95,
+    "fondo_z": 1.59
+  },
+  "triangulos": 1778,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/antena_comunicaciones_color.png",
+    "rugosidad": "texturas/antena_comunicaciones_rugosidad.png",
+    "metal": "texturas/antena_comunicaciones_metal.png",
+    "normal": "texturas/antena_comunicaciones_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "antena_comunicaciones",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1750,
+      "tam_studs": [
+        1.805,
+        7.95,
+        1.585
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.975,
+        0.237
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "antena_comunicaciones_baliza_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FF2A2A",
+      "transparencia": null,
+      "triangulos": 28,
+      "tam_studs": [
+        0.09,
+        0.1,
+        0.09
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        7.41,
+        0.0
+      ],
+      "nota": "Baliza de obstáculo: parpadeo lento."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1778,
+    "tam_studs": [
+      1.805,
+      1.585,
+      7.95
+    ],
+    "centro": [
+      0.0,
+      -0.237,
+      3.975
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "antena_comunicaciones_turnaround.png"
+}
