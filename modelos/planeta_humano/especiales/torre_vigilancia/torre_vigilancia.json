@@ -12,7 +12,7 @@
     "alto_y": 18.03,
     "fondo_z": 4.0
   },
-  "triangulos": 5604,
+  "triangulos": 5536,
   "presupuesto": 12000,
   "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
@@ -31,7 +31,7 @@
       "material_roblox": "SurfaceAppearance",
       "color": null,
       "transparencia": null,
-      "triangulos": 4836,
+      "triangulos": 4768,
       "tam_studs": [
         4.0,
         17.95,
@@ -177,7 +177,7 @@
     "ok": true,
     "problemas": [],
     "unidad_fbx_m": 0.28,
-    "triangulos": 5604,
+    "triangulos": 5536,
     "tam_studs": [
       4.0,
       4.0,
