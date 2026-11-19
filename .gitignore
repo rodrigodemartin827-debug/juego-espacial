@@ -21,3 +21,7 @@ __pycache__/
 
 # Renders intermedios de las herramientas de modelos
 modelos/**/_render_tmp/
+
+# temporales del generador de casas del pueblo
+pueblo/*/_tmp/
+pueblo/*/_estado.json
