@@ -132,7 +132,7 @@ def crear_materiales(P):
                     t.rango(t.ruido(1.3, detalle=2), 0.5, 0.65))
     # Vaho: más en la parte baja de cada paño y en manchas.
     vaho = t.mul(t.rango(z, 2.6, 0.6, 0.25, 1.0), t.rango(t.ruido(1.2, detalle=3), 0.3, 0.75, 0.3, 1.0))
-    vaho = t.op("MINIMUM", t.suma(vaho, t.mul(finas, 0.6)), 1.0)
+    vaho = t.op("MINIMUM", t.suma(vaho, t.mul(finas, 0.25)), 1.0)
     agua = t.op("MINIMUM", t.suma(gota, t.mul(reguero, 0.8)), 1.0)
     col = t.mezcla(t.mul(vaho, 0.55), "#86D49A", "#D8EEDC")
     col = t.mezcla(t.mul(agua, 0.7), col, "#EAF6EE")

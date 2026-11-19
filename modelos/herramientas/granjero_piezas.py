@@ -1436,7 +1436,7 @@ def _pano_tejado(c, s, y0, y1, f0, f1, mat="vidrio_invernadero", d=None):
     off = S + 0.002 if d is None else d
     o = pe + nrm * off
     pts = [(y0, f0 * largo), (y1, f0 * largo), (y1, f1 * largo), (y0, f1 * largo)]
-    return c.placa(pts, o, Vector((0, 1, 0)), dirv, nrm, VID, mat, atras=True, oculta_atras=True)
+    return c.placa(pts, o, Vector((0, 1, 0)), dirv, nrm, VID, mat, atras=True, oculta_atras=False)
 
 
 def invernadero_vidrio():
@@ -1454,10 +1454,10 @@ def invernadero_vidrio():
         trozos = [(GY0, GY1)] if sg < 0 else [(GY0, -0.8), (0.8, GY1)]
         for z0, z1 in filas:
             for y0, y1 in trozos:
-                b.placa(rect(y0 + g, y1 - g, z0 + g, z1 - g), o, u, v, n, VID, vid, atras=True, oculta_atras=True)
+                b.placa(rect(y0 + g, y1 - g, z0 + g, z1 - g), o, u, v, n, VID, vid, atras=True, oculta_atras=False)
         if sg > 0:  # montante encima de la puerta
             b.placa(rect(-0.8 + g, 0.8 - g, PUERTA_I["z1"] + 0.1, GE - g), o, u, v, n, VID, vid, atras=True,
-                    oculta_atras=True)
+                    oculta_atras=False)
     k = (GR - GE) / (GXC - GX0)
     for y_out, sg in ((GY0, -1), (GY1, 1)):
         o = Vector((0, y_out, 0))
@@ -1466,7 +1466,7 @@ def invernadero_vidrio():
             poly = rect(GX0 + g, GX1 - g, z0 + g, z1 - g)
             poly = cp.recortar(poly, -k, 1, GE - k * GX0 + 0.05)     # faldón izquierdo
             poly = cp.recortar(poly, k, 1, GE + k * GX1 + 0.05)      # faldón derecho
-            b.placa(poly, o, u, v, n, VID, vid, atras=True, oculta_atras=True)
+            b.placa(poly, o, u, v, n, VID, vid, atras=True, oculta_atras=False)
     for s in (-1, 1):
         _pano_tejado(b, s, GY0 + g, GY1 - g, 0.0, 0.5 - 0.005)
         if s > 0:
@@ -1548,7 +1548,7 @@ def ventila(nombre, y0, y1, angulo):
     # Goma alrededor del cristal (malla alta) y el cristal.
     pts = [(y0 + g + t - 0.01, f0 * largo + t - 0.01), (y1 - g - t + 0.01, f0 * largo + t - 0.01),
            (y1 - g - t + 0.01, f1 * largo - t + 0.01), (y0 + g + t - 0.01, f1 * largo - t + 0.01)]
-    v.baja.placa(pts, o + nrm * 0.008, u, dirv, nrm, VID, "vidrio_invernadero", atras=True, oculta_atras=True)
+    v.baja.placa(pts, o + nrm * 0.008, u, dirv, nrm, VID, "vidrio_invernadero", atras=True, oculta_atras=False)
     a.tubo([o + nrm * 0.045 + u * q[0] + dirv * q[1] for q in pts + [pts[0]]], 0.008, "goma", lados=4)
     # Bisagras: dos piezas en el borde de arriba.
     for yy in (y0 + 0.3, y1 - 0.3):
@@ -1618,7 +1618,7 @@ def pasillo():
     for sy in (-1, 1):
         o = Vector((0, sy * (ys + 0.04), 0))
         vid.baja.placa(rect(xa + 0.08, -5.29, BASE_Z + 0.08, 3.7), o, Vector((1, 0, 0)), Vector((0, 0, 1)),
-                       Vector((0, sy, 0)), VID, "vidrio_invernadero", atras=True, oculta_atras=True)
+                       Vector((0, sy, 0)), VID, "vidrio_invernadero", atras=True, oculta_atras=False)
     p.extra["felpudo"] = [-5.66, 0.0, BASE_Z]
     return [p, vid]
 
