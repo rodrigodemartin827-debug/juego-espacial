@@ -544,11 +544,12 @@ def caja_envio():
     for k in range(8):
         c.caja((0.33 + k * 0.045, -(L / 2 + 0.018), 0.4), (0.015 + (k % 3) * 0.008, 0.006, 0.08), tinta, 0.0)
     # logotipo de la empresa estampado (lateral): anillo, flecha y letras
-    with c.en((L / 2 + 0.005, 0.0, 1.05), (90, 0, 90)):
+    # (a un lado de la correa, que pasa por el centro de esta cara)
+    with c.en((L / 2 + 0.005, -0.5, 1.15), (90, 0, 90)):
         c.toro((0, 0, 0), 0.32, 0.03, blanco, n=16, m=3)
         c.extruir([(-0.2, -0.05), (0.08, -0.05), (0.08, -0.14), (0.25, 0.0), (0.08, 0.14), (0.08, 0.05), (-0.2, 0.05)],
                   0.012, blanco)
-    c.texto("OT-7", blanco, alto=0.18, grosor=0.01, c=(L / 2 + 0.005, 0.0, 0.55), rot=(90, 0, 90), fuente="mono", resol=1)
+    c.texto("OT-7", blanco, alto=0.18, grosor=0.01, c=(L / 2 + 0.005, -0.5, 0.62), rot=(90, 0, 90), fuente="mono", resol=1)
     m.terminar()
 
 
