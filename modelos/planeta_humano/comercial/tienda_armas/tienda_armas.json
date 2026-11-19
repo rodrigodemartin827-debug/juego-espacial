@@ -14,7 +14,7 @@
   },
   "triangulos": 13948,
   "presupuesto": 14000,
-  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
   "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
   "atlas": {
@@ -255,7 +255,8 @@
       -0.081,
       4.054
     ],
-    "normales_fuera": true
+    "normales_fuera": true,
+    "unidad_fbx_m": 0.28
   },
   "turnaround": "tienda_armas_turnaround.png"
 }

@@ -14,7 +14,7 @@
   },
   "triangulos": 1880,
   "presupuesto": 2000,
-  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
   "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
   "atlas": {
@@ -67,7 +67,8 @@
       0.0,
       1.531
     ],
-    "normales_fuera": true
+    "normales_fuera": true,
+    "unidad_fbx_m": 0.28
   },
   "turnaround": "toldo_mercado_turnaround.png"
 }

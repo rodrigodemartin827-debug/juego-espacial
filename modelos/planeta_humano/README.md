@@ -29,7 +29,7 @@ regenerar. Las 10 casas residenciales (casa_minero, taberna, clínica de casa…
 | --- | --- |
 | Todo 3D real, con grosor | Cada pieza es un sólido cerrado: frutas esféricas, letras extruidas, tornillos de cabeza hexagonal, cristales con grosor, telas y lonas como láminas con grosor. Lo «pintado» (líneas del suelo, etiquetas, tiza) también tiene unas centésimas de grosor. |
 | Un modelo = una escena limpia | `Modelo()` llama a `bpy.ops.wm.read_factory_settings()` y lo modela desde cero. No se reutiliza geometría entre modelos. |
-| Escala 1 unidad = 1 stud | Se modela en studs y se exporta con **Apply Scalings: FBX All**. |
+| Escala 1 unidad = 1 stud | Se modela en studs y se exporta con **Apply Scalings: FBX All**; la cabecera del FBX dice 0,28 m por unidad (`unidades_fbx.py` corrige los que salieron antes con 1 m). |
 | GIRO_IMPORTACION | Antes de exportar se gira 180° sobre el eje vertical (la Y de Roblox). En Studio el frente mira a **-Z**. |
 | Atlas de 2048 | Una UV y un atlas por modelo para todas las piezas con textura: color (con desgaste, suciedad, óxido, lluvia y oclusión horneados), normales (relieve procedural), rugosidad y metal. |
 | Lo que brilla, aparte | Mallas `*_neon` (Material **Neon**). Cyan humano `#3DF2FF`; la clínica usa blanco `#FFFFFF`; las excepciones (forja naranja `#FF6B35`, cantina ámbar `#FFB347`, llama azul, vapor verde, fluorescentes) van en el JSON. |
@@ -41,10 +41,11 @@ regenerar. Las 10 casas residenciales (casa_minero, taberna, clínica de casa…
 ## Importar en Studio
 
 1. **Avatar → Import 3D** y elige el `.fbx`.
-2. **Unidad:** el FBX está en «1 unidad = 1 stud». Si llega 3,57 veces más grande o más pequeño, cambia
-   *File General → Scale Unit* (a *Stud* si lo ofrece; si no, a la unidad que deje el tamaño del JSON).
-   **Ojo:** el resto de modelos del repositorio (README de `modelos/`) usan otra convención (1 stud = 0,28 m).
-   Estos siguen la que pedía el encargo; hay que confirmar en Studio cuál de las dos lee bien el importador.
+2. **Unidad:** las coordenadas del FBX están en studs (1 unidad = 1 stud) y el archivo declara que su unidad mide
+   0,28 m, lo que mide un stud en Roblox. Así llega con el tamaño del JSON tanto si el importador lee la unidad del
+   archivo (*Scale Unit* en automático o *Meter*) como si toma las coordenadas en bruto (*Stud*). Es la misma
+   medida física que el resto de modelos del repositorio. Si aun así llega 3,57 veces más grande o más pequeño,
+   cambia *File General → Scale Unit* hasta que coincida con el JSON.
 3. Comprueba que el frente mira a -Z. Si no, el giro es al revés: gíralo 180° en Y.
 4. **Texturas:** sube las cuatro del atlas (Asset Manager → Bulk Import) y en cada MeshPart con textura crea
    una `SurfaceAppearance` con `ColorMap`, `NormalMap`, `RoughnessMap` y `MetalnessMap`. Todas las piezas con

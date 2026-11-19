@@ -39,6 +39,9 @@ from PIL import Image, ImageDraw, ImageFont
 V = Vector
 GIRO_IMPORTACION = math.pi  # 180° sobre el eje vertical (Y de Roblox) antes de exportar
 NEON = "#3DF2FF"  # cyan humano estándar
+# 1 unidad = 1 stud. El FBX declara además que su unidad mide 0,28 m (lo que mide un stud en Roblox): así llega con su
+# tamaño tanto si el importador lee la unidad del archivo como si toma las coordenadas tal cual.
+METROS_POR_STUD = 0.28
 NEON_CLINICA = "#FFFFFF"
 TAM_ATLAS = 2048
 
@@ -1179,10 +1182,12 @@ class Modelo:
         bpy.context.view_layer.objects.active = objs[0]
         bpy.ops.object.transform_apply(location=False, rotation=True, scale=True)
         ruta = os.path.join(self.dir, f"{self.nombre}.fbx")
+        bpy.context.scene.unit_settings.scale_length = METROS_POR_STUD  # la unidad del FBX = 1 stud (0,28 m)
         bpy.ops.export_scene.fbx(filepath=ruta, use_selection=True, object_types={"MESH"}, apply_unit_scale=True,
                                  apply_scale_options="FBX_SCALE_ALL", global_scale=1.0, axis_forward="-Z",
                                  axis_up="Y", use_mesh_modifiers=True, mesh_smooth_type="FACE", use_tspace=True,
                                  bake_anim=False, embed_textures=False, path_mode="RELATIVE")
+        bpy.context.scene.unit_settings.scale_length = 1.0
         # deshacer el giro para que la escena quede como se modeló
         inv = giro.inverted()
         for o in objs:
@@ -1193,9 +1198,11 @@ class Modelo:
     def _verificar(self, ruta, esperado):
         """Reimporta el FBX en una escena vacía y comprueba piezas, triángulos, tamaño y normales."""
         bpy.ops.wm.read_factory_settings(use_empty=True)
+        # escena de 0,28 m por unidad: el FBX entra 1:1 y los tamaños se comparan en studs
+        bpy.context.scene.unit_settings.scale_length = METROS_POR_STUD
         bpy.ops.import_scene.fbx(filepath=ruta)
         objs = [o for o in bpy.context.scene.objects if o.type == "MESH"]
-        res = {"piezas": len(objs), "ok": True, "problemas": []}
+        res = {"piezas": len(objs), "ok": True, "problemas": [], "unidad_fbx_m": unidad_fbx(ruta)}
         nombres = {o.name for o in objs}
         if nombres != set(esperado["nombres"]):
             res["ok"] = False
@@ -1294,7 +1301,7 @@ class Modelo:
             "tam_studs": {"ancho_x": round(dims.x, 2), "alto_y": round(dims.z, 2), "fondo_z": round(dims.y, 2)},
             "triangulos": total,
             "presupuesto": self.presupuesto,
-            "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+            "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
             "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
             "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
             "atlas": {k: os.path.relpath(v, self.dir) for k, v in rutas.items()},
@@ -1321,6 +1328,17 @@ class Modelo:
 
 
 # ---- utilidades ----------------------------------------------------------------------------------------------
+
+def unidad_fbx(ruta):
+    """Metros por unidad que declara un FBX binario (GlobalSettings > UnitScaleFactor, en cm)."""
+    import struct
+    datos = open(ruta, "rb").read()
+    i = datos.find(b"UnitScaleFactor")
+    for pos in range(i + 15, i + 120):
+        if datos[pos:pos + 1] == b"D":
+            return round(struct.unpack("<d", datos[pos + 1:pos + 9])[0] / 100.0, 6)
+    return None
+
 
 def _roblox_pos(p):
     # Blender (x, y, z) con el frente en -Y  ->  Roblox tras el giro de 180°: (-x, z, y)

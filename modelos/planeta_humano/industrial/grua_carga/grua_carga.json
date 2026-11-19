@@ -1,0 +1,121 @@
+{
+  "nombre": "grua_carga",
+  "zona": "industrial",
+  "descripcion": "Grúa de carga: base giratoria con rodamiento, brazo articulado de dos secciones con pasador en el codo, tambor con cable y manivela, gancho con seguro, contrapeso y panel con dos palancas.",
+  "tam_pedido_studs": [
+    4,
+    3,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 3.86,
+    "alto_y": 7.89,
+    "fondo_z": 2.8
+  },
+  "triangulos": 3160,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/grua_carga_color.png",
+    "rugosidad": "texturas/grua_carga_rugosidad.png",
+    "metal": "texturas/grua_carga_metal.png",
+    "normal": "texturas/grua_carga_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "grua_carga",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 500,
+      "tam_studs": [
+        3.0,
+        0.978,
+        2.8
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.489,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "grua_carga_giratoria",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2292,
+      "tam_studs": [
+        3.58,
+        6.943,
+        2.11
+      ],
+      "pivote_studs": [
+        -0.0,
+        1.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.34,
+        4.422,
+        0.095
+      ],
+      "nota": "Todo lo que gira sobre la base (eje vertical del pivote)."
+    },
+    {
+      "nombre": "grua_carga_gancho",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 368,
+      "tam_studs": [
+        0.54,
+        3.496,
+        0.2
+      ],
+      "pivote_studs": [
+        -1.95,
+        7.6,
+        0.0
+      ],
+      "centro_studs": [
+        -2.095,
+        5.752,
+        0.0
+      ],
+      "nota": "Gancho y cable: cuelga del pivote; para subir/bajar, mover en Y de Roblox y escalar el cable."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 3160,
+    "tam_studs": [
+      3.865,
+      2.8,
+      7.893
+    ],
+    "centro": [
+      -0.432,
+      0.0,
+      3.947
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "grua_carga_turnaround.png"
+}
