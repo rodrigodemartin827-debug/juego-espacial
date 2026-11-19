@@ -1,0 +1,122 @@
+{
+  "nombre": "carro_carga",
+  "zona": "comercial",
+  "descripcion": "Carretilla de carga hover sin ruedas: plataforma con carga atada, 4 discos de levitación, barra de agarre curvada y freno de pie con muelle.",
+  "tam_pedido_studs": [
+    3,
+    2,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 3.09,
+    "alto_y": 1.89,
+    "fondo_z": 1.81
+  },
+  "triangulos": 3236,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/carro_carga_color.png",
+    "rugosidad": "texturas/carro_carga_rugosidad.png",
+    "metal": "texturas/carro_carga_metal.png",
+    "normal": "texturas/carro_carga_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "carro_carga",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2896,
+      "tam_studs": [
+        3.06,
+        1.891,
+        1.81
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.13,
+        1.064,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "carro_carga_discos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.3,
+      "triangulos": 252,
+      "tam_studs": [
+        2.83,
+        1.69,
+        1.54
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.195,
+        1.045,
+        0.0
+      ],
+      "nota": "Discos de levitación: Neon cyan tenue (Transparency 0,3)."
+    },
+    {
+      "nombre": "carro_carga_freno",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 88,
+      "tam_studs": [
+        0.4,
+        0.06,
+        0.4
+      ],
+      "pivote_studs": [
+        -1.05,
+        0.45,
+        0.0
+      ],
+      "centro_studs": [
+        -1.225,
+        0.43,
+        0.0
+      ],
+      "nota": "Pedal de freno: gira hacia abajo 20° sobre su eje."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3236,
+    "tam_studs": [
+      3.085,
+      1.81,
+      1.891
+    ],
+    "centro": [
+      0.118,
+      0.0,
+      1.064
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "carro_carga_turnaround.png"
+}
