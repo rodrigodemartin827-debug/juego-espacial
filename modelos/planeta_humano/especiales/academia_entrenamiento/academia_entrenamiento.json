@@ -9,10 +9,10 @@
   ],
   "tam_studs": {
     "ancho_x": 16.6,
-    "alto_y": 8.11,
-    "fondo_z": 15.01
+    "alto_y": 8.57,
+    "fondo_z": 15.9
   },
-  "triangulos": 8900,
+  "triangulos": 15612,
   "presupuesto": 16000,
   "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
@@ -31,11 +31,11 @@
       "material_roblox": "SurfaceAppearance",
       "color": null,
       "transparencia": null,
-      "triangulos": 8456,
+      "triangulos": 14948,
       "tam_studs": [
         16.6,
-        8.11,
-        15.006
+        8.567,
+        15.9
       ],
       "pivote_studs": [
         -0.0,
@@ -44,8 +44,8 @@
       ],
       "centro_studs": [
         -0.0,
-        4.055,
-        0.503
+        4.242,
+        0.95
       ],
       "nota": ""
     },
@@ -103,11 +103,35 @@
       "material_roblox": "Neon",
       "color": "#3DF2FF",
       "transparencia": null,
-      "triangulos": 108,
+      "triangulos": 208,
       "tam_studs": [
-        10.6,
-        0.03,
-        9.2
+        11.657,
+        2.202,
+        12.492
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.528,
+        5.194,
+        2.146
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "academia_entrenamiento_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9EC6D6",
+      "transparencia": 0.4,
+      "triangulos": 120,
+      "tam_studs": [
+        16.0,
+        3.65,
+        12.24
       ],
       "pivote_studs": [
         -0.0,
@@ -116,29 +140,29 @@
       ],
       "centro_studs": [
         -0.0,
-        6.28,
-        0.5
+        6.225,
+        1.72
       ],
-      "nota": ""
+      "nota": "Lucernarios y ventanas altas."
     }
   ],
   "anclajes": {},
   "notas": [],
   "verificacion_fbx": {
-    "piezas": 4,
+    "piezas": 5,
     "ok": true,
     "problemas": [],
     "unidad_fbx_m": 0.28,
-    "triangulos": 8900,
+    "triangulos": 15612,
     "tam_studs": [
       16.6,
-      15.006,
-      8.11
+      15.9,
+      8.567
     ],
     "centro": [
       0.0,
-      -0.503,
-      4.055
+      -0.95,
+      4.242
     ],
     "normales_fuera": true
   },
