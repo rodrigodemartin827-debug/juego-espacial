@@ -1,0 +1,400 @@
+{
+  "nombre": "almacen",
+  "descripcion": "Almacén general del pueblo: nave de chapa grecada con tejado en arco, muelle de carga con rampa abatible, portón enrollable principal y trasero, puerta de personal y oficina.",
+  "unidades": "studs (1 unidad de Blender = 1 stud). A esta escala 1 stud ~ 1,1 m.",
+  "ejes": {
+    "trabajo": "Blender antes del giro: X ancho, Y fondo, Z arriba; la fachada (portón) mira a -Y; z = 0 en la base.",
+    "giro_importacion": "Antes de exportar se gira 180° sobre el eje vertical (GIRO_IMPORTACION), para compensar el giro de 180° que mete el importador 3D de Roblox (probado con la región 1).",
+    "roblox": "Las coordenadas 'roblox' son dónde queda cada punto en Studio (contando el GIRO del FBX y el giro del importador, que se anulan): (x, z, -y) de las coordenadas de trabajo, en studs, respecto al centro de la base del almacén. La fachada del portón queda hacia +Z del modelo. Si en Studio sale al revés, el importador no ha girado: girar el modelo 180° en Y.",
+    "fbx": "FBX con 'Apply Scalings: FBX All', delante -Z, arriba Y, 'Apply Transform'. Importar con Scale Unit = Stud."
+  },
+  "tamano_studs": {
+    "ancho_x": 17.1,
+    "fondo": 15.7,
+    "alto": 7.17
+  },
+  "edificio_studs": {
+    "ancho": 13.0,
+    "fondo": 7.5,
+    "alero": 4.6,
+    "cumbre": 7.0,
+    "suelo_interior_y_muelle": 1.0,
+    "zocalo": 0.5
+  },
+  "triangulos": {
+    "total": 12990,
+    "presupuesto": 13000,
+    "almacen": 11344,
+    "almacen_porton": 582,
+    "almacen_porton_trasero": 542,
+    "almacen_puerta": 354,
+    "almacen_cristal": 108,
+    "almacen_neon": 60
+  },
+  "texturas": {
+    "tam": [
+      2048,
+      2048
+    ],
+    "densidad_px_stud": 44,
+    "color": "almacen_color.png (RGBA: el alfa es la transparencia del cristal armado y del policarbonato)",
+    "normal": "almacen_normal.png (espacio tangente, convención OpenGL +Y)",
+    "roughness": "almacen_roughness.png",
+    "metalness": "almacen_metalness.png",
+    "emision": "almacen_emision.png",
+    "nota": "Un solo atlas para las 6 mallas: todas usan las mismas texturas (una subida)."
+  },
+  "piezas": {
+    "almacen": {
+      "triangulos": 11344,
+      "centro_caja": {
+        "blender": [
+          -0.85,
+          -1.05,
+          3.573
+        ],
+        "roblox": [
+          -0.85,
+          3.573,
+          1.05
+        ]
+      },
+      "tam_caja_roblox": [
+        17.1,
+        7.174,
+        15.7
+      ]
+    },
+    "almacen_porton": {
+      "triangulos": 582,
+      "centro_caja": {
+        "blender": [
+          1.4,
+          -2.783,
+          3.21
+        ],
+        "roblox": [
+          1.4,
+          3.21,
+          2.783
+        ]
+      },
+      "tam_caja_roblox": [
+        4.14,
+        4.42,
+        0.219
+      ]
+    },
+    "almacen_porton_trasero": {
+      "triangulos": 542,
+      "centro_caja": {
+        "blender": [
+          -2.0,
+          5.278,
+          2.69
+        ],
+        "roblox": [
+          -2.0,
+          2.69,
+          -5.278
+        ]
+      },
+      "tam_caja_roblox": [
+        3.14,
+        3.38,
+        0.228
+      ]
+    },
+    "almacen_puerta": {
+      "triangulos": 354,
+      "centro_caja": {
+        "blender": [
+          -1.973,
+          -2.707,
+          2.002
+        ],
+        "roblox": [
+          -1.973,
+          2.002,
+          2.707
+        ]
+      },
+      "tam_caja_roblox": [
+        0.925,
+        1.98,
+        0.234
+      ]
+    },
+    "almacen_cristal": {
+      "triangulos": 108,
+      "centro_caja": {
+        "blender": [
+          0.871,
+          0.815,
+          4.402
+        ],
+        "roblox": [
+          0.871,
+          4.402,
+          -0.815
+        ]
+      },
+      "tam_caja_roblox": [
+        11.742,
+        4.904,
+        6.47
+      ]
+    },
+    "almacen_neon": {
+      "triangulos": 60,
+      "centro_caja": {
+        "blender": [
+          -0.142,
+          0.886,
+          3.776
+        ],
+        "roblox": [
+          -0.142,
+          3.776,
+          -0.886
+        ]
+      },
+      "tam_caja_roblox": [
+        13.75,
+        4.457,
+        7.742
+      ]
+    }
+  },
+  "animacion": {
+    "porton": {
+      "pivote": {
+        "blender": [
+          1.4,
+          -2.748,
+          5.42
+        ],
+        "roblox": [
+          1.4,
+          5.42,
+          2.748
+        ]
+      },
+      "alto": 4.42,
+      "ancho": 4.14,
+      "como_abrir": "Enrollar = encoger Size.Y hasta ~0,07 del alto dejando fijo el borde de arriba (el pivote, a la altura del eje del tambor): CFrame sube (alto - alto_abierto)/2.",
+      "alto_abierto": 0.3
+    },
+    "porton_trasero": {
+      "pivote": {
+        "blender": [
+          -2.0,
+          5.248,
+          4.38
+        ],
+        "roblox": [
+          -2.0,
+          4.38,
+          -5.248
+        ]
+      },
+      "alto": 3.38,
+      "ancho": 3.14,
+      "alto_abierto": 0.27
+    },
+    "puerta": {
+      "pivote_bisagras": {
+        "blender": [
+          -2.405,
+          -2.67,
+          1.0
+        ],
+        "roblox": [
+          -2.405,
+          1.0,
+          2.67
+        ]
+      },
+      "eje": "vertical (Y de Roblox)",
+      "abre": "hacia fuera, girando sobre las bisagras de su lado izquierdo (visto desde fuera); abierta = 80-90°",
+      "ancho": 0.88
+    }
+  },
+  "luces": {
+    "FocoMuelleIzq": {
+      "posicion": {
+        "blender": [
+          -0.35,
+          -2.923,
+          5.907
+        ],
+        "roblox": [
+          -0.35,
+          5.907,
+          2.923
+        ]
+      },
+      "direccion_roblox": [
+        0.0,
+        -0.661,
+        0.751
+      ],
+      "color": "#3DF2FF",
+      "tipo": "SpotLight",
+      "sugerido": {
+        "Brightness": 2,
+        "Range": 18,
+        "Angle": 70
+      }
+    },
+    "FocoMuelleDer": {
+      "posicion": {
+        "blender": [
+          3.15,
+          -2.923,
+          5.907
+        ],
+        "roblox": [
+          3.15,
+          5.907,
+          2.923
+        ]
+      },
+      "direccion_roblox": [
+        0.0,
+        -0.661,
+        0.751
+      ],
+      "color": "#3DF2FF",
+      "tipo": "SpotLight",
+      "sugerido": {
+        "Brightness": 2,
+        "Range": 18,
+        "Angle": 70
+      }
+    },
+    "FocoSeguridad": {
+      "posicion": {
+        "blender": [
+          -6.901,
+          4.641,
+          4.051
+        ],
+        "roblox": [
+          -6.901,
+          4.051,
+          -4.641
+        ]
+      },
+      "direccion_roblox": [
+        -0.553,
+        -0.623,
+        -0.553
+      ],
+      "color": "#3DF2FF",
+      "tipo": "SpotLight",
+      "sugerido": {
+        "Brightness": 2,
+        "Range": 18,
+        "Angle": 70
+      }
+    }
+  },
+  "luces_calidas": {
+    "LuzOficina": {
+      "blender": [
+        -4.3,
+        -1.0,
+        3.4
+      ],
+      "roblox": [
+        -4.3,
+        3.4,
+        1.0
+      ]
+    },
+    "LuzLampara": {
+      "blender": [
+        -4.681,
+        -1.913,
+        1.999
+      ],
+      "roblox": [
+        -4.681,
+        1.999,
+        1.913
+      ]
+    },
+    "color": "#FFD49A",
+    "tipo": "PointLight (Brightness 0,8, Range 6)"
+  },
+  "otros_anclajes": {
+    "contador": {
+      "blender": [
+        6.58,
+        -1.0,
+        2.0
+      ],
+      "roblox": [
+        6.58,
+        2.0,
+        1.0
+      ]
+    },
+    "grifo": {
+      "blender": [
+        6.88,
+        4.15,
+        0.86
+      ],
+      "roblox": [
+        6.88,
+        0.86,
+        -4.15
+      ]
+    },
+    "transpaleta": {
+      "blender": [
+        3.95,
+        -3.45,
+        1.0
+      ],
+      "roblox": [
+        3.95,
+        1.0,
+        3.45
+      ]
+    },
+    "rampa_bisagra": {
+      "blender": [
+        1.4,
+        -4.52,
+        1.03
+      ],
+      "roblox": [
+        1.4,
+        1.03,
+        4.52
+      ]
+    },
+    "sensor_movimiento": {
+      "blender": [
+        -6.776,
+        4.516,
+        3.975
+      ],
+      "roblox": [
+        -6.776,
+        3.975,
+        -4.516
+      ]
+    }
+  },
+  "studio": {
+    "almacen": "SurfaceAppearance con las 4 texturas (Color, Normal, Roughness, Metalness). Anchored. Colisión: Box o Hull; para entrar por los portones, CollisionFidelity = PreciseConvexDecomposition.",
+    "almacen_porton / almacen_porton_trasero": "Igual que el cuerpo; Anchored; tween de Size/CFrame (ver animacion).",
+    "almacen_puerta": "SurfaceAppearance con AlphaMode = Transparency (la ventanilla es cristal armado). Pivot en las bisagras (pivote_bisagras).",
+    "almacen_cristal": "SurfaceAppearance con AlphaMode = Transparency, CastShadow desactivado, CanCollide no.",
+    "almacen_neon": "Material Neon, color #3DF2FF (lentes y pantallas). Si se quiere ver los dígitos de las pantallas, SurfaceAppearance con almacen_emision.png como máscara de emisión."
+  }
+}

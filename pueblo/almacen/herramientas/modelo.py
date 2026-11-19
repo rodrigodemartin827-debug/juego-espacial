@@ -205,6 +205,8 @@ def estructura(o):
     xs = [x for x in xs if E["x0"] <= x <= E["x1"]]
     ys = [y for y in ys if E["y0"] <= y <= E["y1"]]
 
+    assert D.HUNDIDO["fondo"] < D.S - 0.01, "el hundido no puede atravesar la losa de la explanada"
+
     def z_expl(x, y):
         d = math.hypot((x - D.HUNDIDO["x"]) / 1.0, (y - D.HUNDIDO["y"]) / 0.8) / D.HUNDIDO["radio"]
         return D.S - D.HUNDIDO["fondo"] * max(0.0, 1 - d * d) ** 1.5

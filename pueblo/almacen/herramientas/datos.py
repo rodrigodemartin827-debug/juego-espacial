@@ -50,7 +50,7 @@ REPISA_TRASERA = dict(x0=-3.9, x1=-0.1, y1=Y1 + 1.1)
 
 # ---- explanada ------------------------------------------------------------------------------------------------------
 EXPLANADA = dict(x0=-9.4, x1=7.7, y0=-8.9, y1=6.8)
-HUNDIDO = dict(x=4.7, y=-5.75, radio=1.9, fondo=0.07)   # donde paran las ruedas traseras de los camiones
+HUNDIDO = dict(x=4.7, y=-5.75, radio=1.9, fondo=0.04)   # donde paran las ruedas traseras de los camiones (menos fondo que S)
 
 # ---- colores neón del pueblo ---------------------------------------------------------------------------------------
 NEON = "#3DF2FF"
