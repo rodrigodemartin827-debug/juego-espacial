@@ -1,0 +1,76 @@
+{
+  "nombre": "cinta_transportadora",
+  "zona": "industrial",
+  "descripcion": "Segmento modular de cinta transportadora: banda de goma con nervios en V, 4 rodillos, patas en A, protecciones laterales y motor eléctrico con cables en un extremo.",
+  "tam_pedido_studs": [
+    6,
+    2,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 6.51,
+    "alto_y": 1.93,
+    "fondo_z": 2.05
+  },
+  "triangulos": 2954,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/cinta_transportadora_color.png",
+    "rugosidad": "texturas/cinta_transportadora_rugosidad.png",
+    "metal": "texturas/cinta_transportadora_metal.png",
+    "normal": "texturas/cinta_transportadora_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "cinta_transportadora",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2954,
+      "tam_studs": [
+        6.514,
+        1.926,
+        2.05
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.257,
+        0.883,
+        0.325
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Segmento de 6 studs: se encadena en el eje X de Roblox. El motor puede quitarse en los tramos intermedios (va en la misma malla: copia el segmento si no lo quieres en todos)."
+  ],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2954,
+    "tam_studs": [
+      6.514,
+      2.05,
+      1.926
+    ],
+    "centro": [
+      -0.257,
+      -0.325,
+      0.883
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "cinta_transportadora_turnaround.png"
+}
