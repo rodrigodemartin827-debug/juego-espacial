@@ -19,15 +19,29 @@ def muro_huecos(p, x0, x1, z0, z1, y0, y1, huecos, mat, b=0.03, eje="X"):
         else:
             p.caja_de((y0, a0, c0), (y1, a1, c1), mat, b)
 
-    huecos = sorted(huecos)
-    # columnas de muro entre huecos y franjas encima/debajo de cada hueco
-    xs = [x0]
-    for hx0, hx1, hz0, hz1 in huecos:
-        caja(xs[-1], hx0, z0, z1)
-        caja(hx0, hx1, z0, hz0)
-        caja(hx0, hx1, hz1, z1)
-        xs.append(hx1)
-    caja(xs[-1], x1, z0, z1)
+    # El muro se trocea en tramos elementales de x (entre todos los bordes de los huecos); en cada tramo se rellena
+    # el muro entre los huecos que lo cruzan. Así valen huecos apilados (troneras, varias plantas) y huecos que se
+    # solapan en x a distinta altura (una puerta con una tronera encima). Tramos vecinos con el mismo relleno se unen.
+    bordes = sorted({x0, x1} | {h[0] for h in huecos} | {h[1] for h in huecos})
+    bordes = [x for x in bordes if x0 <= x <= x1]
+    tramos = []
+    for xa, xb in zip(bordes, bordes[1:]):
+        xm = (xa + xb) / 2
+        hs = sorted((h[2], h[3]) for h in huecos if h[0] <= xm <= h[1])
+        llenos, za = [], z0
+        for hz0, hz1 in hs:
+            if hz0 > za:
+                llenos.append((za, hz0))
+            za = max(za, hz1)
+        if za < z1:
+            llenos.append((za, z1))
+        if tramos and tramos[-1][2] == llenos:
+            tramos[-1][1] = xb
+        else:
+            tramos.append([xa, xb, llenos])
+    for xa, xb, llenos in tramos:
+        for c0, c1 in llenos:
+            caja(xa, xb, c0, c1)
 
 
 def marco(p, x0, x1, z0, z1, y, ancho, fondo, mat, b=0.02, eje="X", abajo=True):

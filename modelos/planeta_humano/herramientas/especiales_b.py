@@ -55,7 +55,8 @@ def torre_vigilancia():
         if cara == 0:
             huecos.append((-0.6, 0.6, 0.3, 2.3))
         with c.en((0, 0, 0), (0, 0, cara * 90)):
-            arq.muro_huecos(c, -S / 2, S / 2, 0.3, ZP, -S / 2, -S / 2 + G, sorted(huecos), horm)
+            # en molinete: cada muro llega hasta el siguiente sin solaparse (caras coincidentes = manchas al hornear)
+            arq.muro_huecos(c, -S / 2, S / 2 - G, 0.3, ZP, -S / 2, -S / 2 + G, sorted(huecos), horm)
             for (x0, x1, z0, z1) in huecos:
                 if z0 > 1:
                     cr.caja_de((x0, -S / 2 + 0.12, z0), (x1, -S / 2 + 0.2, z1), None)
