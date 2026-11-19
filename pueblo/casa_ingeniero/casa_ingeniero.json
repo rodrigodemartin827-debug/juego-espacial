@@ -189,13 +189,26 @@
     "lab_interior": {
       "posicion": [
         -9.2,
-        4.65,
-        1.0
+        4.2,
+        0.4
       ],
-      "tipo": "SurfaceLight hacia abajo",
+      "tipo": "PointLight",
       "color": "#E8F4FF",
       "brillo": 1.2,
-      "alcance": 8
+      "alcance": 8,
+      "nota": "Ilumina los equipos que se ven por la ventana."
+    },
+    "casa_interior": {
+      "posicion": [
+        -1.0,
+        5.6,
+        -1.5
+      ],
+      "tipo": "PointLight",
+      "color": "#FFEBCC",
+      "brillo": 1.0,
+      "alcance": 12,
+      "nota": "Para que se vea la mesa y el monitor por la ventana."
     }
   },
   "anclajes": {
