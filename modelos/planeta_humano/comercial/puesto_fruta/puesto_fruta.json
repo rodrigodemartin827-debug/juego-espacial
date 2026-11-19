@@ -1,0 +1,73 @@
+{
+  "nombre": "puesto_fruta",
+  "zona": "comercial",
+  "descripcion": "Puesto de fruta: toldo de lona sobre tres arcos de tubo, cajas de tablas con naranjas, manzanas con rabito y hoja, racimos de uvas, báscula colgante y pizarra de precios.",
+  "tam_pedido_studs": [
+    4,
+    3,
+    4
+  ],
+  "tam_studs": {
+    "ancho_x": 3.98,
+    "alto_y": 3.98,
+    "fondo_z": 2.73
+  },
+  "triangulos": 5896,
+  "presupuesto": 6000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/puesto_fruta_color.png",
+    "rugosidad": "texturas/puesto_fruta_rugosidad.png",
+    "metal": "texturas/puesto_fruta_metal.png",
+    "normal": "texturas/puesto_fruta_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "puesto_fruta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 5896,
+      "tam_studs": [
+        3.98,
+        3.977,
+        2.734
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.989,
+        -0.015
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 5896,
+    "tam_studs": [
+      3.98,
+      2.734,
+      3.977
+    ],
+    "centro": [
+      0.0,
+      0.015,
+      1.989
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "puesto_fruta_turnaround.png"
+}

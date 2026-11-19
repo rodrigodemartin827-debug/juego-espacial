@@ -1,0 +1,193 @@
+{
+  "nombre": "banco_galactico",
+  "zona": "comercial",
+  "descripcion": "Banco Colonial: fachada blindada de paneles gruesos y pilastras de piedra, cajero empotrado con teclado de botones 3D, puerta reforzada con dos cerrojos, placa de latón y escalinata.",
+  "tam_pedido_studs": [
+    12,
+    10,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 12.0,
+    "alto_y": 9.4,
+    "fondo_z": 9.97
+  },
+  "triangulos": 8192,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/banco_galactico_color.png",
+    "rugosidad": "texturas/banco_galactico_rugosidad.png",
+    "metal": "texturas/banco_galactico_metal.png",
+    "normal": "texturas/banco_galactico_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "banco_galactico",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 6948,
+      "tam_studs": [
+        12.0,
+        9.4,
+        9.97
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.7,
+        0.115
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "banco_galactico_cajero_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 24,
+      "tam_studs": [
+        1.0,
+        1.063,
+        0.2
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -3.9,
+        3.894,
+        -2.835
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "banco_galactico_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 236,
+      "tam_studs": [
+        4.513,
+        4.225,
+        3.405
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.164,
+        -1.939
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "banco_galactico_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#8FB4C6",
+      "transparencia": 0.3,
+      "triangulos": 12,
+      "tam_studs": [
+        0.5,
+        2.6,
+        0.06
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        3.4,
+        4.4,
+        -2.73
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "banco_galactico_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 812,
+      "tam_studs": [
+        2.795,
+        4.45,
+        0.828
+      ],
+      "pivote_studs": [
+        1.35,
+        0.9,
+        -2.5
+      ],
+      "centro_studs": [
+        0.048,
+        3.145,
+        -2.664
+      ],
+      "nota": "Hoja blindada batiente sobre bisagras de pivote (eje vertical). Los dos cerrojos (pieza cerrojos) se descorren 0,5 studs a la derecha del modelo antes de abrir."
+    },
+    {
+      "nombre": "banco_galactico_cerrojos",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 160,
+      "tam_studs": [
+        1.25,
+        2.736,
+        0.18
+      ],
+      "pivote_studs": [
+        -1.4,
+        3.2,
+        -2.95
+      ],
+      "centro_studs": [
+        -1.125,
+        3.282,
+        -2.92
+      ],
+      "nota": "Dos cerrojos de barra: se descorren juntos."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 8192,
+    "tam_studs": [
+      12.0,
+      9.97,
+      9.4
+    ],
+    "centro": [
+      -0.0,
+      -0.115,
+      4.7
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "banco_galactico_turnaround.png"
+}

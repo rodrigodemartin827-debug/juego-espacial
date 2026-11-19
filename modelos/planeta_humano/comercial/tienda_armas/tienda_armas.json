@@ -1,0 +1,261 @@
+{
+  "nombre": "tienda_armas",
+  "zona": "comercial",
+  "descripcion": "Armería de la colonia: fachada de paneles blindados sobre zócalo de piedra, escaparate de cristal grueso con armas expuestas, puerta automática corredera y cartel ARMAS en neón.",
+  "tam_pedido_studs": [
+    12,
+    10,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 12.79,
+    "alto_y": 8.19,
+    "fondo_z": 10.39
+  },
+  "triangulos": 13948,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tienda_armas_color.png",
+    "rugosidad": "texturas/tienda_armas_rugosidad.png",
+    "metal": "texturas/tienda_armas_metal.png",
+    "normal": "texturas/tienda_armas_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tienda_armas",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 12056,
+      "tam_studs": [
+        12.79,
+        8.192,
+        10.395
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.054,
+        0.081
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armas_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9CC8DC",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        4.46,
+        4.16,
+        0.15
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        2.95,
+        3.5,
+        -4.085
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armas_cartel_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 568,
+      "tam_studs": [
+        2.172,
+        0.402,
+        0.08
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -2.696,
+        6.815,
+        -4.93
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armas_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 304,
+      "tam_studs": [
+        9.957,
+        6.79,
+        4.532
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.878,
+        3.395,
+        -2.326
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armas_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 492,
+      "tam_studs": [
+        1.72,
+        6.016,
+        0.275
+      ],
+      "pivote_studs": [
+        -1.86,
+        0.45,
+        -4.5
+      ],
+      "centro_studs": [
+        -1.86,
+        3.478,
+        -4.557
+      ],
+      "nota": "Hoja corredera. Abrir: desplazar 1.67 studs hacia el exterior del hueco."
+    },
+    {
+      "nombre": "tienda_armas_puerta_izq_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A9CFE0",
+      "transparencia": 0.45,
+      "triangulos": 12,
+      "tam_studs": [
+        1.4,
+        4.95,
+        0.06
+      ],
+      "pivote_studs": [
+        -1.86,
+        0.45,
+        -4.5
+      ],
+      "centro_studs": [
+        -1.86,
+        3.375,
+        -4.5
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armas_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 492,
+      "tam_studs": [
+        1.72,
+        6.016,
+        0.275
+      ],
+      "pivote_studs": [
+        -3.54,
+        0.45,
+        -4.5
+      ],
+      "centro_studs": [
+        -3.54,
+        3.478,
+        -4.517
+      ],
+      "nota": "Hoja corredera. Abrir: desplazar 1.67 studs hacia el exterior del hueco."
+    },
+    {
+      "nombre": "tienda_armas_puerta_der_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A9CFE0",
+      "transparencia": 0.45,
+      "triangulos": 12,
+      "tam_studs": [
+        1.4,
+        4.95,
+        0.06
+      ],
+      "pivote_studs": [
+        -3.54,
+        0.45,
+        -4.5
+      ],
+      "centro_studs": [
+        -3.54,
+        3.375,
+        -4.46
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {
+    "PuertaAbierta_izq": {
+      "pos_studs": [
+        -0.19,
+        0.45,
+        -4.5
+      ],
+      "nota": "Pivote de la hoja con la puerta abierta."
+    },
+    "PuertaAbierta_der": {
+      "pos_studs": [
+        -5.21,
+        0.45,
+        -4.5
+      ],
+      "nota": "Pivote de la hoja con la puerta abierta."
+    }
+  },
+  "notas": [
+    "Puerta: pieza tienda_armas_puerta + tienda_armas_puerta_cristal con el mismo pivote. Para abrir, mover ambas hacia la izquierda del modelo (X de Roblox +) hasta el anclaje PuertaAbierta.",
+    "Las letras ARMAS van en tienda_armas_cartel_neon; el resto de luces (nicho, vestíbulo, focos, cámara, celda del rifle) en tienda_armas_luces_neon."
+  ],
+  "verificacion_fbx": {
+    "piezas": 8,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 13948,
+    "tam_studs": [
+      12.79,
+      10.395,
+      8.192
+    ],
+    "centro": [
+      -0.0,
+      -0.081,
+      4.054
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tienda_armas_turnaround.png"
+}

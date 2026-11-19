@@ -1,0 +1,97 @@
+{
+  "nombre": "puesto_comida",
+  "zona": "comercial",
+  "descripcion": "Puesto de comida caliente: dos ollas con tapa (una abierta con guiso), hornillo con llama azul, platos apilados, cubiertos en vaso, servilletero y pizarra del menú del día.",
+  "tam_pedido_studs": [
+    4,
+    3,
+    4
+  ],
+  "tam_studs": {
+    "ancho_x": 3.98,
+    "alto_y": 3.98,
+    "fondo_z": 3.05
+  },
+  "triangulos": 5330,
+  "presupuesto": 6000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/puesto_comida_color.png",
+    "rugosidad": "texturas/puesto_comida_rugosidad.png",
+    "metal": "texturas/puesto_comida_metal.png",
+    "normal": "texturas/puesto_comida_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "puesto_comida",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 5210,
+      "tam_studs": [
+        3.98,
+        3.983,
+        3.047
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.986,
+        -0.172
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "puesto_comida_llama_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3D8BFF",
+      "transparencia": null,
+      "triangulos": 120,
+      "tam_studs": [
+        1.3,
+        0.089,
+        0.285
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.6,
+        1.746,
+        0.0
+      ],
+      "nota": "Llama del hornillo: Neon azul #3D8BFF."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 5330,
+    "tam_studs": [
+      3.98,
+      3.047,
+      3.983
+    ],
+    "centro": [
+      0.0,
+      0.172,
+      1.986
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "puesto_comida_turnaround.png"
+}

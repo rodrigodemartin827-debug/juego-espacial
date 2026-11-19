@@ -1,0 +1,241 @@
+{
+  "nombre": "tienda_armaduras",
+  "zona": "comercial",
+  "descripcion": "Armaduras: zócalo de ladrillo, paneles verde grisáceo, escaparate con dos maniquíes robóticos (pechera y hombreras), estante exterior con tres cascos y puerta batiente con sensor de proximidad.",
+  "tam_pedido_studs": [
+    12,
+    10,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 12.8,
+    "alto_y": 8.15,
+    "fondo_z": 11.05
+  },
+  "triangulos": 10904,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tienda_armaduras_color.png",
+    "rugosidad": "texturas/tienda_armaduras_rugosidad.png",
+    "metal": "texturas/tienda_armaduras_metal.png",
+    "normal": "texturas/tienda_armaduras_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tienda_armaduras",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 8516,
+      "tam_studs": [
+        12.8,
+        8.15,
+        11.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.075,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armaduras_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A8CEDA",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        5.86,
+        4.06,
+        0.13
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        2.35,
+        3.55,
+        -3.885
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armaduras_cartel_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 916,
+      "tam_studs": [
+        1.934,
+        0.211,
+        0.06
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -3.198,
+        6.903,
+        -5.52
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armaduras_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 220,
+      "tam_studs": [
+        10.767,
+        2.96,
+        2.035
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.027,
+        4.91,
+        -3.718
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armaduras_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 608,
+      "tam_studs": [
+        1.41,
+        5.52,
+        0.27
+      ],
+      "pivote_studs": [
+        -1.84,
+        0.4,
+        -3.9
+      ],
+      "centro_studs": [
+        -2.495,
+        3.19,
+        -3.975
+      ],
+      "nota": "Hoja batiente: gira sobre su bisagra (eje vertical del pivote). Abre hacia dentro hasta 95°."
+    },
+    {
+      "nombre": "tienda_armaduras_puerta_izq_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A8CEDA",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        1.06,
+        3.65,
+        0.06
+      ],
+      "pivote_studs": [
+        -1.84,
+        0.4,
+        -3.9
+      ],
+      "centro_studs": [
+        -2.52,
+        3.825,
+        -3.9
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_armaduras_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 608,
+      "tam_studs": [
+        1.41,
+        5.52,
+        0.27
+      ],
+      "pivote_studs": [
+        -4.56,
+        0.4,
+        -3.9
+      ],
+      "centro_studs": [
+        -3.905,
+        3.19,
+        -3.975
+      ],
+      "nota": "Hoja batiente: gira sobre su bisagra (eje vertical del pivote). Abre hacia dentro hasta 95°."
+    },
+    {
+      "nombre": "tienda_armaduras_puerta_der_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A8CEDA",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        1.06,
+        3.65,
+        0.06
+      ],
+      "pivote_studs": [
+        -4.56,
+        0.4,
+        -3.9
+      ],
+      "centro_studs": [
+        -3.88,
+        3.825,
+        -3.9
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 8,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 10904,
+    "tam_studs": [
+      12.8,
+      11.05,
+      8.15
+    ],
+    "centro": [
+      0.0,
+      0.025,
+      4.075
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tienda_armaduras_turnaround.png"
+}

@@ -1,0 +1,265 @@
+{
+  "nombre": "tienda_naves",
+  "zona": "comercial",
+  "descripcion": "Astillero Orbital, concesionario de piezas de nave: pórtico de acero con bóveda, ventanal, maqueta de nave colgada, motores en pedestales, puerta doble ancha con rampa y banderines.",
+  "tam_pedido_studs": [
+    14,
+    12,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 13.63,
+    "alto_y": 8.27,
+    "fondo_z": 12.1
+  },
+  "triangulos": 10712,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tienda_naves_color.png",
+    "rugosidad": "texturas/tienda_naves_rugosidad.png",
+    "metal": "texturas/tienda_naves_metal.png",
+    "normal": "texturas/tienda_naves_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tienda_naves",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 6108,
+      "tam_studs": [
+        13.628,
+        8.248,
+        12.1
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.186,
+        4.025,
+        -0.25
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_naves_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A3CFE0",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        7.8,
+        4.8,
+        0.12
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.7,
+        3.3,
+        -3.49
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_naves_cartel_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 3576,
+      "tam_studs": [
+        4.544,
+        0.739,
+        0.07
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.001,
+        7.058,
+        -3.96
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_naves_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 296,
+      "tam_studs": [
+        11.057,
+        6.454,
+        5.367
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.528,
+        3.103,
+        -1.509
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_naves_maqueta_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#2C4A66",
+      "transparencia": 0.3,
+      "triangulos": 120,
+      "tam_studs": [
+        1.12,
+        0.44,
+        0.6
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.85,
+        0.22,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_naves_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 288,
+      "tam_studs": [
+        1.5,
+        5.16,
+        0.28
+      ],
+      "pivote_studs": [
+        -3.55,
+        0.5,
+        -3.9
+      ],
+      "centro_studs": [
+        -3.55,
+        3.1,
+        -3.98
+      ],
+      "nota": "Hoja corredera: abrir 1.40 studs hacia fuera del hueco."
+    },
+    {
+      "nombre": "tienda_naves_puerta_izq_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A3CFE0",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        1.2,
+        4.35,
+        0.06
+      ],
+      "pivote_studs": [
+        -3.55,
+        0.5,
+        -3.9
+      ],
+      "centro_studs": [
+        -3.55,
+        3.175,
+        -3.9
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_naves_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 288,
+      "tam_studs": [
+        1.5,
+        5.16,
+        0.28
+      ],
+      "pivote_studs": [
+        -5.05,
+        0.5,
+        -3.9
+      ],
+      "centro_studs": [
+        -5.05,
+        3.1,
+        -3.98
+      ],
+      "nota": "Hoja corredera: abrir 1.40 studs hacia fuera del hueco."
+    },
+    {
+      "nombre": "tienda_naves_puerta_der_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A3CFE0",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        1.2,
+        4.35,
+        0.06
+      ],
+      "pivote_studs": [
+        -5.05,
+        0.5,
+        -3.9
+      ],
+      "centro_studs": [
+        -5.05,
+        3.175,
+        -3.9
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 9,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 10712,
+    "tam_studs": [
+      13.628,
+      12.1,
+      8.273
+    ],
+    "centro": [
+      0.186,
+      0.25,
+      4.013
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tienda_naves_turnaround.png"
+}
