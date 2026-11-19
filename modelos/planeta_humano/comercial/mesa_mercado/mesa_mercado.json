@@ -9,7 +9,7 @@
   ],
   "tam_studs": {
     "ancho_x": 2.9,
-    "alto_y": 1.7,
+    "alto_y": 2.03,
     "fondo_z": 2.02
   },
   "triangulos": 1562,
@@ -34,7 +34,7 @@
       "triangulos": 1284,
       "tam_studs": [
         2.9,
-        1.7,
+        2.03,
         2.02
       ],
       "pivote_studs": [
@@ -44,7 +44,7 @@
       ],
       "centro_studs": [
         -0.0,
-        0.825,
+        0.985,
         0.0
       ],
       "nota": ""
@@ -58,17 +58,17 @@
       "triangulos": 278,
       "tam_studs": [
         1.2,
-        0.24,
+        0.287,
         1.358
       ],
       "pivote_studs": [
         -0.0,
-        1.15,
+        1.373,
         -0.65
       ],
       "centro_studs": [
         -0.0,
-        1.38,
+        1.648,
         -0.229
       ],
       "nota": "Cajón: se abre deslizándolo 0,6 studs hacia delante (-Z)."
@@ -80,19 +80,19 @@
     "piezas": 2,
     "ok": true,
     "problemas": [],
+    "unidad_fbx_m": 0.28,
     "triangulos": 1562,
     "tam_studs": [
       2.9,
       2.02,
-      1.7
+      2.03
     ],
     "centro": [
       0.0,
       0.0,
-      0.825
+      0.985
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "mesa_mercado_turnaround.png"
 }
