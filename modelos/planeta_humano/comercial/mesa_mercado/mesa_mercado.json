@@ -1,0 +1,97 @@
+{
+  "nombre": "mesa_mercado",
+  "zona": "comercial",
+  "descripcion": "Mesa de mercado vacía para NPCs: patas plegables de tubo con bisagras, tablero de tablones gastados y cajón con tirador.",
+  "tam_pedido_studs": [
+    3,
+    2,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 2.9,
+    "alto_y": 1.7,
+    "fondo_z": 2.02
+  },
+  "triangulos": 1562,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/mesa_mercado_color.png",
+    "rugosidad": "texturas/mesa_mercado_rugosidad.png",
+    "metal": "texturas/mesa_mercado_metal.png",
+    "normal": "texturas/mesa_mercado_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "mesa_mercado",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1284,
+      "tam_studs": [
+        2.9,
+        1.7,
+        2.02
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.825,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "mesa_mercado_cajon",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 278,
+      "tam_studs": [
+        1.2,
+        0.24,
+        1.358
+      ],
+      "pivote_studs": [
+        -0.0,
+        1.15,
+        -0.65
+      ],
+      "centro_studs": [
+        -0.0,
+        1.38,
+        -0.229
+      ],
+      "nota": "Cajón: se abre deslizándolo 0,6 studs hacia delante (-Z)."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 1562,
+    "tam_studs": [
+      2.9,
+      2.02,
+      1.7
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      0.825
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "mesa_mercado_turnaround.png"
+}
