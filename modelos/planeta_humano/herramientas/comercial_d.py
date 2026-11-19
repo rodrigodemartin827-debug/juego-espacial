@@ -444,10 +444,10 @@ def toldo_mercado():
         for k in range(6):
             c.caja((-0.22 + k * 0.088, 0.22, 0.008), (0.04, 0.012, 0.006), cuerda)
             c.caja((-0.22 + k * 0.088, -0.22, 0.008), (0.04, 0.012, 0.006), cuerda)
-    # faldones laterales caídos
-    for sy in (-1, 1):
-        c.lamina(lambda u, v, sy=sy: (-W / 2 - 0.1 + u * (W + 0.2), sy * (D / 2 + 0.14),
-                                      H + 0.08 - v * 0.3 - 0.02 * math.sin(u * 30)), 12, 1, 0.025, lona)
+    # faldones caídos en los aleros (lados largos de la lona, a lo largo de Y), cosidos al borde del tejado
+    for sx in (-1, 1):
+        c.lamina(lambda u, v, sx=sx: (sx * (W / 2 + 0.13 + 0.02 * math.sin(u * 30)), -D / 2 - 0.12 + u * (D + 0.24),
+                                      H + 0.06 - v * 0.32), 12, 1, 0.025, lona)
     m.terminar()
 
 
