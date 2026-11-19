@@ -8,7 +8,7 @@
 import importlib
 import sys
 
-MODULOS = ["comercial", "comercial_b", "comercial_c", "comercial_d", "industrial", "industrial_b", "hangar", "hangar_b"]
+MODULOS = ["comercial", "comercial_b", "comercial_c", "comercial_d", "industrial", "industrial_b", "hangar", "hangar_b", "naturaleza", "naturaleza_b", "especiales", "especiales_b", "urbano"]
 MODELOS = {}
 for nombre in MODULOS:
     try:

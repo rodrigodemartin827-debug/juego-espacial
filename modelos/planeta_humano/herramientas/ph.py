@@ -700,7 +700,9 @@ class Parte:
         """Piedra irregular (icosfera deformada y aplastada)."""
         return self.ico(c, r, mat, sub=sub, esc=esc, ruido=ruido, semilla=semilla)
 
-    def tubo(self, puntos, r, mat, n=8, suave=True, seg=4, tapas=True, cerrado=False, r_fin=None):
+    def tubo(self, puntos, r, mat, n=8, suave=True, seg=4, tapas=True, cerrado=False, r_fin=None, surcos=0,
+             prof=0.0, semilla=0, radios=None):
+        """surcos/prof: relieve de corteza (surcos longitudinales con algo de azar). radios: radio por punto."""
         """Tubo a lo largo de una polilínea (suavizada con Catmull-Rom). Para cables, mangueras, barandillas."""
         pts = [V(p) for p in puntos]
         if suave and len(pts) > 2:
@@ -714,6 +716,7 @@ class Parte:
             if cerrado and (i == 0 or i == len(pts) - 1):
                 a, b = pts[-2], pts[1]
             tangentes.append((b - a).normalized())
+        rnd_surco = random.Random(semilla)
         # marco por transporte paralelo
         t0 = tangentes[0]
         ref = V((0, 0, 1)) if abs(t0.z) < 0.9 else V((1, 0, 0))
@@ -723,9 +726,19 @@ class Parte:
             if i > 0:
                 nrm = (nrm - t * nrm.dot(t)).normalized()
             bn = t.cross(nrm)
-            rr = r if r_fin is None else r + (r_fin - r) * i / (len(pts) - 1)
-            anillos.append([p + (nrm * math.cos(math.tau * k / n) + bn * math.sin(math.tau * k / n)) * rr
-                            for k in range(n)])
+            tt = i / (len(pts) - 1)
+            if radios is not None:
+                rr = _interp(radios, tt)
+            else:
+                rr = r if r_fin is None else r + (r_fin - r) * tt
+            anillo = []
+            for k in range(n):
+                f = 1.0
+                if surcos and prof:
+                    f -= prof * (0.5 + 0.5 * math.cos(math.tau * k * surcos / n + tt * 2.0)) * \
+                        (0.6 + 0.8 * rnd_surco.random())
+                anillo.append(p + (nrm * math.cos(math.tau * k / n) + bn * math.sin(math.tau * k / n)) * rr * f)
+            anillos.append(anillo)
         vs = self._loft(anillos, tapas and not cerrado, tapas and not cerrado)
         if cerrado:
             bmesh.ops.remove_doubles(self.bm, verts=vs, dist=1e-5)
@@ -848,6 +861,15 @@ class Parte:
             else:
                 pts.append(V(c) + V((math.cos(a) * R, math.sin(a) * R, 0)))
         return self.tubo(pts, r, mat, n=n, suave=False)
+
+
+def _interp(valores, t):
+    """Interpolación lineal de una lista de valores en t (0..1)."""
+    if len(valores) == 1:
+        return valores[0]
+    x = t * (len(valores) - 1)
+    i = min(int(x), len(valores) - 2)
+    return valores[i] + (valores[i + 1] - valores[i]) * (x - i)
 
 
 def _catmull(p, seg, cerrado=False):
