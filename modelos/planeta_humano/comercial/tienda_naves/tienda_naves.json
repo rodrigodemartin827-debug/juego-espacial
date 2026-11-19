@@ -9,7 +9,7 @@
   ],
   "tam_studs": {
     "ancho_x": 13.63,
-    "alto_y": 8.27,
+    "alto_y": 8.25,
     "fondo_z": 12.1
   },
   "triangulos": 10712,
@@ -106,7 +106,7 @@
       "triangulos": 296,
       "tam_studs": [
         11.057,
-        6.454,
+        5.68,
         5.367
       ],
       "pivote_studs": [
@@ -116,7 +116,7 @@
       ],
       "centro_studs": [
         -0.528,
-        3.103,
+        3.49,
         -1.509
       ],
       "nota": ""
@@ -129,9 +129,9 @@
       "transparencia": 0.3,
       "triangulos": 120,
       "tam_studs": [
-        1.12,
-        0.44,
-        0.6
+        0.985,
+        0.438,
+        0.742
       ],
       "pivote_studs": [
         -0.0,
@@ -139,9 +139,9 @@
         0.0
       ],
       "centro_studs": [
-        0.85,
-        0.22,
-        0.0
+        2.412,
+        4.708,
+        -1.211
       ],
       "nota": ""
     },
@@ -248,19 +248,19 @@
     "piezas": 9,
     "ok": true,
     "problemas": [],
+    "unidad_fbx_m": 0.28,
     "triangulos": 10712,
     "tam_studs": [
       13.628,
       12.1,
-      8.273
+      8.248
     ],
     "centro": [
       0.186,
       0.25,
-      4.013
+      4.025
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "tienda_naves_turnaround.png"
 }
