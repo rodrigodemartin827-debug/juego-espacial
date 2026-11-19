@@ -1,0 +1,100 @@
+{
+  "nombre": "cesped_alien",
+  "zona": "naturaleza",
+  "descripcion": "Placa modular de césped alienígena (8 x 8): tierra con mechones de hierba volumétrica verde azulada, algunos con puntas luminosas cyan, y flores diminutas intercaladas. Encaja sin costuras con sus vecinas.",
+  "tam_pedido_studs": [
+    8,
+    8,
+    0.3
+  ],
+  "tam_studs": {
+    "ancho_x": 8.0,
+    "alto_y": 0.31,
+    "fondo_z": 8.0
+  },
+  "triangulos": 1580,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/cesped_alien_color.png",
+    "rugosidad": "texturas/cesped_alien_rugosidad.png",
+    "metal": "texturas/cesped_alien_metal.png",
+    "normal": "texturas/cesped_alien_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "cesped_alien",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1516,
+      "tam_studs": [
+        8.0,
+        0.299,
+        8.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.15,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "cesped_alien_puntas_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.2,
+      "triangulos": 64,
+      "tam_studs": [
+        7.594,
+        0.122,
+        7.026
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.026,
+        0.248,
+        0.13
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Placa de 8 x 8 studs exactos, la tierra a ras en los cuatro bordes: se coloca en rejilla de 8."
+  ],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1580,
+    "tam_studs": [
+      8.0,
+      8.0,
+      0.309
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      0.155
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "cesped_alien_turnaround.png"
+}
