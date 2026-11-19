@@ -1,0 +1,98 @@
+{
+  "nombre": "rack_piezas_nave",
+  "zona": "hangar",
+  "descripcion": "Estantería grande de tubo de 4 niveles con piezas de nave: panel de fuselaje curvado, boquilla de motor cónica, tramo de tubería, caja de electrónica; etiquetas por nivel y pernos de anclaje.",
+  "tam_pedido_studs": [
+    6,
+    2,
+    6
+  ],
+  "tam_studs": {
+    "ancho_x": 6.1,
+    "alto_y": 5.91,
+    "fondo_z": 2.0
+  },
+  "triangulos": 2604,
+  "presupuesto": 6000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/rack_piezas_nave_color.png",
+    "rugosidad": "texturas/rack_piezas_nave_rugosidad.png",
+    "metal": "texturas/rack_piezas_nave_metal.png",
+    "normal": "texturas/rack_piezas_nave_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "rack_piezas_nave",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2532,
+      "tam_studs": [
+        6.1,
+        5.915,
+        2.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.957,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "rack_piezas_nave_electronica_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 72,
+      "tam_studs": [
+        1.46,
+        0.06,
+        0.01
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.5,
+        5.13,
+        -0.63
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2604,
+    "tam_studs": [
+      6.1,
+      2.0,
+      5.915
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      2.957
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "rack_piezas_nave_turnaround.png"
+}
