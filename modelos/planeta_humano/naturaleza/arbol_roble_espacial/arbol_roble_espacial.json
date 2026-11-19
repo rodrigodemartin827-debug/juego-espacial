@@ -1,0 +1,98 @@
+{
+  "nombre": "arbol_roble_espacial",
+  "zona": "naturaleza",
+  "descripcion": "Roble espacial: tronco grueso con corteza agrietada modelada, raíces expuestas, 4 ramas principales que se bifurcan, copa de masas de hojas con puntas bioluminiscentes cyan y musgo en la cara norte (+Z de Roblox, la trasera del modelo).",
+  "tam_pedido_studs": [
+    6,
+    6,
+    14
+  ],
+  "tam_studs": {
+    "ancho_x": 6.68,
+    "alto_y": 13.47,
+    "fondo_z": 6.7
+  },
+  "triangulos": 7686,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/arbol_roble_espacial_color.png",
+    "rugosidad": "texturas/arbol_roble_espacial_rugosidad.png",
+    "metal": "texturas/arbol_roble_espacial_metal.png",
+    "normal": "texturas/arbol_roble_espacial_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "arbol_roble_espacial",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 7326,
+      "tam_studs": [
+        6.678,
+        13.473,
+        6.702
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.237,
+        6.584,
+        0.348
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "arbol_roble_espacial_puntas_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.2,
+      "triangulos": 360,
+      "tam_studs": [
+        6.049,
+        4.427,
+        5.829
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.213,
+        10.719,
+        -0.054
+      ],
+      "nota": "Puntas de hojas luminosas."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 7686,
+    "tam_studs": [
+      6.678,
+      6.702,
+      13.473
+    ],
+    "centro": [
+      -0.237,
+      -0.348,
+      6.584
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "arbol_roble_espacial_turnaround.png"
+}
