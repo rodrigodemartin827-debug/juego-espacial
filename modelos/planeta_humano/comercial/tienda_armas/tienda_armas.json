@@ -105,9 +105,9 @@
       "transparencia": null,
       "triangulos": 304,
       "tam_studs": [
-        9.957,
-        6.79,
-        4.532
+        10.902,
+        3.168,
+        3.07
       ],
       "pivote_studs": [
         -0.0,
@@ -115,9 +115,9 @@
         0.0
       ],
       "centro_studs": [
-        0.878,
-        3.395,
-        -2.326
+        0.405,
+        5.206,
+        -3.495
       ],
       "nota": ""
     },
@@ -244,6 +244,7 @@
     "piezas": 8,
     "ok": true,
     "problemas": [],
+    "unidad_fbx_m": 0.28,
     "triangulos": 13948,
     "tam_studs": [
       12.79,
@@ -255,8 +256,7 @@
       -0.081,
       4.054
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "tienda_armas_turnaround.png"
 }
