@@ -1,0 +1,146 @@
+{
+  "nombre": "marquesina_parada",
+  "zona": "urbano",
+  "descripcion": "Marquesina de parada: pórticos de acero con viga curva en voladizo, cubierta curva de cristal, luz cyan bajo el alero, cristal trasero con banda de aviso, banco con 2 asientos moldeados, pantalla de horarios cyan con líneas de texto, panel lateral con el mapa de líneas, papelera al lado y poste con el disco «PARADA».",
+  "tam_pedido_studs": [
+    6,
+    3,
+    4
+  ],
+  "tam_studs": {
+    "ancho_x": 7.39,
+    "alto_y": 3.73,
+    "fondo_z": 3.2
+  },
+  "triangulos": 1820,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/marquesina_parada_color.png",
+    "rugosidad": "texturas/marquesina_parada_rugosidad.png",
+    "metal": "texturas/marquesina_parada_metal.png",
+    "normal": "texturas/marquesina_parada_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "marquesina_parada",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1592,
+      "tam_studs": [
+        7.39,
+        3.686,
+        3.2
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.085,
+        1.843,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "marquesina_parada_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#A8D4E2",
+      "transparencia": 0.55,
+      "triangulos": 204,
+      "tam_studs": [
+        6.0,
+        3.37,
+        2.813
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.045,
+        -0.081
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "marquesina_parada_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        5.7,
+        0.025,
+        0.05
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.12,
+        -1.42
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "marquesina_parada_pantalla_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        0.86,
+        0.52,
+        0.012
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.95,
+        1.97,
+        1.145
+      ],
+      "nota": "Pantalla de horarios."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 4,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1820,
+    "tam_studs": [
+      7.39,
+      3.2,
+      3.73
+    ],
+    "centro": [
+      -0.085,
+      0.0,
+      1.865
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "marquesina_parada_turnaround.png"
+}
