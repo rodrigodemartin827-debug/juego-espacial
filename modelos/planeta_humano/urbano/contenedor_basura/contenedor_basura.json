@@ -1,0 +1,101 @@
+{
+  "nombre": "contenedor_basura",
+  "zona": "urbano",
+  "descripcion": "Contenedor de basura: cuerpo cilíndrico ovalado con nervios, pedal delantero con varilla hasta la tapa, tapa abombada con bisagra y muelle a la vista, 2 ruedas traseras, sensor de llenado con pantallita de barra y logo pintado. Dos variantes en la textura: verde (orgánico, la del atlas) y azul (reciclable, en contenedor_basura_color_azul.png).",
+  "tam_pedido_studs": [
+    2,
+    1.5,
+    2.5
+  ],
+  "tam_studs": {
+    "ancho_x": 1.84,
+    "alto_y": 2.42,
+    "fondo_z": 1.62
+  },
+  "triangulos": 1776,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/contenedor_basura_color.png",
+    "rugosidad": "texturas/contenedor_basura_rugosidad.png",
+    "metal": "texturas/contenedor_basura_metal.png",
+    "normal": "texturas/contenedor_basura_normal.png",
+    "color_azul": "texturas/contenedor_basura_color_azul.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "contenedor_basura",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1764,
+      "tam_studs": [
+        1.84,
+        2.425,
+        1.616
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.212,
+        -0.072
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "contenedor_basura_sensor_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        0.13,
+        0.027,
+        0.012
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.035,
+        2.378,
+        -0.338
+      ],
+      "nota": "Barra de llenado del sensor."
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Variante azul (reciclable): usar texturas/contenedor_basura_color_azul.png como ColorMap."
+  ],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1776,
+    "tam_studs": [
+      1.84,
+      1.616,
+      2.425
+    ],
+    "centro": [
+      0.0,
+      0.072,
+      1.212
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "contenedor_basura_turnaround.png"
+}
