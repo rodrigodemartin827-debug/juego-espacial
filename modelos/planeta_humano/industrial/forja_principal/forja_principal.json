@@ -1,0 +1,195 @@
+{
+  "nombre": "forja_principal",
+  "zona": "industrial",
+  "descripcion": "La forja: el edificio de crafteo más importante. Piedra y ladrillo ennegrecidos, chimenea grande con hollín, puerta corredera de taller sobre raíl, horno con brillo naranja, yunque, lingotes, campana, herramientas colgadas y suelo manchado de metal fundido.",
+  "tam_pedido_studs": [
+    16,
+    14,
+    12
+  ],
+  "tam_studs": {
+    "ancho_x": 16.4,
+    "alto_y": 12.32,
+    "fondo_z": 15.53
+  },
+  "triangulos": 10846,
+  "presupuesto": 18000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/forja_principal_color.png",
+    "rugosidad": "texturas/forja_principal_rugosidad.png",
+    "metal": "texturas/forja_principal_metal.png",
+    "normal": "texturas/forja_principal_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "forja_principal",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 9446,
+      "tam_studs": [
+        16.4,
+        12.32,
+        15.532
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        6.115,
+        -0.734
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "forja_principal_horno_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FF6B35",
+      "transparencia": null,
+      "triangulos": 136,
+      "tam_studs": [
+        10.05,
+        2.575,
+        1.77
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.175,
+        1.712,
+        -3.835
+      ],
+      "nota": "Boca y resplandor del horno: Neon #FF6B35."
+    },
+    {
+      "nombre": "forja_principal_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 112,
+      "tam_studs": [
+        12.357,
+        0.237,
+        1.242
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.178,
+        4.512,
+        -5.171
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "forja_principal_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1140,
+      "tam_studs": [
+        4.96,
+        6.093,
+        0.462
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.4,
+        -5.8
+      ],
+      "centro_studs": [
+        -0.0,
+        3.507,
+        -5.991
+      ],
+      "nota": "Puerta de taller corredera, modelada entreabierta. Corre por el raíl hacia la ventana: ver anclajes PuertaCerrada y PuertaAbierta (posición del pivote)."
+    },
+    {
+      "nombre": "forja_principal_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#8EA6AE",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        3.0,
+        2.2,
+        0.08
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        4.9,
+        3.7,
+        -5.16
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {
+    "PuertaCerrada": {
+      "pos_studs": [
+        -2.1,
+        0.4,
+        -5.8
+      ],
+      "nota": "Pivote de la puerta cerrada (tapa el hueco entero)."
+    },
+    "PuertaAbierta": {
+      "pos_studs": [
+        2.9,
+        0.4,
+        -5.8
+      ],
+      "nota": "Pivote de la puerta abierta del todo."
+    },
+    "LuzHorno": {
+      "pos_studs": [
+        -3.2,
+        1.8,
+        -3.2
+      ],
+      "nota": "PointLight naranja #FF6B35 (Brightness 2-3, Range 14): el resplandor que sale por la puerta entreabierta."
+    }
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 5,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 10846,
+    "tam_studs": [
+      16.4,
+      15.532,
+      12.32
+    ],
+    "centro": [
+      0.0,
+      0.734,
+      6.115
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "forja_principal_turnaround.png"
+}
