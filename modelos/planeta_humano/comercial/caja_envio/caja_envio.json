@@ -1,0 +1,74 @@
+{
+  "nombre": "caja_envio",
+  "zona": "comercial",
+  "descripcion": "Caja de transporte espacial: metal con cantoneras, 8 remaches, dos correas cruzadas con hebilla, etiqueta de envío y logo estampado.",
+  "tam_pedido_studs": [
+    2,
+    2,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 1.96,
+    "alto_y": 1.97,
+    "fondo_z": 2.05
+  },
+  "triangulos": 1908,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/caja_envio_color.png",
+    "rugosidad": "texturas/caja_envio_rugosidad.png",
+    "metal": "texturas/caja_envio_metal.png",
+    "normal": "texturas/caja_envio_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "caja_envio",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1908,
+      "tam_studs": [
+        1.961,
+        1.972,
+        2.048
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.956,
+        -0.016
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1908,
+    "tam_studs": [
+      1.961,
+      2.048,
+      1.973
+    ],
+    "centro": [
+      -0.0,
+      0.016,
+      0.956
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "caja_envio_turnaround.png"
+}
