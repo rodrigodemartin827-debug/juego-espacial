@@ -1,0 +1,242 @@
+{
+  "nombre": "centro_mando",
+  "zona": "especiales",
+  "descripcion": "Centro de mando de la colonia Nueva Esperanza: cúpula geodésica parcial con juntas metálicas, pórtico de 4 columnas estriadas, escalinata de 6 peldaños, puertas dobles con el emblema en relieve, pantallas holográficas con datos, 3 tipos de antena, mástil con bandera, 4 focos, placa de fundación y jardín formal con setos recortados.",
+  "tam_pedido_studs": [
+    18,
+    16,
+    12
+  ],
+  "tam_studs": {
+    "ancho_x": 18.0,
+    "alto_y": 12.3,
+    "fondo_z": 14.41
+  },
+  "triangulos": 11028,
+  "presupuesto": 18000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/centro_mando_color.png",
+    "rugosidad": "texturas/centro_mando_rugosidad.png",
+    "metal": "texturas/centro_mando_metal.png",
+    "normal": "texturas/centro_mando_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "centro_mando",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 9500,
+      "tam_studs": [
+        18.0,
+        12.298,
+        14.41
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        6.149,
+        0.595
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "centro_mando_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9EC6D6",
+      "transparencia": 0.35,
+      "triangulos": 216,
+      "tam_studs": [
+        12.4,
+        9.609,
+        7.854
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        7.405,
+        2.027
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "centro_mando_holo_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.6,
+      "triangulos": 24,
+      "tam_studs": [
+        11.7,
+        0.95,
+        0.03
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        7.2,
+        -2.2
+      ],
+      "nota": "Fondo de las pantallas holográficas."
+    },
+    {
+      "nombre": "centro_mando_datos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#E8FEFF",
+      "transparencia": null,
+      "triangulos": 184,
+      "tam_studs": [
+        11.431,
+        0.805,
+        0.025
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.045,
+        7.202,
+        -2.233
+      ],
+      "nota": "Datos de las pantallas (gráficas y barras)."
+    },
+    {
+      "nombre": "centro_mando_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 208,
+      "tam_studs": [
+        15.866,
+        11.429,
+        10.424
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        6.156,
+        -0.145
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "centro_mando_bandera",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 248,
+      "tam_studs": [
+        1.602,
+        1.08,
+        0.216
+      ],
+      "pivote_studs": [
+        -8.2,
+        9.4,
+        -6.2
+      ],
+      "centro_studs": [
+        -7.35,
+        9.86,
+        -6.241
+      ],
+      "nota": "Bandera de la colonia: tela aparte."
+    },
+    {
+      "nombre": "centro_mando_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 324,
+      "tam_studs": [
+        1.805,
+        4.4,
+        0.34
+      ],
+      "pivote_studs": [
+        1.8,
+        1.2,
+        -1.85
+      ],
+      "centro_studs": [
+        0.897,
+        3.4,
+        -1.92
+      ],
+      "nota": "Hoja de la puerta principal: gira hacia dentro sobre su bisagra."
+    },
+    {
+      "nombre": "centro_mando_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 324,
+      "tam_studs": [
+        1.805,
+        4.4,
+        0.34
+      ],
+      "pivote_studs": [
+        -1.8,
+        1.2,
+        -1.85
+      ],
+      "centro_studs": [
+        -0.897,
+        3.4,
+        -1.92
+      ],
+      "nota": "Hoja de la puerta principal: gira hacia dentro sobre su bisagra."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 8,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 11028,
+    "tam_studs": [
+      18.0,
+      14.41,
+      12.298
+    ],
+    "centro": [
+      0.0,
+      -0.595,
+      6.149
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "centro_mando_turnaround.png"
+}
