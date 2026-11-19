@@ -52,8 +52,8 @@ def viga_h(p, a, b_, alto, ancho, mat, alma=0.12, ala=0.1):
     u = d.normalized()
     # eje "alto" perpendicular
     arriba = V((0, 0, 1)) if abs(u.z) < 0.9 else V((1, 0, 0))
-    lado = u.cross(arriba).normalized()
-    arriba = lado.cross(u).normalized()
+    lado = arriba.cross(u).normalized()  # (u, lado, arriba) sin espejo: determinante +1
+    arriba = u.cross(lado).normalized()
     c = (a + b_) / 2
     from mathutils import Matrix
     m = Matrix((u, lado, arriba)).transposed()

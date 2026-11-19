@@ -1,0 +1,122 @@
+{
+  "nombre": "brazo_mecanico_hangar",
+  "zona": "hangar",
+  "descripcion": "Brazo robótico de ensamblaje: base giratoria con rodamiento, 3 articulaciones con actuadores hidráulicos, pinza de 3 dedos articulados, cables y mangueras con abrazaderas y caja de control.",
+  "tam_pedido_studs": [
+    2,
+    2,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 1.84,
+    "alto_y": 8.3,
+    "fondo_z": 1.69
+  },
+  "triangulos": 2666,
+  "presupuesto": 6000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/brazo_mecanico_hangar_color.png",
+    "rugosidad": "texturas/brazo_mecanico_hangar_rugosidad.png",
+    "metal": "texturas/brazo_mecanico_hangar_metal.png",
+    "normal": "texturas/brazo_mecanico_hangar_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "brazo_mecanico_hangar",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 658,
+      "tam_studs": [
+        1.837,
+        0.988,
+        1.686
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.081,
+        0.494,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_giratoria",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1996,
+      "tam_studs": [
+        1.543,
+        7.4,
+        1.1
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.9,
+        0.0
+      ],
+      "centro_studs": [
+        -0.148,
+        4.6,
+        0.0
+      ],
+      "nota": "Todo el brazo gira sobre la base (eje vertical)."
+    },
+    {
+      "nombre": "brazo_mecanico_hangar_pantalla_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        0.32,
+        0.24,
+        0.01
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.75,
+        0.57,
+        -0.745
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2666,
+    "tam_studs": [
+      1.837,
+      1.686,
+      8.3
+    ],
+    "centro": [
+      -0.081,
+      0.0,
+      4.15
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "brazo_mecanico_hangar_turnaround.png"
+}

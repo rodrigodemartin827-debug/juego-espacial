@@ -1,0 +1,122 @@
+{
+  "nombre": "prensa_hidraulica",
+  "zona": "industrial",
+  "descripcion": "Prensa hidráulica: marco en C de acero grueso, pistón vertical con cilindro, mesa con guías, dos mangueras hidráulicas, panel lateral con manómetro circular y pedal de accionamiento.",
+  "tam_pedido_studs": [
+    3,
+    2,
+    4
+  ],
+  "tam_studs": {
+    "ancho_x": 2.18,
+    "alto_y": 3.95,
+    "fondo_z": 2.28
+  },
+  "triangulos": 1912,
+  "presupuesto": 5000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/prensa_hidraulica_color.png",
+    "rugosidad": "texturas/prensa_hidraulica_rugosidad.png",
+    "metal": "texturas/prensa_hidraulica_metal.png",
+    "normal": "texturas/prensa_hidraulica_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "prensa_hidraulica",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1660,
+      "tam_studs": [
+        2.18,
+        3.954,
+        1.9
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.29,
+        1.934,
+        0.25
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "prensa_hidraulica_piston",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 196,
+      "tam_studs": [
+        0.98,
+        1.28,
+        0.77
+      ],
+      "pivote_studs": [
+        -0.0,
+        2.6,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.36,
+        -0.285
+      ],
+      "nota": "Vástago y cabezal: bajan hasta 0,9 studs (mover en Y de Roblox)."
+    },
+    {
+      "nombre": "prensa_hidraulica_pedal",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 56,
+      "tam_studs": [
+        0.35,
+        0.12,
+        0.45
+      ],
+      "pivote_studs": [
+        -0.9,
+        0.1,
+        -0.7
+      ],
+      "centro_studs": [
+        -0.9,
+        0.11,
+        -0.85
+      ],
+      "nota": "Pedal: gira 15° hacia abajo."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1912,
+    "tam_studs": [
+      2.18,
+      2.275,
+      3.954
+    ],
+    "centro": [
+      -0.29,
+      -0.062,
+      1.934
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "prensa_hidraulica_turnaround.png"
+}

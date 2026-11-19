@@ -554,7 +554,18 @@ class Parte:
         caras = list({f for v in verts for f in v.link_faces})
         if recalc and caras:
             bmesh.ops.recalc_face_normals(self.bm, faces=caras)
-        bmesh.ops.transform(self.bm, matrix=self.pila[-1] @ local, verts=verts)
+        mtx = self.pila[-1] @ local
+        bmesh.ops.transform(self.bm, matrix=mtx, verts=verts)
+        # Normales hacia fuera pase lo que pase (espejos, perfiles de torno al revés, polígonos cóncavos en los que
+        # recalc_face_normals se equivoca): si el volumen con signo de la primitiva es negativo, se le da la vuelta.
+        if caras:
+            vol = 0.0
+            for f in caras:
+                vs = [v.co for v in f.verts]
+                for k in range(1, len(vs) - 1):
+                    vol += vs[0].dot(vs[k].cross(vs[k + 1]))
+            if vol < 0:
+                bmesh.ops.reverse_faces(self.bm, faces=caras)
         i = self._idx(mat)
         for f in caras:
             f.material_index = i
@@ -1226,8 +1237,9 @@ class Modelo:
         malas = []
         for o in objs:
             vol = _volumen(o)
-            if vol <= 0:
-                malas.append(f"{o.name} ({vol:.4f})")
+            inv = islas_invertidas(o)
+            if vol <= 0 or inv:
+                malas.append(f"{o.name} ({inv} piezas del revés)")
         if malas:
             res["ok"] = False
             res["problemas"].append("normales hacia dentro: " + ", ".join(malas))
@@ -1264,7 +1276,7 @@ class Modelo:
         print(f"   triángulos: {total} (máx {self.presupuesto})", flush=True)
         if total > self.presupuesto:
             raise SystemExit(f"{self.nombre}: {total} triángulos, por encima del presupuesto {self.presupuesto}")
-        malas = [o.name for o in objs if _volumen(o) <= 0]
+        malas = [o.name for o in objs if _volumen(o) <= 0 or islas_invertidas(o)]
         if malas:
             raise SystemExit(f"{self.nombre}: normales hacia dentro en {malas}")
         mn, mx = _caja(objs)
@@ -1358,6 +1370,37 @@ def _caja(objs):
             mn = V(map(min, mn, w))
             mx = V(map(max, mx, w))
     return mn, mx
+
+
+def islas_invertidas(o):
+    """Cuenta las piezas sueltas (islas de caras conectadas) con el volumen negativo: normales hacia dentro."""
+    bm = bmesh.new()
+    bm.from_mesh(o.data)
+    bm.faces.ensure_lookup_table()
+    vistas = set()
+    malas = 0
+    for f0 in bm.faces:
+        if f0.index in vistas:
+            continue
+        pila, isla = [f0], []
+        vistas.add(f0.index)
+        while pila:
+            f = pila.pop()
+            isla.append(f)
+            for e in f.edges:
+                for g in e.link_faces:
+                    if g.index not in vistas:
+                        vistas.add(g.index)
+                        pila.append(g)
+        vol = 0.0
+        for f in isla:
+            vs = [v.co for v in f.verts]
+            for k in range(1, len(vs) - 1):
+                vol += vs[0].dot(vs[k].cross(vs[k + 1]))
+        if vol < -1e-7:
+            malas += 1
+    bm.free()
+    return malas
 
 
 def _tris(o):
