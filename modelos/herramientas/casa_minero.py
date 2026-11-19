@@ -316,11 +316,18 @@ def hornear_atlas(objs, tam, carpeta, rapido):
             f"{time.time() - ti:5.1f} s")
 
     # 2) Oclusión ambiental desde las mallas bajas, todas visibles (contacto entre piezas).
+    # El cristal translúcido ni recibe oclusión (no tiene rincones: se vería la sombra de lo de dentro pintada en
+    # el paño) ni la proyecta (si no, oscurece todo lo que hay dentro del invernadero).
+    def es_translucido(nombre):
+        return bool(TRANSLUCIDO) and TRANSLUCIDO in nombre
+
     for o in todos:
-        o.hide_render = o.name.endswith("_alta")
+        o.hide_render = o.name.endswith("_alta") or es_translucido(o.name)
     scn.world.light_settings.distance = 1.6
     scn.cycles.samples = 16 if rapido else 64
     for idx, (p, ob, oa) in enumerate(objs):
+        if es_translucido(ob.name):
+            continue
         tmp.pixels.foreach_set(ceros)
         bpy.ops.object.select_all(action="DESELECT")
         ob.select_set(True)
@@ -328,6 +335,8 @@ def hornear_atlas(objs, tam, carpeta, rapido):
         bpy.ops.object.bake(type="AO", margin=0, use_selected_to_active=False)
         sel = ids == idx
         atlas["ao"][sel] = _leer(tmp)[..., 0][sel]
+    for o in todos:
+        o.hide_render = o.name.endswith("_alta")
     log(f"Horneado completo en {time.time() - t0:.0f} s")
 
     # Restaurar materiales de las bajas.
@@ -574,6 +583,8 @@ def preparar_estudio():
     scn.view_settings.view_transform = "AgX"
     scn.view_settings.look = "AgX - Medium High Contrast"
     scn.cycles.use_denoising = True
+    # Cristal translúcido apilado (invernadero): con el límite de 8 se ven parches opacos a través de él.
+    scn.cycles.transparent_max_bounces = 48
     w = scn.world
     w.use_nodes = True
     fondo = w.node_tree.nodes["Background"]
