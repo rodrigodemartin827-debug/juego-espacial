@@ -1,0 +1,74 @@
+{
+  "nombre": "chimenea_industrial",
+  "zona": "industrial",
+  "descripcion": "Chimenea industrial de metal remachado: escalerilla de varillas con barandilla, plataforma de inspección a 2/3 con barandilla, sombrerete anti-lluvia, pararrayos y hollín bajando desde la boca.",
+  "tam_pedido_studs": [
+    2,
+    2,
+    14
+  ],
+  "tam_studs": {
+    "ancho_x": 2.54,
+    "alto_y": 14.9,
+    "fondo_z": 2.57
+  },
+  "triangulos": 6078,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/chimenea_industrial_color.png",
+    "rugosidad": "texturas/chimenea_industrial_rugosidad.png",
+    "metal": "texturas/chimenea_industrial_metal.png",
+    "normal": "texturas/chimenea_industrial_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "chimenea_industrial",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 6078,
+      "tam_studs": [
+        2.542,
+        14.902,
+        2.571
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.021,
+        7.449,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 6078,
+    "tam_studs": [
+      2.542,
+      2.571,
+      14.902
+    ],
+    "centro": [
+      0.021,
+      0.0,
+      7.449
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "chimenea_industrial_turnaround.png"
+}
