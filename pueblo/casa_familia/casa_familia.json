@@ -1,0 +1,140 @@
+{
+  "nombre": "casa_familia",
+  "descripcion": "Casa de la familia del pueblo: dos plantas, la más grande. Puerta amarilla desconchada con marcas de altura, franja azul pintada por los niños, dibujo en la ventana, bici tirada, maceta rota, tendedero, caja de juguetes, huerto del padre, rayuela de tiza.",
+  "unidades": "studs (1 unidad de Blender = 1 stud)",
+  "tamano_studs": {
+    "ancho_x": 12.62,
+    "fondo": 10.36,
+    "alto": 9.37
+  },
+  "tamano_casa_sin_entorno": {
+    "ancho": 10.0,
+    "fondo": 7.5,
+    "alto_cumbrera": 8.96
+  },
+  "triangulos": {
+    "casa_familia": 12882,
+    "casa_familia_Puerta": 840,
+    "casa_familia_Cristal": 72,
+    "casa_familia_Neon": 92,
+    "total": 13886,
+    "limite": 14000
+  },
+  "mallas": {
+    "casa_familia": "Casa y entorno (todo lo fijo). SurfaceAppearance con el atlas.",
+    "casa_familia_Puerta": "Hoja de la puerta, pieza aparte para animar. Pivote en el eje de las bisagras.",
+    "casa_familia_Cristal": "Cristales con grosor. En Studio: Material Glass, Transparency 0.4, color #CFE6EE.",
+    "casa_familia_Neon": "Bombilla de la lámpara y pantallita del medidor. En Studio: Material Neon, color #3DF2FF."
+  },
+  "texturas": {
+    "color": "casa_familia_color.png",
+    "normal": "casa_familia_normal.png",
+    "roughness": "casa_familia_roughness.png",
+    "metalness": "casa_familia_metalness.png",
+    "emision": "casa_familia_emision.png"
+  },
+  "atlas": {
+    "tamano": 2048,
+    "px_por_stud_casa": 45,
+    "px_por_stud_puerta": 93
+  },
+  "surface_appearance": {
+    "ColorMap": "casa_familia_color.png",
+    "NormalMap": "casa_familia_normal.png",
+    "RoughnessMap": "casa_familia_roughness.png",
+    "MetalnessMap": "casa_familia_metalness.png",
+    "nota_emision": "SurfaceAppearance no usa mapa de emisión: el brillo de las lámparas interiores va pintado en el color; las piezas de neón van en casa_familia_Neon. emision.png queda para otros motores o para el futuro."
+  },
+  "exportacion": {
+    "giro_importacion": "Rotado 180° sobre el eje vertical antes de exportar (como MontarRegion.GIRO_IMPORTACION).",
+    "ejes_fbx": "Y arriba, -Z delante; Apply Scalings = FBX All; importar con Scale Unit = Stud.",
+    "fachada_en_blender": "-Y",
+    "coordenadas": "Las posiciones *_fbx son las del archivo: (X, Y, Z) = (-x, z, y) de Blender. Sin probar en Studio: si la casa entra mirando al revés, girarla 180° en Y."
+  },
+  "puerta": {
+    "pivote_blender": [
+      -2.15,
+      -3.8,
+      0.5
+    ],
+    "pivote_fbx": [
+      2.15,
+      0.5,
+      -3.8
+    ],
+    "eje_giro": "vertical",
+    "abre_hacia": "fuera (bisagras vistas por fuera); ángulo de apertura recomendado 100°",
+    "hoja_studs": [
+      1.96,
+      0.15,
+      3.06
+    ],
+    "manijas": "normal a 1,53 studs del suelo de la hoja y la de los niños a 0,92"
+  },
+  "luces_recomendadas": [
+    {
+      "nombre": "LuzPuerta",
+      "tipo": "PointLight",
+      "blender": [
+        -1.15,
+        -4.11,
+        3.67
+      ],
+      "fbx": [
+        1.15,
+        3.67,
+        -4.11
+      ],
+      "color": "#3DF2FF",
+      "brightness": 1.5,
+      "range": 12
+    },
+    {
+      "nombre": "LuzSalon",
+      "tipo": "PointLight",
+      "blender": [
+        2.5,
+        0.2,
+        3.5
+      ],
+      "fbx": [
+        -2.5,
+        3.5,
+        0.2
+      ],
+      "color": "#FFD9A0",
+      "brightness": 1,
+      "range": 10,
+      "nota": "dentro, se ve por la ventana grande"
+    },
+    {
+      "nombre": "LuzNinos",
+      "tipo": "PointLight",
+      "blender": [
+        0.3,
+        0.6,
+        6.4
+      ],
+      "fbx": [
+        -0.3,
+        6.4,
+        0.6
+      ],
+      "color": "#FFD9A0",
+      "brightness": 0.8,
+      "range": 8
+    }
+  ],
+  "escala": "Ojo: con 9 studs de alto y 2 plantas, la puerta mide 3,1 studs (un R6 mide 5). Es la escala pedida para el pueblo; si los jugadores tienen que entrar, escalar el modelo entero (×1,6 aprox.).",
+  "comprobaciones": {
+    "piezas_con_aristas_abiertas": "ninguna (todas las piezas son cerradas)",
+    "normales": "recalculadas hacia fuera en cada pieza"
+  },
+  "historia": {
+    "puerta": "amarilla, desconchada abajo (patadas, la bici) y junto a las manijas; marcas de altura: Leo 4, Mia 6, Leo 7, y una rayita de lápiz muy arriba (papá, en broma); manchita de manos",
+    "ventana_baja": "marco con franja azul de niño (irregular, gotas, dedazo), dibujo de la familia con estrellas firmado «MIA y LEO», geranio rojo y planta con flor amarilla, cortinas de colores",
+    "ventana_alta": "pegatinas de estrellas en el cristal (3D), persiana medio subida, litera detrás",
+    "ventana_lateral_1": "marco azul a medio pintar (se aburrieron), rejilla de ventilación debajo",
+    "entorno": "bici rosa con flecos tirada contra la pared y manillar girado; maceta de barro rota con la tierra derramada; rayuela de tiza con un cohete; felpudo «HOLA»; buzón a franjas con la banderita levantada y una carta; huerto del padre (lechugas, tomatera, zanahorias); tendedero con camiseta, pantalón, toalla y calcetines; chapa remachada torcida (reparación); cinta americana en la bajante"
+  }
+}
