@@ -1,0 +1,243 @@
+{
+  "nombre": "casa_ingeniero",
+  "descripcion": "Casa del ingeniero de la colonia (Ing. Kowalski) con mini laboratorio adosado.",
+  "escala": "1 unidad = 1 stud. FBX con Apply Scalings = FBX All y sin escala de unidades: en el importador de Studio, Scale Unit = Stud.",
+  "giro_importacion": "Las mallas llevan aplicado un giro de 180° sobre el eje vertical (Y de Roblox) antes de exportar. Con los ejes del FBX (adelante -Z, arriba Y) la fachada mira a -Z.",
+  "coordenadas": "Todas las posiciones de este archivo son de Roblox (X, Y arriba, Z), en studs, respecto al origen del modelo: el centro de la planta de la casa principal a ras de suelo. La fachada (puerta principal) mira a -Z; el laboratorio queda en -X.",
+  "tamano_total_studs": [
+    24.2,
+    10.23,
+    14.23
+  ],
+  "triangulos": {
+    "total": 13987,
+    "presupuesto": 14000,
+    "por_pieza": {
+      "estructura": 10205,
+      "cristal": 112,
+      "neon": 12,
+      "puerta_principal": 500,
+      "puerta_lab": 682,
+      "persiana": 204,
+      "antena_parabolica": 588,
+      "antena_dipolo": 448,
+      "estacion_meteo": 572,
+      "anemometro": 296,
+      "veleta": 60,
+      "camara": 308
+    }
+  },
+  "texturas": {
+    "tamano": 2048,
+    "ColorMap": "casa_ingeniero_color.png",
+    "NormalMap": "casa_ingeniero_normal.png",
+    "RoughnessMap": "casa_ingeniero_roughness.png",
+    "MetalnessMap": "casa_ingeniero_metalness.png",
+    "Emision": "casa_ingeniero_emision.png",
+    "nota": "Un solo atlas para todas las piezas salvo _cristal y _neon. SurfaceAppearance con ColorMap, NormalMap, RoughnessMap y MetalnessMap en cada MeshPart del atlas. La emisión es la máscara de los LEDs y pantallas (para SurfaceAppearance.EmissiveMaskContent si se usa, o de referencia)."
+  },
+  "piezas": {
+    "casa_ingeniero_estructura": {
+      "material": "SurfaceAppearance (atlas)",
+      "anclada": true,
+      "que_es": "Casa, lab, pasillo, techo técnico, canaletas, cuadro, generador, contenedor, silla, panel del suelo, poste de la cámara, explanada."
+    },
+    "casa_ingeniero_puerta_principal": {
+      "material": "SurfaceAppearance (atlas)",
+      "animable": true,
+      "pivote": [
+        3.38,
+        0.5,
+        -4.47
+      ],
+      "eje_giro": [
+        0,
+        1,
+        0
+      ],
+      "abrir": "Gira hacia fuera (hacia la calle, -Z). Con la puerta cerrada, girar el pivote +90° sobre Y abre hacia fuera sin chocar con la silla.",
+      "grados_abierta": 95
+    },
+    "casa_ingeniero_puerta_lab": {
+      "material": "SurfaceAppearance (atlas)",
+      "animable": true,
+      "pivote": [
+        -7.72,
+        0.35,
+        -1.57
+      ],
+      "eje_giro": [
+        0,
+        1,
+        0
+      ],
+      "abrir": "Igual que la principal: hacia fuera, bisagras en el lado de la casa.",
+      "grados_abierta": 95
+    },
+    "casa_ingeniero_persiana": {
+      "material": "SurfaceAppearance (atlas)",
+      "animable": true,
+      "alto": 0.92,
+      "alto_recogida": 0.12,
+      "borde_superior": [
+        -2.5,
+        4.86,
+        -4.555
+      ],
+      "como_abrir": "Size.Y -> alto_recogida manteniendo fijo el borde superior (subir el CFrame (alto - alto_recogida) / 2). Para bajarla del todo, Size.Y = 2,7."
+    },
+    "casa_ingeniero_antena_parabolica": {
+      "material": "SurfaceAppearance (atlas)",
+      "pivote": [
+        3.4,
+        6.65,
+        2.75
+      ]
+    },
+    "casa_ingeniero_antena_dipolo": {
+      "material": "SurfaceAppearance (atlas)",
+      "pivote": [
+        -4.1,
+        6.65,
+        3.0
+      ]
+    },
+    "casa_ingeniero_estacion_meteo": {
+      "material": "SurfaceAppearance (atlas)",
+      "pivote": [
+        4.65,
+        6.65,
+        -3.6
+      ]
+    },
+    "casa_ingeniero_anemometro": {
+      "material": "SurfaceAppearance (atlas)",
+      "animable": true,
+      "pivote": [
+        5.35,
+        9.515,
+        -3.6
+      ],
+      "eje_giro": [
+        0,
+        1,
+        0
+      ],
+      "animacion": "Giro continuo sobre Y (1-3 vueltas por segundo según el viento)."
+    },
+    "casa_ingeniero_veleta": {
+      "material": "SurfaceAppearance (atlas)",
+      "animable": true,
+      "pivote": [
+        3.95,
+        9.515,
+        -3.6
+      ],
+      "eje_giro": [
+        0,
+        1,
+        0
+      ],
+      "animacion": "Oscilación lenta de ±15° sobre Y."
+    },
+    "casa_ingeniero_camara": {
+      "material": "SurfaceAppearance (atlas)",
+      "animable": true,
+      "pivote": [
+        -12.421,
+        3.15,
+        -5.042
+      ],
+      "mira_hacia": [
+        0.724,
+        -0.1654,
+        0.6697
+      ],
+      "animacion": "Barrido lento de ±25° sobre Y alrededor del pivote (la rótula)."
+    },
+    "casa_ingeniero_cristal": {
+      "material": "Glass",
+      "color": "#DCEEF5",
+      "transparencia": 0.35,
+      "que_es": "Cristales de las ventanas (el del lab es doble), claraboya y ojo de buey del pasillo."
+    },
+    "casa_ingeniero_neon": {
+      "material": "Neon",
+      "color": "#DFF1FF",
+      "que_es": "Cristal emisor del foco LED de la puerta (blanco frío)."
+    }
+  },
+  "luces": {
+    "foco_puerta": {
+      "posicion": [
+        2.1,
+        5.78,
+        -5.05
+      ],
+      "direccion": [
+        0.0,
+        -0.93,
+        -0.37
+      ],
+      "tipo": "SpotLight",
+      "color": "#DFF1FF",
+      "brillo": 2.5,
+      "alcance": 16,
+      "angulo": 70,
+      "nota": "Encender con el sensor de movimiento (ProximityPrompt o zona) de noche."
+    },
+    "lab_interior": {
+      "posicion": [
+        -9.2,
+        4.65,
+        1.0
+      ],
+      "tipo": "SurfaceLight hacia abajo",
+      "color": "#E8F4FF",
+      "brillo": 1.2,
+      "alcance": 8
+    }
+  },
+  "anclajes": {
+    "puerta_principal_paso": [
+      2.1,
+      0.3,
+      -5.9
+    ],
+    "puerta_lab_paso": [
+      -8.7,
+      0.1,
+      -2.8
+    ],
+    "silla_asiento": [
+      4.85,
+      1.85,
+      -5.85
+    ],
+    "generador_boton": [
+      -12.05,
+      0.85,
+      2.0
+    ]
+  },
+  "medidas_studs": {
+    "casa": [
+      11.0,
+      7.12,
+      9.0
+    ],
+    "lab": [
+      3.999999999999999,
+      5.36,
+      4.0
+    ],
+    "puerta_principal_hueco": [
+      2.5999999999999996,
+      5.0
+    ],
+    "puerta_lab_hueco": [
+      1.9999999999999991,
+      3.95
+    ]
+  }
+}
