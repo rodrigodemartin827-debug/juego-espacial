@@ -64,10 +64,10 @@ def cinta_transportadora():
             c.caja((x + 0.12, s * 0.22, Z + R + 0.03), (0.06, 0.5, 0.04), banda, 0.01, rot=(0, 0, s * 30))
     # protecciones laterales para que no caiga material
     for s in (-1, 1):
-        c.caja((0, s * 0.62, Z + 0.4), (L - 0.2, 0.04, 0.45), amar, 0.01, rot=(s * 12, 0, 0))
+        c.caja((0, s * 0.64, Z + 0.3), (L - 0.2, 0.04, 0.24), amar, 0.01, rot=(s * 10, 0, 0))
         for k in range(4):
             x = -L / 2 + 0.6 + k * (L - 1.2) / 3
-            c.caja((x, s * 0.64, Z + 0.2), (0.06, 0.06, 0.4), osc, 0.0)
+            c.caja((x, s * 0.65, Z + 0.17), (0.06, 0.06, 0.28), osc, 0.0)
     # patas en A con tirantes y pies
     for x in (-L / 2 + 0.7, L / 2 - 0.7):
         for s in (-1, 1):

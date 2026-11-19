@@ -1,0 +1,73 @@
+{
+  "nombre": "viga_mina",
+  "zona": "industrial",
+  "descripcion": "Marco de entibado en H: dos postes de 0,5 × 0,5 × 5 y travesaño de 3 × 0,5 × 0,5 de madera gruesa con nudos y vetas, placas de refuerzo con pernos en las uniones y cuñas en la base.",
+  "tam_pedido_studs": [
+    3,
+    0.5,
+    5
+  ],
+  "tam_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 5.0,
+    "fondo_z": 0.63
+  },
+  "triangulos": 604,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/viga_mina_color.png",
+    "rugosidad": "texturas/viga_mina_rugosidad.png",
+    "metal": "texturas/viga_mina_metal.png",
+    "normal": "texturas/viga_mina_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "viga_mina",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 604,
+      "tam_studs": [
+        3.0,
+        5.0,
+        0.633
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.5,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 604,
+    "tam_studs": [
+      3.0,
+      0.633,
+      5.0
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      2.5
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "viga_mina_turnaround.png"
+}

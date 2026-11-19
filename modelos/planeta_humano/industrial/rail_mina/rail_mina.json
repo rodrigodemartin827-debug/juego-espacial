@@ -1,0 +1,75 @@
+{
+  "nombre": "rail_mina",
+  "zona": "industrial",
+  "descripcion": "Segmento modular de raíl de mina: dos rieles con perfil en T sobre tres traviesas de madera con clavos y placas de fijación. Se encadena extremo con extremo (4 studs).",
+  "tam_pedido_studs": [
+    4,
+    1,
+    0.3
+  ],
+  "tam_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 0.3,
+    "fondo_z": 1.0
+  },
+  "triangulos": 772,
+  "presupuesto": 1000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/rail_mina_color.png",
+    "rugosidad": "texturas/rail_mina_rugosidad.png",
+    "metal": "texturas/rail_mina_metal.png",
+    "normal": "texturas/rail_mina_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "rail_mina",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 772,
+      "tam_studs": [
+        4.0,
+        0.3,
+        1.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.15,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Los rieles van de x=-2 a x=+2 exactos: coloca los segmentos cada 4 studs en el eje X de Roblox."
+  ],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 772,
+    "tam_studs": [
+      4.0,
+      1.0,
+      0.3
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      0.15
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "rail_mina_turnaround.png"
+}

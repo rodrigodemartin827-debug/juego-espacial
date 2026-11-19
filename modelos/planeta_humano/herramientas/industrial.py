@@ -891,7 +891,7 @@ def grua_carga():
                "codo, tambor con cable y manivela, gancho con seguro, contrapeso y panel con dos palancas.")
     c = m.parte()
     giro = m.parte("giratoria", pivote=(0, 0, 1.0), nota="Todo lo que gira sobre la base (eje vertical del pivote).")
-    gancho = m.parte("gancho", pivote=(1.6, 0, 6.2), nota="Gancho y cable: cuelga del pivote; para subir/bajar, "
+    gancho = m.parte("gancho", pivote=(1.95, 0, 7.6), nota="Gancho y cable: cuelga del pivote; para subir/bajar, "
                                                           "mover en Y de Roblox y escalar el cable.")
     amarillo = m.mat("pintura", "#E3A21E", desgaste=0.7)
     osc = m.mat("metal", "#2C3036", rug=0.5)
@@ -917,16 +917,16 @@ def grua_carga():
         giro.caja((math.cos(a) * 0.92, math.sin(a) * 0.92, 1.01), (0.08, 0.06, 0.12), acero, 0.0,
                   rot=(0, 0, math.degrees(a)))
     giro.caja((-0.2, 0, 1.25), (2.2, 1.4, 0.3), amarillo, 0.05)
-    giro.caja((0, 0, 2.6), (0.55, 0.55, 2.4), amarillo, 0.05)
+    giro.caja((0, 0, 2.7), (0.55, 0.55, 2.6), amarillo, 0.05)
     # contrapeso trasero (bloques)
     for k in range(3):
         giro.caja((-1.1, 0, 1.55 + k * 0.32), (0.6, 1.2, 0.3), m.mat("hormigon", "#5A5854"), 0.04)
     giro.caja((-1.1, 0, 2.6), (0.7, 1.3, 0.08), osc, 0.01)
     # brazo: tramo 1 (columna -> codo) y tramo 2 (codo -> punta), en celosía con pasadores
-    hombro = V((0, 0, 3.8))
-    codo = V((0.4, 0, 5.9))
-    punta = V((1.7, 0, 6.6))
-    giro.cil((0, -0.35, 3.8), (0, 0.35, 3.8), 0.12, osc, n=10)
+    hombro = V((0, 0, 4.0))
+    codo = V((0.5, 0, 6.8))
+    punta = V((1.95, 0, 7.7))
+    giro.cil((0, -0.35, 4.0), (0, 0.35, 4.0), 0.12, osc, n=10)
     for s in (-1, 1):
         giro.caja(hombro + V((0, s * 0.22, -0.1)), (0.4, 0.06, 0.6), amarillo, 0.02)
     def tramo(a, b, alto):
@@ -953,8 +953,8 @@ def grua_carga():
         giro.cil(codo + V((0, s * 0.3, 0)), codo + V((0, s * 0.34, 0)), 0.14, acero, n=8)
         giro.caja(codo + V((0, s * 0.24, 0)), (0.32, 0.05, 0.32), osc, 0.02)
     # cilindro hidráulico del codo
-    giro.cil(V((0.0, 0, 3.0)) + V((0.3, 0, 0)), V((0.35, 0, 5.3)), 0.07, osc, n=8)
-    giro.cil(V((0.35, 0, 4.4)), V((0.4, 0, 5.75)), 0.04, m.mat("cromo", "#D0D4D8"), n=8)
+    giro.cil(V((0.3, 0, 3.1)), V((0.42, 0, 5.6)), 0.07, osc, n=8)
+    giro.cil(V((0.4, 0, 5.0)), V((0.5, 0, 6.6)), 0.04, m.mat("cromo", "#D0D4D8"), n=8)
     # polea de la punta
     giro.cil(punta + V((0, -0.1, 0)), punta + V((0, 0.1, 0)), 0.18, osc, n=12)
     # tambor con cable enrollado y manivela
@@ -966,7 +966,7 @@ def grua_carga():
     giro.cil(td + V((0, 0.55, 0)), td + V((0.3, 0.55, 0.2)), 0.025, acero, n=6)
     giro.cil(td + V((0.3, 0.55, 0.2)), td + V((0.3, 0.7, 0.2)), 0.035, negro, n=6)
     # cable del tambor a la polea
-    giro.tubo([td + V((0.2, 0.25, 0.1)), V((0.25, 0, 3.5)), codo + V((0.1, 0, -0.05)), punta + V((0, 0, 0.18))], 0.02,
+    giro.tubo([td + V((0.2, 0.25, 0.1)), V((0.25, 0, 3.7)), codo + V((0.1, 0, -0.05)), punta + V((0, 0, 0.18))], 0.02,
               cable, n=4, suave=False)
     # panel de control con dos palancas
     pc = V((0.6, -0.55, 1.7))
@@ -978,13 +978,14 @@ def grua_carga():
         giro.esfera(b + V((0, -0.05, 0.32)), 0.05, col, seg=8, anillos=4)
         giro.caja(b + V((0, 0, -0.1)), (0.06, 0.03, 0.2), negro, 0.0)
     # gancho con seguro (pieza aparte)
-    gancho.cil((1.7, 0, 6.4), (1.7, 0, 4.0), 0.02, cable, n=4)
-    gancho.caja((1.7, 0, 3.85), (0.25, 0.18, 0.35), osc, 0.04)  # motón
-    gancho.cil((1.7, -0.1, 3.8), (1.7, 0.1, 3.8), 0.08, acero, n=8)
-    gancho.cil((1.7, 0, 3.66), (1.7, 0, 3.5), 0.04, acero, n=6)
-    gancho.tubo([(1.7, 0, 3.5), (1.7, 0, 3.2), (1.75, 0, 3.0), (1.95, 0, 2.95), (2.08, 0, 3.08), (2.05, 0, 3.25)], 0.06,
-                acero, n=8, seg=3, r_fin=0.03)
-    gancho.cil((1.72, 0, 3.4), (2.04, 0, 3.24), 0.015, acero, n=4)  # pestillo de seguridad
+    gx = 1.95
+    gancho.cil((gx, 0, 7.5), (gx, 0, 5.1), 0.02, cable, n=4)
+    gancho.caja((gx, 0, 4.95), (0.25, 0.18, 0.35), osc, 0.04)  # motón
+    gancho.cil((gx, -0.1, 4.9), (gx, 0.1, 4.9), 0.08, acero, n=8)
+    gancho.cil((gx, 0, 4.76), (gx, 0, 4.6), 0.04, acero, n=6)
+    gancho.tubo([(gx, 0, 4.6), (gx, 0, 4.3), (gx + 0.05, 0, 4.1), (gx + 0.25, 0, 4.05), (gx + 0.38, 0, 4.18),
+                 (gx + 0.35, 0, 4.35)], 0.06, acero, n=8, seg=3, r_fin=0.03)
+    gancho.cil((gx + 0.02, 0, 4.5), (gx + 0.34, 0, 4.34), 0.015, acero, n=4)  # pestillo de seguridad
     m.terminar()
 
 

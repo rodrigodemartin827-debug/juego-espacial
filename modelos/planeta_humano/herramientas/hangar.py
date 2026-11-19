@@ -63,18 +63,25 @@ def hangar_principal():
             c.caja((x, y, 10.2), (0.1, 3.4, 1.6), gris, 0.03)
             cr.caja((x + s * 0.04, y, 10.2), (0.06, 3.1, 1.3), None)
     # cubierta a dos aguas muy tendida con lucernario corrido
-    cum = ZT + 1.3
+    cum = ZT + 0.8
     for s in (-1, 1):
         x_al = X0 - 0.4 if s < 0 else X1 + 0.4
         a = V((x_al, 0, ZT - 0.1))
         b = V((s * 1.5, 0, cum))
         d = b - a
         ang = math.degrees(math.atan2(d.z, abs(d.x)))
-        with c.en(((a + b) / 2) + V((0, (YF + YB) / 2, 0.08)), (0, -s * ang, 0)):
+        with c.en(((a + b) / 2) + V((0, (YF + YB) / 2, 0.08)), (0, s * ang, 0)):
             c.caja((0, 0, 0), (d.length, YB - YF + 0.8, 0.16), gris, 0.04)
             for k in range(9):
                 c.caja((0, -(YB - YF) / 2 + k * (YB - YF) / 8, 0.12), (d.length, 0.08, 0.1), osc)
-    cr.caja((0, (YF + YB) / 2, cum + 0.1), (3.0, YB - YF - 1.0, 0.12), None)
+    # linterna en la cumbrera: base, cristaleras laterales con montantes y tejadillo propio
+    ym, ly = (YF + YB) / 2, YB - YF - 1.0
+    c.caja((0, ym, cum + 0.08), (3.2, ly, 0.2), gris, 0.03)
+    for s in (-1, 1):
+        cr.caja((s * 1.45, ym, cum + 0.45), (0.06, ly - 0.4, 0.55), None)
+        for k in range(9):
+            c.caja((s * 1.45, ym - (ly - 0.4) / 2 + k * (ly - 0.4) / 8, cum + 0.45), (0.1, 0.1, 0.55), osc)
+    c.caja((0, ym, cum + 0.8), (3.6, ly + 0.2, 0.14), gris, 0.04)
     for s in (-1, 1):
         c.extruir([(X0, ZT), (X1, ZT), (1.5, cum), (-1.5, cum)], 0.5, panel,
                   c=(0, YF + 0.25 if s < 0 else YB - 0.25, 0), rot=(90, 0, 0))
@@ -123,6 +130,7 @@ def hangar_principal():
         puerta.cil((x, YF - 0.62, pz0 + 0.5), (x, YF - 0.88, pz0 + 0.5), 0.12, osc, n=10)
     puerta.caja_de((px0 + 0.05, YF - 0.75, pz0), (px1 - 0.05, YF - 0.5, pz0 + 0.06), m.mat("goma", "#151618"), 0.01)
     m.anclaje("PuertaAbierta", (0, YF - 0.6, pz0 + 10.5), "Pivote del portón subido del todo.")
+    m.vistas_extra.append(("Interior (sin portón)", -18, 16, ("hangar_principal_puerta",)))
     # panel de control junto a la puerta con botón grande de apertura
     cpx = px1 + 1.4
     c.caja((cpx, YF - 0.25, 3.0), (0.9, 0.3, 1.3), gris, 0.05)
@@ -508,10 +516,11 @@ def rack_piezas_nave():
 # ==============================================================================================================
 def cable_combustible():
     m = Modelo("cable_combustible", ZONA, (3, 1, 1), 2000,
-               "Manguera de repostaje enrollada en carrete de pared, boquilla con seguro de bayoneta, manómetro en "
-               "la conexión y cartel COMBUSTIBLE — NO FUMAR.")
+               "Punto de repostaje de pared: panel de servicio con carrete de manguera, boquilla con seguro de bayoneta "
+               "en su soporte, manómetro en la conexión y cartel COMBUSTIBLE — NO FUMAR.")
     c = m.parte()
-    carrete = m.parte("carrete", pivote=(-0.6, -0.4, 0.55), nota="Tambor del carrete: gira sobre el eje Y del modelo.")
+    carrete = m.parte("carrete", pivote=(-0.85, 0.0, 0.55), nota="Tambor del carrete: gira sobre el eje Z de Roblox "
+                                                                 "(perpendicular a la pared).")
     rojo = m.mat("pintura", "#B8302A", desgaste=0.55)
     acero = m.mat("metal", "#8A9097")
     osc = m.mat("metal", "#2B2F34", rug=0.45)
@@ -520,47 +529,49 @@ def cable_combustible():
     blanco = m.mat("plastico", "#F0EEE6")
     amar = m.mat("pintura", "#E3B22A", desgaste=0.4)
     tinta = m.mat("pintura", "#16181A", desgaste=0.0)
-    # placa de pared y soportes del carrete
-    c.caja((-0.6, 0.45, 0.55), (1.1, 0.08, 1.0), rojo)
-    for (dx, dz) in ((-0.45, -0.4), (0.45, 0.4)):
-        c.perno((-0.6 + dx, 0.4, 0.55 + dz), (0, -1, 0), acero, r=0.035)
-    for s in (-1, 1):
-        c.extruir([(-0.15, 0.0), (0.15, 0.0), (0.05, -0.9), (-0.05, -0.9)], 0.05, rojo, c=(-0.6 + s * 0.38, 0.42, 0.55),
-                  rot=(90, 90, 0))
-    # tambor con discos laterales y manguera enrollada
-    carrete.cil((-0.6, 0.35, 0.55), (-0.6, -0.42, 0.55), 0.12, osc, n=8)
-    for y in (0.3, -0.38):
-        carrete.cil((-0.6, y, 0.55), (-0.6, y - 0.04, 0.55), 0.42, rojo, n=14)
+    panel = m.mat("pintura", "#4A525C", desgaste=0.45)
+    YP = 0.45  # cara del panel de servicio (la pared queda detrás, en +Y)
+    # panel de servicio que se atornilla a la pared y une todo el conjunto
+    c.caja((0, YP + 0.03, 0.55), (3.0, 0.06, 1.08), panel)
+    for x, z in ((-1.42, 1.02), (1.42, 0.08)):
+        c.perno((x, YP, z), (0, -1, 0), acero, r=0.03)
+    # carrete: buje fijo, tambor con discos y manguera enrollada (pieza aparte), manivela
+    cx = -0.85
+    c.cil((cx, YP, 0.55), (cx, YP - 0.12, 0.55), 0.16, osc, n=8)
+    carrete.cil((cx, YP - 0.1, 0.55), (cx, -0.36, 0.55), 0.12, osc, n=8)
+    for y in (YP - 0.14, -0.3):
+        carrete.cil((cx, y, 0.55), (cx, y - 0.04, 0.55), 0.44, rojo, n=14)
     for k in range(3):
-        carrete.toro((-0.6, 0.18 - k * 0.19, 0.55), 0.22, 0.09, goma, n=10, m=4, rot=(90, 0, 0))
-    carrete.cil((-0.6, -0.45, 0.55), (-0.6, -0.5, 0.55), 0.06, acero, n=6)
-    carrete.cil((-0.6, -0.5, 0.55), (-0.3, -0.5, 0.75), 0.02, acero, n=4)  # manivela
-    carrete.cil((-0.3, -0.5, 0.75), (-0.3, -0.62, 0.75), 0.03, osc, n=4)
-    # manguera que sale y cuelga hasta la boquilla en su soporte
-    c.tubo([(-0.6, -0.05, 0.3), (-0.3, -0.2, 0.1), (0.2, -0.25, 0.08), (0.6, -0.2, 0.35), (0.75, -0.15, 0.6)], 0.05, goma,
-           n=6, seg=3)
-    # manómetro en la conexión
-    mp = V((0.75, -0.15, 0.62))
-    c.cil(mp, mp + V((0, 0, 0.1)), 0.06, laton, n=6)
-    c.cil(mp + V((0, 0, 0.1)), mp + V((0, -0.08, 0.2)), 0.025, laton, n=5)
-    c.cil(mp + V((0, -0.08, 0.2)), mp + V((0, -0.15, 0.2)), 0.1, acero, n=10)
-    c.cil(mp + V((0, -0.15, 0.2)), mp + V((0, -0.155, 0.2)), 0.085, blanco, n=10)
-    c.caja(mp + V((0.02, -0.16, 0.22)), (0.01, 0.004, 0.07), rojo, 0.0, rot=(0, -40, 0))
-    # boquilla con gatillo y seguro de bayoneta, en un soporte de pared
-    c.caja((0.95, 0.42, 0.75), (0.25, 0.1, 0.35), osc)
-    with c.en((0.95, 0.15, 0.85), (0, 0, 0)):
-        c.cil((-0.2, 0, -0.1), (0.0, 0, 0.0), 0.05, laton, n=6)
-        c.caja((0.0, 0, 0.0), (0.12, 0.12, 0.35), osc, rot=(0, 20, 0))
-        c.cil((0.05, 0, 0.15), (0.35, 0, 0.3), 0.04, acero, n=6)
-        c.cil((0.35, 0, 0.3), (0.45, 0, 0.32), 0.05, acero, n=6)
+        carrete.toro((cx, 0.22 - k * 0.19, 0.55), 0.22, 0.09, goma, n=10, m=4, rot=(90, 0, 0))
+    carrete.cil((cx, -0.34, 0.55), (cx, -0.4, 0.55), 0.06, acero, n=6)
+    carrete.cil((cx, -0.4, 0.55), (cx + 0.3, -0.4, 0.75), 0.02, acero, n=4)  # manivela
+    carrete.cil((cx + 0.3, -0.4, 0.75), (cx + 0.3, -0.52, 0.75), 0.03, osc, n=4)
+    # manguera: sale del tambor, cuelga en curva y sube a la conexión con el manómetro
+    mp = V((0.1, YP - 0.12, 0.55))
+    c.tubo([(cx + 0.2, 0.0, 0.33), (cx + 0.45, -0.15, 0.12), (-0.2, -0.2, 0.08), (0.05, -0.12, 0.25), mp + V((0, -0.05, -0.12))],
+           0.05, goma, n=5, seg=2)
+    c.cil(mp + V((0, 0.12, 0)), mp + V((0, -0.08, 0)), 0.06, laton, n=6)  # racor en la pared
+    c.cil(mp + V((0, -0.08, 0)), mp + V((0, -0.08, 0.15)), 0.025, laton, n=5)
+    c.cil(mp + V((0, -0.08, 0.15)), mp + V((0, -0.15, 0.15)), 0.1, acero, n=10)
+    c.cil(mp + V((0, -0.15, 0.15)), mp + V((0, -0.155, 0.15)), 0.085, blanco, n=10)
+    c.caja(mp + V((0.02, -0.16, 0.17)), (0.01, 0.004, 0.07), rojo, 0.0, rot=(0, -40, 0))
+    # boquilla con gatillo y seguro de bayoneta, en su soporte del panel
+    c.caja((0.55, YP - 0.05, 0.6), (0.22, 0.1, 0.3), osc)
+    with c.en((0.55, YP - 0.22, 0.72), (0, 0, 0)):
+        c.cil((-0.02, 0, -0.18), (0.0, 0, 0.0), 0.05, laton, n=6)
+        c.caja((0.0, 0, 0.0), (0.12, 0.12, 0.3), osc, rot=(0, 20, 0))
+        c.cil((0.05, 0, 0.12), (0.3, 0, 0.25), 0.04, acero, n=6)
+        c.cil((0.3, 0, 0.25), (0.4, 0, 0.27), 0.05, acero, n=6)
         for k in range(2):  # pitones de bayoneta
-            c.caja((0.42, 0.055 * (1 - 2 * k), 0.31), (0.04, 0.03, 0.03), acero, 0.0)
-        c.tubo([(-0.02, 0, -0.08), (0.04, -0.0, -0.2), (0.15, 0, -0.18), (0.12, 0, -0.04)], 0.018, rojo, n=4, seg=2)
-    # cartel COMBUSTIBLE — NO FUMAR
-    c.caja((1.6 - 0.2, 0.45, 0.6), (1.0, 0.04, 0.7), amar)
-    c.texto("COMBUSTIBLE", tinta, alto=0.11, grosor=0.01, c=(1.4, 0.425, 0.82), fuente="mono", resol=1)
-    c.texto("NO FUMAR", m.mat("pintura", "#B8302A", desgaste=0.0), alto=0.13, grosor=0.01, c=(1.4, 0.425, 0.32),
+            c.caja((0.37, 0.055 * (1 - 2 * k), 0.26), (0.04, 0.03, 0.03), acero, 0.0)
+        c.tubo([(-0.02, 0, -0.08), (0.04, 0, -0.2), (0.15, 0, -0.18), (0.12, 0, -0.04)], 0.018, rojo, n=4, seg=2)
+    c.tubo([mp + V((0.08, -0.05, -0.12)), (0.35, YP - 0.25, 0.3), (0.53, YP - 0.24, 0.52)], 0.04, goma, n=5, seg=2)
+    # cartel COMBUSTIBLE — NO FUMAR sobre el panel
+    c.caja((1.05, YP - 0.02, 0.6), (0.85, 0.03, 0.72), amar)
+    c.texto("COMBUSTIBLE", tinta, alto=0.1, grosor=0.01, c=(1.05, YP - 0.04, 0.8), fuente="mono", resol=1)
+    c.texto("NO FUMAR", m.mat("pintura", "#B8302A", desgaste=0.0), alto=0.12, grosor=0.01, c=(1.05, YP - 0.04, 0.32),
             fuente="mono", resol=1)
+    c.caja((1.05, YP - 0.04, 0.62), (0.6, 0.01, 0.025), tinta, 0.0)
     m.terminar()
 
 

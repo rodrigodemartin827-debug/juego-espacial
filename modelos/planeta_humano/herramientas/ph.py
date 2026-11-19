@@ -880,6 +880,8 @@ class Modelo:
         self.notas = []
         self._secc = [("inicio", 0)]
         self.pila = [Matrix.Identity(4)]  # transformaciones activas (compartidas por todas las piezas)
+        # vistas añadidas al turnaround: (nombre, azimut, elevación, nombres de mallas que se ocultan)
+        self.vistas_extra = []
         # Se genera en una carpeta temporal fuera del repositorio y solo se mueve a su sitio (RAIZ/zona/nombre)
         # cuando todo ha salido bien y el FBX está verificado: así nunca queda un modelo a medias en la rama.
         self.dir_final = os.path.join(RAIZ, zona, nombre)
@@ -1121,7 +1123,11 @@ class Modelo:
         carpeta = os.path.join(self.dir, "_render")
         os.makedirs(carpeta, exist_ok=True)
         rutas = []
-        for nombre, az, el in vistas:
+        lista = [(n, a_, e_, ()) for n, a_, e_ in vistas] + [tuple(v) for v in self.vistas_extra]
+        for nombre, az, el, ocultar in lista:
+            ocultos = [o for o in objs if o.name in ocultar]
+            for o in ocultos:
+                o.hide_render = True
             a, e = math.radians(az), math.radians(el)
             # azimut positivo = hacia +X
             dirc = V((math.sin(a) * math.cos(e), -math.cos(a) * math.cos(e), math.sin(e)))
@@ -1135,6 +1141,8 @@ class Modelo:
             scn.render.filepath = ruta
             bpy.ops.render.render(write_still=True)
             rutas.append((nombre, ruta))
+            for o in ocultos:
+                o.hide_render = False
         scn.view_layers[0].material_override = None
         # hoja
         filas = (len(rutas) + cols - 1) // cols
