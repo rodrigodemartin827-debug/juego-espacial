@@ -9,10 +9,10 @@
   ],
   "tam_studs": {
     "ancho_x": 18.0,
-    "alto_y": 12.3,
-    "fondo_z": 14.41
+    "alto_y": 12.4,
+    "fondo_z": 15.51
   },
-  "triangulos": 11028,
+  "triangulos": 17380,
   "presupuesto": 18000,
   "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
   "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
@@ -31,11 +31,11 @@
       "material_roblox": "SurfaceAppearance",
       "color": null,
       "transparencia": null,
-      "triangulos": 9500,
+      "triangulos": 15532,
       "tam_studs": [
         18.0,
-        12.298,
-        14.41
+        12.398,
+        15.51
       ],
       "pivote_studs": [
         -0.0,
@@ -44,8 +44,8 @@
       ],
       "centro_studs": [
         -0.0,
-        6.149,
-        0.595
+        6.099,
+        1.145
       ],
       "nota": ""
     },
@@ -55,11 +55,11 @@
       "material_roblox": "Glass",
       "color": "#9EC6D6",
       "transparencia": 0.35,
-      "triangulos": 216,
+      "triangulos": 336,
       "tam_studs": [
-        12.4,
+        13.7,
         9.609,
-        7.854
+        9.15
       ],
       "pivote_studs": [
         -0.0,
@@ -69,7 +69,7 @@
       "centro_studs": [
         -0.0,
         7.405,
-        2.027
+        2.675
       ],
       "nota": ""
     },
@@ -127,11 +127,11 @@
       "material_roblox": "Neon",
       "color": "#3DF2FF",
       "transparencia": null,
-      "triangulos": 208,
+      "triangulos": 408,
       "tam_studs": [
         15.866,
         11.429,
-        10.424
+        13.149
       ],
       "pivote_studs": [
         -0.0,
@@ -141,7 +141,7 @@
       "centro_studs": [
         -0.0,
         6.156,
-        -0.145
+        1.217
       ],
       "nota": ""
     },
@@ -225,16 +225,16 @@
     "ok": true,
     "problemas": [],
     "unidad_fbx_m": 0.28,
-    "triangulos": 11028,
+    "triangulos": 17380,
     "tam_studs": [
       18.0,
-      14.41,
-      12.298
+      15.51,
+      12.398
     ],
     "centro": [
       0.0,
-      -0.595,
-      6.149
+      -1.145,
+      6.099
     ],
     "normales_fuera": true
   },
