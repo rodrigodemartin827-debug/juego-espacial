@@ -1,0 +1,146 @@
+{
+  "nombre": "mesa_crafting",
+  "zona": "industrial",
+  "descripcion": "Mesa de trabajo de crafteo: tablero grueso con cortes y quemaduras, panel trasero con herramientas, tornillo de banco con manivela, cajón, regla clavada y lupa de brazo articulado.",
+  "tam_pedido_studs": [
+    3,
+    2,
+    2.5
+  ],
+  "tam_studs": {
+    "ancho_x": 3.0,
+    "alto_y": 2.61,
+    "fondo_z": 1.86
+  },
+  "triangulos": 1900,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/mesa_crafting_color.png",
+    "rugosidad": "texturas/mesa_crafting_rugosidad.png",
+    "metal": "texturas/mesa_crafting_metal.png",
+    "normal": "texturas/mesa_crafting_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "mesa_crafting",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1544,
+      "tam_studs": [
+        3.0,
+        2.61,
+        1.86
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.305,
+        -0.22
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "mesa_crafting_cajon",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 220,
+      "tam_studs": [
+        1.0,
+        0.22,
+        1.17
+      ],
+      "pivote_studs": [
+        -0.85,
+        1.1,
+        -0.85
+      ],
+      "centro_studs": [
+        -0.85,
+        1.17,
+        -0.235
+      ],
+      "nota": "Cajón lateral: se abre 0,6 studs hacia delante."
+    },
+    {
+      "nombre": "mesa_crafting_lupa_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 84,
+      "tam_studs": [
+        0.222,
+        0.216,
+        0.111
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.636,
+        2.113,
+        -0.332
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "mesa_crafting_lupa_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#D9F1F6",
+      "transparencia": 0.5,
+      "triangulos": 52,
+      "tam_studs": [
+        0.22,
+        0.162,
+        0.162
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.63,
+        2.115,
+        -0.345
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 4,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1900,
+    "tam_studs": [
+      3.0,
+      1.86,
+      2.61
+    ],
+    "centro": [
+      -0.0,
+      0.22,
+      1.305
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "mesa_crafting_turnaround.png"
+}
