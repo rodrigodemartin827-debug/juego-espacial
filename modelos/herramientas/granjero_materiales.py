@@ -119,25 +119,25 @@ def crear_materiales(P):
 
     t = nuevo("vidrio_invernadero")
     x, y, z = t.xyz()
-    # Gotas: celdas de Voronoi; la gota es el centro de la celda, de tamaño variable.
+    # Todo a escala del atlas: el cristal tiene unos 50 píxeles por stud (25 si Roblox baja la textura a 1024),
+    # así que gotas, regueros y manchas miden varios píxeles y tienen el borde suave. Si no, salen cuadraditos.
+    # Gotas: centro de cada celda de Voronoi, de tamaño variable.
     vor = t.nodo("ShaderNodeTexVoronoi", voronoi_dimensions="3D", feature="F1")
     t.poner(vor.inputs["Vector"], t.estirar((1, 1, 0.8)))
-    vor.inputs["Scale"].default_value = 9.0
-    tam_gota = t.rango(t.ruido(1.5, detalle=2), 0.3, 0.7, 0.02, 0.06)
-    # Borde suave (no un corte duro): al hornear no salen gotas cuadradas.
-    gota = t.rango(t.resta(vor.outputs["Distance"], tam_gota), 0.03, -0.02, suave=True)
-    finas = t.rango(t.voronoi(22.0, salida="Distance"), 0.11, 0.05)
-    # Regueros: gotas que han resbalado (rayas verticales).
-    reguero = t.mul(t.rango(t.ruido(1.0, t.estirar((26, 26, 0.7)), detalle=1), 0.68, 0.74),
-                    t.rango(t.ruido(1.3, detalle=2), 0.5, 0.65))
-    # Vaho: más en la parte baja de cada paño y en manchas.
-    vaho = t.mul(t.rango(z, 2.6, 0.6, 0.25, 1.0), t.rango(t.ruido(1.2, detalle=3), 0.3, 0.75, 0.3, 1.0))
-    vaho = t.op("MINIMUM", t.suma(vaho, t.mul(finas, 0.25)), 1.0)
-    agua = t.op("MINIMUM", t.suma(gota, t.mul(reguero, 0.8)), 1.0)
+    vor.inputs["Scale"].default_value = 4.5
+    tam_gota = t.rango(t.ruido(1.5, detalle=2), 0.3, 0.7, 0.04, 0.09)
+    gota = t.rango(t.resta(vor.outputs["Distance"], tam_gota), 0.05, -0.03, suave=True)
+    # Regueros: gotas que han resbalado (rayas verticales anchas, con el borde suave).
+    reguero = t.mul(t.rango(t.ruido(1.0, t.estirar((9, 9, 0.5)), detalle=0), 0.6, 0.78, suave=True),
+                    t.rango(t.ruido(1.1, detalle=1), 0.5, 0.68, suave=True))
+    # Vaho: más en la parte baja de cada paño, en manchas grandes y suaves.
+    vaho = t.mul(t.rango(z, 2.6, 0.6, 0.25, 1.0, suave=True),
+                 t.rango(t.ruido(0.9, detalle=1), 0.3, 0.75, 0.35, 1.0, suave=True))
+    agua = t.op("MINIMUM", t.suma(gota, t.mul(reguero, 0.7)), 1.0)
     col = t.mezcla(t.mul(vaho, 0.55), "#86D49A", "#D8EEDC")
     col = t.mezcla(t.mul(agua, 0.7), col, "#EAF6EE")
     # Polvo y verdín en el borde de abajo, por fuera.
-    pie = t.mul(t.rango(z, 0.95, 0.55), t.rango(t.ruido(8.0, detalle=4), 0.35, 0.65))
+    pie = t.mul(t.rango(z, 0.95, 0.55, suave=True), t.rango(t.ruido(2.5, detalle=1), 0.35, 0.65, suave=True))
     col = t.mezcla(t.mul(pie, 0.7), col, "#7A7F55")
     # Opacidad: base del 30 % (se lee el verde del cristal aunque dentro esté en sombra) + vaho y gotas.
     alfa = t.suma(0.3, t.suma(t.mul(vaho, 0.28), t.suma(t.mul(agua, 0.25), t.mul(pie, 0.45))))

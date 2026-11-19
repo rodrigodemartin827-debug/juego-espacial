@@ -1444,7 +1444,7 @@ def invernadero_vidrio():
     Paños de cristal (0,03 de grosor) por fuera del armazón. Cada fila es un paño seguido: las juntas quedan bajo
     los tapajuntas de aluminio, así que se ven igual que paños sueltos y gastan muchos menos triángulos.
     """
-    p = Pieza("invernadero_vidrio", peso_uv=1.1)
+    p = Pieza("invernadero_vidrio", peso_uv=1.4)
     b = p.baja
     g = 0.012
     vid = "vidrio_invernadero"
@@ -1514,7 +1514,7 @@ def puerta_invernadero():
             tornillo(p, (x1 + 0.02, D["y0"] + 0.06, z + dz), (1, 0, 0), 0.012, "acero", en_baja=False)
     # Pegatina de «cierre la puerta» (malla alta).
     a.caja_de((x1, -0.15, 1.95), (x1 + 0.003, 0.15, 2.07), "papel")
-    v = Pieza("puerta_invernadero_vidrio", pivote=piv, peso_uv=1.1)
+    v = Pieza("puerta_invernadero_vidrio", pivote=piv, peso_uv=1.4)
     for za, zb in ((D["z0"] + 0.12, 1.62), (1.62 + t, D["z1"] - t)):
         v.baja.caja_de((xc - VID / 2, D["y0"] + t - 0.01, za - 0.01), (xc + VID / 2, D["y1"] - t + 0.01, zb + 0.01),
                        "vidrio_invernadero")
@@ -1535,7 +1535,7 @@ def ventila(nombre, y0, y1, angulo):
     bis = pe + dirv * largo * f1 + nrm * (off + 0.03)
     piv = (bis.x, (y0 + y1) / 2, bis.z)
     p = Pieza(nombre, pivote=piv, peso_uv=1.6)
-    v = Pieza(nombre + "_vidrio", pivote=piv, peso_uv=1.1)
+    v = Pieza(nombre + "_vidrio", pivote=piv, peso_uv=1.4)
     b, a = p.baja, p.alta
     o = pe + nrm * off
     u = Vector((0, 1, 0))
@@ -1614,7 +1614,7 @@ def pasillo():
         tornillo(p, (xb - 0.02, yy, zt1 + 0.18), (-1, 0, 0), 0.016, "acero", en_baja=False)
     # Felpudo de fibra para no meter barro en casa (malla baja + ribete en la alta).
     b.caja_de((-5.95, -0.6, BASE_Z), (-5.38, 0.6, BASE_Z + 0.035), "fibra", sin=("-z",))
-    vid = Pieza("pasillo_vidrio", peso_uv=1.1)
+    vid = Pieza("pasillo_vidrio", peso_uv=1.4)
     for sy in (-1, 1):
         o = Vector((0, sy * (ys + 0.04), 0))
         vid.baja.placa(rect(xa + 0.08, -5.29, BASE_Z + 0.08, 3.7), o, Vector((1, 0, 0)), Vector((0, 0, 1)),
