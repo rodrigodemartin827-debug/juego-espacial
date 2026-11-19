@@ -1,0 +1,122 @@
+{
+  "nombre": "contenedor_envio_grande",
+  "zona": "hangar",
+  "descripcion": "Contenedor de carga: chapa ondulada, puertas dobles traseras con barras de cierre y candado 3D, 8 cantoneras de acero, rejillas de ventilación y huecos para horquilla de montacargas.",
+  "tam_pedido_studs": [
+    6,
+    3,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 6.28,
+    "alto_y": 2.92,
+    "fondo_z": 2.98
+  },
+  "triangulos": 3686,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/contenedor_envio_grande_color.png",
+    "rugosidad": "texturas/contenedor_envio_grande_rugosidad.png",
+    "metal": "texturas/contenedor_envio_grande_metal.png",
+    "normal": "texturas/contenedor_envio_grande_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "contenedor_envio_grande",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3126,
+      "tam_studs": [
+        6.28,
+        2.92,
+        2.981
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.114,
+        1.45,
+        -0.001
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "contenedor_envio_grande_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 280,
+      "tam_studs": [
+        0.18,
+        2.52,
+        1.43
+      ],
+      "pivote_studs": [
+        -3.0,
+        0.2,
+        1.45
+      ],
+      "centro_studs": [
+        -3.07,
+        1.45,
+        0.735
+      ],
+      "nota": "Hoja de la puerta trasera: gira 270° sobre su bisagra."
+    },
+    {
+      "nombre": "contenedor_envio_grande_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 280,
+      "tam_studs": [
+        0.18,
+        2.52,
+        1.43
+      ],
+      "pivote_studs": [
+        -3.0,
+        0.2,
+        -1.45
+      ],
+      "centro_studs": [
+        -3.07,
+        1.45,
+        -0.735
+      ],
+      "nota": "Hoja de la puerta trasera: gira 270° sobre su bisagra."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3686,
+    "tam_studs": [
+      6.28,
+      2.981,
+      2.92
+    ],
+    "centro": [
+      -0.114,
+      0.0,
+      1.45
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "contenedor_envio_grande_turnaround.png"
+}
