@@ -1,0 +1,122 @@
+{
+  "nombre": "cascada_pequena",
+  "zona": "naturaleza",
+  "descripcion": "Cascada: pared de roca con musgo, cortina de agua ondulada semitransparente, poza con ondas concéntricas, gotas de salpicadura suspendidas y helechos alienígenas con puntas luminosas en las grietas.",
+  "tam_pedido_studs": [
+    4,
+    2,
+    6
+  ],
+  "tam_studs": {
+    "ancho_x": 4.88,
+    "alto_y": 6.15,
+    "fondo_z": 3.59
+  },
+  "triangulos": 4836,
+  "presupuesto": 5000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/cascada_pequena_color.png",
+    "rugosidad": "texturas/cascada_pequena_rugosidad.png",
+    "metal": "texturas/cascada_pequena_metal.png",
+    "normal": "texturas/cascada_pequena_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "cascada_pequena",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3292,
+      "tam_studs": [
+        4.883,
+        6.148,
+        3.589
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.024,
+        2.988,
+        -0.356
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "cascada_pequena_agua_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9ADCE8",
+      "transparencia": 0.35,
+      "triangulos": 824,
+      "tam_studs": [
+        2.9,
+        5.354,
+        1.084
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.874,
+        -0.5
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "cascada_pequena_helechos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 720,
+      "tam_studs": [
+        3.584,
+        3.682,
+        1.5
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.106,
+        2.811,
+        -0.382
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 4836,
+    "tam_studs": [
+      4.883,
+      3.589,
+      6.148
+    ],
+    "centro": [
+      0.024,
+      0.356,
+      2.988
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "cascada_pequena_turnaround.png"
+}
