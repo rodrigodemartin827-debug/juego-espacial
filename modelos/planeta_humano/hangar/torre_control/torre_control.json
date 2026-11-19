@@ -1,0 +1,194 @@
+{
+  "nombre": "torre_control",
+  "zona": "hangar",
+  "descripcion": "Torre de control: fuste cilíndrico con puerta y una tronera alta por la que se ve la escalera de caracol, cabina octogonal con 8 paneles de cristal y consola con pantallas, antena con luz roja, parabólica lateral y bandera de la colonia.",
+  "tam_pedido_studs": [
+    4,
+    4,
+    14
+  ],
+  "tam_studs": {
+    "ancho_x": 4.3,
+    "alto_y": 13.91,
+    "fondo_z": 4.3
+  },
+  "triangulos": 4156,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/torre_control_color.png",
+    "rugosidad": "texturas/torre_control_rugosidad.png",
+    "metal": "texturas/torre_control_metal.png",
+    "normal": "texturas/torre_control_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "torre_control",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3420,
+      "tam_studs": [
+        4.3,
+        13.72,
+        4.3
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        6.86,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "torre_control_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 136,
+      "tam_studs": [
+        0.935,
+        2.05,
+        0.205
+      ],
+      "pivote_studs": [
+        0.45,
+        0.35,
+        -1.32
+      ],
+      "centro_studs": [
+        0.017,
+        1.42,
+        -1.533
+      ],
+      "nota": "Puerta de la base: gira sobre su bisagra."
+    },
+    {
+      "nombre": "torre_control_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9EC6D6",
+      "transparencia": 0.35,
+      "triangulos": 120,
+      "tam_studs": [
+        3.622,
+        11.002,
+        3.622
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        7.301,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "torre_control_pantallas_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 132,
+      "tam_studs": [
+        2.407,
+        9.19,
+        2.06
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        7.205,
+        -0.47
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "torre_control_luz_posicion_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FF2A2A",
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        0.171,
+        0.18,
+        0.18
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.6,
+        13.82,
+        0.4
+      ],
+      "nota": "Luz de posición: Neon rojo."
+    },
+    {
+      "nombre": "torre_control_bandera",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 248,
+      "tam_studs": [
+        1.403,
+        0.98,
+        0.167
+      ],
+      "pivote_studs": [
+        -1.85,
+        6.9,
+        -0.9
+      ],
+      "centro_studs": [
+        -1.1,
+        6.61,
+        -0.935
+      ],
+      "nota": "Bandera de la colonia: tela aparte (se puede agitar)."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 4156,
+    "tam_studs": [
+      4.3,
+      4.3,
+      13.91
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      6.955
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "torre_control_turnaround.png"
+}
