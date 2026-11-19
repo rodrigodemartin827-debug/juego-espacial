@@ -1,0 +1,122 @@
+{
+  "nombre": "vagoneta_mina",
+  "zona": "industrial",
+  "descripcion": "Vagoneta de mina: caja de metal remachada, cuatro ruedas con pestaña y ejes, carga de minerales de colores, palanca de freno lateral y enganches delante y detrás.",
+  "tam_pedido_studs": [
+    3,
+    2,
+    2
+  ],
+  "tam_studs": {
+    "ancho_x": 3.19,
+    "alto_y": 2.04,
+    "fondo_z": 1.79
+  },
+  "triangulos": 2832,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/vagoneta_mina_color.png",
+    "rugosidad": "texturas/vagoneta_mina_rugosidad.png",
+    "metal": "texturas/vagoneta_mina_metal.png",
+    "normal": "texturas/vagoneta_mina_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "vagoneta_mina",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2700,
+      "tam_studs": [
+        3.19,
+        2.041,
+        1.77
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.979,
+        -0.015
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "vagoneta_mina_minerales_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 32,
+      "tam_studs": [
+        1.457,
+        0.358,
+        0.272
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.009,
+        1.691,
+        -0.004
+      ],
+      "nota": "Las vetas de cristal azul brillante de la carga."
+    },
+    {
+      "nombre": "vagoneta_mina_freno",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 100,
+      "tam_studs": [
+        0.332,
+        1.376,
+        0.34
+      ],
+      "pivote_studs": [
+        -0.55,
+        0.55,
+        -0.82
+      ],
+      "centro_studs": [
+        -0.636,
+        0.928,
+        -0.75
+      ],
+      "nota": "Palanca de freno: gira 25° hacia delante."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 3,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2832,
+    "tam_studs": [
+      3.19,
+      1.79,
+      2.041
+    ],
+    "centro": [
+      0.0,
+      0.025,
+      0.979
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "vagoneta_mina_turnaround.png"
+}
