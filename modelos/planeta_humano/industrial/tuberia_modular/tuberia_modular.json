@@ -1,0 +1,74 @@
+{
+  "nombre": "tuberia_modular",
+  "zona": "industrial",
+  "descripcion": "Tubería modular: tramo recto, codo de 90°, válvula de volante con radios, bridas con 8 pernos, soporte de pared con abrazadera y junta de expansión ondulada.",
+  "tam_pedido_studs": [
+    4,
+    1,
+    1
+  ],
+  "tam_studs": {
+    "ancho_x": 4.2,
+    "alto_y": 1.03,
+    "fondo_z": 0.89
+  },
+  "triangulos": 2384,
+  "presupuesto": 3000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tuberia_modular_color.png",
+    "rugosidad": "texturas/tuberia_modular_rugosidad.png",
+    "metal": "texturas/tuberia_modular_metal.png",
+    "normal": "texturas/tuberia_modular_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tuberia_modular",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 2384,
+      "tam_studs": [
+        4.202,
+        1.032,
+        0.892
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.101,
+        0.664,
+        0.094
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2384,
+    "tam_studs": [
+      4.202,
+      0.892,
+      1.032
+    ],
+    "centro": [
+      -0.101,
+      -0.094,
+      0.664
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tuberia_modular_turnaround.png"
+}
