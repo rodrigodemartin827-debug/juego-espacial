@@ -1,0 +1,170 @@
+{
+  "nombre": "almacen_industrial",
+  "zona": "industrial",
+  "descripcion": "Almacén industrial tipo quonset: chapa ondulada en bóveda, puerta corredera grande sobre raíl y ruedas, puerta peatonal con cerradura, estanterías y palé con cajas a la vista, canalón, ventilador de techo y tubos fluorescentes.",
+  "tam_pedido_studs": [
+    16,
+    12,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 16.0,
+    "alto_y": 7.79,
+    "fondo_z": 13.4
+  },
+  "triangulos": 10176,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/almacen_industrial_color.png",
+    "rugosidad": "texturas/almacen_industrial_rugosidad.png",
+    "metal": "texturas/almacen_industrial_metal.png",
+    "normal": "texturas/almacen_industrial_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "almacen_industrial",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 8564,
+      "tam_studs": [
+        16.0,
+        7.793,
+        13.4
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.897,
+        -0.7
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "almacen_industrial_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 960,
+      "tam_studs": [
+        6.2,
+        4.994,
+        0.446
+      ],
+      "pivote_studs": [
+        1.5,
+        0.3,
+        -6.15
+      ],
+      "centro_studs": [
+        1.5,
+        2.767,
+        -6.293
+      ],
+      "nota": "Puerta corredera: abrir desplazándola 5,8 studs a la derecha del modelo (-X de Roblox) sobre el raíl."
+    },
+    {
+      "nombre": "almacen_industrial_puerta_peatonal",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 212,
+      "tam_studs": [
+        1.19,
+        3.28,
+        0.195
+      ],
+      "pivote_studs": [
+        -4.35,
+        0.3,
+        -5.95
+      ],
+      "centro_studs": [
+        -3.785,
+        1.94,
+        -5.957
+      ],
+      "nota": "Puerta peatonal batiente: gira sobre su bisagra."
+    },
+    {
+      "nombre": "almacen_industrial_fluorescentes_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#E6F7FF",
+      "transparencia": null,
+      "triangulos": 220,
+      "tam_studs": [
+        8.957,
+        1.907,
+        8.887
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.578,
+        4.947,
+        -1.909
+      ],
+      "nota": "Tubos fluorescentes: Neon blanco frío."
+    },
+    {
+      "nombre": "almacen_industrial_ventilador",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 220,
+      "tam_studs": [
+        2.962,
+        0.062,
+        3.114
+      ],
+      "pivote_studs": [
+        -0.0,
+        7.0,
+        1.0
+      ],
+      "centro_studs": [
+        -0.119,
+        6.8,
+        1.0
+      ],
+      "nota": "Aspas del ventilador: girar sobre el eje vertical."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 5,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 10176,
+    "tam_studs": [
+      16.0,
+      13.4,
+      7.793
+    ],
+    "centro": [
+      0.0,
+      0.7,
+      3.897
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "almacen_industrial_turnaround.png"
+}
