@@ -559,7 +559,8 @@ def barril_metal():
                "Barril metálico sci-fi: cierre hermético con junta de goma, asa articulada, manómetro, etiqueta y "
                "abolladuras de uso.")
     c = m.parte()
-    asa = m.parte("asa", pivote=(0, 0, 1.98), nota="Asa articulada: gira sobre el eje X de Roblox en el pivote.")
+    asa = m.parte("asa", pivote=(0, 0, 2.02), nota="Asa articulada, plegada sobre la tapa: para levantarla, girarla "
+                                                  "80° sobre el eje X de Roblox en el pivote.")
     chapa = m.mat("pintura", "#B4502A", desgaste=0.65, abolladuras=0.6)
     acero = m.mat("metal", "#8D9399")
     goma = m.mat("goma", "#151618")
@@ -584,11 +585,13 @@ def barril_metal():
         c.perno((math.cos(a) * (R - 0.15), math.sin(a) * (R - 0.15), 1.96), (0, 0, 1), acero, r=0.03)
     c.cil((0.25, 0.15, 1.96), (0.25, 0.15, 2.0), 0.08, acero, n=10)  # tapón de llenado
     # asa articulada (pieza aparte)
+    # orejetas fijas en la tapa y asa plegada hacia atrás (gira -80° sobre el eje X; levantada mide 2,3)
     for s in (-1, 1):
-        asa.cil((s * 0.42, 0, 1.96), (s * 0.42, 0, 2.06), 0.04, acero, n=8)
-    asa.tubo([(-0.42, 0, 2.02), (-0.42, 0, 2.2), (-0.3, 0, 2.3), (0.3, 0, 2.3), (0.42, 0, 2.2), (0.42, 0, 2.02)], 0.025,
-             acero, n=6, seg=2)
-    asa.cil((-0.15, 0, 2.3), (0.15, 0, 2.3), 0.045, goma, n=8)
+        c.cil((s * 0.42, 0, 1.96), (s * 0.42, 0, 2.06), 0.04, acero, n=8)
+    with asa.en((0, 0, 2.02), (-80, 0, 0)):
+        asa.tubo([(-0.42, 0, 0.0), (-0.42, 0, 0.18), (-0.3, 0, 0.28), (0.3, 0, 0.28), (0.42, 0, 0.18), (0.42, 0, 0.0)],
+                 0.025, acero, n=6, seg=2)
+        asa.cil((-0.15, 0, 0.28), (0.15, 0, 0.28), 0.045, goma, n=8)
     # manómetro (esfera con aguja) sobre un racor
     mp = V((0, -R, 1.62))
     c.cil(mp, mp + V((0, -0.08, 0)), 0.03, acero, n=6)
