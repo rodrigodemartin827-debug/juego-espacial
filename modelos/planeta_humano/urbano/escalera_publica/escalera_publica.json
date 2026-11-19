@@ -1,0 +1,74 @@
+{
+  "nombre": "escalera_publica",
+  "zona": "urbano",
+  "descripcion": "Escalera pública de 6 peldaños de chapa: zancas laterales dentadas, tabicas, bandas antideslizantes y canto amarillo en cada huella, pasamanos de tubo en un lado con un apoyo cada 2 peldaños y anclajes atornillados abajo y arriba.",
+  "tam_pedido_studs": [
+    4,
+    3,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 4.04,
+    "alto_y": 4.29,
+    "fondo_z": 3.12
+  },
+  "triangulos": 1952,
+  "presupuesto": 2000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/escalera_publica_color.png",
+    "rugosidad": "texturas/escalera_publica_rugosidad.png",
+    "metal": "texturas/escalera_publica_metal.png",
+    "normal": "texturas/escalera_publica_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "escalera_publica",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1952,
+      "tam_studs": [
+        4.045,
+        4.291,
+        3.117
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.012,
+        2.145,
+        0.058
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 1952,
+    "tam_studs": [
+      4.045,
+      3.117,
+      4.291
+    ],
+    "centro": [
+      -0.012,
+      -0.058,
+      2.145
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "escalera_publica_turnaround.png"
+}

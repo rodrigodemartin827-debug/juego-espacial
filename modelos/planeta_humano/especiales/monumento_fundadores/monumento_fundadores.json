@@ -1,0 +1,98 @@
+{
+  "nombre": "monumento_fundadores",
+  "zona": "especiales",
+  "descripcion": "Monumento a los fundadores: pedestal de piedra de 3 escalones con placa de bronce A LOS QUE LLEGARON PRIMERO, estatua de un astronauta mirando al cielo con el casco en una mano y la bandera en la otra, corona de flores metálica, dos focos que la iluminan desde abajo y dos bancos de piedra a los lados.",
+  "tam_pedido_studs": [
+    3,
+    3,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 5.35,
+    "alto_y": 7.96,
+    "fondo_z": 3.0
+  },
+  "triangulos": 4540,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/monumento_fundadores_color.png",
+    "rugosidad": "texturas/monumento_fundadores_rugosidad.png",
+    "metal": "texturas/monumento_fundadores_metal.png",
+    "normal": "texturas/monumento_fundadores_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "monumento_fundadores",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 4468,
+      "tam_studs": [
+        5.35,
+        7.96,
+        3.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.98,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "monumento_fundadores_focos_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 72,
+      "tam_studs": [
+        2.159,
+        0.165,
+        0.098
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.844,
+        -0.941
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 4540,
+    "tam_studs": [
+      5.35,
+      3.0,
+      7.96
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      3.98
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "monumento_fundadores_turnaround.png"
+}

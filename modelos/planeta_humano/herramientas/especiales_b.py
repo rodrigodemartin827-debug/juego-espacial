@@ -441,10 +441,30 @@ def estacion_comunicaciones():
         c.caja((cx0 - 0.17, -0.6 + k * 0.6, 1.9), (0.04, 0.45, 0.3), osc, 0.01)
     m.seccion("mástil y parabólica grande")
     mx, my = 1.2, 1.2
-    c.cil((mx, my, 0.3), (mx, my, 0.6), 0.6, horm, n=10)
-    c.cil((mx, my, 0.6), (mx, my, 6.2), 0.22, gris, n=10)
-    for z in (1.5, 3.0, 4.5):
-        c.toro((mx, my, z), 0.24, 0.03, acero, n=10, m=3)
+    # torre de celosía de 3 patas que se estrecha hacia arriba, con anillos y cruces de San Andrés
+    c.cil((mx, my, 0.3), (mx, my, 0.45), 0.85, horm, n=10)
+    secc = [0.45, 1.6, 2.75, 3.9, 5.05, 6.2]
+
+    def pata(k, z):
+        r = 0.62 - 0.36 * (z - 0.45) / 5.75
+        a = math.radians(90 + k * 120)
+        return V((mx + math.cos(a) * r, my + math.sin(a) * r, z))
+    for k in range(3):
+        c.cil(pata(k, 0.45), pata(k, 6.2), 0.045, gris, n=6)
+        c.caja(pata(k, 0.47), (0.22, 0.22, 0.04), acero)  # placa de pie
+        for i in range(len(secc) - 1):
+            a0, a1 = pata(k, secc[i]), pata((k + 1) % 3, secc[i])
+            b0, b1 = pata(k, secc[i + 1]), pata((k + 1) % 3, secc[i + 1])
+            c.cil(a0, b1, 0.016, acero, n=4)
+            c.cil(a1, b0, 0.016, acero, n=4)
+    for z in secc[1:]:
+        for k in range(3):
+            c.cil(pata(k, z), pata((k + 1) % 3, z), 0.022, gris, n=4)
+    c.cil((mx, my, 5.9), (mx, my, 6.2), 0.3, gris, n=10)  # plataforma del rotor
+    for i in range(18):  # escalerilla de peldaños por dentro de una pata
+        z = 0.7 + i * 0.3
+        p = pata(0, z)
+        c.cil(p + V((-0.12, -0.06, 0)), p + V((0.12, -0.06, 0)), 0.012, acero, n=4)
     plato.cil((mx, my, 6.2), (mx, my, 6.45), 0.32, osc, n=12)  # cabeza giratoria
     plato.caja((mx, my, 6.7), (0.3, 0.5, 0.5), osc, 0.04)
     _parabolica(plato, blanco, acero, V((mx, my - 0.3, 6.9)), (100, 0, 25), 1.5, profundo=0.45)
@@ -477,6 +497,43 @@ def estacion_comunicaciones():
             for j in range(4):
                 c.caja((-1.08 + i * 0.43, -0.6 + j * 0.4, 0.045), (0.4, 0.37, 0.02), celda, 0.0)
     c.tubo([(sx - 1.1, sy + 0.4, 1.0), (cx1 + 0.2, -0.8, 1.0)], 0.03, goma, n=4, suave=False)
+    m.seccion("bandeja de cables, climatizador y valla")
+    for y in (0.65, 0.95):  # bandeja de escalera de la torre a la cabina
+        c.cil((cx1 + 0.15, y, 2.6), (mx - 0.35, y, 2.6), 0.02, acero, n=4)
+    for i in range(5):
+        x = cx1 + 0.2 + i * (mx - 0.6 - cx1) / 4
+        c.cil((x, 0.65, 2.6), (x, 0.95, 2.6), 0.012, acero, n=4)
+    c.tubo([(cx1 + 0.15, 0.8, 2.64), (mx - 0.4, 0.8, 2.64), (mx - 0.25, 0.9, 3.4), (mx - 0.2, 0.95, 5.9)], 0.035, goma,
+           n=4, seg=2)
+    c.caja((cx0 - 0.45, -0.2, 1.0), (0.5, 1.2, 0.9), m.mat("paneles", "#B8BEC4", tam_panel=(0.6, 0.45)), 0.03)
+    c.cil((cx0 - 0.71, -0.2, 1.05), (cx0 - 0.73, -0.2, 1.05), 0.34, osc, n=12)  # ventilador del climatizador
+    for d in (-1, 1):
+        c.cil((cx0 - 0.74, -0.2 - 0.3 * d, 1.05), (cx0 - 0.74, -0.2 + 0.3 * d, 1.05), 0.012, acero, n=4)
+    # valla perimetral de malla con puerta delante de la cabina
+    L = 2.85
+    esquinas = [(-L, -L), (L, -L), (L, L), (-L, L)]
+    for i in range(4):
+        a, b = V((*esquinas[i], 0.3)), V((*esquinas[(i + 1) % 4], 0.3))
+        n = 4
+        for j in range(n):
+            p = a.lerp(b, j / n)
+            if i == 0 and -2.4 < p.x < -0.8:
+                continue
+            c.cil(p, p + V((0, 0, 1.6)), 0.035, acero, n=6)
+        tramos = [(a, b)] if i else [(a, V((-2.3, -L, 0.3))), (V((-0.9, -L, 0.3)), b)]
+        for p0, p1 in tramos:
+            for z in (0.4, 1.0, 1.6):
+                c.cil(p0 + V((0, 0, z - 0.3)), p1 + V((0, 0, z - 0.3)), 0.014, acero, n=4)
+            for z in (0.7, 1.3):
+                c.cil(p0 + V((0, 0, z - 0.3)), p1 + V((0, 0, z - 0.3)), 0.008, acero, n=3)
+            # alambre de espino en zigzag sobre la valla
+            d = p1 - p0
+            k = max(2, int(d.length / 0.3))
+            c.tubo([p0.lerp(p1, j / k) + V((0, 0, 1.38 + 0.06 * (j % 2))) for j in range(k + 1)], 0.008, acero, n=3,
+                   suave=False)
+    for x in (-2.3, -0.9):  # puerta de la valla (abierta hacia dentro)
+        c.cil((x, -L, 0.3), (x, -L, 1.95), 0.05, gris, n=6)
+    c.caja((-1.6, -L + 0.02, 1.0), (1.3, 0.04, 1.3), m.mat("pintura", "#4A525C", desgaste=0.5), 0.02, rot=(0, 0, 25))
     m.terminar()
 
 

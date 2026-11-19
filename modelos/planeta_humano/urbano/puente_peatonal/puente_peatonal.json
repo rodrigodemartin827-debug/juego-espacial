@@ -1,0 +1,98 @@
+{
+  "nombre": "puente_peatonal",
+  "zona": "urbano",
+  "descripcion": "Puente peatonal: dos arcos de tubo de acero con péndolas, vigas cajón laterales, tablero de chapa perforada en rombos, barandillas de tubo con cables por los dos lados, 6 luces cyan en el pasamanos bajo, mini rampas de chapa estriada y estribos de hormigón en los extremos.",
+  "tam_pedido_studs": [
+    10,
+    4,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 10.04,
+    "alto_y": 2.95,
+    "fondo_z": 3.9
+  },
+  "triangulos": 3228,
+  "presupuesto": 5000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/puente_peatonal_color.png",
+    "rugosidad": "texturas/puente_peatonal_rugosidad.png",
+    "metal": "texturas/puente_peatonal_metal.png",
+    "normal": "texturas/puente_peatonal_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "puente_peatonal",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3044,
+      "tam_studs": [
+        10.04,
+        2.953,
+        3.9
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.476,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "puente_peatonal_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 184,
+      "tam_studs": [
+        10.0,
+        0.663,
+        2.806
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.951,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3228,
+    "tam_studs": [
+      10.04,
+      3.9,
+      2.953
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      1.476
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "puente_peatonal_turnaround.png"
+}

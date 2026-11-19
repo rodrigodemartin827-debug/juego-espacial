@@ -1,0 +1,196 @@
+{
+  "nombre": "muro_perimetral",
+  "zona": "especiales",
+  "descripcion": "Segmento modular de muro defensivo de 6 studs: paneles de acero con costillas, pasarela superior con barandilla, torreta automática giratoria (pieza aparte), luces de seguridad cyan, puerta peatonal (pieza aparte, con su tapa para los tramos sin puerta) y escalera (pieza aparte, para 1 de cada 4).",
+  "tam_pedido_studs": [
+    6,
+    1,
+    5
+  ],
+  "tam_studs": {
+    "ancho_x": 6.0,
+    "alto_y": 5.36,
+    "fondo_z": 1.83
+  },
+  "triangulos": 2052,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/muro_perimetral_color.png",
+    "rugosidad": "texturas/muro_perimetral_rugosidad.png",
+    "metal": "texturas/muro_perimetral_metal.png",
+    "normal": "texturas/muro_perimetral_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "muro_perimetral",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1396,
+      "tam_studs": [
+        6.0,
+        5.355,
+        1.32
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        2.672,
+        0.09
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "muro_perimetral_torreta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 244,
+      "tam_studs": [
+        0.69,
+        0.57,
+        1.47
+      ],
+      "pivote_studs": [
+        -1.6,
+        4.6,
+        0.05
+      ],
+      "centro_studs": [
+        -1.605,
+        4.885,
+        -0.345
+      ],
+      "nota": "Torreta: gira sobre el eje vertical del pivote."
+    },
+    {
+      "nombre": "muro_perimetral_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 76,
+      "tam_studs": [
+        0.96,
+        2.28,
+        0.2
+      ],
+      "pivote_studs": [
+        1.95,
+        0.25,
+        -0.32
+      ],
+      "centro_studs": [
+        1.45,
+        1.39,
+        -0.32
+      ],
+      "nota": "Puerta peatonal: gira sobre su bisagra."
+    },
+    {
+      "nombre": "muro_perimetral_tapa_sin_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        1.0,
+        2.3,
+        0.58
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.45,
+        1.4,
+        0.0
+      ],
+      "nota": "Para los tramos SIN puerta: deja esta pieza y borra la puerta. En los tramos con puerta, borra esta tapa."
+    },
+    {
+      "nombre": "muro_perimetral_escalera",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 260,
+      "tam_studs": [
+        0.567,
+        4.95,
+        0.358
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        2.6,
+        2.725,
+        0.499
+      ],
+      "nota": "Escalera de acceso a la pasarela: déjala en uno de cada 4 tramos."
+    },
+    {
+      "nombre": "muro_perimetral_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 64,
+      "tam_studs": [
+        4.24,
+        0.26,
+        0.62
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.99,
+        -0.27
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Los extremos están en x = ±3: coloca los tramos cada 6 studs en el eje X de Roblox."
+  ],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2052,
+    "tam_studs": [
+      6.0,
+      1.83,
+      5.355
+    ],
+    "centro": [
+      0.0,
+      0.165,
+      2.672
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "muro_perimetral_turnaround.png"
+}
