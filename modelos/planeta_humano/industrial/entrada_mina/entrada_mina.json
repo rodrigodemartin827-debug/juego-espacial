@@ -1,0 +1,98 @@
+{
+  "nombre": "entrada_mina",
+  "zona": "industrial",
+  "descripcion": "Entrada de la Mina Sector 7: frente de roca en estratos con el arco de vigas en H (marco de 4 vigas y 2 diagonales), túnel con entibado, raíles que salen de la boca, cartel de chapa con flecha, bombillas en el techo, pico y casco colgados, botiquín y cables por el techo del arco.",
+  "tam_pedido_studs": [
+    6,
+    6,
+    5
+  ],
+  "tam_studs": {
+    "ancho_x": 6.21,
+    "alto_y": 5.15,
+    "fondo_z": 6.67
+  },
+  "triangulos": 7788,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/entrada_mina_color.png",
+    "rugosidad": "texturas/entrada_mina_rugosidad.png",
+    "metal": "texturas/entrada_mina_metal.png",
+    "normal": "texturas/entrada_mina_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "entrada_mina",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 7460,
+      "tam_studs": [
+        6.206,
+        5.149,
+        6.675
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.008,
+        2.464,
+        0.337
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "entrada_mina_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 328,
+      "tam_studs": [
+        1.574,
+        0.47,
+        3.94
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.663,
+        3.115,
+        -0.19
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 7788,
+    "tam_studs": [
+      6.206,
+      6.675,
+      5.149
+    ],
+    "centro": [
+      -0.008,
+      -0.337,
+      2.464
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "entrada_mina_turnaround.png"
+}
