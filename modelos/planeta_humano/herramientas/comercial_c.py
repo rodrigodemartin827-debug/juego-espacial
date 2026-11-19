@@ -757,12 +757,14 @@ def hospital_clinica():
     goma = m.mat("goma", "#202225")
     sab = m.mat("tela", "#F4F4F0", suciedad=0.1)
 
-    X0, X1, YF, YB, Z0, ZT = -3.4, 6.6, -3.0, 5.6, 0.8, 8.4
+    X0, X1, YF, YB, Z0, ZT = -3.4, 6.6, -2.4, 4.6, 0.5, 8.0
+    D_DESC = 1.6  # fondo del descansillo de entrada
+    L = 3.0  # largo de la rampa (pendiente 1:6)
 
     m.seccion("cuerpo")
     c.caja_de((X0 - 0.2, YF - 0.2, 0), (X1 + 0.2, YB + 0.2, Z0), horm, 0.05)
-    PUE = (1.0, 4.4, Z0, 5.8)
-    VEN = (-2.7, 0.2, 2.2, 5.6)
+    PUE = (1.0, 4.4, Z0, 5.6)
+    VEN = (-2.7, 0.2, 1.9, 5.3)
     arq.muro_huecos(c, X0, X1, Z0, ZT, YF, YF + 0.4, [PUE, VEN], blanco)
     for x in (X0, X1 - 0.4):
         c.caja_de((x, YF + 0.4, Z0), (x + 0.4, YB - 0.4, ZT), blanco)
@@ -771,33 +773,48 @@ def hospital_clinica():
     c.caja_de((X0 - 0.05, YF - 0.05, Z0), (X1 + 0.05, YB + 0.05, Z0 + 0.4), gris, 0.03)
     c.caja_de((X0 - 0.25, YF - 0.25, ZT), (X1 + 0.25, YB + 0.25, ZT + 0.3), gris, 0.05)
     c.caja_de((X0 - 0.1, YF - 0.1, ZT + 0.3), (X1 + 0.1, YB + 0.1, ZT + 0.6), blanco, 0.03)
-    # ventanas altas del piso superior
-    for x in (-1.6, 2.7, 5.4):
-        c.caja_de((x - 0.7, YF - 0.06, 6.5), (x + 0.7, YF + 0.05, 7.7), gris, 0.03)
-        cr.caja_de((x - 0.6, YF - 0.08, 6.6), (x + 0.6, YF - 0.04, 7.6), None)
-    # marquesina de entrada
-    c.caja_de((PUE[0] - 0.8, YF - 2.0, 6.1), (PUE[1] + 0.8, YF, 6.35), blanco, 0.05)
+    # ventanas altas del piso superior (fachada y laterales), con alféizar
+    for x in (-1.6, 5.5):
+        c.caja_de((x - 0.7, YF - 0.06, 6.2), (x + 0.7, YF + 0.05, 7.4), gris, 0.03)
+        cr.caja_de((x - 0.6, YF - 0.08, 6.3), (x + 0.6, YF - 0.04, 7.3), None)
+        c.caja_de((x - 0.8, YF - 0.2, 6.08), (x + 0.8, YF + 0.02, 6.2), gris, 0.02)
+    for xs, sx in ((X0, -1), (X1, 1)):
+        for y in (-0.3, 2.6):
+            c.caja((xs + sx * 0.02, y, 6.8), (0.1, 1.5, 1.3), gris, 0.03)
+            cr.caja((xs + sx * 0.06, y, 6.8), (0.04, 1.3, 1.1), None)
+    # marquesina de entrada sobre dos columnas
+    c.caja_de((PUE[0] - 0.8, YF - D_DESC - 0.1, 5.75), (PUE[1] + 0.8, YF, 6.0), blanco, 0.05)
     for x in (PUE[0] - 0.6, PUE[1] + 0.6):
-        c.cil((x, YF - 1.8, Z0), (x, YF - 1.8, 6.1), 0.1, cromo, n=10)
-    luces.caja(((PUE[0] + PUE[1]) / 2, YF - 1.0, 6.08), (2.6, 0.5, 0.04), None)
+        c.cil((x, YF - D_DESC + 0.1, Z0), (x, YF - D_DESC + 0.1, 5.75), 0.1, cromo, n=10)
+    luces.caja(((PUE[0] + PUE[1]) / 2, YF - D_DESC / 2, 5.73), (2.6, 0.5, 0.04), None)
+    # equipos del tejado (no asoman por encima de los 10 studs)
+    c.caja((-1.2, 2.0, ZT + 0.95), (2.0, 1.4, 0.7), gris, 0.06)
+    c.cil((-1.2, 2.0, ZT + 1.3), (-1.2, 2.0, ZT + 1.36), 0.5, acero, n=14)
+    for k in range(4):
+        a = k * math.pi / 2
+        c.caja((-1.2 + math.cos(a) * 0.22, 2.0 + math.sin(a) * 0.22, ZT + 1.38), (0.4, 0.07, 0.02), acero, 0.0,
+               rot=(0, 15, math.degrees(a)))
+    c.tubo([(-0.2, 2.0, ZT + 0.8), (0.4, 2.0, ZT + 0.75), (0.6, 2.0, ZT + 0.62)], 0.08, acero, n=6, seg=2)
+    for (x, y) in ((2.5, 3.2), (4.6, 0.4)):
+        c.cil((x, y, ZT + 0.6), (x, y, ZT + 0.95), 0.14, acero, n=8)
+        c.cil((x, y, ZT + 0.95), (x, y, ZT + 1.03), 0.24, acero, n=8, r1=0.06)
 
     m.seccion("rampa con barandillas")
-    # la rampa sube por el frente desde la derecha (accesible), con barandilla a ambos lados
+    # descansillo ante la puerta y rampa accesible (1:6) que baja hacia delante, con barandilla a los dos lados
     rx0, rx1 = PUE[0] - 0.5, PUE[1] + 0.5
-    c.caja_de((rx0, YF - 2.0, 0), (rx1, YF, Z0), horm, 0.04)  # descansillo
-    L = 7.0
-    with c.en((X1 + 0.85, YF - 1.0 + 0.0, Z0 / 2), (0, -math.degrees(math.atan2(Z0, L)), 90)):
-        pass
-    # rampa a lo largo de -X... a lo largo de Y hacia delante: de y=YF-2 (z=Z0) a y=YF-2-L (z=0)
+    c.caja_de((rx0, YF - D_DESC, 0), (rx1, YF, Z0), horm, 0.04)  # descansillo
     ang = math.degrees(math.atan2(Z0, L))
-    with c.en(((rx0 + rx1) / 2, YF - 2.0 - L / 2, Z0 / 2), (ang, 0, 0)):
+    with c.en(((rx0 + rx1) / 2, YF - D_DESC - L / 2, Z0 / 2), (ang, 0, 0)):
         c.caja((0, 0, -0.08), (2.2, L + 0.1, 0.16), horm, 0.03)
         for s in (-1, 1):
             c.caja((s * 1.15, 0, 0.0), (0.12, L, 0.25), gris, 0.02)
+        # bandas antideslizantes
+        for k in range(5):
+            c.caja((0, -L / 2 + 0.35 + k * 0.58, 0.005), (2.0, 0.08, 0.02), m.mat("goma", "#2A2C30"), 0.0)
     for s in (-1.15, 1.15):
         x = (rx0 + rx1) / 2 + s
-        arq.barandilla(c, [(x, YF - 2.0 - L, 0.0), (x, YF - 2.0, Z0)], 1.0, cromo, r=0.045, n=8, barrotes=4)
-    arq.barandilla(c, [(rx0, YF - 2.0, Z0), (rx0, YF - 0.2, Z0)], 1.0, cromo, r=0.045, n=8)
+        arq.barandilla(c, [(x, YF - D_DESC - L, 0.0), (x, YF - D_DESC, Z0)], 1.0, cromo, r=0.045, n=8, barrotes=3)
+    arq.barandilla(c, [(rx0, YF - D_DESC + 0.2, Z0), (rx0, YF - 0.2, Z0)], 1.0, cromo, r=0.045, n=8)
 
     m.seccion("puerta doble esmerilada")
     px0, px1, pz0, pz1 = PUE
@@ -850,16 +867,17 @@ def hospital_clinica():
 
     m.seccion("cruz, placa y botiquín")
     # cruz luminosa blanca en la fachada (neón dentro de un marco gris)
-    cx_, cz_ = (px0 + px1) / 2, 7.15
-    c.caja((cx_, YF - 0.12, cz_), (1.9, 0.18, 1.9), gris, 0.06)
-    cruz.caja((cx_, YF - 0.24, cz_), (1.5, 0.08, 0.48), None, 0.02)
-    cruz.caja((cx_, YF - 0.24, cz_), (0.48, 0.08, 1.5), None, 0.02)
-    # cruz en el tejado sobre mástil
-    c.caja((X1 - 1.2, 2.0, ZT + 0.6 + 1.0), (0.3, 0.3, 2.0), gris, 0.03)
-    with c.en((X1 - 1.2, 2.0, ZT + 3.2), (0, 0, 0)):
-        c.caja((0, 0, 0), (0.2, 1.7, 1.7), gris, 0.04)
-        cruz.caja((0.0, 0, 0), (0.3, 1.4, 0.45), None, 0.02)
-        cruz.caja((0.0, 0, 0), (0.3, 0.45, 1.4), None, 0.02)
+    cx_, cz_ = (px0 + px1) / 2, 6.95
+    c.caja((cx_, YF - 0.12, cz_), (1.55, 0.18, 1.55), gris, 0.06)
+    cruz.caja((cx_, YF - 0.24, cz_), (1.25, 0.08, 0.4), None, 0.02)
+    cruz.caja((cx_, YF - 0.24, cz_), (0.4, 0.08, 1.25), None, 0.02)
+    # cruz en el tejado sobre un pie corto (arriba del todo: 9,95 studs)
+    c.caja((X1 - 1.2, 2.0, ZT + 0.6 + 0.12), (0.5, 0.5, 0.24), gris, 0.03)
+    c.caja((X1 - 1.2, 2.0, ZT + 0.6 + 0.35), (0.25, 0.25, 0.3), gris, 0.02)
+    with c.en((X1 - 1.2, 2.0, ZT + 0.6 + 1.08), (0, 0, 0)):
+        c.caja((0, 0, 0), (0.2, 1.25, 1.25), gris, 0.04)
+        cruz.caja((0.0, 0, 0), (0.28, 1.05, 0.34), None, 0.02)
+        cruz.caja((0.0, 0, 0), (0.28, 0.34, 1.05), None, 0.02)
     # placa metálica con el nombre
     c.caja((px1 + 1.05, YF - 0.05, 3.6), (1.4, 0.08, 0.9), cromo, 0.02)
     tinta = m.mat("pintura", "#22323F", desgaste=0.05)

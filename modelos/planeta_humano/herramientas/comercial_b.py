@@ -359,7 +359,7 @@ def tienda_pociones():
             c.extruir([(0, 0), (0.25, 0), (0, -0.25)], 0.05, laton, c=(x, YF + G + 0.85, zb - 0.06), rot=(90, 0, -90))
     # frascos: cristal (malla _cristal) + líquido (opaco, con textura) + tapón
     def esferico(x, y, z, r, liq):
-        frascos.esfera((x, y, z + r), r, None, seg=12, anillos=8)
+        frascos.esfera((x, y, z + r), r, None, seg=10, anillos=7)
         frascos.cil((x, y, z + r * 1.8), (x, y, z + r * 2.35), r * 0.32, None, n=10)
         c.esfera((x, y, z + r * 0.92), r * 0.84, liq, seg=10, anillos=6, esc=(1, 1, 0.82))
         c.cil((x, y, z + r * 2.3), (x, y, z + r * 2.55), r * 0.28, corcho, n=8, r1=r * 0.33)
@@ -527,6 +527,7 @@ def tienda_herramientas():
     chapa_ondulada(PER[1] + 0.25, PUE[0] - 0.2, Z0 + 0.6, ZT - 0.4, YF + 0.05)
     chapa_ondulada(PUE[1] + 0.2, X1 - 0.15, Z0 + 0.6, ZT - 0.4, YF + 0.05)
     chapa_ondulada(PER[0] - 0.1, PUE[1] + 0.2, PER[3] + 0.5, ZT - 0.4, YF + 0.05)
+    chapa_ondulada(PUE[0] - 0.2, PUE[1] + 0.2, PUE[3] + 0.1, PER[3] + 0.55, YF + 0.05)  # sobre la puerta
     # zócalo de hormigón bajo la chapa
     c.caja_de((X0 + 0.1, YF - 0.05, Z0), (PER[0] - 0.1, YF + 0.25, Z0 + 0.6), horm, 0.03)
     c.caja_de((PER[1] + 0.25, YF - 0.05, Z0), (PUE[0] - 0.2, YF + 0.25, Z0 + 0.6), horm, 0.03)

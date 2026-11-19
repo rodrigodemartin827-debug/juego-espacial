@@ -1,0 +1,193 @@
+{
+  "nombre": "bar_cantina",
+  "zona": "comercial",
+  "descripcion": "Cantina: más oscura y acogedora, de madera ennegrecida, con barra exterior y tres taburetes, estantería de botellas, letrero de jarra en neón ámbar, puertas batientes tipo saloon y pizarra.",
+  "tam_pedido_studs": [
+    10,
+    10,
+    7
+  ],
+  "tam_studs": {
+    "ancho_x": 10.01,
+    "alto_y": 7.65,
+    "fondo_z": 9.38
+  },
+  "triangulos": 11216,
+  "presupuesto": 12000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/bar_cantina_color.png",
+    "rugosidad": "texturas/bar_cantina_rugosidad.png",
+    "metal": "texturas/bar_cantina_metal.png",
+    "normal": "texturas/bar_cantina_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "bar_cantina",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 8528,
+      "tam_studs": [
+        10.012,
+        7.65,
+        9.384
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.825,
+        0.092
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "bar_cantina_jarra_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FFB347",
+      "transparencia": null,
+      "triangulos": 424,
+      "tam_studs": [
+        1.302,
+        1.531,
+        0.07
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.473,
+        5.064,
+        -1.45
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "bar_cantina_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#FFB347",
+      "transparencia": null,
+      "triangulos": 140,
+      "tam_studs": [
+        6.895,
+        0.675,
+        3.985
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.352,
+        4.238,
+        -2.003
+      ],
+      "nota": "Luz cálida de la cantina (ámbar)."
+    },
+    {
+      "nombre": "bar_cantina_botellas_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#5E8A55",
+      "transparencia": 0.25,
+      "triangulos": 1404,
+      "tam_studs": [
+        4.14,
+        1.8,
+        0.38
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.65,
+        3.15,
+        0.35
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "bar_cantina_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 360,
+      "tam_studs": [
+        0.96,
+        2.32,
+        0.102
+      ],
+      "pivote_studs": [
+        -1.65,
+        1.35,
+        -1.25
+      ],
+      "centro_studs": [
+        -2.09,
+        2.51,
+        -1.25
+      ],
+      "nota": "Hoja batiente de saloon: gira sobre el eje vertical del pivote en los dos sentidos (±80°) y vuelve sola."
+    },
+    {
+      "nombre": "bar_cantina_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 360,
+      "tam_studs": [
+        0.96,
+        2.32,
+        0.102
+      ],
+      "pivote_studs": [
+        -3.55,
+        1.35,
+        -1.25
+      ],
+      "centro_studs": [
+        -3.11,
+        2.51,
+        -1.25
+      ],
+      "nota": "Hoja batiente de saloon: gira sobre el eje vertical del pivote en los dos sentidos (±80°) y vuelve sola."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 11216,
+    "tam_studs": [
+      10.012,
+      9.384,
+      7.65
+    ],
+    "centro": [
+      -0.0,
+      -0.092,
+      3.825
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "bar_cantina_turnaround.png"
+}

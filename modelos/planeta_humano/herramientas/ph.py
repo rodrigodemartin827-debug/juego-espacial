@@ -24,7 +24,10 @@ import json
 import math
 import os
 import random
+import shutil
+import tempfile
 import time
+import zlib
 from contextlib import contextmanager
 
 import bpy  # bpy antes que bmesh
@@ -867,9 +870,15 @@ class Modelo:
         self.anclajes = {}
         self.notas = []
         self._secc = [("inicio", 0)]
-        self.dir = os.path.join(RAIZ, zona, nombre)
-        os.makedirs(os.path.join(self.dir, "texturas"), exist_ok=True)
-        self.rnd = random.Random(hash(nombre) & 0xFFFF)
+        # Se genera en una carpeta temporal fuera del repositorio y solo se mueve a su sitio (RAIZ/zona/nombre)
+        # cuando todo ha salido bien y el FBX está verificado: así nunca queda un modelo a medias en la rama.
+        self.dir_final = os.path.join(RAIZ, zona, nombre)
+        provisional = os.environ.get("PH_PROVISIONAL", os.path.join(tempfile.gettempdir(), "planeta_humano_provisional"))
+        self.dir = os.path.join(provisional, zona, nombre)
+        if not os.environ.get("PH_DEBUG"):
+            shutil.rmtree(self.dir, ignore_errors=True)
+            os.makedirs(os.path.join(self.dir, "texturas"), exist_ok=True)
+        self.rnd = random.Random(zlib.crc32(nombre.encode()))  # semilla estable entre ejecuciones
 
     def parte(self, sufijo=None, tipo="textura", color=None, pivote=(0, 0, 0), **kw):
         nombre = self.nombre if not sufijo else f"{self.nombre}_{sufijo}"
@@ -1271,6 +1280,11 @@ class Modelo:
               f"{time.time() - self.t0:.0f} s", flush=True)
         if not ver["ok"]:
             raise SystemExit(f"{self.nombre}: verificación del FBX fallida: {ver['problemas']}")
+        # todo bien: se mueve la carpeta completa a su sitio en el repositorio (rutas relativas, siguen valiendo)
+        shutil.rmtree(self.dir_final, ignore_errors=True)
+        os.makedirs(os.path.dirname(self.dir_final), exist_ok=True)
+        shutil.move(self.dir, self.dir_final)
+        print(f"   -> {os.path.relpath(self.dir_final, RAIZ)}", flush=True)
         return datos
 
 

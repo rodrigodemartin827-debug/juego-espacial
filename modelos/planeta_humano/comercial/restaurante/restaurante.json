@@ -1,0 +1,267 @@
+{
+  "nombre": "restaurante",
+  "zona": "comercial",
+  "descripcion": "La Nebulosa: restaurante con terraza (3 mesas redondas, 6 sillas), toldo retráctil de brazos articulados, menú holográfico, macetas y ventanal con la barra a la vista.",
+  "tam_pedido_studs": [
+    14,
+    10,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 13.2,
+    "alto_y": 7.39,
+    "fondo_z": 10.0
+  },
+  "triangulos": 13608,
+  "presupuesto": 14000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/restaurante_color.png",
+    "rugosidad": "texturas/restaurante_rugosidad.png",
+    "metal": "texturas/restaurante_metal.png",
+    "normal": "texturas/restaurante_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "restaurante",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 10990,
+      "tam_studs": [
+        13.2,
+        7.35,
+        10.0
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.675,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "restaurante_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#B2D4E0",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        6.6,
+        3.8,
+        0.1
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        2.3,
+        3.1,
+        -0.91
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "restaurante_menu_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 308,
+      "tam_studs": [
+        1.0,
+        1.4,
+        0.05
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -5.85,
+        3.25,
+        -1.915
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "restaurante_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 140,
+      "tam_studs": [
+        5.6,
+        5.17,
+        1.675
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        2.3,
+        2.54,
+        0.462
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "restaurante_toldo",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1550,
+      "tam_studs": [
+        12.1,
+        1.899,
+        4.03
+      ],
+      "pivote_studs": [
+        -0.0,
+        5.9,
+        -0.95
+      ],
+      "centro_studs": [
+        -0.0,
+        4.919,
+        -2.955
+      ],
+      "nota": "Toldo extendido. Se recoge girando/encogiendo hacia el cajón (pivote): en Studio, escalar en Z de Roblox hasta 0,1."
+    },
+    {
+      "nombre": "restaurante_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 292,
+      "tam_studs": [
+        1.14,
+        4.7,
+        0.24
+      ],
+      "pivote_studs": [
+        -2.4,
+        0.3,
+        -0.8
+      ],
+      "centro_studs": [
+        -2.93,
+        2.65,
+        -0.86
+      ],
+      "nota": "Hoja batiente acristalada: gira sobre su bisagra."
+    },
+    {
+      "nombre": "restaurante_puerta_izq_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#B2D4E0",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        0.82,
+        3.6,
+        0.06
+      ],
+      "pivote_studs": [
+        -2.4,
+        0.3,
+        -0.8
+      ],
+      "centro_studs": [
+        -2.95,
+        2.9,
+        -0.81
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "restaurante_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 292,
+      "tam_studs": [
+        1.14,
+        4.7,
+        0.24
+      ],
+      "pivote_studs": [
+        -4.6,
+        0.3,
+        -0.8
+      ],
+      "centro_studs": [
+        -4.07,
+        2.65,
+        -0.86
+      ],
+      "nota": "Hoja batiente acristalada: gira sobre su bisagra."
+    },
+    {
+      "nombre": "restaurante_puerta_der_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#B2D4E0",
+      "transparencia": 0.4,
+      "triangulos": 12,
+      "tam_studs": [
+        0.82,
+        3.6,
+        0.06
+      ],
+      "pivote_studs": [
+        -4.6,
+        0.3,
+        -0.8
+      ],
+      "centro_studs": [
+        -4.05,
+        2.9,
+        -0.81
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "El menú holográfico es un panel Neon: para que parezca holograma, Transparency 0,4 en Studio."
+  ],
+  "verificacion_fbx": {
+    "piezas": 9,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 13608,
+    "tam_studs": [
+      13.2,
+      10.0,
+      7.395
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      3.652
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "restaurante_turnaround.png"
+}

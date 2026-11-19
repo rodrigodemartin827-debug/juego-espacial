@@ -1,0 +1,193 @@
+{
+  "nombre": "tienda_herramientas",
+  "zona": "comercial",
+  "descripcion": "Ferretería Torres: fachada industrial de chapa ondulada oscura, persiana metálica a medias, panel perforado lateral con herramientas 3D, cajas de herramientas apiladas y cartel pintado a mano.",
+  "tam_pedido_studs": [
+    10,
+    8,
+    7
+  ],
+  "tam_studs": {
+    "ancho_x": 10.97,
+    "alto_y": 7.12,
+    "fondo_z": 8.15
+  },
+  "triangulos": 11436,
+  "presupuesto": 12000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL)",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tienda_herramientas_color.png",
+    "rugosidad": "texturas/tienda_herramientas_rugosidad.png",
+    "metal": "texturas/tienda_herramientas_metal.png",
+    "normal": "texturas/tienda_herramientas_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tienda_herramientas",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 10316,
+      "tam_studs": [
+        10.967,
+        7.12,
+        8.15
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.234,
+        3.56,
+        -0.225
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_herramientas_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9EC2D2",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        5.2,
+        3.65,
+        0.08
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.6,
+        2.725,
+        -3.24
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_herramientas_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 228,
+      "tam_studs": [
+        4.849,
+        1.951,
+        1.421
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.576,
+        5.34,
+        -3.275
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tienda_herramientas_persiana",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 528,
+      "tam_studs": [
+        5.2,
+        2.0,
+        0.17
+      ],
+      "pivote_studs": [
+        1.6,
+        4.6,
+        -3.45
+      ],
+      "centro_studs": [
+        1.6,
+        3.58,
+        -3.475
+      ],
+      "nota": "Persiana de lamas (a media altura). Para cerrarla, estirarla hacia abajo: alto cerrada = 4.30 studs."
+    },
+    {
+      "nombre": "tienda_herramientas_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 340,
+      "tam_studs": [
+        1.845,
+        3.86,
+        0.254
+      ],
+      "pivote_studs": [
+        -1.8,
+        0.3,
+        -3.28
+      ],
+      "centro_studs": [
+        -2.678,
+        2.25,
+        -3.347
+      ],
+      "nota": "Puerta metálica batiente con ventanuco: gira sobre la bisagra."
+    },
+    {
+      "nombre": "tienda_herramientas_puerta_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9EC2D2",
+      "transparencia": 0.35,
+      "triangulos": 12,
+      "tam_studs": [
+        1.2,
+        1.5,
+        0.06
+      ],
+      "pivote_studs": [
+        -1.8,
+        0.3,
+        -3.28
+      ],
+      "centro_studs": [
+        -2.7,
+        3.05,
+        -3.28
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 6,
+    "ok": true,
+    "problemas": [],
+    "triangulos": 11436,
+    "tam_studs": [
+      10.967,
+      8.15,
+      7.12
+    ],
+    "centro": [
+      0.234,
+      0.225,
+      3.56
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tienda_herramientas_turnaround.png"
+}
