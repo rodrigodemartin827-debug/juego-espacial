@@ -588,11 +588,7 @@ class Parte:
         # Normales hacia fuera pase lo que pase (espejos, perfiles de torno al revés, polígonos cóncavos en los que
         # recalc_face_normals se equivoca): si el volumen con signo de la primitiva es negativo, se le da la vuelta.
         if caras:
-            vol = 0.0
-            for f in caras:
-                vs = [v.co for v in f.verts]
-                for k in range(1, len(vs) - 1):
-                    vol += vs[0].dot(vs[k].cross(vs[k + 1]))
+            vol = _vol_signo(caras)
             if vol < 0:
                 bmesh.ops.reverse_faces(self.bm, faces=caras)
         i = self._idx(mat)
@@ -1476,6 +1472,19 @@ def _caja(objs):
     return mn, mx
 
 
+def _vol_signo(caras):
+    """Volumen con signo (×6) de un conjunto cerrado de caras, medido desde su propio centro: medido desde el
+    origen del modelo, en piezas diminutas lejos del centro el redondeo de float32 puede cambiarle el signo."""
+    vs_ = {v for f in caras for v in f.verts}
+    c0 = sum((v.co for v in vs_), V()) / max(1, len(vs_))
+    vol = 0.0
+    for f in caras:
+        vs = [v.co - c0 for v in f.verts]
+        for k in range(1, len(vs) - 1):
+            vol += vs[0].dot(vs[k].cross(vs[k + 1]))
+    return vol
+
+
 def islas_invertidas(o):
     """Cuenta las piezas sueltas (islas de caras conectadas) con el volumen negativo: normales hacia dentro."""
     bm = bmesh.new()
@@ -1496,12 +1505,7 @@ def islas_invertidas(o):
                     if g.index not in vistas:
                         vistas.add(g.index)
                         pila.append(g)
-        vol = 0.0
-        for f in isla:
-            vs = [v.co for v in f.verts]
-            for k in range(1, len(vs) - 1):
-                vol += vs[0].dot(vs[k].cross(vs[k + 1]))
-        if vol < -1e-7:
+        if _vol_signo(isla) < -1e-9:
             malas += 1
     bm.free()
     return malas
