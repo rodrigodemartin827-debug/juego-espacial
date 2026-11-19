@@ -1,0 +1,98 @@
+{
+  "nombre": "flor_luminosa_b",
+  "zona": "naturaleza",
+  "descripcion": "Flor campana: tallo curvado, flor colgante en forma de campana con el borde ondulado, brillo azul interno y dos hojas.",
+  "tam_pedido_studs": [
+    0.5,
+    0.5,
+    1.2
+  ],
+  "tam_studs": {
+    "ancho_x": 0.58,
+    "alto_y": 1.13,
+    "fondo_z": 0.24
+  },
+  "triangulos": 416,
+  "presupuesto": 500,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/flor_luminosa_b_color.png",
+    "rugosidad": "texturas/flor_luminosa_b_rugosidad.png",
+    "metal": "texturas/flor_luminosa_b_metal.png",
+    "normal": "texturas/flor_luminosa_b_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "flor_luminosa_b",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 336,
+      "tam_studs": [
+        0.576,
+        1.131,
+        0.242
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.078,
+        0.565,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "flor_luminosa_b_brillo_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#5B9BD5",
+      "transparencia": null,
+      "triangulos": 80,
+      "tam_studs": [
+        0.095,
+        0.1,
+        0.1
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.25,
+        0.87,
+        0.0
+      ],
+      "nota": "Brillo interno: Neon azul #5B9BD5."
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 416,
+    "tam_studs": [
+      0.576,
+      0.242,
+      1.131
+    ],
+    "centro": [
+      -0.078,
+      0.0,
+      0.565
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "flor_luminosa_b_turnaround.png"
+}

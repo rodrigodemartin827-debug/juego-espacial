@@ -1,0 +1,74 @@
+{
+  "nombre": "puente_rio_piedra",
+  "zona": "naturaleza",
+  "descripcion": "Puente de piedra de un arco: dovelas individuales con juntas, tímpanos de sillería, calzada de adoquines 3D, pretiles bajos de piedra, musgo bajo el arco y marcas de humedad en las piedras bajas.",
+  "tam_pedido_studs": [
+    8,
+    4,
+    3
+  ],
+  "tam_studs": {
+    "ancho_x": 8.17,
+    "alto_y": 2.92,
+    "fondo_z": 3.32
+  },
+  "triangulos": 3580,
+  "presupuesto": 4000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/puente_rio_piedra_color.png",
+    "rugosidad": "texturas/puente_rio_piedra_rugosidad.png",
+    "metal": "texturas/puente_rio_piedra_metal.png",
+    "normal": "texturas/puente_rio_piedra_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "puente_rio_piedra",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3580,
+      "tam_studs": [
+        8.174,
+        2.919,
+        3.32
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.005,
+        1.459,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 1,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3580,
+    "tam_studs": [
+      8.174,
+      3.32,
+      2.919
+    ],
+    "centro": [
+      0.005,
+      0.0,
+      1.459
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "puente_rio_piedra_turnaround.png"
+}

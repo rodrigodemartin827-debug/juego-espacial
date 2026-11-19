@@ -1,0 +1,98 @@
+{
+  "nombre": "flor_luminosa_a",
+  "zona": "naturaleza",
+  "descripcion": "Flor bioluminiscente abierta: tallo fino, 5 pétalos 3D en estrella, centro brillante con estambres cyan y una hoja.",
+  "tam_pedido_studs": [
+    0.5,
+    0.5,
+    1
+  ],
+  "tam_studs": {
+    "ancho_x": 0.42,
+    "alto_y": 0.88,
+    "fondo_z": 0.44
+  },
+  "triangulos": 352,
+  "presupuesto": 500,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/flor_luminosa_a_color.png",
+    "rugosidad": "texturas/flor_luminosa_a_rugosidad.png",
+    "metal": "texturas/flor_luminosa_a_metal.png",
+    "normal": "texturas/flor_luminosa_a_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "flor_luminosa_a",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 132,
+      "tam_studs": [
+        0.416,
+        0.815,
+        0.437
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.042,
+        0.405,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "flor_luminosa_a_centro_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 220,
+      "tam_studs": [
+        0.113,
+        0.117,
+        0.115
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.016,
+        0.823,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 352,
+    "tam_studs": [
+      0.416,
+      0.437,
+      0.884
+    ],
+    "centro": [
+      -0.042,
+      0.0,
+      0.44
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "flor_luminosa_a_turnaround.png"
+}
