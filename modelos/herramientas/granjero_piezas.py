@@ -980,8 +980,8 @@ def enredadera():
         a.tubo([q + Vector((-0.05, 0.03, 0)), q + Vector((-0.04, -0.03, 0)), q + Vector((0.04, -0.03, 0)),
                 q + Vector((0.05, 0.03, 0))], 0.006, "acero", lados=4)
     # Diez hojas en forma de corazón, cada una con su peciolo.
-    hojas = [(1, 0.3, 200, 0.42), (2, 0.6, 340, 0.4), (3, 0.2, 160, 0.38), (3, 0.8, 20, 0.42), (4, 0.4, 190, 0.36),
-             (5, 0.3, 350, 0.36), (6, 0.5, 170, 0.32), (7, 0.4, 10, 0.3)]
+    hojas = [(1, 0.3, 200, 0.34), (2, 0.6, 340, 0.33), (3, 0.2, 160, 0.31), (3, 0.8, 20, 0.34), (4, 0.4, 190, 0.3),
+             (5, 0.3, 350, 0.3), (6, 0.5, 170, 0.27), (7, 0.4, 10, 0.25)]
     def hoja_pared(origen, ang, tam, normal):
         """Hoja plana contra la pared (como la hiedra): mira hacia fuera y cae un poco hacia abajo."""
         n = Vector(normal)
@@ -990,9 +990,9 @@ def enredadera():
         l_ = n.cross(d).normalized()
         n2 = d.cross(l_).normalized()
         ini_h = set(b.bm.verts)
-        hoja3d(b, Vector((0, 0, 0)), 0.0, tam, tam * 0.95, -tam * 0.12, "hoja_enredadera", subida=0.0,
+        hoja3d(b, Vector((0, 0, 0)), 0.0, tam, tam * 0.95, 0.0, "hoja_enredadera", subida=0.0,
                secciones=3, alabeo=rnd.uniform(-0.3, 0.3), corazon=True)
-        M = Matrix.Translation(origen) @ Matrix((d, l_, n2)).transposed().to_4x4()
+        M = Matrix.Translation(Vector(origen) + n * 0.03) @ Matrix((d, l_, n2)).transposed().to_4x4()
         b.transformar([v for v in b.bm.verts if v not in ini_h], M)
 
     for seg, f, rumbo, tam in hojas:
@@ -1001,7 +1001,7 @@ def enredadera():
         pec = q + Vector((math.cos(r) * 0.06, -0.035, -0.02))
         a.tubo([q, pec], 0.008, "tallo", lados=3, tapa_ini=False)
         hoja_pared(pec, r, tam, (0, -1, 0))
-    for f, rumbo, tam in ((0.5, 250, 0.32), (0.95, 80, 0.3)):
+    for f, rumbo, tam in ((0.5, 250, 0.27), (0.95, 80, 0.25)):
         q = rama[1].lerp(rama[2], f) if f < 0.9 else rama[3]
         hoja_pared(q + Vector((0.035, 0, 0.0)), math.radians(rumbo), tam, (1, 0, 0))
     # Zarcillos (malla alta).
@@ -1444,7 +1444,7 @@ def invernadero_vidrio():
     Paños de cristal (0,03 de grosor) por fuera del armazón. Cada fila es un paño seguido: las juntas quedan bajo
     los tapajuntas de aluminio, así que se ven igual que paños sueltos y gastan muchos menos triángulos.
     """
-    p = Pieza("invernadero_vidrio", peso_uv=0.55)
+    p = Pieza("invernadero_vidrio", peso_uv=1.1)
     b = p.baja
     g = 0.012
     vid = "vidrio_invernadero"
@@ -1514,7 +1514,7 @@ def puerta_invernadero():
             tornillo(p, (x1 + 0.02, D["y0"] + 0.06, z + dz), (1, 0, 0), 0.012, "acero", en_baja=False)
     # Pegatina de «cierre la puerta» (malla alta).
     a.caja_de((x1, -0.15, 1.95), (x1 + 0.003, 0.15, 2.07), "papel")
-    v = Pieza("puerta_invernadero_vidrio", pivote=piv, peso_uv=0.55)
+    v = Pieza("puerta_invernadero_vidrio", pivote=piv, peso_uv=1.1)
     for za, zb in ((D["z0"] + 0.12, 1.62), (1.62 + t, D["z1"] - t)):
         v.baja.caja_de((xc - VID / 2, D["y0"] + t - 0.01, za - 0.01), (xc + VID / 2, D["y1"] - t + 0.01, zb + 0.01),
                        "vidrio_invernadero")
@@ -1535,7 +1535,7 @@ def ventila(nombre, y0, y1, angulo):
     bis = pe + dirv * largo * f1 + nrm * (off + 0.03)
     piv = (bis.x, (y0 + y1) / 2, bis.z)
     p = Pieza(nombre, pivote=piv, peso_uv=1.6)
-    v = Pieza(nombre + "_vidrio", pivote=piv, peso_uv=0.55)
+    v = Pieza(nombre + "_vidrio", pivote=piv, peso_uv=1.1)
     b, a = p.baja, p.alta
     o = pe + nrm * off
     u = Vector((0, 1, 0))
@@ -1614,7 +1614,7 @@ def pasillo():
         tornillo(p, (xb - 0.02, yy, zt1 + 0.18), (-1, 0, 0), 0.016, "acero", en_baja=False)
     # Felpudo de fibra para no meter barro en casa (malla baja + ribete en la alta).
     b.caja_de((-5.95, -0.6, BASE_Z), (-5.38, 0.6, BASE_Z + 0.035), "fibra", sin=("-z",))
-    vid = Pieza("pasillo_vidrio", peso_uv=0.55)
+    vid = Pieza("pasillo_vidrio", peso_uv=1.1)
     for sy in (-1, 1):
         o = Vector((0, sy * (ys + 0.04), 0))
         vid.baja.placa(rect(xa + 0.08, -5.29, BASE_Z + 0.08, 3.7), o, Vector((1, 0, 0)), Vector((0, 0, 1)),
@@ -1785,8 +1785,8 @@ def tomateras():
         for j, (f, ang, r) in enumerate(((0.22, 0.4, 0.27), (0.45, 2.6, 0.3), (0.68, 4.6, 0.26), (0.9, 1.5, 0.19))):
             ang += k * 1.1
             c0 = base_p + Vector((math.cos(ang) * r * 0.55, math.sin(ang) * r * 0.55, alto * f - 0.08))
-            bulto(tb, c0, r, r * 0.95, "hoja_tomate", lados=6, semilla=k * 4 + j, aplastar=1.0, base_r=0.35,
-                  rugoso=0.35)
+            bulto(tb, c0 - Vector((0, 0, r * 0.35)), r, r * 1.5, "hoja_tomate", lados=6, semilla=k * 4 + j,
+                  aplastar=1.0, base_r=0.45, rugoso=0.3)
             # Rama del tallo al ramillete (alta) y hojas compuestas que asoman (alta).
             ta.tubo([base_p + Vector((0, 0, alto * f - 0.1)), c0], 0.012, "tallo", lados=4)
             for _ in range(22):
