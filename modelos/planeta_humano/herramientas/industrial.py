@@ -576,105 +576,170 @@ def mesa_crafting():
 # ==============================================================================================================
 def entrada_mina():
     m = Modelo("entrada_mina", ZONA, (6, 6, 5), 8000,
-               "Entrada de la Mina Sector 7: arco de vigas en H con diagonales, raíles saliendo de la boca, cartel de "
-               "chapa con flecha, bombillas en el techo del túnel, pico y casco colgados, botiquín y cables.")
+               "Entrada de la Mina Sector 7: frente de roca en estratos con el arco de vigas en H (marco de 4 vigas y 2 "
+               "diagonales), túnel con entibado, raíles que salen de la boca, cartel de chapa con flecha, bombillas en "
+               "el techo, pico y casco colgados, botiquín y cables por el techo del arco.")
     c = m.parte()
     luces = m.parte("luces_neon", tipo="neon", color=NEON)
-    roca = m.mat("piedra", "#7A7064", escala=0.7)
-    roca2 = m.mat("piedra", "#5E564C", escala=0.7)
+    roca = m.mat("piedra", "#857A6C", escala=0.8)
+    roca2 = m.mat("piedra", "#6E6458", escala=0.8)
+    roca3 = m.mat("piedra", "#9A8E7C", escala=0.8)
     viga = m.mat("pintura", "#C79A2A", desgaste=0.8, c_desgaste="#5A5048")
     acero = m.mat("metal", "#6E747A", suciedad=0.7)
-    oxido = m.mat("oxido", "#6E4A32")
     madera = m.mat("madera", "#5A3C26", eje="X")
+    madera_y = m.mat("madera", "#5A3C26", eje="Y")
     chapa = m.mat("pintura", "#D8CFB8", desgaste=0.7, c_desgaste="#6E4A32")
     tinta = m.mat("pintura", "#202428", desgaste=0.2)
     rojo = m.mat("pintura", "#B8282A", desgaste=0.5)
     cable = m.mat("goma", "#1B1C1E")
     mango = m.mat("madera", "#8A5C34", eje="Z")
-    tierra = m.mat("piedra", "#4E4236", bump=0.6, escala=1.6)
-    W, H, D = 3.4, 3.8, 6.0
-    # montaña de roca alrededor de la boca: rocas grandes deformadas
-    m.seccion("roca")
-    rocas = [(-2.6, 0.6, 1.4, 1.8), (2.6, 0.6, 1.4, 1.8), (-2.1, 1.8, 3.6, 1.5), (2.2, 1.6, 3.5, 1.6), (0.0, 1.6, 4.6, 1.8),
-             (-1.6, 2.4, 0.8, 1.4), (1.7, 2.5, 0.9, 1.4), (-2.8, -1.4, 0.4, 0.7), (2.9, -1.2, 0.5, 0.8)]
-    for i, (x, y, z, r) in enumerate(rocas):
-        c.roca((x, y, z), r, [roca, roca2][i % 2], semilla=i, esc=(1.0, 1.0, 0.85), ruido=0.22, sub=2 if r > 1.5 else 1)
-    # suelo de tierra y fondo oscuro del túnel
-    c.caja((0, 0.0, -0.05), (6.0, 6.0, 0.1), tierra, 0.02)
-    c.caja((0, D / 2 - 0.2, H / 2), (W + 0.4, 0.2, H + 0.2), m.mat("piedra", "#151311", rug=1.0, suciedad=0.0), 0.0)
+    tierra = m.mat("piedra", "#5A4C3E", bump=0.6, escala=1.6, manchas=[(0.0, -2.0, 0.0, 1.4, "#3A3028", 0.5)])
+    negro = m.mat("piedra", "#0E0D0C", rug=1.0, suciedad=0.0)
+    rnd = m.rnd
+    W, H = 3.4, 3.8  # hueco del túnel (ancho, alto)
+    YP = -1.55  # cara del frente de roca
+    YE = 2.7  # fondo del túnel
+
+    def losa(cx, cy, cz, sx, sy, sz):
+        """Losa de roca irregular: caja con chaflán, tamaño y giro algo aleatorios (estratos)."""
+        mat = (roca, roca2, roca3)[rnd.randrange(3)]
+        c.caja((cx + rnd.uniform(-0.05, 0.05), cy + rnd.uniform(-0.08, 0.08), cz),
+               (sx * rnd.uniform(0.95, 1.08), sy * rnd.uniform(0.9, 1.1), sz * rnd.uniform(0.92, 1.0)), mat,
+               b=min(0.14, sz * 0.25), rot=(rnd.uniform(-4, 4), rnd.uniform(-5, 5), rnd.uniform(-4, 4)))
+
+    def fila(z0, alto, x0, x1, cy, fondo, hueco=None):
+        x = x0
+        while x < x1 - 0.05:
+            w = min(rnd.uniform(0.9, 1.6), x1 - x)
+            if hueco and x + w > hueco[0] and x < hueco[1]:
+                # recorta la losa al borde del hueco
+                if x < hueco[0]:
+                    w = hueco[0] - x
+                else:
+                    x = hueco[1]
+                    continue
+            losa(x + w / 2, cy, z0 + alto / 2, w + 0.04, fondo, alto)
+            x += w
+
+    m.seccion("suelo y túnel")
+    c.caja((0, 0, -0.05), (6.0, 6.0, 0.1), tierra, 0.02)
+    c.caja((0, YE + 0.1, H / 2), (W + 0.2, 0.2, H), negro, 0.0)  # fondo oscuro del túnel
     for s in (-1, 1):
-        c.caja((s * (W / 2 + 0.2), 1.2, H / 2), (0.3, 3.6, H), roca2, 0.05)
-    c.caja((0, 1.2, H + 0.15), (W + 0.6, 3.6, 0.3), roca2, 0.05)
+        c.caja((s * (W / 2 + 0.2), (YP + YE) / 2 + 0.3, H / 2 + 0.1), (0.4, YE - YP, H + 0.2), roca2, 0.05)
+    c.caja((0, (YP + YE) / 2 + 0.3, H + 0.35), (W + 0.8, YE - YP, 0.5), roca2, 0.05)
+    # entibado: tablas del techo del túnel
+    for k in range(8):
+        c.caja((0, YP + 0.35 + k * 0.5, H + 0.06), (W + 0.25, 0.42, 0.1), madera, 0.02)
+
+    m.seccion("frente y ladera de roca")
+    # frente en estratos alrededor del hueco
+    alturas = [1.0, 1.0, 0.95, 0.95, 1.1]
+    z = 0.0
+    for k, a in enumerate(alturas):
+        hueco = (-W / 2 - 0.3, W / 2 + 0.3) if z < H else None
+        fila(z, a, -3.0, 3.0, YP + 0.45, 0.9, hueco)
+        z += a
+    # laterales de la ladera (losas a lo largo de Y)
+    for sx in (-1, 1):
+        z = 0.0
+        for k, a in enumerate([1.3, 1.3, 1.3]):
+            y = YP + 0.9
+            while y < YE + 0.25:
+                d = min(rnd.uniform(1.4, 2.1), YE + 0.3 - y)
+                losa(sx * 2.62, y + d / 2, z + a / 2, 0.75, d + 0.04, a)
+                y += d
+            z += a
+    # techo de la ladera, bajando hacia atrás, y espalda
+    for k in range(4):
+        y = YP + 0.9 + k * 1.05
+        ztop = 4.95 - k * 0.32
+        fila(ztop - 0.9, 0.9, -3.0, 3.0, y + 0.52, 1.1)
+    z = 0.0
+    for k, a in enumerate([1.0, 1.0, 1.05, 0.9]):
+        fila(z, a, -3.0, 3.0, YE + 0.35, 0.6)
+        z += a
+    # piedras sueltas al pie del frente
+    for i in range(3):
+        x = rnd.choice((-1, 1)) * rnd.uniform(2.0, 2.8)
+        c.roca((x, YP - rnd.uniform(0.2, 0.9), 0.12), rnd.uniform(0.15, 0.3), roca2, semilla=i, ruido=0.3)
 
     m.seccion("marcos en H")
-    for k, y in enumerate((-1.2, 0.4, 2.0)):
+    for k, y in enumerate((YP - 0.05, 0.9)):
         for s in (-1, 1):
             arq.viga_h(c, (s * W / 2, y, 0.0), (s * W / 2, y, H), 0.32, 0.3, viga)
             c.caja((s * W / 2, y, 0.06), (0.5, 0.5, 0.12), acero, 0.01)  # placa base
             for dx in (-0.18, 0.18):
                 c.perno((s * W / 2 + dx, y + 0.18, 0.12), (0, 0, 1), acero, r=0.04)
         arq.viga_h(c, (-W / 2 - 0.15, y, H), (W / 2 + 0.15, y, H), 0.36, 0.3, viga)
-        # cartelas en las esquinas
-        for s in (-1, 1):
+        for s in (-1, 1):  # cartelas en las esquinas
             c.extruir([(0, 0), (s * -0.6, 0), (0, -0.6)], 0.04, acero, c=(s * W / 2, y - 0.0, H - 0.18), rot=(90, 0, 0))
-    # diagonales de refuerzo en el primer marco
+    # el marco de la boca lleva una cuarta viga (cabecero) y dos diagonales de refuerzo
+    arq.viga_h(c, (-W / 2 - 0.3, YP - 0.25, H + 0.55), (W / 2 + 0.3, YP - 0.25, H + 0.55), 0.36, 0.3, viga)
     for s in (-1, 1):
-        c.cil((s * W / 2, -1.25, 1.8), (s * (W / 2 - 1.0), -1.25, H - 0.2), 0.08, viga, n=4, giro=math.pi / 4)
-    # tablas de entibado del techo
-    for k in range(7):
-        c.caja((0, -1.0 + k * 0.5, H + 0.2), (W + 0.3, 0.4, 0.08), madera, 0.02)
+        c.caja((s * W / 2, YP - 0.2, H + 0.3), (0.3, 0.3, 0.5), viga, 0.02)
+        c.cil((s * W / 2, YP - 0.2, 1.7), (s * (W / 2 - 1.05), YP - 0.2, H - 0.2), 0.08, viga, n=4, giro=math.pi / 4)
 
     m.seccion("raíles")
     for s in (-1, 1):
-        c.caja((s * 0.6, 0.0, 0.1), (0.07, 6.0, 0.06), acero, 0.005)
-        c.caja((s * 0.6, 0.0, 0.05), (0.14, 6.0, 0.03), acero, 0.0)
+        c.caja((s * 0.6, (YE - 3.0) / 2, 0.1), (0.07, YE + 3.0, 0.06), acero, 0.005)  # hasta el borde del suelo
+        c.caja((s * 0.6, (YE - 3.0) / 2, 0.05), (0.14, YE + 3.0, 0.03), acero, 0.0)
     for k in range(4):
-        y = -2.4 + k * 1.6
+        y = -2.8 + k * 1.4
         c.caja((0, y, 0.03), (1.8, 0.25, 0.1), madera, 0.02)
         for s in (-1, 1):
             c.perno((s * 0.6 + 0.1, y, 0.08), (0, 0, 1), acero, r=0.025, arandela=False)
+    for k in range(3):
+        c.caja((0, 0.4 + k * 1.0, 0.03), (1.8, 0.25, 0.1), madera, 0.02)
 
     m.seccion("cartel, luces y cables")
-    # cartel MINA SECTOR 7 pintado en chapa con flecha, colgado del dintel
-    c.caja((0, -1.55, H + 0.55), (2.6, 0.05, 0.7), chapa, 0.01)
-    c.texto("MINA SECTOR 7", tinta, alto=0.24, grosor=0.01, c=(-0.25, -1.58, H + 0.48), fuente="estrecha", resol=1)
+    # cartel MINA SECTOR 7 pintado en chapa con flecha, colgado del cabecero
+    zc = H + 0.55
+    c.caja((0, YP - 0.45, zc - 0.05), (2.7, 0.05, 0.62), chapa, 0.01)
+    c.texto("MINA SECTOR 7", tinta, alto=0.24, grosor=0.01, c=(-0.25, YP - 0.48, zc - 0.13), fuente="estrecha", resol=1)
     c.extruir([(0, 0.06), (0.3, 0.06), (0.3, 0.14), (0.45, 0.0), (0.3, -0.14), (0.3, -0.06), (0, -0.06)], 0.01, rojo,
-              c=(0.95, -1.58, H + 0.55), rot=(90, 0, 0))
-    for x in (-1.1, 1.1):
-        c.cil((x, -1.52, H + 0.9), (x, -1.4, H + 0.18), 0.012, acero, n=4)
-    # tres bombillas en el techo del túnel con cable
-    pts = []
+              c=(1.0, YP - 0.48, zc - 0.05), rot=(90, 0, 0))
+    for x in (-1.15, 1.15):
+        c.perno((x, YP - 0.48, zc + 0.14), (0, -1, 0), acero, r=0.03)
+    # tres bombillas con rejilla protectora colgando del techo del túnel, unidas por un cable
+    puntos = []
     for k in range(3):
-        y = -0.3 + k * 1.1
-        c.cil((0.6, y, H - 0.15), (0.6, y, H - 0.35), 0.04, cable, n=6)
-        c.cil((0.6, y, H - 0.35), (0.6, y, H - 0.45), 0.08, acero, n=8)
-        luces.esfera((0.6, y, H - 0.55), 0.09, None, seg=8, anillos=5)
-        c.tubo([(0.6 - 0.0, y - 0.1, H - 0.14), (0.62, y + 0.05, H - 0.2), (0.65, y + 0.25, H - 0.17)], 0.02, cable, n=4)
-    c.tubo([(1.7, -1.4, 0.8), (1.7, -1.35, H - 0.4), (1.2, -1.2, H - 0.12), (0.65, -0.4, H - 0.12), (0.7, 2.5, H - 0.12)],
-           0.035, cable, n=5, seg=3)
-    c.tubo([(-1.7, -1.4, H - 0.2), (-0.6, -1.3, H - 0.05), (0.6, -1.3, H - 0.05), (1.7, -1.4, H - 0.2)], 0.03, cable, n=5,
-           seg=3)
-    c.caja((1.7, -1.42, 0.8), (0.25, 0.12, 0.35), acero, 0.02)  # caja de conexiones
+        y = YP + 0.6 + k * 1.3
+        c.cil((0.0, y, H - 0.02), (0.0, y, H - 0.3), 0.025, cable, n=5)
+        c.cil((0.0, y, H - 0.3), (0.0, y, H - 0.42), 0.09, acero, n=8)
+        luces.esfera((0.0, y, H - 0.58), 0.13, None, seg=10, anillos=6)
+        for j in range(3):  # rejilla
+            a = j * math.tau / 3
+            c.tubo([(math.cos(a) * 0.09, y + math.sin(a) * 0.09, H - 0.42),
+                    (math.cos(a) * 0.17, y + math.sin(a) * 0.17, H - 0.58), (0.0, y, H - 0.76)], 0.012, acero, n=4,
+                   seg=2)
+        puntos.append((0.0, y, H - 0.03))
+    c.tubo([(0.0, YP - 0.1, H - 0.05)] + puntos + [(0.0, YE, H - 0.03)], 0.03, cable, n=5, suave=False)
+    # cables por el techo del arco que bajan a una caja de conexiones
+    c.tubo([(-W / 2 + 0.25, YP - 0.15, 0.9), (-W / 2 + 0.25, YP - 0.18, H - 0.35), (-W / 2 + 0.6, YP - 0.2, H - 0.12),
+            (W / 2 - 0.6, YP - 0.2, H - 0.12), (W / 2 - 0.25, YP - 0.18, H - 0.35)], 0.035, cable, n=5, seg=3)
+    for x in (-1.0, 0.0, 1.0):
+        c.caja((x, YP - 0.2, H - 0.12), (0.06, 0.1, 0.1), acero, 0.0)  # grapas
+    c.caja((-W / 2 + 0.25, YP - 0.2, 0.75), (0.3, 0.14, 0.4), acero, 0.02)
 
     m.seccion("pico, casco y botiquín")
-    gx = -W / 2 - 0.05
-    c.cil((gx, -1.4, 2.3), (gx, -1.65, 2.3), 0.025, acero, n=5)
-    c.cil((gx, -1.65, 2.3), (gx, -1.65, 2.4), 0.025, acero, n=5)
-    with c.en((gx, -1.6, 1.7), (0, 0, 0)):
-        c.cil((0, 0, -0.9), (0, 0, 0.55), 0.04, mango, n=6)
-        c.tubo([(-0.55, 0, 0.45), (-0.2, 0, 0.6), (0.2, 0, 0.6), (0.55, 0, 0.45)], 0.04, acero, n=6, seg=2, r_fin=0.01)
-    c.cil((gx - 0.0, -1.42, 3.0), (gx, -1.65, 3.0), 0.025, acero, n=5)
-    with c.en((gx, -1.75, 2.85)):
+    gx = -W / 2 - 0.45
+    c.cil((gx, YP - 0.02, 2.4), (gx, YP - 0.22, 2.4), 0.025, acero, n=5)
+    c.cil((gx, YP - 0.22, 2.4), (gx, YP - 0.22, 2.5), 0.025, acero, n=5)
+    with c.en((gx, YP - 0.2, 1.75)):
+        c.cil((0, 0, -1.0), (0, 0, 0.6), 0.04, mango, n=6)
+        c.tubo([(-0.55, 0, 0.5), (-0.2, 0, 0.65), (0.2, 0, 0.65), (0.55, 0, 0.5)], 0.04, acero, n=6, seg=2, r_fin=0.01)
+    c.cil((gx + 0.75, YP - 0.02, 3.05), (gx + 0.75, YP - 0.22, 3.05), 0.025, acero, n=5)
+    with c.en((gx + 0.75, YP - 0.32, 2.88)):
         c.esfera((0, 0, 0), 0.24, m.mat("plastico", "#E5B82A"), seg=10, anillos=6, esc=(1, 1.1, 0.75))
         c.cil((0, 0, -0.04), (0, 0, 0.0), 0.3, m.mat("plastico", "#E5B82A"), n=12)  # ala
         c.cil((0, -0.22, 0.05), (0, -0.28, 0.05), 0.06, acero, n=8)
         luces.cil((0, -0.28, 0.05), (0, -0.29, 0.05), 0.05, None, n=8)
-    # botiquín rojo en la pared de roca derecha
-    bx = W / 2 + 0.25
-    c.caja((bx, -1.4, 1.6), (0.5, 0.3, 0.55), rojo, 0.03)
-    c.caja((bx, -1.56, 1.62), (0.3, 0.02, 0.08), m.mat("plastico", "#F2F2F2"), 0.0)
-    c.caja((bx, -1.56, 1.62), (0.08, 0.02, 0.3), m.mat("plastico", "#F2F2F2"), 0.0)
-    c.caja((bx + 0.22, -1.57, 1.6), (0.04, 0.03, 0.12), acero, 0.005)
+    # botiquín rojo en la roca, a la derecha de la boca
+    bx = W / 2 + 0.75
+    c.caja((bx, YP - 0.15, 1.8), (0.5, 0.3, 0.55), rojo, 0.03)
+    c.caja((bx, YP - 0.31, 1.82), (0.3, 0.02, 0.08), m.mat("plastico", "#F2F2F2"), 0.0)
+    c.caja((bx, YP - 0.31, 1.82), (0.08, 0.02, 0.3), m.mat("plastico", "#F2F2F2"), 0.0)
+    c.caja((bx + 0.22, YP - 0.32, 1.8), (0.04, 0.03, 0.12), acero, 0.005)
     m.terminar()
 
 
