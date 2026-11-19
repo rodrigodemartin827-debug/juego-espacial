@@ -1,0 +1,227 @@
+{
+  "nombre": "hangar_principal",
+  "zona": "hangar",
+  "descripcion": "Hangar principal, el edificio más grande: puerta gigante motorizada que sube por guías (pieza aparte, con motor y cadenas), dos grúas puente sobre raíl, marcas de aterrizaje, líneas amarillas, 8 pantallas de luz, 4 columnas en H, panel de apertura y señalización BAHÍA 1.",
+  "tam_pedido_studs": [
+    24,
+    20,
+    14
+  ],
+  "tam_studs": {
+    "ancho_x": 24.83,
+    "alto_y": 14.27,
+    "fondo_z": 21.48
+  },
+  "triangulos": 10762,
+  "presupuesto": 18000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/hangar_principal_color.png",
+    "rugosidad": "texturas/hangar_principal_rugosidad.png",
+    "metal": "texturas/hangar_principal_metal.png",
+    "normal": "texturas/hangar_principal_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "hangar_principal",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 7658,
+      "tam_studs": [
+        24.828,
+        14.27,
+        21.48
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        7.135,
+        -0.34
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hangar_principal_puerta",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 1284,
+      "tam_studs": [
+        17.9,
+        10.28,
+        0.38
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.3,
+        -9.6
+      ],
+      "centro_studs": [
+        -0.0,
+        5.44,
+        -10.09
+      ],
+      "nota": "Portón de hangar: sube 10,5 studs (Y de Roblox) por las guías laterales. Ver anclaje PuertaAbierta."
+    },
+    {
+      "nombre": "hangar_principal_grua_1",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 612,
+      "tam_studs": [
+        22.84,
+        5.043,
+        1.8
+      ],
+      "pivote_studs": [
+        -0.0,
+        11.6,
+        -3.0
+      ],
+      "centro_studs": [
+        -0.0,
+        9.578,
+        -3.0
+      ],
+      "nota": "Grúa puente 1: se desplaza a lo largo del raíl (Z de Roblox)."
+    },
+    {
+      "nombre": "hangar_principal_grua_2",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 612,
+      "tam_studs": [
+        22.84,
+        4.043,
+        1.8
+      ],
+      "pivote_studs": [
+        -0.0,
+        11.6,
+        4.0
+      ],
+      "centro_studs": [
+        -0.0,
+        10.078,
+        4.0
+      ],
+      "nota": "Grúa puente 2: se desplaza a lo largo del raíl (Z de Roblox)."
+    },
+    {
+      "nombre": "hangar_principal_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 12,
+      "tam_studs": [
+        0.5,
+        0.35,
+        0.01
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -10.4,
+        3.32,
+        -9.83
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "hangar_principal_lamparas_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#F2FBFF",
+      "transparencia": null,
+      "triangulos": 416,
+      "tam_studs": [
+        12.975,
+        0.04,
+        9.5
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        11.2,
+        0.75
+      ],
+      "nota": "Difusores de las 8 lámparas de techo."
+    },
+    {
+      "nombre": "hangar_principal_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#9CC2D2",
+      "transparencia": 0.35,
+      "triangulos": 168,
+      "tam_studs": [
+        24.18,
+        7.454,
+        19.33
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        10.398,
+        -0.365
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {
+    "PuertaAbierta": {
+      "pos_studs": [
+        -0.0,
+        10.8,
+        -10.0
+      ],
+      "nota": "Pivote del portón subido del todo."
+    }
+  },
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 7,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 10762,
+    "tam_studs": [
+      24.828,
+      21.48,
+      14.27
+    ],
+    "centro": [
+      -0.0,
+      0.34,
+      7.135
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "hangar_principal_turnaround.png"
+}
