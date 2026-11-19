@@ -1,0 +1,146 @@
+{
+  "nombre": "academia_entrenamiento",
+  "zona": "especiales",
+  "descripcion": "Academia de entrenamiento: nave semiabierta (frente sin pared) con 3 dianas con impactos, 2 maniquíes de combate de brazos articulados, tatami, armero con palos y escudos de práctica, gradas de 3 filas, marcador holográfico y cartel ACADEMIA — HONOR Y DISCIPLINA.",
+  "tam_pedido_studs": [
+    16,
+    16,
+    8
+  ],
+  "tam_studs": {
+    "ancho_x": 16.6,
+    "alto_y": 8.11,
+    "fondo_z": 15.01
+  },
+  "triangulos": 8900,
+  "presupuesto": 16000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/academia_entrenamiento_color.png",
+    "rugosidad": "texturas/academia_entrenamiento_rugosidad.png",
+    "metal": "texturas/academia_entrenamiento_metal.png",
+    "normal": "texturas/academia_entrenamiento_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "academia_entrenamiento",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 8456,
+      "tam_studs": [
+        16.6,
+        8.11,
+        15.006
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        4.055,
+        0.503
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "academia_entrenamiento_marcador_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": 0.55,
+      "triangulos": 12,
+      "tam_studs": [
+        3.0,
+        0.95,
+        0.03
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        5.9,
+        7.4
+      ],
+      "nota": "Fondo del marcador holográfico."
+    },
+    {
+      "nombre": "academia_entrenamiento_cifras_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#E8FEFF",
+      "transparencia": null,
+      "triangulos": 324,
+      "tam_studs": [
+        2.002,
+        0.337,
+        0.03
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.005,
+        5.781,
+        7.36
+      ],
+      "nota": "Cifras del marcador."
+    },
+    {
+      "nombre": "academia_entrenamiento_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 108,
+      "tam_studs": [
+        10.6,
+        0.03,
+        9.2
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        6.28,
+        0.5
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 4,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 8900,
+    "tam_studs": [
+      16.6,
+      15.006,
+      8.11
+    ],
+    "centro": [
+      0.0,
+      -0.503,
+      4.055
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "academia_entrenamiento_turnaround.png"
+}
