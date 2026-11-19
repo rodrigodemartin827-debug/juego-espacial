@@ -9,7 +9,7 @@
   ],
   "tam_studs": {
     "ancho_x": 13.2,
-    "alto_y": 7.39,
+    "alto_y": 7.35,
     "fondo_z": 10.0
   },
   "triangulos": 13608,
@@ -78,12 +78,12 @@
       "tipo": "neon",
       "material_roblox": "Neon",
       "color": "#3DF2FF",
-      "transparencia": null,
-      "triangulos": 308,
+      "transparencia": 0.6,
+      "triangulos": 12,
       "tam_studs": [
         1.0,
         1.4,
-        0.05
+        0.02
       ],
       "pivote_studs": [
         -0.0,
@@ -93,9 +93,33 @@
       "centro_studs": [
         -5.85,
         3.25,
-        -1.915
+        -1.9
       ],
-      "nota": ""
+      "nota": "Panel del menú holográfico: Neon cyan con Transparency 0,6."
+    },
+    {
+      "nombre": "restaurante_menu_texto_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#E8FEFF",
+      "transparencia": null,
+      "triangulos": 296,
+      "tam_studs": [
+        0.68,
+        1.173,
+        0.025
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -5.74,
+        3.257,
+        -1.928
+      ],
+      "nota": "Texto del menú: Neon blanco azulado, opaco."
     },
     {
       "nombre": "restaurante_luces_neon",
@@ -106,8 +130,8 @@
       "triangulos": 140,
       "tam_studs": [
         5.6,
-        5.17,
-        1.675
+        1.55,
+        2.485
       ],
       "pivote_studs": [
         -0.0,
@@ -116,8 +140,8 @@
       ],
       "centro_studs": [
         2.3,
-        2.54,
-        0.462
+        5.85,
+        0.057
       ],
       "nota": ""
     },
@@ -244,25 +268,25 @@
   ],
   "anclajes": {},
   "notas": [
-    "El menú holográfico es un panel Neon: para que parezca holograma, Transparency 0,4 en Studio."
+    "Menú holográfico: el panel (menu_neon) es translúcido y el texto (menu_texto_neon) opaco."
   ],
   "verificacion_fbx": {
-    "piezas": 9,
+    "piezas": 10,
     "ok": true,
     "problemas": [],
+    "unidad_fbx_m": 0.28,
     "triangulos": 13608,
     "tam_studs": [
       13.2,
       10.0,
-      7.395
+      7.35
     ],
     "centro": [
       0.0,
       0.0,
-      3.652
+      3.675
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "restaurante_turnaround.png"
 }
