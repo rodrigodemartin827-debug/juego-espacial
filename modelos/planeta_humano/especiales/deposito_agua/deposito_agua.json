@@ -1,0 +1,98 @@
+{
+  "nombre": "deposito_agua",
+  "zona": "especiales",
+  "descripcion": "Torre de agua: depósito esférico sobre 4 patas en A con arriostramiento, escalerilla con jaula, tubería principal con dos válvulas de volante en la base, medidor de nivel de cristal, placa AGUA POTABLE, rebosadero con canaleta y grifo de purga.",
+  "tam_pedido_studs": [
+    4,
+    4,
+    12
+  ],
+  "tam_studs": {
+    "ancho_x": 4.65,
+    "alto_y": 11.71,
+    "fondo_z": 4.23
+  },
+  "triangulos": 4116,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/deposito_agua_color.png",
+    "rugosidad": "texturas/deposito_agua_rugosidad.png",
+    "metal": "texturas/deposito_agua_metal.png",
+    "normal": "texturas/deposito_agua_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "deposito_agua",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 4080,
+      "tam_studs": [
+        4.649,
+        11.705,
+        4.23
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.309,
+        5.797,
+        -0.285
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "deposito_agua_nivel_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#D5EEF2",
+      "transparencia": 0.5,
+      "triangulos": 36,
+      "tam_studs": [
+        0.133,
+        2.2,
+        0.14
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.9,
+        9.4,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 4116,
+    "tam_studs": [
+      4.649,
+      4.23,
+      11.705
+    ],
+    "centro": [
+      -0.309,
+      0.285,
+      5.797
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "deposito_agua_turnaround.png"
+}
