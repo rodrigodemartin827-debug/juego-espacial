@@ -1,0 +1,98 @@
+{
+  "nombre": "tanque_combustible",
+  "zona": "industrial",
+  "descripcion": "Tanque de combustible horizontal sobre patas en Y: chapa curvada con soldaduras, válvula de llenado con tapa y cadena, grifo con manguera, nivel de cristal, cartel INFLAMABLE y manchas en la base.",
+  "tam_pedido_studs": [
+    6,
+    4,
+    4
+  ],
+  "tam_studs": {
+    "ancho_x": 6.19,
+    "alto_y": 4.38,
+    "fondo_z": 3.8
+  },
+  "triangulos": 3860,
+  "presupuesto": 8000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/tanque_combustible_color.png",
+    "rugosidad": "texturas/tanque_combustible_rugosidad.png",
+    "metal": "texturas/tanque_combustible_metal.png",
+    "normal": "texturas/tanque_combustible_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "tanque_combustible",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 3824,
+      "tam_studs": [
+        6.191,
+        4.375,
+        3.8
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        0.045,
+        2.188,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "tanque_combustible_nivel_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#D5EEF2",
+      "transparencia": 0.5,
+      "triangulos": 36,
+      "tam_studs": [
+        0.114,
+        1.8,
+        0.12
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        1.0,
+        2.3,
+        -1.68
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 3860,
+    "tam_studs": [
+      6.191,
+      3.8,
+      4.375
+    ],
+    "centro": [
+      0.045,
+      0.0,
+      2.188
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "tanque_combustible_turnaround.png"
+}
