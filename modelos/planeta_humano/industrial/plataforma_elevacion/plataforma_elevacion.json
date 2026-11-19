@@ -1,0 +1,172 @@
+{
+  "nombre": "plataforma_elevacion",
+  "zona": "industrial",
+  "descripcion": "Plataforma elevadora: base con 4 pistones hidráulicos telescópicos, superficie de chapa de diamante, barandilla abatible en 3 lados y botonera con subir, bajar y seta de emergencia.",
+  "tam_pedido_studs": [
+    4,
+    4,
+    0.5
+  ],
+  "tam_studs": {
+    "ancho_x": 4.0,
+    "alto_y": 1.85,
+    "fondo_z": 4.07
+  },
+  "triangulos": 2092,
+  "presupuesto": 6000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/plataforma_elevacion_color.png",
+    "rugosidad": "texturas/plataforma_elevacion_rugosidad.png",
+    "metal": "texturas/plataforma_elevacion_metal.png",
+    "normal": "texturas/plataforma_elevacion_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "plataforma_elevacion",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 724,
+      "tam_studs": [
+        4.0,
+        0.405,
+        4.068
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.203,
+        -0.034
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "plataforma_elevacion_plataforma",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 900,
+      "tam_studs": [
+        3.82,
+        1.53,
+        3.82
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.5,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        1.085,
+        0.0
+      ],
+      "nota": "Lo que sube: superficie, barandillas y vástagos superiores. Mover en Y de Roblox (hasta +6 studs)."
+    },
+    {
+      "nombre": "plataforma_elevacion_barandilla_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 156,
+      "tam_studs": [
+        0.08,
+        1.165,
+        3.52
+      ],
+      "pivote_studs": [
+        -1.9,
+        0.6,
+        0.0
+      ],
+      "centro_studs": [
+        -1.82,
+        1.048,
+        0.0
+      ],
+      "nota": "Barandilla abatible: gira 90° hacia fuera sobre su eje."
+    },
+    {
+      "nombre": "plataforma_elevacion_barandilla_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 156,
+      "tam_studs": [
+        0.08,
+        1.165,
+        3.52
+      ],
+      "pivote_studs": [
+        1.9,
+        0.6,
+        0.0
+      ],
+      "centro_studs": [
+        1.82,
+        1.048,
+        0.0
+      ],
+      "nota": "Barandilla abatible: gira 90° hacia fuera sobre su eje."
+    },
+    {
+      "nombre": "plataforma_elevacion_barandilla_tras",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 156,
+      "tam_studs": [
+        3.52,
+        1.165,
+        0.08
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.6,
+        1.9
+      ],
+      "centro_studs": [
+        -0.0,
+        1.048,
+        1.82
+      ],
+      "nota": "Barandilla abatible: gira 90° hacia fuera sobre su eje."
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "Tamaño plegada: 4 × 4 × 0,5 studs de base; las barandillas levantadas llegan a 1,9 studs."
+  ],
+  "verificacion_fbx": {
+    "piezas": 5,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 2092,
+    "tam_studs": [
+      4.0,
+      4.068,
+      1.85
+    ],
+    "centro": [
+      0.0,
+      0.034,
+      0.925
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "plataforma_elevacion_turnaround.png"
+}
