@@ -343,6 +343,26 @@ def laboratorio():
     biohazard((cx_, YF - 1.26, Z0 + 0.65), 0.25)
     arq.camara_seguridad(c, luces, (px0 - 0.5, YF - 0.12, 5.2), m.mat("plastico", "#D5D8DB"), acero, osc)
     arq.camara_seguridad(c, luces, (X1 - 0.5, YF, 6.4), m.mat("plastico", "#D5D8DB"), acero, osc)
+    m.seccion("laterales y trasera")
+    # ventanas corridas en los laterales, puerta de carga trasera con rampa, conductos y climatizadora de pared
+    for xs, s in ((X0, -1), (X1, 1)):
+        for k in range(3):
+            y = YF + 1.6 + k * 3.0
+            c.caja((xs + s * 0.03, y, 4.4), (0.1, 2.4, 1.1), osc, 0.02)
+            cr.caja((xs + s * 0.08, y, 4.4), (0.04, 2.2, 0.9), None)
+            c.caja((xs + s * 0.1, y, 3.8), (0.2, 2.5, 0.08), gris, 0.01)
+        c.tubo([(xs + s * 0.15, YB - 1.0, Z0 + 0.2), (xs + s * 0.15, YB - 1.0, 6.0), (xs + s * 0.15, YB - 2.0, 6.6),
+                (xs + s * 0.15, YF + 1.0, 6.6)], 0.09, acero, n=6, seg=2)
+    c.caja((X1 + 0.35, 1.0, 2.0), (0.6, 1.4, 1.2), acero, 0.06)  # climatizadora de pared
+    c.cil((X1 + 0.66, 1.0, 2.0), (X1 + 0.7, 1.0, 2.0), 0.5, osc, n=14)
+    for k in range(4):
+        c.caja((X1 + 0.72, 1.0, 1.65 + k * 0.23), (0.03, 0.9, 0.04), acero, 0.0)
+    c.caja_de((-1.6, YB, Z0), (1.6, YB + 0.1, 4.0), gris, 0.03)  # puerta de carga
+    for k in range(9):
+        c.caja((0, YB + 0.12, Z0 + 0.3 + k * 0.4), (3.0, 0.04, 0.3), acero, 0.01)
+    with c.en((0, YB + 1.0, Z0 / 2), (-math.degrees(math.atan2(Z0, 1.8)), 0, 0)):
+        c.caja((0, 0, 0), (3.2, 1.9, 0.12), m.mat("grip", "#7A8087"), 0.02)
+    luces.caja((0, YB + 0.15, 4.2), (1.0, 0.06, 0.1), None)
     m.seccion("chimenea con extractor")
     ch = V((-4.0, 2.5, ZT + 0.5))
     c.caja(ch + V((0, 0, 0.6)), (1.2, 1.2, 1.2), gris, 0.05)

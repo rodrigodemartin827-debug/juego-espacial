@@ -33,20 +33,20 @@ def cesped_alien():
             x = max(-S / 2 + 0.2, min(S / 2 - 0.2, x))
             y = max(-S / 2 + 0.2, min(S / 2 - 0.2, y))
             p = V((x, y, 0.08))
-            hojas = 4
+            hojas = 5
             mat = hierba[(i + j) % 3]
             luminoso = rnd.random() < 0.14
             for h in range(hojas):
                 a = h * math.tau / hojas + rnd.uniform(-0.4, 0.4)
-                alto = rnd.uniform(0.14, 0.22)
-                inc = rnd.uniform(0.25, 0.6)
+                alto = rnd.uniform(0.15, 0.22)
+                inc = rnd.uniform(0.35, 0.8)
                 tip = p + V((math.cos(a) * alto * inc, math.sin(a) * alto * inc, alto))
-                c.cil(p, tip, 0.025, mat, n=3, r1=0.0, giro=a)
-                if luminoso and h % 2 == 0:
+                c.cil(p, tip, 0.05, mat, n=3, r1=0.0, giro=a)
+                if luminoso and h % 3 == 0:
                     puntas.cil(tip - (tip - p) * 0.25, tip + (tip - p).normalized() * 0.02, 0.012, None, n=3, r1=0.0)
             k += 1
     # flores diminutas entre la hierba
-    for f in range(16):
+    for f in range(8):
         x = rnd.uniform(-S / 2 + 0.25, S / 2 - 0.25)
         y = rnd.uniform(-S / 2 + 0.25, S / 2 - 0.25)
         c.cil((x, y, 0.08), (x, y, 0.2), 0.008, hierba[0], n=3)
