@@ -1,0 +1,100 @@
+{
+  "nombre": "luz_baliza_hangar",
+  "zona": "hangar",
+  "descripcion": "Baliza de suelo empotrada: cuerpo cilíndrico metálico, marco biselado antipisada, 4 tornillos y lente superior en neón cyan. Se colocan en línea para marcar caminos.",
+  "tam_pedido_studs": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "tam_studs": {
+    "ancho_x": 0.5,
+    "alto_y": 0.51,
+    "fondo_z": 0.5
+  },
+  "triangulos": 204,
+  "presupuesto": 500,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/luz_baliza_hangar_color.png",
+    "rugosidad": "texturas/luz_baliza_hangar_rugosidad.png",
+    "metal": "texturas/luz_baliza_hangar_metal.png",
+    "normal": "texturas/luz_baliza_hangar_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "luz_baliza_hangar",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 168,
+      "tam_studs": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.25,
+        0.0
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "luz_baliza_hangar_lente_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 36,
+      "tam_studs": [
+        0.247,
+        0.07,
+        0.26
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        0.475,
+        0.0
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [
+    "El suelo debe quedar a 0,42 studs de la base (enrasado con el marco): el cuerpo va empotrado."
+  ],
+  "verificacion_fbx": {
+    "piezas": 2,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 204,
+    "tam_studs": [
+      0.5,
+      0.5,
+      0.51
+    ],
+    "centro": [
+      0.0,
+      0.0,
+      0.255
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "luz_baliza_hangar_turnaround.png"
+}
