@@ -1,0 +1,266 @@
+{
+  "nombre": "laboratorio",
+  "zona": "especiales",
+  "descripcion": "Laboratorio de investigación: fachada limpia y moderna, ventanales con gradilla de 6 tubos de ensayo, probetas y microscopio, chimenea con extractor, luces verdes de descontaminación sobre la puerta, señal de riesgo biológico, contenedor de residuos, 2 cámaras y lector de tarjetas.",
+  "tam_pedido_studs": [
+    14,
+    12,
+    10
+  ],
+  "tam_studs": {
+    "ancho_x": 15.03,
+    "alto_y": 11.4,
+    "fondo_z": 13.34
+  },
+  "triangulos": 8524,
+  "presupuesto": 16000,
+  "escala": "1 unidad = 1 stud (FBX_SCALE_ALL); el FBX declara 0,28 m por unidad",
+  "giro_importacion": "180° sobre el eje Y de Roblox antes de exportar: el frente mira a -Z en Studio",
+  "coordenadas": "Roblox: X derecha del modelo, Y arriba, Z hacia atrás; origen en el suelo, en el centro",
+  "atlas": {
+    "color": "texturas/laboratorio_color.png",
+    "rugosidad": "texturas/laboratorio_rugosidad.png",
+    "metal": "texturas/laboratorio_metal.png",
+    "normal": "texturas/laboratorio_normal.png"
+  },
+  "tam_atlas": 2048,
+  "piezas": [
+    {
+      "nombre": "laboratorio",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 7316,
+      "tam_studs": [
+        15.035,
+        11.404,
+        13.344
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.217,
+        5.64,
+        0.672
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "laboratorio_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#B6DCE6",
+      "transparencia": 0.3,
+      "triangulos": 96,
+      "tam_studs": [
+        14.2,
+        3.4,
+        8.6
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.0,
+        3.3,
+        -0.2
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "laboratorio_vidrio_lab_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#E6F6FA",
+      "transparencia": 0.55,
+      "triangulos": 328,
+      "tam_studs": [
+        2.79,
+        0.75,
+        0.457
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        3.755,
+        2.325,
+        -2.9
+      ],
+      "nota": "Tubos de ensayo y probetas: Glass casi transparente."
+    },
+    {
+      "nombre": "laboratorio_descontaminacion_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#39FF14",
+      "transparencia": null,
+      "triangulos": 320,
+      "tam_studs": [
+        3.035,
+        4.46,
+        0.137
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.157,
+        2.53,
+        -4.889
+      ],
+      "nota": "Luces de descontaminación: Neon verde #39FF14."
+    },
+    {
+      "nombre": "laboratorio_luces_neon",
+      "tipo": "neon",
+      "material_roblox": "Neon",
+      "color": "#3DF2FF",
+      "transparencia": null,
+      "triangulos": 120,
+      "tam_studs": [
+        12.496,
+        4.085,
+        11.13
+      ],
+      "pivote_studs": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "centro_studs": [
+        -0.348,
+        4.333,
+        0.015
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "laboratorio_puerta_izq",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 160,
+      "tam_studs": [
+        1.1,
+        3.9,
+        0.12
+      ],
+      "pivote_studs": [
+        0.55,
+        0.3,
+        -4.8
+      ],
+      "centro_studs": [
+        0.55,
+        2.25,
+        -4.8
+      ],
+      "nota": "Hoja corredera: abrir 1.05 studs hacia fuera."
+    },
+    {
+      "nombre": "laboratorio_puerta_izq_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#E9F1F3",
+      "transparencia": 0.15,
+      "triangulos": 12,
+      "tam_studs": [
+        0.94,
+        3.7,
+        0.06
+      ],
+      "pivote_studs": [
+        0.55,
+        0.3,
+        -4.8
+      ],
+      "centro_studs": [
+        0.55,
+        2.25,
+        -4.8
+      ],
+      "nota": ""
+    },
+    {
+      "nombre": "laboratorio_puerta_der",
+      "tipo": "textura",
+      "material_roblox": "SurfaceAppearance",
+      "color": null,
+      "transparencia": null,
+      "triangulos": 160,
+      "tam_studs": [
+        1.1,
+        3.9,
+        0.12
+      ],
+      "pivote_studs": [
+        -0.55,
+        0.3,
+        -4.8
+      ],
+      "centro_studs": [
+        -0.55,
+        2.25,
+        -4.8
+      ],
+      "nota": "Hoja corredera: abrir 1.05 studs hacia fuera."
+    },
+    {
+      "nombre": "laboratorio_puerta_der_cristal",
+      "tipo": "cristal",
+      "material_roblox": "Glass",
+      "color": "#E9F1F3",
+      "transparencia": 0.15,
+      "triangulos": 12,
+      "tam_studs": [
+        0.94,
+        3.7,
+        0.06
+      ],
+      "pivote_studs": [
+        -0.55,
+        0.3,
+        -4.8
+      ],
+      "centro_studs": [
+        -0.55,
+        2.25,
+        -4.8
+      ],
+      "nota": ""
+    }
+  ],
+  "anclajes": {},
+  "notas": [],
+  "verificacion_fbx": {
+    "piezas": 9,
+    "ok": true,
+    "problemas": [],
+    "unidad_fbx_m": 0.28,
+    "triangulos": 8524,
+    "tam_studs": [
+      15.035,
+      13.344,
+      11.404
+    ],
+    "centro": [
+      -0.217,
+      -0.672,
+      5.64
+    ],
+    "normales_fuera": true
+  },
+  "turnaround": "laboratorio_turnaround.png"
+}
