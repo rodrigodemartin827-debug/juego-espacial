@@ -42,13 +42,14 @@ def forja_principal():
     c = m.parte()
     fuego = m.parte("horno_neon", tipo="neon", color=NARANJA_FORJA, nota="Boca y resplandor del horno: Neon #FF6B35.")
     luces = m.parte("luces_neon", tipo="neon", color=NEON)
-    puerta = m.parte("puerta", pivote=(1.6, -5.65, 0.4), nota="Puerta de taller corredera: se abre desplazándola "
-                                                              "4,2 studs a la izquierda del modelo (+X de Roblox) "
-                                                              "sobre el raíl. Ver anclaje PuertaAbierta.")
+    puerta = m.parte("puerta", nota="Puerta de taller corredera, modelada entreabierta. Corre por el raíl hacia la "
+                                    "ventana: ver anclajes PuertaCerrada y PuertaAbierta (posición del pivote).")
     cr = m.parte("cristal", tipo="cristal", color="#8EA6AE", transparencia=0.4)
 
-    piedra = m.mat("piedra", "#77706A", hollin=(6.0, 11.5))
-    ladr = m.mat("ladrillo", "#7A3E2C", c2="#4D4642", hollin=(5.5, 9.5))
+    piedra = m.mat("piedra", "#77706A")
+    # hollín de la fachada: manchas sobre la puerta y la ventana (por donde sale el humo del taller)
+    ladr = m.mat("ladrillo", "#7A3E2C", c2="#4D4642", manchas=[(2.1, -5.4, 6.4, 1.9, "#1A1612", 0.85),
+                                                             (-4.9, -5.4, 5.3, 1.4, "#1A1612", 0.75)])
     madera = m.mat("madera", "#4A3020", eje="X", lluvia=0.7)
     madera_z = m.mat("madera", "#4A3020", eje="Z", lluvia=0.7)
     chapa = m.mat("oxido", "#5E4A3C")
@@ -69,7 +70,7 @@ def forja_principal():
     X0, X1, YF, YB, Z0, ZT = -7.6, 7.6, -5.4, 6.4, 0.4, 7.6
 
     m.seccion("solera y muros")
-    c.caja_de((X0 - 0.4, YF - 2.6, 0), (X1 + 0.4, YB + 0.3, Z0), suelo, 0.05)
+    c.caja_de((X0 - 0.4, YF - 3.1, 0), (X1 + 0.4, YB + 0.3, Z0), suelo, 0.05)
     # charcos de metal fundido solidificado (relieve irregular)
     for i, (x, y, r) in enumerate(((2.2, -6.8, 0.35), (0.9, -7.3, 0.22), (3.1, -7.5, 0.18), (1.6, -6.3, 0.15))):
         c.ico((x, y, Z0), r, plata if i % 2 else cobre, sub=1, esc=(1.4, 1.0, 0.12), ruido=0.3, semilla=i)
@@ -123,29 +124,36 @@ def forja_principal():
 
     m.seccion("chimenea grande")
     chx, chy = -4.0, 2.2
-    c.caja((chx, chy, (ZT + 11.8) / 2), (2.2, 2.2, 11.8 - ZT), ladr, 0.06)
-    c.caja((chx, chy, 11.85), (2.6, 2.6, 0.3), piedra, 0.05)
+    # ladrillo propio con hollín: negro en la boca y se va aclarando hacia abajo
+    ladr_ch = m.mat("ladrillo", "#7A3E2C", c2="#4D4642", hollin=(8.0, 11.9))
+    c.caja((chx, chy, (ZT + 11.8) / 2), (2.2, 2.2, 11.8 - ZT), ladr_ch, 0.06)
+    c.caja((chx, chy, 11.85), (2.6, 2.6, 0.3), m.mat("piedra", "#77706A", hollin=(11.0, 12.2)), 0.05)
     for k in range(3):
         c.caja((chx, chy, ZT + 1.0 + k * 1.3), (2.32, 2.32, 0.14), hierro, 0.02)  # zunchos de hierro
     c.caja((chx, chy, 11.95), (1.5, 1.5, 0.12), m.mat("metal", "#0E0D0C", rug=0.9), 0.0)  # boca negra
     for (dx, dy) in ((-0.9, -0.9), (0.9, 0.9), (-0.9, 0.9), (0.9, -0.9)):
-        c.caja((chx + dx, chy + dy, 12.1), (0.35, 0.35, 0.35), piedra, 0.04)
+        c.caja((chx + dx, chy + dy, 12.1), (0.35, 0.35, 0.35), m.mat("piedra", "#77706A", hollin=(11.6, 12.3)), 0.04)
 
     m.seccion("puerta corredera")
     px0, px1, pz0, pz1 = PUE
     arq.marco(c, px0, px1, pz0, pz1, YF, 0.3, 0.25, madera_z, abajo=False)
-    # raíl de carril en I con soportes y topes, más allá del hueco hacia +X
-    c.caja_de((px0 - 0.3, YF - 0.55, pz1 + 0.35), (X1 - 0.1, YF - 0.25, pz1 + 0.6), osc, 0.03)
-    for x in (px0 + 0.2, px1 + 0.4, X1 - 0.4):
+    # raíl de carril en I con soportes y topes. Corre del hueco hacia el lado de la ventana (-X del modelo), donde
+    # cabe la hoja entera cuando se abre del todo sin salirse de la fachada.
+    RX0, RX1 = X0 + 0.25, px1 + 0.35
+    c.caja_de((RX0, YF - 0.55, pz1 + 0.35), (RX1, YF - 0.25, pz1 + 0.6), osc, 0.03)
+    for x in (RX0 + 0.3, (RX0 + px0) / 2, px0 - 0.1, px1 + 0.1):
         c.caja((x, YF - 0.12, pz1 + 0.48), (0.2, 0.3, 0.45), osc, 0.02)
         c.perno((x, YF - 0.29, pz1 + 0.55), (0, -1, 0), acero, r=0.05)
-    for x in (px0 - 0.3, X1 - 0.1):
+    for x in (RX0, RX1):
         c.caja((x, YF - 0.4, pz1 + 0.35), (0.12, 0.35, 0.25), hierro, 0.02)
-    c.caja_de((px0 - 0.2, YF - 0.6, Z0 - 0.02), (X1 - 0.3, YF - 0.45, Z0 + 0.04), hierro)
-    # hoja: tablones con travesaños en Z y herrajes, colgada de dos carros
+    c.caja_de((RX0 + 0.1, YF - 0.6, Z0 - 0.02), (RX1, YF - 0.45, Z0 + 0.04), hierro)
+    # hoja: tablones con travesaños en Z y herrajes, colgada de dos carros. Se deja ENTREABIERTA (corrida ABRE studs
+    # hacia -X) para que se vea el horno encendido por la rendija.
     W = px1 - px0 + 0.4
-    hx0 = px0 - 0.2
+    ABRE = 2.1
+    hx0 = px0 - 0.2 - ABRE
     pyy = YF - 0.4
+    puerta.pivote = V((hx0 + W / 2, pyy, pz0))
     for k in range(9):
         x = hx0 + k * W / 9
         puerta.caja_de((x + 0.02, pyy - 0.1, pz0 + 0.06), (x + W / 9 - 0.02, pyy + 0.04, pz1 + 0.15), madera_z, 0.02)
@@ -162,7 +170,8 @@ def forja_principal():
         puerta.cil((x, pyy - 0.3, pz1 + 0.62), (x, pyy - 0.1, pz1 + 0.62), 0.14, hierro, n=10)
     puerta.tubo([(hx0 + W - 0.4, pyy - 0.12, 3.2), (hx0 + W - 0.4, pyy - 0.35, 3.2), (hx0 + W - 0.4, pyy - 0.35, 2.4),
                  (hx0 + W - 0.4, pyy - 0.12, 2.4)], 0.05, hierro, n=6, seg=2)
-    m.anclaje("PuertaAbierta", (hx0 + W / 2 + 4.2, pyy, pz0), "Pivote de la puerta con el taller abierto.")
+    m.anclaje("PuertaCerrada", (hx0 + ABRE + W / 2, pyy, pz0), "Pivote de la puerta cerrada (tapa el hueco entero).")
+    m.anclaje("PuertaAbierta", (hx0 + ABRE + W / 2 - W, pyy, pz0), "Pivote de la puerta abierta del todo.")
     # interior visible tras la puerta: suelo, fondo y el horno grande
     YI = YF + 0.6
     c.caja_de((px0, YI, Z0), (px1, YB - 0.6, Z0 + 0.02), suelo)
@@ -172,45 +181,67 @@ def forja_principal():
     c.caja_de((px0, YI, pz1 + 0.8), (px1, YI + 4.5, pz1 + 1.0), madera)
 
     m.seccion("horno y campana")
-    # horno: cuerpo de ladrillo refractario dentro del taller, con la puerta entreabierta y el brillo naranja
-    hx, hy = 2.6, YI + 3.0
-    c.caja((hx, hy, Z0 + 1.4), (2.6, 2.4, 2.8), m.mat("ladrillo", "#9A6A4A", c2="#5A524C", tam_ladrillo=(0.35, 0.18),
+    # horno: cuerpo de ladrillo refractario frente a la rendija de la puerta, con su puerta entreabierta y el brillo
+    hx, hy = 3.2, YI + 3.0
+    c.caja((hx, hy, Z0 + 1.4), (2.2, 2.4, 2.8), m.mat("ladrillo", "#9A6A4A", c2="#5A524C", tam_ladrillo=(0.35, 0.18),
                                                      hollin=(1.8, 3.2)), 0.05)
     c.caja((hx, hy - 1.22, Z0 + 1.4), (1.4, 0.1, 1.3), hierro, 0.04)  # marco de la boca
     fuego.caja((hx, hy - 1.18, Z0 + 1.4), (1.1, 0.06, 1.0), None)
-    with c.en((hx - 0.7, hy - 1.3, Z0 + 1.4), (0, 0, -40)):  # puerta entreabierta
+    with c.en((hx - 0.7, hy - 1.3, Z0 + 1.4), (0, 0, -40)):  # puerta del horno entreabierta
         c.caja((0.6, 0, 0), (1.2, 0.1, 1.15), hierro, 0.03)
         c.cil((1.05, -0.1, 0.1), (1.05, -0.3, 0.1), 0.03, hierro, n=6)
     for zz in (Z0 + 1.0, Z0 + 1.8):
         c.cil((hx - 0.72, hy - 1.28, zz - 0.15), (hx - 0.72, hy - 1.28, zz + 0.15), 0.05, hierro, n=8)
     # campana extractora troncopiramidal sobre el horno y tubo al techo
-    c.loft([[(hx + x, hy + y, Z0 + 3.4) for x, y in ((-1.6, -1.6), (1.6, -1.6), (1.6, 1.4), (-1.6, 1.4))],
+    c.loft([[(hx + x, hy + y, Z0 + 3.4) for x, y in ((-1.3, -1.6), (1.3, -1.6), (1.3, 1.4), (-1.3, 1.4))],
             [(hx + x, hy + y, Z0 + 4.4) for x, y in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5))]], chapa)
     c.cil((hx, hy, Z0 + 4.4), (hx, hy, ZT + 0.1), 0.45, osc, n=10)
-    # resplandor en el suelo frente a la puerta del taller (luz que sale por la puerta entreabierta)
+    # resplandor en el suelo del taller delante del horno y brasas en la bandeja
     fuego.caja((hx, hy - 1.7, Z0 + 0.03), (1.3, 0.6, 0.01), None)
+    for k in range(5):
+        fuego.ico((hx - 0.4 + k * 0.2, hy - 1.33, Z0 + 0.82), 0.07, None, sub=1, ruido=0.3, semilla=k)
+    m.anclaje("LuzHorno", (hx, hy - 1.4, Z0 + 1.4), "PointLight naranja #FF6B35 (Brightness 2-3, Range 14): el "
+              "resplandor que sale por la puerta entreabierta.")
     # la luz naranja asoma también por el ventanuco de la fachada
     fuego.caja(((vx0 + vx1) / 2, YF + 0.7, vz0 + 0.2), (2.6, 0.04, 0.4), None)
+
+    m.seccion("tejadillo del yunque")
+    # porche de madera a la derecha de la puerta: dos pies derechos, carrera y tablas inclinadas sobre el yunque
+    for x in (5.1, 7.45):
+        c.caja((x, YF - 2.75, (Z0 + 4.95) / 2), (0.26, 0.26, 4.95 - Z0), madera_z, 0.03)
+        c.caja((x, YF - 2.75, Z0 + 0.1), (0.4, 0.4, 0.2), piedra, 0.03)
+        c.cil((x, YF - 2.65, 4.3), (x, YF - 1.9, 5.25), 0.07, madera_z, n=6)  # tornapunta
+    c.caja_de((4.95, YF - 2.9, 4.95), (7.6, YF - 2.6, 5.2), madera, 0.03)
+    ang = math.degrees(math.atan2(6.05 - 5.1, 2.9))
+    with c.en((6.28, YF - 1.45, 5.62), (-ang, 0, 0)):
+        for k in range(7):
+            c.caja((-1.2 + k * 0.4, 0, 0), (0.38, 3.15, 0.08), madera, 0.015)
+        for k in range(3):
+            c.caja((0, -1.2 + k * 1.2, -0.08), (2.7, 0.12, 0.1), madera_z, 0.01)
+    c.caja_de((5.0, YF - 0.05, 5.95), (7.5, YF + 0.0, 6.15), madera, 0.02)  # durmiente contra el muro
+    arq.foco_pared(c, luces, (6.3, YF, 4.4), osc, acero)
 
     m.seccion("yunque, lingotes y herramientas")
     tx, ty = 5.9, YF - 1.6
     c.torno([(0.0, 0.0), (0.55, 0.0), (0.6, 0.15), (0.52, 0.85), (0.5, 0.9), (0.0, 0.9)], tocon, n=12, c=(tx, ty, Z0))
     c.cil((tx, ty, Z0 + 0.9), (tx, ty, Z0 + 0.92), 0.47, m.mat("madera", "#9A7650", eje="Z", patron="vetas"), n=12)
     _yunque(c, tx, ty, Z0 + 0.92, hierro, cara, 1.0)
+    # martillo apoyado en el yunque
+    with c.en((tx - 0.3, ty + 0.05, Z0 + 1.72), (0, 0, 25)):
+        c.cil((0.0, 0, 0.06), (0.7, 0, 0.06), 0.035, tocon, n=6)
+        c.caja((0.0, 0, 0.1), (0.14, 0.3, 0.13), hierro, 0.02)
     # lingotes en pirámide (3 + 2 + 1), troncopiramidales
-    def lingote(x, y, z, mat, giro=0):
+    def lingote(x, y, z, mat):
         c.loft([[(x + dx, y + dy, z) for dx, dy in ((-0.4, -0.15), (0.4, -0.15), (0.4, 0.15), (-0.4, 0.15))],
                 [(x + dx, y + dy, z + 0.2) for dx, dy in ((-0.32, -0.1), (0.32, -0.1), (0.32, 0.1), (-0.32, 0.1))]], mat)
     lx, ly = -2.0, YF - 1.3
     c.caja((lx, ly, Z0 + 0.08), (1.4, 1.1, 0.16), madera, 0.02)  # palé
-    for i, (dx, dz, mat) in enumerate(((-0.0, 0, acero), (0.0, 0, cobre), (0.0, 0, oro))):
-        pass
     filas = [[(-0.0, -0.33), (0.0, 0.0), (0.0, 0.33)], [(0.0, -0.17), (0.0, 0.17)], [(0.0, 0.0)]]
     mats = [[acero, cobre, acero], [oro, plata], [oro]]
     for k, fila in enumerate(filas):
         for j, (dx, dy) in enumerate(fila):
             lingote(lx + dx, ly + dy, Z0 + 0.16 + k * 0.2, mats[k][j])
-    # ganchos con martillos y tenazas en la pared exterior
+    # ganchos con martillos y tenazas en la pared exterior (la puerta abierta pasa por delante sin tocarlos)
     for i, x in enumerate((-6.6, -5.9, -5.2, -4.5)):
         c.cil((x, YF, 2.15), (x, YF - 0.2, 2.15), 0.03, hierro, n=5)
         c.cil((x, YF - 0.2, 2.15), (x, YF - 0.2, 2.25), 0.03, hierro, n=5)
@@ -224,6 +255,26 @@ def forja_principal():
             c.cil((x - 0.04, YF - 0.12, 1.5), (x + 0.04, YF - 0.12, 1.5), 0.03, hierro, n=5)
     c.caja((-5.6, YF - 0.06, 2.2), (2.6, 0.08, 0.15), madera, 0.02)
 
+    m.seccion("cartel colgante")
+    # muestra de forja perpendicular a la fachada: brazo de hierro, tabla con yunque recortado y FORJA a ambos lados
+    bx = -1.6
+    c.caja((bx, YF - 0.04, 7.0), (0.3, 0.08, 0.5), hierro, 0.02)
+    c.cil((bx, YF - 0.05, 7.05), (bx, YF - 1.45, 7.05), 0.04, hierro, n=6)
+    c.cil((bx, YF - 0.05, 6.75), (bx, YF - 0.75, 7.05), 0.03, hierro, n=5)
+    c.esfera((bx, YF - 1.48, 7.05), 0.05, hierro, seg=6, anillos=4)
+    for yy in (YF - 0.55, YF - 1.3):
+        c.cil((bx, yy, 7.03), (bx, yy, 6.88), 0.012, hierro, n=4)
+        c.toro((bx, yy, 6.88), 0.03, 0.008, hierro, n=6, m=3, rot=(0, 90, 0))
+    with c.en((bx, YF - 0.92, 6.45), None):
+        c.caja((0, 0, 0), (0.08, 1.1, 0.8), madera_z, 0.02)
+        for sx in (-1, 1):
+            with c.en((sx * 0.045, 0, 0.08), (90, 0, 90 * sx)):
+                c.extruir([(-0.28, 0.12), (0.22, 0.12), (0.34, 0.2), (0.34, 0.24), (-0.32, 0.24), (-0.4, 0.17),
+                           (-0.12, 0.12), (-0.12, -0.02), (-0.22, -0.12), (0.18, -0.12), (0.08, -0.02), (0.08, 0.12)],
+                          0.02, hierro)
+            c.texto("FORJA", m.mat("metal", "#B9913F", rug=0.3), alto=0.16, grosor=0.012,
+                    c=(sx * 0.045, 0, -0.32), rot=(90, 0, 90 * sx), fuente="serif", resol=1)
+
     m.seccion("canaleta de desagüe")
     # canal de piedra con manchas de óxido a lo largo de la fachada hasta una rejilla
     cy = YF - 0.9
@@ -234,15 +285,20 @@ def forja_principal():
     for k in range(4):
         c.caja((-0.55 + k * 0.1, cy, Z0 + 0.08), (0.04, 0.45, 0.04), hierro)
     arq.bajante(c, -7.0, YF, ZT - 0.2, hierro, osc, r=0.12)
-    # barril de agua de temple y carbón
+    # barril de agua de temple y montón de carbón
     c.torno([(0.0, 0.0), (0.45, 0.0), (0.52, 0.5), (0.45, 1.0), (0.0, 1.0)], madera_z, n=12, c=(4.9, YF - 2.0, Z0))
     for zz in (0.15, 0.85):
         c.toro((4.9, YF - 2.0, Z0 + zz), 0.47, 0.025, hierro, n=12, m=4)
     c.cil((4.9, YF - 2.0, Z0 + 0.85), (4.9, YF - 2.0, Z0 + 0.88), 0.44, m.mat("liquido", "#1E2A2E"), n=12)
-    for i in range(7):
-        c.roca((-5.6 + (i % 4) * 0.25, YF - 1.4 + (i // 4) * 0.25, Z0 + 0.08), 0.16, m.mat("piedra", "#1C1B1A", rug=0.7),
-               semilla=i)
-    arq.foco_pared(c, luces, (px0 - 0.6, YF, 5.6), osc, acero)
+    carbon = m.mat("piedra", "#1C1B1A", rug=0.7, suciedad=0.2)
+    rnd = m.rnd
+    for i in range(16):
+        a = rnd.uniform(0, math.tau)
+        r = rnd.uniform(0, 0.6)
+        x, y = -6.2 + math.cos(a) * r, YF - 1.9 + math.sin(a) * r * 0.7
+        c.roca((x, y, Z0 + 0.05 + (0.6 - r) * 0.55), rnd.uniform(0.12, 0.2), carbon, semilla=i)
+    c.cil((-5.4, YF - 2.0, Z0), (-5.0, YF - 1.7, Z0 + 1.2), 0.03, tocon, n=5)  # pala
+    c.caja((-5.43, YF - 2.02, Z0 + 0.1), (0.3, 0.05, 0.35), hierro, 0.01, rot=(0, -18, 0))
     m.terminar()
 
 
