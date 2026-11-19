@@ -224,6 +224,7 @@
     "piezas": 8,
     "ok": true,
     "problemas": [],
+    "unidad_fbx_m": 0.28,
     "triangulos": 10904,
     "tam_studs": [
       12.8,
@@ -235,8 +236,7 @@
       0.025,
       4.075
     ],
-    "normales_fuera": true,
-    "unidad_fbx_m": 0.28
+    "normales_fuera": true
   },
   "turnaround": "tienda_armaduras_turnaround.png"
 }
