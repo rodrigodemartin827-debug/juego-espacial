@@ -35,10 +35,24 @@ def main():
             T.suave(ob)
             objs.append(ob)
             print(nombre, len(c), "tris", f"{time.time() - t:.1f}s")
+    if bestia == "dragon":
+        import dragon_forma as F
+        for nombre in F.PIEZAS:
+            if solo and nombre not in solo:
+                continue
+            t = time.time()
+            mn, mx = F.caja(nombre)
+            vol, o, p = C.volumen(F.campo_pieza(nombre), mn, mx, F.voxel(nombre) * 1.8)
+            v, c = C.malla_de_volumen(vol, o, p)
+            ob = T.malla_numpy(nombre, v, c)
+            T.normales_fuera(ob)
+            T.suave(ob)
+            objs.append(ob)
+            print(nombre, len(c), "tris", f"{time.time() - t:.1f}s", flush=True)
     mat, _ = T.material_simple("gris", (0.35, 0.37, 0.42), rug=0.55)
     for o in objs:
         T.asignar_material(o, mat)
-    T.preparar_estudio(8.0)
+    T.preparar_estudio(float(os.environ.get("RADIO_EST", "8.0")))
     vistas = [("Arriba", 0, 89.5), ("3/4 Frontal", 40, 25), ("Frente", 0, 4), ("Lateral Izq", 90, 4),
               ("Abajo", 0, -89.5), ("3/4 Trasera", 140, 25)]
     centro = os.environ.get("CENTRO")

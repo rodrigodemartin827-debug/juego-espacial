@@ -127,7 +127,23 @@ def diezmar(obj, tris_objetivo, nombre=None, triangular=True):
         mod.ratio = tris_objetivo / actual
         mod.use_collapse_triangulate = triangular
         aplicar_modificadores(nuevo)
+    limpiar_degeneradas(nuevo)
     return nuevo
+
+
+def limpiar_degeneradas(obj, dist=2e-4):
+    """Quita caras de área ~0 (el FBX las descarta y el recuento dejaría de cuadrar)."""
+    bm = bmesh.new()
+    bm.from_mesh(obj.data)
+    bmesh.ops.dissolve_degenerate(bm, dist=dist, edges=bm.edges[:])
+    ngons = [f for f in bm.faces if len(f.verts) > 4]
+    if ngons:
+        bmesh.ops.triangulate(bm, faces=ngons)
+    malas = [f for f in bm.faces if f.calc_area() < 1e-9]
+    if malas:
+        bmesh.ops.delete(bm, geom=malas, context="FACES")
+    bm.to_mesh(obj.data)
+    bm.free()
 
 
 def unir(objetos, nombre):
