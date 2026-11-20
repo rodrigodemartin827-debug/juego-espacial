@@ -96,6 +96,7 @@ def terminar(cfg):
     orden = cfg["orden"]
     lista = [piezas[n] for n in orden] + [piezas[n] for n in soldadas]
     T.desplegar_piezas(lista, cfg.get("prioridad_uv", {}), margen=0.0035)
+    T.FUERZA_EMISION_RENDER = cfg.get("emision_render", 6.0)
     tam = 512 if cfg["rapido"] else T.TAM_ATLAS
     rutas, _ = T.hornear_atlas(parejas, salida, nombre, tam=tam, muestras=4 if cfg["rapido"] else 12,
                                extrusion=0.07, distancia=0.22)

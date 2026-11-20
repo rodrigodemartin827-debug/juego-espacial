@@ -30,6 +30,7 @@ STUD_EN_METROS = 0.28
 TAM_ATLAS = 2048
 GIRO_IMPORTACION = math.pi  # 180° en el eje vertical antes de exportar
 SEPARACION = 0.02  # studs entre piezas del rig
+FUERZA_EMISION_RENDER = 6.0  # brillo de la emisión en los renders (cada bestia puede cambiarlo)
 
 # --------------------------------------------------------------------------------------------------------------
 # Escena y mallas
@@ -135,6 +136,7 @@ def limpiar_degeneradas(obj, dist=2e-4):
     """Quita caras de área ~0 (el FBX las descarta y el recuento dejaría de cuadrar)."""
     bm = bmesh.new()
     bm.from_mesh(obj.data)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts[:], dist=dist)
     bmesh.ops.dissolve_degenerate(bm, dist=dist, edges=bm.edges[:])
     ngons = [f for f in bm.faces if len(f.verts) > 4]
     if ngons:
@@ -813,7 +815,8 @@ def _multiplicar_ao(img_color, img_ao, fuerza):
     img_color.update()
 
 
-def material_atlas(nombre, rutas, fuerza_emision=6.0):
+def material_atlas(nombre, rutas, fuerza_emision=None):
+    fuerza_emision = FUERZA_EMISION_RENDER if fuerza_emision is None else fuerza_emision
     """Material final con las 5 texturas del atlas (lo que se ve en el render y lo que lleva el FBX)."""
     mat = bpy.data.materials.new(f"{nombre}_atlas")
     N = Nodos(mat)

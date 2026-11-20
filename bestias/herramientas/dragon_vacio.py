@@ -99,8 +99,8 @@ def mapas():
                        width=int(0.04 * PX))
 
     izq, der, cic, par = lienzo(), lienzo(), lienzo(), lienzo()
-    runas(ImageDraw.Draw(izq), 2.25, 3.05, 1)
-    runas(ImageDraw.Draw(der), 2.25, 3.05, 2)
+    runas(ImageDraw.Draw(izq), 1.55, 3.55, 1)
+    runas(ImageDraw.Draw(der), 1.55, 3.55, 2)
     d = ImageDraw.Draw(cic)
     for k in range(3):  # zarpazo: 3 líneas paralelas en el lado izquierdo del cuello
         o = k * 0.17
@@ -347,9 +347,8 @@ def cuerno(g, base, pts, r0):
     curva = C.remuestrear(C.catmull_rom([tuple(p) for p in pts], 6, cerrada=False), 0.09)
     n = len(curva)
     rad = [r0 * (1 - i / (n - 1)) ** 0.85 + 0.012 for i in range(n)]
-    g.tubo([Vector(p) for p in curva], rad, "cuerno", lados=8, punta=True,
-           aux_fn=lambda t, a: (t, a / math.tau, 0.0),
-           perfil=lambda i, a: 1.0 - 0.06 * (i % 2))  # anillos de crecimiento en la geometría
+    g.tubo([Vector(p) for p in curva], rad, "cuerno", lados=10, punta=True,
+           aux_fn=lambda t, a: (t, a / math.tau, 0.0))  # los surcos de crecimiento van en el normal map
 
 
 def garra(g, base, dir_, largo, radio, curva, mat="garra"):
@@ -801,7 +800,7 @@ def main():
         padre=padre, orden=orden, montajes=montajes,
         prioridad_uv={"Cabeza": 1.5, "Mandibula": 1.3, "Torso": 1.1, "Cuello": 1.15, "Ojos_Cornea": 1.5,
                       "Ala_Izq_Mano": 0.8, "Ala_Der_Mano": 0.8, "Ala_Izq_Antebrazo": 0.8, "Ala_Der_Antebrazo": 0.8},
-        render_material={cornea: vidrio}, radio_estudio=9.0, exposicion=1.3,
+        render_material={cornea: vidrio}, radio_estudio=9.0, exposicion=1.3, emision_render=2.5,
         cerca=[("Cabeza 3/4", 40, 15, (0, 5.4, 6.2), 1.9), ("Ojo y cuerno", 75, 10, (0.5, 4.6, 6.7), 1.0),
                ("Boca (dientes)", 20, -5, (0, 5.9, 6.1), 1.1), ("Silla y artillero", 140, 35, (0, 0.3, 3.9), 2.6),
                ("Garras", 30, 10, (1.2, -1.6, 0.4), 1.0), ("Maza de la cola", 150, 20, (0, -7.6, 2.5), 1.4)],
