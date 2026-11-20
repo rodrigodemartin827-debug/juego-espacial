@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+<!-- sidebar_mapa · Juego espacial · generado por herramientas/iconos_ui/generar.mjs -->
+<circle cx="64" cy="64" r="48" fill="#FFFFFF" fill-opacity="0.08"/><ellipse cx="64" cy="64" rx="21" ry="48" stroke-width="6"/><path d="M16 64 H112" stroke-width="6"/><path d="M24 40 C50 47 78 47 104 40 M24 88 C50 81 78 81 104 88" stroke-width="5" opacity="0.5"/><circle cx="64" cy="64" r="15" stroke-width="5" opacity="0.55"/><circle cx="64" cy="64" r="8" fill="#FFFFFF" stroke="none"/>
+</svg>
