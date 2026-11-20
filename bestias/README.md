@@ -11,6 +11,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 | --- | --- | --- | --- | --- |
 | Manta Estelar | `manta_estelar/` | 17.930 / 18.000 | 17,99 × 14,25 × 3,93 (sin cola) | Aprobada en la ronda 3 |
 | Dragón del Vacío | `dragon_vacio/` | 19.836 / 20.000 | 4,84 × 15,83 × 7,79 (alas plegadas; envergadura abierta 14) | Aprobado en la ronda 3 |
+| Serpiente Cósmica | `serpiente_cosmica/` | 19.910 / 20.000 | 6,1 × 29,41 × 4,64 (con el estandarte) | Aprobada en la ronda 2 |
 
 Cada carpeta lleva el `.fbx`, el atlas de 2048 (`_color`, `_normal`, `_roughness`, `_metalness`, `_emision`), el
 `_turnaround.png` de 8 vistas, el `.json` (piezas, pivotes, puntos de montaje) y `verificacion_fbx.txt` (la

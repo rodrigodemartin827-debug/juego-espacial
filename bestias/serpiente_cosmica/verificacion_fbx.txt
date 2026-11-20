@@ -1,0 +1,23 @@
+OK
+Segmento_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 932 (esperado 932), tamaño 2.96×3.98×1.98 st
+Cabeza: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 2474 (esperado 2474), tamaño 2.46×3.22×1.61 st
+Mandibula: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1368 (esperado 1368), tamaño 2.17×2.81×0.98 st
+Segmento_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 2676 (esperado 2676), tamaño 3.52×3.98×4.38 st
+Segmento_3: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3194 (esperado 3194), tamaño 3.61×3.98×2.65 st
+Segmento_4: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3152 (esperado 3152), tamaño 3.56×3.98×2.61 st
+Segmento_5: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1520 (esperado 1520), tamaño 3.27×3.98×2.13 st
+Segmento_6: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1268 (esperado 1268), tamaño 2.58×3.98×1.62 st
+Cola_Punta: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 518 (esperado 518), tamaño 2.16×2.17×1.06 st
+Aleta_Izq_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 260 (esperado 260), tamaño 1.59×1.85×0.78 st
+Aleta_Izq_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 260 (esperado 260), tamaño 1.61×1.85×0.78 st
+Aleta_Der_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 260 (esperado 260), tamaño 1.59×1.85×0.78 st
+Aleta_Der_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 260 (esperado 260), tamaño 1.61×1.85×0.78 st
+Cresta_Dorsal: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1628 (esperado 1628), tamaño 0.08×22.60×1.24 st
+Ojos_Cornea: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 140 (esperado 140), tamaño 2.68×0.78×0.77 st
+Montura_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_3: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_4: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_5: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_6: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Punto_Carga: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
