@@ -1,0 +1,485 @@
+{
+  "nombre": "leviatan_estelar",
+  "bestia": "Leviatán Estelar",
+  "rol": "Nave nodriza viviente",
+  "jinetes": "8-12",
+  "unidades": "studs (1 unidad de Blender = 1 stud; FBX en metros con 1 stud = 0,28 m)",
+  "giro_importacion": "180° en el eje vertical aplicado antes de exportar: la bestia mira a -Z en Roblox",
+  "coordenadas": "pivotes en Roblox (X derecha, Y arriba, -Z delante) relativos al origen del modelo; 'modelado' = coordenadas de Blender antes del giro (X derecha, Y delante, Z arriba)",
+  "triangulos": {
+    "total_visibles": 19905,
+    "presupuesto": 20000,
+    "por_pieza": {
+      "Cuerpo_Principal": 4954,
+      "Cabeza": 3546,
+      "Mandibula_Inf": 630,
+      "Aleta_Pectoral_Der": 914,
+      "Aleta_Pectoral_Izq": 914,
+      "Aleta_Dorsal": 3087,
+      "Cola_Base": 460,
+      "Cola_Media": 328,
+      "Cola_Punta": 652,
+      "Placa_Opercular_Der": 432,
+      "Placa_Opercular_Izq": 432,
+      "Tentaculo_1": 854,
+      "Tentaculo_2": 854,
+      "Tentaculo_3": 854,
+      "Tentaculo_4": 854,
+      "Ojos_Cornea": 140
+    },
+    "puntos_de_montaje": 96
+  },
+  "tamano_studs": {
+    "ancho_x_largo_x_alto_en_reposo": [
+      26.69,
+      43.8,
+      18.75
+    ]
+  },
+  "color_neon": [
+    "#FFD700",
+    "#00BFFF"
+  ],
+  "texturas": {
+    "color": "leviatan_estelar_color.png",
+    "normal": "leviatan_estelar_normal.png",
+    "roughness": "leviatan_estelar_roughness.png",
+    "metalness": "leviatan_estelar_metalness.png",
+    "emision": "leviatan_estelar_emision.png"
+  },
+  "piezas": [
+    {
+      "nombre": "Cuerpo_Principal",
+      "padre": null,
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        7.4889,
+        -0.2927
+      ],
+      "pivote_modelado": [
+        0.0,
+        0.2927,
+        7.4889
+      ],
+      "triangulos": 4954
+    },
+    {
+      "nombre": "Cabeza",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        8.1,
+        -9.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        9.0,
+        8.1
+      ],
+      "triangulos": 3546
+    },
+    {
+      "nombre": "Mandibula_Inf",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        4.5,
+        -9.6
+      ],
+      "pivote_modelado": [
+        0.0,
+        9.6,
+        4.5
+      ],
+      "triangulos": 630
+    },
+    {
+      "nombre": "Aleta_Pectoral_Izq",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -5.6,
+        5.2,
+        -4.0
+      ],
+      "pivote_modelado": [
+        -5.6,
+        4.0,
+        5.2
+      ],
+      "triangulos": 914
+    },
+    {
+      "nombre": "Aleta_Pectoral_Der",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        5.6,
+        5.2,
+        -4.0
+      ],
+      "pivote_modelado": [
+        5.6,
+        4.0,
+        5.2
+      ],
+      "triangulos": 914
+    },
+    {
+      "nombre": "Aleta_Dorsal",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        11.0,
+        3.5
+      ],
+      "pivote_modelado": [
+        0.0,
+        -3.5,
+        11.0
+      ],
+      "triangulos": 3087
+    },
+    {
+      "nombre": "Cola_Base",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        7.9,
+        11.8
+      ],
+      "pivote_modelado": [
+        0.0,
+        -11.8,
+        7.9
+      ],
+      "triangulos": 460
+    },
+    {
+      "nombre": "Cola_Media",
+      "padre": "Cola_Base",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        8.4,
+        15.6
+      ],
+      "pivote_modelado": [
+        0.0,
+        -15.6,
+        8.4
+      ],
+      "triangulos": 328
+    },
+    {
+      "nombre": "Cola_Punta",
+      "padre": "Cola_Media",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        8.7,
+        18.4
+      ],
+      "pivote_modelado": [
+        0.0,
+        -18.4,
+        8.7
+      ],
+      "triangulos": 652
+    },
+    {
+      "nombre": "Tentaculo_1",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.4,
+        3.1625,
+        -7.6
+      ],
+      "pivote_modelado": [
+        -2.4,
+        7.6,
+        3.1625
+      ],
+      "triangulos": 854
+    },
+    {
+      "nombre": "Tentaculo_2",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.4,
+        3.1625,
+        -7.6
+      ],
+      "pivote_modelado": [
+        2.4,
+        7.6,
+        3.1625
+      ],
+      "triangulos": 854
+    },
+    {
+      "nombre": "Tentaculo_3",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -3.0,
+        3.2378,
+        -1.0
+      ],
+      "pivote_modelado": [
+        -3.0,
+        1.0,
+        3.2378
+      ],
+      "triangulos": 854
+    },
+    {
+      "nombre": "Tentaculo_4",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        3.0,
+        3.2378,
+        -1.0
+      ],
+      "pivote_modelado": [
+        3.0,
+        1.0,
+        3.2378
+      ],
+      "triangulos": 854
+    },
+    {
+      "nombre": "Placa_Opercular_Izq",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -6.85,
+        8.8,
+        1.0
+      ],
+      "pivote_modelado": [
+        -6.85,
+        -1.0,
+        8.8
+      ],
+      "triangulos": 432
+    },
+    {
+      "nombre": "Placa_Opercular_Der",
+      "padre": "Cuerpo_Principal",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        6.85,
+        8.8,
+        1.0
+      ],
+      "pivote_modelado": [
+        6.85,
+        -1.0,
+        8.8
+      ],
+      "triangulos": 432
+    },
+    {
+      "nombre": "Ojos_Cornea",
+      "padre": "Cabeza",
+      "tipo": "soldada (Weld)",
+      "pivote_roblox": [
+        0.0,
+        8.1,
+        -9.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        9.0,
+        8.1
+      ],
+      "triangulos": 140
+    }
+  ],
+  "puntos_montaje": [
+    {
+      "nombre": "Puente_Mando",
+      "pieza": "Cabeza",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        13.2003,
+        -12.3
+      ],
+      "posicion_modelado": [
+        0.0,
+        12.3,
+        13.2003
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        5.1003,
+        -3.3
+      ]
+    },
+    {
+      "nombre": "Proa_Inferior",
+      "pieza": "Mandibula_Inf",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        3.2327,
+        -15.5
+      ],
+      "posicion_modelado": [
+        0.0,
+        15.5,
+        3.2327
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        -1.2673,
+        -5.9
+      ]
+    },
+    {
+      "nombre": "Acceso_Bodega_Der",
+      "pieza": "Cuerpo_Principal",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        6.7,
+        8.9,
+        -0.0
+      ],
+      "posicion_modelado": [
+        6.7,
+        0.0,
+        8.9
+      ],
+      "relativo_a_pieza_roblox": [
+        6.7,
+        1.4111,
+        0.2927
+      ]
+    },
+    {
+      "nombre": "Acceso_Bodega_Izq",
+      "pieza": "Cuerpo_Principal",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        -6.7,
+        8.9,
+        -0.0
+      ],
+      "posicion_modelado": [
+        -6.7,
+        0.0,
+        8.9
+      ],
+      "relativo_a_pieza_roblox": [
+        -6.7,
+        1.4111,
+        0.2927
+      ]
+    },
+    {
+      "nombre": "Vigia_Dorsal",
+      "pieza": "Aleta_Dorsal",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        14.5484,
+        3.0
+      ],
+      "posicion_modelado": [
+        0.0,
+        -3.0,
+        14.5484
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        3.5484,
+        -0.5
+      ]
+    },
+    {
+      "nombre": "Artillero_Der",
+      "pieza": "Aleta_Pectoral_Der",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        7.6,
+        6.0063,
+        -2.8
+      ],
+      "posicion_modelado": [
+        7.6,
+        2.8,
+        6.0063
+      ],
+      "relativo_a_pieza_roblox": [
+        2.0,
+        0.8063,
+        1.2
+      ]
+    },
+    {
+      "nombre": "Artillero_Izq",
+      "pieza": "Aleta_Pectoral_Izq",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        -7.6,
+        6.0063,
+        -2.8
+      ],
+      "posicion_modelado": [
+        -7.6,
+        2.8,
+        6.0063
+      ],
+      "relativo_a_pieza_roblox": [
+        -2.0,
+        0.8063,
+        1.2
+      ]
+    },
+    {
+      "nombre": "Timonel_Cola",
+      "pieza": "Cola_Base",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0023,
+        10.9955,
+        13.6372
+      ],
+      "posicion_modelado": [
+        0.0023,
+        -13.6372,
+        10.9955
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0023,
+        3.0955,
+        1.8372
+      ]
+    }
+  ],
+  "notas": [
+    "La aleta caudal es HORIZONTAL (como una ballena).",
+    "Ojos_Cornea va soldada a la Cabeza: en Roblox, material Glass o Transparency 0,35.",
+    "Las placas operculares pivotan en su bisagra superior (se abren como puertas de garaje).",
+    "Los puntos de montaje son cubos de 0,3: en Roblox, Transparency = 1, CanCollide = false.",
+    "El atlas lo comparten todas las piezas (SurfaceAppearance con color, normal, roughness y metal)."
+  ]
+}

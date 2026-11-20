@@ -1,0 +1,25 @@
+OK
+Cuerpo_Principal: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 4954 (esperado 4954), tamaño 14.36×24.32×10.63 st
+Cabeza: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3546 (esperado 3546), tamaño 8.79×10.63×10.64 st
+Mandibula_Inf: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 630 (esperado 630), tamaño 3.47×9.53×1.91 st
+Aleta_Pectoral_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 914 (esperado 914), tamaño 8.19×8.29×3.48 st
+Aleta_Pectoral_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 914 (esperado 914), tamaño 8.18×8.30×3.50 st
+Aleta_Dorsal: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3087 (esperado 3087), tamaño 3.98×7.75×6.53 st
+Cola_Base: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 460 (esperado 460), tamaño 6.16×5.84×6.59 st
+Cola_Media: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 328 (esperado 328), tamaño 3.75×3.57×3.69 st
+Cola_Punta: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 652 (esperado 652), tamaño 9.99×4.87×2.31 st
+Tentaculo_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 854 (esperado 854), tamaño 1.47×10.28×4.60 st
+Tentaculo_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 854 (esperado 854), tamaño 1.30×10.26×4.58 st
+Tentaculo_3: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 854 (esperado 854), tamaño 1.49×10.28×4.60 st
+Tentaculo_4: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 854 (esperado 854), tamaño 1.39×10.27×4.57 st
+Placa_Opercular_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 432 (esperado 432), tamaño 0.82×5.54×3.65 st
+Placa_Opercular_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 432 (esperado 432), tamaño 0.82×5.54×3.65 st
+Ojos_Cornea: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 140 (esperado 140), tamaño 8.78×0.74×0.75 st
+Puente_Mando: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Proa_Inferior: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Acceso_Bodega_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Acceso_Bodega_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Vigia_Dorsal: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Artillero_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Artillero_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Timonel_Cola: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
