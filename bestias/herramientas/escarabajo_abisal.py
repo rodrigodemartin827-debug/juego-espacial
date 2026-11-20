@@ -244,6 +244,13 @@ def elitro(g, bvh, lado, rnd):
                     crater_c = (p, n)
             fila.append(p + n * off)
         rej.append(fila)
+    # Suavizado de la rejilla (quita las ondas que dejan las proyecciones), sin mover el borde.
+    for _ in range(3):
+        nueva = [fila[:] for fila in rej]
+        for i in range(1, len(rej) - 1):
+            for j in range(1, nth - 1):
+                nueva[i][j] = (rej[i][j] * 2 + rej[i - 1][j] + rej[i + 1][j] + rej[i][j - 1] + rej[i][j + 1]) / 6
+        rej = nueva
     D.lamina(g, rej, 0.25, 0.28, "elitro", Vector((lado, 0, 1)), aux_fn=lambda i, j: (i / 18, j / 13, 0.0))
     if lado < 0:
         if crater_c is None:
@@ -300,7 +307,7 @@ def construir(args):
             g.tubo([b, b + Vector((lado * 0.08, 0.25, -0.25)), b + Vector((lado * 0.12, 0.42, -0.45))],
                    [0.07, 0.055, 0.04], "cuerno", lados=5, punta=True)
     # Ariete frontal en V (hueso y metal) con 3 púas, sobre la placa frontal.
-    c = Vector((0, 7.25, 3.15))
+    c = Vector((0, 7.75, 3.0))
     for lado in (1, -1):
         brazo = Vector((lado * 0.95, -0.55, 0.0))
         D.caja(g, c + brazo * 0.5, (brazo.normalized(), Vector((0, 0, 1)).cross(brazo.normalized()) * -lado,
