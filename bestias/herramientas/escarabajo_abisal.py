@@ -234,7 +234,7 @@ def elitro(g, bvh, lado, rnd):
                 if p is not None:
                     p = p - Vector((0, dy, 0))
                     break
-            off = 0.115 + 0.125
+            off = 0.15 + 0.125
             for uk in (0.25, 0.5, 0.75):  # nervaduras
                 off += 0.1 * math.exp(-((u - uk) / 0.045) ** 2) * (1 - C.sstep(0.85, 1.0, v))
             if lado < 0:  # cráter de impacto (1 stud) en el élitro izquierdo
@@ -245,7 +245,7 @@ def elitro(g, bvh, lado, rnd):
             fila.append(p + n * off)
         rej.append(fila)
     # Suavizado de la rejilla (quita las ondas que dejan las proyecciones), sin mover el borde.
-    for _ in range(3):
+    for _ in range(10):
         nueva = [fila[:] for fila in rej]
         for i in range(1, len(rej) - 1):
             for j in range(1, nth - 1):
