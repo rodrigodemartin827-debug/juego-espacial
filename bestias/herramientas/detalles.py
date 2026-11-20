@@ -208,3 +208,103 @@ def rotar_a(v_desde, v_hacia):
 
 def matriz(ejes):
     return Matrix([list(e) for e in ejes]).transposed()
+
+
+def lamina(geo, rejilla, grosor, borde, mat, salida, aux_fn=None):
+    """Lámina con grosor a partir de una rejilla de puntos de su superficie media (filas × columnas): dos capas
+    separadas `grosor` y un canto redondeado algo más grueso (`borde`). Sirve para aletas, crestas y telas.
+    aux_fn(i, j) -> aux de cada punto (i: fila, j: columna)."""
+    filas, cols = len(rejilla), len(rejilla[0])
+    salida = Vector(salida)
+    sup, inf = [], []
+    for i in range(filas):
+        fs, fi = [], []
+        for j in range(cols):
+            p = Vector(rejilla[i][j])
+            a = Vector(rejilla[min(i + 1, filas - 1)][j]) - Vector(rejilla[max(i - 1, 0)][j])
+            b = Vector(rejilla[i][min(j + 1, cols - 1)]) - Vector(rejilla[i][max(j - 1, 0)])
+            n = a.cross(b)
+            n = n.normalized() if n.length > 1e-8 else salida.normalized()
+            if n.dot(salida) < 0:
+                n = -n
+            en_borde = i in (0, filas - 1) or j in (0, cols - 1)
+            e = (borde if en_borde else grosor) / 2
+            aux = aux_fn(i, j) if aux_fn else (i / max(filas - 1, 1), j / max(cols - 1, 1), 6.0)
+            fs.append(geo.v(p + n * e, aux))
+            fi.append(geo.v(p - n * e, aux))
+        sup.append(fs)
+        inf.append(fi)
+    for i in range(filas - 1):
+        for j in range(cols - 1):
+            geo.cara((sup[i][j], sup[i + 1][j], sup[i + 1][j + 1], sup[i][j + 1]), mat)
+            geo.cara((inf[i][j + 1], inf[i + 1][j + 1], inf[i + 1][j], inf[i][j]), mat)
+    borde_idx = [(i, 0) for i in range(filas)] + [(filas - 1, j) for j in range(1, cols)] + \
+                [(i, cols - 1) for i in range(filas - 2, -1, -1)] + [(0, j) for j in range(cols - 2, 0, -1)]
+    for k in range(len(borde_idx)):
+        (i1, j1), (i2, j2) = borde_idx[k], borde_idx[(k + 1) % len(borde_idx)]
+        geo.cara((sup[i1][j1], sup[i2][j2], inf[i2][j2], inf[i1][j1]), mat)
+
+
+def ojo_completo(geo, cornea, c, d, R, alfa=0.9, pupila="vertical", nictitante=True, mat_globo="esclera",
+                 seg=12):
+    """Ojo con volumen: globo, iris (aux = radio, ángulo, 5) ligeramente cóncavo, pupila con grosor (vertical
+    de reptil o de estrella de 4 puntas), córnea convexa (en `cornea`) y membrana nictitante recogida."""
+    c = Vector(c)
+    t1, t2, d = marco(d, Vector((0, 0, 1)))
+    filas = []
+    for j in range(6):
+        th = math.pi - (math.pi - alfa) * j / 5
+        filas.append([c + (t1 * math.cos(math.tau * k / seg) + t2 * math.sin(math.tau * k / seg)) * R * math.sin(th)
+                      + d * R * math.cos(th) for k in range(seg)])
+    vs = geo.loft(filas[1:], mat_globo, tapar_inicio=False, tapar_fin=False, punta_inicio=(c - d * R, (0, 0, 0)))
+    plano = c + d * R * math.cos(alfa)
+    ri = R * math.sin(alfa)
+    prof = 0.06 * R
+    anillos = [[geo.v(v.co, (1.0, k / seg, 5.0)) for k, v in enumerate(vs[-1])]]
+    for f in (0.62, 0.28):
+        anillos.append([geo.v(plano - d * prof * (1 - f) + (t1 * math.cos(math.tau * k / seg) +
+                                                           t2 * math.sin(math.tau * k / seg)) * ri * f,
+                              (f, k / seg, 5.0)) for k in range(seg)])
+    for j in range(2):
+        for k in range(seg):
+            k2 = (k + 1) % seg
+            geo.cara((anillos[j][k], anillos[j][k2], anillos[j + 1][k2], anillos[j + 1][k]), "iris")
+    cen = geo.v(plano - d * prof, (0.0, 0.0, 5.0))
+    for k in range(seg):
+        geo.cara((anillos[-1][k], anillos[-1][(k + 1) % seg], cen), "iris")
+    base = plano - d * prof
+    if pupila == "vertical":
+        pts = [(math.sin(a) * ri * 0.16, math.cos(a) * ri * 0.82) for a in
+               [math.tau * k / 10 for k in range(10)]]
+    else:
+        pts = [((0.56 if k % 2 == 0 else 0.22) * ri * math.cos(math.tau * k / 8),
+                (0.56 if k % 2 == 0 else 0.22) * ri * math.sin(math.tau * k / 8)) for k in range(8)]
+    n = len(pts)
+    sup = [geo.v(base + t2 * x + t1 * y + d * (prof * math.hypot(x, y) / ri + 0.012 * R / 0.5)) for x, y in pts]
+    inf = [geo.v(base + t2 * x + t1 * y - d * 0.004) for x, y in pts]
+    ca, cb = geo.v(base + d * 0.016 * R / 0.5), geo.v(base - d * 0.006)
+    for k in range(n):
+        k2 = (k + 1) % n
+        geo.cara((sup[k], sup[k2], ca), "pupila")
+        geo.cara((inf[k2], inf[k], cb), "pupila")
+        geo.cara((inf[k], inf[k2], sup[k2], sup[k]), "pupila")
+    # Córnea: casquete que pasa por el borde del iris y asoma 0,1·R por delante.
+    h0 = R * math.cos(alfa)
+    A = R * 1.1
+    k_ = (A * A - R * R) / (2 * (A - h0))
+    rho = A - k_
+    ac = math.acos(max(-1.0, min(1.0, (h0 - k_) / rho)))
+    capas = [[c + d * (k_ + rho * math.cos(ac * j / 3)) + (t1 * math.cos(math.tau * k / seg) +
+              t2 * math.sin(math.tau * k / seg)) * rho * math.sin(ac * j / 3) for k in range(seg)]
+             for j in range(3, 0, -1)]
+    cornea.loft(capas, "cornea", punta_fin=(c + d * A, (0, 0, 0)), tapar_inicio=True)
+    if nictitante:
+        delante = Vector((0, 1, 0)) - d * d.y
+        delante.normalize()
+        arr = d.cross(delante).normalized()
+        rej = []
+        for j in range(3):
+            th = alfa + 0.02 + 0.3 * j / 2
+            rej.append([c + (d * math.cos(th) + (delante * math.cos(ph) + arr * math.sin(ph)) * math.sin(th)) *
+                        (R * 1.012) for ph in [math.radians(-70 + 140 * k / 6) for k in range(7)]])
+        lamina(geo, rej, 0.012 * R / 0.5, 0.02 * R / 0.5, "membrana_ojo", d)

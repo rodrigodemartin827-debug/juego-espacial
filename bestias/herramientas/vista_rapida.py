@@ -49,6 +49,19 @@ def main():
             T.suave(ob)
             objs.append(ob)
             print(nombre, len(c), "tris", f"{time.time() - t:.1f}s", flush=True)
+    if bestia == "serpiente":
+        import serpiente_forma as F
+        for nombre in F.PIEZAS:
+            if solo and nombre not in solo:
+                continue
+            mn, mx = F.caja(nombre)
+            vol, o, p = C.volumen(F.campo_pieza(nombre), mn, mx, F.voxel(nombre) * 1.8)
+            v, c = C.malla_de_volumen(vol, o, p)
+            ob = T.malla_numpy(nombre, v, c)
+            T.normales_fuera(ob)
+            T.suave(ob)
+            objs.append(ob)
+            print(nombre, len(c), flush=True)
     mat, _ = T.material_simple("gris", (0.35, 0.37, 0.42), rug=0.55)
     for o in objs:
         T.asignar_material(o, mat)
