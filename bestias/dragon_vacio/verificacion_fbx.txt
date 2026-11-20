@@ -1,0 +1,24 @@
+OK
+Torso: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 5508 (esperado 5508), tamaño 3.41×6.53×3.61 st
+Cuello: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1782 (esperado 1782), tamaño 1.76×3.38×3.74 st
+Cabeza: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3324 (esperado 3324), tamaño 1.53×4.02×1.88 st
+Mandibula: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 916 (esperado 916), tamaño 1.02×2.44×0.81 st
+Ala_Izq_Hombro: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 372 (esperado 372), tamaño 0.94×1.45×0.98 st
+Ala_Izq_Antebrazo: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 408 (esperado 408), tamaño 0.47×3.10×2.42 st
+Ala_Izq_Mano: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 850 (esperado 850), tamaño 0.56×3.93×2.53 st
+Ala_Der_Hombro: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 372 (esperado 372), tamaño 0.94×1.44×0.99 st
+Ala_Der_Antebrazo: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 408 (esperado 408), tamaño 0.47×3.11×2.42 st
+Ala_Der_Mano: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 850 (esperado 850), tamaño 0.55×3.93×2.53 st
+Pata_Izq_Muslo: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 542 (esperado 542), tamaño 1.49×2.25×2.40 st
+Pata_Izq_Tibia: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 970 (esperado 970), tamaño 0.89×1.99×1.30 st
+Pata_Der_Muslo: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 536 (esperado 536), tamaño 1.49×2.26×2.40 st
+Pata_Der_Tibia: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 970 (esperado 970), tamaño 0.89×1.99×1.30 st
+Cola_Base: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 604 (esperado 604), tamaño 1.20×2.31×1.44 st
+Cola_Media: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 500 (esperado 500), tamaño 0.88×1.76×1.15 st
+Cola_Punta: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 784 (esperado 784), tamaño 1.27×2.10×1.06 st
+Ojos_Cornea: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 140 (esperado 140), tamaño 1.62×0.43×0.46 st
+Montura_Piloto: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_Artillero: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Agarre_Cuello_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Agarre_Cuello_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Punto_Ataque: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st

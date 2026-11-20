@@ -10,6 +10,7 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 | Bestia | Carpeta | Triángulos | Tamaño (studs) | Estado |
 | --- | --- | --- | --- | --- |
 | Manta Estelar | `manta_estelar/` | 17.930 / 18.000 | 17,99 × 14,25 × 3,93 (sin cola) | Aprobada en la ronda 3 |
+| Dragón del Vacío | `dragon_vacio/` | 19.836 / 20.000 | ver JSON (alas plegadas; envergadura abierta 14) | Aprobado en la ronda 3 |
 
 Cada carpeta lleva el `.fbx`, el atlas de 2048 (`_color`, `_normal`, `_roughness`, `_metalness`, `_emision`), el
 `_turnaround.png` de 8 vistas, el `.json` (piezas, pivotes, puntos de montaje) y `verificacion_fbx.txt` (la
