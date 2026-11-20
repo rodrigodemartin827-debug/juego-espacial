@@ -21,8 +21,9 @@ def marco(n, preferido=Vector((1, 0, 0))):
     return t1, t2, n
 
 
-def proyectar(bvh, x, y, z_alto=6.0, abajo=False, dist=20.0):
+def proyectar(bvh, x, y, z_alto=30.0, abajo=False, dist=None):
     """Lanza un rayo vertical y devuelve (punto, normal) de la piel, o (None, None)."""
+    dist = dist if dist is not None else 2 * z_alto + 20.0
     if abajo:
         o = Vector((x, y, -z_alto))
         d = Vector((0, 0, 1))
@@ -275,6 +276,9 @@ def ojo_completo(geo, cornea, c, d, R, alfa=0.9, pupila="vertical", nictitante=T
     base = plano - d * prof
     if pupila == "vertical":
         pts = [(math.sin(a) * ri * 0.16, math.cos(a) * ri * 0.82) for a in
+               [math.tau * k / 10 for k in range(10)]]
+    elif pupila == "horizontal":
+        pts = [(math.sin(a) * ri * 0.78, math.cos(a) * ri * 0.2) for a in
                [math.tau * k / 10 for k in range(10)]]
     else:
         pts = [((0.56 if k % 2 == 0 else 0.22) * ri * math.cos(math.tau * k / 8),

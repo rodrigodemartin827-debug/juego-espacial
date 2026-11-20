@@ -35,8 +35,8 @@ def main():
             T.suave(ob)
             objs.append(ob)
             print(nombre, len(c), "tris", f"{time.time() - t:.1f}s")
-    if bestia in ("dragon", "escarabajo"):
-        F = __import__("dragon_forma" if bestia == "dragon" else "escarabajo_forma")
+    if bestia in ("dragon", "escarabajo", "leviatan"):
+        F = __import__(bestia + "_forma")
         for nombre in F.PIEZAS:
             if solo and nombre not in solo:
                 continue
