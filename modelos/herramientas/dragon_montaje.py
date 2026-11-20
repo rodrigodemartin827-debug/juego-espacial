@@ -988,8 +988,8 @@ def _pintar_membrana(resultado, lado, k, fino, rnd):
         if n == 0:
             continue
         base = PAL["membrana"]
-        col = np.tile(base, (n, 1)) * 0.42
-        rug = np.full(n, 0.55)
+        col = np.tile(base, (n, 1)) * 0.3
+        rug = np.full(n, 0.72)
         if fino:
             # venas: ríos ramificados (ruido celular de bordes) + relieve 0,1 en la cara interior
             f1, f2, _, _ = s.voronoi(m.v * V([1, 1, 1]), 1.6, semilla=31 + k)

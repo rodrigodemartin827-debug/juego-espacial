@@ -627,7 +627,7 @@ def hornear_atlas(bajos, altos, carpeta, tam, muestras_ao=24):
     rme = atlas["rme"][..., :3]
     salida = {
         "color": col,
-        "normal": atlas["normal"][..., :3],
+        "normal": corregir_normales(atlas["normal"][..., :3]),
         "roughness": np.repeat(rme[..., 0:1], 3, 2),
         "metalness": np.repeat(rme[..., 1:2], 3, 2),
         "emision": atlas["emi"][..., :3],
@@ -644,6 +644,18 @@ def hornear_atlas(bajos, altos, carpeta, tam, muestras_ao=24):
         rutas[k] = ruta
         print("[ok]", ruta, flush=True)
     return rutas
+
+
+def corregir_normales(n):
+    """
+    En láminas finas (membranas, la vela de la cresta) el rayo del horneado a veces da en la cara opuesta y deja
+    normales que apuntan hacia dentro (z < 0 en espacio tangente): se ven negras. Se aplanan y se renormaliza.
+    """
+    v = n * 2 - 1
+    malo = v[..., 2] < 0.25
+    v[malo] = (0.0, 0.0, 1.0)
+    v /= np.maximum(np.linalg.norm(v, axis=-1, keepdims=True), 1e-6)
+    return v * 0.5 + 0.5
 
 
 def material_final(rutas):
@@ -732,19 +744,19 @@ def estudio():
         return o
 
     # 3 puntos: clave cálida arriba-delante-izquierda, relleno frío, contraluz fuerte que recorta la silueta
-    luz("clave", 260000, (-45, -60, 70), (1.0, 0.92, 0.82), 25)
-    luz("relleno", 70000, (60, -40, 25), (0.65, 0.75, 1.0), 30)
-    luz("contra", 330000, (20, 75, 55), (0.85, 0.9, 1.0), 20)
-    luz("contra2", 160000, (-50, 60, 20), (1.0, 0.55, 0.4), 20)
-    luz("abajo", 30000, (0, -10, -40), (0.8, 0.8, 0.9), 40)
+    luz("clave", 140000, (-45, -60, 70), (1.0, 0.92, 0.82), 25)
+    luz("relleno", 38000, (60, -40, 25), (0.65, 0.75, 1.0), 30)
+    luz("contra", 200000, (20, 75, 55), (0.85, 0.9, 1.0), 20)
+    luz("contra2", 90000, (-50, 60, 20), (1.0, 0.55, 0.4), 20)
+    luz("abajo", 15000, (0, -10, -40), (0.8, 0.8, 0.9), 40)
     bpy.ops.mesh.primitive_plane_add(size=900, location=(0, 0, -0.02))
     suelo = bpy.context.active_object
     suelo.name = "suelo"
     m = bpy.data.materials.new("suelo")
     m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (0.04, 0.042, 0.05, 1)
-    b.inputs["Roughness"].default_value = 0.9
+    b.inputs["Base Color"].default_value = (0.025, 0.027, 0.033, 1)
+    b.inputs["Roughness"].default_value = 0.95
     suelo.data.materials.append(m)
     return mira, suelo
 
@@ -807,7 +819,7 @@ PRIMEROS_PLANOS = [
     ("Cuello y cadenas", (1.5, -12.5, 12.0), 6.5, 55, 12),
     ("Pata trasera", (7.6, 6.0, 3.5), 5.0, 70, 10),
     ("Hacha de la cola", (3.4, 30.5, 9.0), 4.0, 120, 25),
-    ("Ala (cara interior)", (17.0, 4.0, 22.0), 14.0, -20, 10),
+    ("Ala (cara interior)", (17.0, 5.0, 22.0), 12.0, -55, 8),
 ]
 
 
@@ -1105,6 +1117,38 @@ print(`[Dragón] {modelo.Name} montado: 25 piezas, 24 Motor6D, 5 puntos de monta
 # --------------------------------------------------------------------------------------------------------------
 
 
+def fase_render(a, proceso):
+    """Renders desde el FBX exportado (el asset de verdad), con las texturas del disco. Sin volver a hornear."""
+    escena_vacia()
+    ruta = os.path.join(a.salida, f"{NOMBRE}.fbx")
+    bpy.ops.import_scene.fbx(filepath=ruta, global_scale=1.0 / ESTUDIO)
+    rutas_tex = {k: os.path.join(a.salida, f"{NOMBRE}_{k}.png")
+                 for k in ("color", "normal", "roughness", "metalness", "emision")}
+    mat = material_final(rutas_tex)
+    R = Matrix.Rotation(math.radians(-GIRO_IMPORTACION), 4, "Z")
+    objs = []
+    for o in list(bpy.context.scene.objects):
+        if o.type != "MESH":
+            continue
+        o.matrix_world = R @ o.matrix_world
+        if o.name.split(".")[0] in MONTAJES:
+            o.hide_render = True
+            continue
+        o.data.materials.clear()
+        o.data.materials.append(mat)
+        objs.append(o)
+    estudio()
+    figura_r6(bpy.context.scene.collection)
+    rutas = renderizar(objs, proceso, "vista_", tam=a.tam, muestras=a.muestras)
+    hoja(rutas, os.path.join(proceso, "turnaround.png"), f"Dragón Leviatán · ronda {a.ronda}",
+         [f"{sum(triangulos(o) for o in objs)} triángulos · 25 piezas Motor6D · atlas {a.tex}×{a.tex} · "
+          "figura gris = jugador R6 (5 studs)"])
+    pp = primeros_planos(objs, proceso, a.tam, a.muestras)
+    hoja(pp, os.path.join(proceso, "hoja_detalle.png"), f"Primeros planos · ronda {a.ronda}")
+    sil = silueta(objs, proceso)
+    hoja(sil, os.path.join(proceso, "hoja_silueta.png"), "Prueba de silueta", columnas=4)
+
+
 def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:]
     ap = argparse.ArgumentParser()
@@ -1119,6 +1163,9 @@ def main():
     os.makedirs(a.salida, exist_ok=True)
     proceso = os.path.join(a.salida, "proceso", f"ronda{a.ronda}")
     os.makedirs(proceso, exist_ok=True)
+    if a.fase == "render":
+        fase_render(a, proceso)
+        return
     escena_vacia()
     t0 = time.time()
     bajos, altos = construir(a.cache)

@@ -554,12 +554,12 @@ def pintar_piel(P, N, nombre):
     col = col * (1 - 0.7 * bx[:, None]) + it.lin("#030202")[None, :] * 0.7 * bx[:, None]
     rug = rug * (1 - bx) + 0.32 * bx
     f1, f2, _, _ = s.voronoi(P, 0.55, semilla=13)
-    venas_magma = (1 - s.smoothstep(0.0, 0.06, f2 - f1)) * s.smoothstep(2.4, 0.5, dxx) * (dxx > 0.35)
-    venas_magma *= s.fbm(P, 0.8, 2, semilla=21) > -0.2
-    nucleo = (1 - s.smoothstep(0.0, 0.14, dxx))  # el fondo del surco también arde
-    lava = np.clip(venas_magma + nucleo * 0.8, 0, 1)
+    venas_magma = (1 - s.smoothstep(0.0, 0.05, f2 - f1)) * s.smoothstep(1.5, 0.45, dxx) * (dxx > 0.35)
+    venas_magma *= s.fbm(P, 0.8, 2, semilla=21) > 0.0
+    nucleo = (1 - s.smoothstep(0.0, 0.2, dxx))  # el fondo del surco arde: la X se lee desde lejos
+    lava = np.clip(venas_magma * 0.8 + nucleo, 0, 1)
     col = col * (1 - lava[:, None]) + it.PAL["grieta"][None, :] * 0.45 * lava[:, None]
-    em = np.maximum(em, lava * 2.2)
+    em = np.maximum(em, lava * 2.6)
     # Zarpazo: piel más clara
     bz = np.zeros(n)
     bz[info["banda"]] = info["banda_z"]
@@ -594,9 +594,9 @@ def pintar_piel(P, N, nombre):
     musgo = lomo * s.smoothstep(-0.1, 0.4, s.fbm(P, 0.6, 3, semilla=31))
     col = col * (1 - musgo[:, None]) + it.PAL["musgo"][None, :] * musgo[:, None]
     rug = np.maximum(rug, 0.95 * musgo)
-    liquen = lomo * (1 - s.smoothstep(0.0, 0.05, f2 - f1)) * (s.fbm(P, 0.9, 2, semilla=55) > 0.1)
-    col = col * (1 - liquen[:, None]) + it.PAL["grieta"][None, :] * 0.3 * liquen[:, None]
-    em = np.maximum(em, liquen * 0.8)
+    liquen = lomo * (1 - s.smoothstep(0.0, 0.035, f2 - f1)) * (s.fbm(P, 0.9, 2, semilla=55) > 0.35)
+    col = col * (1 - liquen[:, None]) + it.PAL["grieta"][None, :] * 0.2 * liquen[:, None]
+    em = np.maximum(em, liquen * 0.35)  # líquenes: brillo TENUE
     # Huesos de las alas: hueso oscuro, rótulas gastadas
     ala = W["ala"]
     col = col * (1 - 0.5 * ala[:, None]) + it.lin("#1C1210")[None, :] * 0.5 * ala[:, None]
