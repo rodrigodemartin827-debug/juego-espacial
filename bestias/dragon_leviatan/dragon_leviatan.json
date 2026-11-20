@@ -1,0 +1,1148 @@
+{
+ "nombre": "dragon_leviatan",
+ "triangulos": 49528,
+ "unidades": "studs (1 unidad de Blender = 1 stud)",
+ "giro_importacion_grados": 180.0,
+ "ejes": "Roblox: delante -Z, arriba +Y. Pivotes en coordenadas de Roblox relativas al origen del modelo (centro en el suelo).",
+ "fbx": {
+  "archivo": "dragon_leviatan.fbx",
+  "escala": "metros (1 stud = 0,28 m); Apply Scalings: FBX All",
+  "importar_con": "Scale Unit: Meter"
+ },
+ "texturas": {
+  "color": "dragon_leviatan_color.png",
+  "normal": "dragon_leviatan_normal.png",
+  "roughness": "dragon_leviatan_roughness.png",
+  "metalness": "dragon_leviatan_metalness.png",
+  "emision": "dragon_leviatan_emision.png"
+ },
+ "piezas": {
+  "Torso": {
+   "padre": null,
+   "triangulos": 9276,
+   "pivote_blender": [
+    0.0,
+    0.5,
+    9.6
+   ],
+   "pivote_roblox": [
+    -0.0,
+    9.600000381469727,
+    0.5
+   ],
+   "centro_roblox": [
+    -0.003,
+    10.147,
+    -0.23
+   ],
+   "tam_roblox": [
+    14.538,
+    12.829,
+    20.729
+   ]
+  },
+  "Cuello_Base": {
+   "padre": "Torso",
+   "triangulos": 2564,
+   "pivote_blender": [
+    0.0,
+    -8.4,
+    11.2
+   ],
+   "pivote_roblox": [
+    -0.0,
+    11.199999809265137,
+    -8.399999618530273
+   ],
+   "centro_roblox": [
+    -0.483,
+    11.961,
+    -9.891
+   ],
+   "tam_roblox": [
+    6.432,
+    10.438,
+    7.669
+   ]
+  },
+  "Cuello_Medio": {
+   "padre": "Cuello_Base",
+   "triangulos": 1184,
+   "pivote_blender": [
+    0.0,
+    -12.0,
+    14.6
+   ],
+   "pivote_roblox": [
+    -0.0,
+    14.600000381469727,
+    -12.0
+   ],
+   "centro_roblox": [
+    -0.004,
+    14.65,
+    -14.309
+   ],
+   "tam_roblox": [
+    5.094,
+    6.28,
+    6.426
+   ]
+  },
+  "Cuello_Superior": {
+   "padre": "Cuello_Medio",
+   "triangulos": 1154,
+   "pivote_blender": [
+    0.0,
+    -16.5,
+    14.4
+   ],
+   "pivote_roblox": [
+    -0.0,
+    14.399999618530273,
+    -16.5
+   ],
+   "centro_roblox": [
+    0.009,
+    12.984,
+    -18.415
+   ],
+   "tam_roblox": [
+    6.338,
+    7.198,
+    6.572
+   ]
+  },
+  "Cabeza": {
+   "padre": "Cuello_Superior",
+   "triangulos": 5660,
+   "pivote_blender": [
+    0.0,
+    -19.6,
+    11.0
+   ],
+   "pivote_roblox": [
+    -0.0,
+    11.0,
+    -19.600000381469727
+   ],
+   "centro_roblox": [
+    -0.005,
+    10.234,
+    -24.795
+   ],
+   "tam_roblox": [
+    6.803,
+    8.442,
+    12.363
+   ]
+  },
+  "Mandibula": {
+   "padre": "Cabeza",
+   "triangulos": 3318,
+   "pivote_blender": [
+    0.0,
+    -21.7,
+    8.75
+   ],
+   "pivote_roblox": [
+    -0.0,
+    8.75,
+    -21.700000762939453
+   ],
+   "centro_roblox": [
+    0.001,
+    7.418,
+    -24.685
+   ],
+   "tam_roblox": [
+    6.1,
+    4.088,
+    11.134
+   ]
+  },
+  "Ala_Izq_Hombro": {
+   "padre": "Torso",
+   "triangulos": 700,
+   "pivote_blender": [
+    4.0,
+    -4.6,
+    13.4
+   ],
+   "pivote_roblox": [
+    -4.0,
+    13.399999618530273,
+    -4.599999904632568
+   ],
+   "centro_roblox": [
+    -6.907,
+    15.854,
+    -2.913
+   ],
+   "tam_roblox": [
+    6.958,
+    6.704,
+    5.493
+   ]
+  },
+  "Ala_Izq_Antebrazo": {
+   "padre": "Ala_Izq_Hombro",
+   "triangulos": 932,
+   "pivote_blender": [
+    9.8,
+    -1.0,
+    18.6
+   ],
+   "pivote_roblox": [
+    -9.800000190734863,
+    18.600000381469727,
+    -1.0
+   ],
+   "centro_roblox": [
+    -9.879,
+    16.769,
+    6.751
+   ],
+   "tam_roblox": [
+    13.393,
+    14.962,
+    24.276
+   ]
+  },
+  "Ala_Izq_Mano": {
+   "padre": "Ala_Izq_Antebrazo",
+   "triangulos": 2604,
+   "pivote_blender": [
+    14.6,
+    -1.6,
+    23.6
+   ],
+   "pivote_roblox": [
+    -14.600000381469727,
+    23.600000381469727,
+    -1.600000023841858
+   ],
+   "centro_roblox": [
+    -19.638,
+    22.222,
+    7.195
+   ],
+   "tam_roblox": [
+    11.044,
+    25.852,
+    22.92
+   ]
+  },
+  "Ala_Der_Hombro": {
+   "padre": "Torso",
+   "triangulos": 700,
+   "pivote_blender": [
+    -4.0,
+    -4.6,
+    13.4
+   ],
+   "pivote_roblox": [
+    4.0,
+    13.399999618530273,
+    -4.599999904632568
+   ],
+   "centro_roblox": [
+    6.882,
+    15.872,
+    -2.914
+   ],
+   "tam_roblox": [
+    6.946,
+    6.743,
+    5.486
+   ]
+  },
+  "Ala_Der_Antebrazo": {
+   "padre": "Ala_Der_Hombro",
+   "triangulos": 932,
+   "pivote_blender": [
+    -9.8,
+    -1.0,
+    18.6
+   ],
+   "pivote_roblox": [
+    9.800000190734863,
+    18.600000381469727,
+    -1.0
+   ],
+   "centro_roblox": [
+    9.879,
+    16.77,
+    6.751
+   ],
+   "tam_roblox": [
+    13.393,
+    14.964,
+    24.276
+   ]
+  },
+  "Ala_Der_Mano": {
+   "padre": "Ala_Der_Antebrazo",
+   "triangulos": 2070,
+   "pivote_blender": [
+    -14.6,
+    -1.6,
+    23.6
+   ],
+   "pivote_roblox": [
+    14.600000381469727,
+    23.600000381469727,
+    -1.600000023841858
+   ],
+   "centro_roblox": [
+    19.674,
+    22.234,
+    7.652
+   ],
+   "tam_roblox": [
+    11.099,
+    25.798,
+    21.963
+   ]
+  },
+  "Pata_Del_Izq_Muslo": {
+   "padre": "Torso",
+   "triangulos": 998,
+   "pivote_blender": [
+    5.2,
+    -6.2,
+    8.2
+   ],
+   "pivote_roblox": [
+    -5.199999809265137,
+    8.199999809265137,
+    -6.199999809265137
+   ],
+   "centro_roblox": [
+    -6.743,
+    6.726,
+    -5.427
+   ],
+   "tam_roblox": [
+    5.008,
+    6.093,
+    5.931
+   ]
+  },
+  "Pata_Del_Izq_Garra": {
+   "padre": "Pata_Del_Izq_Muslo",
+   "triangulos": 1740,
+   "pivote_blender": [
+    7.7,
+    -4.2,
+    4.5
+   ],
+   "pivote_roblox": [
+    -7.699999809265137,
+    4.5,
+    -4.199999809265137
+   ],
+   "centro_roblox": [
+    -7.891,
+    2.669,
+    -7.507
+   ],
+   "tam_roblox": [
+    4.128,
+    5.489,
+    9.956
+   ]
+  },
+  "Pata_Del_Der_Muslo": {
+   "padre": "Torso",
+   "triangulos": 1000,
+   "pivote_blender": [
+    -5.2,
+    -6.2,
+    8.2
+   ],
+   "pivote_roblox": [
+    5.199999809265137,
+    8.199999809265137,
+    -6.199999809265137
+   ],
+   "centro_roblox": [
+    6.738,
+    6.73,
+    -5.413
+   ],
+   "tam_roblox": [
+    4.996,
+    6.08,
+    5.894
+   ]
+  },
+  "Pata_Del_Der_Garra": {
+   "padre": "Pata_Del_Der_Muslo",
+   "triangulos": 1740,
+   "pivote_blender": [
+    -7.7,
+    -4.2,
+    4.5
+   ],
+   "pivote_roblox": [
+    7.699999809265137,
+    4.5,
+    -4.199999809265137
+   ],
+   "centro_roblox": [
+    7.886,
+    2.666,
+    -7.51
+   ],
+   "tam_roblox": [
+    4.136,
+    5.483,
+    9.951
+   ]
+  },
+  "Pata_Tras_Izq_Muslo": {
+   "padre": "Torso",
+   "triangulos": 1100,
+   "pivote_blender": [
+    4.9,
+    7.0,
+    10.1
+   ],
+   "pivote_roblox": [
+    -4.900000095367432,
+    10.100000381469727,
+    7.0
+   ],
+   "centro_roblox": [
+    -6.295,
+    8.987,
+    5.421
+   ],
+   "tam_roblox": [
+    5.627,
+    6.605,
+    7.436
+   ]
+  },
+  "Pata_Tras_Izq_Tibia": {
+   "padre": "Pata_Tras_Izq_Muslo",
+   "triangulos": 1692,
+   "pivote_blender": [
+    7.4,
+    3.6,
+    6.6
+   ],
+   "pivote_roblox": [
+    -7.400000095367432,
+    6.599999904632568,
+    3.5999999046325684
+   ],
+   "centro_roblox": [
+    -7.173,
+    3.799,
+    6.349
+   ],
+   "tam_roblox": [
+    4.238,
+    8.158,
+    9.138
+   ]
+  },
+  "Pata_Tras_Der_Muslo": {
+   "padre": "Torso",
+   "triangulos": 1100,
+   "pivote_blender": [
+    -4.9,
+    7.0,
+    10.1
+   ],
+   "pivote_roblox": [
+    4.900000095367432,
+    10.100000381469727,
+    7.0
+   ],
+   "centro_roblox": [
+    6.303,
+    8.992,
+    5.421
+   ],
+   "tam_roblox": [
+    5.639,
+    6.598,
+    7.419
+   ]
+  },
+  "Pata_Tras_Der_Tibia": {
+   "padre": "Pata_Tras_Der_Muslo",
+   "triangulos": 1692,
+   "pivote_blender": [
+    -7.4,
+    3.6,
+    6.6
+   ],
+   "pivote_roblox": [
+    7.400000095367432,
+    6.599999904632568,
+    3.5999999046325684
+   ],
+   "centro_roblox": [
+    7.17,
+    3.798,
+    6.352
+   ],
+   "tam_roblox": [
+    4.238,
+    8.157,
+    9.162
+   ]
+  },
+  "Cola_Base": {
+   "padre": "Torso",
+   "triangulos": 1724,
+   "pivote_blender": [
+    0.0,
+    9.2,
+    10.6
+   ],
+   "pivote_roblox": [
+    -0.0,
+    10.600000381469727,
+    9.199999809265137
+   ],
+   "centro_roblox": [
+    -0.654,
+    10.013,
+    12.764
+   ],
+   "tam_roblox": [
+    6.311,
+    8.053,
+    8.235
+   ]
+  },
+  "Cola_Media": {
+   "padre": "Cola_Base",
+   "triangulos": 1400,
+   "pivote_blender": [
+    0.5,
+    16.2,
+    8.6
+   ],
+   "pivote_roblox": [
+    -0.5,
+    8.600000381469727,
+    16.200000762939453
+   ],
+   "centro_roblox": [
+    -0.949,
+    7.948,
+    19.464
+   ],
+   "tam_roblox": [
+    4.992,
+    6.549,
+    7.889
+   ]
+  },
+  "Cola_Punta": {
+   "padre": "Cola_Media",
+   "triangulos": 2424,
+   "pivote_blender": [
+    1.9,
+    23.0,
+    6.6
+   ],
+   "pivote_roblox": [
+    -1.899999976158142,
+    6.599999904632568,
+    23.0
+   ],
+   "centro_roblox": [
+    -2.803,
+    7.75,
+    28.078
+   ],
+   "tam_roblox": [
+    4.868,
+    5.901,
+    10.679
+   ]
+  },
+  "Cresta_Dorsal": {
+   "padre": "Torso",
+   "triangulos": 1082,
+   "pivote_blender": [
+    0.0,
+    1.313,
+    14.818
+   ],
+   "pivote_roblox": [
+    -0.0,
+    14.817999839782715,
+    1.312999963760376
+   ],
+   "centro_roblox": [
+    -0.0,
+    16.489,
+    1.313
+   ],
+   "tam_roblox": [
+    0.481,
+    3.341,
+    16.251
+   ]
+  },
+  "Cornamenta": {
+   "padre": "Cabeza",
+   "triangulos": 742,
+   "pivote_blender": [
+    0.0,
+    -21.6,
+    13.6
+   ],
+   "pivote_roblox": [
+    -0.0,
+    13.600000381469727,
+    -21.600000381469727
+   ],
+   "centro_roblox": [
+    -0.0,
+    14.354,
+    -20.85
+   ],
+   "tam_roblox": [
+    8.427,
+    5.167,
+    7.041
+   ]
+  }
+ },
+ "puntos_montaje": {
+  "Montura_Cria_Piloto": {
+   "pieza": "Cuello_Medio",
+   "pos_blender": [
+    0.0,
+    -15.2,
+    17.17
+   ],
+   "pos_roblox": [
+    -0.0,
+    17.170000076293945,
+    -15.199999809265137
+   ],
+   "tam": 0.3
+  },
+  "Montura_Cria_Pasajero": {
+   "pieza": "Torso",
+   "pos_blender": [
+    0.0,
+    -2.4,
+    15.829
+   ],
+   "pos_roblox": [
+    -0.0,
+    15.829000473022461,
+    -2.4000000953674316
+   ],
+   "tam": 0.3
+  },
+  "Agarre_Cuello_Izq": {
+   "pieza": "Cuello_Medio",
+   "pos_blender": [
+    2.415,
+    -14.2,
+    14.616
+   ],
+   "pos_roblox": [
+    -2.4149999618530273,
+    14.616000175476074,
+    -14.199999809265137
+   ],
+   "tam": 0.3
+  },
+  "Agarre_Cuello_Der": {
+   "pieza": "Cuello_Medio",
+   "pos_blender": [
+    -2.415,
+    -14.2,
+    14.616
+   ],
+   "pos_roblox": [
+    2.4149999618530273,
+    14.616000175476074,
+    -14.199999809265137
+   ],
+   "tam": 0.3
+  },
+  "Punto_Aliento": {
+   "pieza": "Cabeza",
+   "pos_blender": [
+    0.0,
+    -27.2,
+    8.45
+   ],
+   "pos_roblox": [
+    -0.0,
+    8.449999809265137,
+    -27.200000762939453
+   ],
+   "tam": 0.3
+  }
+ },
+ "tamano_studs": {
+  "envergadura_x": 50.38,
+  "largo_y": 64.39,
+  "alto_z": 35.43
+ },
+ "penetraciones": {
+  "Ala_Izq_Antebrazo": {
+   "Torso": [
+    1,
+    0.209,
+    [
+     3.2,
+     -5.1,
+     12.6
+    ]
+   ]
+  },
+  "Ala_Der_Antebrazo": {
+   "Torso": [
+    1,
+    0.209,
+    [
+     -3.2,
+     -5.1,
+     12.6
+    ]
+   ]
+  }
+ },
+ "verificacion_reimportacion": {
+  "error_max_pivote_studs": 0.0,
+  "faltan": [],
+  "piezas": {
+   "Agarre_Cuello_Der": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 12
+   },
+   "Agarre_Cuello_Izq": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 12
+   },
+   "Ala_Der_Antebrazo": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 929
+   },
+   "Ala_Der_Hombro": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 700
+   },
+   "Ala_Der_Mano": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 2070
+   },
+   "Ala_Izq_Antebrazo": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 928
+   },
+   "Ala_Izq_Hombro": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 700
+   },
+   "Ala_Izq_Mano": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 2604
+   },
+   "Cabeza": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 5660
+   },
+   "Cola_Base": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1724
+   },
+   "Cola_Media": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1400
+   },
+   "Cola_Punta": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 2424
+   },
+   "Cornamenta": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 742
+   },
+   "Cresta_Dorsal": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1082
+   },
+   "Cuello_Base": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 2564
+   },
+   "Cuello_Medio": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1184
+   },
+   "Cuello_Superior": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1154
+   },
+   "Mandibula": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 3318
+   },
+   "Montura_Cria_Pasajero": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 12
+   },
+   "Montura_Cria_Piloto": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 12
+   },
+   "Pata_Del_Der_Garra": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1740
+   },
+   "Pata_Del_Der_Muslo": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1000
+   },
+   "Pata_Del_Izq_Garra": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1740
+   },
+   "Pata_Del_Izq_Muslo": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 998
+   },
+   "Pata_Tras_Der_Muslo": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1100
+   },
+   "Pata_Tras_Der_Tibia": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1691
+   },
+   "Pata_Tras_Izq_Muslo": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1100
+   },
+   "Pata_Tras_Izq_Tibia": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 1691
+   },
+   "Punto_Aliento": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 12
+   },
+   "Torso": {
+    "err": 0.0,
+    "rot": [
+     -0.0,
+     -0.0,
+     0.0
+    ],
+    "esc": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "tris": 9270
+   }
+  }
+ }
+}
