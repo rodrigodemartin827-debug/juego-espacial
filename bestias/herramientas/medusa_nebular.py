@@ -67,8 +67,8 @@ def smooth(N, a, b, x):
 def campana_ext(t, phi):
     """Punto de la superficie exterior: t = 0 en la cima, 1 en el borde. Lóbulos suaves (8) cerca del borde."""
     # Paraguas: cima ancha y algo plana, hombros caídos y borde abierto hacia fuera (no un casco).
-    r = RADIO * (math.sin(t * math.pi / 2) ** 0.72) * (0.94 + 0.06 * t ** 3)
-    z = BORDE_Z + (APICE - BORDE_Z) * math.cos(t * math.pi / 2) ** 1.9
+    r = RADIO * (math.sin(t * math.pi / 2) ** 0.6) * (0.95 + 0.05 * t ** 3)
+    z = BORDE_Z + (APICE - BORDE_Z) * math.cos(t * math.pi / 2) ** 1.6
     r *= 1 + 0.025 * math.cos(8 * phi) * t ** 3 + 0.01 * math.sin(3 * phi + 1.0) * t
     z -= 0.06 * t ** 6  # el borde se curva un poco hacia abajo
     return Vector((r * math.cos(phi), r * math.sin(phi), z))
@@ -342,9 +342,9 @@ def materiales():
     gel = N.ruido(P, 9.0, 4.0, 0.6)
     venas = smooth(N, 0.0, 0.04, N.voronoi(P, 3.0, rasgo="DISTANCE_TO_EDGE"))
     # 3 manchas más opacas (quemaduras solares).
-    q = N.ruido(N.vmate("ADD", P, (13.0, 4.0, 0.0)), 0.55, 2.0, 0.5)
+    q = N.ruido(N.vmate("ADD", P, (13.0, 4.0, 0.0)), 0.9, 1.0, 0.5)
     quema = N.mate("MULTIPLY", smooth(N, 0.68, 0.74, q), N.mate("LESS_THAN", a[2], 0.5))
-    quema = N.mate("MULTIPLY", quema, 0.6)
+    quema = N.mate("MULTIPLY", quema, 0.35)
     # Dos espirales luminosas en la cima (marcas de domesticación inducidas).
     ang = N.mate("ARCTAN2", py_, px_)
     rr = N.vmate("LENGTH", N.combinar(px_, py_, 0.0))
@@ -355,7 +355,7 @@ def materiales():
     borde = smooth(N, 0.8, 1.0, a[0])
     col = N.mezcla(smooth(N, 0.3, 0.7, gel), lin("campana"), (0.42, 0.22, 0.6))
     col = N.mezcla(N.mate("MULTIPLY", N.mate("SUBTRACT", 1.0, venas), 0.35), col, (0.55, 0.35, 0.75))
-    col = N.mezcla(quema, col, (0.7, 0.6, 0.75))
+    col = N.mezcla(quema, col, (0.62, 0.5, 0.66))
     col = N.mezcla(espiral, col, (0.85, 0.65, 1.0))
     N.poner("Base Color", col)
     N.poner("Roughness", N.sep(N.mezcla(quema, 0.12, 0.55))[0])
