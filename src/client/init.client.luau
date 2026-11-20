@@ -25,6 +25,7 @@ local ServicioPlanetas = require(script.Planetas.ServicioPlanetas)
 local ServicioRed = require(script.Servicios.ServicioRed)
 local GravedadPlaneta = require(script.Experimentos.GravedadPlaneta)
 local ServicioTiendas = require(script.Tiendas.ServicioTiendas)
+local HUDController = require(script.UI.HUDController)
 
 -- Primero la red (espera a que el servidor publique los remotos) y después lo que los usa.
 ServicioRed.Iniciar()
@@ -35,8 +36,9 @@ ServicioExploracion.Iniciar()
 ServicioPlanetas.Iniciar()
 ServicioTiendas.Iniciar()
 GravedadPlaneta.Iniciar() -- EXPERIMENTO: solo hace algo en Studio, con el experimento activo
+HUDController.Iniciar() -- la interfaz va la última: usa los datos, el combate y la exploración ya iniciados
 
--- Aviso en la consola mientras no hay interfaz: permite comprobar que los datos llegan.
+-- Aviso en la consola: permite comprobar que los datos llegan.
 ServicioDatos.Actualizados:Conectar(function(datos)
 	print(`[Cliente] Datos recibidos: bando {datos.Bando}, nivel {datos.Nivel}, {datos.Monedas} monedas`)
 end)

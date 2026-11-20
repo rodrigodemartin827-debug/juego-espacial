@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+<!-- slot_armadura · Juego espacial · generado por herramientas/iconos_ui/generar.mjs -->
+<path d="M40 38 L52 32 L64 40 L76 32 L88 38 V98 L64 114 L40 98 Z" fill="#FFFFFF" fill-opacity="0.12"/><path d="M16 40 L40 26 L48 50 L28 62 Z" fill="#FFFFFF" fill-opacity="0.35"/><path d="M112 40 L88 26 L80 50 L100 62 Z" fill="#FFFFFF" fill-opacity="0.35"/><circle cx="64" cy="64" r="16" stroke-width="5"/><circle cx="64" cy="64" r="8" fill="#FFFFFF" stroke="none"/><path d="M48 88 L64 96 L80 88" stroke-width="5" opacity="0.6"/><path d="M50 78 H40 M78 78 H88" stroke-width="5" opacity="0.6"/>
+</svg>

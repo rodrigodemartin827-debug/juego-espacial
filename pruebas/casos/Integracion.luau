@@ -68,6 +68,9 @@ local function arrancarCliente(entorno, jugador)
 		"return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Experimentos.GravedadPlaneta`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.buscar(`{RUTA_CLIENTE}.Tiendas.ServicioTiendas`).Source = "return { Iniciar = function() end }"
+	-- La interfaz (UI/HUDController) construye GUIs con TweenService, UIScale, ViewportFrame... que la simulación no
+	-- tiene; sus reglas tienen su propia prueba (InterfazUI).
+	entorno.cliente.buscar(`{RUTA_CLIENTE}.UI.HUDController`).Source = "return { Iniciar = function() end }"
 	entorno.cliente.ejecutarScript(RUTA_CLIENTE)
 	return entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioDatos`),
 		entorno.cliente.requerir(`{RUTA_CLIENTE}.Servicios.ServicioRed`)

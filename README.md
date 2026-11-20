@@ -20,6 +20,9 @@ Por ahora el repositorio contiene la **base técnica** sobre la que se construir
   transición; ver [Planetas, sol y agujero negro](#planetas-sol-y-agujero-negro),
 - las **tiendas del planeta humano**: materiales y mejoras de la nave a cambio de monedas, validado en el servidor, y una
   persiana animada que baja cuando se acerca un Monstruo y no le vende nada; ver [Tiendas](#tiendas), y
+- la **interfaz** completa: HUD en partida, barra lateral y nueve pantallas de menú (Personaje, Inventario, Poderes,
+  Tripulación, Ranked, Índice, Mapa galáctico, Ajustes y Tienda) con iconos propios y un preview HTML para aprobar el
+  diseño sin Studio; ver [Interfaz](#interfaz), y
 - pruebas automáticas que se ejecutan fuera de Studio.
 
 ## Puesta en marcha
@@ -133,6 +136,7 @@ src/
     ├── Naves/               Vuelo, cámara, panel de mandos, controles y efectos de las naves
     ├── Exploracion/         Escáner (Q), pico (R), ficha, bodega (I), mesa de crafteo y efectos de escaneo
     ├── Tiendas/             Panel de compra y animación de las persianas
+    ├── UI/                  HUD, barra lateral y pantallas de menú (ver src/client/UI/README.md)
     └── VFX/                 Motor de efectos visuales (lo usan el combate y las naves)
 
 pruebas/                     Pruebas con Lune (ver más abajo)
@@ -144,6 +148,18 @@ modelos/                     Modelos 3D (.fbx para Studio): nave humana, monstru
 Convenciones: todo el código de `src/` va en módulos con `--!strict` y comentarios en español; los nombres de módulos,
 tipos y funciones públicas son `PascalCase` sin tildes (Luau no admite tildes en identificadores), las variables locales
 `camelCase` y las constantes `MAYUSCULAS_CON_GUION_BAJO`. Los puntos de entrada solo arrancan servicios.
+
+## Interfaz
+
+La interfaz vive en `src/client/UI` y se explica entera en [`src/client/UI/README.md`](src/client/UI/README.md).
+
+- **Preview**: abre `src/client/UI/preview_ui_completa.html` en el navegador para ver y probar todas las pantallas sin Studio.
+- **Iconos**: siluetas propias en SVG (`herramientas/iconos_ui`), exportadas a PNG con
+  `node herramientas/iconos_ui/generar.mjs`. Hay que subirlos a Roblox y pegar sus ID en `UI/Modules/Iconos/IdsIconos.luau`;
+  hasta entonces se ve un marcador en su lugar.
+- **Datos**: lo que ya existe (nivel, monedas, bodega, especies descubiertas, poderes, vida) es real; clanes, ranked, gemas,
+  equipo y árbol de poderes son de demostración (`UI/Modules/Datos/DatosDemo.luau`) hasta que tengan servidor.
+- Sustituye al HUD de combate y a la bodega antiguos (`ConfigUI.SustituirInterfacesAntiguas`).
 
 ## Sistema de red
 

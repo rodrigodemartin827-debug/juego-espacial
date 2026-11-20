@@ -18,6 +18,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
 
 local Combate = ReplicatedStorage:WaitForChild("Shared").Combate
+local Senal = require(ReplicatedStorage.Shared.Utilidades.Senal)
 local Config = require(Combate.Config)
 local Poderes = require(Combate.Datos.Poderes)
 local Calidad = require(script.Parent.Parent.VFX.Calidad)
@@ -31,6 +32,9 @@ local ServicioRed = require(script.Parent.Parent.Servicios.ServicioRed)
 local Utiles = require(script.Parent.Parent.VFX.Utiles)
 
 local ServicioCombate = {}
+
+-- Se dispara con `true` al pausar el combate a pie (al subir a una nave) y con `false` al reanudarlo.
+ServicioCombate.PausaCambiada = Senal.nueva()
 
 -- Mientras está pausado (el jugador pilota una nave) no se pide ninguna habilidad y la interfaz se oculta.
 local pausado = false
@@ -198,6 +202,17 @@ end
 function ServicioCombate.Pausar(valor: boolean)
 	pausado = valor
 	Interfaz.Mostrar(not valor)
+	ServicioCombate.PausaCambiada:Disparar(valor)
+end
+
+-- Pide una habilidad como si se hubiera pulsado su tecla (lo usan los botones del HUD nuevo, UI/HUDPartida).
+function ServicioCombate.Solicitar(id: string)
+	solicitar(id)
+end
+
+-- El HUD nuevo sustituye a la interfaz de combate antigua (vida, energía y botones).
+function ServicioCombate.SustituirInterfaz()
+	Interfaz.Sustituir()
 end
 
 -- ===== Arranque =====

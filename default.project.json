@@ -1,5 +1,11 @@
 {
   "name": "JuegoEspacial",
+  "globIgnorePaths": [
+    "src/client/UI/Assets",
+    "src/client/UI/Assets/**",
+    "src/client/UI/*.html",
+    "src/client/UI/*.md"
+  ],
   "tree": {
     "$className": "DataModel",
 
