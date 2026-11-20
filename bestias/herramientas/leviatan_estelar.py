@@ -72,6 +72,7 @@ def material_piel():
     # Placa craneal de marfil con grietas y líquenes.
     q = N.vmate("LENGTH", N.vmate("DIVIDE", N.vmate("SUBTRACT", P, (0, 12.5, F.ZC + 4.3)), (3.0, 3.6, 1.3)))
     placa = N.mate("SUBTRACT", 1.0, smooth(N, 0.85, 1.0, q))
+    placa = N.mate("MULTIPLY", placa, smooth(N, 0.45, 0.7, nz_))  # sólo en la cima, no sobre los ojos
     grietas = N.mate("SUBTRACT", 1.0, smooth(N, 0.0, 0.05, N.voronoi(P, 2.2, rasgo="DISTANCE_TO_EDGE")))
     liquen = N.mate("MULTIPLY", smooth(N, 0.55, 0.65, N.ruido(P, 1.6, 3.0)), placa)
     # Melón (frente) más liso.
@@ -204,7 +205,7 @@ def materiales():
     px_ = N.sep(N.pos())[0]
     nx_ = N.sep(N.normal())[0]
     dentro = N.mate("LESS_THAN", N.mate("MULTIPLY", nx_, px_), 0.0)
-    borde = smooth(N, 0.82, 1.0, a[0])
+    borde = smooth(N, 0.93, 1.0, a[0])
     col = N.mezcla(dentro, N.mezcla(smooth(N, 0.3, 0.7, N.ruido(N.pos(), 2.0)), (0.02, 0.03, 0.05), lin("dorso")),
                    lin("mucosa"))
     col = N.mezcla(borde, col, (0.2, 0.18, 0.15))
@@ -213,7 +214,7 @@ def materiales():
     N.poner("Normal", N.relieve(N.ruido(N.vmate("MULTIPLY", N.pos(), (2, 0.3, 2)), 2.0, 4.0), fuerza=0.6,
                                 distancia=0.05))
     N.poner("Emission Color", N.mezcla(borde, (0, 0, 0), lin("azul")))
-    N.poner("Emission Strength", 0.4)
+    N.poner("Emission Strength", 0.15)
     m["opercular"] = mt
     return m
 
