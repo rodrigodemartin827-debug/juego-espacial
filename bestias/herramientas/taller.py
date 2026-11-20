@@ -142,6 +142,14 @@ def limpiar_degeneradas(obj, dist=2e-4):
     if ngons:
         bmesh.ops.triangulate(bm, faces=ngons)
     malas = [f for f in bm.faces if f.calc_area() < 1e-9]
+    # Caras duplicadas (mismo trío de vértices: una lámina sin volumen que el FBX funde): fuera las dos.
+    vistas = {}
+    for f in bm.faces:
+        vistas.setdefault(tuple(sorted(v.index for v in f.verts)), []).append(f)
+    for lst in vistas.values():
+        if len(lst) > 1:
+            malas.extend(lst)
+    malas = list(set(malas))
     if malas:
         bmesh.ops.delete(bm, geom=malas, context="FACES")
     bm.to_mesh(obj.data)
