@@ -1,0 +1,385 @@
+{
+  "nombre": "medusa_nebular",
+  "bestia": "Medusa Nebular",
+  "rol": "Soporte / curación",
+  "jinetes": "1-2",
+  "unidades": "studs (1 unidad de Blender = 1 stud; FBX en metros con 1 stud = 0,28 m)",
+  "giro_importacion": "180° en el eje vertical aplicado antes de exportar: la bestia mira a -Z en Roblox",
+  "coordenadas": "pivotes en Roblox (X derecha, Y arriba, -Z delante) relativos al origen del modelo; 'modelado' = coordenadas de Blender antes del giro (X derecha, Y delante, Z arriba)",
+  "triangulos": {
+    "total_visibles": 14802,
+    "presupuesto": 16000,
+    "por_pieza": {
+      "Campana": 7526,
+      "Falda": 1548,
+      "Brazo_Oral_1": 316,
+      "Brazo_Oral_2": 316,
+      "Brazo_Oral_3": 316,
+      "Brazo_Oral_4": 316,
+      "Tentaculo_1": 550,
+      "Tentaculo_2": 550,
+      "Tentaculo_3": 514,
+      "Tentaculo_4": 514,
+      "Tentaculo_5": 612,
+      "Tentaculo_6": 514,
+      "Tentaculo_7": 550,
+      "Tentaculo_8": 550,
+      "Humo_Incensario": 110
+    },
+    "puntos_de_montaje": 48
+  },
+  "tamano_studs": {
+    "ancho_x_largo_x_alto_en_reposo": [
+      6.97,
+      6.97,
+      8.37
+    ]
+  },
+  "color_neon": [
+    "#8E44AD",
+    "#FF69B4"
+  ],
+  "texturas": {
+    "color": "medusa_nebular_color.png",
+    "normal": "medusa_nebular_normal.png",
+    "roughness": "medusa_nebular_roughness.png",
+    "metalness": "medusa_nebular_metalness.png",
+    "emision": "medusa_nebular_emision.png"
+  },
+  "piezas": [
+    {
+      "nombre": "Campana",
+      "padre": null,
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        10.0,
+        -0.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "triangulos": 7526
+    },
+    {
+      "nombre": "Falda",
+      "padre": "Campana",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        7.1,
+        -0.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        0.0,
+        7.1
+      ],
+      "triangulos": 1548
+    },
+    {
+      "nombre": "Brazo_Oral_1",
+      "padre": "Campana",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -0.1414,
+        7.42,
+        -0.1414
+      ],
+      "pivote_modelado": [
+        -0.1414,
+        0.1414,
+        7.42
+      ],
+      "triangulos": 316
+    },
+    {
+      "nombre": "Brazo_Oral_2",
+      "padre": "Campana",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -0.1414,
+        7.42,
+        0.1414
+      ],
+      "pivote_modelado": [
+        -0.1414,
+        -0.1414,
+        7.42
+      ],
+      "triangulos": 316
+    },
+    {
+      "nombre": "Brazo_Oral_3",
+      "padre": "Campana",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.1414,
+        7.42,
+        0.1414
+      ],
+      "pivote_modelado": [
+        0.1414,
+        -0.1414,
+        7.42
+      ],
+      "triangulos": 316
+    },
+    {
+      "nombre": "Brazo_Oral_4",
+      "padre": "Campana",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.1414,
+        7.42,
+        -0.1414
+      ],
+      "pivote_modelado": [
+        0.1414,
+        0.1414,
+        7.42
+      ],
+      "triangulos": 316
+    },
+    {
+      "nombre": "Tentaculo_1",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.864,
+        6.9,
+        -1.1863
+      ],
+      "pivote_modelado": [
+        2.864,
+        1.1863,
+        6.9
+      ],
+      "triangulos": 550
+    },
+    {
+      "nombre": "Tentaculo_2",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        1.1863,
+        6.9,
+        -2.864
+      ],
+      "pivote_modelado": [
+        1.1863,
+        2.864,
+        6.9
+      ],
+      "triangulos": 550
+    },
+    {
+      "nombre": "Tentaculo_3",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -1.1863,
+        6.9,
+        -2.864
+      ],
+      "pivote_modelado": [
+        -1.1863,
+        2.864,
+        6.9
+      ],
+      "triangulos": 514
+    },
+    {
+      "nombre": "Tentaculo_4",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.864,
+        6.9,
+        -1.1863
+      ],
+      "pivote_modelado": [
+        -2.864,
+        1.1863,
+        6.9
+      ],
+      "triangulos": 514
+    },
+    {
+      "nombre": "Tentaculo_5",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.864,
+        6.9,
+        1.1863
+      ],
+      "pivote_modelado": [
+        -2.864,
+        -1.1863,
+        6.9
+      ],
+      "triangulos": 612
+    },
+    {
+      "nombre": "Tentaculo_6",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -1.1863,
+        6.9,
+        2.864
+      ],
+      "pivote_modelado": [
+        -1.1863,
+        -2.864,
+        6.9
+      ],
+      "triangulos": 514
+    },
+    {
+      "nombre": "Tentaculo_7",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        1.1863,
+        6.9,
+        2.864
+      ],
+      "pivote_modelado": [
+        1.1863,
+        -2.864,
+        6.9
+      ],
+      "triangulos": 550
+    },
+    {
+      "nombre": "Tentaculo_8",
+      "padre": "Falda",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.864,
+        6.9,
+        1.1863
+      ],
+      "pivote_modelado": [
+        2.864,
+        -1.1863,
+        6.9
+      ],
+      "triangulos": 550
+    },
+    {
+      "nombre": "Humo_Incensario",
+      "padre": "Campana",
+      "tipo": "soldada (Weld)",
+      "pivote_roblox": [
+        0.0,
+        10.0,
+        -0.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "triangulos": 110
+    }
+  ],
+  "puntos_montaje": [
+    {
+      "nombre": "Montura_Piloto",
+      "pieza": "Campana",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        10.51,
+        -0.62
+      ],
+      "posicion_modelado": [
+        0.0,
+        0.62,
+        10.51
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        0.51,
+        -0.62
+      ]
+    },
+    {
+      "nombre": "Montura_Pasajero",
+      "pieza": "Campana",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        10.51,
+        1.0
+      ],
+      "posicion_modelado": [
+        0.0,
+        -1.0,
+        10.51
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        0.51,
+        1.0
+      ]
+    },
+    {
+      "nombre": "Agarre_Izq",
+      "pieza": "Campana",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        -1.44,
+        10.49,
+        -0.0
+      ],
+      "posicion_modelado": [
+        -1.44,
+        0.0,
+        10.49
+      ],
+      "relativo_a_pieza_roblox": [
+        -1.44,
+        0.49,
+        -0.0
+      ]
+    },
+    {
+      "nombre": "Agarre_Der",
+      "pieza": "Campana",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        1.44,
+        10.49,
+        -0.0
+      ],
+      "posicion_modelado": [
+        1.44,
+        0.0,
+        10.49
+      ],
+      "relativo_a_pieza_roblox": [
+        1.44,
+        0.49,
+        -0.0
+      ]
+    }
+  ],
+  "notas": [
+    "Translúcida: en Roblox, Transparency ≈ 0,4 en Campana, 0,3 en Falda, 0,3 en brazos y 0,25 en tentáculos (por eso los canales y el órgano rosa interior se ven a través de la campana).",
+    "Humo_Incensario va soldado a la Campana con Transparency 0,7.",
+    "Alto real ≈ 7,6 studs: la campana mide 3 y los tentáculos 4, como pide la anatomía; los 10 de la tabla no cuadran con esas medidas.",
+    "Tentaculo_5 mide 3 studs (roto, regenerándose) y tiene la punta redondeada y más clara.",
+    "Los puntos de montaje son cubos de 0,3: en Roblox, Transparency = 1, CanCollide = false.",
+    "El atlas lo comparten todas las piezas (SurfaceAppearance con color, normal, roughness y metal)."
+  ]
+}

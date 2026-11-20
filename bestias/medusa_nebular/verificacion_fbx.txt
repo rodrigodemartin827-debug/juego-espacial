@@ -1,0 +1,20 @@
+OK
+Campana: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 7526 (esperado 7526), tamaño 6.29×6.27×3.86 st
+Falda: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1548 (esperado 1548), tamaño 6.97×6.97×0.43 st
+Brazo_Oral_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 316 (esperado 316), tamaño 0.49×0.47×3.03 st
+Brazo_Oral_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 316 (esperado 316), tamaño 0.59×0.59×3.03 st
+Brazo_Oral_3: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 316 (esperado 316), tamaño 0.58×0.58×3.03 st
+Brazo_Oral_4: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 316 (esperado 316), tamaño 0.61×0.58×3.03 st
+Tentaculo_1: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 550 (esperado 550), tamaño 0.27×0.23×4.03 st
+Tentaculo_2: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 550 (esperado 550), tamaño 0.22×0.42×4.03 st
+Tentaculo_3: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 514 (esperado 514), tamaño 0.33×0.30×4.03 st
+Tentaculo_4: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 514 (esperado 514), tamaño 0.29×0.17×4.03 st
+Tentaculo_5: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 612 (esperado 612), tamaño 0.38×0.25×3.05 st
+Tentaculo_6: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 514 (esperado 514), tamaño 0.25×0.31×4.03 st
+Tentaculo_7: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 550 (esperado 550), tamaño 0.25×0.37×4.03 st
+Tentaculo_8: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 550 (esperado 550), tamaño 0.32×0.15×4.03 st
+Humo_Incensario: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 110 (esperado 110), tamaño 0.47×0.36×1.46 st
+Montura_Piloto: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_Pasajero: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Agarre_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Agarre_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
