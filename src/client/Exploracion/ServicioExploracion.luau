@@ -61,4 +61,10 @@ function ServicioExploracion.Iniciar()
 	end, false, Enum.KeyCode.I)
 end
 
+-- La UI nueva (UI/HUDController) se queda la tecla I y enseña la bodega dentro de su inventario.
+function ServicioExploracion.SustituirBodega()
+	ContextActionService:UnbindAction("AbrirBodega")
+	PanelInventario.Sustituir()
+end
+
 return ServicioExploracion

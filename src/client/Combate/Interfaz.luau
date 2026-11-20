@@ -57,6 +57,9 @@ local textoEnergia: TextLabel = nil :: any
 local humanoidActual: Humanoid? = nil
 local pantalla: ScreenGui? = nil
 local iniciada = false
+-- La interfaz nueva (UI/HUDPartida) puede ocupar el lugar de esta: entonces esta no se vuelve a enseñar, pero sigue
+-- llevando la cuenta de energía y cooldowns (EnCooldown) para no pedir habilidades en vano.
+local sustituida = false
 
 -- ===== Construcción =====
 
@@ -271,7 +274,15 @@ end
 -- Muestra u oculta toda la interfaz de combate (mientras se pilota una nave no hace falta).
 function Interfaz.Mostrar(visible: boolean)
 	if pantalla then
-		pantalla.Enabled = visible
+		pantalla.Enabled = visible and not sustituida
+	end
+end
+
+-- La sustituye el HUD nuevo (UI/HUDPartida): se oculta para siempre.
+function Interfaz.Sustituir()
+	sustituida = true
+	if pantalla then
+		pantalla.Enabled = false
 	end
 end
 
@@ -350,6 +361,7 @@ function Interfaz.Iniciar(alPulsar: (id: string) -> ())
 		end)
 	end
 
+	gui.Enabled = not sustituida
 	gui.Parent = jugador:WaitForChild("PlayerGui")
 	pantalla = gui
 

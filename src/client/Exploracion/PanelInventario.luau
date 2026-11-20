@@ -144,6 +144,14 @@ function PanelInventario.EstaAbierto(): boolean
 	return abierto
 end
 
+-- La sustituye el inventario de la UI nueva (UI/PanelInventario): se oculta la pantalla entera (pastilla y panel).
+function PanelInventario.Sustituir()
+	abierto = false
+	if pantalla then
+		pantalla.Enabled = false
+	end
+end
+
 function PanelInventario.Iniciar()
 	if pantalla then
 		return
