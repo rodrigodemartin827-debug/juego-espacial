@@ -23,3 +23,7 @@ __pycache__/
 modelos/**/_render_tmp/
 .venv/
 bestias/**/_cache*/
+# Renders sueltos de las rondas de revisión (en el repositorio solo van las hojas que los juntan)
+bestias/**/proceso/**/*.png
+!bestias/**/proceso/**/hoja_*.png
+!bestias/**/proceso/**/turnaround.png
