@@ -1,0 +1,17 @@
+OK
+Cuerpo_Central: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 9568 (esperado 9568), tamaño 5.78×10.90×1.68 st
+Cabeza: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3178 (esperado 3178), tamaño 4.09×2.97×1.62 st
+Mandibula: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 470 (esperado 470), tamaño 2.20×1.24×0.37 st
+Ala_Izquierda_Base: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 836 (esperado 836), tamaño 2.88×7.95×0.66 st
+Ala_Izquierda_Punta: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 556 (esperado 556), tamaño 3.18×4.69×0.79 st
+Ala_Derecha_Base: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1004 (esperado 1004), tamaño 2.88×7.95×0.66 st
+Ala_Derecha_Punta: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 556 (esperado 556), tamaño 3.18×4.68×0.79 st
+Cola: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 280 (esperado 280), tamaño 0.58×2.96×0.61 st
+Cola_Punta: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 298 (esperado 298), tamaño 0.27×2.62×0.82 st
+Tentaculo_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 482 (esperado 482), tamaño 0.88×1.67×2.25 st
+Tentaculo_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 482 (esperado 482), tamaño 0.93×1.67×2.25 st
+Ojos_Cornea: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 220 (esperado 220), tamaño 4.38×0.79×0.82 st
+Montura_Piloto: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_Pasajero: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Agarre_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Agarre_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st

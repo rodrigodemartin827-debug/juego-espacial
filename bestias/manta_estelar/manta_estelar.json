@@ -1,0 +1,334 @@
+{
+  "nombre": "manta_estelar",
+  "bestia": "Manta Estelar",
+  "rol": "Exploración / velocidad",
+  "jinetes": "1-2",
+  "unidades": "studs (1 unidad de Blender = 1 stud; FBX en metros con 1 stud = 0,28 m)",
+  "giro_importacion": "180° en el eje vertical aplicado antes de exportar: la bestia mira a -Z en Roblox",
+  "coordenadas": "pivotes en Roblox (X derecha, Y arriba, -Z delante) relativos al origen del modelo; 'modelado' = coordenadas de Blender antes del giro (X derecha, Y delante, Z arriba)",
+  "triangulos": {
+    "total_visibles": 17930,
+    "presupuesto": 18000,
+    "por_pieza": {
+      "Cuerpo_Central": 9568,
+      "Cabeza": 3178,
+      "Mandibula": 470,
+      "Ala_Izquierda_Base": 836,
+      "Ala_Izquierda_Punta": 556,
+      "Ala_Derecha_Base": 1004,
+      "Ala_Derecha_Punta": 556,
+      "Cola": 280,
+      "Cola_Punta": 298,
+      "Tentaculo_Izq": 482,
+      "Tentaculo_Der": 482,
+      "Ojos_Cornea": 220
+    },
+    "puntos_de_montaje": 48
+  },
+  "tamano_studs": {
+    "envergadura_largo_alto_sin_cola": [
+      17.99,
+      14.13,
+      3.42
+    ],
+    "con_cola": [
+      17.99,
+      19.75,
+      3.42
+    ]
+  },
+  "color_neon": "#3DF2FF",
+  "texturas": {
+    "color": "manta_estelar_color.png",
+    "normal": "manta_estelar_normal.png",
+    "roughness": "manta_estelar_roughness.png",
+    "metalness": "manta_estelar_metalness.png",
+    "emision": "manta_estelar_emision.png"
+  },
+  "piezas": [
+    {
+      "nombre": "Cuerpo_Central",
+      "padre": null,
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        0.1092,
+        0.8818
+      ],
+      "pivote_modelado": [
+        0.0,
+        -0.8818,
+        0.1092
+      ],
+      "triangulos": 9568
+    },
+    {
+      "nombre": "Cabeza",
+      "padre": "Cuerpo_Central",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        0.1168,
+        -4.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        4.0,
+        0.1168
+      ],
+      "triangulos": 3178
+    },
+    {
+      "nombre": "Mandibula",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        -0.36,
+        -4.98
+      ],
+      "pivote_modelado": [
+        0.0,
+        4.98,
+        -0.36
+      ],
+      "triangulos": 470
+    },
+    {
+      "nombre": "Ala_Izquierda_Base",
+      "padre": "Cuerpo_Central",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.9,
+        0.0554,
+        0.9833
+      ],
+      "pivote_modelado": [
+        -2.9,
+        -0.9833,
+        0.0554
+      ],
+      "triangulos": 836
+    },
+    {
+      "nombre": "Ala_Izquierda_Punta",
+      "padre": "Ala_Izquierda_Base",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -5.8,
+        0.1122,
+        1.0257
+      ],
+      "pivote_modelado": [
+        -5.8,
+        -1.0257,
+        0.1122
+      ],
+      "triangulos": 556
+    },
+    {
+      "nombre": "Ala_Derecha_Base",
+      "padre": "Cuerpo_Central",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.9,
+        0.0554,
+        0.9833
+      ],
+      "pivote_modelado": [
+        2.9,
+        -0.9833,
+        0.0554
+      ],
+      "triangulos": 1004
+    },
+    {
+      "nombre": "Ala_Derecha_Punta",
+      "padre": "Ala_Derecha_Base",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        5.8,
+        0.1122,
+        1.0257
+      ],
+      "pivote_modelado": [
+        5.8,
+        -1.0257,
+        0.1122
+      ],
+      "triangulos": 556
+    },
+    {
+      "nombre": "Cola",
+      "padre": "Cuerpo_Central",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        0.0,
+        6.92
+      ],
+      "pivote_modelado": [
+        0.0,
+        -6.92,
+        0.0
+      ],
+      "triangulos": 280
+    },
+    {
+      "nombre": "Cola_Punta",
+      "padre": "Cola",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        -0.05,
+        9.9
+      ],
+      "pivote_modelado": [
+        0.0,
+        -9.9,
+        -0.05
+      ],
+      "triangulos": 298
+    },
+    {
+      "nombre": "Tentaculo_Izq",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -1.38,
+        -0.24,
+        -5.72
+      ],
+      "pivote_modelado": [
+        -1.38,
+        5.72,
+        -0.24
+      ],
+      "triangulos": 482
+    },
+    {
+      "nombre": "Tentaculo_Der",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        1.38,
+        -0.24,
+        -5.72
+      ],
+      "pivote_modelado": [
+        1.38,
+        5.72,
+        -0.24
+      ],
+      "triangulos": 482
+    },
+    {
+      "nombre": "Ojos_Cornea",
+      "padre": "Cabeza",
+      "tipo": "soldada (Weld)",
+      "pivote_roblox": [
+        0.0,
+        0.1168,
+        -4.0
+      ],
+      "pivote_modelado": [
+        0.0,
+        4.0,
+        0.1168
+      ],
+      "triangulos": 220
+    }
+  ],
+  "puntos_montaje": [
+    {
+      "nombre": "Montura_Piloto",
+      "pieza": "Cuerpo_Central",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0015,
+        1.0769,
+        -2.3606
+      ],
+      "posicion_modelado": [
+        0.0015,
+        2.3606,
+        1.0769
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0015,
+        0.9678,
+        -3.2425
+      ]
+    },
+    {
+      "nombre": "Montura_Pasajero",
+      "pieza": "Cuerpo_Central",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0017,
+        1.1673,
+        -0.3527
+      ],
+      "posicion_modelado": [
+        0.0017,
+        0.3527,
+        1.1673
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0017,
+        1.0581,
+        -1.2345
+      ]
+    },
+    {
+      "nombre": "Agarre_Izq",
+      "pieza": "Ala_Izquierda_Base",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        -3.2661,
+        0.2952,
+        -2.9938
+      ],
+      "posicion_modelado": [
+        -3.2661,
+        2.9938,
+        0.2952
+      ],
+      "relativo_a_pieza_roblox": [
+        -0.3661,
+        0.2399,
+        -3.9771
+      ]
+    },
+    {
+      "nombre": "Agarre_Der",
+      "pieza": "Ala_Derecha_Base",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        3.2661,
+        0.2952,
+        -2.9938
+      ],
+      "posicion_modelado": [
+        3.2661,
+        2.9938,
+        0.2952
+      ],
+      "relativo_a_pieza_roblox": [
+        0.3661,
+        0.2399,
+        -3.9771
+      ]
+    }
+  ],
+  "notas": [
+    "Los nombres van sin tilde (Mandibula, Tentaculo_Izq/Der) para que no se estropeen al importar.",
+    "Ojos_Cornea va soldada a la Cabeza: en Roblox, material Glass o Transparency 0,35 con su color ámbar.",
+    "Los puntos de montaje son cubos de 0,3: en Roblox, Transparency = 1, CanCollide = false.",
+    "El atlas es compartido por todas las piezas (SurfaceAppearance con color, normal, roughness y metal)."
+  ]
+}
