@@ -43,7 +43,11 @@ def terminar(cfg):
     pesos = cfg["peso_tris"]
     suma = sum(pesos.values())
     print(f"[presupuesto] detalles {tris_det} tri; quedan {libre} para las superficies")
-    if libre < 1000:
+    if libre < 0:
+        raise RuntimeError(f"Pasa del presupuesto en {-libre} triángulos: hay que aligerar")
+    for n, o in list(geometricas.items()) + [(n, o) for n, (o, _) in soldadas.items()]:
+        print(f"   [geo] {n}: {T.triangulos(o)}")
+    if altas and libre < 1000:
         raise RuntimeError("Los detalles se comen el presupuesto: hay que aligerarlos")
 
     parejas, piezas = [], {}
@@ -110,6 +114,23 @@ def terminar(cfg):
     # --- Render ---
     if not cfg.get("sin_render"):
         originales = {}
+        # Piezas translúcidas (en Roblox llevan Transparency): en el render, el atlas mezclado con transparencia.
+        for pieza, alfa in cfg.get("translucidas", {}).items():
+            o = piezas[pieza]
+            base = o.active_material
+            m = base.copy()
+            m.name = f"{pieza}_translucida"
+            nt = m.node_tree
+            out = next(n for n in nt.nodes if n.type == "OUTPUT_MATERIAL")
+            bsdf = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")
+            tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+            mix = nt.nodes.new("ShaderNodeMixShader")
+            mix.inputs["Fac"].default_value = alfa
+            nt.links.new(tr.outputs[0], mix.inputs[1])
+            nt.links.new(bsdf.outputs["BSDF"], mix.inputs[2])
+            nt.links.new(mix.outputs[0], out.inputs["Surface"])
+            originales[o] = base
+            T.asignar_material(o, m)
         for o, m in cfg.get("render_material", {}).items():
             originales[o] = o.active_material
             T.asignar_material(o, m)
