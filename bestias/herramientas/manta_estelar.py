@@ -44,7 +44,7 @@ COL = {
     "lomo": "#1A1A3E", "lomo2": "#2D1B4E", "vientre": "#C8C8D4", "escama": "#1E3A5F", "neon": "#3DF2FF",
     "ojo": "#FFB347", "aguijon": "#0D0D1A", "cuero": "#4A2820", "costura": "#C4A882", "hueso": "#E8DCC8",
     "cicatriz": "#8E6E96", "regenerada": "#34407A", "quemadura": "#5A2A1E", "boca": "#5A2440",
-    "branquia": "#3A1238", "fibra": "#8A7A4A", "fibra2": "#4E4226", "hierro": "#3A3836", "esclera": "#17121F",
+    "branquia": "#3A1238", "fibra": "#8A7A4A", "fibra2": "#4E4226", "hierro": "#3A3836", "esclera": "#3A2412",
     "membrana": "#9AA0B8", "diente": "#DCCFB4", "espina": "#26304A", "parasito": "#7A6A80",
 }
 
@@ -885,7 +885,7 @@ def ojo(g, cornea, c, d, lado):
     abombada (pieza aparte) y membrana nictitante recogida en el lagrimal."""
     R = F.OJO_RADIO
     t1, t2, d = D.marco(d, Vector((0, 0, 1)))  # t1 hacia arriba aproximado
-    alfa = 0.9
+    alfa = 1.0
     anillos = []
     for j in range(0, 7):
         th = math.pi - (math.pi - alfa) * j / 6
