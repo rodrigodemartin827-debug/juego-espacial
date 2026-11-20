@@ -1,0 +1,387 @@
+{
+  "nombre": "escarabajo_abisal",
+  "bestia": "Escarabajo Abisal",
+  "rol": "Tanque pesado / asedio",
+  "jinetes": "2-3",
+  "unidades": "studs (1 unidad de Blender = 1 stud; FBX en metros con 1 stud = 0,28 m)",
+  "giro_importacion": "180° en el eje vertical aplicado antes de exportar: la bestia mira a -Z en Roblox",
+  "coordenadas": "pivotes en Roblox (X derecha, Y arriba, -Z delante) relativos al origen del modelo; 'modelado' = coordenadas de Blender antes del giro (X derecha, Y delante, Z arriba)",
+  "triangulos": {
+    "total_visibles": 19906,
+    "presupuesto": 20000,
+    "por_pieza": {
+      "Torso": 4778,
+      "Cabeza": 3482,
+      "Cuerno_Central": 696,
+      "Mandibula_Der": 532,
+      "Mandibula_Izq": 532,
+      "Abdomen": 3168,
+      "Pata_Del_Der": 716,
+      "Pata_Del_Izq": 716,
+      "Pata_Med_Der": 764,
+      "Pata_Med_Izq": 764,
+      "Pata_Tras_Der": 728,
+      "Pata_Tras_Izq": 734,
+      "Elitro_Izq": 1236,
+      "Elitro_Der": 1060
+    },
+    "puntos_de_montaje": 60
+  },
+  "tamano_studs": {
+    "ancho_x_largo_x_alto_en_reposo": [
+      9.64,
+      18.81,
+      7.46
+    ]
+  },
+  "color_neon": [
+    "#FF8C00",
+    "#39FF14"
+  ],
+  "texturas": {
+    "color": "escarabajo_abisal_color.png",
+    "normal": "escarabajo_abisal_normal.png",
+    "roughness": "escarabajo_abisal_roughness.png",
+    "metalness": "escarabajo_abisal_metalness.png",
+    "emision": "escarabajo_abisal_emision.png"
+  },
+  "piezas": [
+    {
+      "nombre": "Torso",
+      "padre": null,
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        2.6998,
+        -1.3307
+      ],
+      "pivote_modelado": [
+        0.0,
+        1.3307,
+        2.6998
+      ],
+      "triangulos": 4778
+    },
+    {
+      "nombre": "Cabeza",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        2.85,
+        -4.35
+      ],
+      "pivote_modelado": [
+        0.0,
+        4.35,
+        2.85
+      ],
+      "triangulos": 3482
+    },
+    {
+      "nombre": "Mandibula_Izq",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -0.85,
+        2.15,
+        -6.85
+      ],
+      "pivote_modelado": [
+        -0.85,
+        6.85,
+        2.15
+      ],
+      "triangulos": 532
+    },
+    {
+      "nombre": "Mandibula_Der",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.85,
+        2.15,
+        -6.85
+      ],
+      "pivote_modelado": [
+        0.85,
+        6.85,
+        2.15
+      ],
+      "triangulos": 532
+    },
+    {
+      "nombre": "Cuerno_Central",
+      "padre": "Cabeza",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        3.75,
+        -6.05
+      ],
+      "pivote_modelado": [
+        0.0,
+        6.05,
+        3.75
+      ],
+      "triangulos": 696
+    },
+    {
+      "nombre": "Elitro_Izq",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -0.05,
+        4.4699,
+        -1.42
+      ],
+      "pivote_modelado": [
+        -0.05,
+        1.42,
+        4.4699
+      ],
+      "triangulos": 1236
+    },
+    {
+      "nombre": "Elitro_Der",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.05,
+        4.4699,
+        -1.42
+      ],
+      "pivote_modelado": [
+        0.05,
+        1.42,
+        4.4699
+      ],
+      "triangulos": 1060
+    },
+    {
+      "nombre": "Pata_Del_Izq",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.35,
+        2.1,
+        -3.35
+      ],
+      "pivote_modelado": [
+        -2.35,
+        3.35,
+        2.1
+      ],
+      "triangulos": 716
+    },
+    {
+      "nombre": "Pata_Del_Der",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.35,
+        2.1,
+        -3.35
+      ],
+      "pivote_modelado": [
+        2.35,
+        3.35,
+        2.1
+      ],
+      "triangulos": 716
+    },
+    {
+      "nombre": "Pata_Med_Izq",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.65,
+        2.0,
+        -0.95
+      ],
+      "pivote_modelado": [
+        -2.65,
+        0.95,
+        2.0
+      ],
+      "triangulos": 764
+    },
+    {
+      "nombre": "Pata_Med_Der",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.65,
+        2.0,
+        -0.95
+      ],
+      "pivote_modelado": [
+        2.65,
+        0.95,
+        2.0
+      ],
+      "triangulos": 764
+    },
+    {
+      "nombre": "Pata_Tras_Izq",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        -2.35,
+        2.0,
+        1.55
+      ],
+      "pivote_modelado": [
+        -2.35,
+        -1.55,
+        2.0
+      ],
+      "triangulos": 734
+    },
+    {
+      "nombre": "Pata_Tras_Der",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        2.35,
+        2.0,
+        1.55
+      ],
+      "pivote_modelado": [
+        2.35,
+        -1.55,
+        2.0
+      ],
+      "triangulos": 728
+    },
+    {
+      "nombre": "Abdomen",
+      "padre": "Torso",
+      "tipo": "rig (Motor6D)",
+      "pivote_roblox": [
+        0.0,
+        2.7,
+        1.6
+      ],
+      "pivote_modelado": [
+        0.0,
+        -1.6,
+        2.7
+      ],
+      "triangulos": 3168
+    }
+  ],
+  "puntos_montaje": [
+    {
+      "nombre": "Montura_Piloto",
+      "pieza": "Torso",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        4.9546,
+        -2.8
+      ],
+      "posicion_modelado": [
+        0.0,
+        2.8,
+        4.9546
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        2.2548,
+        -1.4693
+      ]
+    },
+    {
+      "nombre": "Montura_Artillero",
+      "pieza": "Abdomen",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        4.3802,
+        7.7
+      ],
+      "posicion_modelado": [
+        0.0,
+        -7.7,
+        4.3802
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        1.6802,
+        6.1
+      ]
+    },
+    {
+      "nombre": "Montura_Lateral_Izq",
+      "pieza": "Torso",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        -3.067,
+        1.7098,
+        -0.3289
+      ],
+      "posicion_modelado": [
+        -3.067,
+        0.3289,
+        1.7098
+      ],
+      "relativo_a_pieza_roblox": [
+        -3.067,
+        -0.99,
+        1.0018
+      ]
+    },
+    {
+      "nombre": "Montura_Lateral_Der",
+      "pieza": "Torso",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        3.0677,
+        1.7105,
+        -0.3291
+      ],
+      "posicion_modelado": [
+        3.0677,
+        0.3291,
+        1.7105
+      ],
+      "relativo_a_pieza_roblox": [
+        3.0677,
+        -0.9893,
+        1.0016
+      ]
+    },
+    {
+      "nombre": "Punto_Carga",
+      "pieza": "Abdomen",
+      "tamano": 0.3,
+      "orientacion": "hacia delante (-Z en Roblox)",
+      "posicion_roblox": [
+        0.0,
+        4.8115,
+        5.0
+      ],
+      "posicion_modelado": [
+        0.0,
+        -5.0,
+        4.8115
+      ],
+      "relativo_a_pieza_roblox": [
+        0.0,
+        2.1115,
+        3.4
+      ]
+    }
+  ],
+  "notas": [
+    "Los élitros pivotan en su bisagra delantera (detrás del pronoto): se abren hacia arriba y atrás para ventilar.",
+    "Metal (cadenas, ariete, cascos) con metalness alto; la quitina lleva un brillo sutil (0,2).",
+    "Los puntos de montaje son cubos de 0,3: en Roblox, Transparency = 1, CanCollide = false.",
+    "El atlas lo comparten todas las piezas (SurfaceAppearance con color, normal, roughness y metal)."
+  ]
+}

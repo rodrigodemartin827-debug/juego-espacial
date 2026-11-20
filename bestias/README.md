@@ -4,6 +4,8 @@ Modelos generados con Blender sin pantalla (`bpy`) por los scripts de `herramien
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requirements.txt scikit-image scipy
+# una bestia por script: manta_estelar, dragon_vacio, serpiente_cosmica, medusa_nebular, escarabajo_abisal,
+# leviatan_estelar
 .venv/bin/python bestias/herramientas/manta_estelar.py --salida bestias/manta_estelar --ronda N
 ```
 
@@ -13,6 +15,8 @@ python3 -m venv .venv && .venv/bin/pip install -r modelos/herramientas/requireme
 | Dragón del Vacío | `dragon_vacio/` | 19.836 / 20.000 | 4,84 × 15,83 × 7,79 (alas plegadas; envergadura abierta 14) | Aprobado en la ronda 3 |
 | Serpiente Cósmica | `serpiente_cosmica/` | 19.910 / 20.000 | 6,1 × 29,41 × 4,64 (con el estandarte) | Aprobada en la ronda 2 |
 | Medusa Nebular | `medusa_nebular/` | 14.802 / 16.000 | 6,97 × 6,97 × 8,37 | Aprobada en la ronda 2 |
+| Escarabajo Abisal | `escarabajo_abisal/` | 19.906 / 20.000 | 9,64 × 18,81 × 7,46 | Aprobado en la ronda 3 |
+| Leviatán Estelar | `leviatan_estelar/` | 19.905 / 20.000 | 26,69 × 43,8 × 18,75 (con tentáculos y estandarte) | Aprobado en la ronda 2 |
 
 Cada carpeta lleva el `.fbx`, el atlas de 2048 (`_color`, `_normal`, `_roughness`, `_metalness`, `_emision`), el
 `_turnaround.png` de 8 vistas, el `.json` (piezas, pivotes, puntos de montaje) y `verificacion_fbx.txt` (la
@@ -40,3 +44,14 @@ reimportación en escena limpia). En `rondas/` están los turnarounds y primeros
    piezas de neón o un futuro `Emissive`. Las córneas (`Ojos_Cornea`) van con material Glass y algo de transparencia.
 4. Motor6D de cada pieza a su padre con `C0`/`C1` en el pivote del JSON. **Falta probarlo en Studio**: estas sesiones
    no tienen Studio, así que el director tiene que verlo funcionar con capturas antes de darlo por bueno.
+
+## Desviaciones de la tabla del encargo (a revisar)
+
+- **Medusa Nebular**: mide ≈ 8,4 de alto, no 10: la anatomía pide campana de 3 y tentáculos de 4.
+- **Serpiente Cósmica**: el cuerpo (2 de alto + cresta 0,8) no llega a 5; los 4,6 se alcanzan con el estandarte. La
+  cresta dorsal se pliega bajo cada asiento para que los 6 jinetes vayan a horcajadas.
+- **Leviatán Estelar**: la caja total (26,7 × 43,8 × 18,8) incluye aletas, tentáculos colgando y estandarte; el cuerpo
+  se ajusta a 20 × 40 × 15.
+- **Dragón del Vacío**: en reposo las alas van plegadas (4,8 de ancho); abiertas darían los 14 de envergadura.
+- **Escarabajo Abisal**: los élitros pivotan en su bisagra delantera (detrás del pronoto), que es donde se abren en
+  un escarabajo real.

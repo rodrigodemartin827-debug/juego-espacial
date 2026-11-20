@@ -1,0 +1,20 @@
+OK
+Torso: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 4778 (esperado 4778), tamaño 6.51×6.32×4.72 st
+Cabeza: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3482 (esperado 3482), tamaño 3.35×4.95×3.04 st
+Mandibula_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 532 (esperado 532), tamaño 0.98×2.77×0.52 st
+Mandibula_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 532 (esperado 532), tamaño 0.98×2.77×0.53 st
+Cuerno_Central: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 696 (esperado 696), tamaño 1.26×2.31×3.59 st
+Elitro_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1236 (esperado 1236), tamaño 3.28×8.50×1.82 st
+Elitro_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 1060 (esperado 1060), tamaño 3.27×8.72×1.82 st
+Pata_Del_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 716 (esperado 716), tamaño 2.01×2.93×3.16 st
+Pata_Del_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 716 (esperado 716), tamaño 2.00×2.93×3.16 st
+Pata_Med_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 764 (esperado 764), tamaño 2.39×1.10×3.03 st
+Pata_Med_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 764 (esperado 764), tamaño 2.40×1.10×3.03 st
+Pata_Tras_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 734 (esperado 734), tamaño 3.16×3.73×3.21 st
+Pata_Tras_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 728 (esperado 728), tamaño 3.16×3.72×3.21 st
+Abdomen: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 3168 (esperado 3168), tamaño 5.98×8.00×5.28 st
+Montura_Piloto: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_Artillero: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_Lateral_Izq: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Montura_Lateral_Der: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
+Punto_Carga: pivote err 0.0000 st, rot (0.0, 0.0, -0.0), escala (0.28, 0.28, 0.28), tris 12 (esperado 12), tamaño 0.30×0.30×0.30 st
