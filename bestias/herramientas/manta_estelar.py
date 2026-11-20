@@ -530,10 +530,12 @@ def materiales(mapas):
     mat = bpy.data.materials.new("iris")
     N = T.Nodos(mat)
     a = N.sep(N.atributo("aux").outputs["Vector"])
-    fibras = N.ruido(N.combinar(N.mate("MULTIPLY", a[1], 40.0), N.mate("MULTIPLY", a[0], 3.0), 0.0), 3.0, 4.0)
-    col = N.mezcla(smooth(N, 0.35, 0.7, fibras), (0.55, 0.2, 0.02), lin("ojo"))
-    col = N.mezcla(smooth(N, 0.78, 1.0, a[0]), col, (0.08, 0.03, 0.0))
-    col = N.mezcla(N.mate("SUBTRACT", 1.0, smooth(N, 0.18, 0.4, a[0])), col, (1.0, 0.85, 0.45))
+    # Fibras radiales finas (ruido estirado en el ángulo) y anillos: degradado dorado -> ámbar -> borde oscuro.
+    fibras = N.ruido(N.combinar(N.mate("MULTIPLY", a[1], 90.0), N.mate("MULTIPLY", a[0], 1.5), 0.0), 2.0, 2.0, 0.4,
+                     dim="2D")
+    col = N.mezcla(smooth(N, 0.15, 0.75, a[0]), (1.0, 0.72, 0.28), lin("ojo"))
+    col = N.mezcla(N.mate("MULTIPLY", smooth(N, 0.45, 0.75, fibras), 0.45), col, (0.55, 0.22, 0.03))
+    col = N.mezcla(smooth(N, 0.82, 1.0, a[0]), col, (0.12, 0.04, 0.0))
     N.poner("Base Color", col)
     N.poner("Roughness", 0.3)
     N.poner("Emission Color", N.mezcla(0.75, (0, 0, 0), col))  # brillo suave: el ojo está vivo
@@ -823,9 +825,10 @@ def arnes_cuerpo(g, bvh, rnd, datos):
         tam = (0.62, 0.74, 0.36)
         c = p + n * (tam[2] / 2 - 0.015)
         g.caja_redonda(c, tam, "cuero", rot=rot, seg=3, aux=(0.0, 0.5, 1.0), redondeo=0.75)
-        # Solapa y cierre.
-        D.caja(g, c + n * 0.19 + ex * 0.08, (ex, ey, n), (0.48, 0.66, 0.035), "cuero", aux=(0.0, 0.5, 1.0))
-        D.cono(g, c + n * 0.15 + ex * 0.33 - ey * 0.09, ey, 0.18, 0.03, "hueso", lados=6, radio_punta=0.024)
+        # Solapa blanda que cae sobre el costado exterior y cierre de hueso.
+        g.caja_redonda(c + n * 0.15 + ex * 0.1, (0.5, 0.66, 0.08), "cuero", rot=rot, seg=2, aux=(0.0, 0.5, 1.0),
+                       redondeo=0.8)
+        D.cono(g, c + n * 0.1 + ex * 0.33 - ey * 0.09, ey, 0.18, 0.03, "hueso", lados=6, radio_punta=0.024)
         g.v(c)  # (sin cara: ancla para depurar)
         # Correa a la silla.
         pts, ns = [], []

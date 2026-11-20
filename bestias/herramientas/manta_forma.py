@@ -46,7 +46,7 @@ NERVADURAS = [
 ALTO_NERVADURA = 0.10
 
 # Ojos (1 stud de diámetro) a los lados de la cabeza.
-OJO_CENTRO = (1.90, 4.86, 0.14)
+OJO_CENTRO = (1.74, 4.86, 0.16)
 OJO_RADIO = 0.5
 # Espiráculos: (x, y, giro en grados).
 ESPIRACULOS = [(1.25, 3.02, 18), (1.62, 2.40, 26)]
@@ -270,10 +270,10 @@ class Campo:
             ox, oy, oz = OJO_CENTRO
             for lado in (1, -1):
                 # Montículo de piel: el ojo asoma por su cima (párpado), no por un lateral (sin efecto "tubo").
-                bulto = C.elipsoide(X, Y, Z, (lado * (ox - 0.34), oy, oz - 0.04), (0.46, 0.86, 0.70))
+                bulto = C.elipsoide(X, Y, Z, (lado * (ox - 0.30), oy, oz - 0.04), (0.40, 0.84, 0.66))
                 f = C.smin(f, bulto, 0.3)
                 rot = C.matriz_giro((0, 0, 1), lado * 0.35)
-                cresta = C.elipsoide(X, Y, Z, (lado * 1.78, oy + 0.02, oz + 0.40), (0.30, 0.66, 0.17), rot=rot)
+                cresta = C.elipsoide(X, Y, Z, (lado * 1.62, oy + 0.02, oz + 0.40), (0.30, 0.66, 0.17), rot=rot)
                 f = C.smin(f, cresta, 0.16)
                 # Cuenca del ojo: el globo (pieza aparte) se asienta con 0,02 de holgura.
                 cuenca = np.sqrt((X - lado * ox) ** 2 + (Y - oy) ** 2 + (Z - oz) ** 2) - (OJO_RADIO + 0.02)
