@@ -91,12 +91,14 @@ def material_piel():
     # Línea lateral luminosa (puntos púrpura a media altura) y los bordes del remo de la cola.
     altura = N.mate("ABSOLUTE", N.mate("SUBTRACT", pz_, F.ZC + 0.05))
     linea = N.mate("MULTIPLY", N.mate("SUBTRACT", 1.0, smooth(N, 0.03, 0.09, altura)), lateral)
-    puntos = N.mate("LESS_THAN", N.mate("PINGPONG", N.mate("MULTIPLY", py_, 1.0), 0.5), 0.12)
-    luz = N.mate("MULTIPLY", linea, puntos)
+    dy = N.mate("SUBTRACT", N.mate("PINGPONG", py_, 0.25), 0.125)
+    dz = N.mate("SUBTRACT", pz_, F.ZC + 0.05)
+    punto = N.mate("SUBTRACT", 1.0, smooth(N, 0.035, 0.06, N.vmate("LENGTH", N.combinar(dy, dz, 0.0))))
+    luz = N.mate("MULTIPLY", lateral, punto)
     luz = N.mate("MULTIPLY", luz, N.mate("LESS_THAN", py_, 11.5))
     remo = N.mate("MULTIPLY", N.mate("LESS_THAN", py_, -12.4),
                   smooth(N, 0.62, 0.86, N.mate("ABSOLUTE", px_)))
-    remo = N.mate("MULTIPLY", remo, N.mate("LESS_THAN", N.mate("PINGPONG", py_, 0.3), 0.16))
+    remo = N.mate("MULTIPLY", remo, N.mate("MULTIPLY", N.mate("LESS_THAN", N.mate("PINGPONG", py_, 0.3), 0.09), 0.6))
     luz = N.mate("MAXIMUM", luz, remo)
     # Cicatrices de arpón en el flanco izquierdo (segmentos 4 y 5).
     q = N.mate("ADD", N.mate("MULTIPLY", py_, 0.8), pz_)
@@ -112,7 +114,7 @@ def material_piel():
     col = N.mezcla(irid, lin("lomo"), lin("reflejo"))
     col = N.mezcla(N.mate("MULTIPLY", smooth(N, 0.55, 0.7, N.ruido(P, 2.5, 2.0)), 0.5), col, (0.02, 0.06, 0.09))
     col = N.mezcla(lateral, col, lin("lateral"))
-    col = N.mezcla(N.mate("MULTIPLY", N.mate("SUBTRACT", 1.0, teja), 0.55), col, (0.0, 0.004, 0.002))
+    col = N.mezcla(N.mate("MULTIPLY", N.mate("SUBTRACT", 1.0, teja), 0.85), col, (0.0, 0.004, 0.002))
     vcol = N.mezcla(N.mate("MULTIPLY", placas, 0.35), lin("vientre"), (0.25, 0.2, 0.1))
     col = N.mezcla(vientre, col, vcol)
     col = N.mezcla(N.mate("MULTIPLY", anillo, 0.6), col, (0.0, 0.01, 0.005))
@@ -125,7 +127,7 @@ def material_piel():
     h = N.mate("ADD", h, N.mate("MULTIPLY", placas, N.mate("MULTIPLY", vientre, 0.6)))
     h = N.mate("SUBTRACT", h, N.mate("MULTIPLY", anillo, 0.9))
     h = N.mate("ADD", h, N.mate("MULTIPLY", cic, 1.2))
-    N.poner("Normal", N.relieve(h, fuerza=0.6, distancia=0.035))
+    N.poner("Normal", N.relieve(h, fuerza=1.0, distancia=0.06))
     N.poner("Emission Color", N.mezcla(luz, (0, 0, 0), lin("cresta")))
     N.poner("Emission Strength", 1.0)
     return mat
@@ -215,7 +217,7 @@ def material_cuero():
 
 
 def materiales():
-    m = {"piel": material_piel(), "cresta": material_membrana("cresta", "#5B2C87", 0.8),
+    m = {"piel": material_piel(), "cresta": material_membrana("cresta", "#3E1660", 0.35),
          "aleta": material_membrana("aleta", "aleta", 0.0), "escudo": material_escudo(), "tela": material_tela(),
          "cuero": material_cuero()}
     m["hueso"], _ = T.material_simple("hueso", lin("hueso"), rug=0.45, relieve=(14.0, 0.35))
@@ -224,7 +226,7 @@ def materiales():
     m["lengua"], _ = T.material_simple("lengua", T.srgb("#3A1030"), rug=0.3)
     m["esclera"], _ = T.material_simple("esclera", T.srgb("#0E1A0E"), rug=0.25)
     m["pupila"], _ = T.material_simple("pupila", (0.002, 0.003, 0.002), rug=0.1)
-    m["membrana_ojo"], _ = T.material_simple("membrana_ojo", T.srgb("#8AA08A"), rug=0.3)
+    m["membrana_ojo"], _ = T.material_simple("membrana_ojo", T.srgb("#2E4A2E"), rug=0.3)
     m["cornea"], _ = T.material_simple("cornea", T.srgb("#C8FFC0"), rug=0.04)
     m["fosil"], _ = T.material_simple("fosil", T.srgb("#6E6A58"), rug=0.9, relieve=(40.0, 0.9))
     iris = bpy.data.materials.new("iris")
@@ -410,9 +412,12 @@ def construir(args):
         for lado in (1, -1):
             p, n = D.proyectar(bvh["Mandibula"], lado * x, y, abajo=True)
             base = p + n * -0.04
-            q = [base + Vector((0, -0.15 * k * k, -0.3 * k)) + Vector((lado * 0.06 * math.sin(k), 0, 0))
-                 for k in range(5)]
-            gm.tubo(q, [0.07, 0.055, 0.04, 0.025, 0.012], "piel", lados=5, punta=True,
+            q = []
+            for k in range(8):  # cuelgan, se curvan hacia atrás y la punta se enrosca
+                t = k / 7
+                q.append(base + Vector((lado * (0.05 * t + 0.08 * math.sin(t * 4.0) * t), -0.55 * t * t - 0.1 * t,
+                                        -0.62 * math.sin(t * 1.35) + 0.15 * t ** 3)))
+            gm.tubo(q, [0.075 * (1 - 0.82 * k / 7) for k in range(8)], "piel", lados=5, punta=True,
                     aux_fn=lambda t, a: (0, 0, 0))
 
     # Arnés: cinchas, hebillas, correas longitudinales, asientos, estribos, barandilla, red de carga, estandarte.

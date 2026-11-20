@@ -304,7 +304,7 @@ def ojo_completo(geo, cornea, c, d, R, alfa=0.9, pupila="vertical", nictitante=T
         arr = d.cross(delante).normalized()
         rej = []
         for j in range(3):
-            th = alfa + 0.02 + 0.3 * j / 2
+            th = alfa + 0.02 + 0.16 * j / 2
             rej.append([c + (d * math.cos(th) + (delante * math.cos(ph) + arr * math.sin(ph)) * math.sin(th)) *
-                        (R * 1.012) for ph in [math.radians(-70 + 140 * k / 6) for k in range(7)]])
+                        (R * 1.012) for ph in [math.radians(-50 + 100 * k / 6) for k in range(7)]])
         lamina(geo, rej, 0.012 * R / 0.5, 0.02 * R / 0.5, "membrana_ojo", d)
