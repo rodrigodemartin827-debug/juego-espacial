@@ -241,32 +241,33 @@ def marca(bm_marca, centro, diametro=0.5, mat=0):
     cilindro(bm_marca, (centro[0], centro[1], centro[2] + 0.03), diametro / 2, 0.06, lados=16, mat=mat)
 
 
-def canon(bm, bm_neon, base, longitud=2.6, dobles=False, mat=M_CASCO, mat_neon=0, radio=0.26):
+def canon(bm, bm_neon, base, longitud=2.6, dobles=False, mat=M_CASCO, mat_neon=0, radio=0.26, dir_y=-1, escala=1.0):
     """
-    Torreta láser: pedestal + anillo giratorio + horquilla + asiento + 1 o 2 cañones apuntando a -Y, con boca neón.
-    `base` es el punto del suelo donde se apoya. Deja clearance para girar (nada pega al suelo salvo el pedestal).
+    Torreta láser: pedestal + anillo giratorio + horquilla + asiento + 1 o 2 cañones, con boca neón.
+    Apunta hacia `dir_y` en Y (-1 = -Y por defecto, 1 = +Y para el cañón trasero). `escala` agranda la torreta.
+    `base` es el punto del suelo donde se apoya. Devuelve dónde se para el artillero.
     """
     x, y, z = base
+    e = escala
     # Pedestal y anillo de giro.
-    cilindro(bm, (x, y, z + 0.25), 0.55, 0.5, lados=16, mat=M_OSCURO)
-    cilindro(bm, (x, y, z + 0.55), 0.62, 0.16, lados=20, mat=mat)
-    cuerpo_z = z + 0.95
-    # Cuerpo giratorio (lo que el director rota): caja compacta.
-    caja(bm, (x, y, cuerpo_z), (1.3, 1.3, 0.7), mat=mat)
-    placa(bm, (x, y, cuerpo_z + 0.35), (1.1, 1.1, 0.12), mat=M_PANEL, borde=0.18, remaches=False)
-    # Asiento del artillero (detrás, hacia +Y).
-    caja(bm, (x, y + 0.75, cuerpo_z + 0.1), (0.7, 0.5, 0.12), mat=M_OSCURO)
-    caja(bm, (x, y + 1.0, cuerpo_z + 0.5), (0.7, 0.12, 0.8), mat=M_OSCURO)
-    # Horquilla y cañones hacia -Y.
-    offsets = (-0.3, 0.3) if dobles else (0.0,)
+    cilindro(bm, (x, y, z + 0.25 * e), 0.55 * e, 0.5 * e, lados=16, mat=M_OSCURO)
+    cilindro(bm, (x, y, z + 0.55 * e), 0.62 * e, 0.16 * e, lados=20, mat=mat)
+    cuerpo_z = z + 0.95 * e
+    caja(bm, (x, y, cuerpo_z), (1.3 * e, 1.3 * e, 0.7 * e), mat=mat)
+    placa(bm, (x, y, cuerpo_z + 0.35 * e), (1.1 * e, 1.1 * e, 0.12 * e), mat=M_PANEL, borde=0.18 * e, remaches=False)
+    # Asiento del artillero (detrás del cañón).
+    caja(bm, (x, y - dir_y * 0.75 * e, cuerpo_z + 0.1 * e), (0.7 * e, 0.5 * e, 0.12 * e), mat=M_OSCURO)
+    caja(bm, (x, y - dir_y * 1.0 * e, cuerpo_z + 0.5 * e), (0.7 * e, 0.12 * e, 0.8 * e), mat=M_OSCURO)
+    # Horquilla y cañones.
+    offsets = (-0.3 * e, 0.3 * e) if dobles else (0.0,)
     for ox in offsets:
-        cilindro(bm, (x + ox, y - longitud / 2, cuerpo_z + 0.25), radio, longitud, lados=12, eje="Y", mat=M_OSCURO)
-        cilindro(bm, (x + ox, y - longitud * 0.78, cuerpo_z + 0.25), radio * 1.25, longitud * 0.3, lados=12,
-                 eje="Y", mat=mat)  # manguito
-        # Boca neón.
-        cilindro(bm_neon, (x + ox, y - longitud - 0.02, cuerpo_z + 0.25), radio * 0.7, 0.14, lados=10,
-                 eje="Y", mat=mat_neon)
-    return (x, y + 1.15, cuerpo_z + 0.1)  # dónde se para/sienta el artillero (para la marca)
+        cilindro(bm, (x + ox, y + dir_y * longitud / 2, cuerpo_z + 0.25 * e), radio, longitud, lados=12, eje="Y",
+                 mat=M_OSCURO)
+        cilindro(bm, (x + ox, y + dir_y * longitud * 0.78, cuerpo_z + 0.25 * e), radio * 1.25, longitud * 0.3,
+                 lados=12, eje="Y", mat=mat)
+        cilindro(bm_neon, (x + ox, y + dir_y * (longitud + 0.02), cuerpo_z + 0.25 * e), radio * 0.7, 0.14,
+                 lados=10, eje="Y", mat=mat_neon)
+    return (x, y - dir_y * 1.15 * e, cuerpo_z + 0.1 * e)
 
 
 def tobera(bm, bm_neon, centro, radio=0.9, largo=2.4, mat=M_OSCURO, mat_neon=0):
