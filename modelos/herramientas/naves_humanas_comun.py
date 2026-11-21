@@ -577,23 +577,35 @@ def finalizar_nave(nombre, archivo, salida, piezas, casco, anclajes_rel, vistas_
 
 
 def _render_seccion(archivo, nombre, salida, piezas, seccion, r6_pos, rapido):
-    """Oculta las piezas indicadas (casco/costado) para enseñar el interior, y renderiza 2 vistas."""
-    ocultar, vistas = seccion.get("ocultar", []), seccion.get("vistas")
-    estado = {}
-    for n, o in piezas.items():
-        estado[o] = o.hide_render
-        if any(k in n for k in ocultar):
-            o.hide_render = True
-    visibles = [o for n, o in piezas.items() if o.hide_render is False]
-    extra = [maniqui_r6(p) for p in seccion.get("r6", ([r6_pos] if r6_pos else []))]
-    rutas = c.renderizar_vistas(visibles + extra, os.path.join(salida, "_tmp_int"), vistas,
-                                tam=320 if rapido else 520, muestras=16 if rapido else 56, margen=1.04,
-                                con_malla=False)
+    """
+    Renderiza la sección interior. `seccion` es una lista de vistas, cada una un dict:
+        {"label", "az", "el", "ocultar": [subcadenas de nombres a ocultar], "r6": [posiciones], "centro": Vector}
+    En cada vista se ocultan las piezas cuyo nombre contenga alguna subcadena de `ocultar`.
+    """
+    import os
+    rutas = []
+    for i, v in enumerate(seccion):
+        estado = {}
+        for n, o in piezas.items():
+            estado[o] = o.hide_render
+            o.hide_render = any(k in n for k in v.get("ocultar", []))
+        visibles = [o for n, o in piezas.items() if not o.hide_render]
+        extra = [maniqui_r6(p) for p in v.get("r6", [])]
+        centro = None
+        if visibles:
+            mn, mx = c.caja_limite(visibles)
+            centro = (mn + mx) / 2
+        r = c.renderizar_vistas(visibles + extra, os.path.join(salida, "_tmp_int"),
+                                [(v["label"], v["az"], v["el"])],
+                                tam=320 if rapido else 520, muestras=16 if rapido else 56, margen=1.03,
+                                con_malla=False, centro=v.get("centro", centro), prefijo=f"s{i}_")
+        rutas.append(r[0])
+        for o, hd in estado.items():
+            o.hide_render = hd
     c.montar_hoja([rutas], os.path.join(salida, "render", f"{archivo}_interior.png"),
-                  f"{nombre} — sección interior", columnas=len(rutas) or 2,
-                  notas=["sección transversal: casco oculto para ver los niveles · maniquí R6 (5 studs) para escala"])
-    for o, hd in estado.items():
-        o.hide_render = hd
+                  f"{nombre} — sección interior", columnas=min(2, len(rutas)) or 2,
+                  notas=["sección transversal: se ocultan casco/piezas para ver los niveles · "
+                         "maniquí R6 (5 studs) para escala"])
 
 
 def maniqui_r6(pos, altura=5.0):
