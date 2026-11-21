@@ -3,7 +3,7 @@
   "archivo": "sable_gravitacional.fbx",
   "rareza": "Raro",
   "colorBorde": "#4488FF",
-  "triangulos": 4534,
+  "triangulos": 3686,
   "trisMax": 4000,
   "texturas": {
     "color": "texturas/SableGravitacional_color.png",
@@ -28,7 +28,7 @@
     {
       "nombre": "SableGravitacional_Guarda",
       "rol": "tex",
-      "triangulos": 1580,
+      "triangulos": 1260,
       "centro": [
         -0.0,
         0.7575,
@@ -74,10 +74,10 @@
     {
       "nombre": "SableGravitacional_Neon_03",
       "rol": "neon",
-      "triangulos": 672,
+      "triangulos": 432,
       "centro": [
         -0.0,
-        2.126,
+        2.1261,
         0.0
       ],
       "Material": "Neon",
@@ -87,7 +87,7 @@
     {
       "nombre": "SableGravitacional_Anillo_01",
       "rol": "tex",
-      "triangulos": 336,
+      "triangulos": 240,
       "centro": [
         -0.0,
         1.323,
@@ -98,7 +98,7 @@
     {
       "nombre": "SableGravitacional_Anillo_02",
       "rol": "tex",
-      "triangulos": 336,
+      "triangulos": 240,
       "centro": [
         -0.0,
         2.155,
@@ -109,7 +109,7 @@
     {
       "nombre": "SableGravitacional_Anillo_03",
       "rol": "tex",
-      "triangulos": 336,
+      "triangulos": 240,
       "centro": [
         -0.0,
         2.935,
