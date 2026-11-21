@@ -21,3 +21,6 @@ __pycache__/
 
 # Renders intermedios de las herramientas de modelos
 modelos/**/_render_tmp/
+
+# Entorno de Python para bpy (herramientas de modelos y animaciones)
+.venv/
