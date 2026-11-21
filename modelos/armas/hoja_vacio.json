@@ -76,9 +76,9 @@
       "rol": "tex",
       "triangulos": 414,
       "centro": [
-        0.2842,
+        -0.282,
         0.7295,
-        0.004
+        0.0004
       ],
       "SurfaceAppearance": true
     },
@@ -87,9 +87,9 @@
       "rol": "tex",
       "triangulos": 414,
       "centro": [
-        -0.282,
+        0.2842,
         0.7295,
-        0.0004
+        0.004
       ],
       "SurfaceAppearance": true
     },
@@ -111,7 +111,7 @@
       "centro": [
         0.0011,
         -0.575,
-        -0.0148
+        -0.0163
       ],
       "SurfaceAppearance": true
     },
@@ -122,7 +122,7 @@
       "centro": [
         0.0011,
         -0.575,
-        -0.1198
+        -0.1278
       ],
       "Material": "Neon",
       "Color": "#FF2222"
@@ -132,9 +132,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        0.3349,
-        2.6488,
-        -0.1986
+        0.3386,
+        2.644,
+        -0.2049
       ],
       "SurfaceAppearance": true
     },
@@ -143,9 +143,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        0.3994,
-        1.4761,
-        0.0457
+        0.3972,
+        1.4832,
+        0.0427
       ],
       "SurfaceAppearance": true
     },
@@ -154,9 +154,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        0.2296,
-        1.1876,
-        -0.1238
+        0.2343,
+        1.1938,
+        -0.1273
       ],
       "SurfaceAppearance": true
     },
@@ -165,9 +165,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        -0.1183,
-        3.1236,
-        0.2572
+        -0.1159,
+        3.1165,
+        0.2592
       ],
       "SurfaceAppearance": true
     },
@@ -176,9 +176,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        -0.3669,
-        2.4957,
-        0.0016
+        -0.3674,
+        2.4905,
+        -0.0025
       ],
       "SurfaceAppearance": true
     },
@@ -187,9 +187,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        0.0032,
-        2.9073,
-        -0.189
+        0.0044,
+        2.9108,
+        -0.1958
       ],
       "SurfaceAppearance": true
     },
@@ -198,9 +198,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        -0.3416,
-        3.1332,
-        -0.1009
+        -0.349,
+        3.1311,
+        -0.1076
       ],
       "SurfaceAppearance": true
     },
@@ -209,9 +209,9 @@
       "rol": "tex",
       "triangulos": 6,
       "centro": [
-        -0.352,
-        1.6957,
-        0.1304
+        -0.3508,
+        1.6978,
+        0.1237
       ],
       "SurfaceAppearance": true
     }

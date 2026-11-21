@@ -3,7 +3,7 @@
   "archivo": "hacha_meteorito.fbx",
   "rareza": "Poco común",
   "colorBorde": "#4AFF8B",
-  "triangulos": 1468,
+  "triangulos": 2036,
   "trisMax": 3000,
   "texturas": {
     "color": "texturas/HachaMeteorito_color.png",
@@ -28,22 +28,22 @@
     {
       "nombre": "HachaMeteorito_Roca",
       "rol": "tex",
-      "triangulos": 120,
+      "triangulos": 480,
       "centro": [
-        0.0785,
-        0.2818,
-        0.0105
+        0.0828,
+        0.2754,
+        0.0115
       ],
       "SurfaceAppearance": true
     },
     {
       "nombre": "HachaMeteorito_Neon_01",
       "rol": "neon",
-      "triangulos": 48,
+      "triangulos": 256,
       "centro": [
-        0.0346,
-        0.3048,
-        0.0002
+        0.028,
+        0.2515,
+        0.0
       ],
       "Material": "Neon",
       "Color": "#3DF2FF"

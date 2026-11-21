@@ -3,7 +3,7 @@
   "archivo": "martillo_pulsar.fbx",
   "rareza": "Épico",
   "colorBorde": "#A07AE8",
-  "triangulos": 3148,
+  "triangulos": 3268,
   "trisMax": 5000,
   "texturas": {
     "color": "texturas/MartilloPulsar_color.png",
@@ -52,7 +52,7 @@
     {
       "nombre": "MartilloPulsar_Neon_01",
       "rol": "neon",
-      "triangulos": 288,
+      "triangulos": 408,
       "centro": [
         -0.0,
         2.0233,

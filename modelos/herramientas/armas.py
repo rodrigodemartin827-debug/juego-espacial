@@ -116,7 +116,7 @@ def espada_plasma():
     paleta = {
         "hoja": {"color": "#BFCBDA", "rug": 0.15, "met": 1.0, "patron": "cepillado", "relieve": 0.25},
         "canal": {"color": "#5D6878", "rug": 0.25, "met": 1.0},
-        "guarda": {"color": "#3B414B", "rug": 0.3, "met": 1.0, "patron": "cepillado", "relieve": 0.3},
+        "guarda": {"color": "#525A66", "rug": 0.28, "met": 1.0, "patron": "cepillado", "relieve": 0.3},
         "sintetico": {"color": "#141619", "rug": 0.7, "met": 0.0, "patron": "diamante", "relieve": 1.0},
         "neon": NEON,
     }
@@ -184,7 +184,7 @@ def hoja_cristal():
         "cristal": {"color": "#46F0D2", "rug": 0.05, "met": 0.0, "patron": "cristalino", "relieve": 0.6,
                     "color2": "#1C8FB0", "mezcla": ("grad", "Z", 0.6, 3.0), "alfa": 0.7},
         "veta": {"color": "#F4FFFD", "rug": 0.0, "met": 0.0},
-        "patina": {"color": "#2F3A36", "rug": 0.35, "met": 1.0, "patron": "grabado", "relieve": 0.4,
+        "patina": {"color": "#46524C", "rug": 0.35, "met": 1.0, "patron": "grabado", "relieve": 0.4,
                    "color2": "#3F7A62", "mezcla": ("manchas", 6.0, 0.62)},
         "cuero": {"color": "#3B2418", "rug": 0.8, "met": 0.0, "patron": "cuero", "relieve": 1.0},
         "gema": {"color": "#2FE0C8", "rug": 0.05, "met": 0.0, "alfa": 0.85},
@@ -224,10 +224,10 @@ def hoja_cristal():
                 t = t0 + (t1 - t0) * s
                 return sup(t, u0 + (u1 - u0) * s, lado, 0.0)
             principal = i < 4
-            v.cinta(cam, 0.03, lambda s, lado=lado: (0, lado, 0), 0.014, "veta", n=3,
+            v.cinta(cam, 0.03, lambda s, lado=lado: (0, lado, 0), 0.02, "veta", n=3,
                     ancho_fn=lambda s, p=principal: (0.034 if p else 0.022) * (1 - 0.4 * s))
             if principal:  # la fractura principal brilla
-                nn.cinta(lambda s, cam=cam, lado=lado: cam(s) + Vector((0, lado * 0.024, 0)), 0.012,
+                nn.cinta(lambda s, cam=cam, lado=lado: cam(s) + Vector((0, lado * 0.03, 0)), 0.012,
                          lambda s, lado=lado: (0, lado, 0), 0.02, "neon", n=3, ancho_fn=lambda s: 0.012)
 
     # Guarda en C: cruz corta + arco de nudillos que baja por el lado del filo hasta el pomo.
@@ -237,8 +237,8 @@ def hoja_cristal():
               seccion=[(1, 0.7), (0.6, 1), (-0.6, 1), (-1, 0.7), (-1, -0.7), (-0.6, -1), (0.6, -1), (1, -0.7)],
               ancho=lambda t: 0.045, grueso=lambda t: 0.075, punta=False)
     g.esfera((-0.21, 0, zg + 0.01), 0.04, "patina", seg=8, anillos=6)
-    g.banda(lambda t: (0.2 + 0.16 * math.sin(t * math.pi) - 0.13 * t, 0, zg - (MANGO + 0.1) * t), (0, 1, 0), 0.07,
-            0.04, "patina", n=14, ancho_fn=lambda t: 0.07 - 0.02 * math.sin(t * math.pi))
+    g.banda(lambda t: (0.2 + 0.16 * math.sin(t * math.pi) - 0.13 * t, 0, zg - (MANGO + 0.1) * t), (0, 1, 0), 0.09,
+            0.05, "patina", n=14, ancho_fn=lambda t: 0.1 - 0.035 * math.sin(t * math.pi))
     g.cilindro((0, 0, -MANGO / 2 - 0.08), 0.07, 0.08, "patina", lados=12)  # pomo donde acaba la C
 
     e = a.pieza("Empunadura", studio={"raiz": True})
@@ -264,7 +264,7 @@ def sable_gravitacional():
     LARGO, ANCHO, GROSOR = 2.6, 0.4, 0.08
     MANGO, R_MANGO = 1.0, 0.09
     paleta = {
-        "gunmetal": {"color": "#1E2126", "rug": 0.2, "met": 1.0, "patron": "fundido", "relieve": 1.2},
+        "gunmetal": {"color": "#2E343D", "rug": 0.2, "met": 1.0, "patron": "fundido", "relieve": 1.8},
         "filo": {"color": "#8C96A3", "rug": 0.12, "met": 1.0},
         "industrial": {"color": "#5C636D", "rug": 0.45, "met": 1.0, "patron": "paneles", "relieve": 0.8},
         "oscuro": {"color": "#2A2E35", "rug": 0.4, "met": 1.0},
@@ -281,7 +281,7 @@ def sable_gravitacional():
         return (0.0, z0 + LARGO * t)
 
     def ancho_total(t):  # se ensancha hacia la punta (falchion)
-        return HW * (0.78 + 0.35 * t)
+        return HW * (0.7 + 0.5 * t)
 
     def ancho(t):  # corte diagonal: el lomo cae hacia el filo en el último 18 %
         return ancho_total(t) * (1 - 0.985 * suave(t, 0.8, 1.0) ** 0.9)
@@ -355,12 +355,12 @@ def espada_estelar():
     LARGO_PUNTAS = 0.3
     MANGO, R_MANGO = 0.85, 0.085
     paleta = {
-        "oro": {"color": "#FFD266", "rug": 0.08, "met": 1.0, "color2": "#FFA640", "mezcla": ("vetas", 1.2, 0.88)},
+        "oro": {"color": "#FFCC55", "rug": 0.08, "met": 1.0, "color2": "#FFA640", "mezcla": ("manchas", 2.5, 0.6)},
         "lava": {"color": "#FF7A1A", "rug": 0.2, "met": 0.0, "color2": "#FFF2C8", "mezcla": ("manchas", 9, 0.55)},
         "oro_viejo": {"color": "#B08A3E", "rug": 0.3, "met": 1.0, "patron": "grabado", "relieve": 0.9},
         "hueso": {"color": "#EEE6D2", "rug": 0.6, "met": 0.0, "patron": "hueso", "relieve": 0.7,
                   "color2": "#C9A24A", "mezcla": ("vetas", 3.5, 0.82)},
-        "cristal_oro": {"color": "#FFD36B", "rug": 0.05, "met": 0.0, "alfa": 0.7},
+        "cristal_oro": {"color": "#FFB800", "rug": 0.05, "met": 0.0, "alfa": 0.88},
         "neon": NEON,
     }
     a = ak.Arma("EspadaEstelar", "espada_estelar.fbx", "Legendario", paleta, "Espada Estelar")
@@ -571,13 +571,13 @@ def hoja_vacio():
     # Pomo: ojo abierto que mira hacia delante (-Y), con iris rojo y pupila vertical.
     oj = a.pieza("Ojo")
     zc = -MANGO / 2 - 0.15
-    oj.esfera((0, 0, zc), 0.13, "ojo", seg=16, anillos=12)
+    oj.esfera((0, 0, zc), 0.14, "ojo", seg=16, anillos=12)
     for s in (-1, 1):  # párpados
         oj.toro((0, -0.02, zc + s * 0.045), 0.12, 0.03, "hueso_negro", seg=16, lados=6, eje=(0, 1, 0),
                 arco=(math.radians(20 if s > 0 else 200), math.radians(160 if s > 0 else 340)))
-    oj.esfera((0, -0.155, zc), 0.045, "pupila", seg=8, anillos=6, escala=(0.25, 0.2, 1.0))
+    oj.esfera((0, -0.165, zc), 0.06, "pupila", seg=8, anillos=6, escala=(0.22, 0.2, 1.0))
     n2 = a.pieza("Neon_02", rol="neon", studio={"color": ROJO})
-    n2.esfera((0, -0.122, zc), 0.065, "iris", seg=14, anillos=6, escala=(1, 0.3, 1))
+    n2.esfera((0, -0.13, zc), 0.08, "iris", seg=14, anillos=6, escala=(1, 0.3, 1))
 
     # 8 fragmentos triangulares que flotan alrededor de la hoja.
     for i in range(8):
@@ -676,10 +676,13 @@ def hacha_meteorito():
         cen = Vector(((x0 + x1) / 2, 0.0, (z0_ + z1) / 2 + 0.02))
         n1.fragmento(cen, 0.12, "neon", giro=Matrix.Rotation(rnd.uniform(-0.5, 0.5), 3, "Y"), rnd=rnd, lados=4)
     for lado in (-1, 1):
-        for k in range(3):  # grietas brillantes en las caras de la cabeza, bajo las rocas
-            n1.cinta(lambda t, k=k, lado=lado: (-0.25 + 0.25 * k + 0.08 * t, lado * (0.1 + 0.01),
-                                                ZC + 0.2 - 0.12 * t + 0.02 * k),
-                     0.018, lambda t, lado=lado: (0, lado, 0), 0.02, "neon", n=2)
+        for k in range(3):  # grietas brillantes en zigzag en las caras de la cabeza, bajo las rocas
+            x0 = -0.28 + 0.27 * k
+            puntos = [(x0, ZC + 0.2), (x0 + 0.05, ZC + 0.14), (x0 + 0.01, ZC + 0.09), (x0 + 0.07, ZC + 0.02)]
+            for (xa, za), (xb, zb) in zip(puntos, puntos[1:]):
+                n1.cinta(lambda t, xa=xa, za=za, xb=xb, zb=zb, lado=lado:
+                         (xa + (xb - xa) * t, lado * (0.1 + 0.01), za + (zb - za) * t),
+                         0.016, lambda t, lado=lado: (0, lado, 0), 0.02, "neon", n=1)
 
     # Mango de madera, un poco ovalado, con anillos de refuerzo.
     m = a.pieza("Mango")
@@ -711,7 +714,7 @@ def martillo_pulsar():
     HX, HY, HZ = 0.8, 0.5, 0.6
     ZC = MANGO / 2 + HZ / 2 - 0.05
     paleta = {
-        "blindaje": {"color": "#59606B", "rug": 0.35, "met": 1.0, "patron": "paneles", "relieve": 0.9},
+        "blindaje": {"color": "#737C88", "rug": 0.35, "met": 1.0, "patron": "paneles", "relieve": 0.9},
         "oscuro": {"color": "#22262C", "rug": 0.4, "met": 1.0, "patron": "cepillado", "relieve": 0.5},
         "cara": {"color": "#8D949E", "rug": 0.3, "met": 1.0, "patron": "fundido", "relieve": 0.5},
         "acento": {"color": "#C9CFD6", "rug": 0.15, "met": 1.0},
@@ -800,7 +803,7 @@ def guadana_nebular():
         "nebulosa": {"color": "#45E8FF", "rug": 0.0, "met": 0.0, "color2": "#3A0F78",
                      "mezcla": ("grad", "X", -1.9, -0.5), "patron": "cristalino", "relieve": 0.5,
                      "nubes": ("#C24BFF", 3.0, 0.55)},
-        "wisp": {"color": "#F1E6FF", "rug": 0.0, "met": 0.0, "alfa": 0.6},
+        "wisp": {"color": "#FFFFFF", "rug": 0.0, "met": 0.0, "alfa": 0.78},
         "madera": {"color": "#141110", "rug": 0.6, "met": 0.0, "patron": "madera", "relieve": 1.0,
                    "color2": "#C9A24A", "mezcla": ("vetas", 1.5, 0.86)},
         "oro": {"color": "#B9933F", "rug": 0.25, "met": 1.0, "patron": "grabado", "relieve": 0.8},
@@ -1177,7 +1180,7 @@ def revolver_estelar():
         anillo = []
         for k in range(36):
             ang = k * math.tau / 36
-            rr = 0.15 * (1 - 0.1 * max(0.0, math.cos(6 * ang)) ** 4 * (1 if 0 < i < 4 else 0.3))
+            rr = 0.15 * (1 - 0.22 * max(0.0, math.cos(6 * ang)) ** 4 * (1 if 0 < i < 4 else 0.3))
             rr *= 0.94 if i in (0, 4) else 1.0
             anillo.append(Vector((math.cos(ang) * rr, y, ZT + math.sin(ang) * rr)))
         secs.append(anillo)
@@ -1209,9 +1212,11 @@ def revolver_estelar():
     de = a.pieza("Detalle_01")  # incrustación de hueso de bestia cósmica en las cachas
     for s in (-1, 1):
         cen = Vector((s * 0.078, 0.27, -0.12))
-        de.esfera(cen, 0.07, "hueso", seg=12, anillos=6, escala=(0.07, 0.62, 1.25),
-                  giro=Matrix.Rotation(-0.5, 3, "X"))
-        de.toro(cen, 0.06, 0.008, "hueso", seg=12, lados=3, eje=(1, 0, 0))
+        placa = de.cilindro(cen - Vector((s * 0.008, 0, 0)), 0.07, 0.016, "hueso", lados=16, eje=(s, 0, 0))
+        de.transformar(placa, Matrix.Translation(cen) @ Matrix.Rotation(-0.5, 4, "X") @
+                       Matrix.Diagonal((1, 0.6, 1.2, 1)) @ Matrix.Translation(-cen))
+        estrella = de.cilindro(cen + Vector((s * 0.006, 0, 0)), 0.03, 0.012, "oro", lados=8, eje=(s, 0, 0))
+        de.transformar(estrella, Matrix.Translation(cen) @ Matrix.Rotation(-0.5, 4, "X") @ Matrix.Translation(-cen))
     ga = a.pieza("Gatillo")
     gatillo_y_guarda(ga, "oro", -0.04, 0.17, 0.05, -0.1)
 

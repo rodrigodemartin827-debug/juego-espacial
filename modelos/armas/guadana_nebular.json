@@ -3,7 +3,7 @@
   "archivo": "guadana_nebular.fbx",
   "rareza": "Legendario",
   "colorBorde": "#FFB800",
-  "triangulos": 2660,
+  "triangulos": 3156,
   "trisMax": 6500,
   "texturas": {
     "color": "texturas/GuadanaNebular_color.png",
@@ -28,11 +28,11 @@
     {
       "nombre": "GuadanaNebular_Wisps",
       "rol": "tex",
-      "triangulos": 464,
+      "triangulos": 960,
       "centro": [
-        0.8307,
-        1.4591,
-        0.0025
+        0.8422,
+        1.4685,
+        -0.0044
       ],
       "SurfaceAppearance": true
     },
