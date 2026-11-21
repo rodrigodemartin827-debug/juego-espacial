@@ -470,6 +470,157 @@ def conector(bm_marca, centro, mat=0, diametro=0.2):
 # --------------------------------------------------------------------------------------------------------------
 
 
+def escribir_mapas_rm(ruta_base, tam, rough=0.46, metal=0.82, semilla=1):
+    """Escribe <ruta_base>_roughness/_metalness/_emision.png (la emisión negra: el neón va aparte)."""
+    import numpy as np
+    from PIL import Image
+    rng = np.random.default_rng(semilla)
+    base = rng.random((tam // 16, tam // 16)).astype(np.float32)
+    grande = np.array(Image.fromarray((base * 255).astype(np.uint8)).resize((tam, tam), Image.BILINEAR),
+                      np.float32) / 255
+    r = np.clip(rough + (grande - 0.5) * 0.12, 0, 1)
+    m = np.clip(metal + (grande - 0.5) * 0.10, 0, 1)
+    Image.fromarray((r * 255).astype(np.uint8), "L").save(f"{ruta_base}_roughness.png")
+    Image.fromarray((m * 255).astype(np.uint8), "L").save(f"{ruta_base}_metalness.png")
+    Image.fromarray(np.zeros((tam, tam), np.uint8), "L").save(f"{ruta_base}_emision.png")
+    # Normal neutro (el relieve grande ya está en la geometría y en el color horneado con oclusión; el
+    # microdetalle de paneles lo aporta el atlas tileable como SurfaceAppearance en Studio).
+    plano = np.zeros((tam, tam, 3), np.uint8)
+    plano[..., 0] = 128; plano[..., 1] = 128; plano[..., 2] = 255
+    Image.fromarray(plano, "RGB").save(f"{ruta_base}_normal.png")
+
+
+def a_roblox(p):
+    """Blender (x, y, z) studs -> Roblox (x, y, z): X cambia de signo, Z<->Y."""
+    x, y, z = p
+    return (round(-x, 3), round(z, 3), round(y, 3))
+
+
+def finalizar_nave(nombre, archivo, salida, piezas, casco, anclajes_rel, vistas_ext,
+                   bake_interior=None, vista_interior=None, rapido=False, tam_tex=2048,
+                   tope_tris=None, z_suelo=None, r6_pos=None, seccion=None):
+    """
+    Pipeline de salida común de las naves:
+      * hornea el `casco` (color+AO+normal) en el atlas exterior y le pone la textura (lo que verá Studio),
+      * escribe los mapas de rugosidad/metal/emisión exteriores (y los de interior si hay `bake_interior`),
+      * exporta UN FBX con todas las `piezas` (dict nombre->obj) como objetos separados,
+      * guarda el .blend, renderiza la hoja exterior (+ sección interior si se pasan `vista_interior`),
+      * escribe anclajes.json con los puntos en ejes de Roblox,
+      * imprime el resumen de triángulos y avisa si pasa del tope.
+    `casco` es el objeto principal a texturizar. `bake_interior` es un objeto de interior opcional a hornear.
+    """
+    import os
+    objs = list(piezas.values())
+    tex = os.path.join(salida, "texturas")
+    os.makedirs(tex, exist_ok=True)
+    tam = 256 if rapido else tam_tex
+
+    # Horneado del casco exterior.
+    desplegar = c.desplegar_uv
+    desplegar(casco, margen=0.01)
+    c.hornear(casco, None, tam=tam, ruta_color=os.path.join(tex, f"{archivo}_ext_color.png"),
+              ruta_normal=None, muestras=6 if rapido else 48)
+    escribir_mapas_rm(os.path.join(tex, f"{archivo}_ext"), tam, rough=PALETA["Casco"][1], metal=PALETA["Casco"][2])
+    # Normal exterior: baja resolución con relieve del atlas (el casco horneado no tiene alta, así que normal plano útil).
+    if bake_interior is not None:
+        desplegar(bake_interior, margen=0.01)
+        c.hornear(bake_interior, None, tam=tam, ruta_color=os.path.join(tex, f"{archivo}_int_color.png"),
+                  ruta_normal=None, muestras=6 if rapido else 40)
+        escribir_mapas_rm(os.path.join(tex, f"{archivo}_int"), tam, rough=0.6, metal=0.4, semilla=5)
+
+    # FBX + blend.
+    c.exportar_fbx(os.path.join(salida, f"{archivo}.fbx"), objs)
+    try:
+        bpy.ops.wm.save_as_mainfile(filepath=os.path.join(salida, f"{archivo}.blend"))
+    except Exception as e:  # noqa: BLE001
+        print("[aviso] no se pudo guardar .blend:", e)
+
+    # anclajes.json (relativos al centro de la caja del casco, en ejes de Roblox).
+    import json
+    cmn, cmx = c.caja_limite([casco])
+    centro = tuple(((cmn + cmx) / 2) / c.ESTUDIO)
+    rel = {k: a_roblox(tuple(Vector(v) - Vector(centro))) for k, v in anclajes_rel.items()}
+    rel["Ejes"] = (0.0, 0.0, 0.0)
+    with open(os.path.join(salida, "anclajes.json"), "w", encoding="utf-8") as f:
+        json.dump({"nota": "studs, ejes de Roblox, relativos al centro de la MeshPart del casco",
+                   "Anclajes": rel}, f, indent=2, ensure_ascii=False)
+
+    # Resumen de triángulos.
+    tris = {n: c.triangulos(o) for n, o in piezas.items()}
+    total = sum(tris.values())
+    mn, mx = c.caja_limite(objs)
+    dim = (mx - mn) / c.ESTUDIO
+    print(f"\n=== {nombre} ===")
+    for n in sorted(tris):
+        print(f"  {n:28s} {tris[n]:5d} tri")
+    aviso = "" if (tope_tris is None or total <= tope_tris) else f"  ¡PASA DEL TOPE {tope_tris}!"
+    print(f"  TOTAL {total} tri  ·  {dim.x:.1f} × {dim.y:.1f} × {dim.z:.1f} studs (manga × eslora × alto){aviso}")
+
+    # Render exterior (con un maniquí R6 de pie en la cubierta para comprobar la proporción).
+    os.makedirs(os.path.join(salida, "render"), exist_ok=True)
+    c.preparar_estudio(z_suelo=(mn.z - 0.3 * c.ESTUDIO) if z_suelo is None else z_suelo * c.ESTUDIO)
+    render_objs = list(objs)
+    if r6_pos is not None:
+        render_objs.append(maniqui_r6(r6_pos))
+    rutas = c.renderizar_vistas(render_objs, os.path.join(salida, "_tmp"), vistas_ext,
+                                tam=320 if rapido else 520, muestras=16 if rapido else 56, margen=1.02,
+                                centro=(mn + mx) / 2)
+    c.montar_hoja([rutas], os.path.join(salida, "render", f"{archivo}_exterior.png"),
+                  f"{nombre} — exterior",
+                  notas=[f"{total} tri  ·  {dim.x:.0f} × {dim.y:.0f} × {dim.z:.0f} studs (manga × eslora × alto)  ·  "
+                         f"maniquí R6 (5 studs) para escala · neón cyan #3DF2FF"],
+                  columnas=4)
+    # Sección transversal / vista interior opcional (corta el casco para enseñar los niveles).
+    if seccion is not None:
+        _render_seccion(archivo, nombre, salida, piezas, seccion, r6_pos, rapido)
+    return total, dim
+
+
+def _render_seccion(archivo, nombre, salida, piezas, seccion, r6_pos, rapido):
+    """Oculta las piezas indicadas (casco/costado) para enseñar el interior, y renderiza 2 vistas."""
+    ocultar, vistas = seccion.get("ocultar", []), seccion.get("vistas")
+    estado = {}
+    for n, o in piezas.items():
+        estado[o] = o.hide_render
+        if any(k in n for k in ocultar):
+            o.hide_render = True
+    visibles = [o for n, o in piezas.items() if o.hide_render is False]
+    extra = [maniqui_r6(p) for p in seccion.get("r6", ([r6_pos] if r6_pos else []))]
+    rutas = c.renderizar_vistas(visibles + extra, os.path.join(salida, "_tmp_int"), vistas,
+                                tam=320 if rapido else 520, muestras=16 if rapido else 56, margen=1.04,
+                                con_malla=False)
+    c.montar_hoja([rutas], os.path.join(salida, "render", f"{archivo}_interior.png"),
+                  f"{nombre} — sección interior", columnas=len(rutas) or 2,
+                  notas=["sección transversal: casco oculto para ver los niveles · maniquí R6 (5 studs) para escala"])
+    for o, hd in estado.items():
+        o.hide_render = hd
+
+
+def maniqui_r6(pos, altura=5.0):
+    """
+    Maniquí R6 sencillo (cabeza, torso, 2 brazos, 2 piernas) de `altura` studs, con los pies en pos.z.
+    Para validar la proporción en los renders (no se exporta). Colores llamativos para distinguirlo.
+    """
+    bm = bmesh.new()
+    x, y, z = pos
+    u = altura / 5.0  # escala (R6 ~5 studs)
+    # Piernas (0 a 1.9), torso (1.9 a 3.9), cabeza (3.9 a 5.0).
+    for s in (-0.45, 0.45):
+        caja(bm, (x + s * u, y, z + 0.95 * u), (0.8 * u, 0.9 * u, 1.9 * u), mat=0)
+    caja(bm, (x, y, z + 2.9 * u), (2.0 * u, 1.0 * u, 2.0 * u), mat=1)   # torso
+    for s in (-1.4, 1.4):
+        caja(bm, (x + s * u, y, z + 2.9 * u), (0.8 * u, 0.9 * u, 1.9 * u), mat=2)  # brazos
+    caja(bm, (x, y, z + 4.5 * u), (1.1 * u, 1.1 * u, 1.1 * u), mat=3)  # cabeza
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    mats = [c.material("r6_pierna", c.srgb("#2E3440"), 0.7),
+            c.material("r6_torso", c.srgb("#C94B3B"), 0.6),
+            c.material("r6_brazo", c.srgb("#E8C07A"), 0.6),
+            c.material("r6_cabeza", c.srgb("#E8C07A"), 0.6)]
+    obj = c.objeto_desde_bmesh("Maniqui_R6", bm, mats)
+    obj["estudio"] = True  # que renderizar_vistas no lo oculte al filtrar por objetos pedidos
+    return obj
+
+
 def objeto(nombre, bm, materiales, suavizar=35):
     """Cierra un bmesh en un objeto con sus materiales, normales hacia fuera y sombreado suave por ángulo."""
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)

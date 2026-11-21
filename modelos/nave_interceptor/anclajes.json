@@ -1,0 +1,40 @@
+{
+  "nota": "studs, ejes de Roblox, relativos al centro de la MeshPart del casco",
+  "Anclajes": {
+    "Piloto": [
+      -0.0,
+      2.5,
+      -3.15
+    ],
+    "CanonBabor": [
+      -5.2,
+      2.55,
+      2.9
+    ],
+    "CanonEstribor": [
+      5.2,
+      2.55,
+      2.9
+    ],
+    "Ancla": [
+      -5.9,
+      1.2,
+      0.15
+    ],
+    "MotorBabor": [
+      -4.0,
+      0.5,
+      15.55
+    ],
+    "MotorEstribor": [
+      4.0,
+      0.5,
+      15.55
+    ],
+    "Ejes": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+}
