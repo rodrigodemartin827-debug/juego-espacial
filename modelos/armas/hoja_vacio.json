@@ -1,0 +1,236 @@
+{
+  "arma": "Hoja del Vacío",
+  "archivo": "hoja_vacio.fbx",
+  "rareza": "Mítico",
+  "colorBorde": "#FF4444",
+  "triangulos": 4448,
+  "trisMax": 8000,
+  "texturas": {
+    "color": "texturas/HojaVacio_color.png",
+    "normal": "texturas/HojaVacio_normal.png",
+    "roughness": "texturas/HojaVacio_roughness.png",
+    "metalness": "texturas/HojaVacio_metalness.png",
+    "emision": "texturas/HojaVacio_emision.png"
+  },
+  "piezaRaiz": "HojaVacio_Empunadura",
+  "piezas": [
+    {
+      "nombre": "HojaVacio_Hoja",
+      "rol": "tex",
+      "triangulos": 190,
+      "centro": [
+        0.0011,
+        2.075,
+        0.0022
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Aura",
+      "rol": "tex",
+      "triangulos": 382,
+      "centro": [
+        0.0011,
+        2.115,
+        0.0022
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Neon_01",
+      "rol": "neon",
+      "triangulos": 264,
+      "centro": [
+        0.0011,
+        2.0536,
+        0.0022
+      ],
+      "Material": "Neon",
+      "Color": "#E0206A"
+    },
+    {
+      "nombre": "HojaVacio_Orbe",
+      "rol": "tex",
+      "triangulos": 396,
+      "centro": [
+        0.0011,
+        0.505,
+        0.0022
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Neon_03",
+      "rol": "neon",
+      "triangulos": 272,
+      "centro": [
+        0.0011,
+        0.6722,
+        0.0022
+      ],
+      "Material": "Neon",
+      "Color": "#881111"
+    },
+    {
+      "nombre": "HojaVacio_Garra_Izq",
+      "rol": "tex",
+      "triangulos": 414,
+      "centro": [
+        0.2842,
+        0.7295,
+        0.004
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Garra_Der",
+      "rol": "tex",
+      "triangulos": 414,
+      "centro": [
+        -0.282,
+        0.7295,
+        0.0004
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Empunadura",
+      "rol": "tex",
+      "triangulos": 1096,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Ojo",
+      "rol": "tex",
+      "triangulos": 832,
+      "centro": [
+        0.0011,
+        -0.575,
+        -0.0148
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Neon_02",
+      "rol": "neon",
+      "triangulos": 140,
+      "centro": [
+        0.0011,
+        -0.575,
+        -0.1198
+      ],
+      "Material": "Neon",
+      "Color": "#FF2222"
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_01",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        0.3349,
+        2.6488,
+        -0.1986
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_02",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        0.3994,
+        1.4761,
+        0.0457
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_03",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        0.2296,
+        1.1876,
+        -0.1238
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_04",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        -0.1183,
+        3.1236,
+        0.2572
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_05",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        -0.3669,
+        2.4957,
+        0.0016
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_06",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        0.0032,
+        2.9073,
+        -0.189
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_07",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        -0.3416,
+        3.1332,
+        -0.1009
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaVacio_Fragmento_08",
+      "rol": "tex",
+      "triangulos": 6,
+      "centro": [
+        -0.352,
+        1.6957,
+        0.1304
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        0.0011,
+        0.0,
+        0.0022
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": [
+    "color con alfa: SurfaceAppearance.AlphaMode = Transparency"
+  ]
+}

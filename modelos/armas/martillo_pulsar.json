@@ -1,0 +1,163 @@
+{
+  "arma": "Martillo de Pulsar",
+  "archivo": "martillo_pulsar.fbx",
+  "rareza": "Épico",
+  "colorBorde": "#A07AE8",
+  "triangulos": 3148,
+  "trisMax": 5000,
+  "texturas": {
+    "color": "texturas/MartilloPulsar_color.png",
+    "normal": "texturas/MartilloPulsar_normal.png",
+    "roughness": "texturas/MartilloPulsar_roughness.png",
+    "metalness": "texturas/MartilloPulsar_metalness.png",
+    "emision": "texturas/MartilloPulsar_emision.png"
+  },
+  "piezaRaiz": "MartilloPulsar_Grip",
+  "piezas": [
+    {
+      "nombre": "MartilloPulsar_Cabeza",
+      "rol": "tex",
+      "triangulos": 996,
+      "centro": [
+        -0.01,
+        1.9583,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "MartilloPulsar_Punta",
+      "rol": "tex",
+      "triangulos": 56,
+      "centro": [
+        0.64,
+        2.0233,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "MartilloPulsar_Nucleo",
+      "rol": "cristal",
+      "triangulos": 76,
+      "centro": [
+        -0.0,
+        2.0233,
+        0.0
+      ],
+      "Material": "Glass",
+      "Color": "#9FEFFF",
+      "Transparency": 0.55
+    },
+    {
+      "nombre": "MartilloPulsar_Neon_01",
+      "rol": "neon",
+      "triangulos": 288,
+      "centro": [
+        -0.0,
+        2.0233,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Núcleo: pulsar animando Color/Transparency o un PointLight cian que sube y baja"
+    },
+    {
+      "nombre": "MartilloPulsar_Conductos",
+      "rol": "tex",
+      "triangulos": 504,
+      "centro": [
+        -0.0,
+        2.1108,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "MartilloPulsar_Neon_02",
+      "rol": "neon",
+      "triangulos": 72,
+      "centro": [
+        -0.0,
+        2.1333,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "MartilloPulsar_Neon_03",
+      "rol": "neon",
+      "triangulos": 216,
+      "centro": [
+        0.01,
+        2.0233,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "MartilloPulsar_Mango",
+      "rol": "tex",
+      "triangulos": 332,
+      "centro": [
+        -0.0,
+        0.6733,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "MartilloPulsar_Grip",
+      "rol": "tex",
+      "triangulos": 360,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "MartilloPulsar_Contrapeso",
+      "rol": "tex",
+      "triangulos": 248,
+      "centro": [
+        -0.0,
+        -0.4817,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        -0.1267,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "Handle_Frontal": {
+      "posicion": [
+        -0.0,
+        1.0233,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": [
+    "Épico: añadir en Studio un ParticleEmitter cian suave alrededor del núcleo (aura)"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "arma": "Hacha de Meteorito",
+  "archivo": "hacha_meteorito.fbx",
+  "rareza": "Poco común",
+  "colorBorde": "#4AFF8B",
+  "triangulos": 1468,
+  "trisMax": 3000,
+  "texturas": {
+    "color": "texturas/HachaMeteorito_color.png",
+    "normal": "texturas/HachaMeteorito_normal.png",
+    "roughness": "texturas/HachaMeteorito_roughness.png",
+    "metalness": "texturas/HachaMeteorito_metalness.png",
+    "emision": "texturas/HachaMeteorito_emision.png"
+  },
+  "piezaRaiz": "HachaMeteorito_Cabeza",
+  "piezas": [
+    {
+      "nombre": "HachaMeteorito_Cabeza",
+      "rol": "tex",
+      "triangulos": 484,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HachaMeteorito_Roca",
+      "rol": "tex",
+      "triangulos": 120,
+      "centro": [
+        0.0785,
+        0.2818,
+        0.0105
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HachaMeteorito_Neon_01",
+      "rol": "neon",
+      "triangulos": 48,
+      "centro": [
+        0.0346,
+        0.3048,
+        0.0002
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "HachaMeteorito_Mango",
+      "rol": "tex",
+      "triangulos": 212,
+      "centro": [
+        0.12,
+        -0.74,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HachaMeteorito_Anillos",
+      "rol": "tex",
+      "triangulos": 604,
+      "centro": [
+        0.12,
+        -1.03,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        0.12,
+        -1.47,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "Handle_Frontal": {
+      "posicion": [
+        0.12,
+        -0.92,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": []
+}

@@ -1,0 +1,89 @@
+{
+  "arma": "Espada de Plasma",
+  "archivo": "espada_plasma.fbx",
+  "rareza": "Común",
+  "colorBorde": "#888888",
+  "triangulos": 1854,
+  "trisMax": 2500,
+  "texturas": {
+    "color": "texturas/EspadaPlasma_color.png",
+    "normal": "texturas/EspadaPlasma_normal.png",
+    "roughness": "texturas/EspadaPlasma_roughness.png",
+    "metalness": "texturas/EspadaPlasma_metalness.png",
+    "emision": "texturas/EspadaPlasma_emision.png"
+  },
+  "piezaRaiz": "EspadaPlasma_Empunadura",
+  "piezas": [
+    {
+      "nombre": "EspadaPlasma_Hoja",
+      "rol": "tex",
+      "triangulos": 402,
+      "centro": [
+        -0.0,
+        1.5655,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaPlasma_Guarda",
+      "rol": "tex",
+      "triangulos": 364,
+      "centro": [
+        -0.0,
+        0.4815,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaPlasma_Empunadura",
+      "rol": "tex",
+      "triangulos": 732,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaPlasma_Pomo",
+      "rol": "tex",
+      "triangulos": 332,
+      "centro": [
+        -0.0,
+        -0.502,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaPlasma_Neon_01",
+      "rol": "neon",
+      "triangulos": 24,
+      "centro": [
+        -0.0,
+        1.5055,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        0.0055,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": []
+}

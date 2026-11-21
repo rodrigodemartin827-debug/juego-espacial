@@ -1,0 +1,138 @@
+{
+  "arma": "Láser de Precisión",
+  "archivo": "laser_precision.fbx",
+  "rareza": "Raro",
+  "colorBorde": "#4488FF",
+  "triangulos": 2616,
+  "trisMax": 4000,
+  "texturas": {
+    "color": "texturas/LaserPrecision_color.png",
+    "normal": "texturas/LaserPrecision_normal.png",
+    "roughness": "texturas/LaserPrecision_roughness.png",
+    "metalness": "texturas/LaserPrecision_metalness.png",
+    "emision": "texturas/LaserPrecision_emision.png"
+  },
+  "piezaRaiz": "LaserPrecision_Grip",
+  "piezas": [
+    {
+      "nombre": "LaserPrecision_Cuerpo",
+      "rol": "tex",
+      "triangulos": 632,
+      "centro": [
+        -0.0,
+        0.3925,
+        -0.204
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "LaserPrecision_Canon",
+      "rol": "tex",
+      "triangulos": 588,
+      "centro": [
+        -0.0,
+        0.38,
+        -1.0821
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "LaserPrecision_Mira",
+      "rol": "tex",
+      "triangulos": 220,
+      "centro": [
+        -0.0,
+        0.678,
+        -0.2421
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "LaserPrecision_Cristal",
+      "rol": "cristal",
+      "triangulos": 12,
+      "centro": [
+        -0.0,
+        0.69,
+        -0.2821
+      ],
+      "Material": "Glass",
+      "Color": "#9FEFFF",
+      "Transparency": 0.6
+    },
+    {
+      "nombre": "LaserPrecision_Neon_01",
+      "rol": "neon",
+      "triangulos": 244,
+      "centro": [
+        -0.0,
+        0.69,
+        -0.2561
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Retícula: Transparency 0,2 para que se vea a través"
+    },
+    {
+      "nombre": "LaserPrecision_Grip",
+      "rol": "tex",
+      "triangulos": 552,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "LaserPrecision_Estabilizador",
+      "rol": "tex",
+      "triangulos": 216,
+      "centro": [
+        -0.0,
+        0.2897,
+        -0.9361
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "LaserPrecision_Neon_02",
+      "rol": "neon",
+      "triangulos": 24,
+      "centro": [
+        -0.0,
+        0.43,
+        -0.3121
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "LaserPrecision_Neon_03",
+      "rol": "neon",
+      "triangulos": 128,
+      "centro": [
+        -0.0,
+        0.38,
+        -1.4871
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        0.01,
+        0.0866
+      ],
+      "ejeY": [
+        -0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  },
+  "notas": []
+}

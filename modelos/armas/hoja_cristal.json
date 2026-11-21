@@ -1,0 +1,114 @@
+{
+  "arma": "Hoja de Cristal",
+  "archivo": "hoja_cristal.fbx",
+  "rareza": "Poco común",
+  "colorBorde": "#4AFF8B",
+  "triangulos": 2158,
+  "trisMax": 3000,
+  "texturas": {
+    "color": "texturas/HojaCristal_color.png",
+    "normal": "texturas/HojaCristal_normal.png",
+    "roughness": "texturas/HojaCristal_roughness.png",
+    "metalness": "texturas/HojaCristal_metalness.png",
+    "emision": "texturas/HojaCristal_emision.png"
+  },
+  "piezaRaiz": "HojaCristal_Empunadura",
+  "piezas": [
+    {
+      "nombre": "HojaCristal_Hoja",
+      "rol": "tex",
+      "triangulos": 250,
+      "centro": [
+        0.0214,
+        1.6888,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaCristal_Vetas",
+      "rol": "tex",
+      "triangulos": 392,
+      "centro": [
+        0.0628,
+        1.6159,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaCristal_Neon_01",
+      "rol": "neon",
+      "triangulos": 224,
+      "centro": [
+        0.0912,
+        1.6166,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "HojaCristal_Guarda",
+      "rol": "tex",
+      "triangulos": 540,
+      "centro": [
+        -0.0351,
+        0.0479,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaCristal_Empunadura",
+      "rol": "tex",
+      "triangulos": 584,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaCristal_Gema",
+      "rol": "tex",
+      "triangulos": 96,
+      "centro": [
+        -0.0,
+        0.4787,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "HojaCristal_Neon_02",
+      "rol": "neon",
+      "triangulos": 72,
+      "centro": [
+        0.0,
+        0.4787,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        0.0087,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": [
+    "color con alfa: SurfaceAppearance.AlphaMode = Transparency"
+  ]
+}

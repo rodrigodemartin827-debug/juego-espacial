@@ -1,0 +1,206 @@
+{
+  "arma": "Espada Estelar",
+  "archivo": "espada_estelar.fbx",
+  "rareza": "Legendario",
+  "colorBorde": "#FFB800",
+  "triangulos": 3292,
+  "trisMax": 6500,
+  "texturas": {
+    "color": "texturas/EspadaEstelar_color.png",
+    "normal": "texturas/EspadaEstelar_normal.png",
+    "roughness": "texturas/EspadaEstelar_roughness.png",
+    "metalness": "texturas/EspadaEstelar_metalness.png",
+    "emision": "texturas/EspadaEstelar_emision.png"
+  },
+  "piezaRaiz": "EspadaEstelar_Empunadura",
+  "piezas": [
+    {
+      "nombre": "EspadaEstelar_Hoja",
+      "rol": "tex",
+      "triangulos": 652,
+      "centro": [
+        -0.0194,
+        1.9088,
+        -0.0018
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Guarda",
+      "rol": "tex",
+      "triangulos": 548,
+      "centro": [
+        0.0008,
+        0.622,
+        -0.0018
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Neon_02",
+      "rol": "neon",
+      "triangulos": 336,
+      "centro": [
+        0.0008,
+        0.5974,
+        -0.0018
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "EspadaEstelar_Empunadura",
+      "rol": "tex",
+      "triangulos": 540,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Neon_03",
+      "rol": "neon",
+      "triangulos": 180,
+      "centro": [
+        0.0004,
+        0.0,
+        -0.001
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "EspadaEstelar_Pomo",
+      "rol": "tex",
+      "triangulos": 516,
+      "centro": [
+        0.0008,
+        -0.535,
+        -0.0018
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Neon_05",
+      "rol": "neon",
+      "triangulos": 192,
+      "centro": [
+        -0.0051,
+        -0.5383,
+        0.0016
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "EspadaEstelar_Neon_01",
+      "rol": "neon",
+      "triangulos": 232,
+      "centro": [
+        -0.0303,
+        1.7932,
+        -0.0018
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "EspadaEstelar_Neon_04",
+      "rol": "neon",
+      "triangulos": 48,
+      "centro": [
+        0.0012,
+        1.9331,
+        -0.001
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Núcleos de los 6 fragmentos: animarlos con ellos"
+    },
+    {
+      "nombre": "EspadaEstelar_Fragmento_01",
+      "rol": "tex",
+      "triangulos": 8,
+      "centro": [
+        -0.3379,
+        1.1014,
+        0.0735
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Fragmento_02",
+      "rol": "tex",
+      "triangulos": 8,
+      "centro": [
+        -0.0991,
+        1.4373,
+        0.2877
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Fragmento_03",
+      "rol": "tex",
+      "triangulos": 8,
+      "centro": [
+        0.2236,
+        1.7732,
+        0.1562
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Fragmento_04",
+      "rol": "tex",
+      "triangulos": 8,
+      "centro": [
+        0.3413,
+        2.1097,
+        -0.0798
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Fragmento_05",
+      "rol": "tex",
+      "triangulos": 8,
+      "centro": [
+        0.085,
+        2.4446,
+        -0.3
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "EspadaEstelar_Fragmento_06",
+      "rol": "tex",
+      "triangulos": 8,
+      "centro": [
+        -0.2384,
+        2.7817,
+        -0.1598
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        0.0008,
+        0.0,
+        -0.0018
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": [
+    "color con alfa: SurfaceAppearance.AlphaMode = Transparency"
+  ]
+}

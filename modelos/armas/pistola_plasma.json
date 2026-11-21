@@ -1,0 +1,114 @@
+{
+  "arma": "Pistola de Plasma",
+  "archivo": "pistola_plasma.fbx",
+  "rareza": "Común",
+  "colorBorde": "#888888",
+  "triangulos": 1852,
+  "trisMax": 2500,
+  "texturas": {
+    "color": "texturas/PistolaPlasma_color.png",
+    "normal": "texturas/PistolaPlasma_normal.png",
+    "roughness": "texturas/PistolaPlasma_roughness.png",
+    "metalness": "texturas/PistolaPlasma_metalness.png",
+    "emision": "texturas/PistolaPlasma_emision.png"
+  },
+  "piezaRaiz": "PistolaPlasma_Grip",
+  "piezas": [
+    {
+      "nombre": "PistolaPlasma_Cuerpo",
+      "rol": "tex",
+      "triangulos": 1040,
+      "centro": [
+        -0.0,
+        0.4609,
+        -0.2796
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "PistolaPlasma_Canon",
+      "rol": "tex",
+      "triangulos": 256,
+      "centro": [
+        -0.0,
+        0.4275,
+        -0.6567
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "PistolaPlasma_Grip",
+      "rol": "tex",
+      "triangulos": 260,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "PistolaPlasma_Gatillo",
+      "rol": "tex",
+      "triangulos": 184,
+      "centro": [
+        -0.0,
+        0.1726,
+        -0.2675
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "PistolaPlasma_Celda",
+      "rol": "cristal",
+      "triangulos": 52,
+      "centro": [
+        -0.0,
+        0.6375,
+        -0.0267
+      ],
+      "Material": "Glass",
+      "Color": "#7FEFFF",
+      "Transparency": 0.45
+    },
+    {
+      "nombre": "PistolaPlasma_Neon_02",
+      "rol": "neon",
+      "triangulos": 36,
+      "centro": [
+        -0.0,
+        0.6375,
+        -0.0267
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "PistolaPlasma_Neon_01",
+      "rol": "neon",
+      "triangulos": 24,
+      "centro": [
+        -0.0,
+        0.3775,
+        -0.2767
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        0.0175,
+        -0.0017
+      ],
+      "ejeY": [
+        -0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  },
+  "notas": []
+}

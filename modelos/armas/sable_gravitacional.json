@@ -1,0 +1,136 @@
+{
+  "arma": "Sable Gravitacional",
+  "archivo": "sable_gravitacional.fbx",
+  "rareza": "Raro",
+  "colorBorde": "#4488FF",
+  "triangulos": 4534,
+  "trisMax": 4000,
+  "texturas": {
+    "color": "texturas/SableGravitacional_color.png",
+    "normal": "texturas/SableGravitacional_normal.png",
+    "roughness": "texturas/SableGravitacional_roughness.png",
+    "metalness": "texturas/SableGravitacional_metalness.png",
+    "emision": "texturas/SableGravitacional_emision.png"
+  },
+  "piezaRaiz": "SableGravitacional_Empunadura",
+  "piezas": [
+    {
+      "nombre": "SableGravitacional_Hoja",
+      "rol": "tex",
+      "triangulos": 222,
+      "centro": [
+        0.0429,
+        2.155,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "SableGravitacional_Guarda",
+      "rol": "tex",
+      "triangulos": 1580,
+      "centro": [
+        -0.0,
+        0.7575,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "SableGravitacional_Neon_01",
+      "rol": "neon",
+      "triangulos": 336,
+      "centro": [
+        -0.0,
+        0.7855,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "SableGravitacional_Empunadura",
+      "rol": "tex",
+      "triangulos": 484,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "SableGravitacional_Neon_02",
+      "rol": "neon",
+      "triangulos": 232,
+      "centro": [
+        -0.103,
+        2.1555,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "SableGravitacional_Neon_03",
+      "rol": "neon",
+      "triangulos": 672,
+      "centro": [
+        -0.0,
+        2.126,
+        0.0
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Brillo de los 3 anillos: si se animan, soldar cada parte a su anillo o animar el neón con ellos"
+    },
+    {
+      "nombre": "SableGravitacional_Anillo_01",
+      "rol": "tex",
+      "triangulos": 336,
+      "centro": [
+        -0.0,
+        1.323,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "SableGravitacional_Anillo_02",
+      "rol": "tex",
+      "triangulos": 336,
+      "centro": [
+        -0.0,
+        2.155,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "SableGravitacional_Anillo_03",
+      "rol": "tex",
+      "triangulos": 336,
+      "centro": [
+        -0.0,
+        2.935,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        0.075,
+        0.0
+      ],
+      "ejeY": [
+        -0.0,
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "notas": []
+}

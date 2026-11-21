@@ -1,0 +1,150 @@
+{
+  "arma": "Revólver Estelar",
+  "archivo": "revolver_estelar.fbx",
+  "rareza": "Épico",
+  "colorBorde": "#A07AE8",
+  "triangulos": 3488,
+  "trisMax": 5000,
+  "texturas": {
+    "color": "texturas/RevolverEstelar_color.png",
+    "normal": "texturas/RevolverEstelar_normal.png",
+    "roughness": "texturas/RevolverEstelar_roughness.png",
+    "metalness": "texturas/RevolverEstelar_metalness.png",
+    "emision": "texturas/RevolverEstelar_emision.png"
+  },
+  "piezaRaiz": "RevolverEstelar_Grip",
+  "piezas": [
+    {
+      "nombre": "RevolverEstelar_Cuerpo",
+      "rol": "tex",
+      "triangulos": 1296,
+      "centro": [
+        -0.0,
+        0.3412,
+        -0.46
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "RevolverEstelar_Canon",
+      "rol": "tex",
+      "triangulos": 152,
+      "centro": [
+        -0.0,
+        0.4973,
+        -0.84
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "RevolverEstelar_Neon_02",
+      "rol": "neon",
+      "triangulos": 48,
+      "centro": [
+        -0.0,
+        0.6162,
+        -1.078
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Punto luminoso de la mira (mira hacia el tirador)"
+    },
+    {
+      "nombre": "RevolverEstelar_Neon_03",
+      "rol": "neon",
+      "triangulos": 24,
+      "centro": [
+        -0.0,
+        0.4412,
+        -0.81
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "RevolverEstelar_Tambor",
+      "rol": "tex",
+      "triangulos": 864,
+      "centro": [
+        -0.0,
+        0.3312,
+        -0.325
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "RevolverEstelar_Neon_01",
+      "rol": "neon",
+      "triangulos": 480,
+      "centro": [
+        -0.0,
+        0.3312,
+        -0.46
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Núcleos de las 6 cámaras"
+    },
+    {
+      "nombre": "RevolverEstelar_Martillo",
+      "rol": "tex",
+      "triangulos": 96,
+      "centro": [
+        -0.0,
+        0.5103,
+        0.0531
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "RevolverEstelar_Grip",
+      "rol": "tex",
+      "triangulos": 144,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "RevolverEstelar_Detalle_01",
+      "rol": "tex",
+      "triangulos": 200,
+      "centro": [
+        -0.0,
+        0.0212,
+        -0.02
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "RevolverEstelar_Gatillo",
+      "rol": "tex",
+      "triangulos": 184,
+      "centro": [
+        -0.0,
+        0.1162,
+        -0.2256
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        -0.0,
+        0.0212,
+        -0.03
+      ],
+      "ejeY": [
+        -0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  },
+  "notas": [
+    "Épico: añadir en Studio un ParticleEmitter de chispas cian en la boca y en el tambor (aura)"
+  ]
+}

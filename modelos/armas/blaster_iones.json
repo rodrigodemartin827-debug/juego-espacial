@@ -1,0 +1,113 @@
+{
+  "arma": "Blaster de Iones",
+  "archivo": "blaster_iones.fbx",
+  "rareza": "Poco común",
+  "colorBorde": "#4AFF8B",
+  "triangulos": 2036,
+  "trisMax": 3000,
+  "texturas": {
+    "color": "texturas/BlasterIones_color.png",
+    "normal": "texturas/BlasterIones_normal.png",
+    "roughness": "texturas/BlasterIones_roughness.png",
+    "metalness": "texturas/BlasterIones_metalness.png",
+    "emision": "texturas/BlasterIones_emision.png"
+  },
+  "piezaRaiz": "BlasterIones_Grip",
+  "piezas": [
+    {
+      "nombre": "BlasterIones_Cuerpo",
+      "rol": "tex",
+      "triangulos": 908,
+      "centro": [
+        0.0137,
+        0.365,
+        -0.1061
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "BlasterIones_Neon_02",
+      "rol": "neon",
+      "triangulos": 24,
+      "centro": [
+        0.0137,
+        0.35,
+        0.0638
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF",
+      "nota": "Rejillas: subir el brillo al disparar"
+    },
+    {
+      "nombre": "BlasterIones_Neon_01",
+      "rol": "neon",
+      "triangulos": 96,
+      "centro": [
+        0.0137,
+        0.34,
+        -0.7762
+      ],
+      "Material": "Neon",
+      "Color": "#3DF2FF"
+    },
+    {
+      "nombre": "BlasterIones_Canon_Izq",
+      "rol": "tex",
+      "triangulos": 96,
+      "centro": [
+        -0.0613,
+        0.34,
+        -0.6262
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "BlasterIones_Canon_Der",
+      "rol": "tex",
+      "triangulos": 96,
+      "centro": [
+        0.0888,
+        0.34,
+        -0.6262
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "BlasterIones_Grip",
+      "rol": "tex",
+      "triangulos": 664,
+      "centro": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "SurfaceAppearance": true
+    },
+    {
+      "nombre": "BlasterIones_Cargador",
+      "rol": "tex",
+      "triangulos": 152,
+      "centro": [
+        0.0137,
+        -0.2875,
+        0.2229
+      ],
+      "SurfaceAppearance": true
+    }
+  ],
+  "agarres": {
+    "Handle": {
+      "posicion": [
+        0.0137,
+        0.0,
+        0.0844
+      ],
+      "ejeY": [
+        -0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  },
+  "notas": []
+}
